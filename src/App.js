@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import SignupForm from './components/Signup/SignupForm';
 import Dashboard from './components/Dashboard/Dashboard'
+import Login from './components/Login/Login';
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
           <header className="App-header">
             <Route exact path="/dashboard" component ={Dashboard} />
             <Route exact path="/signup" component={SignupForm} />
+            <Route exact path="/login" component={Login} />
           </header>
         </div>
 
