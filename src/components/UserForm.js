@@ -9,7 +9,7 @@ export default function UserForm(questions) {
   };
 
   const handleChange = x => {
-    const { name, value } = event.target;
+    const { name, value } = x.target;
 
     setUserFormState({
       ...userFormState,
@@ -34,52 +34,6 @@ export default function UserForm(questions) {
             onChange={handleChange}
           />
         </label>
-
-        {/* <label>
-          {question.questionText}
-          <input
-            type="{question.questionText}"
-            name="firstName"
-            value={userFormState.firstName || ""}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label>
-          {question.questionText}
-          <input
-            type="{question.questionText}"
-            name="lastName"
-            value={userFormState.lastName || ""}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label>
-          {question.questionText}
-          <input
-            type="{question.questionText}"
-            name="password"
-            value={userFormState.password || ""}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label>
-          {question.questionText}
-          <input
-            type="{question.questionText}"
-            name="confirmPassword"
-            value={userFormState.confirmPassword || ""}
-            onChange={handleChange}
-          />
-        </label> */}
-        {/* // {
-   //     formState.password &&
-   //     formState.confirmPassword &&
-   //     formState.password !== formState.confirmPassword &&
-   //     <p style={{ color: 'red' }}>The passwords do not match!</p>
-   // } */}
       </div>
     );
   };
