@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import SignupForm from './components/Signup/SignupForm';
 import Dashboard from './components/Dashboard/Dashboard'
 import Login from './components/Login/Login';
+import UserFormContainer from "./components/UserFormContainer";
 import { ThemeProvider } from 'emotion-theming';
 
 
@@ -18,6 +19,7 @@ class App extends Component {
             <Route exact path='/dashboard' component={Dashboard} />
             <Route exact path='/signup' component={SignupForm} />
             <Route exact path='/login' component={Login} />
+            <UserFormContainer />
           </Application>
         </ThemeProvider>
       </Router>
