@@ -10,14 +10,17 @@ export default function UserFormContainer() {
   }, []);
   // //request questions JSON to the server
   request
-  .get(`${baseUrl}/questions`)
-  .then(response => {setGroups(response.body)})
-  .catch(err => {
-          // if (err.status === 400) {
-          //     dispatch(userSignupFailed(err.response.body.message))
-          // }
-          // else {
-              console.error(err)}))
+    .get(`https://13da2d99-4dcf-493e-ae61-3052e15e29a8.mock.pstmn.io/questions`)
+    .then(response => {
+      setGroups(response.body);
+    })
+    .catch(err => {
+      // if (err.status === 400) {
+      //     dispatch(userSignupFailed(err.response.body.message))
+      // }
+      // else {
+      console.error(err);
+    });
 
   const nextQuestionGroup = _ => {
     // let questionsGroups = response.body.questionsGroups[0]
