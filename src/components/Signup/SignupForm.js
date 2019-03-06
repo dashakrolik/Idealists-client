@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import request from 'superagent'
+import { baseUrl } from '../../constants'
 
 export default function SignupForm(props) {
 
@@ -7,7 +9,7 @@ export default function SignupForm(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        props.onSubmit(formState)
+        onSubmit(formState)
     }
 
     const handleChange = (event) => {
@@ -18,6 +20,34 @@ export default function SignupForm(props) {
             [name]: value
         })
     }
+
+    const onSubmit = (data) => {
+        console.log(data)
+    }
+
+
+    // Do we still use dispatch?
+    // const onSubmit = (data) => (dispatch) => {
+    //     const { firstName, lastName, email, password } = data
+
+    //     request
+    //         .post(`${baseUrl}/users`)
+    //         .send({ firstName, lastName, email, password })
+    //         .then(result => {
+    //             dispatch(userSignupSuccess())
+    //         })
+    //         .catch(err => {
+    //             if (err.status === 400) {
+    //                 dispatch(userSignupFailed(err.response.body.message))
+    //             }
+    //             else {
+    //                 console.error(err)
+    //             }
+    //         })
+    // }
+
+
+
 
 
     return (
