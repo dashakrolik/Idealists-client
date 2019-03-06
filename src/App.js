@@ -1,27 +1,54 @@
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
+import styled from '@emotion/styled';
 import React, { Component } from 'react';
-import './App.css';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import SignupForm from './components/Signup/SignupForm';
 import Dashboard from './components/Dashboard/Dashboard'
 import Login from './components/Login/Login';
+import { ThemeProvider } from 'emotion-theming';
+
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
-          <header className="App-header">
-            <Route exact path="/dashboard" component ={Dashboard} />
-            <Route exact path="/signup" component={SignupForm} />
-            <Route exact path="/login" component={Login} />
-          </header>
-        </div>
-
-
+        <ThemeProvider theme={theme}>
+          <Application>
+            <Route exact path='/dashboard' component={Dashboard} />
+            <Route exact path='/signup' component={SignupForm} />
+            <Route exact path='/login' component={Login} />
+          </Application>
+        </ThemeProvider>
       </Router>
-
     );
   }
 }
+
+const theme = {
+  colors: {
+    titleText: '#444444',
+    accents: {
+      primary: {
+        dark: '#1A3D7C',
+        light: '#4CC5F1',
+      },
+      secondary: {
+        dark: '#233949',
+        light: '#DFEFF2',
+      },
+    },
+    bodyText: '#636363',
+  },
+};
+
+const Application = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: ${props => props.theme.colors.bodyText};
+`;
 
 export default App;
