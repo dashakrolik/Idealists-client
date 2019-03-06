@@ -26,23 +26,23 @@ export default function Login(props) {
     }
 
 
-    const onSubmit = (data) => (dispatch) => {
-        const { email, password } = data
-        request
-            .post(`${baseUrl}/logins`)
-            .send({ email, password })
-            .then(
-                // result => dispatch(userLoginSuccess(result.body))
-            )
-            .catch(err => {
-                if (err.status === 400) {
-                    // dispatch(userLoginFailed(err.response.body.message))
-                }
-                else {
-                    console.error(err)
-                }
-            })
-        }
+    // const onSubmit = (data) => (dispatch) => {
+    //     const { email, password } = data
+    //     request
+    //         .post(`${baseUrl}/logins`)
+    //         .send({ email, password })
+    //         .then(
+    //             // result => dispatch(userLoginSuccess(result.body))
+    //         )
+    //         .catch(err => {
+    //             if (err.status === 400) {
+    //                 // dispatch(userLoginFailed(err.response.body.message))
+    //             }
+    //             else {
+    //                 console.error(err)
+    //             }
+    //         })
+    //     }
 
         return (
             <div>
