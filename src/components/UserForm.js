@@ -7,8 +7,8 @@ export default function UserForm(questions) {
     evt.preventDefault();
     onSubmit(userFormState);
   };
-
-  const handleChange = x => {
+  
+  const handleChange = event => {
     const { name, value } = event.target;
 
     setUserFormState({
@@ -83,11 +83,6 @@ export default function UserForm(questions) {
       </div>
     );
   };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      {questions.map(q => questionrenderQuestionsList(q))}
-      <input type="submit" value="Submit" />
-    </form>
-  );
+  
+  return (<div></div>);
 }
