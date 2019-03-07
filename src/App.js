@@ -28,7 +28,7 @@ class App extends Component {
 }
 
 const theme = {
-  colors: {
+  colors: {\
     titleText: '#444444',
     accents: {
       primary: {
