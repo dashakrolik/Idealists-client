@@ -24,6 +24,9 @@ export default function UserFormContainer() {
   const nextButton = () => {
     if (index < maxIndex)
     setIndex(index + 1)
+    if (index === maxIndex){
+      console.log('We post the data to the database now')
+    }
   }
 
   const handleSubmit = (e) => {
