@@ -8,7 +8,7 @@ export default function UserForm(questions) {
     evt.preventDefault();
     onSubmit(userFormState);
   };
-  
+
   const handleChange = event => {
     const { name, value } = event.target;
 
@@ -25,7 +25,7 @@ export default function UserForm(questions) {
 
   const renderQuestion = question => {
     return (
-      <div>
+      <div key={question.questionId}>
         <label>
           {question.questionText}
           <input
@@ -42,11 +42,11 @@ export default function UserForm(questions) {
   useEffect(() => {
     console.log(questions)
   })
-  
+
   return (
-    
-  <div>
-  {questionsReceived.map(question => renderQuestion(question))}
-  </div>
+
+    <div>
+      {questionsReceived.map(question => renderQuestion(question))}
+    </div>
   );
 }

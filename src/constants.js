@@ -7,7 +7,7 @@ export const data =  {
         "questionGroupId": "1",
         "questions": [
           {
-            "questionId": "123456",
+            "questionId": "1",
             "questionType:": "regularTextField",
             "questionText": "First name",
             "questionHint": "Your first name",
@@ -18,7 +18,7 @@ export const data =  {
             "errorMessage": "That's not a name."
           },
           {
-            "questionId": "123456",
+            "questionId": "2",
             "questionType:": "regularTextField",
             "questionText": "Email",
             "questionHint": "Your first name",
