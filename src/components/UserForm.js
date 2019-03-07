@@ -9,11 +9,8 @@ export default function UserForm(questions) {
     onSubmit(userFormState);
   };
 
-  const handleChange = (event) => {
-    // console.log(userFormState)
-    
+  const handleChange = (event) => {    
     const { name, value } = event.target;
-    // console.log(event.target)
 
     setUserFormState({
       ...userFormState,
@@ -24,6 +21,7 @@ export default function UserForm(questions) {
   const onSubmit = data => {
     console.log(data);
     // setUserFormState()
+    // Post request here
   };
 
   const renderQuestion = question => {
