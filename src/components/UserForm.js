@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 
 export default function UserForm(questions) {
   const [userFormState, setUserFormState] = useState({});
-  let questionsReceived = questions.questions
+  const questionsReceived = questions.questions
 
-  // const handleSubmit = evt => {
-  //   evt.preventDefault();
-  //   onSubmit(userFormState);
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(userFormState);
+  };
 
-  const handleChange = event => {
+  const handleChange = (event) => {    
     const { name, value } = event.target;
 
     setUserFormState({
@@ -18,20 +18,21 @@ export default function UserForm(questions) {
     });
   };
 
-  // const onSubmit = data => {
-  //   console.log(data);
-  //   // setUserFormState()
-  // };
+  const onSubmit = data => {
+    console.log(data);
+    // setUserFormState()
+    // Post request here
+  };
 
   const renderQuestion = question => {
     return (
-      <div key={question.questionId}>
+      <div key={question.id}>
         <label>
-          {question.questionText}
+          {question.question}
           <input
-            type={question.questionText}
-            name={question.validateAs}
-            value={userFormState.email || ""}
+            type='answer'
+            name={question.id}
+            value={userFormState[question.id] || ''}
             onChange={handleChange}
           />
         </label>
@@ -40,13 +41,17 @@ export default function UserForm(questions) {
   };
 
   useEffect(() => {
-    console.log(questions)
+    // console.log(questionsReceived)
   })
 
   return (
 
     <div>
-      {questionsReceived.map(question => renderQuestion(question))}
+      <form onSubmit={handleSubmit}>
+        {questionsReceived.map(question => renderQuestion(question))}
+        <button type='submit'>Submit</button>
+      </form>
     </div>
+
   );
 }
