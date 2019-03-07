@@ -12,7 +12,7 @@ export default function SignupForm(props) {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formState);
+    submitForm(formState);
   };
   
   const handleChange = (event) => {
@@ -24,30 +24,30 @@ export default function SignupForm(props) {
     });
   };
   
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  // const onSubmit = (data) => {
+  //   console.log(data);
+  // };
   
   
   // Do we still use dispatch?
-  // const onSubmit = (data) => (dispatch) => {
-  //     const { firstName, lastName, email, password } = data
+  const submitForm = (data) => (dispatch) => {
+      const { firstName, lastName, email, password } = data
   
-  //     request
-  //         .post(`${baseUrl}/users`)
-  //         .send({ firstName, lastName, email, password })
-  //         .then(result => {
-  //             dispatch(userSignupSuccess())
-  //         })
-  //         .catch(err => {
-  //             if (err.status === 400) {
-  //                 dispatch(userSignupFailed(err.response.body.message))
-  //             }
-  //             else {
-  //                 console.error(err)
-  //             }
-  //         })
-  // }
+      request
+          .post(`${baseUrl}/users`)
+          .send({ firstName, lastName, email, password })
+          .then(result => {
+              // dispatch(userSignupSuccess())
+          })
+          .catch(err => {
+              if (err.status === 400) {
+                  // dispatch(userSignupFailed(err.response.body.message))
+              }
+              else {
+                  console.error(err)
+              }
+          })
+        }
   
   
   return (

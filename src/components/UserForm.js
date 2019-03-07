@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function UserForm(questions) {
   const [userFormState, setUserFormState] = useState({});
+  let questionsReceived = questions.questions
 
   const handleSubmit = evt => {
     evt.preventDefault();
     onSubmit(userFormState);
   };
-  
+
   const handleChange = event => {
     const { name, value } = event.target;
 
@@ -22,67 +23,30 @@ export default function UserForm(questions) {
     // setUserFormState()
   };
 
-  const questionrenderQuestionsList = question => {
+  const renderQuestion = question => {
     return (
-      <div>
+      <div key={question.questionId}>
         <label>
           {question.questionText}
           <input
-            type="{question.questionText}"
-            name="email"
+            type={question.questionText}
+            name={question.validateAs}
             value={userFormState.email || ""}
             onChange={handleChange}
           />
         </label>
-
-        {/* <label>
-          {question.questionText}
-          <input
-            type="{question.questionText}"
-            name="firstName"
-            value={userFormState.firstName || ""}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label>
-          {question.questionText}
-          <input
-            type="{question.questionText}"
-            name="lastName"
-            value={userFormState.lastName || ""}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label>
-          {question.questionText}
-          <input
-            type="{question.questionText}"
-            name="password"
-            value={userFormState.password || ""}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label>
-          {question.questionText}
-          <input
-            type="{question.questionText}"
-            name="confirmPassword"
-            value={userFormState.confirmPassword || ""}
-            onChange={handleChange}
-          />
-        </label> */}
-        {/* // {
-   //     formState.password &&
-   //     formState.confirmPassword &&
-   //     formState.password !== formState.confirmPassword &&
-   //     <p style={{ color: 'red' }}>The passwords do not match!</p>
-   // } */}
       </div>
     );
   };
-  
-  return (<div></div>);
+
+  useEffect(() => {
+    console.log(questions)
+  })
+
+  return (
+
+    <div>
+      {questionsReceived.map(question => renderQuestion(question))}
+    </div>
+  );
 }
