@@ -4,13 +4,16 @@ export default function UserForm(questions) {
   const [userFormState, setUserFormState] = useState({});
   const questionsReceived = questions.questions
 
-  const handleSubmit = evt => {
-    evt.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     onSubmit(userFormState);
   };
 
-  const handleChange = event => {
+  const handleChange = (event) => {
+    // console.log(userFormState)
+    
     const { name, value } = event.target;
+    // console.log(event.target)
 
     setUserFormState({
       ...userFormState,
@@ -29,9 +32,9 @@ export default function UserForm(questions) {
         <label>
           {question.question}
           <input
-            type={question.questionText}
+            type='answer'
             name={question.id}
-            value={userFormState.email || ""}
+            value={userFormState[question.id] || ''}
             onChange={handleChange}
           />
         </label>
@@ -46,8 +49,11 @@ export default function UserForm(questions) {
   return (
 
     <div>
-      {questionsReceived.map(question => renderQuestion(question))}
-      Hello!
+      <form onSubmit={handleSubmit}>
+        {questionsReceived.map(question => renderQuestion(question))}
+        <button type='submit'>Submit</button>
+      </form>
     </div>
+
   );
 }
