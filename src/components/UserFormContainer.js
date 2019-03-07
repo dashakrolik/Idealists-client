@@ -1,46 +1,37 @@
 import React, { useEffect, useState } from "react";
-// import request from "superagent";
+import request from "superagent";
 import UserForm from './UserForm'
-import {data} from '../constants'
+import { baseUrl } from '../constants'
 
 export default function UserFormContainer() {
   const [groups, setGroups] = useState([]);
-  const [index, setIndex] = useState(0);
-  
-  // useEffect(() => {
-  //   request
-  //     .get(`http://localhost:3001/questions`)
-  //     .then(response => {
-  //       setGroups(response.body);
-  //     })
-  //     .catch(err => {
-  //         console.error(err);
-  //       },
-  //     );
-  // }, []);
+  const [index, setIndex] = useState(1);
 
   useEffect(() => {
-    setGroups(data)
-  })
-  
-  const nextQuestionGroup = _ => {
-    console.log(index)
-    setIndex(index + 1);
-  };
-  
-  if (groups.questionGroups){
-    return (    
+    // console.log(index)
+
+    request
+      .get(`${baseUrl}/groups/${index}/questions`)
+      .then(response => {
+        setGroups(response.body);
+      })
+      .catch(err => {
+        console.error(err)
+      });
+  }, [index]);
+
+  if (groups) {
+    return (
       <div>
-        <UserForm questions={groups.questionGroups[index].questions} />
-        <button onClick={nextQuestionGroup}>Next</button>
+        <UserForm questions={groups} />
+        <button onClick={() => { setIndex(index + 1) }}>Next</button>
       </div>
-    );      
+    );
   }
   return (
     <div>
       Loading...
     </div>
   )
-  
 }
 

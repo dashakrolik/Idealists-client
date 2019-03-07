@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 
 export default function UserForm(questions) {
   const [userFormState, setUserFormState] = useState({});
-  let questionsReceived = questions.questions
+  const questionsReceived = questions.questions
 
-  // const handleSubmit = evt => {
-  //   evt.preventDefault();
-  //   onSubmit(userFormState);
-  // };
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    onSubmit(userFormState);
+  };
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -18,19 +18,19 @@ export default function UserForm(questions) {
     });
   };
 
-  // const onSubmit = data => {
-  //   console.log(data);
-  //   // setUserFormState()
-  // };
+  const onSubmit = data => {
+    console.log(data);
+    // setUserFormState()
+  };
 
   const renderQuestion = question => {
     return (
-      <div key={question.questionId}>
+      <div key={question.id}>
         <label>
-          {question.questionText}
+          {question.question}
           <input
             type={question.questionText}
-            name={question.validateAs}
+            name={question.id}
             value={userFormState.email || ""}
             onChange={handleChange}
           />
@@ -40,13 +40,14 @@ export default function UserForm(questions) {
   };
 
   useEffect(() => {
-    console.log(questions)
+    // console.log(questionsReceived)
   })
 
   return (
 
     <div>
       {questionsReceived.map(question => renderQuestion(question))}
+      Hello!
     </div>
   );
 }
