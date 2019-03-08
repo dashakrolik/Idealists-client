@@ -5,10 +5,12 @@ import request from 'superagent'
 import { baseUrl } from '../../constants'
 import styled from '@emotion/styled';
 import Header from '../Header';
+import { Redirect } from 'react-router-dom'
 
 export default function SignupForm(props) {
 
   const [formState, setFormState] = useState({});
+  const [userCreated, setUserCreated] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,65 +40,71 @@ export default function SignupForm(props) {
     request
       .post(`${baseUrl}/users`)
       .send({ firstName, lastName, email, password, role: "expert" })
+      .then(setUserCreated(true))
       .catch(err => { console.error(err) })
   }
 
-
-  return (
-    <Container>
-      <Header />
-      <FormContainer>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Email
+  if (userCreated === false) {
+    return (
+      <Container>
+        <Header />
+        <FormContainer>
+          <form onSubmit={handleSubmit}>
+            <label>
+              Email
             <input type='email' name='email' value={
-              formState.email || ''
-            } onChange={handleChange} />
-          </label><br />
+                formState.email || ''
+              } onChange={handleChange} />
+            </label><br />
 
-          <label>
-            First Name
+            <label>
+              First Name
             <input type='firstName' name='firstName' value={
-              formState.firstName || ''
-            } onChange={handleChange} />
-          </label><br />
+                formState.firstName || ''
+              } onChange={handleChange} />
+            </label><br />
 
-          <label>
-            Last Name
+            <label>
+              Last Name
             <input type='lastName' name='lastName' value={
-              formState.lastName || ''
-            } onChange={handleChange} />
-          </label><br />
+                formState.lastName || ''
+              } onChange={handleChange} />
+            </label><br />
 
-          <label>
-            Password
+            <label>
+              Password
             <input type='password' name='password' value={
-              formState.password || ''
-            } onChange={handleChange} />
-          </label><br />
+                formState.password || ''
+              } onChange={handleChange} />
+            </label><br />
 
-          <label>
-            Confirm password
+            <label>
+              Confirm password
             <input type='password' name='confirmPassword' value={
-              formState.confirmPassword || ''
-            } onChange={handleChange} />
-          </label><br />
-          {
-            formState.password &&
-            formState.confirmPassword &&
-            formState.password !== formState.confirmPassword &&
-            <p style={{ color: 'red' }}>The passwords do not match!</p>
-          }
-          {
-            formState.password && !formState.confirmPassword &&
-            <p style={{ color: 'red' }}>Please confirm your password.</p>
-          }
+                formState.confirmPassword || ''
+              } onChange={handleChange} />
+            </label><br />
+            {
+              formState.password &&
+              formState.confirmPassword &&
+              formState.password !== formState.confirmPassword &&
+              <p style={{ color: 'red' }}>The passwords do not match!</p>
+            }
+            {
+              formState.password && !formState.confirmPassword &&
+              <p style={{ color: 'red' }}>Please confirm your password.</p>
+            }
 
-          <button type='submit'>Sign up</button>
-        </form>
-      </FormContainer>
-    </Container>
-  );
+            <button type='submit'>Sign up</button>
+          </form>
+        </FormContainer>
+      </Container>
+    );
+  } else {
+
+    return (<Redirect to="/login" />)
+  }
+
 }
 
 
