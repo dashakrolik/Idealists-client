@@ -5,6 +5,7 @@ import { baseUrl } from '../../constants'
 export default function Dashboard(props) {
     const jwt = localStorage.currentUserJwt
     const [userData, setUserData] = useState({})
+    const [userIdeas, setUserIdeas] = useState([])
 
 
     useEffect(() => {
@@ -15,7 +16,16 @@ export default function Dashboard(props) {
     }, [])
 
 
+    // This should get ideas by industry
+    // useEffect(() => {
+    //     request
+    //         .get(`${baseUrl}/ideas/:industry`)
+
+    // }, [userData])
+
+    console.log(userData)
     return (
+
         <div>
             <h4>This is {userData.firstName}'s dashboard</h4>
             <h3>Log out</h3>
