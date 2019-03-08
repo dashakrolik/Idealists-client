@@ -40,7 +40,11 @@ export default function SignupForm(props) {
     request
       .post(`${baseUrl}/users`)
       .send({ firstName, lastName, email, password, role: "expert" })
-      .then(setUserCreated(true))
+      .then(res => {
+        if (res.status === 200){
+          setUserCreated(true)
+        }
+      })
       .catch(err => { console.error(err) })
   }
 
