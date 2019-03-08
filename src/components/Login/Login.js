@@ -26,10 +26,6 @@ export default function Login(props) {
     });
   };
 
-  // const onSubmit = (data) => {
-  //   console.log(data);
-  // };
-
 
   const onSubmit = (data) => {
     const { email, password } = data
@@ -39,6 +35,7 @@ export default function Login(props) {
       .then(res => {
         if (res.status === 200) {
           setUserLoggedIn(true)
+          storeLocally(res.body.jwt)
         }
       })
       .catch(err => {
@@ -49,6 +46,9 @@ export default function Login(props) {
           console.error(err)
         }
       })
+  }
+  const storeLocally = (jwt) => {
+    localStorage.setItem("currentUserJwt", jwt)
   }
 
   if (userLoggedIn !== true) return (
