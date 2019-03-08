@@ -15,7 +15,10 @@ const SingleLineQuestion = (props) => {
       setValidated(props.validator(currentValue));
     }
     if (props.onChange) {
-      props.onChange(currentValue);
+      props.onChange({
+        name: props.name,
+        value: currentValue,
+      });
     }
   }, [currentValue]);
   
@@ -33,14 +36,14 @@ const SingleLineQuestion = (props) => {
   };
   
   return (
-    <Container isHalfSize={props.halfSize} pose={isFocused ? 'focused' : 'default'}>
-      <QuestionTitle>{props.questionTitle}</QuestionTitle>
-      <TextField onChange={handleChange} value={currentValue}
+    <Container halfSize={props.halfSize} pose={isFocused ? 'focused' : 'default'}>
+      <QuestionTitle halfSize={props.halfSize}>{props.questionTitle}</QuestionTitle>
+      <TextField onChange={handleChange} value={currentValue} halfSize={props.halfSize}
                  pose={(isStillInit || validated) ? (isFocused ? 'focused' : 'default') : (isFocused ? 'focusedError' : 'error')}
                  onFocus={handleFocus} onBlur={handleLostFocus}
       />
-      <ErrorMessage
-        pose={(!isStillInit && props.validator && !validated) ? 'show' : 'hide'}>{props.errorMessage || 'Validation error'}</ErrorMessage>
+      <ErrorMessage halfSize={props.halfSize}
+                    pose={(!isStillInit && props.validator && !validated) ? 'show' : 'hide'}>{props.errorMessage || 'Validation error'}</ErrorMessage>
     </Container>
   );
 };
@@ -131,11 +134,13 @@ const TextField = styled(PTextField)`
 const PContainer = posed.div({
   default: {
     opacity: 0.6,
+    y: 0,
     scale: 1.0,
     transition: { ease: 'easeInOut', duration: 120 },
   },
   focused: {
     opacity: 0.9,
+    y: 0,
     scale: 1.02,
     transition: { ease: 'easeInOut', duration: 120 },
   },
@@ -143,14 +148,12 @@ const PContainer = posed.div({
 
 const Container = styled(PContainer)`
   position: relative;
-  display: inline-block;
   top: 0;
   left: 0;
   margin-bottom: 20px;
-  width: 100%;
+  width: ${props => props.halfSize ? '46%' : '100%'};
   height: auto;
   color: #ffffff;
-  vertical-align: top;
 `;
 
 export default SingleLineQuestion;

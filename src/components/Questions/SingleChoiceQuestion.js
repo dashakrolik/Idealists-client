@@ -65,7 +65,7 @@ const SingleChoiceQuestion = (props) => {
   };
   
   return (
-    <Container isHalfSize={props.halfSize} pose={isFocused ? 'focused' : 'default'}>
+    <Container halfSize={props.halfSize} pose={isFocused ? 'focused' : 'default'}>
       <QuestionTitle>{props.questionTitle}</QuestionTitle>
       <Select
         styles={customStyles}
@@ -173,7 +173,7 @@ const ErrorMessage = styled(PErrorMessage)`
 const TextField = styled(PTextField)`
   position: relative;
   display: block;
-  left: 5%%;
+  left: 5%;
   width: 90%;
   height: 26px;
   line-height: 30px;
@@ -190,7 +190,7 @@ const Container = styled(PContainer)`
   top: 0;
   left: 0;
   margin-bottom: 20px;
-  width: 100%;
+  width: ${props => props.halfSize ? '45%' : '100%'};
   height: auto;
   color: white;
   vertical-align: top;
