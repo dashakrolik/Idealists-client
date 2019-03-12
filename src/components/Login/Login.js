@@ -4,12 +4,14 @@ import logo from '../../res/logo_horizontal_white.png';
 import { jsx } from '@emotion/core';
 import { baseUrl } from '../../constants'
 import request from 'superagent'
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
+import { LoginContext } from './LoginContext';
 
 export default function Login(props) {
 
   const [loginState, setLoginState] = useState({});
   const [userLoggedIn, setUserLoggedIn] = useState(false)
+  const [jwt, setJwt] = useState({})
 
 
   const handleSubmit = (e) => {
@@ -34,8 +36,9 @@ export default function Login(props) {
       .send({ email, password })
       .then(res => {
         if (res.status === 200) {
-          setUserLoggedIn(true)
           storeLocally(res.body.jwt)
+          setJwt(res.body.jwt)
+          setUserLoggedIn(true)
         }
       })
       .catch(err => {
@@ -78,8 +81,10 @@ export default function Login(props) {
         </form>
       </RightSide>
     </Container>);
-  if (userLoggedIn === true) return(
-    <Redirect to="/dashboard" />
+  if (userLoggedIn === true) return (
+    <LoginContext.Provider value={{jwt}}>
+      <Redirect to="/dashboard" />
+    </LoginContext.Provider>
   )
 }
 
