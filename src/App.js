@@ -9,6 +9,7 @@ import Login from './components/Login/Login';
 import UserFormContainer from "./components/UserFormContainer";
 import { ThemeProvider } from 'emotion-theming';
 import Playground from './components/Playground';
+import Ideas from './components/Ideas/Ideas';
 
 
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
             <Route exact path='/login' component={Login} />
             <Route exact path='/userform' component={UserFormContainer} />
             <Route exact path='/devPlayground' component={Playground} />
+            <Route exact path='/dashboard/ideas/:id' component={Ideas} />
           </Application>
         </ThemeProvider>
       </Router>

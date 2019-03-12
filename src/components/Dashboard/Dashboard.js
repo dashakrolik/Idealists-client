@@ -10,10 +10,8 @@ export default function Dashboard(props) {
     const localJwt = localStorage.currentUserJwt
     const [userData, setUserData] = useState({})
     const [userLoggedIn, setUserLoggedIn] = useState(true)
-
-
-    // not in use yet
-    // const [userIdeas, setUserIdeas] = useState([])
+    // Currently userIdeas are ALL ideas, because it is a non-specific GET request
+    const [userIdeas, setUserIdeas] = useState([])
 
     useEffect(() => {
         if (jwt || localJwt)
@@ -24,12 +22,12 @@ export default function Dashboard(props) {
     }, [])
 
 
-    // This should get ideas by industry
-    // useEffect(() => {
-    //     request
-    //         .get(`${baseUrl}/ideas/:industry`)
-
-    // }, [userData])
+    // For testing purposes, this gets ALL ideas
+    useEffect(() => {
+        request
+            .get(`${baseUrl}/ideas`)
+            .then(res => setUserIdeas(res.body))
+    }, [])
 
     const userLogout = () => {
         localStorage.removeItem('currentUserJwt')
@@ -39,7 +37,14 @@ export default function Dashboard(props) {
     if (userLoggedIn === false)
         return (
             <Redirect to="/login" />)
-    if (userData.firstName)
+
+
+    // Condition below should be userIdeas.length > 0, userData.firstName is purely for testing purposes
+    if (userData.firstName) {
+        // console.log(userData)
+        // console.log(userIdeas)
+        console.log(sampleData)
+
         return (
             <div>
 
@@ -50,16 +55,44 @@ export default function Dashboard(props) {
                 <ul>
                     <li>Sample</li>
                     <li>Data</li>
-                    <li>With</li>
-                    <li>Idea</li>
-                    <li>Links</li>
+                </ul>
+                <ul>
+                    {sampleData.map(idea => {
+                        return <li key={idea.id}><Link to={`/dashboard/ideas/${idea.id}`}>
+                            {idea.createdAt}</Link>
+                        </li>
+                    })}
                 </ul>
 
             </div>
         )
-    if (!userData.firstName) return (
-        <div>Fetching user data...
-        <h3> If you keep seeing this, you probably are not <Link to="/login">logged in</Link> yet.</h3 >
-        </div>
-    )
+    }
+    else {
+        return (
+            <div>Fetching user data...
+            <h3> If you keep seeing this, you probably are not <Link to="/login">logged in</Link> yet.</h3 >
+            </div>
+        )
+
+    }
 }
+
+// Code below is just sample data because the ideas database is empty
+const sampleData =
+    [
+        {
+            "createdAt": "2019-03-12T13:57:40.889Z",
+            "id": 1,
+            "idea": "{\"question1\":\"answer1\",\"question2\":\"answer2\",\"question3\":\"answer3\"}"
+        },
+        {
+            "createdAt": "2019-03-12T13:57:54.639Z",
+            "id": 2,
+            "idea": "{\"question1\":\"answer1\",\"question2\":\"answer2\",\"question3\":\"answer3\"}"
+        },
+        {
+            "createdAt": "2019-03-12T13:58:14.973Z",
+            "id": 3,
+            "idea": "{\"question1\":\"answer1\",\"question2\":\"answer2\",\"question3\":\"answer3\"}"
+        }
+    ]
