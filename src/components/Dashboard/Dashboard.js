@@ -9,8 +9,11 @@ export default function Dashboard(props) {
     const { jwt } = useContext(LoginContext)
     const localJwt = localStorage.currentUserJwt
     const [userData, setUserData] = useState({})
-    const [userIdeas, setUserIdeas] = useState([])
     const [userLoggedIn, setUserLoggedIn] = useState(true)
+
+
+    // not in use yet
+    // const [userIdeas, setUserIdeas] = useState([])
 
     useEffect(() => {
         if (jwt || localJwt)
@@ -57,8 +60,6 @@ export default function Dashboard(props) {
     if (!userData.firstName) return (
         <div>Fetching user data...
         <h3> If you keep seeing this, you probably are not <Link to="/login">logged in</Link> yet.</h3 >
-        
         </div>
     )
-
 }
