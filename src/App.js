@@ -11,6 +11,7 @@ import { ThemeProvider } from 'emotion-theming';
 import Playground from './components/Playground';
 import FormScreen from './components/Questions/FormScreen';
 import IdeaSubmissionLandingPage from './components/IdeaSubmission/IdeaSubmissionLandingPage';
+import Ideas from './components/Ideas/Ideas';
 
 
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
             <Route exact path='/login' component={Login} />
             <Route exact path='/userform' component={UserFormContainer} />
             <Route exact path='/devPlayground' component={Playground} />
+            <Route exact path='/dashboard/ideas/:id' component={Ideas} />
             <Route exact path='/formScreen' component={FormScreen} />
             <Route exact path='/ideaSubmission' component={IdeaSubmissionLandingPage} />
           </Application>

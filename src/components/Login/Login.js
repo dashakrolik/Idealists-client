@@ -2,59 +2,68 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import logo from '../../res/logo_horizontal_white.png';
 import { jsx } from '@emotion/core';
+import { baseUrl } from '../../constants'
+import request from 'superagent'
+import { Redirect } from 'react-router-dom'
+import { LoginContext } from './LoginContext';
 
 export default function Login(props) {
-  
+
   const [loginState, setLoginState] = useState({});
-  
-  
+  const [userLoggedIn, setUserLoggedIn] = useState(false)
+  const [jwt, setJwt] = useState({})
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);
   };
-  
+
   const handleChange = (event) => {
     const { name, value } = event.target;
-    
+
     setLoginState({
       ...loginState,
       [name]: value,
     });
   };
-  
+
+
   const onSubmit = (data) => {
-    console.log(data);
-  };
-  
-  
-  // const onSubmit = (data) => (dispatch) => {
-  //     const { email, password } = data
-  //     request
-  //         .post(`${baseUrl}/logins`)
-  //         .send({ email, password })
-  //         .then(
-  //             // result => dispatch(userLoginSuccess(result.body))
-  //         )
-  //         .catch(err => {
-  //             if (err.status === 400) {
-  //                 // dispatch(userLoginFailed(err.response.body.message))
-  //             }
-  //             else {
-  //                 console.error(err)
-  //             }
-  //         })
-  //     }
-  
-  return (
+    const { email, password } = data
+    request
+      .post(`${baseUrl}/login`)
+      .send({ email, password })
+      .then(res => {
+        if (res.status === 200) {
+          storeLocally(res.body.jwt)
+          setJwt(res.body.jwt)
+          setUserLoggedIn(true)
+        }
+      })
+      .catch(err => {
+        if (err.status === 400) {
+          // dispatch(userLoginFailed(err.response.body.message))
+        }
+        else {
+          console.error(err)
+        }
+      })
+  }
+  const storeLocally = (jwt) => {
+    localStorage.setItem("currentUserJwt", jwt)
+  }
+
+  if (userLoggedIn !== true) return (
     <Container>
-      {/*<Header />*/}
-      
+      {/* <Header /> */}
+
       <Logo src={logo} alt='Logo' />
       <LeftSide>
         <div>
           <h3>Financieer Portal</h3>
           <p>If you are looking to check on the status of your idea submission, please click <a>here</a>.</p>
-          <p>Interested in becoming a financieer? <a>Sign up</a></p>
+          <p>Interested in becoming a financieer? <a href="http://localhost:3000/signup">Sign up</a></p>
         </div>
       </LeftSide>
       <RightSide>
@@ -62,16 +71,21 @@ export default function Login(props) {
           <label>Email</label>
           <input type='email' name='email' value={loginState.email || ''} onChange={handleChange} />
           <br />
-          
+
           <label>Password</label>
           <input type='password' name='password' value={loginState.password || ''} onChange={handleChange} />
           <br />
-          
+
           <a>Forgot your password?</a>
           <button type='submit'>Login</button>
         </form>
       </RightSide>
     </Container>);
+  if (userLoggedIn === true) return (
+    <LoginContext.Provider value={{jwt}}>
+      <Redirect to="/dashboard" />
+    </LoginContext.Provider>
+  )
 }
 
 const Logo = styled.img`
