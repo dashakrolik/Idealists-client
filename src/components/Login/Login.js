@@ -80,7 +80,6 @@ const Logo = styled.img`
   right: 0;
   top: 50%;
   margin: -300px auto auto auto;
-  //top: 10px;
   height: 70px;
 `;
 

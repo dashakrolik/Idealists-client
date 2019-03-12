@@ -4,7 +4,6 @@ import { jsx, css } from '@emotion/core';
 import request from 'superagent'
 import { baseUrl } from '../../constants'
 import styled from '@emotion/styled';
-import Header from '../Header';
 
 export default function SignupForm(props) {
   
@@ -52,7 +51,6 @@ export default function SignupForm(props) {
   
   return (
     <Container>
-      <Header />
       <FormContainer>
         <form onSubmit={handleSubmit}>
           <label>

@@ -15,10 +15,7 @@ const SingleLineQuestion = (props) => {
       setValidated(props.validator(currentValue));
     }
     if (props.onChange) {
-      props.onChange({
-        name: props.name,
-        value: currentValue,
-      });
+      props.onChange(currentValue);
     }
   }, [currentValue]);
   
@@ -29,10 +26,12 @@ const SingleLineQuestion = (props) => {
   
   const handleFocus = () => {
     setIsFocused(true);
+    props.onFocusChanged && props.onFocusChanged(true);
   };
   
   const handleLostFocus = () => {
     setIsFocused(false);
+    props.onFocusChanged && props.onFocusChanged(false);
   };
   
   return (
@@ -54,6 +53,7 @@ SingleLineQuestion.propTypes = {
   validator: PropTypes.func,
   errorMessage: PropTypes.string,
   onChange: PropTypes.func,
+  onFocusChanged: PropTypes.func,
 };
 
 const PTextField = posed.input({
@@ -90,7 +90,7 @@ const PErrorMessage = posed.p({
     transition: { ease: 'easeInOut', duration: 200 },
   },
   show: {
-    opacity: 1,
+    opacity: 0.69,
     y: 0,
     transition: { ease: 'easeInOut', duration: 200 },
   },
@@ -121,8 +121,8 @@ const TextField = styled(PTextField)`
   display: block;
   left: 5%;
   width: 90%;
-  height: 42px;
-  line-height: 42px;
+  height: 40px;
+  line-height: 40px;
   font-size: 16px;
   border-radius: 6px;
   border-color: transparent;
@@ -133,13 +133,13 @@ const TextField = styled(PTextField)`
 
 const PContainer = posed.div({
   default: {
-    opacity: 0.6,
+    opacity: 0.69,
     y: 0,
     scale: 1.0,
     transition: { ease: 'easeInOut', duration: 120 },
   },
   focused: {
-    opacity: 0.9,
+    opacity: 1.0,
     y: 0,
     scale: 1.02,
     transition: { ease: 'easeInOut', duration: 120 },
@@ -150,7 +150,7 @@ const Container = styled(PContainer)`
   position: relative;
   top: 0;
   left: 0;
-  margin-bottom: 20px;
+  margin: 5px;
   width: ${props => props.halfSize ? '46%' : '100%'};
   height: auto;
   color: #ffffff;

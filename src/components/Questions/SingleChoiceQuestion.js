@@ -14,12 +14,21 @@ const customStyles = {
     ...provided,
     left: '5%',
     width: '90%',
-    right: 'auto',
-    height: '42px',
+    height: '40px',
     border: '0',
     lineHeight: '26px',
     borderRadius: '6px',
     textSize: '16px',
+    position: 'relative',
+  }),
+  control: (base, state) => ({
+    ...base,
+    border: state.isFocused ? 0 : 0,
+    height: '100%',
+    boxShadow: state.isFocused ? 0 : 0,
+    '&:hover': {
+      border: state.isFocused ? 0 : 0,
+    },
   }),
   singleValue: (provided, state) => {
     const opacity = state.isDisabled ? 0.5 : 1;
@@ -30,12 +39,6 @@ const customStyles = {
 };
 
 const SingleChoiceQuestion = (props) => {
-  
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
   
   const [isFocused, setIsFocused] = useState(false);
   const [isStillInit, setIsStillInit] = useState(true);
@@ -88,63 +91,16 @@ SingleChoiceQuestion.propTypes = {
   onChange: PropTypes.func,
 };
 
-const DropDownContainer = styled.div`
-  position: relative;
-  top: 0;
-  width: 90%;
-  left: 5%;
-  background-color: red;
-`;
-
 const PContainer = posed.div({
   default: {
-    opacity: 0.6,
+    opacity: 0.60,
     scale: 1.0,
     transition: { ease: 'easeInOut', duration: 120 },
   },
   focused: {
-    opacity: 0.9,
+    opacity: 1.0,
     scale: 1.02,
     transition: { ease: 'easeInOut', duration: 120 },
-  },
-});
-
-const PTextField = posed.input({
-  default: {
-    backgroundColor: 'rgba(255, 255, 255, 0.6)',
-    color: '#1A3D7C',
-    scale: 1.0,
-    transition: { ease: 'easeInOut', duration: 200 },
-  },
-  focused: {
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    scale: 1.02,
-    transition: { ease: 'easeInOut', duration: 120 },
-  },
-  error: {
-    backgroundColor: 'rgba(255, 115, 141, 0.9)',
-    color: '#ffffff',
-    scale: 1.0,
-    transition: { ease: 'easeInOut', duration: 200 },
-  },
-  focusedError: {
-    backgroundColor: 'rgba(255, 115, 141, 0.9)',
-    color: '#ffffff',
-    scale: 1.02,
-    transition: { ease: 'easeInOut', duration: 200 },
-  },
-});
-
-const PErrorMessage = posed.p({
-  hide: {
-    opacity: 0,
-    y: 10,
-    transition: { ease: 'easeInOut', duration: 200 },
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { ease: 'easeInOut', duration: 200 },
   },
 });
 
@@ -160,39 +116,14 @@ const QuestionTitle = styled.p`
   }
 `;
 
-const ErrorMessage = styled(PErrorMessage)`
-  position: relative;
-  display: block;
-  padding: 5px 5px 5px 0;
-  margin: 0;
-  left: 10%;
-  width: 90%;
-  font-size: 12px;
-`;
-
-const TextField = styled(PTextField)`
-  position: relative;
-  display: block;
-  left: 5%;
-  width: 90%;
-  height: 26px;
-  line-height: 30px;
-  border-radius: 6px;
-  border-color: transparent;
-  padding: 6px;
-  outline: none;
-  -webkit-appearance: none;
-`;
-
 const Container = styled(PContainer)`
   position: relative;
-  display: inline-block;
   top: 0;
   left: 0;
-  margin-bottom: 20px;
+  margin: 5px;
   width: ${props => props.halfSize ? '45%' : '100%'};
   height: auto;
-  color: white;
+  color: #233949;
   vertical-align: top;
 `;
 

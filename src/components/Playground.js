@@ -17,10 +17,11 @@ const Playground = () => {
 const Content = styled.div`
   position: relative;
   width: 900px;
-  height: 700px;
+  height: auto;
   top: 50%;
   left: 50%;
-  margin: -350px auto auto -450px;
+  //right: 0;
+  transform: translateY(-50%) translateX(-50%);
 `;
 
 const Container = styled.div`
