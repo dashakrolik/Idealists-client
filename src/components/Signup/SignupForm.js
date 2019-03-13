@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/core';
 import request from 'superagent'
 import { baseUrl } from '../../constants'
 import styled from '@emotion/styled';
-import Header from '../Header';
+import Header from '../IdeaSubmission/Header';
 import { Redirect } from 'react-router-dom'
 
 export default function SignupForm(props) {
@@ -31,8 +31,7 @@ export default function SignupForm(props) {
   // const submitForm = (data) => {
   //   console.log(data);
   // };
-
-
+  
   // Do we still use dispatch?
   const submitForm = (data) => {
     const { firstName, lastName, email, password } = data

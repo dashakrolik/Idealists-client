@@ -21,7 +21,6 @@ const SelectContainer = styled.div`
   width: 100%;
   border-radius: 6px;
   background-color: #ffffff;
-  
 `;
 
 export default Select;
