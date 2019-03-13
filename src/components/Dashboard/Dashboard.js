@@ -20,9 +20,8 @@ export default function Dashboard(props) {
                 .set("Authorization", `Bearer ${jwt || localJwt}`)
                 .then(res => setUserData(res.body))
     }, [])
-
-
-    // For testing purposes, this gets ALL ideas
+  
+  // For testing purposes, this gets ALL ideas
     useEffect(() => {
         request
             .get(`${baseUrl}/ideas`)

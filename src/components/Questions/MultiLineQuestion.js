@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import posed from 'react-pose';
 
-const SingleLineQuestion = (props) => {
+const MultiLineQuestion = (props) => {
   
   const [isFocused, setIsFocused] = useState(false);
   const [isStillInit, setIsStillInit] = useState(false);
@@ -44,14 +44,10 @@ const SingleLineQuestion = (props) => {
   return (
     <Container pose={isFocused ? 'focused' : 'default'}>
       <QuestionTitle>{props.questionTitle}</QuestionTitle>
-      {!props.multiLine && <TextField onChange={handleChange} value={currentValue}
-                                      pose={(isStillInit || validated) ? (isFocused ? 'tfFocused' : 'tfDefault') : (isFocused ? 'tfFocusedError' : 'tfError')}
-                                      onFocus={handleFocus} onBlur={handleLostFocus}
-      />}
-      {!!props.multiLine && <TextArea onChange={handleChange} value={currentValue}
-                                      pose={(isStillInit || validated) ? (isFocused ? 'tfFocused' : 'tfDefault') : (isFocused ? 'tfFocusedError' : 'tfError')}
-                                      onFocus={handleFocus} onBlur={handleLostFocus}
-      />}
+      <TextArea onChange={handleChange} value={currentValue}
+                pose={(isStillInit || validated) ? (isFocused ? 'tfFocused' : 'tfDefault') : (isFocused ? 'tfFocusedError' : 'tfError')}
+                onFocus={handleFocus} onBlur={handleLostFocus}
+      />
       <ErrorMessage pose={(!isStillInit && !!props.validationRegex && !validated) ? 'show' : 'hide'}>
         {props.errorMessage || 'Validation error'}
       </ErrorMessage>
@@ -59,7 +55,7 @@ const SingleLineQuestion = (props) => {
   );
 };
 
-SingleLineQuestion.propTypes = {
+MultiLineQuestion.propTypes = {
   id: PropTypes.string.isRequired,
   questionTitle: PropTypes.string.isRequired,
   validationRegex: PropTypes.string,
@@ -69,35 +65,32 @@ SingleLineQuestion.propTypes = {
   onFocusChanged: PropTypes.func,
 };
 
-const poses = {
-  tfDefault: {
+const PTextArea = posed.textarea({
+  default: {
     backgroundColor: 'rgba(255, 255, 255, 1.0)',
-    color: '#252525',
+    color: '#1A3D7C',
     scale: 1.0,
     transition: { ease: 'easeInOut', duration: 200 },
   },
-  tfFocused: {
+  focused: {
     backgroundColor: 'rgba(255, 255, 255, 1.0)',
-    color: '#252525',
+    color: '#1A3D7C',
     scale: 1.0,
     transition: { ease: 'easeInOut', duration: 120 },
   },
-  tfError: {
+  error: {
     backgroundColor: 'rgba(255, 115, 141, 1.0)',
     color: '#ffffff',
     scale: 1.0,
     transition: { ease: 'easeInOut', duration: 200 },
   },
-  tfFocusedError: {
+  focusedError: {
     backgroundColor: 'rgba(255, 115, 141, 1.0)',
     color: '#ffffff',
     scale: 1.0,
     transition: { ease: 'easeInOut', duration: 200 },
   },
-}
-
-const PTextField = posed.input(poses);
-const PTextArea = posed.textarea(poses);
+});
 
 const PErrorMessage = posed.p({
   hide: {
@@ -128,38 +121,20 @@ const ErrorMessage = styled(PErrorMessage)`
   font-size: 12px;
 `;
 
-const TextField = styled(PTextField)`
+const TextArea = styled(PTextArea)`
   position: relative;
   box-sizing:border-box;
   display: block;
   width: 100%;
-  height: 40px;
-  line-height: 40px;
+  //max-width: 600px;
+  height: 320px;
+  line-height: 16px;
   font-size: 16px;
   border-radius: 6px;
   border-color: transparent;
   padding: 6px;
   outline: none;
-  color: #252525;
   -webkit-appearance: none;
-`;
-
-const TextArea = styled(PTextArea)`
-  position: relative;
-  box-sizing:border-box;
-  display: block;
-  width: 90vw;
-  max-width: 700px;
-  height: 320px;
-  line-height: 12px;
-  font-size: 12px;
-  border-radius: 6px;
-  border-color: transparent;
-  padding: 6px;
-  outline: none;
-  color: #252525;
-  -webkit-appearance: none;
-  resize: none;
 `;
 
 const PContainer = posed.div({
@@ -178,7 +153,6 @@ const PContainer = posed.div({
 });
 
 const Container = styled(PContainer)`
-  flex-grow: 1;
   position: relative;
   top: 0;
   left: 0;
@@ -188,4 +162,4 @@ const Container = styled(PContainer)`
   color: #ffffff;
 `;
 
-export default SingleLineQuestion;
+export default MultiLineQuestion;

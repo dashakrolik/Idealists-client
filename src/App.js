@@ -12,7 +12,7 @@ import Playground from './components/Playground';
 import FormScreen from './components/Questions/FormScreen';
 import IdeaSubmissionLandingPage from './components/IdeaSubmission/IdeaSubmissionLandingPage';
 import Ideas from './components/Ideas/Ideas';
-
+import { AuthContext } from './AuthContext';
 
 class App extends Component {
   render() {
@@ -20,14 +20,16 @@ class App extends Component {
       <Router>
         <ThemeProvider theme={theme}>
           <Application>
-            <Route exact path='/dashboard' component={Dashboard} />
-            <Route exact path='/signup' component={SignupForm} />
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/userform' component={UserFormContainer} />
-            <Route exact path='/devPlayground' component={Playground} />
-            <Route exact path='/dashboard/ideas/:id' component={Ideas} />
-            <Route exact path='/formScreen' component={FormScreen} />
-            <Route exact path='/ideaSubmission' component={IdeaSubmissionLandingPage} />
+            <AuthContext.Provider>
+              <Route exact path='/dashboard' component={Dashboard} />
+              <Route exact path='/signup' component={SignupForm} />
+              <Route exact path='/login' component={Login} />
+              <Route exact path='/userform' component={UserFormContainer} />
+              <Route exact path='/devPlayground' component={Playground} />
+              <Route exact path='/dashboard/ideas/:id' component={Ideas} />
+              <Route exact path='/formScreen' component={FormScreen} />
+              <Route exact path='/ideaSubmission' component={IdeaSubmissionLandingPage} />
+            </AuthContext.Provider>
           </Application>
         </ThemeProvider>
       </Router>

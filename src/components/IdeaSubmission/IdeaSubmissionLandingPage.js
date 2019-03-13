@@ -5,35 +5,8 @@ import React, { useEffect, useState } from 'react';
 import Button from '../Questions/Button';
 import posed from 'react-pose';
 import logo from '../../res/logo_horizontal_white.png';
-import Select from 'react-select';
 
-import countryList from './country-list';
 import Registration from './Registration';
-
-const customStyles = {
-  option: (provided, state) => ({
-    ...provided,
-    color: state.isSelected ? '#1A3D7C' : '#1A3D7C',
-  }),
-  input: (provided, state) => ({
-    ...provided,
-    height: '32px',
-  }),
-  container: (provided, state) => ({
-    ...provided,
-    lineHeight: '36px',
-    borderRadius: '6px',
-    height: '36px',
-    textSize: '14px',
-  }),
-  control: (base, state) => ({
-    ...base,
-    height: '36px',
-    '&:hover': {
-      border: state.isFocused ? 0 : 0,
-    },
-  }),
-};
 
 const IdeaSubmissionLandingPage = () => {
   
