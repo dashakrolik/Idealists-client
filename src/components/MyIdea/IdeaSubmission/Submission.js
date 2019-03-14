@@ -9,8 +9,6 @@ import posed from 'react-pose';
 import QuestionGroup from '../../reogranisation/Questions/QuestionGroup';
 import Button from '../../reogranisation/Questions/Button';
 import SubmissionSideScreen from './SubmissionSideScreen';
-import request from '../../../App';
-import { baseUrl } from '../../../constants';
 import CompleteSubmission from './CompleteSubmission';
 
 const Submission = (props) => {
@@ -21,10 +19,6 @@ const Submission = (props) => {
   const [progress, setProgress] = useState(0);
   const [inputFocused, setInputFocused] = useState(0);
   const [answers, setAnswers] = useState({});
-  
-  const handlePreviousBttnClick = () => {
-    (activeGroup > 0) && setActiveGroup(activeGroup - 1);
-  };
   
   useEffect(() => {
     setProgress(activeGroup / questionGroups.length);
@@ -76,8 +70,8 @@ const Submission = (props) => {
         <ProgressBar pose='visible' poseKey={progress} progress={progress} />
         
         <SubmissionSideScreen
-          title={activeGroup === questionGroups.length ? 'Just one more step' : questionGroups[activeGroup].groupTitle}
-          description={activeGroup === questionGroups.length ? 'Please read this agreement carefully' : questionGroups[activeGroup].groupDescription} />
+          title={activeGroup === questionGroups.length ? 'Almost done' : questionGroups[activeGroup].groupTitle}
+          description={activeGroup === questionGroups.length ? 'Please download the Participants Agreement by pressing on the button. After reading it carefully, and if you agree with its terms and conditions, press I agree to finish your submission.' : questionGroups[activeGroup].groupDescription} />
         
         <Right>
           <Content>
@@ -107,7 +101,8 @@ const Submission = (props) => {
         {/*</div>*/}
         
         <div css={css`position: absolute; right: 20px; bottom: 20px; width: 160px;`}>
-          <Button text='Next' disabled={!activeGroupComplete} onClick={handleNextBttnClick} withIcon />
+          {activeGroup !== questionGroups.length &&
+          <Button text='Next' disabled={!activeGroupComplete} onClick={handleNextBttnClick} withIcon />}
         </div>
       
       </Container>

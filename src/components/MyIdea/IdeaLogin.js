@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
+import React, { useState } from 'react';
 import logo from '../../res/logo_horizontal_white.png';
-import { jsx } from '@emotion/core';
-import { baseUrl } from '../../constants';
-import request from 'superagent';
 import { Redirect } from 'react-router-dom';
-import { LoginContext } from '../reogranisation/Login/LoginContext';
 
 export default function IdeaLogin(props) {
   
@@ -31,7 +29,8 @@ export default function IdeaLogin(props) {
   };
   
   if (props.authState.loggedIn) {
-    props.history.replace('/MyIdea/dashboard');
+    props.history.replace('/MyIdea/new');
+    return <div></div>;
   }
   
   if (props.authState.loggedIn !== true) return (

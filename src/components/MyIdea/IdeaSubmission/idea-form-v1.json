@@ -32,9 +32,9 @@
   },
   {
     "id": 2,
-    "groupTitle": "Let's get started",
+    "groupTitle": "Which categories does youd idea fit?",
     "groupType": "default",
-    "groupDescription": "Please tell us a little more about yourself and your idea",
+    "groupDescription": "Please note that we cannot accept ideas that are not within one of the Sustainable Development Goals (SDG)",
     "questions": [
       {
         "id": 0,
@@ -610,7 +610,7 @@
       {
         "id": 0,
         "type": "singleLine",
-        "text": "In max 3 words",
+        "text": "In up to 3 words",
         "validationRegex": "^(?:[A-Za-z,]+ ){0,2}[A-Za-z]+$",
         "maxChar": 150,
         "validationErrorMsg": "Please separate the words by commas or spaces only."
@@ -618,17 +618,23 @@
       {
         "id": 1,
         "type": "singleLine",
-        "text": "In max 30 characters",
+        "text": "In up to 30 characters",
         "validationRegex": "^(.){0,30}$",
         "maxChar": 30,
         "validationErrorMsg": "Invalid number of characters."
       }
-    ],
-    "1": [
+    ]
+  },
+  {
+    "id": 3,
+    "groupTitle": "Describe your Idea",
+    "groupType": "default",
+    "groupDescription": "Please try to describe your idea in up to 3 words, up to 150, and up to 1500 characters. Don't worry, you can attach images later in the submission process.",
+    "questions": [
       {
         "id": 2,
         "type": "multiLine",
-        "text": "Finally, a detailed description of your idea (up to 1500 characters)",
+        "text": "A detailed description of your idea (up to 1500 characters)",
         "validationRegex": "^(*.){1,1500}$",
         "maxChar": 1500,
         "validationErrorMsg": "Max 100 chars."
@@ -644,7 +650,7 @@
       {
         "id": 0,
         "type": "multiLine",
-        "text": "",
+        "text": "Maximum 1500 characters",
         "maxChar": 1500,
         "validationErrorMsg": "Max 1500 chars."
       }
@@ -659,7 +665,7 @@
       {
         "id": 0,
         "type": "multiLine",
-        "text": "",
+        "text": "Max 1000 characters",
         "maxChar": 1000,
         "validationErrorMsg": "Max 1000 chars."
       }
@@ -674,7 +680,7 @@
       {
         "id": 0,
         "type": "multiLine",
-        "text": "",
+        "text": "Max 2000 characters.",
         "maxChar": 2000,
         "validationErrorMsg": "Max 2000 chars."
       }
@@ -688,15 +694,8 @@
     "questions": [
       {
         "id": 0,
-        "type": "singleLine",
-        "text": "URL",
-        "maxChar": 500,
-        "validationErrorMsg": "Invalid link."
-      },
-      {
-        "id": 1,
         "type": "multiLine",
-        "text": "Comment/description:",
+        "text": "Maximum 500 characters",
         "maxChar": 500,
         "validationErrorMsg": "Max 500 characters."
       }
@@ -711,7 +710,7 @@
       {
         "id": 0,
         "type": "multiLine",
-        "text": "",
+        "text": "Maximum 2000 characters",
         "maxChar": 2000,
         "validationErrorMsg": "Max 2000 chars."
       }

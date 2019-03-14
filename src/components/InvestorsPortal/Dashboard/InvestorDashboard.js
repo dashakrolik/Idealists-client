@@ -16,8 +16,8 @@ export default function InvestorDashboard(props) {
       request
         .get(`${baseUrl}/current`)
         .set("Authorization", `Bearer ${props.authState.token}`)
-        .then(res => setUserData(res.body));
-    else props.history.replace('/Investors/login');
+        .then(res => setUserData(res.body))
+    else props.history.push('/Investors/login');
   }, []);
   
   // For testing purposes, this gets ALL ideas

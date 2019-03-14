@@ -29,24 +29,15 @@ class App extends Component {
     },
   };
   
-  storeLocally = (jwt) => {
-    localStorage.setItem("currentUserJwt", jwt);
+  logout = () => {
+    this.setState({
+      auth: {
+        loggedIn: false,
+        token: '',
+        user: '',
+      },
+    });
   };
-  
-  componentDidMount() {
-    const jwt = localStorage.getItem("currentUserJwt");
-    console.log(jwt);
-    if (jwt) {
-      this.setState({
-        ...this.state,
-        auth: {
-          ...this.state.auth,
-          loggedIn: true,
-          token: jwt,
-        },
-      });
-    }
-  }
   
   requestLogin = (email, password) => {
     request
@@ -54,7 +45,6 @@ class App extends Component {
       .send({ email, password })
       .then(res => {
         if (res.status === 200) {
-          this.storeLocally(res.body.jwt);
           this.setState({
             ...this.state,
             auth: {
