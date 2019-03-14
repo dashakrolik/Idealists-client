@@ -8,8 +8,8 @@ import posed from 'react-pose';
 const SingleLineQuestion = (props) => {
   
   const [isFocused, setIsFocused] = useState(false);
-  const [isStillInit, setIsStillInit] = useState(false);
-  const [validated, setValidated] = useState(true);
+  const [isStillInit, setIsStillInit] = useState(true);
+  const [validated, setValidated] = useState(false);
   const [currentValue, setCurrentValue] = useState('');
   
   useEffect(() => {
@@ -17,12 +17,13 @@ const SingleLineQuestion = (props) => {
   }, [validated]);
   
   useEffect(() => {
-    if (!!props.validationRegex) {
-      const validator = new RegExp(props.validationRegex);
-      setValidated(validator.test(currentValue));
+    if (currentValue.length > 1 && currentValue.length < props.maxChar) {
+      setValidated(true);
+    } else {
+      setValidated(false);
     }
     if (props.onChange) {
-      props.onChange(currentValue);
+      props.onChange(props.id, currentValue);
     }
   }, [currentValue]);
   
@@ -145,14 +146,12 @@ const TextField = styled(PTextField)`
 `;
 
 const TextArea = styled(PTextArea)`
-  position: relative;
   box-sizing:border-box;
   display: block;
-  width: 90vw;
-  max-width: 700px;
+  width: 100%;
   height: 320px;
-  line-height: 12px;
-  font-size: 12px;
+  line-height: 16px;
+  font-size: 14px;
   border-radius: 6px;
   border-color: transparent;
   padding: 6px;
@@ -179,9 +178,9 @@ const PContainer = posed.div({
 
 const Container = styled(PContainer)`
   flex-grow: 1;
-  position: relative;
-  top: 0;
-  left: 0;
+  //position: relative;
+  //top: 0;
+  //left: 0;
   margin: 5px;
   width: auto;
   height: auto;

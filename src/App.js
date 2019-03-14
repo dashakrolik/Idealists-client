@@ -3,33 +3,100 @@ import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import SignupForm from './components/Signup/SignupForm';
-import Dashboard from './components/Dashboard/Dashboard'
-import Login from './components/Login/Login';
-import UserFormContainer from "./components/UserFormContainer";
+import SignupForm from './components/reogranisation/Signup/SignupForm';
+import InvestorDashboard from './components/InvestorsPortal/Dashboard/InvestorDashboard';
+import InvestorLogin from './components/InvestorsPortal/InvestorLogin';
+import UserFormContainer from "./components/reogranisation/UserFormContainer";
 import { ThemeProvider } from 'emotion-theming';
-import Playground from './components/Playground';
-import FormScreen from './components/Questions/FormScreen';
-import IdeaSubmissionLandingPage from './components/IdeaSubmission/IdeaSubmissionLandingPage';
-import Ideas from './components/Ideas/Ideas';
-import { AuthContext } from './AuthContext';
+import Playground from './components/reogranisation/Playground';
+import FormScreen from './components/reogranisation/Questions/FormScreen';
+import IdeaStart from './components/MyIdea/IdeaStart';
+import Ideas from './components/reogranisation/Ideas/Ideas';
+import IdeaSubmission from './components/reogranisation/Questions/IdeaSubmission';
+import Submission from './components/MyIdea/IdeaSubmission/Submission';
+import { baseUrl } from './constants';
+import request from 'superagent';
+import IdeaDashboard from './components/MyIdea/Dashboard/IdeaDashboard';
+import IdeaLogin from './components/MyIdea/IdeaLogin';
 
 class App extends Component {
+  
+  state = {
+    auth: {
+      loggedIn: false,
+      token: '',
+      user: '',
+    },
+  };
+  
+  storeLocally = (jwt) => {
+    localStorage.setItem("currentUserJwt", jwt);
+  };
+  
+  componentDidMount() {
+    const jwt = localStorage.getItem("currentUserJwt");
+    console.log(jwt);
+    if (jwt) {
+      this.setState({
+        ...this.state,
+        auth: {
+          ...this.state.auth,
+          loggedIn: true,
+          token: jwt,
+        },
+      });
+    }
+  }
+  
+  requestLogin = (email, password) => {
+    request
+      .post(`${baseUrl}/login`)
+      .send({ email, password })
+      .then(res => {
+        if (res.status === 200) {
+          this.storeLocally(res.body.jwt);
+          this.setState({
+            ...this.state,
+            auth: {
+              ...this.state.auth,
+              loggedIn: true,
+              token: res.body.jwt,
+            },
+          });
+        }
+      })
+      .catch(err => {
+        if (err.status === 400) {
+          // dispatch(userLoginFailed(err.response.body.message))
+        } else {
+          console.error(err);
+        }
+      });
+  };
+  
   render() {
     return (
       <Router>
         <ThemeProvider theme={theme}>
           <Application>
-            <AuthContext.Provider>
-              <Route exact path='/dashboard' component={Dashboard} />
-              <Route exact path='/signup' component={SignupForm} />
-              <Route exact path='/login' component={Login} />
-              <Route exact path='/userform' component={UserFormContainer} />
-              <Route exact path='/devPlayground' component={Playground} />
-              <Route exact path='/dashboard/ideas/:id' component={Ideas} />
-              <Route exact path='/formScreen' component={FormScreen} />
-              <Route exact path='/ideaSubmission' component={IdeaSubmissionLandingPage} />
-            </AuthContext.Provider>
+            <Route exact path='/Investors/dashboard' render={(props) => {
+              return <InvestorDashboard {...props} authState={this.state.auth} login={this.requestLogin} />;
+            }} />
+            <Route exact path='/Investors/login' render={(props) => {
+              return <InvestorLogin {...props} authState={this.state.auth} login={this.requestLogin} />;
+            }} />
+            <Route exact path='/MyIdea' render={(props) => {
+              return <IdeaStart {...props} authState={this.state.auth} login={this.requestLogin} />;
+            }} />
+            <Route exact path='/MyIdea/dashboard' render={(props) => {
+              return <IdeaDashboard {...props} authState={this.state.auth} login={this.requestLogin} />;
+            }} />
+            <Route exact path='/MyIdea/login' render={(props) => {
+              return <IdeaLogin {...props} authState={this.state.auth} login={this.requestLogin} />;
+            }} />
+            <Route exact path='/MyIdea/new' render={(props) => {
+              return <Submission {...props} authState={this.state.auth} login={this.requestLogin} />;
+            }} />
           </Application>
         </ThemeProvider>
       </Router>

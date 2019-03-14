@@ -2,7 +2,7 @@
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import React from 'react';
-import logo from '../../res/logo_horizontal_white.png';
+import logo from '../../../res/logo_horizontal_white.png';
 
 const Header = (props) => {
   return (

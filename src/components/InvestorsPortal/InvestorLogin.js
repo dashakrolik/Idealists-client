@@ -2,17 +2,14 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import logo from '../../res/logo_horizontal_white.png';
 import { jsx } from '@emotion/core';
-import { baseUrl } from '../../constants'
+import { baseUrl } from '../../constants';
 import request from 'superagent'
 import { Redirect } from 'react-router-dom'
-import { LoginContext } from './LoginContext';
+import { LoginContext } from '../reogranisation/Login/LoginContext';
 
-export default function Login(props) {
+export default function InvestorLogin(props) {
 
   const [loginState, setLoginState] = useState({});
-  const [userLoggedIn, setUserLoggedIn] = useState(false)
-  const [jwt, setJwt] = useState({})
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,43 +24,21 @@ export default function Login(props) {
       [name]: value,
     });
   };
-
-
+  
   const onSubmit = (data) => {
     const { email, password } = data
-    request
-      .post(`${baseUrl}/login`)
-      .send({ email, password })
-      .then(res => {
-        if (res.status === 200) {
-          storeLocally(res.body.jwt)
-          setJwt(res.body.jwt)
-          setUserLoggedIn(true)
-        }
-      })
-      .catch(err => {
-        if (err.status === 400) {
-          // dispatch(userLoginFailed(err.response.body.message))
-        }
-        else {
-          console.error(err)
-        }
-      })
-  }
-  const storeLocally = (jwt) => {
-    localStorage.setItem("currentUserJwt", jwt)
-  }
-
-  if (userLoggedIn !== true) return (
+    props.login(email, password);
+  };
+  
+  if (props.authState.loggedIn !== true) return (
     <Container>
       {/* <Header /> */}
 
       <Logo src={logo} alt='Logo' />
       <LeftSide>
         <div>
-          <h3>Financieer Portal</h3>
-          <p>If you are looking to check on the status of your idea submission, please click <a>here</a>.</p>
-          <p>Interested in becoming a financieer? <a href="http://localhost:3000/signup">Sign up</a></p>
+          <h3>Login to my Investor Dashboard</h3>
+          <p>Don’t have an account yet? Create it here</p>
         </div>
       </LeftSide>
       <RightSide>
@@ -81,11 +56,7 @@ export default function Login(props) {
         </form>
       </RightSide>
     </Container>);
-  if (userLoggedIn === true) return (
-    <LoginContext.Provider value={{jwt}}>
-      <Redirect to="/dashboard" />
-    </LoginContext.Provider>
-  )
+  else return <div></div>;
 }
 
 const Logo = styled.img`

@@ -6,6 +6,7 @@ import posed from 'react-pose';
 import SplitText from 'react-pose-text';
 import Lottie from 'react-lottie';
 import { Textfit } from 'react-textfit';
+import { keyframes } from 'popmotion';
 
 const animationData = require('./checkmarksuccess');
 
@@ -31,15 +32,21 @@ const Button = (props) => {
   
   const style = {
     height: props.height ? props.height : 40,
-    isActive: !props.disabled,
+    isActive: !props.disabled || props.enabled,
     shouldShowIcon: !!props.withIcon,
     fontSize: props.fontSize ? props.fontSize : props.height ? Math.floor(props.height * 0.38).toString() : 16,
     iconSize: props.height ? (props.height - 4) : 36,
   };
   
+  const handleClick = (e) => {
+    if (!props.disabled) {
+      props.onClick && props.onClick(e);
+    }
+  };
+  
   return (
     <ButtonContainer pose={style.isActive ? (style.shouldShowIcon ? 'activeWithIcon' : 'activeDefault') : 'disabled'}
-                     {...style} css={props.css} onClick={props.onClick}>
+                     {...style} css={props.css} onClick={handleClick}>
       <Title css={css`margin: 0 20px; padding: 0; 
                       padding-left: ${(style.isActive && style.shouldShowIcon) ? '10' : '0'}px;
                       align-self: flex-start; width: 100%;`}>
@@ -95,10 +102,12 @@ const Title = posed.div({
   },
 });
 
+
 const PFormButton = posed.div({
   hoverable: true,
+  pressable: true,
   init: {
-    scale: 0.9,
+    scale: 1.0,
     originX: '50%',
     originY: '50%',
     transition: {
@@ -106,12 +115,30 @@ const PFormButton = posed.div({
     },
   },
   hover: {
+    x: 0,
     scale: 1.05,
     originX: '50%',
     originY: '50%',
     transition: {
-      scale: { type: 'spring', stiffness: 1000, damping: 30 },
+      scale: {
+        duration: 200,
+        type: 'spring', stiffness: 1000, damping: 30,
+      },
+      x: (props) => {
+        if (!props.isActive) return keyframes({
+          values: [0, 0, 6, -6, 6, 0],
+          times: [0, 0.2, 0.4, 0.6, 0.8, 1],
+          duration: 300,
+          loop: false,
+        });
+        else return {
+          duration: 100,
+        };
+      },
     },
+  },
+  press: {
+    scale: 0.8,
   },
   activeWithIcon: {
     opacity: 1.0,
@@ -139,7 +166,7 @@ const PFormButton = posed.div({
   },
   disabled: {
     opacity: 0.45,
-    scale: 0.95,
+    scale: 1.0,
     originX: '50%',
     originY: '50%',
     borderColor: '#ffffff',
@@ -152,6 +179,7 @@ const PFormButton = posed.div({
 });
 
 const ButtonContainer = styled(PFormButton)`
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;

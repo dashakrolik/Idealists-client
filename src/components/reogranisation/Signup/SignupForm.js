@@ -2,9 +2,9 @@
 import React, { useState } from 'react'
 import { jsx, css } from '@emotion/core';
 import request from 'superagent'
-import { baseUrl } from '../../constants'
+import { baseUrl } from '../../../constants';
 import styled from '@emotion/styled';
-import Header from '../IdeaSubmission/Header';
+import Header from '../Start/Header';
 import { Redirect } from 'react-router-dom'
 
 export default function SignupForm(props) {

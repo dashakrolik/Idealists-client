@@ -2,13 +2,14 @@
 import { css, Global, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
-import Button from '../Questions/Button';
+import Button from '../reogranisation/Questions/Button';
 import posed from 'react-pose';
 import logo from '../../res/logo_horizontal_white.png';
 
 import Registration from './Registration';
+import { Redirect } from 'react-router-dom';
 
-const IdeaSubmissionLandingPage = () => {
+const IdeaStart = (props) => {
   
   const [uiState, setUiState] = useState('notDisplayingLogin');
   const [emailAddress, setEmailAddress] = useState('');
@@ -25,8 +26,16 @@ const IdeaSubmissionLandingPage = () => {
     countryOfResidence: '',
   });
   
-  const openRegistration = () => {
-    setUiState('displayingLogin');
+  const newUser = () => {
+    if (props.authState.loggedIn) {
+      props.history.push('/MyIdea/New');
+    } else {
+      setUiState('displayingLogin');
+    }
+  };
+  
+  const existingUser = () => {
+    props.history.push('/MyIdea/New');
   };
   
   const closeRegistration = () => {
@@ -55,20 +64,20 @@ const IdeaSubmissionLandingPage = () => {
           <div css={css`display: flex; align-items: center; flex-direction: column;`}>
             <StartContent pose={uiState}
                           css={css`display: flex; flex-direction: column; width: auto; margin-bottom: 60px;`}>
-              <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>Idea
-                Portal
+              <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
+                My Idea Page
               </Heading>
               <Paragraph>
-                The Idea Portal is a place where you can submit your ideas and track progress of already submitted
-                ones.
+                Welcome to your Idea Page. Below you can submit your idea or check on the status of ideas you’ve already
+                submitted.
               </Paragraph>
               <Paragraph>
-                We require registration in order to make the whole submission process easier. You can easily track the
-                progress of your submission and we can easily contact you if we need additional information.
+                If you don’t have an account yet when clicking one of the buttons, you will be asked to make
+                one so we can keep you updated throughout the assessment process
               </Paragraph>
               <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-                <Button text={'Submit an idea'} onClick={openRegistration} />
-                <Button text={'Check my submissions'} />
+                <Button text={'New User'} onClick={newUser} />
+                <Button text={'Existing User'} onClick={existingUser} />
               </Controls>
             </StartContent>
             <Registration show={uiState === 'displayingLogin'} handleCancel={closeRegistration} />
@@ -155,4 +164,4 @@ const Container = styled.div`
   display: flex;
 `;
 
-export default IdeaSubmissionLandingPage;
+export default IdeaStart;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import request from "superagent";
-import { baseUrl } from '../constants';
+import { baseUrl } from '../../constants';
 import styled from '@emotion/styled';
 import SingleLineQuestion from './Questions/SingleLineQuestion';
 import { PoseGroup } from 'react-pose';

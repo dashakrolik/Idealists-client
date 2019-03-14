@@ -12,23 +12,12 @@ const customStyles = {
   }),
   container: (provided, state) => ({
     ...provided,
-    width: '100%',
     minHeight: '40px',
     border: '0',
     lineHeight: '26px',
     borderRadius: '6px',
     textSize: '16px',
-    position: 'relative',
   }),
-  // multiValue: (provided, state) => ({
-  //   ...provided,
-  //   height: '20px',
-  //   border: '0',
-  //   lineHeight: '26px',
-  //   borderRadius: '6px',
-  //   textSize: '16px',
-  //   position: 'relative',
-  // }),
   control: (base, state) => ({
     ...base,
     border: state.isFocused ? 0 : 0,
@@ -44,17 +33,34 @@ const customStyles = {
 const SingleChoiceQuestion = (props) => {
   
   const [isFocused, setIsFocused] = useState(false);
-  const [validated, setValidated] = useState(true);
-  const [currentValue, setCurrentValue] = useState('');
+  const [isStillInit, setIsStillInit] = useState(true);
+  const [validated, setValidated] = useState(false);
+  const [currentValue, setCurrentValue] = useState([]);
   
   useEffect(() => {
-    if (props.validator) {
-      setValidated(props.validator(currentValue));
+    if (!!props.multiChoice) {
+      if (currentValue.length > 0) {
+        setValidated(true);
+      } else {
+        setValidated(false);
+      }
+    } else {
+      console.log(currentValue);
+      if (currentValue) {
+        console.log('currentValue');
+        setValidated(true);
+      } else {
+        setValidated(false);
+      }
     }
     if (props.onChange) {
-      props.onChange(currentValue.value);
+      props.onChange(props.id, currentValue);
     }
   }, [currentValue]);
+  
+  useEffect(() => {
+    props.onValidationChange && props.onValidationChange(props.id, validated);
+  }, [validated]);
   
   const handleChange = (selectedOption) => {
     setCurrentValue(selectedOption);
@@ -108,6 +114,34 @@ const QuestionTitle = styled.p`
   }
 `;
 
+const poses = {
+  tfDefault: {
+    backgroundColor: 'rgba(255, 255, 255, 1.0)',
+    color: '#252525',
+    scale: 1.0,
+    transition: { ease: 'easeInOut', duration: 200 },
+  },
+  tfFocused: {
+    backgroundColor: 'rgba(255, 255, 255, 1.0)',
+    color: '#252525',
+    scale: 1.0,
+    transition: { ease: 'easeInOut', duration: 120 },
+  },
+  tfError: {
+    backgroundColor: 'rgba(255, 115, 141, 1.0)',
+    color: '#ffffff',
+    scale: 1.0,
+    transition: { ease: 'easeInOut', duration: 200 },
+  },
+  tfFocusedError: {
+    backgroundColor: 'rgba(255, 115, 141, 1.0)',
+    color: '#ffffff',
+    scale: 1.0,
+    transition: { ease: 'easeInOut', duration: 200 },
+  },
+};
+
+
 const PContainer = posed.div({
   default: {
     opacity: 0.69,
@@ -120,6 +154,28 @@ const PContainer = posed.div({
     transition: { ease: 'easeInOut', duration: 120 },
   },
 });
+
+const PErrorMessage = posed.p({
+  hide: {
+    opacity: 0,
+    y: 10,
+    transition: { ease: 'easeInOut', duration: 200 },
+  },
+  show: {
+    opacity: 0.69,
+    y: 0,
+    transition: { ease: 'easeInOut', duration: 200 },
+  },
+});
+
+const ErrorMessage = styled(PErrorMessage)`
+  display: block;
+  padding: 5px 5px 5px 0;
+  margin: 0;
+  width: auto;
+  font-size: 12px;
+`;
+
 
 const Container = styled(PContainer)`
   flex-grow: 1;

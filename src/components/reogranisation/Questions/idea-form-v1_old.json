@@ -7,8 +7,8 @@
       "groupTitle": "Let's get started",
       "groupType": "fatal",
       "groupDescription": "Please tell us a little more about yourself and your idea",
-      "questions": [
-        [
+      "questions": {
+        "0": [
           {
             "id": 0,
             "type": "fatal",
@@ -18,35 +18,35 @@
             "fatalMessage": "We are working very hard on building a non-profit version of The Idealists as well. Unfortunately, until that is ready, we cannot accept non-profit ideas yet."
           }
         ]
-      ]
+      }
     },
     {
-      "id": 2,
+      "id": 1,
       "groupTitle": "Let's get started",
       "groupType": "singleQuestion",
       "groupDescription": "Please tell us a little more about yourself and your idea",
-      "questions": [
-        [
+      "questions": {
+        "0": [
           {
-            "id": 6,
+            "id": 0,
             "type": "multiLine",
             "text": "Please tell us up to 3 ways it could generate profit?",
-            "validation": "^(*.){5,1000}$",
+            "validationRegex": "^(*.){5,1000}$",
             "maxChar": 1000,
             "validationErrorMsg": "This field is limited to 1000 characters."
           }
         ]
-      ]
+      }
     },
     {
-      "id": 3,
+      "id": 2,
       "groupTitle": "Let's get started",
       "groupType": "default",
       "groupDescription": "Please tell us a little more about yourself and your idea",
-      "questions": [
-        [
+      "questions": {
+        "0": [
           {
-            "id": 4,
+            "id": 0,
             "type": "multiChoice",
             "text": "Under which of the SDGs does your idea fit bets? You can select more than one.",
             "options": [
@@ -123,13 +123,11 @@
                 "label": "None"
               }
             ],
-            "validation": "^((?!none,).)*$",
+            "validationRegex": "^((?!none,).)*$",
             "validationErrorMsg": "We are sorry, but you cannot continue if your idea does not fit within one of the SDGs."
-          }
-        ],
-        [
+          },
           {
-            "id": 3,
+            "id": 1,
             "type": "singleChoice",
             "text": "Under which industry does your idea fit best?",
             "options": [
@@ -606,185 +604,185 @@
                 "label": "Writing / Editing"
               }
             ],
-            "validation": "^(*.){1, 100}$",
+            "validationRegex": "^(*.){1, 100}$",
             "validationErrorMsg": "Max 100 chars."
           }
         ]
-      ]
+      }
     },
     {
-      "id": 1,
+      "id": 3,
       "groupTitle": "Describe your Idea",
       "groupType": "default",
       "groupDescription": "Please try to describe your idea in up to 3 words, up to 150, and up to 1500 characters. Don't worry, you can attach images later in the submission process.",
-      "questions": [
-        [
+      "questions": {
+        "0": [
           {
-            "id": 6,
+            "id": 0,
             "type": "singleLine",
             "text": "In max 3 words",
-            "validation": "^(?:[A-Za-z,]+ ){0,2}[A-Za-z]+$",
+            "validationRegex": "^(?:[A-Za-z,]+ ){0,2}[A-Za-z]+$",
             "validationErrorMsg": "Please separate the words by commas or spaces only."
           },
           {
-            "id": 9,
+            "id": 1,
             "type": "singleLine",
             "text": "In max 30 characters",
-            "validation": "^(.){0,30}$",
+            "validationRegex": "^(.){0,30}$",
             "validationErrorMsg": "Invalid number of characters."
           }
         ],
-        [
+        "1": [
           {
-            "id": 10,
+            "id": 2,
             "type": "multiLine",
             "text": "Finally, a detailed description of your idea (up to 1500 characters)",
-            "validation": "^(*.){1,1500}$",
+            "validationRegex": "^(*.){1,1500}$",
             "validationErrorMsg": "Max 100 chars."
           }
         ]
-      ]
+      }
     },
     {
-      "id": 1,
+      "id": 4,
       "groupTitle": "Why is this a great idea?",
       "groupType": "singleQuestion",
       "groupDescription": "Think for instance of what is new/unique about your idea, which problem do you solve with your idea, how may it change people’s lives compared to what they currently use?",
-      "questions": [
-        [
+      "questions": {
+        "0": [
           {
-            "id": 7,
+            "id": 0,
             "type": "multiLine",
             "text": "",
-            "validation": "^(*.){1, 1500}$",
+            "validationRegex": "^(*.){1, 1500}$",
             "validationErrorMsg": "Max 1500 chars."
           }
         ]
-      ]
+      }
     },
     {
-      "id": 1,
+      "id": 5,
       "groupTitle": "How far developed is your idea?",
       "groupType": "singleQuestion",
       "groupDescription": "Still an idea/prototyped/etc?",
-      "questions": [
-        [
+      "questions": {
+        "0": [
           {
-            "id": 7,
+            "id": 0,
             "type": "multiLine",
             "text": "",
-            "validation": "^(*.){1, 1000}$",
+            "validationRegex": "^(*.){1, 1000}$",
             "validationErrorMsg": "Max 1000 chars."
           }
         ]
-      ]
+      }
     },
     {
-      "id": 1,
+      "id": 6,
       "groupTitle": "Describe the steps and story how you came up with this idea",
       "groupType": "singleQuestion",
       "groupDescription": "What triggered you to come up with this idea and how did it evolve into the idea you submit now?",
-      "questions": [
-        [
+      "questions": {
+        "0": [
           {
-            "id": 7,
+            "id": 0,
             "type": "multiLine",
             "text": "",
-            "validation": "^(*.){1, 2000}$",
+            "validationRegex": "^(*.){1, 2000}$",
             "validationErrorMsg": "Max 2000 chars."
           }
         ]
-      ]
+      }
     },
     {
-      "id": 1,
+      "id": 7,
       "groupTitle": "Is there anything that is close to your idea?",
       "groupType": "default",
       "groupDescription": "Anything on the internet, any article or patent? Any companies who work in a similar area? Please do some Google searching and list 3 things that come closest to your idea. ",
-      "questions": [
-        [
+      "questions": {
+        "0": [
           {
-            "id": 7,
+            "id": 0,
             "type": "singleLine",
             "text": "URL",
-            "validation": "^(*.){1, 500}$",
+            "validationRegex": "^(*.){1, 500}$",
             "validationErrorMsg": "Invalid link."
           },
           {
-            "id": 7,
+            "id": 1,
             "type": "multiLine",
             "text": "Comment/description:",
-            "validation": "^(*.){1, 500}$",
+            "validationRegex": "^(*.){1, 500}$",
             "validationErrorMsg": "Max 500 characters."
           }
         ],
-        [
+        "1": [
           {
-            "id": 7,
+            "id": 2,
             "type": "singleLine",
             "text": "URL",
-            "validation": "^(*.){1, 500}$",
+            "validationRegex": "^(*.){1, 500}$",
             "validationErrorMsg": "Invalid link."
           },
           {
-            "id": 7,
+            "id": 3,
             "type": "multiLine",
             "text": "Comment/description:",
-            "validation": "^(*.){1, 500}$",
+            "validationRegex": "^(*.){1, 500}$",
             "validationErrorMsg": "Max 500 characters."
           }
         ],
-        [
+        "2": [
           {
-            "id": 7,
+            "id": 4,
             "type": "singleLine",
             "text": "URL",
-            "validation": "^(*.){1, 500}$",
+            "validationRegex": "^(*.){1, 500}$",
             "validationErrorMsg": "Invalid link."
           },
           {
-            "id": 7,
+            "id": 5,
             "type": "multiLine",
             "text": "Comment/description:",
-            "validation": "^(*.){1, 500}$",
+            "validationRegex": "^(*.){1, 500}$",
             "validationErrorMsg": "Max 500 characters."
           }
         ]
-      ]
+      }
     },
     {
-      "id": 1,
+      "id": 8,
       "groupTitle": "Anything else you want to tell us about your idea?",
       "groupType": "singleQuestion",
       "groupDescription": "",
-      "questions": [
-        [
+      "questions": {
+        "0": [
           {
-            "id": 7,
+            "id": 0,
             "type": "multiLine",
             "text": "",
-            "validation": "^(*.){1, 2000}$",
+            "validationRegex": "^(*.){1, 2000}$",
             "validationErrorMsg": "Max 2000 chars."
           }
         ]
-      ]
+      }
     },
     {
-      "id": 1,
+      "id": 9,
       "groupTitle": "Attach images/drawings",
       "groupType": "singleQuestion",
       "groupDescription": "",
-      "questions": [
-        [
+      "questions": {
+        "0": [
           {
-            "id": 7,
+            "id": 0,
             "type": "fileUpload",
             "text": "",
             "maxItems": "^(*.){1, 2000}$",
             "maxSize": "20"
           }
         ]
-      ]
+      }
     }
   ]
 }

@@ -2,11 +2,13 @@
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
-import countryList from './country-list';
+import countryList from '../reogranisation/Start/country-list';
 import posed from 'react-pose';
 import Select from 'react-select';
-import Button from '../Questions/Button';
+import Button from '../reogranisation/Questions/Button';
 import validator from 'validator';
+import { baseUrl } from '../../constants';
+import request from 'superagent';
 
 const Registration = (props) => {
   
@@ -23,7 +25,7 @@ const Registration = (props) => {
       shouldShowError: false,
       validated: false,
     },
-    emailAddress: {
+    email: {
       value: '',
       shouldShowError: false,
       validated: false,
@@ -38,7 +40,7 @@ const Registration = (props) => {
       shouldShowError: false,
       validated: false,
     },
-    countryOfResidence: {
+    country: {
       value: 'NL',
       shouldShowError: false,
       validated: true,
@@ -56,7 +58,7 @@ const Registration = (props) => {
       validator: (val) => (val.length <= 100),
       shouldShowError: (val) => (val.length > 4),
     },
-    emailAddress: {
+    email: {
       validator: (val) => (val.length <= 100 && validator.isEmail(val)),
       shouldShowError: (val) => true,
     },
@@ -68,7 +70,7 @@ const Registration = (props) => {
       validator: (val) => (val === formData.password.value),
       shouldShowError: (val) => (val.length >= 8),
     },
-    countryOfResidence: {
+    country: {
       validator: (val) => (val === 'NL'),
       shouldShowError: (val) => (val.length > 0),
     },
@@ -77,8 +79,6 @@ const Registration = (props) => {
   useEffect(() => {
     setFormValidated(Object.keys(formData).reduce((acc, currVal) => acc && formData[currVal].validated, true));
   }, [formData]);
-  
-  useEffect(() => console.log(formData), [formData]);
   
   const handleChange = (e) => {
     const newState = {
@@ -108,6 +108,31 @@ const Registration = (props) => {
         shouldShowError: (formData[e.target.name].shouldShowError || formValidations[e.target.name].shouldShowError(e.target.value)),
       },
     });
+  };
+  
+  const signup = () => {
+    const { firstName, lastName, email, password, country } = formData;
+    request
+      .post(`${baseUrl}/users`)
+      .send({
+        firstName: firstName.value,
+        lastName: lastName.value,
+        email: email.value,
+        password: password.value,
+        country: country.value,
+      })
+      .then(res => {
+        if (res.status === 200) {
+          props.login(email, password);
+        }
+      })
+      .catch(err => {
+        if (err.status === 400) {
+          // dispatch(userLoginFailed(err.response.body.message))
+        } else {
+          console.error(err);
+        }
+      });
   };
   
   return (
@@ -154,10 +179,10 @@ const Registration = (props) => {
           <FlexRow>
             <FlexColumn>
               <FormGroup>
-                <label>Email{formData.emailAddress.shouldShowError && !formData.emailAddress.validated &&
+                <label>Email{formData.email.shouldShowError && !formData.email.validated &&
                 <span css={css`font-weight: 800; color: #ff4444;`}> / invalid e-mail address</span>}</label>
-                <input type='email' name='emailAddress' onChange={handleChange} onBlur={enableValidation}
-                       value={formData.emailAddress.value} />
+                <input type='email' name='email' onChange={handleChange} onBlur={enableValidation}
+                       value={formData.email.value} />
               </FormGroup>
             </FlexColumn>
           </FlexRow>
@@ -213,10 +238,11 @@ const Registration = (props) => {
           </FlexRow>
         </RegistrationForm>
         <div css={css`float: right; width: 160px;`}>
-          <Button disabled={!formValidated} text='Start my submission' disabledText='Sign up' withIcon />
+          <Button disabled={!formValidated} text='Start my submission' disabledText='Sign up' withIcon
+                  onClick={signup} />
         </div>
         <div css={css`float: right; width: 120px;`}>
-          <Button text='Cancel' disabled={true} onClick={props.handleCancel} />
+          <Button text='Cancel' disabled={false} onClick={props.handleCancel} />
         </div>
       </form>
     </Container>
