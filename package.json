@@ -3,9 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.7",
+    "@emotion/styled": "^10.0.7",
+    "country-json": "^1.0.8",
+    "emotion-theming": "^10.0.7",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-scripts": "2.1.5"
+    "react-lottie": "^1.2.3",
+    "react-pose": "^4.0.8",
+    "react-pose-text": "^3.1.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^2.1.8",
+    "react-select": "^2.4.1",
+    "react-svg-morph": "^0.2.1",
+    "react-textfit": "^1.1.0",
+    "superagent": "^4.1.0",
+    "validator": "^10.11.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -21,5 +34,14 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@types/react": "^16.8.6",
+    "@types/react-dom": "^16.8.2",
+    "@types/react-lottie": "^1.2.2",
+    "@types/react-router-dom": "^4.3.1",
+    "@types/react-select": "^2.0.13",
+    "@types/superagent": "^4.1.0",
+    "@types/validator": "^10.9.0"
+  }
 }

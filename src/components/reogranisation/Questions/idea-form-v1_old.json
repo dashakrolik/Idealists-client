@@ -1,0 +1,788 @@
+{
+  "id": 1,
+  "createdAt": "2019-03-07T10:50:14.738Z",
+  "groups": [
+    {
+      "id": 0,
+      "groupTitle": "Let's get started",
+      "groupType": "fatal",
+      "groupDescription": "Please tell us a little more about yourself and your idea",
+      "questions": {
+        "0": [
+          {
+            "id": 0,
+            "type": "fatal",
+            "text": "Is your idea for profit?",
+            "surviveOption": "Yes",
+            "killOption": "No",
+            "fatalMessage": "We are working very hard on building a non-profit version of The Idealists as well. Unfortunately, until that is ready, we cannot accept non-profit ideas yet."
+          }
+        ]
+      }
+    },
+    {
+      "id": 1,
+      "groupTitle": "Let's get started",
+      "groupType": "singleQuestion",
+      "groupDescription": "Please tell us a little more about yourself and your idea",
+      "questions": {
+        "0": [
+          {
+            "id": 0,
+            "type": "multiLine",
+            "text": "Please tell us up to 3 ways it could generate profit?",
+            "validationRegex": "^(*.){5,1000}$",
+            "maxChar": 1000,
+            "validationErrorMsg": "This field is limited to 1000 characters."
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "groupTitle": "Let's get started",
+      "groupType": "default",
+      "groupDescription": "Please tell us a little more about yourself and your idea",
+      "questions": {
+        "0": [
+          {
+            "id": 0,
+            "type": "multiChoice",
+            "text": "Under which of the SDGs does your idea fit bets? You can select more than one.",
+            "options": [
+              {
+                "value": "No Poverty",
+                "label": "No Poverty"
+              },
+              {
+                "value": "Zero Hunger",
+                "label": "Zero Hunger"
+              },
+              {
+                "value": "Good Health and Well-being",
+                "label": "Good Health and Well-being"
+              },
+              {
+                "value": "Quality Education",
+                "label": "Quality Education"
+              },
+              {
+                "value": "Gender Equality",
+                "label": "Gender Equality"
+              },
+              {
+                "value": "Clean Water and Sanitation",
+                "label": "Clean Water and Sanitation"
+              },
+              {
+                "value": "Affordable and Clean Energy",
+                "label": "Affordable and Clean Energy"
+              },
+              {
+                "value": "Decent Work and Economic Growth",
+                "label": "Decent Work and Economic Growth"
+              },
+              {
+                "value": "Industry, Innovation and Infrastructure",
+                "label": "Industry, Innovation and Infrastructure"
+              },
+              {
+                "value": "Reduced Inequality",
+                "label": "Reduced Inequality"
+              },
+              {
+                "value": "Sustainable Cities and Communities",
+                "label": "Sustainable Cities and Communities"
+              },
+              {
+                "value": "Responsible Consumption and Production",
+                "label": "Responsible Consumption and Production"
+              },
+              {
+                "value": "Climate Action",
+                "label": "Climate Action"
+              },
+              {
+                "value": "Life Below Water",
+                "label": "Life Below Water"
+              },
+              {
+                "value": "Life on Land",
+                "label": "Life on Land"
+              },
+              {
+                "value": "Peace and Justice Strong Institutions",
+                "label": "Peace and Justice Strong Institutions"
+              },
+              {
+                "value": "Partnerships to achieve the Goal",
+                "label": "Partnerships to achieve the Goal"
+              },
+              {
+                "value": "none",
+                "label": "None"
+              }
+            ],
+            "validationRegex": "^((?!none,).)*$",
+            "validationErrorMsg": "We are sorry, but you cannot continue if your idea does not fit within one of the SDGs."
+          },
+          {
+            "id": 1,
+            "type": "singleChoice",
+            "text": "Under which industry does your idea fit best?",
+            "options": [
+              {
+                "value": "Accounting",
+                "label": "Accounting"
+              },
+              {
+                "value": "Animation",
+                "label": "Animation"
+              },
+              {
+                "value": "Architecture / Planning",
+                "label": "Architecture / Planning"
+              },
+              {
+                "value": "Arts / Crafts",
+                "label": "Arts / Crafts"
+              },
+              {
+                "value": "Automotive",
+                "label": "Automotive"
+              },
+              {
+                "value": "Aerospace",
+                "label": "Aerospace"
+              },
+              {
+                "value": "Biotechnology / Greentech",
+                "label": "Biotechnology / Greentech"
+              },
+              {
+                "value": "Broadcasting",
+                "label": "Broadcasting"
+              },
+              {
+                "value": "Business Supplies / Equipment",
+                "label": "Business Supplies / Equipment"
+              },
+              {
+                "value": "Chemicals",
+                "label": "Chemicals"
+              },
+              {
+                "value": "Civic / Social Organization",
+                "label": "Civic / Social Organization"
+              },
+              {
+                "value": "Civil Engineering",
+                "label": "Civil Engineering"
+              },
+              {
+                "value": "Computer Games",
+                "label": "Computer Games"
+              },
+              {
+                "value": "Computer Hardware",
+                "label": "Computer Hardware"
+              },
+              {
+                "value": "Computer Networking",
+                "label": "Computer Networking"
+              },
+              {
+                "value": "Computer Software / Engineering",
+                "label": "Computer Software / Engineering"
+              },
+              {
+                "value": "Construction",
+                "label": "Construction"
+              },
+              {
+                "value": "Consumer Electronics",
+                "label": "Consumer Electronics"
+              },
+              {
+                "value": "Consumer Goods",
+                "label": "Consumer Goods"
+              },
+              {
+                "value": "Consumer Services",
+                "label": "Consumer Services"
+              },
+              {
+                "value": "Cosmetics",
+                "label": "Cosmetics"
+              },
+              {
+                "value": "Dairy",
+                "label": "Dairy"
+              },
+              {
+                "value": "Design",
+                "label": "Design"
+              },
+              {
+                "value": "E - Learning",
+                "label": "E - Learning"
+              },
+              {
+                "value": "Education",
+                "label": "Education"
+              },
+              {
+                "value": "Electrical / Electronic Manufacturing",
+                "label": "Electrical / Electronic Manufacturing"
+              },
+              {
+                "value": "Entertainment / Movie Production",
+                "label": "Entertainment / Movie Production"
+              },
+              {
+                "value": "Environmental Services",
+                "label": "Environmental Services"
+              },
+              {
+                "value": "Events Services",
+                "label": "Events Services"
+              },
+              {
+                "value": "Facilities Services",
+                "label": "Facilities Services"
+              },
+              {
+                "value": "Farming",
+                "label": "Farming"
+              },
+              {
+                "value": "Fashion",
+                "label": "Fashion"
+              },
+              {
+                "value": "Finance",
+                "label": "Finance"
+              },
+              {
+                "value": "Fishery",
+                "label": "Fishery"
+              },
+              {
+                "value": "Food / Beverages",
+                "label": "Food / Beverages"
+              },
+              {
+                "value": "Fundraising",
+                "label": "Fundraising"
+              },
+              {
+                "value": "Furniture",
+                "label": "Furniture"
+              },
+              {
+                "value": "Gambling / Lotteries",
+                "label": "Gambling / Lotteries"
+              },
+              {
+                "value": "Glass / Ceramics / Concrete",
+                "label": "Glass / Ceramics / Concrete"
+              },
+              {
+                "value": "Government",
+                "label": "Government"
+              },
+              {
+                "value": "Graphic Design / Web Design",
+                "label": "Graphic Design / Web Design"
+              },
+              {
+                "value": "Health / Fitness",
+                "label": "Health / Fitness"
+              },
+              {
+                "value": "Hospital / Health Care",
+                "label": "Hospital / Health Care"
+              },
+              {
+                "value": "Hospitality",
+                "label": "Hospitality"
+              },
+              {
+                "value": "Human Resources / HR",
+                "label": "Human Resources / HR"
+              },
+              {
+                "value": "Import / Export",
+                "label": "Import / Export"
+              },
+              {
+                "value": "Industrial Automation",
+                "label": "Industrial Automation"
+              },
+              {
+                "value": "Information Services",
+                "label": "Information Services"
+              },
+              {
+                "value": "Information Technology / IT",
+                "label": "Information Technology / IT"
+              },
+              {
+                "value": "Insurance",
+                "label": "Insurance"
+              },
+              {
+                "value": "International Affairs",
+                "label": "International Affairs"
+              },
+              {
+                "value": "International Trade / Development",
+                "label": "International Trade / Development"
+              },
+              {
+                "value": "Internet",
+                "label": "Internet"
+              },
+              {
+                "value": "Judiciary",
+                "label": "Judiciary"
+              },
+              {
+                "value": "Law Enforcement",
+                "label": "Law Enforcement"
+              },
+              {
+                "value": "Legal Services",
+                "label": "Legal Services"
+              },
+              {
+                "value": "Leisure / Travel",
+                "label": "Leisure / Travel"
+              },
+              {
+                "value": "Library",
+                "label": "Library"
+              },
+              {
+                "value": "Logistics / Procurement",
+                "label": "Logistics / Procurement"
+              },
+              {
+                "value": "Luxury Goods / Jewelry",
+                "label": "Luxury Goods / Jewelry"
+              },
+              {
+                "value": "Machinery",
+                "label": "Machinery"
+              },
+              {
+                "value": "Management Consulting",
+                "label": "Management Consulting"
+              },
+              {
+                "value": "Maritime",
+                "label": "Maritime"
+              },
+              {
+                "value": "Market Research",
+                "label": "Market Research"
+              },
+              {
+                "value": "Marketing / Advertising / Sales",
+                "label": "Marketing / Advertising / Sales"
+              },
+              {
+                "value": "Mechanical or Industrial Engineering",
+                "label": "Mechanical or Industrial Engineering"
+              },
+              {
+                "value": "Medical Equipment",
+                "label": "Medical Equipment"
+              },
+              {
+                "value": "Medical Practice",
+                "label": "Medical Practice"
+              },
+              {
+                "value": "Mental Health Care",
+                "label": "Mental Health Care"
+              },
+              {
+                "value": "Mining / Metals",
+                "label": "Mining / Metals"
+              },
+              {
+                "value": "Motion Pictures / Film",
+                "label": "Motion Pictures / Film"
+              },
+              {
+                "value": "Museums / Institutions",
+                "label": "Museums / Institutions"
+              },
+              {
+                "value": "Music",
+                "label": "Music"
+              },
+              {
+                "value": "Nanotechnology",
+                "label": "Nanotechnology"
+              },
+              {
+                "value": "Newspapers / Journalism",
+                "label": "Newspapers / Journalism"
+              },
+              {
+                "value": "Non - Profit / Volunteering",
+                "label": "Non - Profit / Volunteering"
+              },
+              {
+                "value": "Oil / Energy / Solar / Greentech",
+                "label": "Oil / Energy / Solar / Greentech"
+              },
+              {
+                "value": "Other Industry",
+                "label": "Other Industry"
+              },
+              {
+                "value": "Outsourcing",
+                "label": "Outsourcing"
+              },
+              {
+                "value": "Package / Freight Delivery",
+                "label": "Package / Freight Delivery"
+              },
+              {
+                "value": "Packaging / Containers",
+                "label": "Packaging / Containers"
+              },
+              {
+                "value": "Paper / Forest Products",
+                "label": "Paper / Forest Products"
+              },
+              {
+                "value": "Pharmaceuticals",
+                "label": "Pharmaceuticals"
+              },
+              {
+                "value": "Philanthropy",
+                "label": "Philanthropy"
+              },
+              {
+                "value": "Photography",
+                "label": "Photography"
+              },
+              {
+                "value": "Plastics",
+                "label": "Plastics"
+              },
+              {
+                "value": "Political Organization",
+                "label": "Political Organization"
+              },
+              {
+                "value": "Printing",
+                "label": "Printing"
+              },
+              {
+                "value": "Public Relations / PR",
+                "label": "Public Relations / PR"
+              },
+              {
+                "value": "Public Safety",
+                "label": "Public Safety"
+              },
+              {
+                "value": "Publishing Industry",
+                "label": "Publishing Industry"
+              },
+              {
+                "value": "Railroad Manufacture",
+                "label": "Railroad Manufacture"
+              },
+              {
+                "value": "Ranching / Livestock",
+                "label": "Ranching / Livestock"
+              },
+              {
+                "value": "Real Estate / Mortgage",
+                "label": "Real Estate / Mortgage"
+              },
+              {
+                "value": "Religious Institutions",
+                "label": "Religious Institutions"
+              },
+              {
+                "value": "Renewables / Environment",
+                "label": "Renewables / Environment"
+              },
+              {
+                "value": "Research Industry",
+                "label": "Research Industry"
+              },
+              {
+                "value": "Restaurants",
+                "label": "Restaurants"
+              },
+              {
+                "value": "Retail Industry",
+                "label": "Retail Industry"
+              },
+              {
+                "value": "Security",
+                "label": "Security"
+              },
+              {
+                "value": "Semiconductors",
+                "label": "Semiconductors"
+              },
+              {
+                "value": "Shipbuilding",
+                "label": "Shipbuilding"
+              },
+              {
+                "value": "Space",
+                "label": "Space"
+              },
+              {
+                "value": "Sporting Goods",
+                "label": "Sporting Goods"
+              },
+              {
+                "value": "Sports",
+                "label": "Sports"
+              },
+              {
+                "value": "Staffing / Recruiting",
+                "label": "Staffing / Recruiting"
+              },
+              {
+                "value": "Supermarkets",
+                "label": "Supermarkets"
+              },
+              {
+                "value": "Telecommunications",
+                "label": "Telecommunications"
+              },
+              {
+                "value": "Textiles",
+                "label": "Textiles"
+              },
+              {
+                "value": "Think Tanks",
+                "label": "Think Tanks"
+              },
+              {
+                "value": "Translation / Localization",
+                "label": "Translation / Localization"
+              },
+              {
+                "value": "Transportation",
+                "label": "Transportation"
+              },
+              {
+                "value": "Utilities",
+                "label": "Utilities"
+              },
+              {
+                "value": "Veterinary",
+                "label": "Veterinary"
+              },
+              {
+                "value": "Warehousing",
+                "label": "Warehousing"
+              },
+              {
+                "value": "Wholesale",
+                "label": "Wholesale"
+              },
+              {
+                "value": "Wireless",
+                "label": "Wireless"
+              },
+              {
+                "value": "Writing / Editing",
+                "label": "Writing / Editing"
+              }
+            ],
+            "validationRegex": "^(*.){1, 100}$",
+            "validationErrorMsg": "Max 100 chars."
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "groupTitle": "Describe your Idea",
+      "groupType": "default",
+      "groupDescription": "Please try to describe your idea in up to 3 words, up to 150, and up to 1500 characters. Don't worry, you can attach images later in the submission process.",
+      "questions": {
+        "0": [
+          {
+            "id": 0,
+            "type": "singleLine",
+            "text": "In max 3 words",
+            "validationRegex": "^(?:[A-Za-z,]+ ){0,2}[A-Za-z]+$",
+            "validationErrorMsg": "Please separate the words by commas or spaces only."
+          },
+          {
+            "id": 1,
+            "type": "singleLine",
+            "text": "In max 30 characters",
+            "validationRegex": "^(.){0,30}$",
+            "validationErrorMsg": "Invalid number of characters."
+          }
+        ],
+        "1": [
+          {
+            "id": 2,
+            "type": "multiLine",
+            "text": "Finally, a detailed description of your idea (up to 1500 characters)",
+            "validationRegex": "^(*.){1,1500}$",
+            "validationErrorMsg": "Max 100 chars."
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "groupTitle": "Why is this a great idea?",
+      "groupType": "singleQuestion",
+      "groupDescription": "Think for instance of what is new/unique about your idea, which problem do you solve with your idea, how may it change people’s lives compared to what they currently use?",
+      "questions": {
+        "0": [
+          {
+            "id": 0,
+            "type": "multiLine",
+            "text": "",
+            "validationRegex": "^(*.){1, 1500}$",
+            "validationErrorMsg": "Max 1500 chars."
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "groupTitle": "How far developed is your idea?",
+      "groupType": "singleQuestion",
+      "groupDescription": "Still an idea/prototyped/etc?",
+      "questions": {
+        "0": [
+          {
+            "id": 0,
+            "type": "multiLine",
+            "text": "",
+            "validationRegex": "^(*.){1, 1000}$",
+            "validationErrorMsg": "Max 1000 chars."
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "groupTitle": "Describe the steps and story how you came up with this idea",
+      "groupType": "singleQuestion",
+      "groupDescription": "What triggered you to come up with this idea and how did it evolve into the idea you submit now?",
+      "questions": {
+        "0": [
+          {
+            "id": 0,
+            "type": "multiLine",
+            "text": "",
+            "validationRegex": "^(*.){1, 2000}$",
+            "validationErrorMsg": "Max 2000 chars."
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "groupTitle": "Is there anything that is close to your idea?",
+      "groupType": "default",
+      "groupDescription": "Anything on the internet, any article or patent? Any companies who work in a similar area? Please do some Google searching and list 3 things that come closest to your idea. ",
+      "questions": {
+        "0": [
+          {
+            "id": 0,
+            "type": "singleLine",
+            "text": "URL",
+            "validationRegex": "^(*.){1, 500}$",
+            "validationErrorMsg": "Invalid link."
+          },
+          {
+            "id": 1,
+            "type": "multiLine",
+            "text": "Comment/description:",
+            "validationRegex": "^(*.){1, 500}$",
+            "validationErrorMsg": "Max 500 characters."
+          }
+        ],
+        "1": [
+          {
+            "id": 2,
+            "type": "singleLine",
+            "text": "URL",
+            "validationRegex": "^(*.){1, 500}$",
+            "validationErrorMsg": "Invalid link."
+          },
+          {
+            "id": 3,
+            "type": "multiLine",
+            "text": "Comment/description:",
+            "validationRegex": "^(*.){1, 500}$",
+            "validationErrorMsg": "Max 500 characters."
+          }
+        ],
+        "2": [
+          {
+            "id": 4,
+            "type": "singleLine",
+            "text": "URL",
+            "validationRegex": "^(*.){1, 500}$",
+            "validationErrorMsg": "Invalid link."
+          },
+          {
+            "id": 5,
+            "type": "multiLine",
+            "text": "Comment/description:",
+            "validationRegex": "^(*.){1, 500}$",
+            "validationErrorMsg": "Max 500 characters."
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "groupTitle": "Anything else you want to tell us about your idea?",
+      "groupType": "singleQuestion",
+      "groupDescription": "",
+      "questions": {
+        "0": [
+          {
+            "id": 0,
+            "type": "multiLine",
+            "text": "",
+            "validationRegex": "^(*.){1, 2000}$",
+            "validationErrorMsg": "Max 2000 chars."
+          }
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "groupTitle": "Attach images/drawings",
+      "groupType": "singleQuestion",
+      "groupDescription": "",
+      "questions": {
+        "0": [
+          {
+            "id": 0,
+            "type": "fileUpload",
+            "text": "",
+            "maxItems": "^(*.){1, 2000}$",
+            "maxSize": "20"
+          }
+        ]
+      }
+    }
+  ]
+}
