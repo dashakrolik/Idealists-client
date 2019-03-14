@@ -34,7 +34,7 @@ export default function IdeaDashboard(props) {
   
   if (userLoggedIn === false)
     return (
-      <Redirect to='/login' />);
+      <Redirect to='/myIdea' />);
   
   
   // Condition below should be userIdeas.length > 0, userData.firstName is purely for testing purposes
