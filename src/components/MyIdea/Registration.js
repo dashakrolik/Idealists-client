@@ -11,7 +11,7 @@ import { baseUrl } from '../../constants';
 import request from 'superagent';
 
 const Registration = (props) => {
-  
+  console.log('registration',props)
   const [formValidated, setFormValidated] = useState(false);
   
   const [formData, setFormData] = useState({
@@ -123,10 +123,11 @@ const Registration = (props) => {
       })
       .then(res => {
         if (res.status === 200) {
+          console.log('signup',props)
           props.login(email, password);
         }
       })
-      .then( event => console.log( event.res))
+      .then( <redirect to="/MyIdea" />)
       .catch(err => {
         if (err.status === 400) {
           // dispatch(userLoginFailed(err.response.body.message))
