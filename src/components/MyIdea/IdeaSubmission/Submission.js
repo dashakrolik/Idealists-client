@@ -58,10 +58,10 @@ const Submission = (props) => {
     }
   };
   
-  if (!props.authState.loggedIn) {
-    props.history.replace('/MyIdea/login');
-    return <div></div>;
-  }
+  // if (!props.authState.loggedIn) {
+  //   props.history.replace('/MyIdea/login');
+  //   return <div></div>;
+  // }
   if (questionGroups.length === 0) return <div>Loading...</div>;
   return (
     <div>
@@ -79,17 +79,18 @@ const Submission = (props) => {
               {
                 <PGroupContainer
                   key={`container-${activeGroup === questionGroups.length ? 'complete-submission' : questionGroups[activeGroup].id.toString()}`}>
-                  {activeGroup === questionGroups.length ?
-                    <CompleteSubmission groups={questionGroups} answers={answers} authState={props.authState}
-                                        login={props.login} /> :
-                    <QuestionGroup group={questionGroups[activeGroup]}
+                  {/* {activeGroup === questionGroups.length ? */}
+                  {console.log(props, "PPP")}
+                    <CompleteSubmission groups={questionGroups} answers={answers} authState={props.authState} 
+                                        login={props.login} /> 
+                    {/* <QuestionGroup group={questionGroups[activeGroup]}
                                    answersHandler={handleAnswers}
                                    handleDecidingQuestions={handleDecidingQuestions}
                                    handleInputFocus={handleInputFocus}
                                    handleValidationChanges={handleValidationChange}
                                    key={questionGroups[activeGroup].id.toString()}
                                    answers={answers[activeGroup]}
-                    />}
+              />}  */}
                 </PGroupContainer>
               }
             </PoseGroup>

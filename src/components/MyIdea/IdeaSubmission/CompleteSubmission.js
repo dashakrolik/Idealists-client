@@ -1,19 +1,22 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
 import posed from 'react-pose';
 import Button from '../../reogranisation/Questions/Button';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
-import pdfAgreement from './Participants_ agreement.pdf';
+import pdfAgreement from './participants_agreement.pdf';
+import { Document, Page, pdfjs } from "react-pdf";
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const CompleteSubmission = (props) => {
-  
+
   const [displaySuccess, setDisplaySuccess] = useState(false);
   const [agreeBttn, setAgreeBttn] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const submitIdea = () => {
     setIsSubmitting(true);
     const dataToSend = props.groups.map((group, index) => {
@@ -28,7 +31,7 @@ const CompleteSubmission = (props) => {
         }),
       };
     });
-    
+
     request
       .post(`${baseUrl}/ideas`)
       .set("Authorization", `Bearer ${props.authState.token}`)
@@ -46,20 +49,63 @@ const CompleteSubmission = (props) => {
         }
       });
   };
-  
+
   if (displaySuccess) {
     return <GroupContainer>
       <FlexRow><FlexColumn><GroupTitle>Submission complete!</GroupTitle></FlexColumn></FlexRow>
       <FlexRow><FlexColumn><GroupSubtitle>We'll be in touch with you soon.</GroupSubtitle></FlexColumn></FlexRow>
     </GroupContainer>;
   }
-  
+
+  class Agreement extends Component {
+    state = { numPages: null, pageNumber: 1 };
+
+    onDocumentLoadSuccess = ({ numPages }) => {
+      this.setState({ numPages });
+    };
+
+    goToPrevPage = () =>
+      this.setState(state => ({ pageNumber: state.pageNumber - 1 }));
+    goToNextPage = () =>
+      this.setState(state => ({ pageNumber: state.pageNumber + 1 }));
+
+    render() {
+      const { pageNumber, numPages } = this.state;
+
+      return (
+        <div>
+
+
+          <div style={{ width: 600 }}>
+            <Document
+              file={pdfAgreement}
+              onLoadSuccess={this.onDocumentLoadSuccess}
+            >
+              <Page pageNumber={pageNumber} width={600} />
+            </Document>
+          </div>
+          <nav>
+            <button onClick={this.goToPrevPage}>Prev</button>
+            <button onClick={this.goToNextPage}>Next</button>
+          </nav>
+          <p>
+            Page {pageNumber} of {numPages}
+          </p>
+        </div>
+      );
+    }
+  }
+
   return (
     <GroupContainer>
-      <FlexRow><FlexColumn><Button text={'Download the Participants Agreement'}
-                                   onClick={() => setAgreeBttn(true)} /><Button text={'I agree'} onClick={submitIdea}
-                                                                                disabled={!agreeBttn}
-                                                                                withIcon /></FlexColumn></FlexRow>
+      {/* <FlexRow><FlexColumn> */}
+        <Agreement />
+        <a href={pdfAgreement} download><Button text={'Download the Participants Agreement'}
+          onClick={() => setAgreeBttn(true)} /></a>
+        <Button text={'I agree'} onClick={submitIdea}
+          disabled={!agreeBttn}
+          withIcon />
+      {/* </FlexColumn></FlexRow> */}
     </GroupContainer>
   );
 };
