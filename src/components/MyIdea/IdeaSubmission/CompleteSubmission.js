@@ -9,11 +9,11 @@ import { baseUrl } from '../../../constants';
 import pdfAgreement from './Participants_ agreement.pdf';
 
 const CompleteSubmission = (props) => {
-  
+
   const [displaySuccess, setDisplaySuccess] = useState(false);
   const [agreeBttn, setAgreeBttn] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const submitIdea = () => {
     setIsSubmitting(true);
     const dataToSend = props.groups.map((group, index) => {
@@ -28,7 +28,7 @@ const CompleteSubmission = (props) => {
         }),
       };
     });
-    
+
     request
       .post(`${baseUrl}/ideas`)
       .set("Authorization", `Bearer ${props.authState.token}`)
@@ -46,20 +46,20 @@ const CompleteSubmission = (props) => {
         }
       });
   };
-  
+
   if (displaySuccess) {
     return <GroupContainer>
       <FlexRow><FlexColumn><GroupTitle>Submission complete!</GroupTitle></FlexColumn></FlexRow>
       <FlexRow><FlexColumn><GroupSubtitle>We'll be in touch with you soon.</GroupSubtitle></FlexColumn></FlexRow>
     </GroupContainer>;
   }
-  
+
   return (
     <GroupContainer>
       <FlexRow><FlexColumn><Button text={'Download the Participants Agreement'}
-                                   onClick={() => setAgreeBttn(true)} /><Button text={'I agree'} onClick={submitIdea}
-                                                                                disabled={!agreeBttn}
-                                                                                withIcon /></FlexColumn></FlexRow>
+        onClick={() => setAgreeBttn(true)} /><Button text={'I agree'} onClick={submitIdea}
+          disabled={!agreeBttn}
+          withIcon /></FlexColumn></FlexRow>
     </GroupContainer>
   );
 };

@@ -41,7 +41,8 @@ export default function IdeaLogin(props) {
       <LeftSide>
         <div>
           <h3>Login to My Idea Page</h3>
-          <p>Don’t have an account yet? Create it here</p>
+          <p>Don’t have an account yet?</p>
+          <a href='/MyIdea'> Create it here</a>
         </div>
       </LeftSide>
       <RightSide>
