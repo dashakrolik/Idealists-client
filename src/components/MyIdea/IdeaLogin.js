@@ -16,7 +16,6 @@ export default function IdeaLogin(props) {
   
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(value)
     setLoginState({
       ...loginState,
       [name]: value,
@@ -26,10 +25,15 @@ export default function IdeaLogin(props) {
   const onSubmit = (data) => {
     const { email, password } = data;
     props.login(email, password);
-    console.log("IDEALOGIN")
-    console.log(props.authState)
   };
-  props.user()
+
+  const triggerUserData = () => {
+    if (props.authState) {
+    props.user()
+    }
+  }
+
+  triggerUserData()
 
   if (props.authState.loggedIn) {
     props.history.replace('/MyIdea/new');
