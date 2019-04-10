@@ -215,7 +215,7 @@ const POverlay = posed.div({
 const Logo = styled.img`
   position: absolute;
   left: 30px;
-  top: 30px;
+  top: 70px;
   margin: 0 auto;
   height: 70px;
 `;

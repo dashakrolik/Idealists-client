@@ -3,15 +3,17 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/Button'
 import { useEffect, useState } from 'react';
+import './TopBar.css'
+import {withRouter} from 'react-router-dom'
 
 const TopBar = (props) => {
 
 const [history, location] = useState({});
-
+console.log(props.location.pathname);
 
 return (
     <AppBar>
-        <Toolbar>
+        <Toolbar className="topBar">
             {
             <Button color="inherit" onClick={() => history.push('/MyIdea/login')}>Login</Button>
             }
@@ -29,4 +31,4 @@ return (
     )
 }
 
-export default TopBar
+export default withRouter(TopBar)
