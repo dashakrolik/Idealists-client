@@ -1,18 +1,12 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import { jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import SignupForm from './components/reogranisation/Signup/SignupForm';
 import InvestorDashboard from './components/InvestorsPortal/Dashboard/InvestorDashboard';
 import InvestorLogin from './components/InvestorsPortal/InvestorLogin';
-import UserFormContainer from "./components/reogranisation/UserFormContainer";
 import { ThemeProvider } from 'emotion-theming';
-import Playground from './components/reogranisation/Playground';
-import FormScreen from './components/reogranisation/Questions/FormScreen';
 import IdeaStart from './components/MyIdea/IdeaStart';
-import Ideas from './components/reogranisation/Ideas/Ideas';
-import IdeaSubmission from './components/reogranisation/Questions/IdeaSubmission';
 import Submission from './components/MyIdea/IdeaSubmission/Submission';
 import { baseUrl } from './constants';
 import request from 'superagent';
