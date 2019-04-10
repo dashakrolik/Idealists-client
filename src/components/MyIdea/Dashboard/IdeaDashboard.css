@@ -5,6 +5,7 @@
 }
 
 .flex-tilescontainer {
+    margin: auto;
     width: 90%;
     display: flex;
     background: white;
