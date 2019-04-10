@@ -13,6 +13,7 @@ import request from 'superagent';
 import IdeaDashboard from './components/MyIdea/Dashboard/IdeaDashboard';
 import IdeaLogin from './components/MyIdea/IdeaLogin';
 import TopBar from './components/NavBar/TopBar'
+import ResetPassword from './components/MyIdea/ResetPassword';
 
 class App extends Component {
   state = {
@@ -87,7 +88,7 @@ class App extends Component {
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: res.body.jwt
+              token: null
             },
           });
         }
@@ -118,6 +119,9 @@ class App extends Component {
                 }} />
                 <Route exact path='/MyIdea/new' render={(props) => {
                   return <Submission {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
+                }} />
+               <Route exact path='/MyIdea/login/reset-password' render={(props) => {
+                  return <ResetPassword {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword}/>;
                 }} />
               </Application>
             </ThemeProvider>
