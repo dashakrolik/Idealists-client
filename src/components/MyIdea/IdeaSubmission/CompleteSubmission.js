@@ -6,10 +6,13 @@ import posed from 'react-pose';
 import Button from '../../reogranisation/Questions/Button';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
+import pdfAgreement from './participants_agreement.pdf';
+import { Document, Page, pdfjs } from "react-pdf";
+import { color } from 'style-value-types';
+import { borderRadius } from 'react-select/lib/theme';
+import { relative } from 'path';
 
-import pdfAgreement from './Participants_ agreement.pdf';
-import { Link } from 'react-router-dom'
-
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const CompleteSubmission = (props) => {
 
@@ -99,14 +102,14 @@ const CompleteSubmission = (props) => {
 
   return (
     <GroupContainer>
-
-      <FlexRow><FlexColumn>
-        <Button text={'Download the Participants Agreement'}
-          onClick={() => setAgreeBttn(true)} />
-        <Button text={'I agree'} onClick={submitIdea}
-          disabled={!agreeBttn}
-          withIcon /></FlexColumn></FlexRow>
-
+      {/* <FlexRow><FlexColumn> */}
+      <Agreement />
+      <a href={pdfAgreement} download><Button text={'Download the Participants Agreement'}
+        onClick={() => setAgreeBttn(true)} /></a>
+      <Button text={'I agree'} onClick={submitIdea}
+        disabled={!agreeBttn}
+        withIcon />
+      {/* </FlexColumn></FlexRow> */}
     </GroupContainer>
   );
 };
