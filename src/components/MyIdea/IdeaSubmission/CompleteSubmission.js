@@ -8,6 +8,9 @@ import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import pdfAgreement from './participants_agreement.pdf';
 import { Document, Page, pdfjs } from "react-pdf";
+import { color } from 'style-value-types';
+import { borderRadius } from 'react-select/lib/theme';
+import { relative } from 'path';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -74,8 +77,6 @@ const CompleteSubmission = (props) => {
 
       return (
         <div>
-
-
           <div style={{ width: 600 }}>
             <Document
               file={pdfAgreement}
@@ -84,9 +85,12 @@ const CompleteSubmission = (props) => {
               <Page pageNumber={pageNumber} width={600} />
             </Document>
           </div>
+          <br />
           <nav>
-            <button onClick={this.goToPrevPage}>Prev</button>
-            <button onClick={this.goToNextPage}>Next</button>
+            <button style={{ backgroundColor: "inherit", color: "white", borderRadius: "10px" }}
+              onClick={this.goToPrevPage}>Prev Page</button>
+            <button style={{ backgroundColor: "inherit", color: "white", borderRadius: "10px" }}
+              onClick={this.goToNextPage}>Next Page</button>
           </nav>
           <p>
             Page {pageNumber} of {numPages}
@@ -99,12 +103,12 @@ const CompleteSubmission = (props) => {
   return (
     <GroupContainer>
       {/* <FlexRow><FlexColumn> */}
-        <Agreement />
-        <a href={pdfAgreement} download><Button text={'Download the Participants Agreement'}
-          onClick={() => setAgreeBttn(true)} /></a>
-        <Button text={'I agree'} onClick={submitIdea}
-          disabled={!agreeBttn}
-          withIcon />
+      <Agreement />
+      <a href={pdfAgreement} download><Button text={'Download the Participants Agreement'}
+        onClick={() => setAgreeBttn(true)} /></a>
+      <Button text={'I agree'} onClick={submitIdea}
+        disabled={!agreeBttn}
+        withIcon />
       {/* </FlexColumn></FlexRow> */}
     </GroupContainer>
   );
