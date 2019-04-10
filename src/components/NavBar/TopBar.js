@@ -17,20 +17,22 @@ return (
     <AppBar>
         <Toolbar className="topBar">
             {
-            props.location.pathname.indexOf('/MyIdea') > 0 &&
-            <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Login</Button>
+            !props.authState.loggedIn ? 
+            <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Login</Button> : null
             }
             {
-            <Button color="inherit" onClick={() => props.history.push('/MyIdea')}>Sign Up</Button>
+            !props.authState.loggedIn ?
+            <Button color="inherit" onClick={() => props.history.push('/MyIdea')}>Sign Up</Button> : null
             }
             {
-            <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Dashboard</Button>
+            props.authState.loggedIn ? 
+            <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Dashboard</Button> : null
             }
             {
             <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>New Idea</Button>
             }
             {
-            !props.location.pathname.indexOf('/MyIdea/new') ? 
+            props.authState.loggedIn ? 
             <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>Logout</Button> : null
             }
         </Toolbar>
