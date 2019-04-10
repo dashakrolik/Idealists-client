@@ -57,10 +57,12 @@ const CompleteSubmission = (props) => {
 
   return (
     <GroupContainer>
-      <FlexRow><FlexColumn><Button text={'Download the Participants Agreement'}
-        onClick={() => setAgreeBttn(true)} /><Link to='/MyIdea/Dashboard'><Button text={'I agree'} onClick={submitIdea}
+      <FlexRow><FlexColumn>
+        <Button text={'Download the Participants Agreement'}
+          onClick={() => setAgreeBttn(true)} />
+        <Button text={'I agree'} onClick={submitIdea}
           disabled={!agreeBttn}
-          withIcon /></Link></FlexColumn></FlexRow>
+          withIcon /></FlexColumn></FlexRow>
     </GroupContainer>
   );
 };
