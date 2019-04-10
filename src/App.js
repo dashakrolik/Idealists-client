@@ -1,9 +1,8 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import SignupForm from './components/reogranisation/Signup/SignupForm';
 import InvestorDashboard from './components/InvestorsPortal/Dashboard/InvestorDashboard';
 import InvestorLogin from './components/InvestorsPortal/InvestorLogin';
 import UserFormContainer from "./components/reogranisation/UserFormContainer";

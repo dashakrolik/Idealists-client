@@ -12,6 +12,7 @@ export default function IdeaLogin(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);
+    triggerUserData()
   };
   
   const handleChange = (event) => {
@@ -33,7 +34,7 @@ export default function IdeaLogin(props) {
     }
   }
 
-  triggerUserData()
+  
 
   if (props.authState.loggedIn) {
     props.history.replace('/MyIdea/new');
