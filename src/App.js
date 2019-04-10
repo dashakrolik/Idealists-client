@@ -75,12 +75,30 @@ class App extends Component {
         }})
       })
   }
-  
+
+  resetPassword = (email) => {
+    request
+      .post(`${baseUrl}/reset-password`)
+      .send( {email} )
+      .then(res => {
+        if (res.status === 200) {
+          this.setState({
+            ...this.state,
+            auth: {
+              ...this.state.auth,
+              loggedIn: false,
+              token: res.body.jwt
+            },
+          });
+        }
+      })
+    }
+
   render() {
     return (
       <Router>
         <div>
-          <TopBar authState={this.state.auth} user={this.getCurrentUser} logout={this.logout}/>
+          <TopBar authState={this.state.auth} user={this.getCurrentUser} logout={this.logout} resetPassword={this.resetPassword}/>
             <ThemeProvider theme={theme}>
               <Application>
                 <Route exact path='/Investors/dashboard' render={(props) => {
@@ -96,7 +114,7 @@ class App extends Component {
                   return <IdeaDashboard {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
                 }} />
                 <Route exact path='/MyIdea/login' render={(props) => {
-                  return <IdeaLogin {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
+                  return <IdeaLogin {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword}/>;
                 }} />
                 <Route exact path='/MyIdea/new' render={(props) => {
                   return <Submission {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
