@@ -8,7 +8,7 @@
       {
         "id": 0,
         "type": "deciding",
-        "text": "Is your idea for profit?",
+        "text": "Is your idea for profit? *",
         "continueOption": "Yes",
         "endOption": "No",
         "decidingMessage": "We are working very hard on building a non-profit version of The Idealists as well. Unfortunately, until that is ready, we cannot accept non-profit ideas yet."
@@ -24,7 +24,7 @@
       {
         "id": 0,
         "type": "multiLine",
-        "text": "Please tell us up to 3 ways it could generate profit?",
+        "text": "Please tell us up to 3 ways it could generate profit? *",
         "maxChar": 1000,
         "validationErrorMsg": "This field is limited to 1000 characters."
       }
@@ -610,7 +610,7 @@
       {
         "id": 0,
         "type": "singleLine",
-        "text": "In up to 3 words",
+        "text": "Your idea in up to 3 words *",
         "validationRegex": "^(?:[A-Za-z,]+ ){0,2}[A-Za-z]+$",
         "maxChar": 150,
         "validationErrorMsg": "Please separate the words by commas or spaces only."
@@ -618,7 +618,7 @@
       {
         "id": 1,
         "type": "singleLine",
-        "text": "In up to 150 characters",
+        "text": "Your idea in up to 150 characters *",
         "validationRegex": "^(.){0,150}$",
         "maxChar": 150,
         "validationErrorMsg": "Invalid number of characters."
@@ -634,7 +634,7 @@
       {
         "id": 2,
         "type": "multiLine",
-        "text": "A detailed description of your idea (up to 1500 characters)",
+        "text": "A detailed description of your idea up to 1500 characters *",
         "validationRegex": "^(*.){1,1500}$",
         "maxChar": 1500,
         "validationErrorMsg": "Max 100 chars."
@@ -645,12 +645,12 @@
     "id": 4,
     "groupTitle": "Why is this a great idea?",
     "groupType": "singleQuestion",
-    "groupDescription": "Think for instance of what is new/unique about your idea, which problem do you solve with your idea, how may it change people’s lives compared to what they currently use?",
+    "groupDescription": "Please describe your answer up to 1500 characters. Don't worry, you can attach images later in the submission process",
     "questions": [
       {
         "id": 0,
         "type": "multiLine",
-        "text": "Maximum 1500 characters",
+        "text": "Think for instance of what is new/unique about your idea, which problem do you solve with your idea, how may it change people’s lives compared to what they currently use? *",
         "maxChar": 1500,
         "validationErrorMsg": "Max 1500 chars."
       }
@@ -660,12 +660,12 @@
     "id": 5,
     "groupTitle": "How far developed is your idea?",
     "groupType": "singleQuestion",
-    "groupDescription": "Still an idea/prototyped/etc?",
+    "groupDescription": "Please describe your progress up to 1000 characters.",
     "questions": [
       {
         "id": 0,
         "type": "multiLine",
-        "text": "Max 1000 characters",
+        "text": "Still an idea/prototyped/etc? *",
         "maxChar": 1000,
         "validationErrorMsg": "Max 1000 chars."
       }
@@ -675,12 +675,12 @@
     "id": 6,
     "groupTitle": "Describe the steps and story how you came up with this idea",
     "groupType": "singleQuestion",
-    "groupDescription": "What triggered you to come up with this idea and how did it evolve into the idea you submit now?",
+    "groupDescription": "Please describe your steps up to 2000 characters.",
     "questions": [
       {
         "id": 0,
         "type": "multiLine",
-        "text": "Max 2000 characters.",
+        "text": "What triggered you to come up with this idea and how did it evolve into the idea you submit now? *",
         "maxChar": 2000,
         "validationErrorMsg": "Max 2000 chars."
       }
@@ -690,12 +690,12 @@
     "id": 7,
     "groupTitle": "Is there anything that is close to your idea?",
     "groupType": "default",
-    "groupDescription": "Anything on the internet, any article or patent? Any companies who work in a similar area? Please do some Google searching and list 3 things that come closest to your idea. ",
+    "groupDescription": "Please describe your answer up to 500 characters ",
     "questions": [
       {
         "id": 0,
         "type": "multiLine",
-        "text": "Maximum 500 characters",
+        "text": "Anything on the internet, any article or patent? Any companies who work in a similar area? Please do some Google searching and list 3 things that come closest to your idea. *",
         "maxChar": 500,
         "validationErrorMsg": "Max 500 characters."
       }
@@ -705,12 +705,12 @@
     "id": 8,
     "groupTitle": "Anything else you want to tell us about your idea?",
     "groupType": "singleQuestion",
-    "groupDescription": "",
+    "groupDescription": "Please describe your answer up to 2000 characters",
     "questions": [
       {
         "id": 0,
         "type": "multiLine",
-        "text": "Maximum 2000 characters",
+        "text": "Anything that has not come up with the questions before. *",
         "maxChar": 2000,
         "validationErrorMsg": "Max 2000 chars."
       }
