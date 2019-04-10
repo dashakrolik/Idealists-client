@@ -12,15 +12,18 @@ import { baseUrl } from './constants';
 import request from 'superagent';
 import IdeaDashboard from './components/MyIdea/Dashboard/IdeaDashboard';
 import IdeaLogin from './components/MyIdea/IdeaLogin';
+import TopBar from './components/NavBar/TopBar'
 
 class App extends Component {
-  
   state = {
     auth: {
       loggedIn: false,
       token: '',
       user: '',
     },
+    navigation: {
+      activePath: '',
+    }
   };
   
   logout = () => {
@@ -73,6 +76,9 @@ class App extends Component {
   render() {
     return (
       <Router>
+        <div>
+          <TopBar />
+        
         <ThemeProvider theme={theme}>
           <Application>
             <Route exact path='/Investors/dashboard' render={(props) => {
@@ -95,6 +101,7 @@ class App extends Component {
             }} />
           </Application>
         </ThemeProvider>
+        </div>
       </Router>
     );
   }
