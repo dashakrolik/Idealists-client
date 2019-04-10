@@ -80,7 +80,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <TopBar authState={this.state.auth} user={this.getCurrentUser}/>
+          <TopBar authState={this.state.auth} user={this.getCurrentUser} logout={this.logout}/>
             <ThemeProvider theme={theme}>
               <Application>
                 <Route exact path='/Investors/dashboard' render={(props) => {

@@ -33,7 +33,7 @@ return (
             }
             {
             props.authState.loggedIn ? 
-            <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>Logout</Button> : null
+            <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Logout</Button> : null
             }
         </Toolbar>
     </AppBar>
