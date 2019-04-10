@@ -87,6 +87,7 @@ class App extends Component {
               return <InvestorLogin {...props} authState={this.state.auth} login={this.requestLogin} />;
             }} />
             <Route exact path='/MyIdea' render={(props) => {
+              console.log(props, "PPP", this.state)
               return <IdeaStart {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
             }} />
             <Route exact path='/MyIdea/dashboard' render={(props) => {

@@ -9,11 +9,12 @@ import Button from '../reogranisation/Questions/Button';
 import validator from 'validator';
 import { baseUrl } from '../../constants';
 import request from 'superagent';
+import { Redirect } from 'react-router-dom'
 
 const Registration = (props) => {
-  console.log('registration',props)
+  console.log('registration', props) //has props.login as a function
   const [formValidated, setFormValidated] = useState(false);
-  
+
   const [formData, setFormData] = useState({
     firstName: {
       value: '',
@@ -41,14 +42,14 @@ const Registration = (props) => {
       validated: false,
     },
     country: {
-      value: 'NL',
+      value: '',
       shouldShowError: false,
       validated: true,
     },
   });
-  
+
   const passwordRegEx = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])");
-  
+
   const formValidations = {
     firstName: {
       validator: (val) => (val.length <= 100),
@@ -71,15 +72,15 @@ const Registration = (props) => {
       shouldShowError: (val) => (val.length >= 8),
     },
     country: {
-      validator: (val) => (val === 'NL'),
+      validator: (val) => (val === formData.country.value),
       shouldShowError: (val) => (val.length > 0),
     },
   };
-  
+
   useEffect(() => {
     setFormValidated(Object.keys(formData).reduce((acc, currVal) => acc && formData[currVal].validated, true));
   }, [formData]);
-  
+
   const handleChange = (e) => {
     const newState = {
       ...formData,
@@ -88,7 +89,7 @@ const Registration = (props) => {
         value: e.target.value,
       },
     };
-    
+
     setFormData(Object.keys(formData).reduce((acc, currVal) => {
       return {
         ...acc,
@@ -99,7 +100,7 @@ const Registration = (props) => {
       };
     }, {}));
   };
-  
+
   const enableValidation = (e) => {
     setFormData({
       ...formData,
@@ -109,8 +110,9 @@ const Registration = (props) => {
       },
     });
   };
-  
+
   const signup = () => {
+
     const { firstName, lastName, email, password, country } = formData;
     request
       .post(`${baseUrl}/users`)
@@ -121,13 +123,18 @@ const Registration = (props) => {
         password: password.value,
         country: country.value,
       })
+      // .then(res => {
+      //   if (res.status === 200) {
+      //     console.log('signup',props) //has props.login
+      //     console.log('signupLOGIN',res) //login is undefined
+      //     props.login(email, password); //props.login is not a function
+      //   }
+      // })
       .then(res => {
         if (res.status === 200) {
-          console.log('signup',props)
-          props.login(email, password);
+          window.location.replace(`localhost:3000/MyIdea/login`)
         }
       })
-      .then( <redirect to="/MyIdea" />)
       .catch(err => {
         if (err.status === 400) {
           // dispatch(userLoginFailed(err.response.body.message))
@@ -136,12 +143,12 @@ const Registration = (props) => {
         }
       });
   };
-  
+
   return (
     <Container pose={props.show ? 'show' : 'hide'} css={css`justify-self: flex-end; width: 100%;`}>
       <form>
         <RegistrationForm>
-          
+
           <FlexRow>
             <FlexColumn>
               <FormGroup css={css`font-size: 24px; padding: 5px 10px;`}>
@@ -149,53 +156,53 @@ const Registration = (props) => {
               </FormGroup>
             </FlexColumn>
           </FlexRow>
-          
+
           <FlexRow>
             <FlexColumn>
               <FormGroup css={css`font-size: 10px; padding: 5px 10px; margin: 0 0 30px;`}>
-                Already registered? <b>Click here</b>
+                <a href='/MyIdea/login'> Already registered? Click here to log in</a>
               </FormGroup>
             </FlexColumn>
           </FlexRow>
-          
+
           <FlexRow>
             <FlexColumn>
               <FormGroup>
                 <label>Name{formData.firstName.shouldShowError && !formData.firstName.validated &&
-                <span
-                  css={css`font-weight: 800; color: #ff4444;`}> / max 100 chars</span>}</label>
+                  <span
+                    css={css`font-weight: 800; color: #ff4444;`}> / max 100 chars</span>}</label>
                 <input type='text' name='firstName' onChange={handleChange} onBlur={enableValidation}
-                       value={formData.firstName.value} />
+                  value={formData.firstName.value} />
               </FormGroup>
             </FlexColumn>
             <FlexColumn>
               <FormGroup>
                 <label>Surname{formData.lastName.shouldShowError && !formData.lastName.validated &&
-                <span css={css`font-weight: 800; color: #ff4444;`}> / max 100 chars</span>}</label>
+                  <span css={css`font-weight: 800; color: #ff4444;`}> / max 100 chars</span>}</label>
                 <input type='text' name='lastName' onChange={handleChange} onBlur={enableValidation}
-                       value={formData.lastName.value} />
+                  value={formData.lastName.value} />
               </FormGroup>
             </FlexColumn>
           </FlexRow>
-          
+
           <FlexRow>
             <FlexColumn>
               <FormGroup>
                 <label>Email{formData.email.shouldShowError && !formData.email.validated &&
-                <span css={css`font-weight: 800; color: #ff4444;`}> / invalid e-mail address</span>}</label>
+                  <span css={css`font-weight: 800; color: #ff4444;`}> / invalid e-mail address</span>}</label>
                 <input type='email' name='email' onChange={handleChange} onBlur={enableValidation}
-                       value={formData.email.value} />
+                  value={formData.email.value} />
               </FormGroup>
             </FlexColumn>
           </FlexRow>
-          
+
           <FlexRow>
             <FlexColumn>
               <FormGroup css={css`flex: 1 1 auto;`}>
                 <label>Password{formData.password.shouldShowError && !formData.password.validated &&
-                <span css={css`font-weight: 800; color: #ff4444;`}> / invalid password</span>}</label>
+                  <span css={css`font-weight: 800; color: #ff4444;`}> / invalid password</span>}</label>
                 <input type='password' name='password' onChange={handleChange} onBlur={enableValidation}
-                       value={formData.password.value} />
+                  value={formData.password.value} />
               </FormGroup>
             </FlexColumn>
             <FlexColumn css={css`width: 34%; flex: 0 0 auto; font-size: 10px; align-items: flex-start;`}>
@@ -211,25 +218,25 @@ const Registration = (props) => {
               </FormGroup>
             </FlexColumn>
           </FlexRow>
-          
+
           <FlexRow>
             <FlexColumn css={css`flex: 1 1 auto;`}>
               <FormGroup>
                 <label>Repeat password{formData.passwordRepeat.shouldShowError && !formData.passwordRepeat.validated &&
-                <span css={css`font-weight: 800; color: #ff4444;`}> / doesn't match</span>}</label>
+                  <span css={css`font-weight: 800; color: #ff4444;`}> / doesn't match</span>}</label>
                 <input type='password' name='passwordRepeat' onChange={handleChange} onBlur={enableValidation}
-                       value={formData.passwordRepeat.value} />
+                  value={formData.passwordRepeat.value} />
               </FormGroup>
             </FlexColumn>
             <FlexColumn css={css`width: 34%; flex: 0 0 auto; font-size: 10px; align-items: flex-end;`}>
               <FormGroup>
                 <div>
-                
+
                 </div>
               </FormGroup>
             </FlexColumn>
           </FlexRow>
-          
+
           <FlexRow>
             <FlexColumn>
               <FormGroup>
@@ -241,7 +248,7 @@ const Registration = (props) => {
         </RegistrationForm>
         <div css={css`float: right; width: 160px;`}>
           <Button disabled={!formValidated} text='Start my submission' disabledText='Sign up' withIcon
-                  onClick={signup} />
+            onClick={signup} />
         </div>
         <div css={css`float: right; width: 120px;`}>
           <Button text='Cancel' disabled={false} onClick={props.handleCancel} />
