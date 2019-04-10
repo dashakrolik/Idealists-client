@@ -33,10 +33,11 @@ export default function IdeaLogin(props) {
     }
   }
 
-  triggerUserData()
+
 
   if (props.authState.loggedIn) {
     props.history.replace('/MyIdea/new');
+    triggerUserData()
     return <div></div>;
   }
   
