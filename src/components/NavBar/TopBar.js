@@ -10,21 +10,28 @@ const TopBar = (props) => {
 
 const [history, location] = useState({});
 console.log(props.location.pathname);
+const [authState] = useState({})
+console.log(props, 'TopBar props')
 
 return (
     <AppBar>
         <Toolbar className="topBar">
             {
+            props.location.pathname.indexOf('/MyIdea') > 0 &&
             <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Login</Button>
             }
             {
             <Button color="inherit" onClick={() => props.history.push('/MyIdea')}>Sign Up</Button>
             }
             {
-            <Button color="inherit" onClick={() => props.history.push('/Dashboard')}>Dashboard</Button>
+            <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Dashboard</Button>
             }
             {
             <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>New Idea</Button>
+            }
+            {
+            !props.location.pathname.indexOf('/MyIdea/new') ? 
+            <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>Logout</Button> : null
             }
         </Toolbar>
     </AppBar>
