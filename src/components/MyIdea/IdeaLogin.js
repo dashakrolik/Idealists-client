@@ -38,6 +38,15 @@ export default function IdeaLogin(props) {
 
   console.log(props)
 
+  //logout code
+
+
+
+
+
+
+  //logout code
+
   if (props.authState.loggedIn) {
     props.history.replace('/MyIdea/new');
     triggerUserData()
@@ -62,8 +71,8 @@ export default function IdeaLogin(props) {
           <label>Password</label>
           <input type='password' name='password' value={loginState.password || ''} onChange={handleChange} />
           <br />
-          
-          <a>Forgot your password?</a>
+        
+          <button type='submit'>Forgot your password</button>
           <button type='submit'>Login</button>
         </form>
       </RightSide>
