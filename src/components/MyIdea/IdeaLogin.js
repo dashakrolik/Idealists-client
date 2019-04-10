@@ -12,7 +12,9 @@ export default function IdeaLogin(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);
+    if (props.authState.loggedIn) {
     triggerUserData()
+    }
   };
   
   const handleChange = (event) => {
