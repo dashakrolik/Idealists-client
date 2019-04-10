@@ -15,16 +15,16 @@ return (
     <AppBar>
         <Toolbar className="topBar">
             {
-            <Button color="inherit" onClick={() => history.push('/MyIdea/login')}>Login</Button>
+            <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Login</Button>
             }
             {
-            <Button color="inherit" onClick={() => history.push('/MyIdea')}>Sign Up</Button>
+            <Button color="inherit" onClick={() => props.history.push('/MyIdea')}>Sign Up</Button>
             }
             {
-            <Button color="inherit" onClick={() => history.push('/Dashboard')}>Dashboard</Button>
+            <Button color="inherit" onClick={() => props.history.push('/Dashboard')}>Dashboard</Button>
             }
             {
-            <Button color="inherit" onClick={() => history.push('/MyIdea/new')}>New Idea</Button>
+            <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>New Idea</Button>
             }
         </Toolbar>
     </AppBar>
