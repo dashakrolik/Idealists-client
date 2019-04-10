@@ -36,10 +36,10 @@ export default function IdeaLogin(props) {
     }
   }
 
-  
 
   if (props.authState.loggedIn) {
     props.history.replace('/MyIdea/new');
+    triggerUserData()
     return <div></div>;
   }
   
@@ -51,7 +51,7 @@ export default function IdeaLogin(props) {
       <LeftSide>
         <div>
           <h3>Login to My Idea Page</h3>
-          <a href='/MyIdea'> Don’t have an account yet? Create it here</a>
+
         </div>
       </LeftSide>
       <RightSide>

@@ -16,15 +16,15 @@ const IdeaStart = (props) => {
   const [loginButtonEnabled, setLoginButtonEnabled] = useState(false);
   const [password, setPassword] = useState('');
   const [signUpFormValidated, setSignUpFormValidated] = useState(false);
-  
-  const [registrationFormData, setRegistratinoFormData] = useState({
-    firstName: '',
-    lastName: '',
-    emailAddress: '',
-    password: '',
-    passwordRepeat: '',
-    countryOfResidence: '',
-  });
+  console.log('IdeaStart', props)
+  // const [registrationFormData, setRegistratinoFormData] = useState({
+  //   firstName: '',
+  //   lastName: '',
+  //   emailAddress: '',
+  //   password: '',
+  //   passwordRepeat: '',
+  //   countryOfResidence: '',
+  // });
   
   const newUser = () => {
     if (props.authState.loggedIn) {
@@ -80,7 +80,7 @@ const IdeaStart = (props) => {
                 <Button text={'Existing User'} onClick={existingUser} />
               </Controls>
             </StartContent>
-            <Registration show={uiState === 'displayingLogin'} handleCancel={closeRegistration} />
+            <Registration show={uiState === 'displayingLogin'} handleCancel={closeRegistration} props={props}/>
           </div>
         </div>
       </Content>

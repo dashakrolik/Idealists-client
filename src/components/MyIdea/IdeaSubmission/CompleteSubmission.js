@@ -1,13 +1,15 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
 import posed from 'react-pose';
 import Button from '../../reogranisation/Questions/Button';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
+
 import pdfAgreement from './Participants_ agreement.pdf';
 import { Link } from 'react-router-dom'
+
 
 const CompleteSubmission = (props) => {
 
@@ -55,14 +57,56 @@ const CompleteSubmission = (props) => {
     </GroupContainer>;
   }
 
+  class Agreement extends Component {
+    state = { numPages: null, pageNumber: 1 };
+
+    onDocumentLoadSuccess = ({ numPages }) => {
+      this.setState({ numPages });
+    };
+
+    goToPrevPage = () =>
+      this.setState(state => ({ pageNumber: state.pageNumber - 1 }));
+    goToNextPage = () =>
+      this.setState(state => ({ pageNumber: state.pageNumber + 1 }));
+
+    render() {
+      const { pageNumber, numPages } = this.state;
+
+      return (
+        <div>
+          <div style={{ width: 600 }}>
+            <Document
+              file={pdfAgreement}
+              onLoadSuccess={this.onDocumentLoadSuccess}
+            >
+              <Page pageNumber={pageNumber} width={600} />
+            </Document>
+          </div>
+          <br />
+          <nav>
+            <button style={{ backgroundColor: "inherit", color: "white", borderRadius: "10px" }}
+              onClick={this.goToPrevPage}>Prev Page</button>
+            <button style={{ backgroundColor: "inherit", color: "white", borderRadius: "10px" }}
+              onClick={this.goToNextPage}>Next Page</button>
+          </nav>
+          <p>
+            Page {pageNumber} of {numPages}
+          </p>
+        </div>
+      );
+    }
+  }
+
   return (
     <GroupContainer>
+
       <FlexRow><FlexColumn>
         <Button text={'Download the Participants Agreement'}
           onClick={() => setAgreeBttn(true)} />
         <Button text={'I agree'} onClick={submitIdea}
           disabled={!agreeBttn}
           withIcon /></FlexColumn></FlexRow>
+
     </GroupContainer>
   );
 };
