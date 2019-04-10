@@ -9,7 +9,6 @@ import Button from '../reogranisation/Questions/Button';
 import validator from 'validator';
 import { baseUrl } from '../../constants';
 import request from 'superagent';
-import { Redirect } from 'react-router-dom'
 
 const Registration = (props) => {
   console.log('registration', props) //has props.login as a function
@@ -123,13 +122,6 @@ const Registration = (props) => {
         password: password.value,
         country: country.value,
       })
-      // .then(res => {
-      //   if (res.status === 200) {
-      //     console.log('signup',props) //has props.login
-      //     console.log('signupLOGIN',res) //login is undefined
-      //     props.login(email, password); //props.login is not a function
-      //   }
-      // })
       .then(res => {
         if (res.status === 200) {
           window.location.replace(`localhost:3000/MyIdea/login`)
