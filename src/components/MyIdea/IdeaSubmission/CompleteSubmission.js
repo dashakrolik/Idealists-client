@@ -7,6 +7,7 @@ import Button from '../../reogranisation/Questions/Button';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import pdfAgreement from './Participants_ agreement.pdf';
+import { Link } from 'react-router-dom'
 
 const CompleteSubmission = (props) => {
 
@@ -57,9 +58,9 @@ const CompleteSubmission = (props) => {
   return (
     <GroupContainer>
       <FlexRow><FlexColumn><Button text={'Download the Participants Agreement'}
-        onClick={() => setAgreeBttn(true)} /><Button text={'I agree'} onClick={submitIdea}
+        onClick={() => setAgreeBttn(true)} /><Link to='/MyIdea/Dashboard'><Button text={'I agree'} onClick={submitIdea}
           disabled={!agreeBttn}
-          withIcon /></FlexColumn></FlexRow>
+          withIcon /></Link></FlexColumn></FlexRow>
     </GroupContainer>
   );
 };

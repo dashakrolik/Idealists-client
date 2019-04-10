@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import { Redirect, Link } from 'react-router-dom';
+import { Card } from 'material-ui'
+import './IdeaDashboard.css'
 
 export default function IdeaDashboard(props) {
   
@@ -11,14 +13,14 @@ export default function IdeaDashboard(props) {
   // Currently userIdeas are ALL ideas, because it is a non-specific GET request
   const [userIdeas, setUserIdeas] = useState([]);
   
-  useEffect(() => {
-    if (props.authState.loggedIn)
-      request
-        .get(`${baseUrl}/current`)
-        .set("Authorization", `Bearer ${props.authState.token}`)
-        .then(res => setUserData(res.body));
-    else props.history.replace('/MyIdea/login');
-  }, []);
+  // useEffect(() => {
+  //   // if (props.authState.loggedIn)
+  //     request
+  //       .get(`${baseUrl}/current`)
+  //       .set("Authorization", `Bearer ${props.authState.token}`)
+  //       .then(res => setUserData(res.body));
+  //   // else props.history.replace('/MyIdea/login');
+  // }, []);
   
   // For testing purposes, this gets ALL ideas
   useEffect(() => {
@@ -32,19 +34,19 @@ export default function IdeaDashboard(props) {
     setUserLoggedIn(false);
   };
   
-  if (userLoggedIn === false)
-    return (
-      <Redirect to='/myIdea' />);
+  // if (userLoggedIn === false)
+  //   return (
+  //     <Redirect to='/myIdea' />);
   
   
   // Condition below should be userIdeas.length > 0, userData.firstName is purely for testing purposes
-  if (userData.firstName) {
-    // console.log(userData)
-    // console.log(userIdeas)
-    console.log(sampleData);
+  // if (userData.firstName) {
+  //   // console.log(userData)
+  //   // console.log(userIdeas)
+  //   console.log(sampleData);
     
     return (
-      <div>
+      <div className='dashboard-container'>
         
         <h4>This is {userData.firstName}'s dashboard</h4>
         <button onClick={userLogout}>Log out</button>
@@ -54,23 +56,22 @@ export default function IdeaDashboard(props) {
           <li>Sample</li>
           <li>Data</li>
         </ul>
-        <ul>
-          {sampleData.map(idea => {
-            return <li key={idea.id}><Link to={`/dashboard/ideas/${idea.id}`}>
-              {idea.createdAt}</Link>
-            </li>;
-          })}
-        </ul>
-      
+        <div className='flex-tilescontainer'>
+          {sampleData.map(idea => 
+          <div className='idea-tile' key={idea.id}>
+          <div>{idea.id}</div>
+            </div>
+          )}
+      </div>
       </div>
     );
-  } else {
-    return (
-      <div>
-      </div>
-    );
+  // } else {
+  //   return (
+  //     <div>
+  //     </div>
+  //   );
     
-  }
+  
 }
 
 // Code below is just sample data because the ideas database is empty
