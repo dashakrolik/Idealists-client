@@ -1,0 +1,23 @@
+.dashboard-container {
+    height: 100vh;
+    background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
+
+}
+
+.flex-tilescontainer {
+    margin: auto;
+    width: 90%;
+    display: flex;
+    background: white;
+    border: 1px solid white;
+    border-radius: 15px;
+}
+
+.idea-tile {
+    width: 30vw;
+    height: 30vh;
+    margin: 10px;
+    border: 1px solid silver;
+    border-radius: 15px;
+    background-image: white;
+}
