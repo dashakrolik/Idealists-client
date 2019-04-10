@@ -10,6 +10,7 @@
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-lottie": "^1.2.3",
+    "react-pdf": "^4.0.5",
     "react-pose": "^4.0.8",
     "react-pose-text": "^3.1.0",
     "react-router-dom": "^4.3.1",
