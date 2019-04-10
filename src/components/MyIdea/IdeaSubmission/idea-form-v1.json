@@ -618,9 +618,9 @@
       {
         "id": 1,
         "type": "singleLine",
-        "text": "In up to 30 characters",
-        "validationRegex": "^(.){0,30}$",
-        "maxChar": 30,
+        "text": "In up to 150 characters",
+        "validationRegex": "^(.){0,150}$",
+        "maxChar": 150,
         "validationErrorMsg": "Invalid number of characters."
       }
     ]

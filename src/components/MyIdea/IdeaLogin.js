@@ -12,11 +12,13 @@ export default function IdeaLogin(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);
+    if (props.authState.loggedIn) {
+    triggerUserData()
+    }
   };
   
   const handleChange = (event) => {
     const { name, value } = event.target;
-    
     setLoginState({
       ...loginState,
       [name]: value,
@@ -27,7 +29,15 @@ export default function IdeaLogin(props) {
     const { email, password } = data;
     props.login(email, password);
   };
+
+  const triggerUserData = () => {
+    if (props.authState) {
+    props.user()
+    }
+  }
+
   
+
   if (props.authState.loggedIn) {
     props.history.replace('/MyIdea/new');
     return <div></div>;
@@ -41,7 +51,7 @@ export default function IdeaLogin(props) {
       <LeftSide>
         <div>
           <h3>Login to My Idea Page</h3>
-          <p>Don’t have an account yet? Create it here</p>
+          <a href='/MyIdea'> Don’t have an account yet? Create it here</a>
         </div>
       </LeftSide>
       <RightSide>
