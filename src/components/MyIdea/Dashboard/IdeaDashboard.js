@@ -33,6 +33,10 @@ export default function IdeaDashboard(props) {
     localStorage.removeItem('currentUserJwt');
     setUserLoggedIn(false);
   };
+
+   const handleClick = () => {
+     props.history.replace('/MyIdea/')
+   }
   
   if (userLoggedIn === false)
     return (
@@ -42,7 +46,7 @@ export default function IdeaDashboard(props) {
   //  Condition below should be userIdeas.length > 0, userData.firstName is purely for testing purposes
   // if (userData.firstName) {
     // console.log(userData)
-    // console.log(userIdeas)
+    console.log(userIdeas)
     console.log(sampleData);
     
     return (
@@ -54,10 +58,11 @@ export default function IdeaDashboard(props) {
         <h1>{user.firstName}'s Dashboard</h1>
         </div>
         <div className='flex-tilescontainer'>
-            {sampleData.map(idea => 
-            <div className='idea-tile' key={idea.id}>
-            <div>{idea.id}</div>
-        </div>
+            {userIdeas.map(idea => 
+            <Link className='tile-link' to={`/dashboard/ideas/${idea.id}`}><div className='idea-tile' key={idea.id}>
+            <p>{idea.idea[3].answers[0].qAnswer}</p>
+            
+              </div></Link>
           )}
       </div>
         <div className='statusbar-container'>this will contain the statusbar</div>
