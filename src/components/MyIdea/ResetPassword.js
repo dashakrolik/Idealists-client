@@ -25,6 +25,7 @@ export default function ResetPassword(props) {
   const onSubmit = (data) => {
     const { email } = data;
     props.resetPassword(email)
+    
   };
 
 
@@ -32,11 +33,7 @@ export default function ResetPassword(props) {
   console.log(props)
 
   //link requesting token
-//   getToken = () => {
-//     request
-//         .
-//   }
-
+//make api call; set bearer with received token
 
 
 
