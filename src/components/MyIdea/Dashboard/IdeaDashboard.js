@@ -52,6 +52,7 @@ export default function IdeaDashboard(props) {
     
     return (
       <div className='dashboard-container'>
+
         <br/>
         <br/>
         <br/>

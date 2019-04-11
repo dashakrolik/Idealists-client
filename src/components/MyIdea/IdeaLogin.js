@@ -36,6 +36,7 @@ export default function IdeaLogin(props) {
     }
   }
 
+  console.log(props)
 
   if (props.authState.loggedIn) {
     props.history.replace('/MyIdea/new');
@@ -45,9 +46,7 @@ export default function IdeaLogin(props) {
   
   if (props.authState.loggedIn !== true) return (
     <Container>
-      {/* <Header /> */}
-      
-      <Logo src={logo} alt='Logo' />
+
       <LeftSide>
         <div>
           <h3>Login to My Idea Page</h3>
