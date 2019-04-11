@@ -35,7 +35,6 @@ export default function IdeaLogin(props) {
     }
   }
 
-  console.log(props)
 
   //logout code
 

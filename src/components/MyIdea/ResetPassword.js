@@ -30,15 +30,6 @@ export default function ResetPassword(props) {
 
 
 
-  console.log(props)
-
-  //link requesting token
-//make api call; set bearer with received token
-
-
-
-
-  //link requesting token
 
   if (props) return (
     <Container>

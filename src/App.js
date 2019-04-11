@@ -14,6 +14,7 @@ import IdeaDashboard from './components/MyIdea/Dashboard/IdeaDashboard';
 import IdeaLogin from './components/MyIdea/IdeaLogin';
 import TopBar from './components/NavBar/TopBar'
 import ResetPassword from './components/MyIdea/ResetPassword';
+import EnterNewPassword from './components/MyIdea/EnterNewPassword';
 
 class App extends Component {
   state = {
@@ -131,8 +132,8 @@ class App extends Component {
                 <Route exact path='/MyIdea/login/reset-password' render={(props) => {
                   return <ResetPassword {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword}/>;
                 }} />
-                <Route exact path='/reset-password/:token' render={(props) => {
-                  return <ResetPassword {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword}/>;
+                <Route exact path='/reset-password/:jwt' render={(props) => {
+                  return <EnterNewPassword {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword}/>;
                 }} />
               </Application>
             </ThemeProvider>
