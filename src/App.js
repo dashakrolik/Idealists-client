@@ -2,7 +2,7 @@
 import { jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import InvestorDashboard from './components/InvestorsPortal/Dashboard/InvestorDashboard';
 import InvestorLogin from './components/InvestorsPortal/InvestorLogin';
 import { ThemeProvider } from 'emotion-theming';
@@ -119,6 +119,7 @@ class App extends Component {
                 <Route exact path='/MyIdea/new' render={(props) => {
                   return <Submission {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
                 }} />
+                <Route exact path="/" render={() => <Redirect to="/MyIdea" />} />
               </Application>
             </ThemeProvider>
         </div>
