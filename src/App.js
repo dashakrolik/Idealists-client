@@ -28,18 +28,10 @@ class App extends Component {
     }
   };
   
-  logout = () => {
-    this.setState({
-      auth: {
-        loggedIn: false,
-        token: '',
-        user: '',
-      },
-      navigation: {
-        activePath: ''
-      }
-    });
-  };
+  logout() {
+    localStorage.clear();
+    this.setState({loggedIn: false});
+}
   
   requestLogin = (email, password) => {
     request
