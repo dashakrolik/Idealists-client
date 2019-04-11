@@ -26,6 +26,7 @@ export default function IdeaDashboard(props) {
   useEffect(() => {
     request
       .get(`${baseUrl}/ideas`)
+      .set("Authorization", `Bearer ${props.authState.token}`)
       .then(res => setUserIdeas(res.body));
   }, []);
   
@@ -46,8 +47,8 @@ export default function IdeaDashboard(props) {
   //  Condition below should be userIdeas.length > 0, userData.firstName is purely for testing purposes
   // if (userData.firstName) {
     // console.log(userData)
-    console.log(userIdeas)
-    console.log(sampleData);
+    // console.log(userIdeas.idea[0].idea[3].answers[1])
+    console.log(userIdeas)// console.log(sampleData);
     
     return (
       <div className='dashboard-container'>
@@ -66,7 +67,10 @@ export default function IdeaDashboard(props) {
           )}
       </div>
         <div className='statusbar-container'>this will contain the statusbar</div>
-        <div className='summary-container'><p>this will contain the idea summary</p></div>
+        <div className='summary-container'>
+          <p>Summary of your idea:</p><br/>
+          
+        </div>
         
       </div>
     );
