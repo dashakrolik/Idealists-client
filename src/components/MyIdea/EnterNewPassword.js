@@ -2,11 +2,17 @@
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { useState } from 'react';
+import {withRouter} from 'react-router-dom'
 
-export default function EnterNewPassword(props) {
+function EnterNewPassword(props) {
   
   const [resetState, setLoginState] = useState({});
-  
+  const [history, location] = useState({});
+  console.log(props.location.pathname);
+  let initJwt = props.location.pathname.split('/')
+    console.log(initJwt)
+  const jwt = initJwt[2]
+  console.log(jwt)
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(resetState);
@@ -43,7 +49,7 @@ export default function EnterNewPassword(props) {
 
       <LeftSide>
         <div>
-          <h3>Reset Password</h3>
+          <h3>Enter New Password</h3>
         </div>
       </LeftSide>
 
@@ -52,15 +58,16 @@ export default function EnterNewPassword(props) {
           <label>New password</label>
           <input type='password' name='password' value={resetState.password || ''} onChange={handleChange} />
 
-          <label>Confirm password</label>
-          <input type='passwordConfirmation' name='passwordConfirmation' value={resetState.passwordConfirmation || ''} onChange={handleChange} />
-          <br />
+       
           <button type='submit'>Submimt new password</button>
         </form>
       </RightSide>
   </Container>);
   else return <div></div>;
 }
+
+
+export default withRouter(EnterNewPassword)
 
 const Logo = styled.img`
   position: absolute;
