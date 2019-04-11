@@ -1,4 +1,4 @@
-export const baseUrl = 'https://idealists-test.herokuapp.com'
+export const baseUrl ='https://idealists-test.herokuapp.com'
 
 export const data =  {
     "questionsVersion": "1.0",

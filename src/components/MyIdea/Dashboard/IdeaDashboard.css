@@ -1,23 +1,49 @@
 .dashboard-container {
     height: 100vh;
     background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
-
+    text-align: center;
 }
 
 .flex-tilescontainer {
-    margin: auto;
+    margin: auto;   
     width: 90%;
     display: flex;
+}
+
+.summary-container {
+    margin: 20px auto;   
+    width: 70%;
     background: white;
     border: 1px solid white;
-    border-radius: 15px;
+    border-radius: 10px;
+    height: 30%;
+    color: black;
+}
+
+.statusbar-container {
+    margin: 20px auto;   
+    width: 90%;
+    background: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    height: 7%;
+}
+
+.title {
+    color: white;
 }
 
 .idea-tile {
-    width: 30vw;
+    min-width: 30vw;
     height: 30vh;
     margin: 10px;
     border: 1px solid silver;
-    border-radius: 15px;
-    background-image: white;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.tile-link {
+    text-decoration: none;
+    text-decoration-color: black;
+    color: black;
 }
