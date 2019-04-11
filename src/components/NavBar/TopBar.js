@@ -14,9 +14,9 @@ const TopBar = (props) => {
 
 const [history, location, window] = useState({});
 const myStorage = localStorage
-console.log(myStorage)
+
 const [authState] = useState({})
-console.log(props)
+
 
 return (
     <AppBar>

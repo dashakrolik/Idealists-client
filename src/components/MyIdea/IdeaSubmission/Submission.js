@@ -35,8 +35,7 @@ const Submission = (props) => {
   };
 
   const handleNextBttnClick = () => {
-    console.log(answers);
-    console.log(questionGroups);
+    
     if ((activeGroup) === questionGroups.length) {
     } else {
       setActiveGroup(activeGroup + 1);
