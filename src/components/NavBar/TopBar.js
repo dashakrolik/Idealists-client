@@ -13,9 +13,9 @@ import styled from '@emotion/styled';
 const TopBar = (props) => {
 
 const [history, location] = useState({});
-console.log(props.location.pathname);
+
 const [authState] = useState({})
-console.log(props, 'TopBar props')
+
 
 return (
     <AppBar>

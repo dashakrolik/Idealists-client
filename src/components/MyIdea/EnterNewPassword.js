@@ -2,81 +2,75 @@
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import {withRouter} from 'react-router-dom'
 
-export default function IdeaLogin(props) {
+function EnterNewPassword(props) {
   
-  const [loginState, setLoginState] = useState({});
-  
+  const [resetState, setLoginState] = useState({});
+  const [history, location,] = useState({});
+  console.log(props.location.pathname);
+  let initJwt = props.location.pathname.split('/')
+  console.log(initJwt)
+  const jwt = initJwt[2]
+  console.log(jwt)
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(loginState);
-    if (props.authState.loggedIn) {
-    triggerUserData()
-    }
+    onSubmit(resetState);
   };
   
   const handleChange = (event) => {
     const { name, value } = event.target;
     setLoginState({
-      ...loginState,
+      ...resetState,
       [name]: value,
     });
   };
   
   const onSubmit = (data) => {
-    const { email, password } = data;
-    props.login(email, password);
+    const { password } = data;
+    const  token  = props.location.pathname.split('/')[2]
+    console.log(token, password)
+    props.updatePassword(token, password)
+    //JSONwebtoken: invalid signature
   };
 
-  const triggerUserData = () => {
-    if (props.authState) {
-    props.user()
-    }
-  }
 
 
-  //logout code
+  console.log(props)
 
+  //link requesting token
+//make api call; set bearer with received token
 
 
 
 
+  //link requesting token
 
-  //logout code
-
-  if (props.authState.loggedIn) {
-    props.history.replace('/MyIdea/new');
-    triggerUserData()
-    return <div></div>;
-  }
-  
-  if (props.authState.loggedIn !== true) return (
+  if (props) return (
     <Container>
 
       <LeftSide>
         <div>
-          <h3>Login to My Idea Page</h3>
-
+          <h3>Enter New Password</h3>
         </div>
       </LeftSide>
+
       <RightSide>
         <form onSubmit={handleSubmit}>
-          <label>Email</label>
-          <input type='email' name='email' value={loginState.email || ''} onChange={handleChange} />
-          <br />
-          
-          <label>Password</label>
-          <input type='password' name='password' value={loginState.password || ''} onChange={handleChange} />
-          <br />
-        
-          <button type='submit'>Forgot your password?</button>
-          <button type='submit'>Login</button>
+          <label>New password</label>
+          <input type='password' name='password' value={resetState.password || ''} onChange={handleChange} />
+
+       
+          <button type='submit'>Submimt new password</button>
         </form>
       </RightSide>
-    </Container>);
+  </Container>);
   else return <div></div>;
 }
+
+
+export default withRouter(EnterNewPassword)
 
 const Logo = styled.img`
   position: absolute;

@@ -9,11 +9,13 @@ import Button from '../reogranisation/Questions/Button';
 import validator from 'validator';
 import { baseUrl } from '../../constants';
 import request from 'superagent';
+import { Redirect } from 'react-router'
+import {withRouter} from 'react-router-dom'
 
 const Registration = (props) => {
   console.log('registration', props) //has props.login as a function
   const [formValidated, setFormValidated] = useState(false);
-
+  const [history, location] = useState({});
   const [formData, setFormData] = useState({
     firstName: {
       value: '',
@@ -124,7 +126,7 @@ const Registration = (props) => {
       })
       .then(res => {
         if (res.status === 200) {
-          window.location.replace(`localhost:3000/MyIdea/login`)
+          props.history.push(`MyIdea/login`)
         }
       })
       .catch(err => {
@@ -241,6 +243,7 @@ const Registration = (props) => {
         <div css={css`float: right; width: 160px;`}>
           <Button disabled={!formValidated} text='Start my submission' disabledText='Sign up' withIcon
             onClick={signup} />
+            
         </div>
         <div css={css`float: right; width: 120px;`}>
           <Button text='Cancel' disabled={false} onClick={props.handleCancel} />
@@ -333,4 +336,4 @@ const RegistrationForm = styled.div`
   }
 `;
 
-export default Registration;
+export default withRouter(Registration)
