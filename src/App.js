@@ -11,8 +11,10 @@ import Submission from './components/MyIdea/IdeaSubmission/Submission';
 import { baseUrl } from './constants';
 import request from 'superagent';
 import IdeaDashboard from './components/MyIdea/Dashboard/IdeaDashboard';
+import IdeaDashboardDetail from './components/MyIdea/Dashboard/IdeaDashboardDetail';
 import IdeaLogin from './components/MyIdea/IdeaLogin';
 import TopBar from './components/NavBar/TopBar'
+
 
 class App extends Component {
   state = {
@@ -25,7 +27,7 @@ class App extends Component {
       activePath: '',
     }
   };
-  
+
   logout = () => {
     this.setState({
       auth: {
@@ -38,7 +40,7 @@ class App extends Component {
       }
     });
   };
-  
+
   requestLogin = (email, password) => {
     request
       .post(`${baseUrl}/login`)
@@ -69,17 +71,19 @@ class App extends Component {
       .get(`${baseUrl}/current`)
       .set("Authorization", `Bearer ${this.state.auth.token}`)
       .then(res => {
-        this.setState({...this.state, auth: {
-          ...this.state.auth,
-          user: res.body
-        }})
+        this.setState({
+          ...this.state, auth: {
+            ...this.state.auth,
+            user: res.body
+          }
+        })
       })
   }
 
   resetPassword = (email) => {
     request
       .post(`${baseUrl}/reset-password`)
-      .send( {email} )
+      .send({ email })
       .then(res => {
         if (res.status === 200) {
           this.setState({
@@ -92,36 +96,39 @@ class App extends Component {
           });
         }
       })
-    }
+  }
 
   render() {
     return (
       <Router>
         <div>
-          <TopBar authState={this.state.auth} user={this.getCurrentUser} logout={this.logout} resetPassword={this.resetPassword}/>
-            <ThemeProvider theme={theme}>
-              <Application>
-                <Route exact path='/Investors/dashboard' render={(props) => {
-                  return <InvestorDashboard {...props} authState={this.state.auth} login={this.requestLogin} />;
-                }} />
-                <Route exact path='/Investors/login' render={(props) => {
-                  return <InvestorLogin {...props} authState={this.state.auth} login={this.requestLogin} />;
-                }} />
-                <Route exact path='/MyIdea' render={(props) => {
-                  return <IdeaStart {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
-                }} />
-                <Route exact path='/MyIdea/dashboard' render={(props) => {
-                  return <IdeaDashboard {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
-                }} />
-                <Route exact path='/MyIdea/login' render={(props) => {
-                  return <IdeaLogin {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword}/>;
-                }} />
-                <Route exact path='/MyIdea/new' render={(props) => {
-                  return <Submission {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
-                }} />
-                <Route exact path="/" render={() => <Redirect to="/MyIdea" />} />
-              </Application>
-            </ThemeProvider>
+          <TopBar authState={this.state.auth} user={this.getCurrentUser} logout={this.logout} resetPassword={this.resetPassword} />
+          <ThemeProvider theme={theme}>
+            <Application>
+              <Route exact path='/Investors/dashboard' render={(props) => {
+                return <InvestorDashboard {...props} authState={this.state.auth} login={this.requestLogin} />;
+              }} />
+              <Route exact path='/Investors/login' render={(props) => {
+                return <InvestorLogin {...props} authState={this.state.auth} login={this.requestLogin} />;
+              }} />
+              <Route exact path='/MyIdea' render={(props) => {
+                return <IdeaStart {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
+              }} />
+              <Route exact path='/MyIdea/dashboard' render={(props) => {
+                return <IdeaDashboard {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
+              }} />
+              <Route exact path='/dashboard/ideas/:id' render={(props) => {
+                return <IdeaDashboardDetail {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
+              }} />
+              <Route exact path='/MyIdea/login' render={(props) => {
+                return <IdeaLogin {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} />;
+              }} />
+              <Route exact path='/MyIdea/new' render={(props) => {
+                return <Submission {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
+              }} />
+              <Route exact path="/" render={() => <Redirect to="/MyIdea" />} />
+            </Application>
+          </ThemeProvider>
         </div>
       </Router>
     );
