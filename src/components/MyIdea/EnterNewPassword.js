@@ -7,12 +7,13 @@ import {withRouter} from 'react-router-dom'
 function EnterNewPassword(props) {
   
   const [resetState, setLoginState] = useState({});
-  const [history, location] = useState({});
+  const [history, location,] = useState({});
   console.log(props.location.pathname);
   let initJwt = props.location.pathname.split('/')
-    console.log(initJwt)
+  console.log(initJwt)
   const jwt = initJwt[2]
   console.log(jwt)
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(resetState);
@@ -28,8 +29,10 @@ function EnterNewPassword(props) {
   
   const onSubmit = (data) => {
     const { password } = data;
-    props.updatePassword(password)
-    
+    const  token  = props.location.pathname.split('/')[2]
+    console.log(token, password)
+    props.updatePassword(token, password)
+    //JSONwebtoken: invalid signature
   };
 
 
