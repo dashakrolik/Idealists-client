@@ -47,7 +47,6 @@ export default function InvestorDashboard(props) {
       <div>
         
         <h4>This is {userData.firstName}'s dashboard</h4>
-        <button onClick={userLogout}>Log out</button>
         <h3>Edit my profile</h3>
         <h1>Dashboard</h1>
         <ul>
