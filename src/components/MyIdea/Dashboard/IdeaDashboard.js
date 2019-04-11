@@ -52,6 +52,10 @@ export default function IdeaDashboard(props) {
     console.log(userIdeas)// console.log(sampleData);
     var listOne = userIdeas.map(idea => idea.idea.map(idea => idea))
     console.log(listOne)
+    var listTwo = listOne.map(idea => idea[0])
+    console.log(listTwo)
+    var listThree = listTwo.map(list => list.answers)
+    console.log(listThree)
     
 
 
