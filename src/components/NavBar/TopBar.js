@@ -12,7 +12,8 @@ import styled from '@emotion/styled';
 
 const TopBar = (props) => {
 
-const [history, location] = useState({});
+const [history, location, window] = useState({});
+const myStorage = localStorage
 
 const [authState] = useState({})
 
@@ -37,7 +38,7 @@ return (
             }
             {
             props.authState.loggedIn ? 
-            <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Logout</Button> : null
+            <Button color="inherit" onClick={() => props.logout}>Logout</Button> : null
             }
             <img src={logo} alt='Logo' style={logoStyle}/>
         </Toolbar>

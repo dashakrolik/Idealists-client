@@ -8,11 +8,10 @@ function EnterNewPassword(props) {
   
   const [resetState, setLoginState] = useState({});
   const [history, location,] = useState({});
-  console.log(props.location.pathname);
   let initJwt = props.location.pathname.split('/')
-  console.log(initJwt)
+ 
   const jwt = initJwt[2]
-  console.log(jwt)
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,20 +31,9 @@ function EnterNewPassword(props) {
     const  token  = props.location.pathname.split('/')[2]
     console.log(token, password)
     props.updatePassword(token, password)
-    //JSONwebtoken: invalid signature
+    
   };
 
-
-
-  console.log(props)
-
-  //link requesting token
-//make api call; set bearer with received token
-
-
-
-
-  //link requesting token
 
   if (props) return (
     <Container>
