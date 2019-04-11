@@ -85,6 +85,10 @@ const CompleteSubmission = (props) => {
       this.setState(state => ({ pageNumber: state.pageNumber + 1 }));
     }}
 
+    handleChange = (event) => {
+      this.setState({ value: event.target.value });
+    }
+
     handleSubmit = (event) => {
       if (this.state.value === (props.authState.user.firstName + ' ' + props.authState.user.lastName)) {
         alert(this.state.value + ' has agreed to the agreement'); //change it
