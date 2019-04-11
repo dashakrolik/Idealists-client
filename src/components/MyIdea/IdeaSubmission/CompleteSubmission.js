@@ -61,20 +61,44 @@ const CompleteSubmission = (props) => {
   }
 
   class Agreement extends Component {
-    state = { numPages: null, pageNumber: 1 };
+    constructor(props) {
+      super(props);
+      this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleChange = this.handleChange.bind(this);
+    }
+    state = { numPages: null, pageNumber: 1, value: null };
 
     onDocumentLoadSuccess = ({ numPages }) => {
       this.setState({ numPages });
     };
 
-    goToPrevPage = () =>
-      this.setState(state => ({ pageNumber: state.pageNumber - 1 }));
-    goToNextPage = () =>
+    goToPrevPage = () =>{
+      if (this.state.pageNumber === 1) {
+        this.state.pageNumber = 1
+      }else{
+        this.setState(state => ({ pageNumber: state.pageNumber - 1 }));
+      }}
+    goToNextPage = () =>{
+    if (this.state.pageNumber === 2) {
+      this.state.pageNumber = 2
+    }else{
       this.setState(state => ({ pageNumber: state.pageNumber + 1 }));
+    }}
+
+    handleSubmit = (event) => {
+      if (this.state.value === (props.authState.user.firstName + ' ' + props.authState.user.lastName)) {
+        alert(this.state.value + ' has agreed to the agreement'); //change it
+        setAgreeBttn(true)
+        event.preventDefault()
+      } else {
+        alert('Your first name and lastname are not the same as you registered')
+      }
+    }
 
     render() {
-      const { pageNumber, numPages } = this.state;
-
+      const { pageNumber, numPages, value } = this.state;
+      console.log(props, "PROPSSS")
+      console.log(this.state, "STATEEEE")
       return (
         <div>
           <div style={{ width: 600 }}>
@@ -86,6 +110,15 @@ const CompleteSubmission = (props) => {
             </Document>
           </div>
           <br />
+
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Type your first name and last name for agreement:
+          <input type="text" value={value} onChange={this.handleChange} />
+            </label>
+            <input type="submit" value="Submit" style={{ backgroundColor: "inherit", color: "white", borderRadius: "10px" }}/>
+          </form>
+
           <nav>
             <button style={{ backgroundColor: "inherit", color: "white", borderRadius: "10px" }}
               onClick={this.goToPrevPage}>Prev Page</button>
@@ -104,8 +137,9 @@ const CompleteSubmission = (props) => {
     <GroupContainer>
       {/* <FlexRow><FlexColumn> */}
       <Agreement />
+
       <a href={pdfAgreement} download><Button text={'Download the Participants Agreement'}
-        onClick={() => setAgreeBttn(true)} /></a>
+      /></a>
       <Button text={'I agree'} onClick={submitIdea}
         disabled={!agreeBttn}
         withIcon />
@@ -198,3 +232,4 @@ const GroupContainer = styled(PGroupContainer)`
 `;
 
 export default CompleteSubmission;
+
