@@ -24,7 +24,7 @@ return (
     <AppBar>
         <Toolbar className="topBar">
         <img src={logo} alt='Logo' style={logoStyle}/>
-            <div className="menu" style={menuStyle}>
+            <div className="menu">
                 {
                 !props.authState.loggedIn ? 
                 <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Login</Button> : null
@@ -56,7 +56,7 @@ const logoStyle = {
   width: 200
 }
 
-c
+
 
 
 
