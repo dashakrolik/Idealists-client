@@ -45,7 +45,7 @@ export default function ResetPassword(props) {
           <label>Email</label>
           <input type='email' name='email' value={resetState.email || ''} onChange={handleChange} />
           <br />
-          <button type='submit'>Reset Password</button>
+          <button type='submit' onClick={()=> {props.history.replace('/MyIdea/login')}}>Reset Password</button>
         </form>
       </RightSide>
   </Container>);
@@ -160,8 +160,8 @@ const RightSide = styled.div`
     position: relative;
     float: right;
     right: 10%;
-    width: 30%;
-    height: 30px;
+    width: 50%;
+    height: 50px;
     line-height: 30px;
     font-size: 12px;
     color: #233949;

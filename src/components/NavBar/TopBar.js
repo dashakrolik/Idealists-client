@@ -23,6 +23,7 @@ const [authState] = useState({})
 return (
     <AppBar>
         <Toolbar className="topBar">
+
         <img src={logo} alt='Logo' style={logoStyle}/>
             <div className="menu">
                 {

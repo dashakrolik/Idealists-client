@@ -10,10 +10,9 @@ export default function IdeaDashboard(props) {
   
   const [user, setUserData] = useState({});
   const [userLoggedIn, setUserLoggedIn] = useState(true);
+
   // progress bar
   const [percentRange, setProgress] = useState(0);
-
-
 
   console.log('User object', user)
   
@@ -62,8 +61,6 @@ export default function IdeaDashboard(props) {
     console.log(listTwo)
     var listThree = listTwo.map(list => list.answers)
     console.log(listThree)
-    
-    console.log("CHECK", userIdeas.map(idea => idea.idea[3]))
 
 
     return (
