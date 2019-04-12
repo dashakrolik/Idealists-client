@@ -30,11 +30,9 @@ export default function IdeaDashboardDetail(props) {
             .then(automatch => DoAutomatch(automatch.body))
     }, []);
 
-    console.log(ideasId)
-    console.log(automatchResults)
-    console.log(automatchResults.autoMatch)
-    let array1 = automatchResults.autoMatch
-    // let array2 = array1.map(match => match.match.passage)
+
+
+ 
 
 
     return (
@@ -48,7 +46,7 @@ export default function IdeaDashboardDetail(props) {
           <div css={css`grid-area: content-area`}>
             <div css={css`display: flex; align-items: center; flex-direction: column;`}>
               <StartContent 
-                            css={css`display: flex; flex-direction: column; width: auto; margin-bottom: 60px;`}>
+                css={css`display: flex; flex-direction: column; width: auto; margin-bottom: 60px;`}>
                 <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
                   Idea Details
                 </Heading>
@@ -59,7 +57,7 @@ export default function IdeaDashboardDetail(props) {
                   Please follow your next step: your market check
                 </Paragraph>
                 <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-                  <Button text={'Start'}/>
+                  <Button text={'Start'} />
                 </Controls>
               </StartContent>
             </div>
