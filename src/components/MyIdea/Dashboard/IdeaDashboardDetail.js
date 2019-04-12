@@ -27,19 +27,36 @@ export default function IdeaDashboardDetail(props) {
 
     const qAnswers = []
     const qTitles = []
-    const question2 = []
+    const questionTwo = []
     console.log(userIdeas, "USERRRR")
-    const answ = userIdeas.map(idea => idea.answers) //ans is now an array
-    console.log(answ, "ANSW")
-    console.log(answ[2], 'Answer two array')
+    userIdeas.map(idea => {
+        idea.answers.map(answer => {
+            qTitles.push(answer.qTitle)
+        })
+    })
 
-    const answers = answ.map(answer => answer.map(ans => qAnswers.push(ans.qAnswer))) // answers is now an object
-    console.log(qAnswers, "TITLE")
-    const questions = answ.map(question => question.map(q => qTitles.push(q.qTitle)))
-    // const answerTwo = answ.map(answer => answer.map(q => qTitles.push(q[2].qTitle)))
-    // const answerTwo = answ[2].map(q => question2.push(q.qTitle))
-    console.log(answ[2[0]], 'Answer two, first element of array')
-    // console.log(question2, 'AnswerTwo')
+    userIdeas.map(idea => {
+        console.log('idea test:', idea)
+        idea.answers.map(answer => {
+            if (answer.qAnswer.value) {
+                questionTwo.push(answer.qAnswer.map(answer => answer.value))
+            } else {
+                console.log('answer test:', answer.qAnswer)
+                qAnswers.push(answer.qAnswer)
+            }
+        })
+    })
+    console.log('qTitles test:', qAnswers)
+    // console.log(answ, "ANSW")
+    // console.log(answ[2], 'Answer two array')
+
+    // const answers = answ.map(answer => answer.map(ans => qAnswers.push(ans.qAnswer))) // answers is now an object
+    // console.log(qAnswers, "TITLE")
+    // const questions = answ.map(question => question.map(q => qTitles.push(q.qTitle)))
+    // // const answerTwo = answ.map(answer => answer.map(q => qTitles.push(q[2].qTitle)))
+    // // const answerTwo = answ[2].map(q => question2.push(q.qTitle))
+    console.log(qAnswers[2[0].value], 'Answer two, first element of array')
+    // // console.log(question2, 'AnswerTwo')
     return (
         <div>
             <br />
