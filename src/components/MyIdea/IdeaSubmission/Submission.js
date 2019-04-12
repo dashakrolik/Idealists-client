@@ -65,7 +65,7 @@ const Submission = (props) => {
   return (
     <div>
       <Container>
-        <Overlay pose={inputFocused ? 'isFocusing' : 'default'} /><Logo src={logo} alt='Logo' />
+        <Overlay pose={inputFocused ? 'isFocusing' : 'default'} />
         <ProgressBar pose='visible' poseKey={progress} progress={progress} />
 
         <SubmissionSideScreen
