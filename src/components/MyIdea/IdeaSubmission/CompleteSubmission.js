@@ -11,6 +11,7 @@ import { Document, Page, pdfjs } from "react-pdf";
 import { color } from 'style-value-types';
 import { borderRadius } from 'react-select/lib/theme';
 import { relative } from 'path';
+import {withRouter} from 'react-router-dom'
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -19,6 +20,7 @@ const CompleteSubmission = (props) => {
   const [displaySuccess, setDisplaySuccess] = useState(false);
   const [agreeBttn, setAgreeBttn] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [history, location] = useState({});
 
   const submitIdea = () => {
     setIsSubmitting(true);
@@ -57,6 +59,7 @@ const CompleteSubmission = (props) => {
     return <GroupContainer>
       <FlexRow><FlexColumn><GroupTitle>Submission complete!</GroupTitle></FlexColumn></FlexRow>
       <FlexRow><FlexColumn><GroupSubtitle>We'll be in touch with you soon.</GroupSubtitle></FlexColumn></FlexRow>
+      <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Go to my dashboard</Button>
     </GroupContainer>;
   }
 
@@ -95,7 +98,7 @@ const CompleteSubmission = (props) => {
         setAgreeBttn(true)
         event.preventDefault()
       } else {
-        alert('Your first name and lastname are not the same as you registered')
+        return true
       }
     }
 
@@ -235,5 +238,5 @@ const GroupContainer = styled(PGroupContainer)`
   flex-grow: 1;
 `;
 
-export default CompleteSubmission;
+export default withRouter(CompleteSubmission)
 
