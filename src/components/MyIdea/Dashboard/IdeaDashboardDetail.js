@@ -20,13 +20,14 @@ export default function IdeaDashboardDetail(props) {
             .set("Authorization", `Bearer ${props.authState.token}`)
             .then(idea => setUserIdeas(idea.body)/* console.log('res.body', res.body*/)
     }, []);
+
+    console.log('DDDD', ideasId)
     // console.log(props.authState.user.ideas)
     // const ideaDetail = props.authState.user.ideas.map(idea =>
     //     idea.id === props.match.params.id ? idea.map(idea => idea.answers) : null)
     // console.log(ideaDetail)
 
     // var list = userIdeas.idea //this contains the array of answers
-    
     console.log(userIdeas, "Useridea")
     
 
