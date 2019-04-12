@@ -13,9 +13,13 @@ export default function IdeaDashboard(props) {
   // progress bar
   const [percentRange, setProgress] = useState(0);
 
+
+
+  console.log('User object', user)
+  
   // Currently userIdeas are ALL ideas, because it is a non-specific GET request
   const [userIdeas, setUserIdeas] = useState([]);
-  
+  console.log('User Ideas', userIdeas)
   useEffect(() => {
      if (props.authState.loggedIn)
       request
@@ -52,7 +56,16 @@ export default function IdeaDashboard(props) {
     // console.log(userData)
     // console.log(userIdeas.idea[0].idea[3].answers[1])
     console.log(userIdeas)// console.log(sampleData);
+    var listOne = userIdeas.map(idea => idea.idea.map(idea => idea))
+    console.log(listOne)
+    var listTwo = listOne.map(idea => idea[0])
+    console.log(listTwo)
+    var listThree = listTwo.map(list => list.answers)
+    console.log(listThree)
     
+    console.log("CHECK", userIdeas.map(idea => idea.idea[3]))
+
+
     return (
       <div className='dashboard-container'>
 
@@ -78,13 +91,15 @@ export default function IdeaDashboard(props) {
         <div className='statusbar-container'>
         Assessing Your Idea:
           <ul className="progressbar">
-            <li class="active">Idea Comes In</li>
+          
+            <li className="active">Idea Comes In</li>
             <li>	Automated Novelty and Patent/IP Check</li>
             <li>Collective Intelligence Sift Filter</li>
             <li>Expert Novelty and Patent/IP Check</li>
             <li>Validation Process</li>
             <li>Expert Novelty and Patent/IP Check</li>
             <li>Determine Finance Need and Timeframe</li>
+          
 	        </ul>
         </div>
         <div className='summary-container'>
