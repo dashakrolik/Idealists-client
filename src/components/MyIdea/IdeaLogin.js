@@ -70,7 +70,7 @@ export default function IdeaLogin(props) {
           <input type='password' name='password' value={loginState.password || ''} onChange={handleChange} />
           <br />
         
-          <button type='submit'>Forgot your password?</button>
+          <button type='submit' onClick={()=> {props.history.replace('/MyIdea/login/reset-password')}}>Forgot your password?</button>
           <button type='submit'>Login</button>
         </form>
       </RightSide>
@@ -186,8 +186,8 @@ const RightSide = styled.div`
     position: relative;
     float: right;
     right: 10%;
-    width: 30%;
-    height: 30px;
+    width: 40%;
+    height: 60px;
     line-height: 30px;
     font-size: 12px;
     color: #233949;

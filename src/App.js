@@ -11,10 +11,12 @@ import Submission from './components/MyIdea/IdeaSubmission/Submission';
 import { baseUrl } from './constants';
 import request from 'superagent';
 import IdeaDashboard from './components/MyIdea/Dashboard/IdeaDashboard';
+import IdeaDashboardDetail from './components/MyIdea/Dashboard/IdeaDashboardDetail';
 import IdeaLogin from './components/MyIdea/IdeaLogin';
 import TopBar from './components/NavBar/TopBar'
 import ResetPassword from './components/MyIdea/ResetPassword';
 import EnterNewPassword from './components/MyIdea/EnterNewPassword';
+
 
 class App extends Component {
   state = {
@@ -27,19 +29,11 @@ class App extends Component {
       activePath: '',
     }
   };
-  
-  logout = () => {
-    this.setState({
-      auth: {
-        loggedIn: false,
-        token: '',
-        user: '',
-      },
-      navigation: {
-        activePath: ''
-      }
-    });
-  };
+
+  logout() {
+    localStorage.clear();
+    this.setState({loggedIn: false});
+}
   
   requestLogin = (email, password) => {
     request
@@ -71,17 +65,19 @@ class App extends Component {
       .get(`${baseUrl}/current`)
       .set("Authorization", `Bearer ${this.state.auth.token}`)
       .then(res => {
-        this.setState({...this.state, auth: {
-          ...this.state.auth,
-          user: res.body
-        }})
+        this.setState({
+          ...this.state, auth: {
+            ...this.state.auth,
+            user: res.body
+          }
+        })
       })
   }
 
   resetPassword = (email) => {
     request
       .post(`${baseUrl}/reset-password`)
-      .send( {email} )
+      .send({ email })
       .then(res => {
         if (res.status === 200) {
           this.setState({
@@ -94,7 +90,7 @@ class App extends Component {
           });
         }
       })
-    }
+  }
 
   updatePassword = (jwt, password) => {
     request
@@ -122,6 +118,9 @@ class App extends Component {
                 }} />
                 <Route exact path='/MyIdea/dashboard' render={(props) => {
                   return <IdeaDashboard {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
+                }} />
+                <Route exact path='/dashboard/ideas/:id' render={(props) => {
+                  return <IdeaDashboardDetail {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
                 }} />
                 <Route exact path='/MyIdea/login' render={(props) => {
                   return <IdeaLogin {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword}/>;

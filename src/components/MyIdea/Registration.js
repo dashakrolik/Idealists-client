@@ -13,7 +13,7 @@ import { Redirect } from 'react-router'
 import {withRouter} from 'react-router-dom'
 
 const Registration = (props) => {
-  console.log('registration', props) //has props.login as a function
+  
   const [formValidated, setFormValidated] = useState(false);
   const [history, location] = useState({});
   const [formData, setFormData] = useState({
