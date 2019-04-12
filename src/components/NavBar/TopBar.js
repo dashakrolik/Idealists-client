@@ -9,6 +9,7 @@ import logo from '../../res/logo_horizontal_white.png';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
+import { withStyles } from '@material-ui/core';
 
 const TopBar = (props) => {
 
@@ -18,36 +19,45 @@ const myStorage = localStorage
 const [authState] = useState({})
 
 
+
 return (
     <AppBar>
         <Toolbar className="topBar">
-            {
-            !props.authState.loggedIn ? 
-            <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Login</Button> : null
-            }
-            {
-            !props.authState.loggedIn ?
-            <Button color="inherit" onClick={() => props.history.push('/MyIdea')}>Sign Up</Button> : null
-            }
-            {
-            props.authState.loggedIn ? 
-            <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Dashboard</Button> : null
-            }
-            {
-            <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>New Idea</Button>
-            }
-            {
-            props.authState.loggedIn ? 
-            <Button color="inherit" onClick={() => props.logout}>Logout</Button> : null
-            }
-            <img src={logo} alt='Logo' style={logoStyle}/>
+
+        <img src={logo} alt='Logo' style={logoStyle}/>
+            <div className="menu" style={menuStyle}>
+                {
+                !props.authState.loggedIn ? 
+                <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Login</Button> : null
+                }
+                {
+                !props.authState.loggedIn ?
+                <Button color="inherit" onClick={() => props.history.push('/MyIdea')}>Sign Up</Button> : null
+                }
+                {
+                props.authState.loggedIn ? 
+                <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Dashboard</Button> : null
+                }
+                {
+                <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>New Idea</Button>
+                }
+                {
+                props.authState.loggedIn ? 
+                <Button color="inherit" onClick={() => props.logout}>Logout</Button> : null
+                }
+            </div>
         </Toolbar>
     </AppBar>
     )
 }
 
-export default withRouter(TopBar)
+export default withRouter(TopBar) 
 
-var logoStyle = {
+const logoStyle = {
   width: 200
 }
+
+c
+
+
+
