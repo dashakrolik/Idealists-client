@@ -4,6 +4,9 @@ import { baseUrl } from '../../../constants';
 import { Redirect, Link } from 'react-router-dom';
 import { Card } from 'material-ui'
 import './IdeaDashboard.css'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Button from '@material-ui/core/Button'
 
 export default function IdeaDashboard(props) {
   
@@ -61,27 +64,30 @@ export default function IdeaDashboard(props) {
 
     return (
       <div className='dashboard-container'>
+        <Container>
+          <Content>
+            <Heading>
 
+            </Heading>
+          </Content>
+        </Container>
         <br/>
         <br/>
         <br/>
         <div className='title'>
-        <h1>{user.firstName}'s Dashboard</h1>
+          <h1>{user.firstName}'s Dashboard</h1>
         </div>
         <div className='flex-tilescontainer'>
-            {userIdeas.map(idea => 
+          {userIdeas.map(idea => 
             <Link className='tile-link' to={`/dashboard/ideas/${idea.id}`}><div className='idea-tile' key={idea.id}>
-            <p>{idea.idea[3].answers[0].qAnswer}</p>
-            
-              </div></Link>
+          <p>{idea.idea[3].answers[0].qAnswer}</p>    
+        </div></Link>
           )}
       </div>
         <div className='statusbar-container'>this will contain the statusbar</div>
-        <div className='summary-container'>
+          <div className='summary-container'>
           <p>Summary of your idea:</p><br/>
-          
-        </div>
-        
+        </div> 
       </div>
     );
   // } else {
@@ -112,3 +118,81 @@ const sampleData =
       "idea": "{\"question1\":\"answer1\",\"question2\":\"answer2\",\"question3\":\"answer3\"}",
     },
   ]
+
+
+  const PStartContent = posed.div({
+    notDisplayingLogin: {
+      y: 0,
+      opacity: 1.0,
+    },
+    displayingLogin: {
+      y: -390,
+      opacity: 0.15,
+    },
+  });
+  
+  const StartContent = styled(PStartContent)`
+    width: 100%;
+  `;
+  
+  const Logo = styled.img`
+    height: 70px;
+    align-self: flex-start;
+    margin-right: 60px;
+  `;
+  
+  const Controls = styled.div`
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+  `;
+  
+  const Content = styled.div`
+    align-self: center;
+    justify-self: center;
+    color: #ffffff;
+    width: 80vw;
+    max-width: 900px;
+    height: auto;
+    max-height: 500px;
+    padding: 20px;
+    display: grid;
+    
+    @media only screen and (orientation:portrait) { 
+      grid-template-columns: 1fr;
+      grid-template-rows:  auto auto;
+      grid-template-areas: "logo-area" "content-area";
+    }
+    @media only screen and (orientation:landscape) { 
+      grid-template-columns: auto auto;
+      grid-template-rows: auto;
+      grid-template-areas: "logo-area content-area";
+    }
+  `;
+  
+  const Heading = styled.div`
+    font-size: 30px;
+    font-weight: 800;
+    margin: 18px 10px 80px 10px;
+  `;
+  
+  const Paragraph = styled.div`
+    display: block;
+    position: relative;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0 10px 30px;
+  `;
+  
+  const Container = styled.div`
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
+    display: flex;
+  `;
+  
