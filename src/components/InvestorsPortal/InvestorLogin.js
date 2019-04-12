@@ -40,7 +40,7 @@ export default function InvestorLogin(props) {
       <LeftSide>
         <div>
           <h3>Login to my Investor Dashboard</h3>
-          <p>Don’t have an account yet? Create it here</p>
+          <a href='/MyIdea'> Don’t have an account yet? Create it here</a>
         </div>
       </LeftSide>
       <RightSide>
@@ -61,7 +61,7 @@ export default function InvestorLogin(props) {
   else return <div></div>;
 }
 
-const Logo = styled.img`
+const Logo = styled.img`  
   position: absolute;
   left: 0;
   right: 0;
