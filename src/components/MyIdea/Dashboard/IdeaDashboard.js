@@ -2,8 +2,8 @@ import React, { useEffect, useState, useContext } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import { Redirect, Link } from 'react-router-dom';
-import { Card } from 'material-ui'
 import './IdeaDashboard.css'
+import posed from 'react-pose';
 
 
 export default function IdeaDashboard(props) {
@@ -65,13 +65,13 @@ export default function IdeaDashboard(props) {
 
     return (
       <div className='dashboard-container'>
-
         <br/>
         <br/>
         <br/>
         <div className='title'>
           <h1>{user.firstName}'s Dashboard</h1>
         </div>
+           <h2 style={styledH2}>Please follow your next step: your market check</h2>
         <div className='flex-tilescontainer'>
             {userIdeas.map(idea => 
             <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
@@ -132,3 +132,22 @@ const sampleData =
       "idea": "{\"question1\":\"answer1\",\"question2\":\"answer2\",\"question3\":\"answer3\"}",
     },
   ]
+
+
+  const PStartContent = posed.div({
+    notDisplayingLogin: {
+      y: 0,
+      opacity: 1.0,
+    },
+    displayingLogin: {
+      y: -390,
+      opacity: 0.15,
+    },
+  });
+  
+  
+  const styledH2 = {
+    fontSize: 20,
+    fontWeight: 800,
+    color: 'white',
+  }
