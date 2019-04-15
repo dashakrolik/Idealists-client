@@ -41,14 +41,29 @@ export default function IdeaDashboardDetail(props) {
     })
 
     return (
-        <div>
+        <div className='dashboard-container'>
             <br />
             <br />
             <br />
             <br />
             <br />
+            <div className='statusbar-container'>
+                Assessing Your Idea:
+          <ul className="progressbar">
+
+                    <li className="active">Idea Comes In</li>
+                    <li>Automated Novelty and Patent/IP Check</li>
+                    <li>Collective Intelligence Sift Filter</li>
+                    <li>Expert Novelty and Patent/IP Check</li>
+                    <li>Validation Process</li>
+                    <li>Expert Novelty and Patent/IP Check</li>
+                    <li>Determine Finance Need and Timeframe</li>
+
+                </ul>
+            </div>
             <br />
             <br />
+            <div className='questions-answers'>
             <h1> Questions and Answers about Idea</h1>
             <p>{qTitles[0]}:</p>
             <p>{qAnswers[0]}</p>
@@ -86,6 +101,7 @@ export default function IdeaDashboardDetail(props) {
             <p>{qTitles[11]}:</p>
             <p>{qAnswers[11]}</p>
             <br />
+            </div>
 
 
         </div>)
