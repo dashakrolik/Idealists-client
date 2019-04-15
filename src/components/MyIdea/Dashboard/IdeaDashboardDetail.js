@@ -22,9 +22,13 @@ export default function IdeaDashboardDetail(props) {
     }, []);
 
     
-    let smth = automatchResults.map(a => a.passage.text)
-    console.log(smth)
-    
+    let automatchTitle = automatchResults.map(c => c.bibliographic.title[0].text)
+    console.log(automatchTitle)
+    console.log(automatchResults)
+    let automatchText = automatchResults.map(a => a.passage.text)
+    console.log(automatchText[0])
+    let relevanceScore = automatchResults.map(b => b.relevance.score)
+    console.log(relevanceScore)
     if (typeof automatchResults.autoMatch === 'object'){
         console.table(automatchResults.autoMatch['0'].relevance)
     }
@@ -44,16 +48,21 @@ export default function IdeaDashboardDetail(props) {
               <StartContent 
                 css={css`display: flex; flex-direction: column; width: auto; margin-bottom: 60px;`}>
                 <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
-                  Idea Details
+                  Automatch results
                 </Heading>
+
                 <Paragraph>
-                  This page will show details for your idea
+                  {automatchTitle[0]}
                 </Paragraph>
                 <Paragraph>
-                  Please follow your next step: your market check
+                  {automatchText[0]}
                 </Paragraph>
+                <br></br><br></br>
                 <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-                  <Button text={'Start'} />
+ 
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                  <Button text={'Next'} />
                 </Controls>
               </StartContent>
             </div>
@@ -122,10 +131,10 @@ const PStartContent = posed.div({
   
   const Paragraph = styled.div`
     display: block;
-    position: relative;
+    padding: 1em
+    margin: 18px 10px 80px 10px;
     font-size: 14px;
-    font-weight: 400;
-    margin: 0 10px 30px;
+
   `;
   
   const Container = styled.div`
