@@ -22,18 +22,19 @@ export default function IdeaDashboardDetail(props) {
     }, []);
 
     
-    let autoMatchText = automatchResults.map(a => a.passage.text)
-    console.log(autoMatchText)
-    
+    let automatchTitle = automatchResults.map(c => c.bibliographic.title[0].text)
+    console.log(automatchTitle)
+    console.log(automatchResults)
+    let automatchText = automatchResults.map(a => a.passage.text)
+    console.log(automatchText[0])
+    let relevanceScore = automatchResults.map(b => b.relevance.score)
+    console.log(relevanceScore)
     if (typeof automatchResults.autoMatch === 'object'){
         console.table(automatchResults.autoMatch['0'].relevance)
     }
-    
-    const existingUser = () => {
-        props.history.push('/MyIdea/New');
-      };
-      
+	
 
+    if (automatchResults) {
 
     return (
         <Container>
@@ -48,23 +49,127 @@ export default function IdeaDashboardDetail(props) {
               <StartContent 
                 css={css`display: flex; flex-direction: column; width: auto; margin-bottom: 60px;`}>
                 <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
-                  Idea Details
+                  Automatch results
                 </Heading>
                 <Paragraph>
-                  This page will show details for your idea
+                  {relevanceScore[0]} | {automatchTitle[0]}
                 </Paragraph>
                 <Paragraph>
-                  Please follow your next step: your market check
+                  {automatchText[0]}
                 </Paragraph>
                 <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-                  <Button text={'Start'} />
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
                 </Controls>
+                <br></br><br></br>
+                <Paragraph>
+                  {relevanceScore[1]} | {automatchTitle[1]}
+                </Paragraph>
+                <Paragraph>
+                  {automatchText[1]}
+                </Paragraph>
+                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                </Controls>
+                <br></br><br></br>
+                <Paragraph>
+                  {relevanceScore[2]} | {automatchTitle[2]}
+                </Paragraph>
+                <Paragraph>
+                  {automatchText[2]}
+                </Paragraph>
+                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                </Controls>
+                <br></br><br></br>
+                <Paragraph>
+                  {relevanceScore[3]} | {automatchTitle[3]}
+                </Paragraph>
+                <Paragraph>
+                  {automatchText[3]}
+                </Paragraph>
+                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                </Controls>
+                <br></br><br></br>
+                <Paragraph>
+                  {relevanceScore[4]} | {automatchTitle[4]}
+                </Paragraph>
+                <Paragraph>
+                  {automatchText[4]}
+                </Paragraph>
+                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                </Controls>
+                <br></br><br></br>
+                <Paragraph>
+                  {relevanceScore[5]} | {automatchTitle[5]}
+                </Paragraph>
+                <Paragraph>
+                  {automatchText[5]}
+                </Paragraph>
+                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                </Controls>
+                <br></br><br></br>
+                <Paragraph>
+                  {relevanceScore[6]} | {automatchTitle[6]}
+                </Paragraph>
+                <Paragraph>
+                  {automatchText[6]}
+                </Paragraph>
+                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                </Controls>
+                <br></br><br></br>
+                <Paragraph>
+                  {relevanceScore[7]} | {automatchTitle[7]}
+                </Paragraph>
+                <Paragraph>
+                  {automatchText[7]}
+                </Paragraph>
+                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                </Controls>
+                <br></br><br></br>
+                <Paragraph>
+                  {relevanceScore[8]} | {automatchTitle[8]}
+                </Paragraph>
+                <Paragraph>
+                  {automatchText[8]}
+                </Paragraph>
+                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                </Controls>
+                <br></br><br></br>
+                <Paragraph>
+                  {relevanceScore[9]} | {automatchTitle[9]}
+                </Paragraph>
+                <Paragraph>
+                  {automatchText[9]}
+                </Paragraph>
+                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                </Controls>
+                <br></br><br></br>
               </StartContent>
             </div>
           </div>
         </Content>
       </Container>
     )
+} else {
+  return (<Heading>Loading...</Heading>)
+}
 }
 
 
@@ -96,13 +201,12 @@ const PStartContent = posed.div({
   `;
   
   const Content = styled.div`
-    align-self: center;
-    justify-self: center;
+
     color: #ffffff;
     width: 80vw;
     max-width: 900px;
-    height: auto;
-    max-height: 500px;
+    
+    
     padding: 20px;
     display: grid;
     
@@ -126,20 +230,20 @@ const PStartContent = posed.div({
   
   const Paragraph = styled.div`
     display: block;
-    position: relative;
+    
+    margin: 18px 10px 10px 10px;
     font-size: 14px;
-    font-weight: 400;
-    margin: 0 10px 30px;
+
   `;
   
   const Container = styled.div`
-    position: fixed;
+    position: relative;
     align-items: center;
     justify-content: center;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 4000px;
     background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
     display: flex;
   `;

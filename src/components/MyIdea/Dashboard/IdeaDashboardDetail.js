@@ -1,250 +1,143 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
-import './IdeaDashboard.css'
-/** @jsx jsx */
-import { css, Global, jsx } from '@emotion/core';
-import styled from '@emotion/styled';
 import Button from '../../reogranisation/Questions/Button';
-import posed from 'react-pose';
-
+import Card from '@material-ui/core/Card'
+import { Redirect, Link } from 'react-router-dom';
 export default function IdeaDashboardDetail(props) {
-    const [user, setUserData] = useState({});
-    const [userLoggedIn, setUserLoggedIn] = useState(true);
     const [userIdeas, setUserIdeas] = useState([]);
     const ideasId = props.match.params.id
-    const [automatchResults, DoAutomatch] = useState([])
+
     useEffect(() => {
         request
-            .get(`${baseUrl}/automatch/986`)
+            .get(`${baseUrl}/ideas/${ideasId}`)
             .set("Authorization", `Bearer ${props.authState.token}`)
-            .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
+            .then(res => setUserIdeas(res.body.idea))
     }, []);
 
-    
-    let automatchTitle = automatchResults.map(c => c.bibliographic.title[0].text)
-    console.log(automatchTitle)
-    console.log(automatchResults)
-    let automatchText = automatchResults.map(a => a.passage.text)
-    console.log(automatchText[0])
-    let relevanceScore = automatchResults.map(b => b.relevance.score)
-    console.log(relevanceScore)
-    if (typeof automatchResults.autoMatch === 'object'){
-        console.table(automatchResults.autoMatch['0'].relevance)
-    }
-	
+    let qAnswers = []
+    const qTitles = []
+    userIdeas.map(idea => {
+        idea.answers.map(question => {
+            qTitles.push(question.qTitle)
+        })
+    })
 
-    if (automatchResults) {
+    userIdeas.map(idea => {
+        idea.answers.map(answer => {
+            qAnswers.push(answer.qAnswer)
+        })
+    })
+
+    qAnswers = qAnswers.map(answer => {
+        if (typeof answer === 'object') {
+            if (answer[0]) {
+                return answer[0].value
+            }
+            else {
+                return answer.value
+            }
+        }
+        return answer;
+    })
+
+    if (qAnswers[0] === 'true') {
+        qAnswers[0] = 'yes'
+    }
 
     return (
-        <Container>
-        <Global styles={css`
-          body {
-            background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
-          }
-        `} />
-        <Content>
-          <div css={css`grid-area: content-area`}>
-            <div css={css`display: flex; align-items: center; flex-direction: column;`}>
-              <StartContent 
-                css={css`display: flex; flex-direction: column; width: auto; margin-bottom: 60px;`}>
-                <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
-                  Automatch results
-                </Heading>
-                <Paragraph>
-                  {relevanceScore[0]} | {automatchTitle[0]}
-                </Paragraph>
-                <Paragraph>
-                  {automatchText[0]}
-                </Paragraph>
-                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-                  <Button text={`It's different`} />
-                  <Button text={`It's the same`} />
-                </Controls>
-                <br></br><br></br>
-                <Paragraph>
-                  {relevanceScore[1]} | {automatchTitle[1]}
-                </Paragraph>
-                <Paragraph>
-                  {automatchText[1]}
-                </Paragraph>
-                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-                  <Button text={`It's different`} />
-                  <Button text={`It's the same`} />
-                </Controls>
-                <br></br><br></br>
-                <Paragraph>
-                  {relevanceScore[2]} | {automatchTitle[2]}
-                </Paragraph>
-                <Paragraph>
-                  {automatchText[2]}
-                </Paragraph>
-                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-                  <Button text={`It's different`} />
-                  <Button text={`It's the same`} />
-                </Controls>
-                <br></br><br></br>
-                <Paragraph>
-                  {relevanceScore[3]} | {automatchTitle[3]}
-                </Paragraph>
-                <Paragraph>
-                  {automatchText[3]}
-                </Paragraph>
-                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-                  <Button text={`It's different`} />
-                  <Button text={`It's the same`} />
-                </Controls>
-                <br></br><br></br>
-                <Paragraph>
-                  {relevanceScore[4]} | {automatchTitle[4]}
-                </Paragraph>
-                <Paragraph>
-                  {automatchText[4]}
-                </Paragraph>
-                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-                  <Button text={`It's different`} />
-                  <Button text={`It's the same`} />
-                </Controls>
-                <br></br><br></br>
-                <Paragraph>
-                  {relevanceScore[5]} | {automatchTitle[5]}
-                </Paragraph>
-                <Paragraph>
-                  {automatchText[5]}
-                </Paragraph>
-                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-                  <Button text={`It's different`} />
-                  <Button text={`It's the same`} />
-                </Controls>
-                <br></br><br></br>
-                <Paragraph>
-                  {relevanceScore[6]} | {automatchTitle[6]}
-                </Paragraph>
-                <Paragraph>
-                  {automatchText[6]}
-                </Paragraph>
-                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-                  <Button text={`It's different`} />
-                  <Button text={`It's the same`} />
-                </Controls>
-                <br></br><br></br>
-                <Paragraph>
-                  {relevanceScore[7]} | {automatchTitle[7]}
-                </Paragraph>
-                <Paragraph>
-                  {automatchText[7]}
-                </Paragraph>
-                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-                  <Button text={`It's different`} />
-                  <Button text={`It's the same`} />
-                </Controls>
-                <br></br><br></br>
-                <Paragraph>
-                  {relevanceScore[8]} | {automatchTitle[8]}
-                </Paragraph>
-                <Paragraph>
-                  {automatchText[8]}
-                </Paragraph>
-                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-                  <Button text={`It's different`} />
-                  <Button text={`It's the same`} />
-                </Controls>
-                <br></br><br></br>
-                <Paragraph>
-                  {relevanceScore[9]} | {automatchTitle[9]}
-                </Paragraph>
-                <Paragraph>
-                  {automatchText[9]}
-                </Paragraph>
-                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-                  <Button text={`It's different`} />
-                  <Button text={`It's the same`} />
-                </Controls>
-                <br></br><br></br>
-              </StartContent>
+        <div className='dashboard-container'>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <div className='statusbar-container'>
+                Assessing Your Idea:
+          <ul className="progressbar">
+
+                    <li className="active">Idea Comes In</li>
+                    <li>Automated Novelty and Patent/IP Check</li>
+                    <li>Collective Intelligence Sift Filter</li>
+                    <li>Expert Novelty and Patent/IP Check</li>
+                    <li>Validation Process</li>
+                    <li>Expert Novelty and Patent/IP Check</li>
+                    <li>Determine Finance Need and Timeframe</li>
+
+                </ul>
             </div>
-          </div>
-        </Content>
-      </Container>
-    )
-} else {
-  return (<Heading>Loading...</Heading>)
+            <br />
+            <br />
+            <h1 className='header'> Questions and Answers about Idea</h1>
+            <br />
+            <div className='questions-answers'>
+            <Link key={ideasId} className='tile-link' to={`/automatch`}>Market Check</Link>
+                <Card className='card-detail'>
+                    <h4>{qTitles[0]}:</h4>
+                    <p>{qAnswers[0]}</p>
+                </Card>
+                <Card className='card-detail'>
+                    <h4>{qTitles[1]}:</h4>
+                    <p>{qAnswers[1]}</p>
+                </Card>
+                <Card className='card-detail'>
+                    <h4>{qTitles[2]}:</h4>
+                    <p>{qAnswers[2]}</p>
+                </Card>
+                <Card className='card-detail'>
+                    <h4>{qTitles[3]}:</h4>
+                    <p>{qAnswers[3]}</p>
+                </Card>
+
+                <Card className='card-detail'>
+                    <h4>{qTitles[4]}:</h4>
+                    <p>{qAnswers[4]}</p>
+                </Card>
+
+                <Card className='card-detail'>
+                    <h4>{qTitles[5]}:</h4>
+                    <p>{qAnswers[5]}</p>
+                </Card>
+
+                <Card className='card-detail'>
+                    <h4>{qTitles[6]}:</h4>
+                    <p>{qAnswers[6]}</p>
+                </Card>
+
+                <Card className='card-detail'>
+                    <h4>{qTitles[7]}:</h4>
+                    <p>{qAnswers[7]}</p>
+                </Card>
+
+                <Card className='card-detail'>
+                    <h4>{qTitles[8]}:</h4>
+                    <p>{qAnswers[8]}</p>
+                </Card>
+
+                <Card className='card-detail'>
+                    <h4>{qTitles[9]}:</h4>
+                    <p>{qAnswers[9]}</p>
+                </Card>
+
+                <Card className='card-detail'>
+                    <h4>{qTitles[10]}:</h4>
+                    <p>{qAnswers[10]}</p>
+                </Card>
+
+                <Card className='card-detail'>
+                    <h4>{qTitles[11]}:</h4>
+                    <p>{qAnswers[11]}</p>
+                </Card>
+                
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+
+            </div>
+
+
+        </div>)
+
 }
-}
-
-
-const PStartContent = posed.div({
-    notDisplayingLogin: {
-      y: 0,
-      opacity: 1.0,
-    },
-    displayingLogin: {
-      y: -390,
-      opacity: 0.15,
-    },
-  });
-  
-  const StartContent = styled(PStartContent)`
-    width: 100%;
-  `;
-  
-  const Logo = styled.img`
-    height: 70px;
-    align-self: flex-start;
-    margin-right: 60px;
-  `;
-  
-  const Controls = styled.div`
-    justify-content: space-between;
-    display: flex;
-    flex-direction: row;
-  `;
-  
-  const Content = styled.div`
-
-    color: #ffffff;
-    width: 80vw;
-    max-width: 900px;
-    
-    
-    padding: 20px;
-    display: grid;
-    
-    @media only screen and (orientation:portrait) { 
-      grid-template-columns: 1fr;
-      grid-template-rows:  auto auto;
-      grid-template-areas: "logo-area" "content-area";
-    }
-    @media only screen and (orientation:landscape) { 
-      grid-template-columns: auto auto;
-      grid-template-rows: auto;
-      grid-template-areas: "logo-area content-area";
-    }
-  `;
-  
-  const Heading = styled.div`
-    font-size: 30px;
-    font-weight: 800;
-    margin: 18px 10px 80px 10px;
-  `;
-  
-  const Paragraph = styled.div`
-    display: block;
-    
-    margin: 18px 10px 10px 10px;
-    font-size: 14px;
-
-  `;
-  
-  const Container = styled.div`
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4000px;
-    background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
-    display: flex;
-  `;
-  
