@@ -9,38 +9,26 @@ import Button from '../../reogranisation/Questions/Button';
 import posed from 'react-pose';
 
 export default function IdeaDashboardDetail(props) {
-
     const [user, setUserData] = useState({});
     const [userLoggedIn, setUserLoggedIn] = useState(true);
     const [userIdeas, setUserIdeas] = useState([]);
     const ideasId = props.match.params.id
     const [automatchResults, DoAutomatch] = useState([])
-
     useEffect(() => {
         request
-            .get(`${baseUrl}/ideas/${ideasId}`)
+            .get(`${baseUrl}/automatch/986`)
             .set("Authorization", `Bearer ${props.authState.token}`)
-            .then(idea => setUserIdeas(idea.body))
+            .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
     }, []);
 
-    useEffect(() => {
-        request
-            .get(`${baseUrl}/automatch/965`)
-            .set("Authorization", `Bearer ${props.authState.token}`)
-            .then(automatch => DoAutomatch(automatch.body))
-    }, []);
-    console.log(automatchResults)
-    let firstResult = automatchResults.autoMatch
-    let array = []
-    array.push(firstResult)
     
-    console.log(array[0])
-    let array2 = array[0]
-    console.log(array2)
-    console.log(Object.keys(array))
-
+    let smth = automatchResults.map(a => a.passage.text)
+    console.log(smth)
     
-    
+    if (typeof automatchResults.autoMatch === 'object'){
+        console.table(automatchResults.autoMatch['0'].relevance)
+    }
+	
 
 
     return (
