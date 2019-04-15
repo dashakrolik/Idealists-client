@@ -2,13 +2,18 @@ import React, { useEffect, useState, useContext } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import { Redirect, Link } from 'react-router-dom';
-import { Card } from 'material-ui'
 import './IdeaDashboard.css'
+import posed from 'react-pose';
+
 
 export default function IdeaDashboard(props) {
   
   const [user, setUserData] = useState({});
   const [userLoggedIn, setUserLoggedIn] = useState(true);
+
+  // progress bar
+  const [percentRange, setProgress] = useState(0);
+
   console.log('User object', user)
   
   // Currently userIdeas are ALL ideas, because it is a non-specific GET request
@@ -42,8 +47,8 @@ export default function IdeaDashboard(props) {
   
   if (userLoggedIn === false)
     return (
-      <Redirect to='/myIdea' />);
-  
+      <Redirect to='/myIdea' />
+    );
   
   //  Condition below should be userIdeas.length > 0, userData.firstName is purely for testing purposes
   // if (userData.firstName) {
@@ -56,32 +61,47 @@ export default function IdeaDashboard(props) {
     console.log(listTwo)
     var listThree = listTwo.map(list => list.answers)
     console.log(listThree)
-    
 
 
     return (
       <div className='dashboard-container'>
-
         <br/>
         <br/>
         <br/>
         <div className='title'>
-        <h1>{user.firstName}'s Dashboard</h1>
+          <h1>{user.firstName}'s Dashboard</h1>
         </div>
+           <h2 style={styledH2}>Please follow your next step: your market check</h2>
         <div className='flex-tilescontainer'>
             {userIdeas.map(idea => 
-            <Link className='tile-link' to={`/dashboard/ideas/${idea.id}`}><div className='idea-tile' key={idea.id}>
-            <p>{idea.idea[3].answers[0].qAnswer}</p>
-            
-              </div></Link>
+            <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
+              <div className='idea-tile' key={idea.id}>
+                <p>{idea.idea[3].answers[0].qAnswer}</p>
+              </div>
+            </Link>
           )}
-      </div>
-        <div className='statusbar-container'>this will contain the statusbar</div>
+        </div>
+        {/* <div className='statusbar-container'>
+        Assessing Your Idea:
+          <ProgressBar percentRange={percentRange}/>
+        </div>  */}
+        <div className='statusbar-container'>
+        Assessing Your Idea:
+          <ul className="progressbar">
+          
+            <li className="active">Idea Comes In</li>
+            <li>	Automated Novelty and Patent/IP Check</li>
+            <li>Collective Intelligence Sift Filter</li>
+            <li>Expert Novelty and Patent/IP Check</li>
+            <li>Validation Process</li>
+            <li>Expert Novelty and Patent/IP Check</li>
+            <li>Determine Finance Need and Timeframe</li>
+          
+	        </ul>
+        </div>
         <div className='summary-container'>
           <p>Summary of your idea:</p><br/>
-          
         </div>
-        
       </div>
     );
   // } else {
@@ -112,3 +132,22 @@ const sampleData =
       "idea": "{\"question1\":\"answer1\",\"question2\":\"answer2\",\"question3\":\"answer3\"}",
     },
   ]
+
+
+  const PStartContent = posed.div({
+    notDisplayingLogin: {
+      y: 0,
+      opacity: 1.0,
+    },
+    displayingLogin: {
+      y: -390,
+      opacity: 0.15,
+    },
+  });
+  
+  
+  const styledH2 = {
+    fontSize: 20,
+    fontWeight: 800,
+    color: 'white',
+  }
