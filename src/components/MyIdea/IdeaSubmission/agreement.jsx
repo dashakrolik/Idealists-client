@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import * as jsPDF from 'jspdf'
 import { withRouter } from 'react-router-dom'
 import logo from '../../../res/logo_horizontal_white.png';
-import html2canvas from 'html2canvas'
 
-
-const UserAgreement = (props) => {
+const Useagre = (props) => {
 
     let aggr = (props) => {
         return (
@@ -81,106 +79,67 @@ const UserAgreement = (props) => {
         let doc = new jsPDF()
         doc.text(
             aggr(props).props.children, 15, 15,
-            { 'width': 200 },
+            {'width':200},
             doc.save('doc2.pdf')
         )
     }
-    /////////////////////
-    class Tryone extends Component {
-        constructor(props) {
+    class Trytwo extends Component {
+        constructor(props){
           super(props);
+          this.pdfToHTML=this.pdfToHTML.bind(this);
         }
       
-        printDocument() {
-          const input = document.getElementById('divToPrint');
-          html2canvas(input)
-            .then((canvas) => {
-              const imgData = canvas.toDataURL('image/png');
-              const pdf = new jsPDF();
-              pdf.addImage(imgData, 'JPEG', 0, 0);
-              // pdf.output('dataurlnewwindow');
-              pdf.save("download.pdf");
-            })
-          ;
+        pdfToHTML(){
+          var pdf = new jsPDF('p', 'pt', 'letter');
+          var source = ('#HTMLtoPDF');
+          var specialElementHandlers = {
+            '#bypassme': function(element, renderer) {
+              return true
+            }
+          };
+      
+          var margins = {
+            top: 50,
+            left: 60,
+            width: 545
+          };
+      
+          pdf.fromHTML (
+            source // HTML string or DOM elem ref.
+            , margins.left // x coord
+            , margins.top // y coord
+            , {
+                'width': margins.width // max width of content on PDF
+                , 'elementHandlers': specialElementHandlers
+              },
+            function (dispose) {
+              // dispose: object with X, Y of the last line add to the PDF
+              // this allow the insertion of new lines after html
+              pdf.save('html2pdf.pdf');
+            }
+          )
         }
       
         render() {
-          return (<div>
-            <div className="mb5">
-              <button onClick={this.printDocument}>Print</button>
+          return (
+            <div>
+              <div classID="HTMLtoPDF">
+                <center>
+                  <h2>HTML to PDF</h2>
+                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing </p>
+                </center>
+              </div>
+              <button onClick={this.pdfToHTML}>Download PDF</button>
             </div>
-            <div id="divToPrint" className="mt4" style={{
-              backgroundColor: '#f5f5f5',
-              width: '210mm',
-              minHeight: '297mm',
-              marginLeft: 'auto',
-              marginRight: 'auto'
-            }}>
-              <div>Note: Here the dimensions of div are same as A4</div> 
-              <div>You Can add any component here</div>
-            </div>
-          </div>);
-        }
+          );
+        } 
       }
-      /////////////////////////////
-    //   class Trytwo extends Component {
-    //     constructor(props){
-    //       super(props);
-    //       this.pdfToHTML=this.pdfToHTML.bind(this);
-    //     }
-      
-    //     pdfToHTML(){
-    //       var pdf = new jsPDF('p', 'pt', 'letter');
-    //       var source = $('#HTMLtoPDF')[0];
-    //       var specialElementHandlers = {
-    //         '#bypassme': function(element, renderer) {
-    //           return true
-    //         }
-    //       };
-      
-    //       var margins = {
-    //         top: 50,
-    //         left: 60,
-    //         width: 545
-    //       };
-      
-    //       pdf.fromHTML (
-    //         source // HTML string or DOM elem ref.
-    //         , margins.left // x coord
-    //         , margins.top // y coord
-    //         , {
-    //             'width': margins.width // max width of content on PDF
-    //             , 'elementHandlers': specialElementHandlers
-    //           },
-    //         function (dispose) {
-    //           // dispose: object with X, Y of the last line add to the PDF
-    //           // this allow the insertion of new lines after html
-    //           pdf.save('html2pdf.pdf');
-    //         }
-    //       )
-    //     }
-      
-    //     render() {
-    //       return (
-    //         <div>
-    //           <div classID="HTMLtoPDF">
-    //             <center>
-    //               <h2>HTML to PDF</h2>
-    //              <p>Lorem ipsum dolor sit amet, consectetur adipisicing </p>
-    //             </center>
-    //           </div>
-    //           <button onClick={this.pdfToHTML}>Download PDF</button>
-    //         </div>
-    //       );
-    //     } 
-    //   }
-      ////////////////////
 
     return (
-        
         <div style={{ width: 700, textAlign: 'left', margin: 100 }}>
-            
-            {aggr(props)}
+        <Trytwo/>
+        {/* {console.log(source, "SSSS")} */}
+            {/* {aggr(props)} */}
             <br />
             <button style={{ backgroundColor: "inherit", color: "primary", borderRadius: "10px" }}
                 onClick={saveIt}> Download Agreement </button>
@@ -188,7 +147,7 @@ const UserAgreement = (props) => {
 }
 
 
-export default withRouter(UserAgreement)
+export default withRouter(Useagre)
 
 
 //     `PARTICIPANTS’ AGREEMENT

@@ -2,8 +2,8 @@ import React, { useEffect, useState, Component } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import './IdeaDashboard.css'
-import UserAgreement, {doc} from '../IdeaSubmission/agreement';
-
+import UserAgreement from '../IdeaSubmission/agreement.js';
+import Useagre from '../IdeaSubmission/agreement.jsx'
 
 export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
@@ -151,7 +151,7 @@ export default function IdeaDashboardDetail(props) {
             <p>{qAnswers[11]}</p>
             <br />
             <UserAgreement authState={props.authState} login={props.login} />
-            
+            <Useagre authState={props.authState} login={props.login} />
 
         </div>)
 
