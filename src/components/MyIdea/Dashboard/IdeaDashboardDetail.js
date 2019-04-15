@@ -1,36 +1,22 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
-import { Redirect, Link } from 'react-router-dom';
-import { Card } from 'material-ui'
 import './IdeaDashboard.css'
-import IdeaDashboard from './IdeaDashboard'
-import { render } from 'react-dom';
-import { string, object } from 'prop-types';
-import { isObject } from 'util';
 
 
 export default function IdeaDashboardDetail(props) {
-
-    const [user, setUserData] = useState({});
-    const [userLoggedIn, setUserLoggedIn] = useState(true);
     const [userIdeas, setUserIdeas] = useState([]);
     const ideasId = props.match.params.id
 
     useEffect(() => {
-         request
+        request
             .get(`${baseUrl}/ideas/${ideasId}`)
             .set("Authorization", `Bearer ${props.authState.token}`)
-            .then(async (res) => await setUserIdeas(res.body.idea))
+            .then(res => setUserIdeas(res.body.idea))
     }, []);
-
-    // const ideaDetail = props.authState.user.ideas.map(idea =>
-    //     idea.id === props.match.params.id ? idea.map(idea => idea.groupName) : null)
 
     let qAnswers = []
     const qTitles = []
-    const questionTwo = []
-    const questionThree = []
     userIdeas.map(idea => {
         idea.answers.map(question => {
             qTitles.push(question.qTitle)
@@ -39,20 +25,13 @@ export default function IdeaDashboardDetail(props) {
 
     userIdeas.map(idea => {
         idea.answers.map(answer => {
-            if (false) {
-                return questionThree.push(answer.qAnswer)
-
-            } else {
-                return qAnswers.push(answer.qAnswer)
-            }
+            qAnswers.push(answer.qAnswer)
         })
     })
 
-    console.log(JSON.stringify(qAnswers))
-
     qAnswers = qAnswers.map(answer => {
-        if(typeof answer === 'object'){
-            if(answer[0]){
+        if (typeof answer === 'object') {
+            if (answer[0]) {
                 return answer[0].value
             } else {
                 return answer.value
@@ -60,20 +39,6 @@ export default function IdeaDashboardDetail(props) {
         }
         return answer;
     })
-
-    console.log(qAnswers)
-// console.log(userIdeas[2], "HEYYYYTTDGFGSDFSD")
-
-   // console.log(questionThree, 'Answer three')
-    // console.log(qAnswers, "AAAAAAA")
-    // console.log(answ, "ANSW")
-    // console.log(answ[2], 'Answer two array')
-
-    // const answers = answ.map(answer => answer.map(ans => qAnswers.push(ans.qAnswer))) // answers is now an object
-    // console.log(qAnswers, "TITLE")
-    // const questions = answ.map(question => question.map(q => qTitles.push(q.qTitle)))
-    // // const answerTwo = answ.map(answer => answer.map(q => qTitles.push(q[2].qTitle)))
-    // // const answerTwo = answ[2].map(q => question2.push(q.qTitle))
 
     return (
         <div>
