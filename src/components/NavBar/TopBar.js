@@ -12,6 +12,9 @@ import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { withStyles } from '@material-ui/core';
 
+// react grid system, responsiveness
+import { Container, Row, Col } from 'react-grid-system';
+
 const TopBar = (props) => {
 
 const [history, location, window] = useState({});
@@ -22,33 +25,39 @@ const [authState] = useState({})
 const {classes} = props
 
 return (
-    <AppBar>
-        <Toolbar className="topBar">
-
-        <img src={logo} alt='Logo' style={logoStyle}/>
-        <div className="menu" style={{ flex: 1 }} >
-            {
-            !props.authState.loggedIn ? 
-            <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Login</Button> : null
-            }
-            {
-            !props.authState.loggedIn ?
-            <Button color="inherit" onClick={() => props.history.push('/MyIdea')}>Sign Up</Button> : null
-            }
-            {
-            props.authState.loggedIn ? 
-            <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Dashboard</Button> : null
-            }
-            {
-            <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>New Idea</Button>
-            }
-            {
-            props.authState.loggedIn ? 
-            <Button color="inherit" onClick={() => props.logout}>Logout</Button> : null
-            }
-        </div>
-        </Toolbar>
-    </AppBar>
+    <Container fluid>
+        <AppBar>
+            <Toolbar className="topBar">
+            <Row justify="between" debug>
+                <Col md={6} debug>
+                    <img src={logo} alt='Logo' style={logoStyle}/>
+                </Col>
+                
+                <Col md={6} debug>
+                    {
+                    !props.authState.loggedIn ? 
+                    <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Login</Button> : null
+                    }
+                    {
+                    !props.authState.loggedIn ?
+                    <Button color="inherit" onClick={() => props.history.push('/MyIdea')}>Sign Up</Button> : null
+                    }
+                    {
+                    props.authState.loggedIn ? 
+                    <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Dashboard</Button> : null
+                    }
+                    {
+                    <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>New Idea</Button>
+                    }
+                    {
+                    props.authState.loggedIn ? 
+                    <Button color="inherit" onClick={() => props.logout}>Logout</Button> : null
+                    }
+                </Col>
+            </Row>
+            </Toolbar>
+        </AppBar>
+    </Container>
     )
 }
 
@@ -58,3 +67,4 @@ var logoStyle = {
   width: 200,
 //   marginLeft: 300
 }
+

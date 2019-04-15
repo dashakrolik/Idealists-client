@@ -90,7 +90,7 @@ export default function IdeaDashboard(props) {
           <ul className="progressbar">
           
             <li className="active">Idea Comes In</li>
-            <li>	Automated Novelty and Patent/IP Check</li>
+            <li>Automated Novelty and Patent/IP Check</li>
             <li>Collective Intelligence Sift Filter</li>
             <li>Expert Novelty and Patent/IP Check</li>
             <li>Validation Process</li>
