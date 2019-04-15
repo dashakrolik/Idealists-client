@@ -34,6 +34,7 @@ export default function IdeaDashboardDetail(props) {
     }
 	
 
+    if (automatchResults) {
 
     return (
         <Container>
@@ -70,6 +71,9 @@ export default function IdeaDashboardDetail(props) {
         </Content>
       </Container>
     )
+} else {
+  return (<Heading>Loading...</Heading>)
+}
 }
 
 
