@@ -29,10 +29,18 @@ export default function IdeaDashboardDetail(props) {
             .set("Authorization", `Bearer ${props.authState.token}`)
             .then(automatch => DoAutomatch(automatch.body))
     }, []);
+    console.log(automatchResults)
+    let firstResult = automatchResults.autoMatch
+    let array = []
+    array.push(firstResult)
+    
+    console.log(array[0])
+    let array2 = array[0]
+    console.log(array2)
+    console.log(Object.keys(array))
 
-
-
- 
+    
+    
 
 
     return (
