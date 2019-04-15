@@ -56,5 +56,5 @@ export default withRouter(TopBar)
 
 var logoStyle = {
   width: 200,
-  marginLeft: 300
+//   marginLeft: 300
 }
