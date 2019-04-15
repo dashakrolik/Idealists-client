@@ -6,11 +6,11 @@ import { useEffect, useState } from 'react';
 import './TopBar.css'
 import {withRouter} from 'react-router-dom'
 import logo from '../../res/logo_horizontal_white.png';
+
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { withStyles } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
 
 const TopBar = (props) => {
 
@@ -54,14 +54,7 @@ return (
 
 export default withRouter(TopBar) 
 
-const logoStyle = {
-  width: 200
+var logoStyle = {
+  width: 200,
+  marginLeft: 300
 }
-const menu = {
-
-}
-
-
-
-
-
