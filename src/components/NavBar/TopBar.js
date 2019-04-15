@@ -11,9 +11,7 @@ import logo from '../../res/logo_horizontal_white.png';
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { withStyles } from '@material-ui/core';
-
-// react grid system, responsiveness
-import { Container, Row, Col } from 'react-grid-system';
+import Grid from '@material-ui/core/Grid'
 
 const TopBar = (props) => {
 
@@ -25,15 +23,15 @@ const [authState] = useState({})
 const {classes} = props
 
 return (
-    <Container fluid>
+    
         <AppBar>
             <Toolbar className="topBar">
-            <Row justify="between" debug>
-                <Col md={6} debug>
-                    <img src={logo} alt='Logo' style={logoStyle}/>
-                </Col>
-                
-                <Col md={6} debug>
+                <img src={logo} alt='Logo' style={logoStyle}/>
+                <Grid container
+                        direction="row"
+                        justify="flex-end"
+                        alignItems="center"
+                >
                     {
                     !props.authState.loggedIn ? 
                     <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Login</Button> : null
@@ -53,11 +51,11 @@ return (
                     props.authState.loggedIn ? 
                     <Button color="inherit" onClick={() => props.logout}>Logout</Button> : null
                     }
-                </Col>
-            </Row>
+               </Grid>
+            
             </Toolbar>
         </AppBar>
-    </Container>
+    
     )
 }
 

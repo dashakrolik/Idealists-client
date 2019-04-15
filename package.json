@@ -11,7 +11,6 @@
     "material-ui": "^0.20.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-grid-system": "^4.4.3",
     "react-lottie": "^1.2.3",
     "react-pdf": "^4.0.5",
     "react-pose": "^4.0.8",
