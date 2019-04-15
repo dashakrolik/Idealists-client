@@ -6,6 +6,8 @@ import { Card } from 'material-ui'
 import './IdeaDashboard.css'
 import IdeaDashboard from './IdeaDashboard'
 import { render } from 'react-dom';
+import { string, object } from 'prop-types';
+import { isObject } from 'util';
 
 
 export default function IdeaDashboardDetail(props) {
@@ -16,37 +18,54 @@ export default function IdeaDashboardDetail(props) {
     const ideasId = props.match.params.id
 
     useEffect(() => {
-        request
+         request
             .get(`${baseUrl}/ideas/${ideasId}`)
             .set("Authorization", `Bearer ${props.authState.token}`)
-            .then(res => setUserIdeas(res.body.idea))
+            .then(async (res) => await setUserIdeas(res.body.idea))
     }, []);
 
     // const ideaDetail = props.authState.user.ideas.map(idea =>
     //     idea.id === props.match.params.id ? idea.map(idea => idea.groupName) : null)
 
-    const qAnswers = []
+    let qAnswers = []
     const qTitles = []
     const questionTwo = []
-    console.log(userIdeas, "USERRRR")
+    const questionThree = []
     userIdeas.map(idea => {
-        idea.answers.map(answer => {
-            qTitles.push(answer.qTitle)
+        idea.answers.map(question => {
+            qTitles.push(question.qTitle)
         })
     })
 
     userIdeas.map(idea => {
-        console.log('idea test:', idea)
         idea.answers.map(answer => {
-            if (answer.qAnswer.value) {
-                questionTwo.push(answer.qAnswer.map(answer => answer.value))
+            if (false) {
+                return questionThree.push(answer.qAnswer)
+
             } else {
-                console.log('answer test:', answer.qAnswer)
-                qAnswers.push(answer.qAnswer)
+                return qAnswers.push(answer.qAnswer)
             }
         })
     })
-    console.log('qTitles test:', qAnswers)
+
+    console.log(JSON.stringify(qAnswers))
+
+    qAnswers = qAnswers.map(answer => {
+        if(typeof answer === 'object'){
+            if(answer[0]){
+                return answer[0].value
+            } else {
+                return answer.value
+            }
+        }
+        return answer;
+    })
+
+    console.log(qAnswers)
+// console.log(userIdeas[2], "HEYYYYTTDGFGSDFSD")
+
+   // console.log(questionThree, 'Answer three')
+    // console.log(qAnswers, "AAAAAAA")
     // console.log(answ, "ANSW")
     // console.log(answ[2], 'Answer two array')
 
@@ -55,8 +74,7 @@ export default function IdeaDashboardDetail(props) {
     // const questions = answ.map(question => question.map(q => qTitles.push(q.qTitle)))
     // // const answerTwo = answ.map(answer => answer.map(q => qTitles.push(q[2].qTitle)))
     // // const answerTwo = answ[2].map(q => question2.push(q.qTitle))
-    console.log(qAnswers[2[0].value], 'Answer two, first element of array')
-    // // console.log(question2, 'AnswerTwo')
+
     return (
         <div>
             <br />
