@@ -63,7 +63,7 @@
 /*marking active/completed steps blue*/
 /*The number of the step and the connector before it = blue*/
 .progressbar li.active:before,  #progressbar li.active:after{
-	background: #1f7fbb;
+	background: #00d7e0;
     color: white;
     z-index: auto;
 }
@@ -72,4 +72,19 @@
     background: #1f7fbb;
     height: 100%;
     border-radius: inherit;
-    transition: width .3s ease-in;
+	transition: width .3s ease-in;
+}
+
+.questions-answers {
+    color: #1f7fbb;
+}
+.card-detail {
+	max-width: 500px;
+	margin: 0 auto;
+	margin-bottom: 40px;
+	border-radius: 10px;
+	padding: 10px;
+}
+.header {
+    color: #DFEFF2;
+}
