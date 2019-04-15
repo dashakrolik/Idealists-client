@@ -69,9 +69,9 @@ export default function IdeaLogin(props) {
           <label>Password</label>
           <input type='password' name='password' value={loginState.password || ''} onChange={handleChange} />
           <br />
-        
-          <button type='submit' onClick={()=> {props.history.replace('/MyIdea/login/reset-password')}}>Forgot your password?</button>
+
           <button type='submit'>Login</button>
+          <button type='submit' onClick={()=> {props.history.replace('/MyIdea/login/reset-password')}}>Forgot your password?</button>
         </form>
       </RightSide>
     </Container>);

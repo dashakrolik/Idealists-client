@@ -1,146 +1,93 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import './IdeaDashboard.css'
-/** @jsx jsx */
-import { css, Global, jsx } from '@emotion/core';
-import styled from '@emotion/styled';
-import Button from '../../reogranisation/Questions/Button';
-import posed from 'react-pose';
+
 
 export default function IdeaDashboardDetail(props) {
-
-    const [user, setUserData] = useState({});
-    const [userLoggedIn, setUserLoggedIn] = useState(true);
     const [userIdeas, setUserIdeas] = useState([]);
     const ideasId = props.match.params.id
-    const [automatchResults, DoAutomatch] = useState([])
 
     useEffect(() => {
         request
             .get(`${baseUrl}/ideas/${ideasId}`)
             .set("Authorization", `Bearer ${props.authState.token}`)
-            .then(idea => setUserIdeas(idea.body))
+            .then(res => setUserIdeas(res.body.idea))
     }, []);
 
-    useEffect(() => {
-        request
-            .get(`${baseUrl}/automatch/965`)
-            .set("Authorization", `Bearer ${props.authState.token}`)
-            .then(automatch => DoAutomatch(automatch.body))
-    }, []);
+    let qAnswers = []
+    const qTitles = []
+    userIdeas.map(idea => {
+        idea.answers.map(question => {
+            qTitles.push(question.qTitle)
+        })
+    })
 
+    userIdeas.map(idea => {
+        idea.answers.map(answer => {
+            qAnswers.push(answer.qAnswer)
+        })
+    })
 
-
- 
-
+    qAnswers = qAnswers.map(answer => {
+        if (typeof answer === 'object') {
+            if (answer[0]) {
+                return answer[0].value
+            } else {
+                return answer.value
+            }
+        }
+        return answer;
+    })
 
     return (
-        <Container>
-        <Global styles={css`
-          body {
-            background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
-          }
-        `} />
-        <Content>
-          <div css={css`grid-area: content-area`}>
-            <div css={css`display: flex; align-items: center; flex-direction: column;`}>
-              <StartContent 
-                css={css`display: flex; flex-direction: column; width: auto; margin-bottom: 60px;`}>
-                <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
-                  Idea Details
-                </Heading>
-                <Paragraph>
-                  This page will show details for your idea
-                </Paragraph>
-                <Paragraph>
-                  Please follow your next step: your market check
-                </Paragraph>
-                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-                  <Button text={'Start'} />
-                </Controls>
-              </StartContent>
-            </div>
-          </div>
-        </Content>
-      </Container>
-    )
+        <div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <h1> Questions and Answers about Idea</h1>
+            <p>{qTitles[0]}:</p>
+            <p>{qAnswers[0]}</p>
+            <br />
+            <p>{qTitles[1]}:</p>
+            <p>{qAnswers[1]}</p>
+            <br />
+            <p>{qTitles[2]}:</p>
+            <p>{qAnswers[2]}</p>
+            <br />
+            <p>{qTitles[3]}:</p>
+            <p>{qAnswers[3]}</p>
+            <br />
+            <p>{qTitles[4]}:</p>
+            <p>{qAnswers[4]}</p>
+            <br />
+            <p>{qTitles[5]}:</p>
+            <p>{qAnswers[5]}</p>
+            <br />
+            <p>{qTitles[6]}:</p>
+            <p>{qAnswers[6]}</p>
+            <br />
+            <p>{qTitles[7]}:</p>
+            <p>{qAnswers[7]}</p>
+            <br />
+            <p>{qTitles[8]}:</p>
+            <p>{qAnswers[8]}</p>
+            <br />
+            <p>{qTitles[9]}:</p>
+            <p>{qAnswers[9]}</p>
+            <br />
+            <p>{qTitles[10]}:</p>
+            <p>{qAnswers[10]}</p>
+            <br />
+            <p>{qTitles[11]}:</p>
+            <p>{qAnswers[11]}</p>
+            <br />
+
+
+        </div>)
+
 }
-
-
-const PStartContent = posed.div({
-    notDisplayingLogin: {
-      y: 0,
-      opacity: 1.0,
-    },
-    displayingLogin: {
-      y: -390,
-      opacity: 0.15,
-    },
-  });
-  
-  const StartContent = styled(PStartContent)`
-    width: 100%;
-  `;
-  
-  const Logo = styled.img`
-    height: 70px;
-    align-self: flex-start;
-    margin-right: 60px;
-  `;
-  
-  const Controls = styled.div`
-    justify-content: space-between;
-    display: flex;
-    flex-direction: row;
-  `;
-  
-  const Content = styled.div`
-    align-self: center;
-    justify-self: center;
-    color: #ffffff;
-    width: 80vw;
-    max-width: 900px;
-    height: auto;
-    max-height: 500px;
-    padding: 20px;
-    display: grid;
-    
-    @media only screen and (orientation:portrait) { 
-      grid-template-columns: 1fr;
-      grid-template-rows:  auto auto;
-      grid-template-areas: "logo-area" "content-area";
-    }
-    @media only screen and (orientation:landscape) { 
-      grid-template-columns: auto auto;
-      grid-template-rows: auto;
-      grid-template-areas: "logo-area content-area";
-    }
-  `;
-  
-  const Heading = styled.div`
-    font-size: 30px;
-    font-weight: 800;
-    margin: 18px 10px 80px 10px;
-  `;
-  
-  const Paragraph = styled.div`
-    display: block;
-    position: relative;
-    font-size: 14px;
-    font-weight: 400;
-    margin: 0 10px 30px;
-  `;
-  
-  const Container = styled.div`
-    position: fixed;
-    align-items: center;
-    justify-content: center;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
-    display: flex;
-  `;
-  
