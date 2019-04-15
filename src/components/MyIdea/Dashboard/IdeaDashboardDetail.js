@@ -57,6 +57,10 @@ export default function IdeaDashboardDetail(props) {
                 <Paragraph>
                   {automatchText[0]}
                 </Paragraph>
+                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                </Controls>
                 <br></br><br></br>
                 <Paragraph>
                   {relevanceScore[1]} | {automatchTitle[1]}
@@ -64,6 +68,10 @@ export default function IdeaDashboardDetail(props) {
                 <Paragraph>
                   {automatchText[1]}
                 </Paragraph>
+                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                </Controls>
                 <br></br><br></br>
                 <Paragraph>
                   {relevanceScore[2]} | {automatchTitle[2]}
@@ -71,6 +79,10 @@ export default function IdeaDashboardDetail(props) {
                 <Paragraph>
                   {automatchText[2]}
                 </Paragraph>
+                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                </Controls>
                 <br></br><br></br>
                 <Paragraph>
                   {relevanceScore[3]} | {automatchTitle[3]}
@@ -78,6 +90,10 @@ export default function IdeaDashboardDetail(props) {
                 <Paragraph>
                   {automatchText[3]}
                 </Paragraph>
+                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                </Controls>
                 <br></br><br></br>
                 <Paragraph>
                   {relevanceScore[4]} | {automatchTitle[4]}
@@ -85,6 +101,10 @@ export default function IdeaDashboardDetail(props) {
                 <Paragraph>
                   {automatchText[4]}
                 </Paragraph>
+                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                </Controls>
                 <br></br><br></br>
                 <Paragraph>
                   {relevanceScore[5]} | {automatchTitle[5]}
@@ -92,6 +112,10 @@ export default function IdeaDashboardDetail(props) {
                 <Paragraph>
                   {automatchText[5]}
                 </Paragraph>
+                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                </Controls>
                 <br></br><br></br>
                 <Paragraph>
                   {relevanceScore[6]} | {automatchTitle[6]}
@@ -99,6 +123,10 @@ export default function IdeaDashboardDetail(props) {
                 <Paragraph>
                   {automatchText[6]}
                 </Paragraph>
+                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                </Controls>
                 <br></br><br></br>
                 <Paragraph>
                   {relevanceScore[7]} | {automatchTitle[7]}
@@ -106,6 +134,10 @@ export default function IdeaDashboardDetail(props) {
                 <Paragraph>
                   {automatchText[7]}
                 </Paragraph>
+                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                </Controls>
                 <br></br><br></br>
                 <Paragraph>
                   {relevanceScore[8]} | {automatchTitle[8]}
@@ -113,6 +145,10 @@ export default function IdeaDashboardDetail(props) {
                 <Paragraph>
                   {automatchText[8]}
                 </Paragraph>
+                <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                  <Button text={`It's different`} />
+                  <Button text={`It's the same`} />
+                </Controls>
                 <br></br><br></br>
                 <Paragraph>
                   {relevanceScore[9]} | {automatchTitle[9]}
@@ -120,14 +156,11 @@ export default function IdeaDashboardDetail(props) {
                 <Paragraph>
                   {automatchText[9]}
                 </Paragraph>
-                <br></br><br></br>
-
                 <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-
                   <Button text={`It's different`} />
                   <Button text={`It's the same`} />
-                  <Button text={'Next'} />
                 </Controls>
+                <br></br><br></br>
               </StartContent>
             </div>
           </div>
@@ -210,7 +243,7 @@ const PStartContent = posed.div({
     top: 0;
     left: 0;
     width: 100%;
-    height: 300%;
+    height: 4000px;
     background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
     display: flex;
   `;
