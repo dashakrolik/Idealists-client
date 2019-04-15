@@ -59,7 +59,7 @@ const CompleteSubmission = (props) => {
     return <GroupContainer>
       <FlexRow><FlexColumn><GroupTitle>Submission complete!</GroupTitle></FlexColumn></FlexRow>
       <FlexRow><FlexColumn><GroupSubtitle>We'll be in touch with you soon.</GroupSubtitle></FlexColumn></FlexRow>
-      <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Go to my dashboard</Button>
+      <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')} text={'Go to my dashboard'}/>
     </GroupContainer>;
   }
 
@@ -94,8 +94,9 @@ const CompleteSubmission = (props) => {
 
     handleSubmit = (event) => {
       if (this.state.value === (props.authState.user.firstName + ' ' + props.authState.user.lastName)) {
-        alert(this.state.value + ' has agreed to the agreement'); //change it
-        setAgreeBttn(true)
+        alert(this.state.value + ' has agreed to the agreement!'); //change it
+        // setAgreeBttn(true)
+        submitIdea()
         event.preventDefault()
       } else {
         return true
@@ -147,9 +148,9 @@ const CompleteSubmission = (props) => {
 
       <a href={pdfAgreement} download><Button text={'Download the Participants Agreement'}
       /></a>
-      <Button text={'I agree'} onClick={submitIdea}
+      {/* <Button text={'I agree'} onClick={submitIdea}
         disabled={!agreeBttn}
-        withIcon />
+        withIcon /> */}
       {/* </FlexColumn></FlexRow> */}
     </GroupContainer>
   );
