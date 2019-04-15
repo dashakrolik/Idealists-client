@@ -51,16 +51,79 @@ export default function IdeaDashboardDetail(props) {
                 <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
                   Automatch results
                 </Heading>
-
                 <Paragraph>
-                  {automatchTitle[0]}
+                  {relevanceScore[0]} | {automatchTitle[0]}
                 </Paragraph>
                 <Paragraph>
                   {automatchText[0]}
                 </Paragraph>
                 <br></br><br></br>
+                <Paragraph>
+                  {relevanceScore[1]} | {automatchTitle[1]}
+                </Paragraph>
+                <Paragraph>
+                  {automatchText[1]}
+                </Paragraph>
+                <br></br><br></br>
+                <Paragraph>
+                  {relevanceScore[2]} | {automatchTitle[2]}
+                </Paragraph>
+                <Paragraph>
+                  {automatchText[2]}
+                </Paragraph>
+                <br></br><br></br>
+                <Paragraph>
+                  {relevanceScore[3]} | {automatchTitle[3]}
+                </Paragraph>
+                <Paragraph>
+                  {automatchText[3]}
+                </Paragraph>
+                <br></br><br></br>
+                <Paragraph>
+                  {relevanceScore[4]} | {automatchTitle[4]}
+                </Paragraph>
+                <Paragraph>
+                  {automatchText[4]}
+                </Paragraph>
+                <br></br><br></br>
+                <Paragraph>
+                  {relevanceScore[5]} | {automatchTitle[5]}
+                </Paragraph>
+                <Paragraph>
+                  {automatchText[5]}
+                </Paragraph>
+                <br></br><br></br>
+                <Paragraph>
+                  {relevanceScore[6]} | {automatchTitle[6]}
+                </Paragraph>
+                <Paragraph>
+                  {automatchText[6]}
+                </Paragraph>
+                <br></br><br></br>
+                <Paragraph>
+                  {relevanceScore[7]} | {automatchTitle[7]}
+                </Paragraph>
+                <Paragraph>
+                  {automatchText[7]}
+                </Paragraph>
+                <br></br><br></br>
+                <Paragraph>
+                  {relevanceScore[8]} | {automatchTitle[8]}
+                </Paragraph>
+                <Paragraph>
+                  {automatchText[8]}
+                </Paragraph>
+                <br></br><br></br>
+                <Paragraph>
+                  {relevanceScore[9]} | {automatchTitle[9]}
+                </Paragraph>
+                <Paragraph>
+                  {automatchText[9]}
+                </Paragraph>
+                <br></br><br></br>
+
                 <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
- 
+
                   <Button text={`It's different`} />
                   <Button text={`It's the same`} />
                   <Button text={'Next'} />
@@ -105,13 +168,12 @@ const PStartContent = posed.div({
   `;
   
   const Content = styled.div`
-    align-self: center;
-    justify-self: center;
+
     color: #ffffff;
     width: 80vw;
     max-width: 900px;
-    height: auto;
-    max-height: 500px;
+    
+    
     padding: 20px;
     display: grid;
     
@@ -135,20 +197,20 @@ const PStartContent = posed.div({
   
   const Paragraph = styled.div`
     display: block;
-    padding: 1em
-    margin: 18px 10px 80px 10px;
+    
+    margin: 18px 10px 10px 10px;
     font-size: 14px;
 
   `;
   
   const Container = styled.div`
-    position: fixed;
+    position: relative;
     align-items: center;
     justify-content: center;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 300%;
     background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
     display: flex;
   `;
