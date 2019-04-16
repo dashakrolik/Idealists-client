@@ -3,7 +3,7 @@ import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import './IdeaDashBoardDetail.css'
 import Card from '@material-ui/core/Card'
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
@@ -61,63 +61,64 @@ export default function IdeaDashboardDetail(props) {
             <br />
             <h1 className='header'> Questions and Answers about Idea</h1>
             <br />
+           
             <div className='questions-answers'>
                 <StyledCard className='card-detail'>
                     <h4>{qTitles[0]}:</h4>
                     <p>{qAnswers[0]}</p>
                 </StyledCard>
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[1]}:</h4>
                     <p>{qAnswers[1]}</p>
-                </Card>
-                <Card className='card-detail'>
+                </StyledCard>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[2]}:</h4>
                     <p>{qAnswers[2]}</p>
-                </Card>
-                <Card className='card-detail'>
+                </StyledCard>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[3]}:</h4>
                     <p>{qAnswers[3]}</p>
-                </Card>
+                </StyledCard>
 
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[4]}:</h4>
                     <p>{qAnswers[4]}</p>
-                </Card>
+                </StyledCard>
 
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[5]}:</h4>
                     <p>{qAnswers[5]}</p>
-                </Card>
+                </StyledCard>
 
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[6]}:</h4>
                     <p>{qAnswers[6]}</p>
-                </Card>
+                </StyledCard>
 
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[7]}:</h4>
                     <p>{qAnswers[7]}</p>
-                </Card>
+                </StyledCard>
 
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[8]}:</h4>
                     <p>{qAnswers[8]}</p>
-                </Card>
+                </StyledCard>
 
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[9]}:</h4>
                     <p>{qAnswers[9]}</p>
-                </Card>
+                </StyledCard>
 
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[10]}:</h4>
                     <p>{qAnswers[10]}</p>
-                </Card>
+                </StyledCard>
 
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[11]}:</h4>
                     <p>{qAnswers[11]}</p>
-                </Card>
+                </StyledCard>
                 <br />
                 <br />
                 <br />
@@ -129,5 +130,7 @@ export default function IdeaDashboardDetail(props) {
         </div>)
 
 }
+
+
 const StyledCard = styled(Card) `
-    background-color: rgb(255,255,255 05);`
+    background-color: rgb(255,255,255, 0.7);`

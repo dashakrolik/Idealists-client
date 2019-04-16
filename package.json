@@ -9,6 +9,7 @@
     "country-json": "^1.0.8",
     "emotion-theming": "^10.0.7",
     "jspdf": "^1.5.3",
+
     "local-storage": "^1.4.2",
     "material-ui": "^0.20.2",
     "react": "^16.8.4",
