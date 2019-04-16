@@ -81,8 +81,9 @@ export default function IdeaDashboard(props) {
             </Link>
           )}
         </div>
-        
+
         {/* <div className='summary-container'>
+
           <p>Summary of your idea:</p><br/>
         </div> */}
       </div>
