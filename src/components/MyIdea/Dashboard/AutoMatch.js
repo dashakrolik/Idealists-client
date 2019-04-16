@@ -8,36 +8,49 @@ import styled from '@emotion/styled';
 import Button from '../../reogranisation/Questions/Button';
 import posed from 'react-pose';
 
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { withStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+
 export default function IdeaDashboardDetail(props) {
-    const [user, setUserData] = useState({});
-    const [userLoggedIn, setUserLoggedIn] = useState(true);
-    const [userIdeas, setUserIdeas] = useState([]);
-    const ideasId = props.match.params.id
-    const [automatchResults, DoAutomatch] = useState([])
-    useEffect(() => {
-        request
-            .get(`${baseUrl}/automatch/986`)
-            .set("Authorization", `Bearer ${props.authState.token}`)
-            .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
-    }, []);
+  const [user, setUserData] = useState({});
+  const [userLoggedIn, setUserLoggedIn] = useState(true);
+  const [userIdeas, setUserIdeas] = useState([]);
+  const ideasId = props.match.params.id
+  const [automatchResults, DoAutomatch] = useState([])
+  useEffect(() => {
+      request
+          .get(`${baseUrl}/automatch/986`)
+          .set("Authorization", `Bearer ${props.authState.token}`)
+          .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
+  }, []);
 
-    
-    let automatchTitle = automatchResults.map(c => c.bibliographic.title[0].text)
-    console.log(automatchTitle)
-    console.log(automatchResults)
-    let automatchText = automatchResults.map(a => a.passage.text)
-    console.log(automatchText[0])
-    let relevanceScore = automatchResults.map(b => b.relevance.score)
-    console.log(relevanceScore)
-    let relevanceNumber = automatchResults.map(b => b.relevance.number)
-    if (typeof automatchResults.autoMatch === 'object'){
-        console.table(automatchResults.autoMatch['0'].relevance)
-    }
-    
-    
+  const [multiline, setMulitline] = useState('Controlled')
 
-    if (automatchResults) {
-      
+  // // change to hooks
+  // handleChange = name => event => {
+  //   this.setState({
+  //     [name]: event.target.value,
+  //   });
+  // };
+  
+  let automatchTitle = automatchResults.map(c => c.bibliographic.title[0].text)
+  // console.log(automatchTitle)
+  // console.log(automatchResults)
+  let automatchText = automatchResults.map(a => a.passage.text)
+  // console.log(automatchText[0])
+  let relevanceScore = automatchResults.map(b => b.relevance.score)
+  // console.log(relevanceScore)
+  let relevanceNumber = automatchResults.map(b => b.relevance.number)
+  if (typeof automatchResults.autoMatch === 'object'){
+      // console.table(automatchResults.autoMatch['0'].relevance)
+  }
+  
+
+  if (automatchResults) {
+    
     return (
         <Container>
         <Global styles={css`
@@ -65,6 +78,15 @@ export default function IdeaDashboardDetail(props) {
                       <Button text={`It's different`} />
                       <Button text={`It's the same`} />
                     </Controls>
+                    <StyledTextField
+                      id="filled-multiline-flexible"
+                      label="Please explain to us how your idea is different (especially better) or similar to this patent:"
+                      multiline
+                      rowsMax="4"
+                      fullWidth
+                      margin="normal"
+                      variant="filled"
+                    />
                     <br></br><br></br>
                   </div>
                 ))}
@@ -154,4 +176,11 @@ const PStartContent = posed.div({
     background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
     display: flex;
   `;
+
+  const StyledTextField = styled(TextField)`
+    background-color: rgb(255,255,255, 0.5);
+    marginLeft: theme.spacing.unit;
+    marginRight: theme.spacing.unit;
+  `;
+  
   
