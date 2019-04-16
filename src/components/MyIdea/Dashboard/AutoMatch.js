@@ -29,13 +29,15 @@ export default function IdeaDashboardDetail(props) {
     console.log(automatchText[0])
     let relevanceScore = automatchResults.map(b => b.relevance.score)
     console.log(relevanceScore)
+    let relevanceNumber = automatchResults.map(b => b.relevance.number)
     if (typeof automatchResults.autoMatch === 'object'){
         console.table(automatchResults.autoMatch['0'].relevance)
     }
-	
+    
+    
 
     if (automatchResults) {
-
+      
     return (
         <Container>
         <Global styles={css`
@@ -51,7 +53,22 @@ export default function IdeaDashboardDetail(props) {
                 <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
                   Automatch results
                 </Heading>
-                <Paragraph>
+                { Object.keys(automatchResults).map((key, index) => (
+                  <div key={relevanceNumber[index]}>
+                    <Paragraph>
+                      {relevanceScore[index]} | {automatchTitle[index]}
+                    </Paragraph>
+                    <Paragraph>
+                      {automatchText[index]}
+                    </Paragraph>
+                    <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
+                      <Button text={`It's different`} />
+                      <Button text={`It's the same`} />
+                    </Controls>
+                    <br></br><br></br>
+                  </div>
+                ))}
+                {/* <Paragraph>
                   {relevanceScore[0]} | {automatchTitle[0]}
                 </Paragraph>
                 <Paragraph>
@@ -160,7 +177,7 @@ export default function IdeaDashboardDetail(props) {
                   <Button text={`It's different`} />
                   <Button text={`It's the same`} />
                 </Controls>
-                <br></br><br></br>
+                <br></br><br></br> */}
               </StartContent>
             </div>
           </div>
