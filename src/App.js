@@ -30,9 +30,9 @@ class App extends Component {
     }
   };
 
-  componentWillUpdate() {
-    this.updateLocalStorage()
-  }
+  // componentWillUpdate() {
+  //   this.updateLocalStorage()
+  // }
 
   requestLogin = (email, password) => {
     request
@@ -48,7 +48,7 @@ class App extends Component {
               token: res.body.jwt,
             },
           });
-          this.updateLocalStorage()
+          localStorage.setItem('currentUserJwt', res.body.jwt)
         }
       })
       .catch(err => {
@@ -71,7 +71,7 @@ class App extends Component {
             user: res.body
           }
         });
-        this.updateLocalStorage()
+        localStorage.setItem('currentUserJwt', this.state.auth.token)
       })
   }
 

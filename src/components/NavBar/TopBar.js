@@ -33,22 +33,22 @@ return (
                         alignItems="center"
                 >
                     {
-                    !props.authState.loggedIn ? 
+                    !localStorage.currentUserJwt ? 
                     <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Login</Button> : null
                     }
                     {
-                    !props.authState.loggedIn ?
+                    !localStorage.currentUserJwt ?
                     <Button color="inherit" onClick={() => props.history.push('/MyIdea')}>Sign Up</Button> : null
                     }
                     {
-                    props.authState.loggedIn ? 
+                    localStorage.currentUserJwt ? 
                     <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Dashboard</Button> : null
                     }
                     {
                     <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>New Idea</Button>
                     }
                     {
-                    props.authState.loggedIn ? 
+                    localStorage.currentUserJwt ? 
                     <Button color="inherit" onClick={() => props.logout}>Logout</Button> : null
                     }
                </Grid>

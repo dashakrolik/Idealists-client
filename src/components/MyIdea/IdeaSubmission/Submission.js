@@ -25,12 +25,12 @@ const Submission = (props) => {
   }, [activeGroup]);
 
 
-  const checkLocalStorage = () => {
-    let token = localStorage.getItem('currentUserJwt')
-    console.log(token)
-  }
+  // const checkLocalStorage = () => {
+  //   let token = localStorage.getItem('currentUserJwt')
+  //   console.log(token)
+  // }
 
-  checkLocalStorage()
+  // checkLocalStorage()
 
   const handleAnswers = (id, value) => {
     setAnswers({
@@ -65,7 +65,7 @@ const Submission = (props) => {
     }
   };
 
-  if (!props.authState.loggedIn) {
+  if (!localStorage.currentUserJwt) {
     props.history.replace('/MyIdea/login');
     return <div></div>;
   }
