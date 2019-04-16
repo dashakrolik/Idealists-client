@@ -6,8 +6,7 @@ import posed from 'react-pose';
 import Button from '../../reogranisation/Questions/Button';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
-import pdfAgreement from './participants_agreement.pdf';
-import { Document, Page, pdfjs } from "react-pdf";
+import { pdfjs } from "react-pdf";
 import { color } from 'style-value-types';
 import { borderRadius } from 'react-select/lib/theme';
 import { relative } from 'path';
@@ -64,32 +63,13 @@ const CompleteSubmission = (props) => {
     </GroupContainer>;
   }
 
-  class Agreement extends Component {
+  class AgreementConfirm extends Component {
     constructor(props) {
       super(props);
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleChange = this.handleChange.bind(this);
     }
-    state = { numPages: null, pageNumber: 1, value: null };
-
-    onDocumentLoadSuccess = ({ numPages }) => {
-      this.setState({ numPages });
-    };
-
-    goToPrevPage = () => {
-      if (this.state.pageNumber === 1) {
-        this.state.pageNumber = 1
-      } else {
-        this.setState(state => ({ pageNumber: state.pageNumber - 1 }));
-      }
-    }
-    goToNextPage = () => {
-      if (this.state.pageNumber === 2) {
-        this.state.pageNumber = 2
-      } else {
-        this.setState(state => ({ pageNumber: state.pageNumber + 1 }));
-      }
-    }
+    state = { value: null };
 
     handleChange = (event) => {
       this.setState({ value: event.target.value });
@@ -97,47 +77,24 @@ const CompleteSubmission = (props) => {
 
     handleSubmit = (event) => {
       if (this.state.value === (props.authState.user.firstName + ' ' + props.authState.user.lastName)) {
-        alert(this.state.value + ' has agreed to the agreement!'); //change it
+        alert(this.state.value + ' has given consent to the agreement!'); //change it
         // setAgreeBttn(true)
         submitIdea()
         event.preventDefault()
-      } 
+      } else {
+        alert('Please Enter your correct Name and Surname')
+        event.preventDefault()
+      }
     }
 
     render() {
-      const { pageNumber, numPages, value } = this.state;
-      // console.log(props, "PROPSSS")
-      // console.log(this.state, "STATEEEE")
+      const { value } = this.state;
+
       return (
         <div>
-          <div style={{ width: 600 }}>
-            <Document
-              file={pdfAgreement}
-              onLoadSuccess={this.onDocumentLoadSuccess}
-            >
-              <Page pageNumber={pageNumber} width={600} />
-            </Document>
-          </div>
-          <br />
-
-          <nav>
-            <button style={{ backgroundColor: "inherit", color: "white", borderRadius: "10px" }}
-              onClick={this.goToPrevPage}>Prev Page</button>
-            <button style={{ backgroundColor: "inherit", color: "white", borderRadius: "10px" }}
-              onClick={this.goToNextPage}>Next Page</button>
-          </nav>
-
-          <p>
-            Page {pageNumber} of {numPages}
-          </p>
-          <br />
-          <a href={pdfAgreement} download><Button text={'Download the Participants Agreement'}
-          /></a>
-          <br />
-          <br />
           <form onSubmit={this.handleSubmit}>
             <label>
-              Type your first name and last name for agreement:
+              Type your first name and last name for Agreement:
           <input type="text" value={value} onChange={this.handleChange} />
             </label>
             <input type="submit" value="Submit" style={{ backgroundColor: "inherit", color: "white", borderRadius: "10px" }} />
@@ -151,13 +108,11 @@ const CompleteSubmission = (props) => {
 
   return (
     <GroupContainer>
-      {/* <FlexRow><FlexColumn> */}
-      <Agreement />
       <UserAgreement authState={props.authState} login={props.login} />
+      <AgreementConfirm />
       {/* <Button text={'I agree'} onClick={submitIdea}
         disabled={!agreeBttn}
         withIcon /> */}
-      {/* </FlexColumn></FlexRow> */}
     </GroupContainer>
   );
 };

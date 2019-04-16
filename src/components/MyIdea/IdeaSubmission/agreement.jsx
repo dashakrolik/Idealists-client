@@ -145,11 +145,13 @@ const Useragreement = (props) => {
   }
 
   return (
-    <div style={{ width: 700, textAlign: 'left', margin: 100 }}>
-      {aggreementPage(props)}
+    <div >
+      <div style={{ width: 1000, textAlign: 'left', padding:15, marginTop: 70, color:'black', backgroundColor:'rgb(255,255,255, 0.8)' } }>
+      {aggreementPage(props) }
+      </div>
       <br />
-      <button style={{ backgroundColor: "inherit", color: "primary", borderRadius: "10px" }}
-        onClick={saveIt}> Download Agreement </button>
+      <button style={{ width:600, justifyContent:'center', backgroundColor: "inherit", margin:20, color: "white", borderRadius: "10px" }}
+        onClick={saveIt}> Download the Participants Agreement </button>
     </div>)
 }
 
