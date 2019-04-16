@@ -24,6 +24,14 @@ const Submission = (props) => {
     setProgress(activeGroup / questionGroups.length);
   }, [activeGroup]);
 
+
+  const checkLocalStorage = () => {
+    let token = localStorage.getItem('currentUserJwt')
+    console.log(token)
+  }
+
+  checkLocalStorage()
+
   const handleAnswers = (id, value) => {
     setAnswers({
       ...answers,

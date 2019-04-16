@@ -107,16 +107,16 @@ class App extends Component {
     localStorage.setItem('User last name', this.state.auth.user.lastName)
     localStorage.setItem('User email', this.state.auth.user.email)
     localStorage.setItem('Current user', this.state.auth.user.email)
-    this.preventRefresh()
+    // this.preventRefresh()
     console.log(localStorage)
     console.log(this.state)
   }
 
-  preventRefresh = () => {
-    if (this.state.auth.user.email) {
-      event.preventRefresh()
-    }
-  }
+  // preventRefresh = () => {
+  //   if (this.state.auth.user.email) {
+  //     event.preventRefresh()
+  //   }
+  // }
   render() {
     return (
       <Router>
