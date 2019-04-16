@@ -13,9 +13,11 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-import FilledInput from '@material-ui/core/FilledInput';
+import Input from '@material-ui/core/TextField';
+import { white } from 'material-ui/styles/colors';
 
 export default function IdeaDashboardDetail(props) {
+// function IdeaDashboardDetail(props) {
   const [user, setUserData] = useState({});
   const [userLoggedIn, setUserLoggedIn] = useState(true);
   const [userIdeas, setUserIdeas] = useState([]);
@@ -29,8 +31,18 @@ export default function IdeaDashboardDetail(props) {
   }, []);
 
   const [multiline, setMulitline] = useState('Controlled')
-
+  const ToggleContent = ({ toggle, content }) => {
+    const [isShown, setIsShown] = useState(false);
+    const hide = () => setIsShown(false);
+    const show = () => setIsShown(true);
   
+    return (
+      <>
+        {toggle(show)}
+        {isShown && content(hide)}
+      </>
+    );
+  };
   
   let automatchTitle = automatchResults.map(c => c.bibliographic.title[0].text)
   // console.log(automatchTitle)
@@ -70,20 +82,28 @@ export default function IdeaDashboardDetail(props) {
                     <Paragraph>
                       {automatchText[index]}
                     </Paragraph>
-                    <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-                      <Button text={`It's different`} />
+                    {/* <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}> */}
+                      {/* <Button text={`It's different`} /> */}
                       <Button text={`It's the same`} />
-                    </Controls>
-                    <StyledTextField
-                      id="outlined-multiline-flexible"
-                      label="Please explain to us how your idea is different (especially better) or similar to this patent:"
-                      multiline
-                      rowsMax="4"
-                      fullWidth
-                      margin="normal"
-                      variant="outlined"
-                    ></StyledTextField>
-                    <br></br><br></br>
+                      <ToggleContent
+                        toggle={show => <Button onClick={show} text={`It's different`}/>}
+                        content={hide => (
+                          <div>
+                            <StyledTextField
+                              id="filled-multiline-flexible"
+                              label="Also then, please explain to us how your idea is different (especially better) or similar to this patent:"
+                              multiline
+                              rowsMax="4"
+                              fullWidth
+                              margin="normal"
+                              variant="filled"
+                            />
+                            <br></br><br></br>
+                          </div>
+                        )
+                      }
+                      /> 
+                    {/* </Controls> */}
                   </div>
                 ))}
               </StartContent>
@@ -173,10 +193,13 @@ const PStartContent = posed.div({
     display: flex;
   `;
 
+
   const StyledTextField = styled(TextField)`
-    background-color: rgb(255,255,255, 0.5);
+    && {
+    background-color: rgb(255, 255, 255, 0.5);
     marginLeft: theme.spacing.unit;
     marginRight: theme.spacing.unit;
+    }
   `;
-  
+
   
