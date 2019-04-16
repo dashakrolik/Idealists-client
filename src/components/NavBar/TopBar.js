@@ -7,6 +7,11 @@ import './TopBar.css'
 import {withRouter} from 'react-router-dom'
 import logo from '../../res/logo_horizontal_white.png';
 
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
+import styled from '@emotion/styled';
+import { withStyles } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid'
 
 const TopBar = (props) => {
 
@@ -15,43 +20,49 @@ const myStorage = localStorage
 
 const [authState] = useState({})
 
-
+const {classes} = props
 
 return (
-    <AppBar>
-        <Toolbar className="topBar">
-
-        <img src={logo} alt='Logo' style={logoStyle}/>
-            <div className="menu">
-                {
-                !props.authState.loggedIn ? 
-                <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Login</Button> : null
-                }
-                {
-                !props.authState.loggedIn ?
-                <Button color="inherit" onClick={() => props.history.push('/MyIdea')}>Sign Up</Button> : null
-                }
-                {
-                props.authState.loggedIn ? 
-                <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Dashboard</Button> : null
-                }
-                {
-                <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>New Idea</Button>
-                }
-                {
-                props.authState.loggedIn ? 
-                <Button color="inherit" onClick={() => props.logout}>Logout</Button> : null
-                }
-            </div>
-        </Toolbar>
-    </AppBar>
+    
+        <AppBar>
+            <Toolbar className="topBar">
+                <img src={logo} alt='Logo' style={logoStyle}/>
+                <Grid container
+                        direction="row"
+                        justify="flex-end"
+                        alignItems="center"
+                >
+                    {
+                    !props.authState.loggedIn ? 
+                    <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Login</Button> : null
+                    }
+                    {
+                    !props.authState.loggedIn ?
+                    <Button color="inherit" onClick={() => props.history.push('/MyIdea')}>Sign Up</Button> : null
+                    }
+                    {
+                    props.authState.loggedIn ? 
+                    <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Dashboard</Button> : null
+                    }
+                    {
+                    <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>New Idea</Button>
+                    }
+                    {
+                    props.authState.loggedIn ? 
+                    <Button color="inherit" onClick={() => props.logout}>Logout</Button> : null
+                    }
+               </Grid>
+            
+            </Toolbar>
+        </AppBar>
+    
     )
 }
 
 export default withRouter(TopBar) 
 
-
 var logoStyle = {
   width: 200,
-  marginLeft: 300
+//   marginLeft: 300
 }
+

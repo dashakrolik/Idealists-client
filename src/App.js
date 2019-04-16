@@ -49,6 +49,7 @@ class App extends Component {
               token: res.body.jwt,
             },
           });
+          this.updateLocalStorage()
         }
       })
       .catch(err => {
@@ -70,7 +71,8 @@ class App extends Component {
             ...this.state.auth,
             user: res.body
           }
-        })
+        });
+        this.updateLocalStorage()
       })
   }
 
@@ -98,6 +100,12 @@ class App extends Component {
       .set("Authorization", `Bearer ${jwt}`)
       .send( {password })
       .then(res => res.status === 200)
+  }
+
+  updateLocalStorage = (key, value) => {
+    localStorage.setItem('auth', this.state.auth.user.firstName)
+    console.log(localStorage)
+    console.log(this.state)
   }
 
   render() {

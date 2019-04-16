@@ -12,6 +12,7 @@ import { color } from 'style-value-types';
 import { borderRadius } from 'react-select/lib/theme';
 import { relative } from 'path';
 import { withRouter } from 'react-router-dom'
+import UserAgreement from './agreement.jsx'
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -100,15 +101,13 @@ const CompleteSubmission = (props) => {
         // setAgreeBttn(true)
         submitIdea()
         event.preventDefault()
-      } else {
-        return true
-      }
+      } 
     }
 
     render() {
       const { pageNumber, numPages, value } = this.state;
-      console.log(props, "PROPSSS")
-      console.log(this.state, "STATEEEE")
+      // console.log(props, "PROPSSS")
+      // console.log(this.state, "STATEEEE")
       return (
         <div>
           <div style={{ width: 600 }}>
@@ -154,7 +153,7 @@ const CompleteSubmission = (props) => {
     <GroupContainer>
       {/* <FlexRow><FlexColumn> */}
       <Agreement />
-
+      <UserAgreement authState={props.authState} login={props.login} />
       {/* <Button text={'I agree'} onClick={submitIdea}
         disabled={!agreeBttn}
         withIcon /> */}
