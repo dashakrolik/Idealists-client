@@ -3,6 +3,7 @@ import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import './IdeaDashBoardDetail.css'
 import Card from '@material-ui/core/Card'
+import styled from '@emotion/styled'
 
 export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
@@ -29,17 +30,7 @@ export default function IdeaDashboardDetail(props) {
         })
     })
 
-    qAnswers = qAnswers.map(answer => {
-        if (typeof answer === 'object') {
-            if (answer[0]) {
-                return answer[0].value
-            }
-            else {
-                return answer.value
-            }
-        }
-        return answer;
-    })
+    qAnswers = qAnswers.map(answer => typeof answer === 'object' ? answer[0] ? answer[0].value : answer.value : answer)
 
     if (qAnswers[0] === 'true') {
         qAnswers[0] = 'yes'
@@ -71,10 +62,10 @@ export default function IdeaDashboardDetail(props) {
             <h1 className='header'> Questions and Answers about Idea</h1>
             <br />
             <div className='questions-answers'>
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[0]}:</h4>
                     <p>{qAnswers[0]}</p>
-                </Card>
+                </StyledCard>
                 <Card className='card-detail'>
                     <h4>{qTitles[1]}:</h4>
                     <p>{qAnswers[1]}</p>
@@ -139,3 +130,5 @@ export default function IdeaDashboardDetail(props) {
         </div>)
 
 }
+const StyledCard = styled(Card) `
+    background-color: rgb(255,255,255 05);`
