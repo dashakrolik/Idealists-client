@@ -81,27 +81,11 @@ export default function IdeaDashboard(props) {
             </Link>
           )}
         </div>
-        {/* <div className='statusbar-container'>
-        Assessing Your Idea:
-          <ProgressBar percentRange={percentRange}/>
-        </div>  */}
-        <div className='statusbar-container'>
-        Assessing Your Idea:
-          <ul className="progressbar">
-          
-            <li className="active">Idea Comes In</li>
-            <li>Automated Novelty and Patent/IP Check</li>
-            <li>Collective Intelligence Sift Filter</li>
-            <li>Expert Novelty and Patent/IP Check</li>
-            <li>Validation Process</li>
-            <li>Expert Novelty and Patent/IP Check</li>
-            <li>Determine Finance Need and Timeframe</li>
-          
-	        </ul>
-        </div>
-        <div className='summary-container'>
+
+        {/* <div className='summary-container'>
+
           <p>Summary of your idea:</p><br/>
-        </div>
+        </div> */}
       </div>
     );
   // } else {

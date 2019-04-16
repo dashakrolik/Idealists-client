@@ -11,7 +11,7 @@ import { Document, Page, pdfjs } from "react-pdf";
 import { color } from 'style-value-types';
 import { borderRadius } from 'react-select/lib/theme';
 import { relative } from 'path';
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -59,7 +59,7 @@ const CompleteSubmission = (props) => {
     return <GroupContainer>
       <FlexRow><FlexColumn><GroupTitle>Submission complete!</GroupTitle></FlexColumn></FlexRow>
       <FlexRow><FlexColumn><GroupSubtitle>We'll be in touch with you soon.</GroupSubtitle></FlexColumn></FlexRow>
-      <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Go to my dashboard</Button>
+      <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')} text={'Go to my dashboard'} />
     </GroupContainer>;
   }
 
@@ -75,18 +75,20 @@ const CompleteSubmission = (props) => {
       this.setState({ numPages });
     };
 
-    goToPrevPage = () =>{
+    goToPrevPage = () => {
       if (this.state.pageNumber === 1) {
         this.state.pageNumber = 1
-      }else{
+      } else {
         this.setState(state => ({ pageNumber: state.pageNumber - 1 }));
-      }}
-    goToNextPage = () =>{
-    if (this.state.pageNumber === 2) {
-      this.state.pageNumber = 2
-    }else{
-      this.setState(state => ({ pageNumber: state.pageNumber + 1 }));
-    }}
+      }
+    }
+    goToNextPage = () => {
+      if (this.state.pageNumber === 2) {
+        this.state.pageNumber = 2
+      } else {
+        this.setState(state => ({ pageNumber: state.pageNumber + 1 }));
+      }
+    }
 
     handleChange = (event) => {
       this.setState({ value: event.target.value });
@@ -94,8 +96,9 @@ const CompleteSubmission = (props) => {
 
     handleSubmit = (event) => {
       if (this.state.value === (props.authState.user.firstName + ' ' + props.authState.user.lastName)) {
-        alert(this.state.value + ' has agreed to the agreement'); //change it
-        setAgreeBttn(true)
+        alert(this.state.value + ' has agreed to the agreement!'); //change it
+        // setAgreeBttn(true)
+        submitIdea()
         event.preventDefault()
       } else {
         return true
@@ -118,23 +121,30 @@ const CompleteSubmission = (props) => {
           </div>
           <br />
 
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Type your first name and last name for agreement:
-          <input type="text" value={value} onChange={this.handleChange} />
-            </label>
-            <input type="submit" value="Submit" style={{ backgroundColor: "inherit", color: "white", borderRadius: "10px" }}/>
-          </form>
-
           <nav>
             <button style={{ backgroundColor: "inherit", color: "white", borderRadius: "10px" }}
               onClick={this.goToPrevPage}>Prev Page</button>
             <button style={{ backgroundColor: "inherit", color: "white", borderRadius: "10px" }}
               onClick={this.goToNextPage}>Next Page</button>
           </nav>
+
           <p>
             Page {pageNumber} of {numPages}
           </p>
+          <br />
+          <a href={pdfAgreement} download><Button text={'Download the Participants Agreement'}
+          /></a>
+          <br />
+          <br />
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Type your first name and last name for agreement:
+          <input type="text" value={value} onChange={this.handleChange} />
+            </label>
+            <input type="submit" value="Submit" style={{ backgroundColor: "inherit", color: "white", borderRadius: "10px" }} />
+          </form>
+          <br />
+          <br />
         </div>
       );
     }
@@ -145,11 +155,9 @@ const CompleteSubmission = (props) => {
       {/* <FlexRow><FlexColumn> */}
       <Agreement />
 
-      <a href={pdfAgreement} download><Button text={'Download the Participants Agreement'}
-      /></a>
-      <Button text={'I agree'} onClick={submitIdea}
+      {/* <Button text={'I agree'} onClick={submitIdea}
         disabled={!agreeBttn}
-        withIcon />
+        withIcon /> */}
       {/* </FlexColumn></FlexRow> */}
     </GroupContainer>
   );
