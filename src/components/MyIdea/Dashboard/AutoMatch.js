@@ -13,6 +13,7 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+import FilledInput from '@material-ui/core/FilledInput';
 
 export default function IdeaDashboardDetail(props) {
   const [user, setUserData] = useState({});
@@ -29,12 +30,7 @@ export default function IdeaDashboardDetail(props) {
 
   const [multiline, setMulitline] = useState('Controlled')
 
-  // // change to hooks
-  // handleChange = name => event => {
-  //   this.setState({
-  //     [name]: event.target.value,
-  //   });
-  // };
+  
   
   let automatchTitle = automatchResults.map(c => c.bibliographic.title[0].text)
   // console.log(automatchTitle)
@@ -79,14 +75,14 @@ export default function IdeaDashboardDetail(props) {
                       <Button text={`It's the same`} />
                     </Controls>
                     <StyledTextField
-                      id="filled-multiline-flexible"
+                      id="outlined-multiline-flexible"
                       label="Please explain to us how your idea is different (especially better) or similar to this patent:"
                       multiline
                       rowsMax="4"
                       fullWidth
                       margin="normal"
-                      variant="filled"
-                    />
+                      variant="outlined"
+                    ></StyledTextField>
                     <br></br><br></br>
                   </div>
                 ))}

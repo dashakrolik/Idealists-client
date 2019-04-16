@@ -16,15 +16,7 @@ const IdeaStart = (props) => {
   const [loginButtonEnabled, setLoginButtonEnabled] = useState(false);
   const [password, setPassword] = useState('');
   const [signUpFormValidated, setSignUpFormValidated] = useState(false);
-  console.log('IdeaStart', props)
-  // const [registrationFormData, setRegistratinoFormData] = useState({
-  //   firstName: '',
-  //   lastName: '',
-  //   emailAddress: '',
-  //   password: '',
-  //   passwordRepeat: '',
-  //   countryOfResidence: '',
-  // });
+
   
   const newUser = () => {
     if (props.authState.loggedIn) {
@@ -57,9 +49,6 @@ const IdeaStart = (props) => {
         }
       `} />
       <Content>
-        <div css={css`grid-area: logo-area;`}>
-          <Logo src={logo} alt='Logo' />
-        </div>
         <div css={css`grid-area: content-area`}>
           <div css={css`display: flex; align-items: center; flex-direction: column;`}>
             <StartContent pose={uiState}

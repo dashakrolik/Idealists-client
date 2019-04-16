@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
-import Button from '../../reogranisation/Questions/Button';
-import Card from '@material-ui/core/Card'
 import { Redirect, Link } from 'react-router-dom';
+import './IdeaDashBoardDetail.css'
+import Card from '@material-ui/core/Card'
+import styled from '@emotion/styled';
+
 export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
     const ideasId = props.match.params.id
@@ -70,12 +72,12 @@ export default function IdeaDashboardDetail(props) {
             <br />
             <h1 className='header'> Questions and Answers about Idea</h1>
             <br />
+           
             <div className='questions-answers'>
-            <Link key={ideasId} className='tile-link' to={`/automatch`}>Market Check</Link>
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[0]}:</h4>
                     <p>{qAnswers[0]}</p>
-                </Card>
+                </StyledCard>
                 <Card className='card-detail'>
                     <h4>{qTitles[1]}:</h4>
                     <p>{qAnswers[1]}</p>
@@ -128,7 +130,6 @@ export default function IdeaDashboardDetail(props) {
                     <h4>{qTitles[11]}:</h4>
                     <p>{qAnswers[11]}</p>
                 </Card>
-                
                 <br />
                 <br />
                 <br />
@@ -141,3 +142,7 @@ export default function IdeaDashboardDetail(props) {
         </div>)
 
 }
+
+const StyledCard = styled(Card) `
+    background-color: rgb(255,255,255, 0.5);
+`

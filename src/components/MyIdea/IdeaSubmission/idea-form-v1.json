@@ -610,7 +610,7 @@
       {
         "id": 0,
         "type": "singleLine",
-        "text": "Your idea in up to 3 words *",
+        "text": "Describe your idea in up to 3 words *",
         "validationRegex": "^(?:[A-Za-z,]+ ){0,2}[A-Za-z]+$",
         "maxChar": 150,
         "validationErrorMsg": "Please separate the words by commas or spaces only."
@@ -618,7 +618,7 @@
       {
         "id": 1,
         "type": "singleLine",
-        "text": "Your idea in up to 150 characters *",
+        "text": "Describe your idea in up to 150 characters *",
         "validationRegex": "^(.){0,150}$",
         "maxChar": 150,
         "validationErrorMsg": "Invalid number of characters."
@@ -634,7 +634,7 @@
       {
         "id": 2,
         "type": "multiLine",
-        "text": "A detailed description of your idea up to 1500 characters *",
+        "text": "Describe your idea up to 1500 characters *",
         "validationRegex": "^(*.){1,1500}$",
         "maxChar": 1500,
         "validationErrorMsg": "Max 100 chars."

@@ -94,11 +94,6 @@ const Submission = (props) => {
             </PoseGroup>
           </Content>
         </Right>
-
-        {/*<div css={css`position: absolute; left: 20px; bottom: 20px; width: 160px;`}>*/}
-        {/*<Button text='Previous' disabled={false} onClick={handlePreviousBttnClick} />*/}
-        {/*</div>*/}
-
         <div css={css`position: absolute; right: 20px; bottom: 20px; width: 160px;`}>
           {activeGroup !== questionGroups.length &&
             <Button text='Next' disabled={!activeGroupComplete} onClick={handleNextBttnClick} withIcon />}
