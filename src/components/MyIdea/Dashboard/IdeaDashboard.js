@@ -14,11 +14,11 @@ export default function IdeaDashboard(props) {
   // progress bar
   const [percentRange, setProgress] = useState(0);
 
-  console.log('User object', user)
+
   
   // Currently userIdeas are ALL ideas, because it is a non-specific GET request
   const [userIdeas, setUserIdeas] = useState([]);
-  console.log('User Ideas', userIdeas)
+
   useEffect(() => {
      if (props.authState.loggedIn)
       request
@@ -54,13 +54,13 @@ export default function IdeaDashboard(props) {
   // if (userData.firstName) {
     // console.log(userData)
     // console.log(userIdeas.idea[0].idea[3].answers[1])
-    console.log(userIdeas)// console.log(sampleData);
+
     var listOne = userIdeas.map(idea => idea.idea.map(idea => idea))
-    console.log(listOne)
+
     var listTwo = listOne.map(idea => idea[0])
-    console.log(listTwo)
+ 
     var listThree = listTwo.map(list => list.answers)
-    console.log(listThree)
+  
 
 
     return (
@@ -80,27 +80,6 @@ export default function IdeaDashboard(props) {
               </div>
             </Link>
           )}
-        </div>
-        {/* <div className='statusbar-container'>
-        Assessing Your Idea:
-          <ProgressBar percentRange={percentRange}/>
-        </div>  */}
-        <div className='statusbar-container'>
-        Assessing Your Idea:
-          <ul className="progressbar">
-          
-            <li className="active">Idea Comes In</li>
-            <li>	Automated Novelty and Patent/IP Check</li>
-            <li>Collective Intelligence Sift Filter</li>
-            <li>Expert Novelty and Patent/IP Check</li>
-            <li>Validation Process</li>
-            <li>Expert Novelty and Patent/IP Check</li>
-            <li>Determine Finance Need and Timeframe</li>
-          
-	        </ul>
-        </div>
-        <div className='summary-container'>
-          <p>Summary of your idea:</p><br/>
         </div>
       </div>
     );
