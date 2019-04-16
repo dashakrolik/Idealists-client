@@ -16,7 +16,7 @@ import IdeaLogin from './components/MyIdea/IdeaLogin';
 import TopBar from './components/NavBar/TopBar'
 import ResetPassword from './components/MyIdea/ResetPassword';
 import EnterNewPassword from './components/MyIdea/EnterNewPassword';
-
+import AutoMatch from './components/MyIdea/Dashboard/AutoMatch'
 
 class App extends Component {
   state = {
@@ -49,6 +49,7 @@ class App extends Component {
               token: res.body.jwt,
             },
           });
+          this.updateLocalStorage()
         }
       })
       .catch(err => {
@@ -70,7 +71,8 @@ class App extends Component {
             ...this.state.auth,
             user: res.body
           }
-        })
+        });
+        this.updateLocalStorage()
       })
   }
 
@@ -98,6 +100,12 @@ class App extends Component {
       .set("Authorization", `Bearer ${jwt}`)
       .send( {password })
       .then(res => res.status === 200)
+  }
+
+  updateLocalStorage = (key, value) => {
+    localStorage.setItem('auth', this.state.auth.user.firstName)
+    console.log(localStorage)
+    console.log(this.state)
   }
 
   render() {
@@ -134,6 +142,9 @@ class App extends Component {
                 }} />
                 <Route exact path='/reset-password/:jwt' render={(props) => {
                   return <EnterNewPassword {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword}/>;
+                }} />
+                <Route exact path='/automatch' render={(props) => {
+                  return <AutoMatch {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword}/>;
                 }} />
                 <Route exact path="/" render={() => <Redirect to="/MyIdea" />} />
 

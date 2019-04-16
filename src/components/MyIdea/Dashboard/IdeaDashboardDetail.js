@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
+import { Redirect, Link } from 'react-router-dom';
 import './IdeaDashBoardDetail.css'
 import Card from '@material-ui/core/Card'
+<<<<<<< HEAD
 import styled from '@emotion/styled'
+=======
+import styled from '@emotion/styled';
+>>>>>>> a419e8d8fd3ba31f219e062ad6df9f7e6a47c250
 
 export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
@@ -61,6 +66,7 @@ export default function IdeaDashboardDetail(props) {
             <br />
             <h1 className='header'> Questions and Answers about Idea</h1>
             <br />
+           
             <div className='questions-answers'>
                 <StyledCard className='card-detail'>
                     <h4>{qTitles[0]}:</h4>
@@ -130,5 +136,12 @@ export default function IdeaDashboardDetail(props) {
         </div>)
 
 }
+<<<<<<< HEAD
 const StyledCard = styled(Card) `
     background-color: rgb(255,255,255 05);`
+=======
+
+const StyledCard = styled(Card) `
+    background-color: rgb(255,255,255, 0.5);
+`
+>>>>>>> a419e8d8fd3ba31f219e062ad6df9f7e6a47c250
