@@ -100,6 +100,11 @@ class App extends Component {
       .then(res => res.status === 200)
   }
 
+  updateLocalStorage = (key, value) => {
+    this.setState({ [key]: value });
+    localStorage.setItem(key, value)
+  }
+
   render() {
     return (
       <Router>
