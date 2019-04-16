@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
-import { Redirect, Link } from 'react-router-dom';
 import './IdeaDashBoardDetail.css'
 import Card from '@material-ui/core/Card'
-<<<<<<< HEAD
-import styled from '@emotion/styled'
-=======
 import styled from '@emotion/styled';
->>>>>>> a419e8d8fd3ba31f219e062ad6df9f7e6a47c250
 
 export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
@@ -72,58 +67,58 @@ export default function IdeaDashboardDetail(props) {
                     <h4>{qTitles[0]}:</h4>
                     <p>{qAnswers[0]}</p>
                 </StyledCard>
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[1]}:</h4>
                     <p>{qAnswers[1]}</p>
-                </Card>
-                <Card className='card-detail'>
+                </StyledCard>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[2]}:</h4>
                     <p>{qAnswers[2]}</p>
-                </Card>
-                <Card className='card-detail'>
+                </StyledCard>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[3]}:</h4>
                     <p>{qAnswers[3]}</p>
-                </Card>
+                </StyledCard>
 
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[4]}:</h4>
                     <p>{qAnswers[4]}</p>
-                </Card>
+                </StyledCard>
 
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[5]}:</h4>
                     <p>{qAnswers[5]}</p>
-                </Card>
+                </StyledCard>
 
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[6]}:</h4>
                     <p>{qAnswers[6]}</p>
-                </Card>
+                </StyledCard>
 
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[7]}:</h4>
                     <p>{qAnswers[7]}</p>
-                </Card>
+                </StyledCard>
 
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[8]}:</h4>
                     <p>{qAnswers[8]}</p>
-                </Card>
+                </StyledCard>
 
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[9]}:</h4>
                     <p>{qAnswers[9]}</p>
-                </Card>
+                </StyledCard>
 
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[10]}:</h4>
                     <p>{qAnswers[10]}</p>
-                </Card>
+                </StyledCard>
 
-                <Card className='card-detail'>
+                <StyledCard className='card-detail'>
                     <h4>{qTitles[11]}:</h4>
                     <p>{qAnswers[11]}</p>
-                </Card>
+                </StyledCard>
                 <br />
                 <br />
                 <br />
@@ -136,12 +131,7 @@ export default function IdeaDashboardDetail(props) {
         </div>)
 
 }
-<<<<<<< HEAD
-const StyledCard = styled(Card) `
-    background-color: rgb(255,255,255 05);`
-=======
+
 
 const StyledCard = styled(Card) `
-    background-color: rgb(255,255,255, 0.5);
-`
->>>>>>> a419e8d8fd3ba31f219e062ad6df9f7e6a47c250
+    background-color: rgb(255,255,255, 0.7);`
