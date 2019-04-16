@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Component } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import './IdeaDashBoardDetail.css'
@@ -134,7 +134,6 @@ export default function IdeaDashboardDetail(props) {
                 <br />
 
             </div>
-
 
         </div>)
 
