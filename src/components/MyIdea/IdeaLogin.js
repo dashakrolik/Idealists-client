@@ -5,7 +5,8 @@ import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 export default function IdeaLogin(props) {
-  
+  props.updateLocalStorage()
+  console.log(localStorage)
   const [loginState, setLoginState] = useState({});
   
   const handleSubmit = (e) => {
