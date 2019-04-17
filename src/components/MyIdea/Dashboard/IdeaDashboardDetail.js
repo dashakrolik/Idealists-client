@@ -1,10 +1,11 @@
 import React, { useEffect, useState, Component } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
-import './IdeaDashBoardDetail.css'
-import Card from '@material-ui/core/Card'
-// import Drawer from '@material-ui/core/Drawer';
+import './IdeaDashBoardDetail.css';
 import styled from '@emotion/styled';
+
+import Card from '@material-ui/core/Card'
+import Grid from '@material-ui/core/Grid'
 
 
 export default function IdeaDashboardDetail(props) {
@@ -41,30 +42,36 @@ export default function IdeaDashboardDetail(props) {
     }
 
     return (
-        <div className='dashboard-container'>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            
-            <div class="wrapper">
-                <h1>Assessing Your Idea:</h1>
-                <ul class="step-progress">
-                    <li class="step-progress-item is-done"><strong>Submit your idea</strong></li>
-                    <li class="step-progress-item is-done"><strong>First patent check (1 week)</strong></li>
-                    <li class="step-progress-item current"><strong>Expert check (2 weeks)</strong></li>
-                    <li class="step-progress-item"><strong>Second patent check (2 weeks)</strong></li>
-                    <li class="step-progress-item"><strong>Validation phase (4 weeks)</strong></li>
-                    <li class="step-progress-item"><strong>Final patent check (2 weeks)</strong></li>
-                    <li class="step-progress-item"><strong>Business plan phase (2 weeks)</strong></li>
-                    <li class="step-progress-item"><strong>Funding phase (2 weeks)</strong></li>
-                    <li class="step-progress-item"><strong>Company is born (1 week)</strong></li>
-                </ul>
+        
+        <Grid className='dashboard-container'
+            container
+            spacing="20"
+            direction="row-2"
+            justify="space-evenly"
+            alignItems="flex-start"
+            margin-top="-20px"
+            >   
+            <div>
+                <br /><br /><br /><br /><br />
+                <div class="wrapper">
+                    
+                    <h1>Assessing Your Idea:</h1>
+                    <ul class="step-progress">
+                        <li class="step-progress-item is-done"><strong>Submit your idea</strong></li>
+                        <li class="step-progress-item is-done"><strong>First patent check (1 week)</strong></li>
+                        <li class="step-progress-item current"><strong>Expert check (2 weeks)</strong></li>
+                        <li class="step-progress-item"><strong>Second patent check (2 weeks)</strong></li>
+                        <li class="step-progress-item"><strong>Validation phase (4 weeks)</strong></li>
+                        <li class="step-progress-item"><strong>Final patent check (2 weeks)</strong></li>
+                        <li class="step-progress-item"><strong>Business plan phase (2 weeks)</strong></li>
+                        <li class="step-progress-item"><strong>Funding phase (2 weeks)</strong></li>
+                        <li class="step-progress-item"><strong>Company is born (1 week)</strong></li>
+                    </ul>
+                </div>
             </div>
             <main>
+                <br /><br /><br /><br /><br /><br />
                 <h1 className='header'> Questions and Answers about Idea</h1>
-                <br />
                 <div className='questions-answers'>
                     <StyledCard className='card-detail'>
                         <h4>{qTitles[0]}:</h4>
@@ -129,13 +136,13 @@ export default function IdeaDashboardDetail(props) {
                     <br />
                 </div>
             </main>
-        </div>
+        </Grid>
     )
 
 }
 
 
 const StyledCard = styled(Card) `
-    background-color: rgb(255,255,255, 0.7);`
+    background-color: rgb(255,255,255, 0.3);`
 
     
