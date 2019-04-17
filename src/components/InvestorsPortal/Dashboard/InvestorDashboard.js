@@ -41,7 +41,7 @@ export default function InvestorDashboard(props) {
   if (userData.firstName) {
     // console.log(userData)
     // console.log(userIdeas)
-    console.log(sampleData);
+
     
     return (
       <div>

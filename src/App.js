@@ -118,10 +118,6 @@ class App extends Component {
 
     let retrievedToken = localStorage.getItem('currentUserJwt')
 
-    console.log(retrievedToken)
-    // this.preventRefresh()
-    console.log(localStorage)
-    console.log(this.state)
     return retrievedToken
   }
 
