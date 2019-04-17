@@ -11,8 +11,13 @@ export default function IdeaLogin(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);
+    e.preventDefault()
     if (props.authState.loggedIn) {
     triggerUserData()
+    } else if (props.authState.error === true) {
+      
+      alert('You have entered an incorrect email or password, please refresh the page and try again')
+      e.preventDefault()
     }
   };
   

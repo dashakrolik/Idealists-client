@@ -24,6 +24,7 @@ class App extends Component {
       loggedIn: false,
       token: '',
       user: '',
+      error: ''
     },
     navigation: {
       activePath: '',
@@ -53,7 +54,15 @@ class App extends Component {
       })
       .catch(err => {
         if (err.status === 400) {
-          // dispatch(userLoginFailed(err.response.body.message))
+          this.setState({
+            ...this.state,
+            auth: {
+              ...this.state.auth,
+              loggedIn: false,
+              token: null,
+              error: true
+            }
+          })
         } else {
           console.error(err);
         }
