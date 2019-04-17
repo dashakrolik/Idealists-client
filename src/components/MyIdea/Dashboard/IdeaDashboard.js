@@ -11,11 +11,6 @@ export default function IdeaDashboard(props) {
   const [user, setUserData] = useState({});
   const [userLoggedIn, setUserLoggedIn] = useState(true);
 
-  // progress bar
-  const [percentRange, setProgress] = useState(0);
-
-
-  
   // Currently userIdeas are ALL ideas, because it is a non-specific GET request
   const [userIdeas, setUserIdeas] = useState([]);
 
@@ -45,21 +40,8 @@ export default function IdeaDashboard(props) {
     return (
       <Redirect to='/myIdea' />
     );
-  
-  //  Condition below should be userIdeas.length > 0, userData.firstName is purely for testing purposes
-  // if (userData.firstName) {
-    // console.log(userData)
-    // console.log(userIdeas.idea[0].idea[3].answers[1])
-
-    var listOne = userIdeas.map(idea => idea.idea.map(idea => idea))
-
-    var listTwo = listOne.map(idea => idea[0])
- 
-    var listThree = listTwo.map(list => list.answers)
-  
-
-
-    return (
+    
+  return (
       <div className='dashboard-container'>
         <br/>
         <br/>
@@ -79,35 +61,9 @@ export default function IdeaDashboard(props) {
         </div>
       </div>
     );
-  // } else {
-  //   return (
-  //     <div>
-  //     </div>
-  //   );
-    
-  // }
 }
 
 // Code below is just sample data because the ideas database is empty
-const sampleData =
-  [
-    {
-      "createdAt": "2019-03-12T13:57:40.889Z",
-      "id": 1,
-      "idea": "{\"question1\":\"answer1\",\"question2\":\"answer2\",\"question3\":\"answer3\"}",
-    },
-    {
-      "createdAt": "2019-03-12T13:57:54.639Z",
-      "id": 2,
-      "idea": "{\"question1\":\"answer1\",\"question2\":\"answer2\",\"question3\":\"answer3\"}",
-    },
-    {
-      "createdAt": "2019-03-12T13:58:14.973Z",
-      "id": 3,
-      "idea": "{\"question1\":\"answer1\",\"question2\":\"answer2\",\"question3\":\"answer3\"}",
-    },
-  ]
-
 
   const PStartContent = posed.div({
     notDisplayingLogin: {
