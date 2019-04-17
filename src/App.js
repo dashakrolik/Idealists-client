@@ -24,6 +24,7 @@ class App extends Component {
       loggedIn: false,
       token: '',
       user: '',
+      error: ''
     },
     navigation: {
       activePath: '',
@@ -53,7 +54,15 @@ class App extends Component {
       })
       .catch(err => {
         if (err.status === 400) {
-          // dispatch(userLoginFailed(err.response.body.message))
+          this.setState({
+            ...this.state,
+            auth: {
+              ...this.state.auth,
+              loggedIn: false,
+              token: null,
+              error: true
+            }
+          })
         } else {
           console.error(err);
         }
@@ -109,10 +118,6 @@ class App extends Component {
 
     let retrievedToken = localStorage.getItem('currentUserJwt')
 
-    console.log(retrievedToken)
-    // this.preventRefresh()
-    console.log(localStorage)
-    console.log(this.state)
     return retrievedToken
   }
 
@@ -148,10 +153,11 @@ class App extends Component {
             <ThemeProvider theme={theme}>
               <Application>
                 <Route exact path='/Investors/dashboard' render={(props) => {
-                  return <InvestorDashboard {...props} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout}/>;
+                return <InvestorDashboard {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
                 }} />
                 <Route exact path='/Investors/login' render={(props) => {
-                  return <InvestorLogin {...props} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue}/>;
+                return <InvestorLogin {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
+
                 }} />
                 <Route exact path='/MyIdea' render={(props) => {
                   return <IdeaStart {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue}/>;

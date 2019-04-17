@@ -8,6 +8,8 @@ export default function InvestorDashboard(props) {
   
   const [userData, setUserData] = useState({});
   const [userLoggedIn, setUserLoggedIn] = useState(true);
+
+  console.log(props.authState.token)
   
   // Currently userIdeas are ALL ideas, because it is a non-specific GET request
   const [userIdeas, setUserIdeas] = useState([]);
@@ -38,13 +40,13 @@ export default function InvestorDashboard(props) {
   if (userLoggedIn === false)
     return (
       <Redirect to='/login' />);
-
     
     return (
+
       <div className='dashboard-container'>
         <br />
         <br />
-        <br />
+
         <h4 className='title'>This is {userData.firstName}'s dashboard</h4>
         <div className='flex-tilescontainer'>
           {userIdeas.map(idea =>
@@ -52,9 +54,15 @@ export default function InvestorDashboard(props) {
               <div className='idea-tile' key={idea.id}>
                 <p>{idea.idea[3].answers[0].qAnswer}</p>
               </div>
+                <br />
+                <p>{idea.idea[3].answers[1].qAnswer}</p>
+              </div>
+
+
             </Link>
           )}
         </div>
       </div>
     )}
+
 

@@ -21,8 +21,7 @@ const myStorage = localStorage
 const [authState] = useState({})
 
 const {classes} = props
-console.log(localStorage)
-console.log(props.logout)
+
 return (
     
         <AppBar>
