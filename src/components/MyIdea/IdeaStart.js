@@ -11,6 +11,7 @@ import { Redirect } from 'react-router-dom';
 
 const IdeaStart = (props) => {
   
+  console.log(localStorage)
   const [uiState, setUiState] = useState('notDisplayingLogin');
   const [emailAddress, setEmailAddress] = useState('');
   const [loginButtonEnabled, setLoginButtonEnabled] = useState(false);
@@ -27,7 +28,7 @@ const IdeaStart = (props) => {
   };
   
   const existingUser = () => {
-    props.history.push('/MyIdea/New');
+    props.history.push('/MyIdea/login');
   };
   
   const closeRegistration = () => {
@@ -41,6 +42,8 @@ const IdeaStart = (props) => {
     }
   }, [emailAddress, password]);
   
+ 
+
   return (
     <Container>
       <Global styles={css`
@@ -49,6 +52,9 @@ const IdeaStart = (props) => {
         }
       `} />
       <Content>
+        {/* <div css={css`grid-area: logo-area;`}>
+          <Logo src={logo} alt='Logo' />
+        </div> */}
         <div css={css`grid-area: content-area`}>
           <div css={css`display: flex; align-items: center; flex-direction: column;`}>
             <StartContent pose={uiState}

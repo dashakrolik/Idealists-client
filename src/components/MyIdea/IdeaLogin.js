@@ -5,14 +5,19 @@ import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 export default function IdeaLogin(props) {
-  
+  console.log(localStorage)
   const [loginState, setLoginState] = useState({});
   
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);
+    e.preventDefault()
     if (props.authState.loggedIn) {
     triggerUserData()
+    } else if (props.authState.error === true) {
+      
+      alert('You have entered an incorrect email or password, please refresh the page and try again')
+      e.preventDefault()
     }
   };
   
@@ -31,23 +36,19 @@ export default function IdeaLogin(props) {
 
   const triggerUserData = () => {
     if (props.authState) {
-    props.user()
+    props.user(); console.log('line 34') 
     }
   }
 
 
   //logout code
 
-
-
-
-
-
   //logout code
-
-  if (props.authState.loggedIn) {
-    props.history.replace('/MyIdea/new');
-    triggerUserData()
+  console.log('line 47')
+  console.log(localStorage.currentUserJwt)
+  if (!localStorage.currentUserJwt) { console.log('line 48')
+    props.history.replace('/MyIdea/login'); console.log('line 48')
+    triggerUserData(); console.log('line 47')
     return <div></div>;
   }
   
@@ -75,7 +76,7 @@ export default function IdeaLogin(props) {
         </form>
       </RightSide>
     </Container>);
-  else return <div></div>;
+  else return (<Redirect to='/' />)
 }
 
 const Logo = styled.img`

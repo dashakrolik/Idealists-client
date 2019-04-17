@@ -24,6 +24,14 @@ const Submission = (props) => {
     setProgress(activeGroup / questionGroups.length);
   }, [activeGroup]);
 
+
+  // const checkLocalStorage = () => {
+  //   let token = localStorage.getItem('currentUserJwt')
+  //   console.log(token)
+  // }
+
+  // checkLocalStorage()
+
   const handleAnswers = (id, value) => {
     setAnswers({
       ...answers,
@@ -57,8 +65,8 @@ const Submission = (props) => {
     }
   };
 
-  if (!props.authState.loggedIn) {
-    props.history.replace('/MyIdea/login');
+  if (localStorage.currentUserJwt !== null && props.authState.loggedIn === false) {
+    props.setAuthLoggedInTrue()
     return <div></div>;
   }
   if (questionGroups.length === 0) return <div>Loading...</div>;
