@@ -36,16 +36,12 @@ export default function IdeaDashboard(props) {
       .then(res => setUserIdeas(res.body));
   }, []);
   
-  const userLogout = () => {
-    localStorage.removeItem('currentUserJwt');
-    setUserLoggedIn(false);
-  };
 
    const handleClick = () => {
      props.history.replace('/MyIdea/')
    }
   
-  if (userLoggedIn === false)
+  if (props.authState.LoggedIn === false)
     return (
       <Redirect to='/myIdea' />
     );

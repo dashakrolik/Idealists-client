@@ -30,7 +30,7 @@ export default function UserFormContainer() {
     if (index < maxIndex)
     setIndex(index + 1)
     if (index === maxIndex){
-      console.log('We post the data to the database now')
+      
     }
   }
 
