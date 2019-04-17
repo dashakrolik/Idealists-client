@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import request from 'superagent';
+import { Redirect, Link } from 'react-router-dom';
 import { baseUrl } from '../../../constants';
 import './IdeaDashboard.css'
 /** @jsx jsx */
@@ -10,10 +11,16 @@ import posed from 'react-pose';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import FilledInput from '@material-ui/core/FilledInput';
+
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark', 
+  },
+});
 
 export default function IdeaDashboardDetail(props) {
   const [user, setUserData] = useState({});
@@ -77,9 +84,11 @@ export default function IdeaDashboardDetail(props) {
                 </Heading>
                 { Object.keys(automatchResults).map((key, index) => (
                   <div key={relevanceNumber[index]}>
-                    <Paragraph>
-                      {relevanceScore[index]} | {automatchTitle[index]}
-                    </Paragraph>
+                    <Link to={`/automatch/${relevanceNumber[index]}`}>
+                      <Paragraph>
+                        {relevanceScore[index]} | {automatchTitle[index]}
+                      </Paragraph>
+                    </Link>
                     <Paragraph>
                       {automatchText[index]}
                     </Paragraph>
@@ -106,7 +115,9 @@ export default function IdeaDashboardDetail(props) {
                       }
                       /> 
                     {/* </Controls> */}
+                    
                   </div>
+                  
                 ))}
               </StartContent>
             </div>
@@ -196,6 +207,7 @@ const PStartContent = posed.div({
   `;
 
   const StyledTextField = styled(TextField)`
+    
     background-color: rgb(255,255,255, 0.5);
     marginLeft: theme.spacing.unit;
     marginRight: theme.spacing.unit;
