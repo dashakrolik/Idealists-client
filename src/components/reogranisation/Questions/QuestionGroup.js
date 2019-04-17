@@ -9,17 +9,17 @@ import posed from 'react-pose';
 
 
 const QuestionGroup = (props) => {
-  
+
   const [validations, setValidations] = useState([]);
   const [answers, setAnswers] = useState([]);
-  
+
   const handleValidationChanges = (from, status) => {
     setValidations({
       ...validations,
       [from]: status,
     });
   };
-  
+
   useEffect(() => {
     if (validations.length === 0) return;
     if (Object.keys(validations).reduce((acc, currVal) => {
@@ -30,19 +30,19 @@ const QuestionGroup = (props) => {
       props.handleValidationChanges(false);
     }
   }, [validations]);
-  
+
   const handleDecidingQuestions = (from, answer) => {
     props.handleDecidingQuestions(from, answer);
   };
-  
+
   const handleInputFocus = (isFocused) => {
     props.handleInputFocus(isFocused);
   };
-  
+
   const handleValueChanges = (from, newValue) => {
     props.answersHandler(from, newValue);
   };
-  
+
   return (
     <GroupContainer>
       {
@@ -54,54 +54,55 @@ const QuestionGroup = (props) => {
                 <FlexRow>
                   <FlexColumn css={css`justify-content: center; margin-top: 30px;`}>
                     <Button text={question.endOption} disabled={false}
-                            onClick={() => handleDecidingQuestions(question.id, false)} />
+                      onClick={() => handleDecidingQuestions(question.id, false)} />
                     <Button text={question.continueOption} disabled={false}
-                            onClick={() => handleDecidingQuestions(question.id, true)} />
+                      onClick={() => handleDecidingQuestions(question.id, true)} />
                   </FlexColumn>
                 </FlexRow>
               </FormGroup>
             </FlexColumn></FlexRow>;
           return <FlexRow><FlexColumn><FormGroup>
             {(question.type === 'singleLine')
-            && <SingleLineQuestion questionTitle={question.text}
-                                   errorMessage={question.validationErrorMsg}
-                                   maxChar={question.maxChar}
-                                   onChange={handleValueChanges}
-                                   onFocusChanged={handleInputFocus}
-                                   id={question.id.toString()}
-                                   onValidationChange={handleValidationChanges}
-            />}
+              && <SingleLineQuestion questionTitle={question.text}
+                errorMessage={question.validationErrorMsg}
+                maxChar={question.maxChar}
+                onChange={handleValueChanges}
+                onFocusChanged={handleInputFocus}
+                id={question.id.toString()}
+                onValidationChange={handleValidationChanges}
+                placeholder={question.placeholder ? question.placeholder : ""}
+              />}
             {(question.type === 'multiLine')
-            && <SingleLineQuestion questionTitle={question.text}
-                                   errorMessage={question.validationErrorMsg}
-                                   maxChar={question.maxChar}
-                                   onChange={handleValueChanges}
-                                   onFocusChanged={handleInputFocus}
-                                   id={question.id.toString()}
-                                   onValidationChange={handleValidationChanges}
-                                   multiLine
-            />}
+              && <SingleLineQuestion questionTitle={question.text}
+                errorMessage={question.validationErrorMsg}
+                maxChar={question.maxChar}
+                onChange={handleValueChanges}
+                onFocusChanged={handleInputFocus}
+                id={question.id.toString()}
+                onValidationChange={handleValidationChanges}
+                multiLine
+              />}
             {(question.type === 'singleChoice')
-            && <SingleChoiceQuestion questionTitle={question.text}
-                                     options={question.options}
-                                     errorMessage={question.validationErrorMsg}
-                                     maxChar={question.maxChar}
-                                     onChange={handleValueChanges}
-                                     onFocusChanged={handleInputFocus}
-                                     onValidationChange={handleValidationChanges}
-                                     id={question.id.toString()}
-            />}
+              && <SingleChoiceQuestion questionTitle={question.text}
+                options={question.options}
+                errorMessage={question.validationErrorMsg}
+                maxChar={question.maxChar}
+                onChange={handleValueChanges}
+                onFocusChanged={handleInputFocus}
+                onValidationChange={handleValidationChanges}
+                id={question.id.toString()}
+              />}
             {(question.type === 'multiChoice')
-            && <SingleChoiceQuestion questionTitle={question.text}
-                                     options={question.options}
-                                     errorMessage={question.validationErrorMsg}
-                                     maxChar={question.maxChar}
-                                     onChange={handleValueChanges}
-                                     onFocusChanged={handleInputFocus}
-                                     onValidationChange={handleValidationChanges}
-                                     id={question.id.toString()}
-                                     multiChoice
-            />}
+              && <SingleChoiceQuestion questionTitle={question.text}
+                options={question.options}
+                errorMessage={question.validationErrorMsg}
+                maxChar={question.maxChar}
+                onChange={handleValueChanges}
+                onFocusChanged={handleInputFocus}
+                onValidationChange={handleValidationChanges}
+                id={question.id.toString()}
+                multiChoice
+              />}
           </FormGroup></FlexColumn></FlexRow>;
         })
       }

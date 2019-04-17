@@ -31,12 +31,12 @@ const customStyles = {
 };
 
 const SingleChoiceQuestion = (props) => {
-  
+
   const [isFocused, setIsFocused] = useState(false);
   const [isStillInit, setIsStillInit] = useState(true);
   const [validated, setValidated] = useState(false);
   const [currentValue, setCurrentValue] = useState([]);
-  
+
   useEffect(() => {
     if (!!props.multiChoice) {
       if (currentValue.length > 0) {
@@ -45,9 +45,7 @@ const SingleChoiceQuestion = (props) => {
         setValidated(false);
       }
     } else {
-      console.log(currentValue);
-      if (currentValue) {
-        console.log('currentValue');
+      if (currentValue.value) {
         setValidated(true);
       } else {
         setValidated(false);
@@ -57,25 +55,25 @@ const SingleChoiceQuestion = (props) => {
       props.onChange(props.id, currentValue);
     }
   }, [currentValue]);
-  
+
   useEffect(() => {
     props.onValidationChange && props.onValidationChange(props.id, validated);
   }, [validated]);
-  
+
   const handleChange = (selectedOption) => {
     setCurrentValue(selectedOption);
   };
-  
+
   const handleFocus = () => {
     setIsFocused(true);
     props.onFocusChanged && props.onFocusChanged(true);
   };
-  
+
   const handleLostFocus = () => {
     setIsFocused(false);
     props.onFocusChanged && props.onFocusChanged(false);
   };
-  
+
   return (
     <Container pose={isFocused ? 'focused' : 'default'}>
       <QuestionTitle>{props.questionTitle}</QuestionTitle>

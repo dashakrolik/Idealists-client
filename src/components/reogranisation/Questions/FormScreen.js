@@ -29,7 +29,7 @@ const FormScreen = (props) => {
   };
   
   const renderGroup = (group) => {
-    console.log(questionGroups);
+    
     if (!!questionGroups) return <div key='placeholder'></div>;
     return (
       <QuestionGroup key={`question-group-${'123'}`} handleInputFocus={handleInputFocus}

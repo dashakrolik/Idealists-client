@@ -29,7 +29,7 @@ function EnterNewPassword(props) {
   const onSubmit = (data) => {
     const { password } = data;
     const  token  = props.location.pathname.split('/')[2]
-    console.log(token, password)
+ 
     props.updatePassword(token, password)
     
   };
