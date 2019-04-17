@@ -38,11 +38,6 @@ export default function IdeaLogin(props) {
 
   //logout code
 
-
-
-
-
-
   //logout code
   console.log('line 47')
   console.log(localStorage.currentUserJwt)
