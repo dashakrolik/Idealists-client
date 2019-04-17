@@ -21,7 +21,8 @@ const myStorage = localStorage
 const [authState] = useState({})
 
 const {classes} = props
-
+console.log(localStorage)
+console.log(props.logout)
 return (
     
         <AppBar>
@@ -32,25 +33,25 @@ return (
                         justify="flex-end"
                         alignItems="center"
                 >
-                    {
-                    !localStorage.currentUserJwt ? 
-                    <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Login</Button> : null
-                    }
-                    {
-                    !localStorage.currentUserJwt ?
-                    <Button color="inherit" onClick={() => props.history.push('/MyIdea')}>Sign Up</Button> : null
-                    }
-                    {
-                    localStorage.currentUserJwt ? 
-                    <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Dashboard</Button> : null
-                    }
-                    {
-                    <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>New Idea</Button>
-                    }
-                    {
-                    localStorage.currentUserJwt ? 
-                    <Button color="inherit" onClick={() => props.logout}>Logout</Button> : null
-                    }
+                {
+                !props.authState.loggedIn ? 
+                <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Login</Button> : null
+                }
+                {
+                !props.authState.loggedIn ?
+                <Button color="inherit" onClick={() => props.history.push('/MyIdea')}>Sign Up</Button> : null
+                }
+                {
+                props.authState.loggedIn ? 
+                <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Dashboard</Button> : null
+                }
+                {
+                <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>New Idea</Button>
+                }
+                {
+                props.authState.loggedIn || localStorage.currentUserJwt ? 
+                <Button color="inherit" onClick={() => props.logout && props.history.push('/MyIdea/login')}>Logout</Button> : null
+                }
                </Grid>
             
             </Toolbar>

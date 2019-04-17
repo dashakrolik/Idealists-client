@@ -108,11 +108,26 @@ class App extends Component {
     localStorage.setItem('Current user', this.state.auth.user.email)
 
     let retrievedToken = localStorage.getItem('currentUserJwt')
+
     console.log(retrievedToken)
     // this.preventRefresh()
     console.log(localStorage)
     console.log(this.state)
     return retrievedToken
+  }
+
+  logout = () => {
+    localStorage.clear();
+    localStorage.removeItem('currentUserJwt')
+    sessionStorage.clear()
+    this.setState({
+      auth: {
+        loggedIn: false,
+        token: null,
+        user: null
+      }
+    })
+    console.log('logout')
   }
 
   render() {
