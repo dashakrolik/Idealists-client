@@ -5,13 +5,18 @@ import './IdeaDashBoardDetail.css';
 import styled from '@emotion/styled';
 
 import Card from '@material-ui/core/Card'
-import Grid from '@material-ui/core/Grid'
 
+import { Redirect, Link } from 'react-router-dom';
+
+import Grid from '@material-ui/core/Grid'
 
 export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
     const ideasId = props.match.params.id
-
+    if (props.authState.LoggedIn === false) {
+    return (
+      <Redirect to='/myIdea' />
+    ) }
     useEffect(() => {
         request
             .get(`${baseUrl}/ideas/${ideasId}`)
@@ -52,6 +57,10 @@ export default function IdeaDashboardDetail(props) {
         qAnswers[0] = 'yes'
     }
 
+    if (props.authState.LoggedIn === false && localStorage.currentUserJwt === null) {
+        return (
+          <Redirect to='/myIdea' />
+        ) }
     return (
         
         <Grid className='dashboard-container'
