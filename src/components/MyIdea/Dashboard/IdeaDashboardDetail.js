@@ -3,11 +3,14 @@ import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import './IdeaDashBoardDetail.css'
 import Card from '@material-ui/core/Card'
-
+import { Redirect, Link } from 'react-router-dom';
 export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
     const ideasId = props.match.params.id
-
+    if (props.authState.LoggedIn === false) {
+    return (
+      <Redirect to='/myIdea' />
+    ) }
     useEffect(() => {
         request
             .get(`${baseUrl}/ideas/${ideasId}`)
@@ -45,6 +48,10 @@ export default function IdeaDashboardDetail(props) {
         qAnswers[0] = 'yes'
     }
 
+    if (props.authState.LoggedIn === false && localStorage.currentUserJwt === null) {
+        return (
+          <Redirect to='/myIdea' />
+        ) }
     return (
         <div className='dashboard-container'>
             <br />
