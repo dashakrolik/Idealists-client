@@ -28,7 +28,7 @@ const IdeaStart = (props) => {
   };
   
   const existingUser = () => {
-    props.history.push('/MyIdea/New');
+    props.history.push('/MyIdea/login');
   };
   
   const closeRegistration = () => {

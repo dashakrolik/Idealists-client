@@ -34,19 +34,20 @@ return (
                         alignItems="center"
                 >
                 {
-                !props.authState.loggedIn ? 
+                !localStorage.currentUserJwt || !props.authState.loggedIn  ? 
                 <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Login</Button> : null
                 }
                 {
-                props.authState.loggedIn ?
+                !props.authState.loggedIn ?
                 <Button color="inherit" onClick={() => props.history.push('/MyIdea')}>Sign Up</Button> : null
                 }
                 {
-                props.authState.loggedIn ? 
+                props.authState.loggedIn && localStorage.currentUserJwt ? 
                 <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Dashboard</Button> : null
                 }
                 {
-                <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>New Idea</Button>
+                 props.authState.loggedIn && localStorage.currentUserJwt ?   
+                <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>New Idea</Button> : null
                 }
                 {
                 props.authState.loggedIn === true && localStorage.currentUserJwt !== null ? 
