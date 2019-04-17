@@ -1,16 +1,11 @@
 import React, { useEffect, useState, Component } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
-<<<<<<< HEAD
 import { Redirect, Link } from 'react-router-dom';
 import './IdeaDashBoardDetail.css'
-||||||| merged common ancestors
-import './IdeaDashBoardDetail.css'
-=======
-import './IdeaDashBoardDetail.css';
 import styled from '@emotion/styled';
 
->>>>>>> 89c6419cafb3935b4aecfae6c7a84f93d6bd48c5
+
 import Card from '@material-ui/core/Card'
 import styled from '@emotion/styled';
 
@@ -94,160 +89,6 @@ export default function IdeaDashboardDetail(props) {
                     </ul>
                 </StyledDiv>
             </div>
-<<<<<<< HEAD
-            <br />
-            <br />
-            <h1 className='header'> Questions and Answers about Idea</h1>
-            <br />
-           
-            <div className='questions-answers'>
-                <StyledCard className='card-detail'>
-                    <h4>{qTitles[0]}:</h4>
-                    <p>{qAnswers[0]}</p>
-                </StyledCard>
-                <Card className='card-detail'>
-                    <h4>{qTitles[1]}:</h4>
-                    <p>{qAnswers[1]}</p>
-                </Card>
-                <Card className='card-detail'>
-                    <h4>{qTitles[2]}:</h4>
-                    <p>{qAnswers[2]}</p>
-                </Card>
-                <Card className='card-detail'>
-                    <h4>{qTitles[3]}:</h4>
-                    <p>{qAnswers[3]}</p>
-                </Card>
-
-                <Card className='card-detail'>
-                    <h4>{qTitles[4]}:</h4>
-                    <p>{qAnswers[4]}</p>
-                </Card>
-
-                <Card className='card-detail'>
-                    <h4>{qTitles[5]}:</h4>
-                    <p>{qAnswers[5]}</p>
-                </Card>
-
-                <Card className='card-detail'>
-                    <h4>{qTitles[6]}:</h4>
-                    <p>{qAnswers[6]}</p>
-                </Card>
-
-                <Card className='card-detail'>
-                    <h4>{qTitles[7]}:</h4>
-                    <p>{qAnswers[7]}</p>
-                </Card>
-
-                <Card className='card-detail'>
-                    <h4>{qTitles[8]}:</h4>
-                    <p>{qAnswers[8]}</p>
-                </Card>
-
-                <Card className='card-detail'>
-                    <h4>{qTitles[9]}:</h4>
-                    <p>{qAnswers[9]}</p>
-                </Card>
-
-                <Card className='card-detail'>
-                    <h4>{qTitles[10]}:</h4>
-                    <p>{qAnswers[10]}</p>
-                </Card>
-
-                <Card className='card-detail'>
-                    <h4>{qTitles[11]}:</h4>
-                    <p>{qAnswers[11]}</p>
-                </Card>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-
-            </div>
-
-
-        </div>)
-
-}
-
-const StyledCard = styled(Card) `
-    background-color: rgb(255,255,255, 0.5);
-`
-||||||| merged common ancestors
-            <br />
-            <br />
-            <h1 className='header'> Questions and Answers about Idea</h1>
-            <br />
-            <div className='questions-answers'>
-                <Card className='card-detail'>
-                    <h4>{qTitles[0]}:</h4>
-                    <p>{qAnswers[0]}</p>
-                </Card>
-                <Card className='card-detail'>
-                    <h4>{qTitles[1]}:</h4>
-                    <p>{qAnswers[1]}</p>
-                </Card>
-                <Card className='card-detail'>
-                    <h4>{qTitles[2]}:</h4>
-                    <p>{qAnswers[2]}</p>
-                </Card>
-                <Card className='card-detail'>
-                    <h4>{qTitles[3]}:</h4>
-                    <p>{qAnswers[3]}</p>
-                </Card>
-
-                <Card className='card-detail'>
-                    <h4>{qTitles[4]}:</h4>
-                    <p>{qAnswers[4]}</p>
-                </Card>
-
-                <Card className='card-detail'>
-                    <h4>{qTitles[5]}:</h4>
-                    <p>{qAnswers[5]}</p>
-                </Card>
-
-                <Card className='card-detail'>
-                    <h4>{qTitles[6]}:</h4>
-                    <p>{qAnswers[6]}</p>
-                </Card>
-
-                <Card className='card-detail'>
-                    <h4>{qTitles[7]}:</h4>
-                    <p>{qAnswers[7]}</p>
-                </Card>
-
-                <Card className='card-detail'>
-                    <h4>{qTitles[8]}:</h4>
-                    <p>{qAnswers[8]}</p>
-                </Card>
-
-                <Card className='card-detail'>
-                    <h4>{qTitles[9]}:</h4>
-                    <p>{qAnswers[9]}</p>
-                </Card>
-
-                <Card className='card-detail'>
-                    <h4>{qTitles[10]}:</h4>
-                    <p>{qAnswers[10]}</p>
-                </Card>
-
-                <Card className='card-detail'>
-                    <h4>{qTitles[11]}:</h4>
-                    <p>{qAnswers[11]}</p>
-                </Card>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-
-            </div>
-
-
-        </div>)
-
-}
-=======
             <main>
                 <br /><br /><br /><br /><br /><br />
                 <h1 className='header'> Questions and Answers about Idea</h1>
@@ -277,4 +118,4 @@ const StyledCard = styled(Card) `
     background-color: rgb(255,255,255, 0.3);`
 
     
->>>>>>> 89c6419cafb3935b4aecfae6c7a84f93d6bd48c5
+
