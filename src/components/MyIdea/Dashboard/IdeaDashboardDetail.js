@@ -12,8 +12,6 @@ export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
     const ideasId = props.match.params.id
 
-    const { classes } = props;
-
     useEffect(() => {
         request
             .get(`${baseUrl}/ideas/${ideasId}`)
@@ -21,11 +19,22 @@ export default function IdeaDashboardDetail(props) {
             .then(res => setUserIdeas(res.body.idea))
     }, []);
 
+    const processTitle = (title) => {
+        let splitTitle = title.split('?')
+        const processedTitle = splitTitle[0] 
+        return processedTitle
+    }
+
     let qAnswers = []
     const qTitles = []
     userIdeas.map(idea => {
         idea.answers.map(question => {
+            if (question.qTitle.length > 50) {
+            const title = processTitle(question.qTitle) 
+            qTitles.push(title)
+        } else {
             qTitles.push(question.qTitle)
+            }
         })
     })
 
@@ -34,6 +43,8 @@ export default function IdeaDashboardDetail(props) {
             qAnswers.push(answer.qAnswer)
         })
     })
+
+    
 
     qAnswers = qAnswers.map(answer => typeof answer === 'object' ? answer[0] ? answer[0].value : answer.value : answer)
 
@@ -58,8 +69,8 @@ export default function IdeaDashboardDetail(props) {
                     <h1>Assessing Your Idea:</h1>
                     <ul class="step-progress">
                         <li class="step-progress-item is-done"><strong>Submit your idea</strong></li>
-                        <li class="step-progress-item is-done"><strong>First patent check (1 week)</strong></li>
-                        <li class="step-progress-item current"><strong>Expert check (2 weeks)</strong></li>
+                        <li class="step-progress-item current"><strong>First patent check (1 week)</strong></li>
+                        <li class="step-progress-item"><strong>Expert check (2 weeks)</strong></li>
                         <li class="step-progress-item"><strong>Second patent check (2 weeks)</strong></li>
                         <li class="step-progress-item"><strong>Validation phase (4 weeks)</strong></li>
                         <li class="step-progress-item"><strong>Final patent check (2 weeks)</strong></li>
@@ -72,69 +83,14 @@ export default function IdeaDashboardDetail(props) {
             <main>
                 <br /><br /><br /><br /><br /><br />
                 <h1 className='header'> Questions and Answers about Idea</h1>
-                <div className='questions-answers'>
-                    <StyledCard className='card-detail'>
-                        <h4>{qTitles[0]}:</h4>
-                        <p>{qAnswers[0]}</p>
-                    </StyledCard>
-                    <StyledCard className='card-detail'>
-                        <h4>{qTitles[1]}:</h4>
-                        <p>{qAnswers[1]}</p>
-                    </StyledCard>
-                    <StyledCard className='card-detail'>
-                        <h4>{qTitles[2]}:</h4>
-                        <p>{qAnswers[2]}</p>
-                    </StyledCard>
-                    <StyledCard className='card-detail'>
-                        <h4>{qTitles[3]}:</h4>
-                        <p>{qAnswers[3]}</p>
-                    </StyledCard>
-
-                    <StyledCard className='card-detail'>
-                        <h4>{qTitles[4]}:</h4>
-                        <p>{qAnswers[4]}</p>
-                    </StyledCard>
-
-                    <StyledCard className='card-detail'>
-                        <h4>{qTitles[5]}:</h4>
-                        <p>{qAnswers[5]}</p>
-                    </StyledCard>
-
-                    <StyledCard className='card-detail'>
-                        <h4>{qTitles[6]}:</h4>
-                        <p>{qAnswers[6]}</p>
-                    </StyledCard>
-
-                    <StyledCard className='card-detail'>
-                        <h4>{qTitles[7]}:</h4>
-                        <p>{qAnswers[7]}</p>
-                    </StyledCard>
-
-                    <StyledCard className='card-detail'>
-                        <h4>{qTitles[8]}:</h4>
-                        <p>{qAnswers[8]}</p>
-                    </StyledCard>
-
-                    <StyledCard className='card-detail'>
-                        <h4>{qTitles[9]}:</h4>
-                        <p>{qAnswers[9]}</p>
-                    </StyledCard>
-
-                    <StyledCard className='card-detail'>
-                        <h4>{qTitles[10]}:</h4>
-                        <p>{qAnswers[10]}</p>
-                    </StyledCard>
-
-                    <StyledCard className='card-detail'>
-                        <h4>{qTitles[11]}:</h4>
-                        <p>{qAnswers[11]}</p>
-                    </StyledCard>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                </div>
+                { qTitles.map((title, index) => 
+                    <div className='questions-answers'>
+                        <StyledCard key={index} className='card-detail'>
+                            <h4>{title}:</h4>
+                            <p>{qAnswers[index]}</p>
+                        </StyledCard>
+                    </div>
+                )}
             </main>
         </Grid>
     )
