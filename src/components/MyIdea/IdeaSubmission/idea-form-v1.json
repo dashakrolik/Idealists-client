@@ -39,7 +39,7 @@
       {
         "id": 0,
         "type": "multiChoice",
-        "text": "Under which of the SDGs does your idea fit bets? You can select more than one.",
+        "text": "Under which of the SDGs does your idea fit best? You can select more than one.",
         "options": [
           {
             "value": "No Poverty",
@@ -115,7 +115,7 @@
           }
         ],
         "validationRegex": "^((?!none,).)*$",
-        "maxChar": 500,
+        "maxChar": 5,
         "validationErrorMsg": "We are sorry, but you cannot continue if your idea does not fit within one of the SDGs."
       },
       {
@@ -670,7 +670,7 @@
         "validationErrorMsg": "Max 1000 chars."
       }
     ]
-  },
+},
   {
     "id": 6,
     "groupTitle": "Describe the steps and story how you came up with this idea",
@@ -690,13 +690,30 @@
     "id": 7,
     "groupTitle": "Is there anything that is close to your idea?",
     "groupType": "default",
-    "groupDescription": "Please describe your answer up to 500 characters ",
+    "groupDescription": "Anything on the internet, any article or patent? Any companies who work in a similar area? Please do some Google searching and list 3 things that come closest to your idea. ",
     "questions": [
       {
         "id": 0,
-        "type": "multiLine",
-        "text": "Anything on the internet, any article or patent? Any companies who work in a similar area? Please do some Google searching and list 3 things that come closest to your idea. *",
+        "type": "singleLine",
+        "text": "Please give the link where you found a similarity to your idea *",
         "maxChar": 500,
+        "placeholder": "https://",
+        "validationErrorMsg": "Max 500 characters."
+      },
+      {
+        "id": 1,
+        "type": "singleLine",
+        "text": "Please give the link where you found a similarity to your idea. *",
+        "maxChar": 500,
+        "placeholder": "https://",
+        "validationErrorMsg": "Max 500 characters."
+      },
+      {
+        "id": 2,
+        "type": "singleLine",
+        "text": "Please give the link where you found a similarity to your idea. *",
+        "maxChar": 500,
+        "placeholder": "https://",
         "validationErrorMsg": "Max 500 characters."
       }
     ]
