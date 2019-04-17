@@ -51,15 +51,14 @@ export default function IdeaDashboard(props) {
            <h2 style={styledH2}>Please follow your next step: your market check</h2>
         <div className='flex-tilescontainer'>
             {userIdeas.map(idea => 
-            <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
-              <div className='idea-tile' key={idea.id}>
-                <p>{idea.idea[3].answers[0].qAnswer}</p>
-                <br />
+              <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
+                <div className='idea-tile' key={idea.id}>
+                  <p>{idea.idea[3].answers[0].qAnswer}</p>
+                  <br />
                   <p>{idea.idea[3].answers[1].qAnswer }</p>
-              </div>
-              
-            </Link>
-          )}
+                </div>
+              </Link>
+              )}
           <Button className='new-idea-button'>Your next idea!</Button>
         </div>
       </div>

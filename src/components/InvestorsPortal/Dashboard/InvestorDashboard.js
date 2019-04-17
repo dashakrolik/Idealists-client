@@ -54,6 +54,7 @@ export default function InvestorDashboard(props) {
               <div className='idea-tile' key={idea.id}>
                 <p>{idea.idea[3].answers[0].qAnswer}</p>
               </div>
+              <div>
                 <br />
                 <p>{idea.idea[3].answers[1].qAnswer}</p>
               </div>
