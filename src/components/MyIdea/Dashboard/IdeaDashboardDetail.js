@@ -4,13 +4,7 @@ import { baseUrl } from '../../../constants';
 import { Redirect, Link } from 'react-router-dom';
 import './IdeaDashBoardDetail.css'
 import styled from '@emotion/styled';
-
-
 import Card from '@material-ui/core/Card'
-import styled from '@emotion/styled';
-
-import { Redirect, Link } from 'react-router-dom';
-
 import Grid from '@material-ui/core/Grid'
 
 export default function IdeaDashboardDetail(props) {

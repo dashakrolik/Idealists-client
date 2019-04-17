@@ -29,7 +29,18 @@ export default function IdeaDashboardDetail(props) {
   }, []);
 
   const [multiline, setMulitline] = useState('Controlled')
-
+  const ToggleContent = ({ toggle, content }) => {
+    const [isShown, setIsShown] = useState(false);
+    const hide = () => setIsShown(false);
+    const show = () => setIsShown(true);
+  
+    return (
+      <>
+        {toggle(show)}
+        {isShown && content(hide)}
+      </>
+    );
+  };
   
   
   let automatchTitle = automatchResults.map(c => c.bibliographic.title[0].text)
