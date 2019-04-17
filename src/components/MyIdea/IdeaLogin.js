@@ -13,8 +13,6 @@ export default function IdeaLogin(props) {
     onSubmit(loginState);
     if (props.authState.loggedIn) {
     triggerUserData()
-    }else {
-      alert('Wrong email or password')
     }
   };
   
