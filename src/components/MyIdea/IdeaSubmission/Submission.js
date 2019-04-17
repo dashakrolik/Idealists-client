@@ -65,8 +65,8 @@ const Submission = (props) => {
     }
   };
 
-  if (localStorage.currentUserJwt === null || props.authState.loggedIn === false) {
-    
+  if (localStorage.currentUserJwt !== null && props.authState.loggedIn === false) {
+    props.setAuthLoggedInTrue()
     return <div></div>;
   }
   if (questionGroups.length === 0) return <div>Loading...</div>;

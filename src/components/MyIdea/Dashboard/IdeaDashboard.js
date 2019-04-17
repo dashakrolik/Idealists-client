@@ -41,7 +41,7 @@ export default function IdeaDashboard(props) {
      props.history.replace('/MyIdea/')
    }
   
-  if (userLoggedIn === false)
+  if (props.authState.LoggedIn === false)
     return (
       <Redirect to='/myIdea' />
     );

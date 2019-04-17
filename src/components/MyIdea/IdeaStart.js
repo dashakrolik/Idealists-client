@@ -42,6 +42,8 @@ const IdeaStart = (props) => {
     }
   }, [emailAddress, password]);
   
+ 
+
   return (
     <Container>
       <Global styles={css`
