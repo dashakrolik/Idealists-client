@@ -10,7 +10,7 @@ export default function IdeaDashboard(props) {
   
   const [user, setUserData] = useState({});
   const [userLoggedIn, setUserLoggedIn] = useState(true);
-  
+
   const [userIdeas, setUserIdeas] = useState([]);
 
   useEffect(() => {
@@ -36,8 +36,8 @@ export default function IdeaDashboard(props) {
   
   if (props.authState.LoggedIn === false)
     return (
-      <Redirect to='/myIdea' />
-    )
+      <Redirect to='/myIdea' />    )
+
 
 
   return (

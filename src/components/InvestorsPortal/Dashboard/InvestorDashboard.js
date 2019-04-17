@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import { Redirect, Link } from 'react-router-dom';
+import './InvestorDashboard.css'
 
 export default function InvestorDashboard(props) {
   
@@ -28,6 +29,7 @@ export default function InvestorDashboard(props) {
       .get(`${baseUrl}/ideas`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then(res => setUserIdeas(res.body));
+      
   }, []);
   
   const userLogout = () => {
@@ -38,38 +40,29 @@ export default function InvestorDashboard(props) {
   if (userLoggedIn === false)
     return (
       <Redirect to='/login' />);
-
-  console.log(userIdeas)
-  
-  
-  // Condition below should be userIdeas.length > 0, userData.firstName is purely for testing purposes
-  // if (userData.firstName) {
-    // console.log(userData)
-    // console.log(userIdeas)
-
     
-  
-  return (
+    return (
+
       <div className='dashboard-container'>
         <br />
         <br />
-        <br />
-        <div className='title'>
-          <h1>{userData.firstName}'s Dashboard</h1>
-        </div>
+
+        <h4 className='title'>This is {userData.firstName}'s dashboard</h4>
         <div className='flex-tilescontainer'>
           {userIdeas.map(idea =>
             <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
               <div className='idea-tile' key={idea.id}>
                 <p>{idea.idea[3].answers[0].qAnswer}</p>
+              </div>
                 <br />
                 <p>{idea.idea[3].answers[1].qAnswer}</p>
               </div>
+
 
             </Link>
           )}
         </div>
       </div>
-    );
-  }
+    )}
+
 
