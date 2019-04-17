@@ -153,10 +153,11 @@ class App extends Component {
             <ThemeProvider theme={theme}>
               <Application>
                 <Route exact path='/Investors/dashboard' render={(props) => {
-                  return <InvestorDashboard {...props} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout}/>;
+                return <InvestorDashboard {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
                 }} />
                 <Route exact path='/Investors/login' render={(props) => {
-                  return <InvestorLogin {...props} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue}/>;
+                return <InvestorLogin {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
+
                 }} />
                 <Route exact path='/MyIdea' render={(props) => {
                   return <IdeaStart {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue}/>;
