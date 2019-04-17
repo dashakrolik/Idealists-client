@@ -10,7 +10,7 @@ import Registration from './Registration';
 import { Redirect } from 'react-router-dom';
 
 const IdeaStart = (props) => {
-  props.updateLocalStorage()
+  
   console.log(localStorage)
   const [uiState, setUiState] = useState('notDisplayingLogin');
   const [emailAddress, setEmailAddress] = useState('');

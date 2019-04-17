@@ -65,7 +65,7 @@ const Submission = (props) => {
     }
   };
 
-  if (!localStorage.currentUserJwt) {
+  if (!localStorage.currentUserJwt && props.authState.loggedIn === false) {
     props.history.replace('/MyIdea/login');
     return <div></div>;
   }

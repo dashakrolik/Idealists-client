@@ -46,9 +46,9 @@ export default function IdeaLogin(props) {
   //logout code
   console.log('line 47')
   console.log(localStorage.currentUserJwt)
-  if (localStorage.currentUserJwt) { console.log('line 48')
-    props.history.replace('/MyIdea/new'); console.log('line 48')
-    triggerUserData(); console.log('line 47')
+  if (!localStorage.currentUserJwt) { console.log('line 48')
+    props.history.replace('/login'); console.log('line 48')
+    console.log(localStorage.currentUserJwt)
     return <div></div>;
   }
   
