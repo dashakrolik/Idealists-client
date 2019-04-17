@@ -38,11 +38,6 @@ export default function IdeaLogin(props) {
 
   //logout code
 
-
-
-
-
-
   //logout code
 
   if (props.authState.loggedIn) {
