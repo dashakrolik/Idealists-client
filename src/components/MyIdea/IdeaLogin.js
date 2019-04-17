@@ -46,13 +46,15 @@ export default function IdeaLogin(props) {
   //logout code
   console.log('line 47')
   console.log(localStorage.currentUserJwt)
-  if (!localStorage.currentUserJwt) { console.log('line 48')
+  if (localStorage.currentUserJwt) { 
+    props.logout()
+    console.log(localStorage)
     props.history.replace('/login'); console.log('line 48')
     console.log(localStorage.currentUserJwt)
     return <div></div>;
   }
   
-  if (props.authState.loggedIn !== true) return (
+  if (props.authState.loggedIn !== true || !localStorage.currentUserJwt) return (
     <Container>
 
       <LeftSide>
