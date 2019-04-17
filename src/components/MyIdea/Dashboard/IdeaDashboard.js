@@ -12,7 +12,7 @@ export default function IdeaDashboard(props) {
   const [userLoggedIn, setUserLoggedIn] = useState(true);
   
   const [userIdeas, setUserIdeas] = useState([]);
-  console.log('User Ideas', userIdeas)
+
   useEffect(() => {
      if (props.authState.loggedIn)
       request
@@ -29,19 +29,16 @@ export default function IdeaDashboard(props) {
       .then(res => setUserIdeas(res.body));
   }, []);
   
-  const userLogout = () => {
-    localStorage.removeItem('currentUserJwt');
-    setUserLoggedIn(false);
-  };
 
    const handleClick = () => {
      props.history.replace('/MyIdea/')
    }
   
-  if (userLoggedIn === false)
+  if (props.authState.LoggedIn === false)
     return (
       <Redirect to='/myIdea' />
     )
+
 
   return (
       <div className='dashboard-container'>

@@ -11,20 +11,13 @@ import { Redirect } from 'react-router-dom';
 
 const IdeaStart = (props) => {
   
+  console.log(localStorage)
   const [uiState, setUiState] = useState('notDisplayingLogin');
   const [emailAddress, setEmailAddress] = useState('');
   const [loginButtonEnabled, setLoginButtonEnabled] = useState(false);
   const [password, setPassword] = useState('');
   const [signUpFormValidated, setSignUpFormValidated] = useState(false);
-  console.log('IdeaStart', props)
-  // const [registrationFormData, setRegistratinoFormData] = useState({
-  //   firstName: '',
-  //   lastName: '',
-  //   emailAddress: '',
-  //   password: '',
-  //   passwordRepeat: '',
-  //   countryOfResidence: '',
-  // });
+
   
   const newUser = () => {
     if (props.authState.loggedIn) {
@@ -35,7 +28,7 @@ const IdeaStart = (props) => {
   };
   
   const existingUser = () => {
-    props.history.push('/MyIdea/New');
+    props.history.push('/MyIdea/login');
   };
   
   const closeRegistration = () => {
@@ -49,6 +42,8 @@ const IdeaStart = (props) => {
     }
   }, [emailAddress, password]);
   
+ 
+
   return (
     <Container>
       <Global styles={css`

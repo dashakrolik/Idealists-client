@@ -1,8 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Component } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
-import './IdeaDashboard.css'
+import './IdeaDashBoardDetail.css';
+import styled from '@emotion/styled';
 
+import Card from '@material-ui/core/Card'
+
+import { Redirect, Link } from 'react-router-dom';
+
+import Grid from '@material-ui/core/Grid'
 
 export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
@@ -11,7 +17,10 @@ export default function IdeaDashboardDetail(props) {
     const [percentRange, setProgress] = useState(0);
     
     const ideasId = props.match.params.id
-
+    if (props.authState.LoggedIn === false) {
+    return (
+      <Redirect to='/myIdea' />
+    ) }
     useEffect(() => {
         request
             .get(`${baseUrl}/ideas/${ideasId}`)
@@ -19,11 +28,22 @@ export default function IdeaDashboardDetail(props) {
             .then(res => setUserIdeas(res.body.idea))
     }, []);
 
+    const processTitle = (title) => {
+        let splitTitle = title.split('?')
+        const processedTitle = splitTitle[0] 
+        return processedTitle
+    }
+
     let qAnswers = []
     const qTitles = []
     userIdeas.map(idea => {
         idea.answers.map(question => {
+            if (question.qTitle.length > 50) {
+            const title = processTitle(question.qTitle) 
+            qTitles.push(title)
+        } else {
             qTitles.push(question.qTitle)
+            }
         })
     })
 
@@ -33,81 +53,69 @@ export default function IdeaDashboardDetail(props) {
         })
     })
 
-    qAnswers = qAnswers.map(answer => {
-        if (typeof answer === 'object') {
-            if (answer[0]) {
-                return answer[0].value
-            } else {
-                return answer.value
-            }
-        }
-        return answer;
-    })
+    
 
+    qAnswers = qAnswers.map(answer => typeof answer === 'object' ? answer[0] ? answer[0].value : answer.value : answer)
+
+    if (qAnswers[0] === 'true') {
+        qAnswers[0] = 'yes'
+    }
+
+    if (props.authState.LoggedIn === false && localStorage.currentUserJwt === null) {
+        return (
+          <Redirect to='/myIdea' />
+        ) }
     return (
-        <div className='dashboard-container'>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <div className='statusbar-container'>
-                Assessing Your Idea:
-          <ul className="progressbar">
-
-                    <li className="active">Idea Comes In</li>
-                    <li>Automated Novelty and Patent/IP Check</li>
-                    <li>Collective Intelligence Sift Filter</li>
-                    <li>Expert Novelty and Patent/IP Check</li>
-                    <li>Validation Process</li>
-                    <li>Expert Novelty and Patent/IP Check</li>
-                    <li>Determine Finance Need and Timeframe</li>
-
-                </ul>
+        
+        <Grid className='dashboard-container'
+            container
+            direction="row"
+            justify="space-evenly"
+            alignItems="flex-start"
+            >   
+            <div>
+                <br /><br /><br /><br /><br />
+                <StyledDiv>
+                    <h1>Assessing Your Idea:</h1>
+                    <ul className="step-progress">
+                        <li className="step-progress-item is-done"><strong>Submit your idea</strong></li>
+                        <li className="step-progress-item current"><strong>First patent check (1 week)</strong></li>
+                        <li className="step-progress-item"><strong>Expert check (2 weeks)</strong></li>
+                        <li className="step-progress-item"><strong>Second patent check (2 weeks)</strong></li>
+                        <li className="step-progress-item"><strong>Validation phase (4 weeks)</strong></li>
+                        <li className="step-progress-item"><strong>Final patent check (2 weeks)</strong></li>
+                        <li className="step-progress-item"><strong>Business plan phase (2 weeks)</strong></li>
+                        <li className="step-progress-item"><strong>Funding phase (2 weeks)</strong></li>
+                        <li className="step-progress-item"><strong>Company is born (1 week)</strong></li>
+                    </ul>
+                </StyledDiv>
             </div>
-            <br />
-            <br />
-            <div className='questions-answers'>
-            <h1> Questions and Answers about Idea</h1>
-            <p>{qTitles[0]}:</p>
-            <p>{qAnswers[0]}</p>
-            <br />
-            <p>{qTitles[1]}:</p>
-            <p>{qAnswers[1]}</p>
-            <br />
-            <p>{qTitles[2]}:</p>
-            <p>{qAnswers[2]}</p>
-            <br />
-            <p>{qTitles[3]}:</p>
-            <p>{qAnswers[3]}</p>
-            <br />
-            <p>{qTitles[4]}:</p>
-            <p>{qAnswers[4]}</p>
-            <br />
-            <p>{qTitles[5]}:</p>
-            <p>{qAnswers[5]}</p>
-            <br />
-            <p>{qTitles[6]}:</p>
-            <p>{qAnswers[6]}</p>
-            <br />
-            <p>{qTitles[7]}:</p>
-            <p>{qAnswers[7]}</p>
-            <br />
-            <p>{qTitles[8]}:</p>
-            <p>{qAnswers[8]}</p>
-            <br />
-            <p>{qTitles[9]}:</p>
-            <p>{qAnswers[9]}</p>
-            <br />
-            <p>{qTitles[10]}:</p>
-            <p>{qAnswers[10]}</p>
-            <br />
-            <p>{qTitles[11]}:</p>
-            <p>{qAnswers[11]}</p>
-            <br />
-            </div>
-
-
-        </div>)
+            <main>
+                <br /><br /><br /><br /><br /><br />
+                <h1 className='header'> Questions and Answers about Idea</h1>
+                { qTitles.map((title, index) => 
+                    <div key={index} className='questions-answers'>
+                        <StyledCard className='card-detail'>
+                            <h4>{title}:</h4>
+                            <p>{qAnswers[index]}</p>
+                        </StyledCard>
+                    </div>
+                )}
+            </main>
+        </Grid>
+    )
 
 }
+
+const StyledDiv = styled.div `
+    margin: 0 auto;
+    width: 330px;
+    font-family: 'Helvetica';
+    font-size: 14px;
+    border: 1px solid #ccc;
+    padding: 20px;
+`
+const StyledCard = styled(Card) `
+    background-color: rgb(255,255,255, 0.3);`
+
+    
