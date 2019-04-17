@@ -7,6 +7,8 @@ import styled from '@emotion/styled';
 import Card from '@material-ui/core/Card'
 import Grid from '@material-ui/core/Grid'
 
+import SubmissionSideScreen from '../IdeaSubmission/SubmissionSideScreen';
+
 export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
     const ideasId = props.match.params.id
@@ -66,6 +68,7 @@ export default function IdeaDashboardDetail(props) {
             justify="space-evenly"
             alignItems="flex-start"
             >   
+            <SubmissionSideScreen />
             <div>
                 <br /><br /><br /><br /><br />
                 <StyledDiv>
