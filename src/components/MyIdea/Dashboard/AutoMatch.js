@@ -47,8 +47,11 @@ export default function IdeaDashboardDetail(props) {
   let automatchTitle = automatchResults.map(c => c.bibliographic.title[0].text)
   // console.log(automatchTitle)
   // console.log(automatchResults)
-  let automatchText = automatchResults.map(a => a.passage.text)
-  // console.log(automatchText[0])
+  let automatchText = automatchResults.map(a => 
+    a.passage.text.split('.').slice(1,-1).join() + '.'
+  )
+  // console.log(automatchText)
+
   let relevanceScore = automatchResults.map(b => b.relevance.score)
   // console.log(relevanceScore)
   let relevanceNumber = automatchResults.map(b => b.relevance.number)
@@ -75,6 +78,7 @@ export default function IdeaDashboardDetail(props) {
                   Automatch results
                 </Heading>
                 { Object.keys(automatchResults).map((key, index) => (
+                  
                   <div key={relevanceNumber[index]}>
                     <Paragraph>
                       {relevanceScore[index]} | {automatchTitle[index]}
@@ -98,6 +102,7 @@ export default function IdeaDashboardDetail(props) {
                               margin="normal"
                               variant="filled"
                             />
+                            <Button text={`submit`} />
                             <br></br><br></br>
                           </div>
                         )
