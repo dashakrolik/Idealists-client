@@ -37,7 +37,7 @@ export default function IdeaLogin(props) {
 
 
   //logout code
-  
+
 
 
 
@@ -46,15 +46,13 @@ export default function IdeaLogin(props) {
   //logout code
   console.log('line 47')
   console.log(localStorage.currentUserJwt)
-  if (localStorage.currentUserJwt) { 
-    props.logout()
-    console.log(localStorage)
-    props.history.replace('/login'); console.log('line 48')
-    console.log(localStorage.currentUserJwt)
+  if (!localStorage.currentUserJwt) { console.log('line 48')
+    props.history.replace('/MyIdea/login'); console.log('line 48')
+    triggerUserData(); console.log('line 47')
     return <div></div>;
   }
   
-  if (props.authState.loggedIn !== true || !localStorage.currentUserJwt) return (
+  if (props.authState.loggedIn !== true) return (
     <Container>
 
       <LeftSide>

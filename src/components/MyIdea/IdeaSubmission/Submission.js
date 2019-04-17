@@ -65,8 +65,8 @@ const Submission = (props) => {
     }
   };
 
-  if (!localStorage.currentUserJwt && props.authState.loggedIn === false) {
-    props.history.replace('/MyIdea/login');
+  if (localStorage.currentUserJwt === null || props.authState.loggedIn === false) {
+    props.history.replace('/MyIdea/login'); console.log('line 69')
     return <div></div>;
   }
   if (questionGroups.length === 0) return <div>Loading...</div>;

@@ -49,8 +49,8 @@ return (
                 <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>New Idea</Button>
                 }
                 {
-                props.authState.loggedIn === true || localStorage.currentUserJwt ? 
-                <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Logout</Button> : null
+                props.authState.loggedIn === true && localStorage.currentUserJwt !== null ? 
+                <Button color="inherit" onClick={() => props.logout() && props.history.push('MyIdea/login')}>Logout</Button> : null
                 }
                </Grid>
             
