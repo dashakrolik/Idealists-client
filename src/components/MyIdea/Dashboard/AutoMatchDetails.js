@@ -27,12 +27,12 @@ export default function IdeaDashboardDetail(props) {
 
   useEffect(() => {
     request
-      .get(`${baseUrl}/ideas/${ideasId}/automatch`)
+      .get(`${baseUrl}/ideas/${ideasId}/automatch/${automatchId}`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
   }, []);
   
-  
+  console.log(automatchResults)
   let automatchTitle = automatchResults.map(result => result.bibliographic.title[0].text)
 //   console.log(automatchResults[0])
   // console.log(automatchTitle)

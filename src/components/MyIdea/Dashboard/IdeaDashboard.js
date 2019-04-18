@@ -57,13 +57,17 @@ export default function IdeaDashboard(props) {
                   <p>{idea.idea[3].answers[0].qAnswer}</p>
                   <br />
                   <p>{idea.idea[3].answers[1].qAnswer }</p>
-                  { idea.progress.step01 === true && 
+                  
+                  { idea.progress === null || 
+                    idea.progress.step01 === true && 
                     idea.progress.step02 === true && 
                     idea.progress.step03 === false && <p>Status: First patent check </p>}
-                  {idea.progress.step01 === true &&
+                  { idea.progress === null || 
+                    idea.progress.step01 === true &&
                     idea.progress.step02 === true &&
                     idea.progress.step03 === true && 
                     idea.progress.step04 === false && <p>Status: Expert check </p>}
+                  
                 </div>
               </Link>
               )}
