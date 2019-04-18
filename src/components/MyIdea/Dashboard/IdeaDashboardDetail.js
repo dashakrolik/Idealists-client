@@ -1,17 +1,18 @@
 import React, { useEffect, useState, Component } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
-import './IdeaDashBoardDetail.css';
+import { Redirect, Link } from 'react-router-dom';
+import './IdeaDashBoardDetail.css'
 import styled from '@emotion/styled';
-
-import Card from '@material-ui/core/Card'
-import Grid from '@material-ui/core/Grid'
-
+import { Card, Grid } from '@material-ui/core'
 
 export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
     const ideasId = props.match.params.id
-
+    if (props.authState.LoggedIn === false) {
+    return (
+      <Redirect to='/myIdea' />
+    ) }
     useEffect(() => {
         request
             .get(`${baseUrl}/ideas/${ideasId}`)
@@ -52,40 +53,41 @@ export default function IdeaDashboardDetail(props) {
         qAnswers[0] = 'yes'
     }
 
+    if (props.authState.LoggedIn === false && localStorage.currentUserJwt === null) {
+        return (
+          <Redirect to='/myIdea' />
+        ) }
     return (
         
         <Grid className='dashboard-container'
             container
-            spacing="20"
-            direction="row-2"
+            direction="row"
             justify="space-evenly"
             alignItems="flex-start"
-            margin-top="-20px"
             >   
             <div>
                 <br /><br /><br /><br /><br />
-                <div class="wrapper">
-                    
+                <StyledDiv>
                     <h1>Assessing Your Idea:</h1>
-                    <ul class="step-progress">
-                        <li class="step-progress-item is-done"><strong>Submit your idea</strong></li>
-                        <li class="step-progress-item current"><strong>First patent check (1 week)</strong></li>
-                        <li class="step-progress-item"><strong>Expert check (2 weeks)</strong></li>
-                        <li class="step-progress-item"><strong>Second patent check (2 weeks)</strong></li>
-                        <li class="step-progress-item"><strong>Validation phase (4 weeks)</strong></li>
-                        <li class="step-progress-item"><strong>Final patent check (2 weeks)</strong></li>
-                        <li class="step-progress-item"><strong>Business plan phase (2 weeks)</strong></li>
-                        <li class="step-progress-item"><strong>Funding phase (2 weeks)</strong></li>
-                        <li class="step-progress-item"><strong>Company is born (1 week)</strong></li>
+                    <ul className="step-progress">
+                        <li className="step-progress-item is-done"><strong>Submit your idea</strong></li>
+                        <li className="step-progress-item current"><strong>First patent check (1 week)</strong></li>
+                        <li className="step-progress-item"><strong>Expert check (2 weeks)</strong></li>
+                        <li className="step-progress-item"><strong>Second patent check (2 weeks)</strong></li>
+                        <li className="step-progress-item"><strong>Validation phase (4 weeks)</strong></li>
+                        <li className="step-progress-item"><strong>Final patent check (2 weeks)</strong></li>
+                        <li className="step-progress-item"><strong>Business plan phase (2 weeks)</strong></li>
+                        <li className="step-progress-item"><strong>Funding phase (2 weeks)</strong></li>
+                        <li className="step-progress-item"><strong>Company is born (1 week)</strong></li>
                     </ul>
-                </div>
+                </StyledDiv>
             </div>
             <main>
                 <br /><br /><br /><br /><br /><br />
                 <h1 className='header'> Questions and Answers about Idea</h1>
                 { qTitles.map((title, index) => 
-                    <div className='questions-answers'>
-                        <StyledCard key={index} className='card-detail'>
+                    <div key={index} className='questions-answers'>
+                        <StyledCard className='card-detail'>
                             <h4>{title}:</h4>
                             <p>{qAnswers[index]}</p>
                         </StyledCard>
@@ -97,8 +99,17 @@ export default function IdeaDashboardDetail(props) {
 
 }
 
-
+const StyledDiv = styled.div `
+    margin: 0 auto;
+    width: 330px;
+    font-family: 'Helvetica';
+    font-size: 14px;
+    border: 1px solid #ccc;
+    padding: 20px;
+`;
 const StyledCard = styled(Card) `
-    background-color: rgb(255,255,255, 0.3);`
+    background-color: rgb(255,255,255, 0.3);
+`;
 
     
+
