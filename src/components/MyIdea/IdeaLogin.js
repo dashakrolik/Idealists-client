@@ -23,7 +23,7 @@ export default function IdeaLogin(props) {
 
   const onSubmit = (data) => {
     const { email, password } = data;
-    props.login(email, password, handleSubmitCallback);
+    props.login(email, password);
   };
 
   const triggerUserData = () => {
