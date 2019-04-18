@@ -11,11 +11,6 @@ export default function IdeaDashboard(props) {
   const [user, setUserData] = useState({});
   const [userLoggedIn, setUserLoggedIn] = useState(true);
 
-  // progress bar
-  const [percentRange, setProgress] = useState(0);
-
-
-  
   // Currently userIdeas are ALL ideas, because it is a non-specific GET request
   const [userIdeas, setUserIdeas] = useState([]);
 
@@ -36,7 +31,7 @@ export default function IdeaDashboard(props) {
       .then(res => setUserIdeas(res.body));
   }, []);
   
-
+  console.log("IDEAS DASHBOARD", userIdeas)
    const handleClick = () => {
      props.history.replace('/MyIdea/')
    }
