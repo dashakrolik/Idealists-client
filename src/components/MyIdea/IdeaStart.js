@@ -11,6 +11,7 @@ import { Redirect } from 'react-router-dom';
 
 const IdeaStart = (props) => {
   
+  // console.log(localStorage)
   const [uiState, setUiState] = useState('notDisplayingLogin');
   const [emailAddress, setEmailAddress] = useState('');
   const [loginButtonEnabled, setLoginButtonEnabled] = useState(false);

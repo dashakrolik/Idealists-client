@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 export default function IdeaLogin(props) {
-
   const [loginState, setLoginState] = useState({});
 
   const handleSubmit = (e) => {
@@ -24,7 +23,7 @@ export default function IdeaLogin(props) {
 
   const onSubmit = (data) => {
     const { email, password } = data;
-    props.login(email, password);
+    props.login(email, password, handleSubmitCallback);
   };
 
   const triggerUserData = () => {
@@ -32,11 +31,6 @@ export default function IdeaLogin(props) {
       props.user();
     }
   }
-
-
-  //logout code
-
-  //logout code
 
   if (!localStorage.currentUserJwt) {
     props.history.replace('/MyIdea/login');

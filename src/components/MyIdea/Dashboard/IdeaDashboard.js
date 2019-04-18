@@ -29,7 +29,7 @@ export default function IdeaDashboard(props) {
       .then(res => setUserIdeas(res.body));
   }, []);
   
-
+  console.log("IDEAS DASHBOARD", userIdeas)
    const handleClick = () => {
      props.history.replace('/MyIdea/')
    }

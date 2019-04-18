@@ -27,6 +27,8 @@ export default function IdeaDashboardDetail(props) {
             .then(res => setUserIdeas(res.body.idea))
     }, []);
 
+    // console.log("IDEAS", userIdeas)
+
     const processTitle = (title) => {
         let splitTitle = title.split('?')
         const processedTitle = splitTitle[0] 
@@ -51,7 +53,6 @@ export default function IdeaDashboardDetail(props) {
             qAnswers.push(answer.qAnswer)
         })
     })
-
     
 
     qAnswers = qAnswers.map(answer => typeof answer === 'object' ? answer[0] ? answer[0].value : answer.value : answer)
@@ -90,7 +91,7 @@ export default function IdeaDashboardDetail(props) {
                     
                 </StyledDiv>
                 <div>
-                <Button color="inherit" text="Patent Check" onClick={() => props.history.push('/automatch')}/>
+                <Button color="inherit" text="Patent Check" onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}/>
                 </div>
             </div>
             <main>
