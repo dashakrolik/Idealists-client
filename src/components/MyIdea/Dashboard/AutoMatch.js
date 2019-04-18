@@ -14,6 +14,7 @@ import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import FilledInput from '@material-ui/core/FilledInput';
+import { value } from 'popmotion';
 
 export default function IdeaDashboardDetail(props) {
   const [user, setUserData] = useState({});
@@ -21,17 +22,19 @@ export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const ideasId = props.match.params.id
   const [automatchResults, DoAutomatch] = useState([])
+  const [currentValue, setCurrentValue] = useState([])
+
   useEffect(() => {
-      request
-          .get(`${baseUrl}/automatch/986`)
-          .set("Authorization", `Bearer ${props.authState.token}`)
-          .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
+    request
+      .get(`${baseUrl}/automatch/986`)
+      .set("Authorization", `Bearer ${props.authState.token}`)
+      .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
   }, []);
 
   const [multiline, setMulitline] = useState('Controlled')
 
-  
-  
+
+
   let automatchTitle = automatchResults.map(c => c.bibliographic.title[0].text)
   // console.log(automatchTitle)
   // console.log(automatchResults)
@@ -40,15 +43,29 @@ export default function IdeaDashboardDetail(props) {
   let relevanceScore = automatchResults.map(b => b.relevance.score)
   // console.log(relevanceScore)
   let relevanceNumber = automatchResults.map(b => b.relevance.number)
-  if (typeof automatchResults.autoMatch === 'object'){
-      // console.table(automatchResults.autoMatch['0'].relevance)
+  if (typeof automatchResults.autoMatch === 'object') {
+    // console.table(automatchResults.autoMatch['0'].relevance)
   }
-  
 
-  if (automatchResults) {
+
+  const handleChange = (e) => {
     
+      setCurrentValue(e.target.value);
+    
+  };
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(currentValue)
+
+  };
+  console.log(currentValue, "CCCC")
+  if (automatchResults) {
+
     return (
-        <Container>
+      <Container>
         <Global styles={css`
           body {
             background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
@@ -57,12 +74,12 @@ export default function IdeaDashboardDetail(props) {
         <Content>
           <div css={css`grid-area: content-area`}>
             <div css={css`display: flex; align-items: center; flex-direction: column;`}>
-              <StartContent 
+              <StartContent
                 css={css`display: flex; flex-direction: column; width: auto; margin-bottom: 60px;`}>
                 <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
                   Automatch results
                 </Heading>
-                { Object.keys(automatchResults).map((key, index) => (
+                {Object.keys(automatchResults).map((key, index) => (
                   <div key={relevanceNumber[index]}>
                     <Paragraph>
                       {relevanceScore[index]} | {automatchTitle[index]}
@@ -76,7 +93,11 @@ export default function IdeaDashboardDetail(props) {
                     </Controls>
                     <StyledTextField
                       id="outlined-multiline-flexible"
+                      key={automatchText[index]}
                       label="Please explain to us how your idea is different (especially better) or similar to this patent:"
+                      onChange={handleChange}
+                      onSubmit={handleSubmit}
+                      value={currentValue[index]}
                       multiline
                       rowsMax="4"
                       fullWidth
@@ -86,46 +107,47 @@ export default function IdeaDashboardDetail(props) {
                     <br></br><br></br>
                   </div>
                 ))}
+                <Button text="HEYYY" onClick={e => { handleSubmit(e) }} />
               </StartContent>
             </div>
           </div>
         </Content>
       </Container>
     )
-} else {
-  return (<Heading>Loading...</Heading>)
-}
+  } else {
+    return (<Heading>Loading...</Heading>)
+  }
 }
 
 
 const PStartContent = posed.div({
-    notDisplayingLogin: {
-      y: 0,
-      opacity: 1.0,
-    },
-    displayingLogin: {
-      y: -390,
-      opacity: 0.15,
-    },
-  });
-  
-  const StartContent = styled(PStartContent)`
+  notDisplayingLogin: {
+    y: 0,
+    opacity: 1.0,
+  },
+  displayingLogin: {
+    y: -390,
+    opacity: 0.15,
+  },
+});
+
+const StartContent = styled(PStartContent)`
     width: 100%;
   `;
-  
-  const Logo = styled.img`
+
+const Logo = styled.img`
     height: 70px;
     align-self: flex-start;
     margin-right: 60px;
   `;
-  
-  const Controls = styled.div`
+
+const Controls = styled.div`
     justify-content: space-between;
     display: flex;
     flex-direction: row;
   `;
-  
-  const Content = styled.div`
+
+const Content = styled.div`
 
     color: #ffffff;
     width: 80vw;
@@ -146,22 +168,22 @@ const PStartContent = posed.div({
       grid-template-areas: "logo-area content-area";
     }
   `;
-  
-  const Heading = styled.div`
+
+const Heading = styled.div`
     font-size: 30px;
     font-weight: 800;
     margin: 18px 10px 80px 10px;
   `;
-  
-  const Paragraph = styled.div`
+
+const Paragraph = styled.div`
     display: block;
     
     margin: 18px 10px 10px 10px;
     font-size: 14px;
 
   `;
-  
-  const Container = styled.div`
+
+const Container = styled.div`
     position: relative;
     align-items: center;
     justify-content: center;
@@ -173,10 +195,10 @@ const PStartContent = posed.div({
     display: flex;
   `;
 
-  const StyledTextField = styled(TextField)`
+const StyledTextField = styled(TextField)`
     background-color: rgb(255,255,255, 0.5);
     marginLeft: theme.spacing.unit;
     marginRight: theme.spacing.unit;
+    
   `;
-  
-  
+
