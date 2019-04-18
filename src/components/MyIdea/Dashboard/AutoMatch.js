@@ -170,6 +170,7 @@ export default function IdeaDashboardDetail(props) {
                     margin="normal"
                     variant="filled"
                   />
+                  <Button text={`submit`} />
                 </AddlQuestions>
               </StartContent>
             </div>
