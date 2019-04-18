@@ -6,7 +6,7 @@ import './IdeaDashboard.css'
 /** @jsx jsx */
 import { css, Global, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import Button from '../../reogranisation/Questions/Button';
+// import Button from '../../reogranisation/Questions/Button';
 import posed from 'react-pose';
 
 import PropTypes from 'prop-types';
@@ -14,7 +14,14 @@ import classNames from 'classnames';
 import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+import Card from '@material-ui/core/Card'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import FilledInput from '@material-ui/core/FilledInput';
+import Button from '@material-ui/core/Button';
 
 const theme = createMuiTheme({
   palette: {
@@ -35,31 +42,51 @@ export default function IdeaDashboardDetail(props) {
           .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
   }, []);
 
-  const [multiline, setMulitline] = useState('Controlled')
-  const ToggleContent = ({ toggle, content }) => {
-    const [isShown, setIsShown] = useState(false);
-    const hide = () => setIsShown(false);
-    const show = () => setIsShown(true);
   
-    return (
-      <>
-        {toggle(show)}
-        {isShown && content(hide)}
-      </>
-    );
-  };
+  const handleInputChange = event => {
+    const {value} = event.target
+    setEntry({value})
+  }
+  const addEntry = () => {
+    console.log(entry)
+  }
+  
+  const [isShown, setIsShown] = useState(false);
+
+  const handleClickOpen = () => {
+    setIsShown(true)
+  }
+  const handleClose = () => {
+    setIsShown(false)
+  }
+
+  const [entry, setEntry] = useState('')
+  
+  // const [multiline, setMulitline] = useState('Controlled')
+  // const ToggleContent = ({ toggle, content }) => {
+  //   const [isShown, setIsShown] = useState(false);
+  //   const hide = () => setIsShown(false);
+  //   const show = () => setIsShown(true);
+  
+  //   return (
+  //     <>
+  //       {toggle(show)}
+  //       {isShown && content(hide)}
+  //     </>
+  //   );
+  // };
   
   
-  let automatchTitle = automatchResults.map(c => c.bibliographic.title[0].text)
+  let automatchTitle = automatchResults.map(result => result.bibliographic.title[0].text)
   // console.log(automatchTitle)
   // console.log(automatchResults)
-  let automatchText = automatchResults.map(a => 
-    a.passage.text.split('.').slice(1,-1).join() + '.'
+  let automatchText = automatchResults.map(result => 
+    result.passage.text.split('.').slice(1,-1).join() + '.'
   )
   // console.log(automatchText)
-  let relevanceScore = automatchResults.map(b => b.relevance.score)
+  let relevanceScore = automatchResults.map(result => result.relevance.score)
   // console.log(relevanceScore)
-  let relevanceNumber = automatchResults.map(b => b.relevance.number)
+  let relevanceNumber = automatchResults.map(result => result.relevance.number)
   if (typeof automatchResults.autoMatch === 'object'){
       // console.table(automatchResults.autoMatch['0'].relevance)
   }
@@ -83,7 +110,7 @@ export default function IdeaDashboardDetail(props) {
                   Automatch results
                 </Heading>
                 { Object.keys(automatchResults).map((key, index) => (
-                  <div key={relevanceNumber[index]}>
+                  <StyledCard key={relevanceNumber[index]}>
                     <Link to={`/automatch/${relevanceNumber[index]}`}>
                       <Paragraph>
                         {relevanceScore[index]} | {automatchTitle[index]}
@@ -92,10 +119,37 @@ export default function IdeaDashboardDetail(props) {
                     <Paragraph>
                       {automatchText[index]}
                     </Paragraph>
-                    {/* <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}> */}
-                      {/* <Button text={`It's different`} /> */}
+                    <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}> 
+                      <Button text={`It's different`} onClick={handleClickOpen}/> 
                       <Button text={`It's the same`} />
-                      <ToggleContent
+                      <Dialog open={handleClickOpen} onClose={handleClose}>
+                        <DialogTitle>
+                          Title
+                        </DialogTitle>
+                        <DialogContent>
+                          <DialogContentText>
+                            Also then, please explain to us how your idea is different (especially better) or similar to this patent:
+                          </DialogContentText>
+                          <TextField
+                            autoFocus
+                            margin="dense"
+                            name='entry'
+                            label='difference entry'
+                            onChange={handleInputChange}
+                            value={entry}
+                            fullWidth
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                          <Button onClick={handleClose} variant="contained">
+                            Cancel
+                          </Button>
+                          <Button onClick={handleClose} variant="contained">
+                            Save
+                          </Button>
+                        </DialogActions>
+                      </Dialog>
+                      {/* <ToggleContent
                         toggle={show => <Button onClick={show} text={`It's different`}/>}
                         content={hide => (
                           <div>
@@ -113,10 +167,10 @@ export default function IdeaDashboardDetail(props) {
                           </div>
                         )
                       }
-                      /> 
-                    {/* </Controls> */}
+                      />  */}
+                    </Controls>
                     
-                  </div>
+                  </StyledCard>
                   
                 ))}
               </StartContent>
@@ -192,6 +246,11 @@ const PStartContent = posed.div({
     margin: 18px 10px 10px 10px;
     font-size: 14px;
 
+  `;
+
+  const StyledCard = styled(Card) `
+    background-color: rgb(255,255,255, 0.3);
+    padding-bottom: 5px;
   `;
   
   const Container = styled.div`

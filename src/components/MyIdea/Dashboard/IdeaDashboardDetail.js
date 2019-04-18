@@ -4,10 +4,7 @@ import { baseUrl } from '../../../constants';
 import { Redirect, Link } from 'react-router-dom';
 import './IdeaDashBoardDetail.css'
 import styled from '@emotion/styled';
-import Card from '@material-ui/core/Card'
-import Grid from '@material-ui/core/Grid'
-
-import SubmissionSideScreen from '../IdeaSubmission/SubmissionSideScreen';
+import { Card, Grid } from '@material-ui/core'
 
 export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
@@ -68,7 +65,6 @@ export default function IdeaDashboardDetail(props) {
             justify="space-evenly"
             alignItems="flex-start"
             >   
-            <SubmissionSideScreen />
             <div>
                 <br /><br /><br /><br /><br />
                 <StyledDiv>
@@ -110,9 +106,10 @@ const StyledDiv = styled.div `
     font-size: 14px;
     border: 1px solid #ccc;
     padding: 20px;
-`
+`;
 const StyledCard = styled(Card) `
-    background-color: rgb(255,255,255, 0.3);`
+    background-color: rgb(255,255,255, 0.3);
+`;
 
     
 
