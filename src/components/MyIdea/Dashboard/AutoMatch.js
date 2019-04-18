@@ -6,7 +6,7 @@ import './IdeaDashboard.css'
 /** @jsx jsx */
 import { css, Global, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-// import Button from '../../reogranisation/Questions/Button';
+import Button from '../../reogranisation/Questions/Button';
 import posed from 'react-pose';
 
 import PropTypes from 'prop-types';
@@ -15,13 +15,8 @@ import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import FilledInput from '@material-ui/core/FilledInput';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button'
 
 const theme = createMuiTheme({
   palette: {
@@ -43,38 +38,38 @@ export default function IdeaDashboardDetail(props) {
   }, []);
 
   
-  const handleInputChange = event => {
-    const {value} = event.target
-    setEntry({value})
-  }
-  const addEntry = () => {
-    console.log(entry)
-  }
+  // const handleInputChange = event => {
+  //   const {value} = event.target
+  //   setEntry({value})
+  // }
+  // const addEntry = () => {
+  //   console.log(entry)
+  // }
   
-  const [isShown, setIsShown] = useState(false);
+  // const [isShown, setIsShown] = useState(false);
 
-  const handleClickOpen = () => {
-    setIsShown(true)
-  }
-  const handleClose = () => {
-    setIsShown(false)
-  }
+  // const handleClickOpen = () => {
+  //   setIsShown(true)
+  // }
+  // const handleClose = () => {
+  //   setIsShown(false)
+  // }
 
-  const [entry, setEntry] = useState('')
+  // const [entry, setEntry] = useState('')
   
-  // const [multiline, setMulitline] = useState('Controlled')
-  // const ToggleContent = ({ toggle, content }) => {
-  //   const [isShown, setIsShown] = useState(false);
-  //   const hide = () => setIsShown(false);
-  //   const show = () => setIsShown(true);
   
-  //   return (
-  //     <>
-  //       {toggle(show)}
-  //       {isShown && content(hide)}
-  //     </>
-  //   );
-  // };
+  const ToggleContent = ({ toggle, content }) => {
+    const [isShown, setIsShown] = useState(false);
+    const hide = () => setIsShown(false);
+    const show = () => setIsShown(true);
+  
+    return (
+      <>
+        {toggle(show)}
+        {isShown && content(hide)}
+      </>
+    );
+  };
   
   
   let automatchTitle = automatchResults.map(result => result.bibliographic.title[0].text)
@@ -119,37 +114,10 @@ export default function IdeaDashboardDetail(props) {
                     <Paragraph>
                       {automatchText[index]}
                     </Paragraph>
-                    <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}> 
-                      <Button text={`It's different`} onClick={handleClickOpen}/> 
+                    {/* <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}> 
+                      <Button text={`It's different`} onClick={handleClickOpen}/>  */}
                       <Button text={`It's the same`} />
-                      <Dialog open={handleClickOpen} onClose={handleClose}>
-                        <DialogTitle>
-                          Title
-                        </DialogTitle>
-                        <DialogContent>
-                          <DialogContentText>
-                            Also then, please explain to us how your idea is different (especially better) or similar to this patent:
-                          </DialogContentText>
-                          <TextField
-                            autoFocus
-                            margin="dense"
-                            name='entry'
-                            label='difference entry'
-                            onChange={handleInputChange}
-                            value={entry}
-                            fullWidth
-                            />
-                        </DialogContent>
-                        <DialogActions>
-                          <Button onClick={handleClose} variant="contained">
-                            Cancel
-                          </Button>
-                          <Button onClick={handleClose} variant="contained">
-                            Save
-                          </Button>
-                        </DialogActions>
-                      </Dialog>
-                      {/* <ToggleContent
+                      <ToggleContent
                         toggle={show => <Button onClick={show} text={`It's different`}/>}
                         content={hide => (
                           <div>
@@ -163,16 +131,15 @@ export default function IdeaDashboardDetail(props) {
                               variant="filled"
                             />
                             <Button text={`submit`} />
-                            <br></br><br></br>
                           </div>
-                        )
-                      }
-                      />  */}
-                    </Controls>
+                        )}
+                      />
+                    {/* </Controls> */}
                     
                   </StyledCard>
                   
                 ))}
+                
               </StartContent>
             </div>
           </div>
