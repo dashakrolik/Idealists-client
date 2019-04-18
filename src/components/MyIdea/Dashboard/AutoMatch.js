@@ -8,22 +8,11 @@ import { css, Global, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import Button from '../../reogranisation/Questions/Button';
 import posed from 'react-pose';
-
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'
-import FilledInput from '@material-ui/core/FilledInput';
-import FormControl from '@material-ui/core/FormControl'
 // import Button from '@material-ui/core/Button'
 
-const theme = createMuiTheme({
-  palette: {
-    type: 'dark', 
-  },
-});
+
 
 export default function IdeaDashboardDetail(props) {
   const [user, setUserData] = useState({});

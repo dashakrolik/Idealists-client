@@ -5,9 +5,10 @@ import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 export default function IdeaLogin(props) {
-  console.log(localStorage)
+  // console.log(localStorage)
   const [loginState, setLoginState] = useState({});
   
+  // added this while debugging login issues
   const handleSubmitCallback = () => {
     console.log('Hi from callback')
   }
@@ -50,6 +51,7 @@ export default function IdeaLogin(props) {
   //logout code
   console.log('line 47')
   console.log(localStorage.currentUserJwt)
+  // // this code breaks the login function
   // if (!localStorage.currentUserJwt) { console.log('line 48')
   //   props.history.replace('/MyIdea/login'); console.log('line 48')
   //   triggerUserData(); console.log('line 47')
