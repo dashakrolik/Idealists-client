@@ -9,10 +9,7 @@ export default function AssessIdeas(props) {
   
   const [userData, setUserData] = useState({});
   const [userLoggedIn, setUserLoggedIn] = useState(true);
-
-  console.log(props.authState.token)
   
-  // Currently userIdeas are ALL ideas, because it is a non-specific GET request
   const [expertIdeas, setExpertIdeas] = useState([]);
   
   useEffect(() => {
@@ -24,7 +21,6 @@ export default function AssessIdeas(props) {
     else props.history.push('/Investors/login');
   }, []);
   
-  // For testing purposes, this gets ALL ideas
   useEffect(() => {
     request
       .get(`${baseUrl}/ideas`)
@@ -57,6 +53,14 @@ export default function AssessIdeas(props) {
               <div className='idea-tile' key={idea.id}>
                 <p><b>{idea.idea[3].answers[0].qAnswer}</b></p>
                 <p>{idea.idea[3].answers[1].qAnswer}</p>
+                <p>{idea.idea[3].answers[1].qAnswer}</p>
+                {idea.progress.step01 === true &&
+                  idea.progress.step02 === true &&
+                  idea.progress.step03 === false && <p>Status: First patent check </p>}
+                {idea.progress.step01 === true &&
+                  idea.progress.step02 === true &&
+                  idea.progress.step03 === true &&
+                  idea.progress.step04 === false && <p>Status: Expert check </p>}
               </div>
               <div>
                 <br />

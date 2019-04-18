@@ -4,7 +4,6 @@ import { baseUrl } from '../../../constants';
 import { Redirect, Link } from 'react-router-dom';
 import './IdeaDashboard.css'
 import posed from 'react-pose';
-import Button from '@material-ui/core/Button'
 
 export default function IdeaDashboard(props) {
   
@@ -38,7 +37,8 @@ export default function IdeaDashboard(props) {
     return (
       <Redirect to='/myIdea' />    )
 
-
+    
+  console.log(userIdeas)
 
   return (
       <div className='dashboard-container'>
@@ -56,10 +56,16 @@ export default function IdeaDashboard(props) {
                   <p>{idea.idea[3].answers[0].qAnswer}</p>
                   <br />
                   <p>{idea.idea[3].answers[1].qAnswer }</p>
+                  { idea.progress.step01 === true && 
+                    idea.progress.step02 === true && 
+                    idea.progress.step03 === false && <p>Status: First patent check </p>}
+                  {idea.progress.step01 === true &&
+                    idea.progress.step02 === true &&
+                    idea.progress.step03 === true && 
+                    idea.progress.step04 === false && <p>Status: Expert check </p>}
                 </div>
               </Link>
               )}
-          {/* <Button className='new-idea-button'>Your next idea!</Button> */}
         </div>
       </div>
     );
