@@ -54,6 +54,7 @@ export default function AssessIdeas(props) {
                 <p><b>{idea.idea[3].answers[0].qAnswer}</b></p>
                 <p>{idea.idea[3].answers[1].qAnswer}</p>
                 <p>{idea.idea[3].answers[1].qAnswer}</p>
+                {console.log(idea,"IDEAAA")}
                 {idea.progress.step01 === true &&
                   idea.progress.step02 === true &&
                   idea.progress.step03 === false && <p>Status: First patent check </p>}

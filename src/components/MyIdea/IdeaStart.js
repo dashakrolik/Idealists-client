@@ -10,15 +10,14 @@ import Registration from './Registration';
 import { Redirect } from 'react-router-dom';
 
 const IdeaStart = (props) => {
-  
-  // console.log(localStorage)
+
   const [uiState, setUiState] = useState('notDisplayingLogin');
   const [emailAddress, setEmailAddress] = useState('');
   const [loginButtonEnabled, setLoginButtonEnabled] = useState(false);
   const [password, setPassword] = useState('');
   const [signUpFormValidated, setSignUpFormValidated] = useState(false);
 
-  
+
   const newUser = () => {
     if (props.authState.loggedIn) {
       props.history.push('/MyIdea/New');
@@ -26,23 +25,23 @@ const IdeaStart = (props) => {
       setUiState('displayingLogin');
     }
   };
-  
+
   const existingUser = () => {
     props.history.push('/MyIdea/login');
   };
-  
+
   const closeRegistration = () => {
     setUiState('notDisplayingLogin');
   };
-  
+
   useEffect(() => {
     if (emailAddress.length > 6 && password.length > 6) {
       setLoginButtonEnabled(true);
       setSignUpFormValidated(true);
     }
   }, [emailAddress, password]);
-  
- 
+
+
 
   return (
     <Container>
@@ -58,7 +57,7 @@ const IdeaStart = (props) => {
         <div css={css`grid-area: content-area`}>
           <div css={css`display: flex; align-items: center; flex-direction: column;`}>
             <StartContent pose={uiState}
-                          css={css`display: flex; flex-direction: column; width: auto; margin-bottom: 60px;`}>
+              css={css`display: flex; flex-direction: column; width: auto; margin-bottom: 60px;`}>
               <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
                 My Idea Page
               </Heading>
@@ -75,7 +74,7 @@ const IdeaStart = (props) => {
                 <Button text={'Existing User'} onClick={existingUser} />
               </Controls>
             </StartContent>
-            <Registration show={uiState === 'displayingLogin'} handleCancel={closeRegistration} props={props}/>
+            <Registration show={uiState === 'displayingLogin'} handleCancel={closeRegistration} props={props} />
           </div>
         </div>
       </Content>

@@ -30,12 +30,12 @@ export default function IdeaDashboardDetail(props) {
       .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
   }, []);
 
-  
+
   const ToggleContent = ({ toggle, content }) => {
     const [isShown, setIsShown] = useState(false);
     const hide = () => setIsShown(false);
     const show = () => setIsShown(true);
-  
+
     return (
       <>
         {toggle(show)}
@@ -43,14 +43,13 @@ export default function IdeaDashboardDetail(props) {
       </>
     );
   };
-  
-  console.log(automatchResults)
+
   let automatchTitle = automatchResults.map(result => result.bibliographic.title[0].text)
 
   // console.log(automatchTitle)
   // console.log(automatchResults)
-  let automatchText = automatchResults.map(result => 
-    result.passage.text.split('.').slice(1,-1).join() + '.'
+  let automatchText = automatchResults.map(result =>
+    result.passage.text.split('.').slice(1, -1).join() + '.'
   )
   // console.log(automatchText)
   let relevanceScore = automatchResults.map(result => result.relevance.score)
@@ -63,8 +62,8 @@ export default function IdeaDashboardDetail(props) {
 
 
   const handleChange = (e) => {
-      setCurrentValue(e.target.value);
-    
+    setCurrentValue(e.target.value);
+
   };
 
 
@@ -92,7 +91,7 @@ export default function IdeaDashboardDetail(props) {
                   Automatch results
                 </Heading>
 
-                { Object.keys(automatchResults).map((key, index) => (
+                {Object.keys(automatchResults).map((key, index) => (
                   <StyledCard key={relevanceNumber[index]}>
                     <Link to={`ideas/${ideasId}/automatch/${relevanceNumber[index]}`}>
                       <Paragraph>
@@ -104,41 +103,41 @@ export default function IdeaDashboardDetail(props) {
                     </Paragraph>
                     {/* <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}> 
                       <Button text={`It's different`} onClick={handleClickOpen}/>  */}
-                      <Button text={`It's the same`} />
+                    <Button text={`It's the same`} />
 
 
-                      <ToggleContent
-                        toggle={show => <Button onClick={show} text={`It's different`}/>}
-                        content={hide => (
-                          <div>
-                            <StyledTextField
-                              id="filled-multiline-flexible"
-                               InputLabelProps={{
+                    <ToggleContent
+                      toggle={show => <Button onClick={show} text={`It's different`} />}
+                      content={hide => (
+                        <div>
+                          <StyledTextField
+                            id="filled-multiline-flexible"
+                            InputLabelProps={{
                               style: { color: '#fff' },
-                              }}
-                              label="Also then, please explain to us how your idea is different (especially better) or similar to this patent:"
-                              multiline
-                              rowsMax="4"
-                              fullWidth
-                              margin="normal"
-                              variant="filled"
-                            />
-                            <Button text={`submit`} />
-                          </div>
-                        )}
-                      />
+                            }}
+                            label="Also then, please explain to us how your idea is different (especially better) or similar to this patent:"
+                            multiline
+                            rowsMax="4"
+                            fullWidth
+                            margin="normal"
+                            variant="filled"
+                          />
+                          <Button text={`submit`} />
+                        </div>
+                      )}
+                    />
                     {/* </Controls> */}
-                    
+
                   </StyledCard>
 
                 ))}
                 <AddlQuestions>
-                  Additional Questions: 
+                  Additional Questions:
                   <StyledTextField
                     id="filled-multiline-flexible"
                     InputLabelProps={{
                       style: { color: '#fff' },
-                      }}
+                    }}
                     label="Now that you know what is already out there, which problem does your idea solve?"
                     multiline
                     rowsMax="4"
@@ -150,7 +149,7 @@ export default function IdeaDashboardDetail(props) {
                     id="filled-multiline-flexible"
                     InputLabelProps={{
                       style: { color: '#fff' },
-                      }}
+                    }}
                     label="How do you solve this problem?"
                     multiline
                     rowsMax="4"
@@ -162,7 +161,7 @@ export default function IdeaDashboardDetail(props) {
                     id="filled-multiline-flexible"
                     InputLabelProps={{
                       style: { color: '#fff' },
-                      }}
+                    }}
                     label="How is this (technically) unique?"
                     multiline
                     rowsMax="4"
@@ -249,12 +248,12 @@ const Paragraph = styled.div`
 
 
 
-  const StyledCard = styled(Card) `
+const StyledCard = styled(Card)`
     background-color: rgb(255,255,255, 0.3);
     padding-bottom: 5px;
   `;
-  
-  const Container = styled.div`
+
+const Container = styled.div`
     position: relative;
     align-items: center;
     justify-content: center;
@@ -267,14 +266,14 @@ const Paragraph = styled.div`
   `;
 
 
-  const StyledTextField = styled(TextField)`
+const StyledTextField = styled(TextField)`
     background-color: rgb(255,255,255, 0.5);
     marginLeft: theme.spacing.unit;
     marginRight: theme.spacing.unit;
     
   `;
-  
-const AddlQuestions = styled.div `
+
+const AddlQuestions = styled.div`
     padding: 3em;
     border: 1px solid #ccc;
 `
