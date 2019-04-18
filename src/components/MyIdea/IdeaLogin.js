@@ -35,8 +35,8 @@ export default function IdeaLogin(props) {
   };
 
   const triggerUserData = () => {
-    if (props.authState) {
-    props.user(); console.log('line 34') 
+    if (props.authState.loggedIn) {
+    props.user(); 
     }
   }
 
@@ -44,11 +44,10 @@ export default function IdeaLogin(props) {
   //logout code
 
   //logout code
-  console.log('line 47')
-  console.log(localStorage.currentUserJwt)
-  if (!localStorage.currentUserJwt) { console.log('line 48')
-    props.history.replace('/MyIdea/login'); console.log('line 48')
-    triggerUserData(); console.log('line 47')
+
+  if (!localStorage.currentUserJwt) { 
+    props.history.replace('/MyIdea/login'); 
+    triggerUserData(); 
     return <div></div>;
   }
   
@@ -75,8 +74,9 @@ export default function IdeaLogin(props) {
           <button type='submit' onClick={()=> {props.history.replace('/MyIdea/login/reset-password')}}>Forgot your password?</button>
         </form>
       </RightSide>
-    </Container>);
-  else return (<Redirect to='/' />)
+
+    </Container>); 
+    else return (<Redirect to='/MyIdea/new' />)
 }
 
 const Logo = styled.img`

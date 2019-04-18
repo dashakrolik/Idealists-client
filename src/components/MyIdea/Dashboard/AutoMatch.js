@@ -16,6 +16,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'
 import FilledInput from '@material-ui/core/FilledInput';
+import { value } from 'popmotion';
 
 const theme = createMuiTheme({
   palette: {
@@ -29,30 +30,14 @@ export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const ideasId = props.match.params.id
   const [automatchResults, DoAutomatch] = useState([])
+  const [currentValue, setCurrentValue] = useState([])
+
   useEffect(() => {
     request
       .get(`${baseUrl}/automatch/986`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
   }, []);
-
-  
-  // const handleInputChange = event => {
-  //   const {value} = event.target
-  //   setEntry({value})
-  // }
-  // const addEntry = () => {
-  //   console.log(entry)
-  // }
-  
-  // const [isShown, setIsShown] = useState(false);
-
-  // const handleClickOpen = () => {
-  //   setIsShown(true)
-  // }
-  // const handleClose = () => {
-  //   setIsShown(false)
-  // }
 
   
   const ToggleContent = ({ toggle, content }) => {
@@ -70,6 +55,7 @@ export default function IdeaDashboardDetail(props) {
   
   
   let automatchTitle = automatchResults.map(result => result.bibliographic.title[0].text)
+
   // console.log(automatchTitle)
   // console.log(automatchResults)
   let automatchText = automatchResults.map(result => 
@@ -79,11 +65,26 @@ export default function IdeaDashboardDetail(props) {
   let relevanceScore = automatchResults.map(result => result.relevance.score)
   // console.log(relevanceScore)
 
-  let relevanceNumber = automatchResults.map(result => result.relevance.number)
-  if (typeof automatchResults.autoMatch === 'object'){
-      // console.table(automatchResults.autoMatch['0'].relevance)
+  let relevanceNumber = automatchResults.map(b => b.relevance.number)
+  if (typeof automatchResults.autoMatch === 'object') {
+    // console.table(automatchResults.autoMatch['0'].relevance)
   }
 
+
+  const handleChange = (e) => {
+    
+      setCurrentValue(e.target.value);
+    
+  };
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(currentValue)
+
+  };
+  console.log(currentValue, "CCCC")
 
   if (automatchResults) {
 
@@ -102,6 +103,7 @@ export default function IdeaDashboardDetail(props) {
                 <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
                   Automatch results
                 </Heading>
+
                 { Object.keys(automatchResults).map((key, index) => (
                   <StyledCard key={relevanceNumber[index]}>
                     <Link to={`/automatch/${relevanceNumber[index]}`}>
@@ -115,6 +117,7 @@ export default function IdeaDashboardDetail(props) {
                     {/* <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}> 
                       <Button text={`It's different`} onClick={handleClickOpen}/>  */}
                       <Button text={`It's the same`} />
+
 
                       <ToggleContent
                         toggle={show => <Button onClick={show} text={`It's different`}/>}
@@ -218,6 +221,7 @@ const Paragraph = styled.div`
   `;
 
 
+
   const StyledCard = styled(Card) `
     background-color: rgb(255,255,255, 0.3);
     padding-bottom: 5px;
@@ -235,10 +239,11 @@ const Paragraph = styled.div`
     display: flex;
   `;
 
+
   const StyledTextField = styled(TextField)`
-    
     background-color: rgb(255,255,255, 0.5);
     marginLeft: theme.spacing.unit;
     marginRight: theme.spacing.unit;
+    
   `;
 

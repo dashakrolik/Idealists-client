@@ -50,7 +50,7 @@ return (
                 }
                 {
                 props.authState.loggedIn === true && localStorage.currentUserJwt !== null ? 
-                <Button color="inherit" onClick={() => props.logout() && props.history.push('MyIdea/login')}>Logout</Button> : null
+                <Button color="inherit" onClick={() => props.logout() || props.history.push('/MyIdea/login')}>Logout</Button> : null
                 }
                </Grid>
             
