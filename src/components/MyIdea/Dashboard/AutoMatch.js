@@ -140,7 +140,36 @@ export default function IdeaDashboardDetail(props) {
                   </StyledCard>
                   
                 ))}
-                
+                <AddlQuestions>
+                  Additional Questions: 
+                  <StyledTextField
+                    id="filled-multiline-flexible"
+                    label="Now that you know what is already out there, which problem does your idea solve?"
+                    multiline
+                    rowsMax="4"
+                    fullWidth
+                    margin="normal"
+                    variant="filled"
+                  />
+                  <StyledTextField
+                    id="filled-multiline-flexible"
+                    label="How do you solve this problem?"
+                    multiline
+                    rowsMax="4"
+                    fullWidth
+                    margin="normal"
+                    variant="filled"
+                  />
+                  <StyledTextField
+                    id="filled-multiline-flexible"
+                    label="How is this (technically) unique?"
+                    multiline
+                    rowsMax="4"
+                    fullWidth
+                    margin="normal"
+                    variant="filled"
+                  />
+                </AddlQuestions>
               </StartContent>
             </div>
           </div>
@@ -240,3 +269,7 @@ const PStartContent = posed.div({
     marginRight: theme.spacing.unit;
   `;
   
+const AddlQuestions = styled.div `
+    padding: 3em;
+    border: 1px solid #ccc;
+`
