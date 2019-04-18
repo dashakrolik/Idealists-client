@@ -16,7 +16,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'
 import FilledInput from '@material-ui/core/FilledInput';
-// import Button from '@material-ui/core/Button'
 
 const theme = createMuiTheme({
   palette: {
@@ -31,10 +30,10 @@ export default function IdeaDashboardDetail(props) {
   const ideasId = props.match.params.id
   const [automatchResults, DoAutomatch] = useState([])
   useEffect(() => {
-      request
-          .get(`${baseUrl}/automatch/986`)
-          .set("Authorization", `Bearer ${props.authState.token}`)
-          .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
+    request
+      .get(`${baseUrl}/automatch/986`)
+      .set("Authorization", `Bearer ${props.authState.token}`)
+      .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
   }, []);
 
   
@@ -55,8 +54,6 @@ export default function IdeaDashboardDetail(props) {
   //   setIsShown(false)
   // }
 
-  // const [entry, setEntry] = useState('')
-  
   
   const ToggleContent = ({ toggle, content }) => {
     const [isShown, setIsShown] = useState(false);
@@ -81,16 +78,17 @@ export default function IdeaDashboardDetail(props) {
   // console.log(automatchText)
   let relevanceScore = automatchResults.map(result => result.relevance.score)
   // console.log(relevanceScore)
+
   let relevanceNumber = automatchResults.map(result => result.relevance.number)
   if (typeof automatchResults.autoMatch === 'object'){
       // console.table(automatchResults.autoMatch['0'].relevance)
   }
-  
+
 
   if (automatchResults) {
-    
+
     return (
-        <Container>
+      <Container>
         <Global styles={css`
           body {
             background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
@@ -99,7 +97,7 @@ export default function IdeaDashboardDetail(props) {
         <Content>
           <div css={css`grid-area: content-area`}>
             <div css={css`display: flex; align-items: center; flex-direction: column;`}>
-              <StartContent 
+              <StartContent
                 css={css`display: flex; flex-direction: column; width: auto; margin-bottom: 60px;`}>
                 <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
                   Automatch results
@@ -117,12 +115,16 @@ export default function IdeaDashboardDetail(props) {
                     {/* <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}> 
                       <Button text={`It's different`} onClick={handleClickOpen}/>  */}
                       <Button text={`It's the same`} />
+
                       <ToggleContent
                         toggle={show => <Button onClick={show} text={`It's different`}/>}
                         content={hide => (
                           <div>
                             <StyledTextField
                               id="filled-multiline-flexible"
+                               InputLabelProps={{
+                              style: { color: '#fff' },
+                              }}
                               label="Also then, please explain to us how your idea is different (especially better) or similar to this patent:"
                               multiline
                               rowsMax="4"
@@ -137,7 +139,7 @@ export default function IdeaDashboardDetail(props) {
                     {/* </Controls> */}
                     
                   </StyledCard>
-                  
+
                 ))}
                 
               </StartContent>
@@ -146,40 +148,40 @@ export default function IdeaDashboardDetail(props) {
         </Content>
       </Container>
     )
-} else {
-  return (<Heading>Loading...</Heading>)
-}
+  } else {
+    return (<Heading>Loading...</Heading>)
+  }
 }
 
 
 const PStartContent = posed.div({
-    notDisplayingLogin: {
-      y: 0,
-      opacity: 1.0,
-    },
-    displayingLogin: {
-      y: -390,
-      opacity: 0.15,
-    },
-  });
-  
-  const StartContent = styled(PStartContent)`
+  notDisplayingLogin: {
+    y: 0,
+    opacity: 1.0,
+  },
+  displayingLogin: {
+    y: -390,
+    opacity: 0.15,
+  },
+});
+
+const StartContent = styled(PStartContent)`
     width: 100%;
   `;
-  
-  const Logo = styled.img`
+
+const Logo = styled.img`
     height: 70px;
     align-self: flex-start;
     margin-right: 60px;
   `;
-  
-  const Controls = styled.div`
+
+const Controls = styled.div`
     justify-content: space-between;
     display: flex;
     flex-direction: row;
   `;
-  
-  const Content = styled.div`
+
+const Content = styled.div`
 
     color: #ffffff;
     width: 80vw;
@@ -200,20 +202,21 @@ const PStartContent = posed.div({
       grid-template-areas: "logo-area content-area";
     }
   `;
-  
-  const Heading = styled.div`
+
+const Heading = styled.div`
     font-size: 30px;
     font-weight: 800;
     margin: 18px 10px 80px 10px;
   `;
-  
-  const Paragraph = styled.div`
+
+const Paragraph = styled.div`
     display: block;
     
     margin: 18px 10px 10px 10px;
     font-size: 14px;
 
   `;
+
 
   const StyledCard = styled(Card) `
     background-color: rgb(255,255,255, 0.3);
@@ -238,4 +241,4 @@ const PStartContent = posed.div({
     marginLeft: theme.spacing.unit;
     marginRight: theme.spacing.unit;
   `;
-  
+
