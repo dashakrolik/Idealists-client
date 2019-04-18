@@ -21,9 +21,13 @@ export default function IdeaLogin(props) {
     });
   };
 
+  const handleSubmitCallback = () => {
+    console.log('Hi from callback')
+  }
+  
   const onSubmit = (data) => {
     const { email, password } = data;
-    props.login(email, password);
+    props.login(email, password, handleSubmitCallback);
   };
 
   const triggerUserData = () => {
