@@ -1,24 +1,21 @@
-import React, { useState } from 'react';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
+import React, { useState } from 'react';
 import logo from '../../res/logo_horizontal_white.png';
-import { jsx } from '@emotion/core';
-import { baseUrl } from '../../constants';
-import request from 'superagent'
-import { Redirect } from 'react-router-dom'
-import { LoginContext } from '../reogranisation/Login/LoginContext';
 
 export default function InvestorLogin(props) {
-
+  
   const [loginState, setLoginState] = useState({});
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);
   };
-
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
-
+    
     setLoginState({
       ...loginState,
       [name]: value,
@@ -30,15 +27,20 @@ export default function InvestorLogin(props) {
     props.login(email, password);
   };
   
+  if (props.authState.loggedIn) {
+    props.history.replace('/Investors/dashboard');
+    return <div></div>;
+  }
+  
   if (props.authState.loggedIn !== true) return (
     <Container>
       {/* <Header /> */}
-
-      <Logo src={logo} alt='Logo' />
+      
+      
       <LeftSide>
         <div>
           <h3>Login to my Investor Dashboard</h3>
-          <p>Don’t have an account yet? Create it here</p>
+          {/* <a href='/MyIdea'> Don’t have an account yet? Create it here</a> */}
         </div>
       </LeftSide>
       <RightSide>
@@ -46,11 +48,11 @@ export default function InvestorLogin(props) {
           <label>Email</label>
           <input type='email' name='email' value={loginState.email || ''} onChange={handleChange} />
           <br />
-
+          
           <label>Password</label>
           <input type='password' name='password' value={loginState.password || ''} onChange={handleChange} />
           <br />
-
+          
           <a>Forgot your password?</a>
           <button type='submit'>Login</button>
         </form>
@@ -59,7 +61,7 @@ export default function InvestorLogin(props) {
   else return <div></div>;
 }
 
-const Logo = styled.img`
+const Logo = styled.img`  
   position: absolute;
   left: 0;
   right: 0;

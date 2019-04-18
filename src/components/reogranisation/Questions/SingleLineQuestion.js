@@ -48,6 +48,7 @@ const SingleLineQuestion = (props) => {
       {!props.multiLine && <TextField onChange={handleChange} value={currentValue}
                                       pose={(isStillInit || validated) ? (isFocused ? 'tfFocused' : 'tfDefault') : (isFocused ? 'tfFocusedError' : 'tfError')}
                                       onFocus={handleFocus} onBlur={handleLostFocus}
+                                      placeholder={props.placeholder.length > 0 ? props.placeholder : ""}
       />}
       {!!props.multiLine && <TextArea onChange={handleChange} value={currentValue}
                                       pose={(isStillInit || validated) ? (isFocused ? 'tfFocused' : 'tfDefault') : (isFocused ? 'tfFocusedError' : 'tfError')}

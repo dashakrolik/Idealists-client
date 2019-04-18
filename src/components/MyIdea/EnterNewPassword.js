@@ -2,67 +2,60 @@
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import {withRouter} from 'react-router-dom'
 
-export default function IdeaLogin(props) {
-  const [loginState, setLoginState] = useState({});
+function EnterNewPassword(props) {
+  
+  const [resetState, setLoginState] = useState({});
+  const [history, location,] = useState({});
+  let initJwt = props.location.pathname.split('/')
+ 
+  const jwt = initJwt[2]
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(loginState);
-    triggerUserData()
+    onSubmit(resetState);
   };
-
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setLoginState({
-      ...loginState,
+      ...resetState,
       [name]: value,
     });
   };
-
+  
   const onSubmit = (data) => {
-    const { email, password } = data;
-    props.login(email, password);
+    const { password } = data;
+    const  token  = props.location.pathname.split('/')[2]
+ 
+    props.updatePassword(token, password)
+    
   };
 
-  const triggerUserData = () => {
-    if (props.authState.loggedIn) {
-      props.user();
-    }
-  }
 
-  if (!localStorage.currentUserJwt) {
-    props.history.replace('/MyIdea/login');
-    triggerUserData();
-    return <div></div>;
-  }
-
-  if (props.authState.loggedIn !== true) return (
+  if (props) return (
     <Container>
       <LeftSide>
         <div>
-          <h3>Login to My Idea Page</h3>
-
+          <h3>Enter New Password</h3>
         </div>
       </LeftSide>
       <RightSide>
         <form onSubmit={handleSubmit}>
-          <label>Email</label>
-          <input type='email' name='email' value={loginState.email || ''} onChange={handleChange} />
-          <br />
-
-          <label>Password</label>
-          <input type='password' name='password' value={loginState.password || ''} onChange={handleChange} />
-          <br />
-
-          <button type='submit'>Login</button>
-          <button type='submit' onClick={() => { props.history.replace('/MyIdea/login/reset-password') }}>Forgot your password?</button>
+          <label>New password</label>
+          <input type='password' name='password' value={resetState.password || ''} onChange={handleChange} />
+       
+          <button type='submit'>Submimt new password</button>
         </form>
       </RightSide>
-    </Container>);
-  else return (<Redirect to='/MyIdea/new' />)
+  </Container>);
+  else return <div></div>;
 }
+
+
+export default withRouter(EnterNewPassword)
 
 const Logo = styled.img`
   position: absolute;
@@ -172,8 +165,8 @@ const RightSide = styled.div`
     position: relative;
     float: right;
     right: 10%;
-    width: 40%;
-    height: 60px;
+    width: 30%;
+    height: 30px;
     line-height: 30px;
     font-size: 12px;
     color: #233949;

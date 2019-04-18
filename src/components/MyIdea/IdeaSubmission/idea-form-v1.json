@@ -8,7 +8,7 @@
       {
         "id": 0,
         "type": "deciding",
-        "text": "Is your idea for profit?",
+        "text": "Is your idea for profit? *",
         "continueOption": "Yes",
         "endOption": "No",
         "decidingMessage": "We are working very hard on building a non-profit version of The Idealists as well. Unfortunately, until that is ready, we cannot accept non-profit ideas yet."
@@ -24,7 +24,7 @@
       {
         "id": 0,
         "type": "multiLine",
-        "text": "Please tell us up to 3 ways it could generate profit?",
+        "text": "Please tell us up to 3 ways it could generate profit? *",
         "maxChar": 1000,
         "validationErrorMsg": "This field is limited to 1000 characters."
       }
@@ -32,14 +32,14 @@
   },
   {
     "id": 2,
-    "groupTitle": "Let's get started",
+    "groupTitle": "Which categories does youd idea fit?",
     "groupType": "default",
-    "groupDescription": "Please tell us a little more about yourself and your idea",
+    "groupDescription": "Please note that we cannot accept ideas that are not within one of the Sustainable Development Goals (SDG)",
     "questions": [
       {
         "id": 0,
         "type": "multiChoice",
-        "text": "Under which of the SDGs does your idea fit bets? You can select more than one.",
+        "text": "Under which of the SDGs does your idea fit best? You can select more than one.",
         "options": [
           {
             "value": "No Poverty",
@@ -115,7 +115,7 @@
           }
         ],
         "validationRegex": "^((?!none,).)*$",
-        "maxChar": 500,
+        "maxChar": 5,
         "validationErrorMsg": "We are sorry, but you cannot continue if your idea does not fit within one of the SDGs."
       },
       {
@@ -610,7 +610,7 @@
       {
         "id": 0,
         "type": "singleLine",
-        "text": "In max 3 words",
+        "text": "Describe your idea in up to 3 words *",
         "validationRegex": "^(?:[A-Za-z,]+ ){0,2}[A-Za-z]+$",
         "maxChar": 150,
         "validationErrorMsg": "Please separate the words by commas or spaces only."
@@ -618,17 +618,23 @@
       {
         "id": 1,
         "type": "singleLine",
-        "text": "In max 30 characters",
-        "validationRegex": "^(.){0,30}$",
-        "maxChar": 30,
+        "text": "Describe your idea in up to 150 characters *",
+        "validationRegex": "^(.){0,150}$",
+        "maxChar": 150,
         "validationErrorMsg": "Invalid number of characters."
       }
-    ],
-    "1": [
+    ]
+  },
+  {
+    "id": 3,
+    "groupTitle": "Describe your Idea",
+    "groupType": "default",
+    "groupDescription": "Please try to describe your idea in up to 3 words, up to 150, and up to 1500 characters. Don't worry, you can attach images later in the submission process.",
+    "questions": [
       {
         "id": 2,
         "type": "multiLine",
-        "text": "Finally, a detailed description of your idea (up to 1500 characters)",
+        "text": "Describe your idea up to 1500 characters *",
         "validationRegex": "^(*.){1,1500}$",
         "maxChar": 1500,
         "validationErrorMsg": "Max 100 chars."
@@ -639,12 +645,12 @@
     "id": 4,
     "groupTitle": "Why is this a great idea?",
     "groupType": "singleQuestion",
-    "groupDescription": "Think for instance of what is new/unique about your idea, which problem do you solve with your idea, how may it change people’s lives compared to what they currently use?",
+    "groupDescription": "Please describe your answer up to 1500 characters. Don't worry, you can attach images later in the submission process",
     "questions": [
       {
         "id": 0,
         "type": "multiLine",
-        "text": "",
+        "text": "Think for instance of what is new/unique about your idea, which problem do you solve with your idea, how may it change people’s lives compared to what they currently use? *",
         "maxChar": 1500,
         "validationErrorMsg": "Max 1500 chars."
       }
@@ -654,27 +660,27 @@
     "id": 5,
     "groupTitle": "How far developed is your idea?",
     "groupType": "singleQuestion",
-    "groupDescription": "Still an idea/prototyped/etc?",
+    "groupDescription": "Please describe your progress up to 1000 characters.",
     "questions": [
       {
         "id": 0,
         "type": "multiLine",
-        "text": "",
+        "text": "Still an idea/prototyped/etc? *",
         "maxChar": 1000,
         "validationErrorMsg": "Max 1000 chars."
       }
     ]
-  },
+},
   {
     "id": 6,
     "groupTitle": "Describe the steps and story how you came up with this idea",
     "groupType": "singleQuestion",
-    "groupDescription": "What triggered you to come up with this idea and how did it evolve into the idea you submit now?",
+    "groupDescription": "Please describe your steps up to 2000 characters.",
     "questions": [
       {
         "id": 0,
         "type": "multiLine",
-        "text": "",
+        "text": "What triggered you to come up with this idea and how did it evolve into the idea you submit now? *",
         "maxChar": 2000,
         "validationErrorMsg": "Max 2000 chars."
       }
@@ -689,15 +695,25 @@
       {
         "id": 0,
         "type": "singleLine",
-        "text": "URL",
+        "text": "Please give the link where you found a similarity to your idea *",
         "maxChar": 500,
-        "validationErrorMsg": "Invalid link."
+        "placeholder": "https://",
+        "validationErrorMsg": "Max 500 characters."
       },
       {
         "id": 1,
-        "type": "multiLine",
-        "text": "Comment/description:",
+        "type": "singleLine",
+        "text": "Please give the link where you found a similarity to your idea. *",
         "maxChar": 500,
+        "placeholder": "https://",
+        "validationErrorMsg": "Max 500 characters."
+      },
+      {
+        "id": 2,
+        "type": "singleLine",
+        "text": "Please give the link where you found a similarity to your idea. *",
+        "maxChar": 500,
+        "placeholder": "https://",
         "validationErrorMsg": "Max 500 characters."
       }
     ]
@@ -706,12 +722,12 @@
     "id": 8,
     "groupTitle": "Anything else you want to tell us about your idea?",
     "groupType": "singleQuestion",
-    "groupDescription": "",
+    "groupDescription": "Please describe your answer up to 2000 characters",
     "questions": [
       {
         "id": 0,
         "type": "multiLine",
-        "text": "",
+        "text": "Anything that has not come up with the questions before. *",
         "maxChar": 2000,
         "validationErrorMsg": "Max 2000 chars."
       }

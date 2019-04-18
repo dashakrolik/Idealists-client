@@ -29,7 +29,7 @@ const FormScreen = (props) => {
   };
   
   const renderGroup = (group) => {
-    console.log(questionGroups);
+    
     if (!!questionGroups) return <div key='placeholder'></div>;
     return (
       <QuestionGroup key={`question-group-${'123'}`} handleInputFocus={handleInputFocus}
@@ -153,8 +153,9 @@ const ProgressBar = styled(PProgressBar)`
   position: fixed;
   bottom: 0;
   left: 0;
-  height: 6px;
-  background-color: #ffffff;
+  height: 20px;
+  border-radius: 5px;
+  background-image: linear-gradient(to right, #1a3d7c, #ffffff);
   opacity: 0.6;
 `;
 
