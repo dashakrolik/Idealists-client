@@ -82,8 +82,10 @@ class App extends Component {
             loggedIn: true,
             user: res.body
           }
-        });
+          
+        })
         localStorage.setItem('currentUserJwt', this.state.auth.token)
+        localStorage.setItem('user', this.state.auth.user)
       })
   }
 
@@ -121,10 +123,6 @@ class App extends Component {
 
     let retrievedToken = localStorage.getItem('currentUserJwt')
 
-    console.log(retrievedToken)
-    // this.preventRefresh()
-    console.log(localStorage)
-    console.log(this.state)
     return retrievedToken
   }
 
@@ -160,10 +158,17 @@ class App extends Component {
             <ThemeProvider theme={theme}>
               <Application>
                 <Route exact path='/Investors/dashboard' render={(props) => {
+// <<<<<<< autoMatchForm
+//                 return <InvestorDashboard {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
+//                 }} />
+//                 <Route exact path='/Investors/login' render={(props) => {
+//                 return <InvestorLogin {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
+// =======
                   return <InvestorDashboard {...props} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout}/>;
                 }} />
                 <Route exact path='/Investors/login' render={(props) => {
                   return <InvestorLogin {...props} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue}/>;
+// >>>>>>> development-version2
                 }} />
                 <Route exact path='/MyIdea' render={(props) => {
                   return <IdeaStart {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue}/>;
@@ -185,9 +190,6 @@ class App extends Component {
                 }} />
                 <Route exact path='/reset-password/:jwt' render={(props) => {
                   return <EnterNewPassword {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} updateLocalStorage={this.updateLocalStorage} logout={this.logout}/>;
-                }} />
-                <Route exact path='/automatch' render={(props) => {
-                  return <AutoMatch {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword}/>;
                 }} />
                 <Route exact path='/automatch' render={(props) => {
                   return <AutoMatch {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword}/>;

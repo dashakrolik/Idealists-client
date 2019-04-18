@@ -14,7 +14,7 @@ const Useragreement = (props) => {
         <p>
           1. The Idealists B.V., a private company with limited liability (besloten vennootschap met beperkte aansprakelijkheid) incorporated under the laws of the Netherlands, having its registered address at Lijsterbeslaan 3, Loon op Zand (5175 BR), hereinafter referred to as “The Idealists”; and
                 </p>
-        2. <strong>{props.authState.user.firstName ? props.authState.user.firstName : 'Idea Owner'}</strong> <strong>{props.authState.user.lastName}</strong>, hereinafter referred to as “Participant”;
+        2. <strong>{props.authState.user.firstName ? props.authState.user.firstName : 'Idea Owner'}</strong> <strong>{props.authState.user.lastName ? props.authState.user.lastName: ''}</strong>, hereinafter referred to as “Participant”;
             <br />
         also referred to below individually as a “Party” and collectively as the “Parties”.
             <br />
@@ -144,10 +144,14 @@ const Useragreement = (props) => {
     doc.save(`${props.authState.user.firstName?props.authState.user.firstName:'user'}_Agreement.pdf`)
   }
 
+  
+
   return (
     <div >
+      {console.log(props, "PPPP")}
       <div style={{ width: 1000, textAlign: 'left', padding:15, marginTop: 70, color:'black', backgroundColor:'rgb(255,255,255, 0.8)' } }>
       {aggreementPage(props) }
+      
       </div>
       <br />
       <button style={{ width:600, justifyContent:'center', backgroundColor: "inherit", margin:20, color: "white", borderRadius: "10px" }}
