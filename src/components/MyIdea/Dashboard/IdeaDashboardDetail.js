@@ -1,14 +1,13 @@
 import React, { useEffect, useState, Component } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
-import './IdeaDashBoardDetail.css';
+import './IdeaDashBoardDetail.css'
 import styled from '@emotion/styled';
-
 import Card from '@material-ui/core/Card'
-
 import { Redirect, Link } from 'react-router-dom';
-
 import Grid from '@material-ui/core/Grid'
+import Button from '../../reogranisation/Questions/Button';
+
 
 export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
@@ -27,6 +26,8 @@ export default function IdeaDashboardDetail(props) {
             .set("Authorization", `Bearer ${props.authState.token}`)
             .then(res => setUserIdeas(res.body.idea))
     }, []);
+
+    // console.log("IDEAS", userIdeas)
 
     const processTitle = (title) => {
         let splitTitle = title.split('?')
@@ -52,7 +53,6 @@ export default function IdeaDashboardDetail(props) {
             qAnswers.push(answer.qAnswer)
         })
     })
-
     
 
     qAnswers = qAnswers.map(answer => typeof answer === 'object' ? answer[0] ? answer[0].value : answer.value : answer)
@@ -88,11 +88,15 @@ export default function IdeaDashboardDetail(props) {
                         <li className="step-progress-item"><strong>Funding phase (2 weeks)</strong></li>
                         <li className="step-progress-item"><strong>Company is born (1 week)</strong></li>
                     </ul>
+                    
                 </StyledDiv>
+                <div>
+                <Button color="inherit" text="Patent Check" onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}/>
+                </div>
             </div>
             <main>
                 <br /><br /><br /><br /><br /><br />
-                <h1 className='header'> Questions and Answers about Idea</h1>
+                <h1 className='header' > Questions and Answers about Idea</h1>
                 { qTitles.map((title, index) => 
                     <div key={index} className='questions-answers'>
                         <StyledCard className='card-detail'>
@@ -101,6 +105,7 @@ export default function IdeaDashboardDetail(props) {
                         </StyledCard>
                     </div>
                 )}
+                
             </main>
         </Grid>
     )
@@ -114,8 +119,14 @@ const StyledDiv = styled.div `
     font-size: 14px;
     border: 1px solid #ccc;
     padding: 20px;
+    color: white;
+    margin-bottom: 20px
 `
 const StyledCard = styled(Card) `
-    background-color: rgb(255,255,255, 0.3);`
+    background-color: rgb(255,255,255, 0.3);
+    padding: 10px
+    `
+
 
     
+

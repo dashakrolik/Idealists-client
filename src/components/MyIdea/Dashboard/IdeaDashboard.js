@@ -28,7 +28,7 @@ export default function IdeaDashboard(props) {
       .then(res => setUserIdeas(res.body));
   }, []);
   
-
+  console.log("IDEAS DASHBOARD", userIdeas)
    const handleClick = () => {
      props.history.replace('/MyIdea/')
    }
@@ -37,9 +37,10 @@ export default function IdeaDashboard(props) {
     return (
       <Redirect to='/myIdea' />    )
 
-    
-  console.log(userIdeas)
 
+    if (!props.authState.user) {
+      props.user()
+    }
   return (
       <div className='dashboard-container'>
         <br/>

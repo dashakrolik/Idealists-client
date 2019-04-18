@@ -23,26 +23,14 @@ export default function IdeaDashboardDetail(props) {
   const [automatchResults, DoAutomatch] = useState([])
   const [currentValue, setCurrentValue] = useState([])
 
+  const automatchId = props.match.params.patentNumber
+
   useEffect(() => {
     request
-      .get(`${baseUrl}/automatch/986`)
+      .get(`${baseUrl}/ideas/${ideasId}/automatch`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
   }, []);
-
-  
-  const ToggleContent = ({ toggle, content }) => {
-    const [isShown, setIsShown] = useState(false);
-    const hide = () => setIsShown(false);
-    const show = () => setIsShown(true);
-  
-    return (
-      <>
-        {toggle(show)}
-        {isShown && content(hide)}
-      </>
-    );
-  };
   
   
   let automatchTitle = automatchResults.map(result => result.bibliographic.title[0].text)
@@ -60,6 +48,9 @@ export default function IdeaDashboardDetail(props) {
   if (typeof automatchResults.autoMatch === 'object') {
     // console.table(automatchResults.autoMatch['0'].relevance)
   }
+
+  
+ 
 
 
   const handleChange = (e) => {
@@ -102,32 +93,6 @@ export default function IdeaDashboardDetail(props) {
                     <Paragraph>
                       {automatchText[index]}
                     </Paragraph>
-                    {/* <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}> 
-                      <Button text={`It's different`} onClick={handleClickOpen}/>  */}
-                      <Button text={`It's the same`} />
-
-
-                      <ToggleContent
-                        toggle={show => <Button onClick={show} text={`It's different`}/>}
-                        content={hide => (
-                          <div>
-                            <StyledTextField
-                              id="filled-multiline-flexible"
-                               InputLabelProps={{
-                              style: { color: '#fff' },
-                              }}
-                              label="Also then, please explain to us how your idea is different (especially better) or similar to this patent:"
-                              multiline
-                              rowsMax="4"
-                              fullWidth
-                              margin="normal"
-                              variant="filled"
-                            />
-                            <Button text={`submit`} />
-                          </div>
-                        )}
-                      />
-                    {/* </Controls> */}
                     
                   </StyledCard>
 
