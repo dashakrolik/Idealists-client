@@ -42,31 +42,33 @@ export default function IdeaDashboard(props) {
   }
 
   return (
-    <div className='dashboard-container'>
-      <br />
-      <br />
-      <br />
-      <div className='title'>
-        <h1>{user.firstName}'s Dashboard</h1>
-      </div>
-      {userIdeas.length < 1 ? <h2 style={styledH2}><a href="/MyIdea/new">Submit your first idea</a></h2> : <h2 style={styledH2}>Please follow your next step: your market check</h2>}
-      <div className='flex-tilescontainer'>
-        {userIdeas.map(idea =>
-          <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
-            <div className='idea-tile' key={idea.id}>
-              <p>{idea.idea[3].answers[0].qAnswer}</p>
-              <br />
-              <p>{idea.idea[3].answers[1].qAnswer}</p>
-              {idea.progress.step01 === true &&
-                idea.progress.step02 === true &&
-                idea.progress.step03 === false && <p>Status: First patent check </p>}
-              {idea.progress.step01 === true &&
-                idea.progress.step02 === true &&
-                idea.progress.step03 === true &&
-                idea.progress.step04 === false && <p>Status: Expert check </p>}
-            </div>
-          </Link>
-        )}
+      <div className='dashboard-container'>
+        <br/>
+        <br/>
+        <br/>
+        <div className='title'>
+          <h1>{user.firstName}'s Dashboard</h1>
+        </div>
+        {userIdeas.length < 1 ? <h2 style={styledH2}><a href="/MyIdea/new">Submit your first idea</a></h2> : <h2 style={styledH2}>Please follow your next step: your market check</h2>}
+        <div className='flex-tilescontainer'>
+            {userIdeas.map(idea => 
+              <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
+                <div className='idea-tile' key={idea.id}>
+                  <p>{idea.idea[3].answers[0].qAnswer}</p>
+                  <br />
+                  <p>{idea.idea[3].answers[1].qAnswer }</p>
+                  { idea.progress === null || 
+                    idea.progress.step01 === true && 
+                    idea.progress.step02 === true && 
+                    idea.progress.step03 === false && <p>Status: First patent check </p>}
+                  { idea.progress === null || 
+                    idea.progress.step01 === true &&
+                    idea.progress.step02 === true &&
+                    idea.progress.step03 === true && 
+                    idea.progress.step04 === false && <p>Status: Expert check </p>}
+                </div>
+              </Link>
+              )}
       </div>
     </div>
   );

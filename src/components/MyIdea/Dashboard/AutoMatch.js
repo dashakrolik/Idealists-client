@@ -44,7 +44,6 @@ export default function IdeaDashboardDetail(props) {
     );
   };
 
-
   let automatchTitle = automatchResults.map(result => result.bibliographic.title[0].text)
 
   // console.log(automatchTitle)
@@ -94,7 +93,7 @@ export default function IdeaDashboardDetail(props) {
 
                 {Object.keys(automatchResults).map((key, index) => (
                   <StyledCard key={relevanceNumber[index]}>
-                    <Link to={`/automatch/${relevanceNumber[index]}`}>
+                    <Link to={`ideas/${ideasId}/automatch/${relevanceNumber[index]}`}>
                       <Paragraph>
                         {relevanceScore[index]} | {automatchTitle[index]}
                       </Paragraph>

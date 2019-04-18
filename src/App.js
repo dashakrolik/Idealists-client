@@ -195,7 +195,6 @@ class App extends Component {
                 return <AutoMatchDetails {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} />;
               }} />
               <Route exact path="/" render={() => <Redirect to="/MyIdea" />} />
-
             </Application>
           </ThemeProvider>
         </div>
