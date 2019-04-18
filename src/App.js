@@ -17,6 +17,7 @@ import TopBar from './components/NavBar/TopBar'
 import ResetPassword from './components/MyIdea/ResetPassword';
 import EnterNewPassword from './components/MyIdea/EnterNewPassword';
 import AutoMatch from './components/MyIdea/Dashboard/AutoMatch'
+import AutoMatchDetails from './components/MyIdea/Dashboard/AutoMatchDetails'
 
 class App extends Component {
   state = {
@@ -191,8 +192,11 @@ class App extends Component {
                 <Route exact path='/reset-password/:jwt' render={(props) => {
                   return <EnterNewPassword {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} updateLocalStorage={this.updateLocalStorage} logout={this.logout}/>;
                 }} />
-                <Route exact path='/automatch' render={(props) => {
+                <Route exact path='/ideas/:id/automatch' render={(props) => {
                   return <AutoMatch {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword}/>;
+                }} />
+                <Route exact path='/automatch/:patentNumber' render={(props) => {
+                  return <AutoMatchDetails {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword}/>;
                 }} />
                 <Route exact path="/" render={() => <Redirect to="/MyIdea" />} />
 

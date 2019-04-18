@@ -27,7 +27,7 @@ export default function IdeaDashboardDetail(props) {
             .then(res => setUserIdeas(res.body.idea))
     }, []);
 
-    console.log("IDEAS", userIdeas)
+    // console.log("IDEAS", userIdeas)
 
     const processTitle = (title) => {
         let splitTitle = title.split('?')
@@ -91,7 +91,7 @@ export default function IdeaDashboardDetail(props) {
                     
                 </StyledDiv>
                 <div>
-                <Button color="inherit" text="Patent Check" onClick={() => props.history.push('/automatch')}/>
+                <Button color="inherit" text="Patent Check" onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}/>
                 </div>
             </div>
             <main>
