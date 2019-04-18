@@ -7,10 +7,14 @@ import { Redirect } from 'react-router-dom';
 export default function IdeaLogin(props) {
   const [loginState, setLoginState] = useState({});
 
+  const handleSubmitCallback = () => {
+    console.log('Hi from callback')
+  }
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);
-    triggerUserData()
+    // triggerUserData()
   };
 
   const handleChange = (event) => {
@@ -20,15 +24,11 @@ export default function IdeaLogin(props) {
       [name]: value,
     });
   };
-
-  const handleSubmitCallback = () => {
-    console.log('Hi from callback')
-  }
   
-  const onSubmit = (data) => {
-    const { email, password } = data;
-    props.login(email, password, handleSubmitCallback);
-  };
+  // const onSubmit = (data) => {
+  //   const { email, password } = data;
+  //   props.login(email, password, handleSubmitCallback);
+  // };
 
   const triggerUserData = () => {
     if (props.authState.loggedIn) {
