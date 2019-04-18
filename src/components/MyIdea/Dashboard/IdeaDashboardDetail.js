@@ -1,7 +1,6 @@
 import React, { useEffect, useState, Component } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
-import { Redirect, Link } from 'react-router-dom';
 import './IdeaDashBoardDetail.css'
 import styled from '@emotion/styled';
 import Card from '@material-ui/core/Card'

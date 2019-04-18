@@ -79,8 +79,10 @@ class App extends Component {
             ...this.state.auth,
             user: res.body
           }
-        });
+          
+        })
         localStorage.setItem('currentUserJwt', this.state.auth.token)
+        localStorage.setItem('user', this.state.auth.user)
       })
   }
 

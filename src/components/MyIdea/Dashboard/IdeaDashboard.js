@@ -39,7 +39,9 @@ export default function IdeaDashboard(props) {
       <Redirect to='/myIdea' />
     )
 
-
+    if (!props.authState.user) {
+      props.user()
+    }
   return (
       <div className='dashboard-container'>
         <br/>

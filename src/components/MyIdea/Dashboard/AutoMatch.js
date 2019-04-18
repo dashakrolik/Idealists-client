@@ -72,7 +72,6 @@ export default function IdeaDashboardDetail(props) {
 
 
   const handleChange = (e) => {
-    
       setCurrentValue(e.target.value);
     
   };
@@ -80,11 +79,9 @@ export default function IdeaDashboardDetail(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     console.log(currentValue)
 
   };
-  console.log(currentValue, "CCCC")
 
   if (automatchResults) {
 

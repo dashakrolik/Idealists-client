@@ -25,6 +25,9 @@ const Submission = (props) => {
   }, [activeGroup]);
 
 
+  if (!props.authState.user) {
+    props.user()
+  }
   // const checkLocalStorage = () => {
   //   let token = localStorage.getItem('currentUserJwt')
   //   console.log(token)
