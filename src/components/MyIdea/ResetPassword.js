@@ -29,8 +29,6 @@ export default function ResetPassword(props) {
   };
 
 
-
-
   if (props) return (
     <Container>
 

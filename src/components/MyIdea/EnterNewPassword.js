@@ -29,7 +29,7 @@ function EnterNewPassword(props) {
   const onSubmit = (data) => {
     const { password } = data;
     const  token  = props.location.pathname.split('/')[2]
-    console.log(token, password)
+ 
     props.updatePassword(token, password)
     
   };
@@ -37,18 +37,15 @@ function EnterNewPassword(props) {
 
   if (props) return (
     <Container>
-
       <LeftSide>
         <div>
           <h3>Enter New Password</h3>
         </div>
       </LeftSide>
-
       <RightSide>
         <form onSubmit={handleSubmit}>
           <label>New password</label>
           <input type='password' name='password' value={resetState.password || ''} onChange={handleChange} />
-
        
           <button type='submit'>Submimt new password</button>
         </form>

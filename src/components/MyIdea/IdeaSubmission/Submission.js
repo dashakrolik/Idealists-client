@@ -24,6 +24,17 @@ const Submission = (props) => {
     setProgress(activeGroup / questionGroups.length);
   }, [activeGroup]);
 
+
+  if (!props.authState.user) {
+    props.user()
+  }
+  // const checkLocalStorage = () => {
+  //   let token = localStorage.getItem('currentUserJwt')
+  //   console.log(token)
+  // }
+
+  // checkLocalStorage()
+
   const handleAnswers = (id, value) => {
     setAnswers({
       ...answers,
@@ -57,8 +68,8 @@ const Submission = (props) => {
     }
   };
 
-  if (!props.authState.loggedIn) {
-    props.history.replace('/MyIdea/login');
+  if (localStorage.currentUserJwt !== null && props.authState.loggedIn === false) {
+    props.setAuthLoggedInTrue()
     return <div></div>;
   }
   if (questionGroups.length === 0) return <div>Loading...</div>;
@@ -94,11 +105,6 @@ const Submission = (props) => {
             </PoseGroup>
           </Content>
         </Right>
-
-        {/*<div css={css`position: absolute; left: 20px; bottom: 20px; width: 160px;`}>*/}
-        {/*<Button text='Previous' disabled={false} onClick={handlePreviousBttnClick} />*/}
-        {/*</div>*/}
-
         <div css={css`position: absolute; right: 20px; bottom: 20px; width: 160px;`}>
           {activeGroup !== questionGroups.length &&
             <Button text='Next' disabled={!activeGroupComplete} onClick={handleNextBttnClick} withIcon />}
