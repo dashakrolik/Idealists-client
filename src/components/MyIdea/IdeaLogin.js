@@ -7,6 +7,11 @@ import { Redirect } from 'react-router-dom';
 export default function IdeaLogin(props) {
   const [loginState, setLoginState] = useState({});
 
+  const onSubmit = (data) => {
+    const { email, password } = data;
+    props.login(email, password, handleSubmitCallback);
+  };
+  
   const handleSubmitCallback = () => {
     console.log('Hi from callback')
   }
@@ -24,11 +29,7 @@ export default function IdeaLogin(props) {
       [name]: value,
     });
   };
-  
-  const onSubmit = (data) => {
-    const { email, password } = data;
-    props.login(email, password, handleSubmitCallback);
-  };
+
 
   const triggerUserData = () => {
     if (props.authState.loggedIn) {
