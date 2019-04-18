@@ -3,67 +3,53 @@ import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import { Redirect, Link } from 'react-router-dom';
 import './InvestorDashboard.css'
+import assess from '../../../res/assess-white.png'
+import invest from '../../../res/invest-white.png'
 
-export default function InvestorDashboard(props) {
-  
-  const [userData, setUserData] = useState({});
-  const [userLoggedIn, setUserLoggedIn] = useState(true);
 
-  console.log(props.authState.token)
-  
-  // Currently userIdeas are ALL ideas, because it is a non-specific GET request
-  const [userIdeas, setUserIdeas] = useState([]);
-  
-  useEffect(() => {
-    if (props.authState.loggedIn)
-      request
-        .get(`${baseUrl}/current`)
-        .set("Authorization", `Bearer ${props.authState.token}`)
-        .then(res => setUserData(res.body))
-    else props.history.push('/Investors/login');
-  }, []);
-  
-  // For testing purposes, this gets ALL ideas
-  useEffect(() => {
-    request
-      .get(`${baseUrl}/ideas`)
-      .set("Authorization", `Bearer ${props.authState.token}`)
-      .then(res => setUserIdeas(res.body));
-      
-  }, []);
-  
-  const userLogout = () => {
-    localStorage.removeItem('currentUserJwt');
-    setUserLoggedIn(false);
-  };
-  
-  if (userLoggedIn === false)
-    return (
-      <Redirect to='/login' />);
+export default function investorDashboard(props) {
+    const [userData, setUserData] = useState({});
+    const [userLoggedIn, setUserLoggedIn] = useState(true)
+
+    useEffect(() => {
+        if (props.authState.loggedIn)
+            request
+                .get(`${baseUrl}/current`)
+                .set("Authorization", `Bearer ${props.authState.token}`)
+                .then(res => setUserData(res.body))
+        else props.history.push('/Investors/login');
+    }, []);
+
+    // onClick = () => {
+    //     props.history.replace('investors/dashboard/assess')
+    // }
     
+    if (userLoggedIn === false)
+        return (
+            <Redirect to='/Investors/login' />)
+
     return (
 
-      <div className='dashboard-container'>
-        <br />
-        <br />
+        <div className='dashboard-container'>
 
-        <h4 className='title'>This is {userData.firstName}'s dashboard</h4>
-        <div className='flex-tilescontainer'>
-          {userIdeas.map(idea =>
-            <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
-              <div className='idea-tile' key={idea.id}>
-                <p>{idea.idea[3].answers[0].qAnswer}</p>
-              </div>
-              <div>
-                <br />
-                <p>{idea.idea[3].answers[1].qAnswer}</p>
-              </div>
-
-
-            </Link>
-          )}
+            <h2 className='title'>{userData.firstName}'s expert dashboard</h2>
+            <div className='flex-tilescontainer'>
+                <Link className='links' to='/investors/dashboard/assess'><div className='assess-tile'>
+                    <img className='icons' src={assess}></img>
+                    <h4>Assess ideas</h4>
+                </div></Link> 
+                <Link className='links' to='/investors/dashboard/invest'><div className='invest-tile'>
+                    <img className='icons' src={invest}></img>
+                    <h4>Invest</h4>
+                </div></Link>
+                
+               
+        
+            
+            </div>
         </div>
-      </div>
-    )}
+    )
+}
+
 
 

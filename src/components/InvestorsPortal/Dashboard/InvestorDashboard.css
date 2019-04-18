@@ -1,0 +1,48 @@
+.assess-tile {
+    height: 40vh;
+    width: 25vw;
+    /* background: white; */
+    /* border: 1px solid silver;
+    border-radius: 10px; */
+    color: white;
+    margin: 20px;
+}
+
+.invest-tile {
+    height: 40vh;
+    width: 25vw;
+    /* background: white; */
+    /* border: 1px solid silver;
+    border-radius: 10px; */
+    color: white;
+    margin: 20px;
+}
+
+.icons {
+    width: 100px;
+    margin: 10px;
+    /* border: 2px solid white; */
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.icons:hover {
+     width: 100px;
+    margin: 10px;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 30px;
+    transition: ease-in;
+
+}
+
+.title {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 40px;
+}
+
+.links {
+    text-decoration: none;
+    text-decoration-color: none;
+}

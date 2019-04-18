@@ -17,6 +17,7 @@ import TopBar from './components/NavBar/TopBar'
 import ResetPassword from './components/MyIdea/ResetPassword';
 import EnterNewPassword from './components/MyIdea/EnterNewPassword';
 import AutoMatch from './components/MyIdea/Dashboard/AutoMatch'
+import AssesIdeas from './components/InvestorsPortal/Dashboard/AssessIdeas'
 
 class App extends Component {
   state = {
@@ -155,6 +156,9 @@ class App extends Component {
                 <Route exact path='/Investors/dashboard' render={(props) => {
                 return <InvestorDashboard {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
                 }} />
+              <Route exact path='/Investors/dashboard/assess' render={(props) => {
+                return <AssesIdeas {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
+              }} />
                 <Route exact path='/Investors/login' render={(props) => {
                 return <InvestorLogin {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
 

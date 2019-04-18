@@ -59,7 +59,7 @@ export default function IdeaDashboard(props) {
                 </div>
               </Link>
               )}
-          <Button className='new-idea-button'>Your next idea!</Button>
+          {/* <Button className='new-idea-button'>Your next idea!</Button> */}
         </div>
       </div>
     );
