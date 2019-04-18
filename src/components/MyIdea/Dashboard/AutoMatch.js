@@ -8,21 +8,11 @@ import { css, Global, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import Button from '../../reogranisation/Questions/Button';
 import posed from 'react-pose';
-
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'
-import FilledInput from '@material-ui/core/FilledInput';
 // import Button from '@material-ui/core/Button'
 
-const theme = createMuiTheme({
-  palette: {
-    type: 'dark', 
-  },
-});
+
 
 export default function IdeaDashboardDetail(props) {
   const [user, setUserData] = useState({});
@@ -139,7 +129,36 @@ export default function IdeaDashboardDetail(props) {
                   </StyledCard>
                   
                 ))}
-                
+                <AddlQuestions>
+                  Additional Questions: 
+                  <StyledTextField
+                    id="filled-multiline-flexible"
+                    label="Now that you know what is already out there, which problem does your idea solve?"
+                    multiline
+                    rowsMax="4"
+                    fullWidth
+                    margin="normal"
+                    variant="filled"
+                  />
+                  <StyledTextField
+                    id="filled-multiline-flexible"
+                    label="How do you solve this problem?"
+                    multiline
+                    rowsMax="4"
+                    fullWidth
+                    margin="normal"
+                    variant="filled"
+                  />
+                  <StyledTextField
+                    id="filled-multiline-flexible"
+                    label="How is this (technically) unique?"
+                    multiline
+                    rowsMax="4"
+                    fullWidth
+                    margin="normal"
+                    variant="filled"
+                  />
+                </AddlQuestions>
               </StartContent>
             </div>
           </div>
@@ -239,3 +258,7 @@ const PStartContent = posed.div({
     marginRight: theme.spacing.unit;
   `;
   
+const AddlQuestions = styled.div `
+    padding: 3em;
+    border: 1px solid #ccc;
+`

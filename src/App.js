@@ -35,7 +35,7 @@ class App extends Component {
   //   this.updateLocalStorage()
   // }
 
-  requestLogin = (email, password) => {
+  requestLogin = (email, password, callback) => {
     request
       .post(`${baseUrl}/login`)
       .send({ email, password })
@@ -50,6 +50,7 @@ class App extends Component {
             },
           });
           localStorage.setItem('currentUserJwt', res.body.jwt)
+          callback()
         }
       })
       .catch(err => {
@@ -63,6 +64,7 @@ class App extends Component {
               error: true
             }
           })
+          localStorage.setItem('currentUserJwt', null)
         } else {
           console.error(err);
         }
@@ -77,6 +79,7 @@ class App extends Component {
         this.setState({
           ...this.state, auth: {
             ...this.state.auth,
+            loggedIn: true,
             user: res.body
           }
         });
