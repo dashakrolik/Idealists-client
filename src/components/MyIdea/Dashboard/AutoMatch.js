@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import request from 'superagent';
+import { Redirect, Link } from 'react-router-dom';
 import { baseUrl } from '../../../constants';
 import './IdeaDashboard.css'
 /** @jsx jsx */
@@ -10,11 +11,18 @@ import posed from 'react-pose';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+import Card from '@material-ui/core/Card'
 import FilledInput from '@material-ui/core/FilledInput';
 import { value } from 'popmotion';
+
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark', 
+  },
+});
 
 export default function IdeaDashboardDetail(props) {
   const [user, setUserData] = useState({});
@@ -31,17 +39,32 @@ export default function IdeaDashboardDetail(props) {
       .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
   }, []);
 
-  const [multiline, setMulitline] = useState('Controlled')
+  
+  const ToggleContent = ({ toggle, content }) => {
+    const [isShown, setIsShown] = useState(false);
+    const hide = () => setIsShown(false);
+    const show = () => setIsShown(true);
+  
+    return (
+      <>
+        {toggle(show)}
+        {isShown && content(hide)}
+      </>
+    );
+  };
+  
+  
+  let automatchTitle = automatchResults.map(result => result.bibliographic.title[0].text)
 
-
-
-  let automatchTitle = automatchResults.map(c => c.bibliographic.title[0].text)
   // console.log(automatchTitle)
   // console.log(automatchResults)
-  let automatchText = automatchResults.map(a => a.passage.text)
-  // console.log(automatchText[0])
-  let relevanceScore = automatchResults.map(b => b.relevance.score)
+  let automatchText = automatchResults.map(result => 
+    result.passage.text.split('.').slice(1,-1).join() + '.'
+  )
+  // console.log(automatchText)
+  let relevanceScore = automatchResults.map(result => result.relevance.score)
   // console.log(relevanceScore)
+
   let relevanceNumber = automatchResults.map(b => b.relevance.number)
   if (typeof automatchResults.autoMatch === 'object') {
     // console.table(automatchResults.autoMatch['0'].relevance)
@@ -62,6 +85,7 @@ export default function IdeaDashboardDetail(props) {
 
   };
   console.log(currentValue, "CCCC")
+
   if (automatchResults) {
 
     return (
@@ -79,35 +103,48 @@ export default function IdeaDashboardDetail(props) {
                 <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
                   Automatch results
                 </Heading>
-                {Object.keys(automatchResults).map((key, index) => (
-                  <div key={relevanceNumber[index]}>
-                    <Paragraph>
-                      {relevanceScore[index]} | {automatchTitle[index]}
-                    </Paragraph>
+
+                { Object.keys(automatchResults).map((key, index) => (
+                  <StyledCard key={relevanceNumber[index]}>
+                    <Link to={`/automatch/${relevanceNumber[index]}`}>
+                      <Paragraph>
+                        {relevanceScore[index]} | {automatchTitle[index]}
+                      </Paragraph>
+                    </Link>
                     <Paragraph>
                       {automatchText[index]}
                     </Paragraph>
-                    <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-                      <Button text={`It's different`} />
+                    {/* <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}> 
+                      <Button text={`It's different`} onClick={handleClickOpen}/>  */}
                       <Button text={`It's the same`} />
-                    </Controls>
-                    <StyledTextField
-                      id="outlined-multiline-flexible"
-                      key={automatchText[index]}
-                      label="Please explain to us how your idea is different (especially better) or similar to this patent:"
-                      onChange={handleChange}
-                      onSubmit={handleSubmit}
-                      value={currentValue[index]}
-                      multiline
-                      rowsMax="4"
-                      fullWidth
-                      margin="normal"
-                      variant="outlined"
-                    ></StyledTextField>
-                    <br></br><br></br>
-                  </div>
+
+
+                      <ToggleContent
+                        toggle={show => <Button onClick={show} text={`It's different`}/>}
+                        content={hide => (
+                          <div>
+                            <StyledTextField
+                              id="filled-multiline-flexible"
+                               InputLabelProps={{
+                              style: { color: '#fff' },
+                              }}
+                              label="Also then, please explain to us how your idea is different (especially better) or similar to this patent:"
+                              multiline
+                              rowsMax="4"
+                              fullWidth
+                              margin="normal"
+                              variant="filled"
+                            />
+                            <Button text={`submit`} />
+                          </div>
+                        )}
+                      />
+                    {/* </Controls> */}
+                    
+                  </StyledCard>
+
                 ))}
-                <Button text="HEYYY" onClick={e => { handleSubmit(e) }} />
+                
               </StartContent>
             </div>
           </div>
@@ -183,7 +220,14 @@ const Paragraph = styled.div`
 
   `;
 
-const Container = styled.div`
+
+
+  const StyledCard = styled(Card) `
+    background-color: rgb(255,255,255, 0.3);
+    padding-bottom: 5px;
+  `;
+  
+  const Container = styled.div`
     position: relative;
     align-items: center;
     justify-content: center;
@@ -195,7 +239,8 @@ const Container = styled.div`
     display: flex;
   `;
 
-const StyledTextField = styled(TextField)`
+
+  const StyledTextField = styled(TextField)`
     background-color: rgb(255,255,255, 0.5);
     marginLeft: theme.spacing.unit;
     marginRight: theme.spacing.unit;

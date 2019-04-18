@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 export default function IdeaLogin(props) {
-  
+  console.log(localStorage)
   const [loginState, setLoginState] = useState({});
   
   const handleSubmit = (e) => {
@@ -44,8 +44,7 @@ export default function IdeaLogin(props) {
   //logout code
 
   //logout code
-  console.log(props, 'line 47')
-  
+
   if (!localStorage.currentUserJwt) { 
     props.history.replace('/MyIdea/login'); 
     triggerUserData(); 
@@ -75,6 +74,7 @@ export default function IdeaLogin(props) {
           <button type='submit' onClick={()=> {props.history.replace('/MyIdea/login/reset-password')}}>Forgot your password?</button>
         </form>
       </RightSide>
+
     </Container>); 
     else return (<Redirect to='/MyIdea/new' />)
 }

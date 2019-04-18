@@ -1,12 +1,14 @@
 import React, { useEffect, useState, Component } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
-import './IdeaDashBoardDetail.css';
+import { Redirect, Link } from 'react-router-dom';
+import './IdeaDashBoardDetail.css'
 import styled from '@emotion/styled';
 import Card from '@material-ui/core/Card'
 import { Redirect, Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid'
 import Button from '../../reogranisation/Questions/Button';
+
 
 export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
@@ -125,4 +127,6 @@ const StyledCard = styled(Card) `
     padding: 10px
     `
 
+
     
+
