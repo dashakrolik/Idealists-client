@@ -24,8 +24,7 @@ class App extends Component {
     auth: {
       loggedIn: false,
       token: '',
-      user: '',
-      error: ''
+      user: ''
     },
     navigation: {
       activePath: '',
@@ -61,10 +60,11 @@ class App extends Component {
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null,
-              error: true
+              token: null
             }
           })
+
+          alert("You have entered an incorrect email or password, Please try again!")
           localStorage.setItem('currentUserJwt', null)
         } else {
           console.error(err);
@@ -83,7 +83,7 @@ class App extends Component {
             loggedIn: true,
             user: res.body
           }
-          
+
         })
         localStorage.setItem('currentUserJwt', this.state.auth.token)
         localStorage.setItem('user', this.state.auth.user)
@@ -112,7 +112,7 @@ class App extends Component {
     request
       .put(`${baseUrl}/users`)
       .set("Authorization", `Bearer ${jwt}`)
-      .send( {password })
+      .send({ password })
       .then(res => res.status === 200)
   }
 
@@ -159,17 +159,10 @@ class App extends Component {
             <ThemeProvider theme={theme}>
               <Application>
                 <Route exact path='/Investors/dashboard' render={(props) => {
-// <<<<<<< autoMatchForm
-//                 return <InvestorDashboard {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
-//                 }} />
-//                 <Route exact path='/Investors/login' render={(props) => {
-//                 return <InvestorLogin {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser}/>;
-// =======
                   return <InvestorDashboard {...props} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout}/>;
                 }} />
                 <Route exact path='/Investors/login' render={(props) => {
                   return <InvestorLogin {...props} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue}/>;
-// >>>>>>> development-version2
                 }} />
                 <Route exact path='/MyIdea' render={(props) => {
                   return <IdeaStart {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue}/>;
