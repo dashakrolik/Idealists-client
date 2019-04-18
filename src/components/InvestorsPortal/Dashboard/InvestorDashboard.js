@@ -2,74 +2,54 @@ import React, { useEffect, useState, useContext } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import { Redirect, Link } from 'react-router-dom';
+import './InvestorDashboard.css'
+import assess from '../../../res/assess-white.png'
+import invest from '../../../res/invest-white.png'
 
-export default function InvestorDashboard(props) {
-  
-  const [userData, setUserData] = useState({});
-  const [userLoggedIn, setUserLoggedIn] = useState(true);
 
-  console.log(props.authState.token)
-  
-  // Currently userIdeas are ALL ideas, because it is a non-specific GET request
-  const [userIdeas, setUserIdeas] = useState([]);
-  
-  useEffect(() => {
-    if (props.authState.loggedIn)
-      request
-        .get(`${baseUrl}/current`)
-        .set("Authorization", `Bearer ${props.authState.token}`)
-        .then(res => setUserData(res.body))
-    else props.history.push('/Investors/login');
-  }, []);
-  
-  // For testing purposes, this gets ALL ideas
-  useEffect(() => {
-    request
-      .get(`${baseUrl}/ideas`)
-      .set("Authorization", `Bearer ${props.authState.token}`)
-      .then(res => setUserIdeas(res.body));
-  }, []);
-  
-  const userLogout = () => {
-    localStorage.removeItem('currentUserJwt');
-    setUserLoggedIn(false);
-  };
-  
-  if (userLoggedIn === false)
-    return (
-      <Redirect to='/login' />);
+export default function investorDashboard(props) {
+    const [userData, setUserData] = useState({});
+    const [userLoggedIn, setUserLoggedIn] = useState(true)
 
-  console.log(userIdeas)
-  
-  
-  // Condition below should be userIdeas.length > 0, userData.firstName is purely for testing purposes
-  // if (userData.firstName) {
-    // console.log(userData)
-    // console.log(userIdeas)
+    useEffect(() => {
+        if (props.authState.loggedIn)
+            request
+                .get(`${baseUrl}/current`)
+                .set("Authorization", `Bearer ${props.authState.token}`)
+                .then(res => setUserData(res.body))
+        else props.history.push('/Investors/login');
+    }, []);
 
+    // onClick = () => {
+    //     props.history.replace('investors/dashboard/assess')
+    // }
     
-  
-  return (
-      <div className='dashboard-container'>
-        <br />
-        <br />
-        <br />
-        <div className='title'>
-          <h1>{userData.firstName}'s Dashboard</h1>
-        </div>
-        <div className='flex-tilescontainer'>
-          {userIdeas.map(idea =>
-            <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
-              <div className='idea-tile' key={idea.id}>
-                <p>{idea.idea[3].answers[0].qAnswer}</p>
-                <br />
-                <p>{idea.idea[3].answers[1].qAnswer}</p>
-              </div>
+    if (userLoggedIn === false)
+        return (
+            <Redirect to='/Investors/login' />)
 
-            </Link>
-          )}
+    return (
+
+        <div className='dashboard-container'>
+
+            <h2 className='title'>{userData.firstName}'s expert dashboard</h2>
+            <div className='flex-tilescontainer'>
+                <Link className='links' to='/investors/dashboard/assess'><div className='assess-tile'>
+                    <img className='icons' src={assess}></img>
+                    <h4>Assess ideas</h4>
+                </div></Link> 
+                <Link className='links' to='/investors/dashboard/invest'><div className='invest-tile'>
+                    <img className='icons' src={invest}></img>
+                    <h4>Invest</h4>
+                </div></Link>
+                
+               
+        
+            
+            </div>
         </div>
-      </div>
-    );
-  }
+    )
+}
+
+
 

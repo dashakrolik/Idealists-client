@@ -36,11 +36,11 @@ export default function InvestorLogin(props) {
     <Container>
       {/* <Header /> */}
       
-      <Logo src={logo} alt='Logo' />
+      
       <LeftSide>
         <div>
           <h3>Login to my Investor Dashboard</h3>
-          <a href='/MyIdea'> Don’t have an account yet? Create it here</a>
+          {/* <a href='/MyIdea'> Don’t have an account yet? Create it here</a> */}
         </div>
       </LeftSide>
       <RightSide>
