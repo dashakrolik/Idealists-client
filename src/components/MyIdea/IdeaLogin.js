@@ -7,10 +7,19 @@ import { Redirect } from 'react-router-dom';
 export default function IdeaLogin(props) {
   const [loginState, setLoginState] = useState({});
 
+  const onSubmit = (data) => {
+    const { email, password } = data;
+    props.login(email, password, handleSubmitCallback);
+  };
+  
+  const handleSubmitCallback = () => {
+    console.log('Hi from callback')
+  }
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);
-    triggerUserData()
+    // triggerUserData()
   };
 
   const handleChange = (event) => {
@@ -21,10 +30,6 @@ export default function IdeaLogin(props) {
     });
   };
 
-  const onSubmit = (data) => {
-    const { email, password } = data;
-    props.login(email, password);
-  };
 
   const triggerUserData = () => {
     if (props.authState.loggedIn) {
@@ -32,11 +37,11 @@ export default function IdeaLogin(props) {
     }
   }
 
-  if (!localStorage.currentUserJwt) {
-    props.history.replace('/MyIdea/login');
-    triggerUserData();
-    return <div></div>;
-  }
+  // if (!localStorage.currentUserJwt) {
+  //   props.history.replace('/MyIdea/login');
+  //   triggerUserData();
+  //   return <div></div>;
+  // }
 
   if (props.authState.loggedIn !== true) return (
     <Container>
