@@ -1,5 +1,7 @@
 # The Idealists - a matching platform for investors and people with great ideas!
 
+https://idealists-client.herokuapp.com/MyIdea
+
 ## Overview
 Built the frontend for the webapp building on top of an existing code base using React Hooks and styled components.
 
