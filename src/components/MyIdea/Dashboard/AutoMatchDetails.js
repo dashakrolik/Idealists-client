@@ -1,12 +1,11 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import request from 'superagent';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { baseUrl } from '../../../constants';
 import './IdeaDashboard.css'
 /** @jsx jsx */
-import { css, Global, jsx } from '@emotion/core';
+import { css, Global } from '@emotion/core';
 import styled from '@emotion/styled';
-import Button from '../../reogranisation/Questions/Button';
 import posed from 'react-pose';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'

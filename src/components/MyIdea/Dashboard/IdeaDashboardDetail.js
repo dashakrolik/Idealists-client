@@ -11,15 +11,15 @@ import Button from '../../reogranisation/Questions/Button';
 
 export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
-    
-    // progress bar
+
     const [percentRange, setProgress] = useState(0);
     
     const ideasId = props.match.params.id
     if (props.authState.LoggedIn === false) {
-    return (
-      <Redirect to='/myIdea' />
-    ) }
+        return (
+        <Redirect to='/myIdea' />
+        ) }
+
     useEffect(() => {
         request
             .get(`${baseUrl}/ideas/${ideasId}`)
@@ -27,12 +27,11 @@ export default function IdeaDashboardDetail(props) {
             .then(res => setUserIdeas(res.body.idea))
     }, []);
 
-    // console.log("IDEAS", userIdeas)
 
     const processTitle = (title) => {
         let splitTitle = title.split('?')
         const processedTitle = splitTitle[0] 
-        return processedTitle
+            return processedTitle
     }
 
     let qAnswers = []
