@@ -10,9 +10,6 @@ import Button from '../../reogranisation/Questions/Button';
 import posed from 'react-pose';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'
-import FilledInput from '@material-ui/core/FilledInput';
-import { value } from 'popmotion';
-
 
 
 export default function IdeaDashboardDetail(props) {
@@ -34,39 +31,28 @@ export default function IdeaDashboardDetail(props) {
   
   console.log(automatchResults)
   let automatchTitle = automatchResults.map(result => result.bibliographic.title[0].text)
-//   console.log(automatchResults[0])
-  // console.log(automatchTitle)
-  // console.log(automatchResults)
+
   let automatchText = automatchResults.map(result => 
     result.passage.text.split('.').slice(1,-1).join() + '.'
   )
-  // console.log(automatchText)
   let relevanceScore = automatchResults.map(result => result.relevance.score)
-  // console.log(relevanceScore)
+  
 
   let relevanceNumber = automatchResults.map(b => b.relevance.number)
   if (typeof automatchResults.autoMatch === 'object') {
-    // console.table(automatchResults.autoMatch['0'].relevance)
+    
   }
-
-  
- 
-
 
   const handleChange = (e) => {
       setCurrentValue(e.target.value);
-    
-  };
+    };
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(currentValue)
-
   };
 
   if (automatchResults) {
-
     return (
       <Container>
         <Global styles={css`
