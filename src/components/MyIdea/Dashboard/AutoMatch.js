@@ -19,9 +19,14 @@ export default function IdeaDashboardDetail(props) {
   const [user, setUserData] = useState({});
   const [userLoggedIn, setUserLoggedIn] = useState(true);
   const [userIdeas, setUserIdeas] = useState([]);
-  const ideasId = props.match.params.id
-  const [automatchResults, DoAutomatch] = useState([])
-  const [currentValue, setCurrentValue] = useState([])
+  const ideasId = props.match.params.id;
+  const [automatchResults, DoAutomatch] = useState([]);
+  const [currentValue, setCurrentValue] = useState([]);
+
+  const [patentDifference, setPatentDifference] = setState("");
+  const [identifyProblem, setIdentifyProblem] = setState("");
+  const [problemSolution, setProblemSolution] = setState("");
+  const [howProblemUnique, setHowProblemUnique] = setState("");
 
   useEffect(() => {
     request
@@ -122,6 +127,10 @@ export default function IdeaDashboardDetail(props) {
                               fullWidth
                               margin="normal"
                               variant="filled"
+                              value={patentDifference}
+                              onChange={e => setPatentDifference(e.target.value)}
+                              name="patentDifference"
+                              type="text"
                             />
                             <Button text={`submit`} />
                           </div>
@@ -142,6 +151,10 @@ export default function IdeaDashboardDetail(props) {
                     fullWidth
                     margin="normal"
                     variant="filled"
+                    value={identifyProblem}
+                    onChange={e => setIdentifyProblem(e.target.value)}
+                    name="identifyProblem"
+                    type="text"
                   />
                   <StyledTextField
                     id="filled-multiline-flexible"
@@ -151,6 +164,10 @@ export default function IdeaDashboardDetail(props) {
                     fullWidth
                     margin="normal"
                     variant="filled"
+                    value={problemSolution}
+                    onChange={e => setProblemSolution(e.target.value)}
+                    name="problemSolution"
+                    type="text"
                   />
                   <StyledTextField
                     id="filled-multiline-flexible"
@@ -160,7 +177,12 @@ export default function IdeaDashboardDetail(props) {
                     fullWidth
                     margin="normal"
                     variant="filled"
+                    value={howProblemUnique}
+                    onChange={e => setHowProblemUnique(e.target.value)}
+                    name="howProblemUnique"
+                    type="text"
                   />
+                  <Button text={`submit`} />
                 </AddlQuestions>
               </StartContent>
             </div>
