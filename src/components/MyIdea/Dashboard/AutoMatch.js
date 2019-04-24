@@ -142,9 +142,13 @@ export default function IdeaDashboardDetail(props) {
 
                 ))}
                 <AddlQuestions>
-                  Additional Questions: 
+                  <h1>Additional Questions:</h1>
+                  <hr />
                   <StyledTextField
                     id="filled-multiline-flexible"
+                    InputLabelProps={{
+                      style: { color: '#fff' },
+                      }}
                     label="Now that you know what is already out there, which problem does your idea solve?"
                     multiline
                     rowsMax="4"
@@ -158,6 +162,9 @@ export default function IdeaDashboardDetail(props) {
                   />
                   <StyledTextField
                     id="filled-multiline-flexible"
+                    InputLabelProps={{
+                      style: { color: '#fff' },
+                      }}
                     label="How do you solve this problem?"
                     multiline
                     rowsMax="4"
@@ -171,6 +178,9 @@ export default function IdeaDashboardDetail(props) {
                   />
                   <StyledTextField
                     id="filled-multiline-flexible"
+                    InputLabelProps={{
+                      style: { color: '#fff' },
+                      }}
                     label="How is this (technically) unique?"
                     multiline
                     rowsMax="4"
