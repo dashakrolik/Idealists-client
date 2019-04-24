@@ -23,10 +23,10 @@ export default function IdeaDashboardDetail(props) {
   const [automatchResults, DoAutomatch] = useState([]);
   const [currentValue, setCurrentValue] = useState([]);
 
-  const [patentDifference, setPatentDifference] = setState("");
-  const [identifyProblem, setIdentifyProblem] = setState("");
-  const [problemSolution, setProblemSolution] = setState("");
-  const [howProblemUnique, setHowProblemUnique] = setState("");
+  const [patentDifference, setPatentDifference] = useState("");
+  const [identifyProblem, setIdentifyProblem] = useState("");
+  const [problemSolution, setProblemSolution] = useState("");
+  const [howProblemUnique, setHowProblemUnique] = useState("");
 
   useEffect(() => {
     request
