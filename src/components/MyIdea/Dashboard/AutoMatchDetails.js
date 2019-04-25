@@ -27,7 +27,7 @@ export default function IdeaDashboardDetail(props) {
 
   useEffect(() => {
     request
-    .get(`${baseUrl}/automatch/986`)
+      .get(`${baseUrl}/automatch/986`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
   }, []);
