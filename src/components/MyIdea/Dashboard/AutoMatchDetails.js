@@ -27,7 +27,7 @@ export default function IdeaDashboardDetail(props) {
 
   useEffect(() => {
     request
-      .get(`${baseUrl}/ideas/${ideasId}/automatch/${automatchId}`)
+    .get(`${baseUrl}/automatch/986`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
   }, []);
@@ -53,14 +53,14 @@ export default function IdeaDashboardDetail(props) {
       setCurrentValue(e.target.value);
     
   };
-
+  console.log(props)
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(currentValue)
 
   };
-
+  console.log(props.results)
   if (props) {
 
     return (

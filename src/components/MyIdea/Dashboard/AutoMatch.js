@@ -99,7 +99,7 @@ export default function IdeaDashboardDetail(props) {
 
                 {Object.keys(automatchResults).map((key, index) => (
                   <StyledCard key={relevanceNumber[index]}>
-                    <Link to={`ideas/${ideasId}/automatch/${relevanceNumber[index]}`}>
+                    <Link to={`ideas/${ideasId}/automatch/${relevanceNumber[index]}`} results={automatchResults}>
                       <Paragraph>
                         {relevanceScore[index]} | {automatchTitle[index]}
                       </Paragraph>
