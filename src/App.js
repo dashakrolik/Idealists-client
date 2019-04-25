@@ -17,7 +17,7 @@ import TopBar from './components/NavBar/TopBar'
 import ResetPassword from './components/MyIdea/ResetPassword';
 import EnterNewPassword from './components/MyIdea/EnterNewPassword';
 import AutoMatch from './components/MyIdea/Dashboard/AutoMatch'
-import AutoMatchLinkDetails from './components/MyIdea/Dashboard/AutoMatchLinkDetails';
+
 import AssesIdeas from './components/InvestorsPortal/Dashboard/AssessIdeas'
 
 import AutoMatchDetails from './components/MyIdea/Dashboard/AutoMatchDetails'
@@ -190,9 +190,6 @@ class App extends Component {
               }} />
               <Route exact path='/ideas/:id/automatch' render={(props) => {
                 return <AutoMatch {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} />;
-              }} />
-              <Route exact path='ideas/:id/ideas/:id/automatch/:id' render={(props) => {
-                return <AutoMatchLinkDetails {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} />;
               }} />
               <Route exact path='/automatch/:patentNumber' render={(props) => {
                 return <AutoMatchDetails {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} />;

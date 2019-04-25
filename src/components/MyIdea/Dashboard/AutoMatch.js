@@ -65,6 +65,7 @@ export default function IdeaDashboardDetail(props) {
     // console.table(automatchResults.autoMatch['0'].relevance)
   }
 
+  console.log(automatchResults)
 
   const handleChange = (e) => {
     setCurrentValue(e.target.value);
