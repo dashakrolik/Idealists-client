@@ -701,6 +701,14 @@
         "validationErrorMsg": "Max 500 characters."
       },
       {
+        "id": 3,
+        "type": "singleLine",
+        "text": "Please comment. *",
+        "maxChar": 500,
+        "placeholder": "Comment",
+        "validationErrorMsg": "Max 500 characters."
+      },
+      {
         "id": 1,
         "type": "singleLine",
         "text": "Please give the link where you found a similarity to your idea. *",
@@ -709,11 +717,27 @@
         "validationErrorMsg": "Max 500 characters."
       },
       {
+        "id": 4,
+        "type": "singleLine",
+        "text": "Please comment. *",
+        "maxChar": 500,
+        "placeholder": "Comment",
+        "validationErrorMsg": "Max 500 characters."
+      },
+      {
         "id": 2,
         "type": "singleLine",
         "text": "Please give the link where you found a similarity to your idea. *",
         "maxChar": 500,
         "placeholder": "https://",
+        "validationErrorMsg": "Max 500 characters."
+      },
+      {
+        "id": 5,
+        "type": "singleLine",
+        "text": "Please comment. *",
+        "maxChar": 500,
+        "placeholder": "Comment",
         "validationErrorMsg": "Max 500 characters."
       }
     ]
