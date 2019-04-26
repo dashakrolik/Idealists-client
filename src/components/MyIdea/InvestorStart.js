@@ -6,7 +6,7 @@ import Button from '../reogranisation/Questions/Button';
 import posed from 'react-pose';
 import logo from '../../res/logo_horizontal_white.png';
 
-import Registration from './Registration';
+import InvestorRegistration from './InvestorRegistration';
 import { Redirect } from 'react-router-dom';
 
 const InvestorStart = (props) => {
@@ -62,19 +62,18 @@ const InvestorStart = (props) => {
                 My Idea Page
               </Heading>
               <Paragraph>
-                Welcome to your Idea Page. Below you can submit your idea or check on the status of ideas you’ve already
-                submitted.
+                Welcome to your Investor Page. Below you can create a new account or login.
               </Paragraph>
               <Paragraph>
                 If you don’t have an account yet when clicking one of the buttons, you will be asked to make
-                one so we can keep you updated throughout the assessment process
+                one.
               </Paragraph>
               <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
                 <Button text={'New User'} onClick={newUser} />
                 <Button text={'Existing User'} onClick={existingUser} />
               </Controls>
             </StartContent>
-            <Registration show={uiState === 'displayingLogin'} handleCancel={closeRegistration} props={props} />
+            <InvestorRegistration show={uiState === 'displayingLogin'} handleCancel={closeRegistration} props={props} />
           </div>
         </div>
       </Content>

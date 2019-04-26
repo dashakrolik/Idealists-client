@@ -17,7 +17,7 @@ import TopBar from './components/NavBar/TopBar'
 import ResetPassword from './components/MyIdea/ResetPassword';
 import EnterNewPassword from './components/MyIdea/EnterNewPassword';
 import AutoMatch from './components/MyIdea/Dashboard/AutoMatch'
-
+import InvestorStart from './components/MyIdea/InvestorStart';
 import AssesIdeas from './components/InvestorsPortal/Dashboard/AssessIdeas'
 
 import AutoMatchDetails from './components/MyIdea/Dashboard/AutoMatchDetails'
@@ -169,6 +169,9 @@ class App extends Component {
               }} />
               <Route exact path='/MyIdea' render={(props) => {
                 return <IdeaStart {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
+              }} />
+              <Route exact path='/InvestorStart' render={(props) => {
+                return <InvestorStart {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
               }} />
               <Route exact path='/MyIdea/dashboard' render={(props) => {
                 return <IdeaDashboard {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} />;

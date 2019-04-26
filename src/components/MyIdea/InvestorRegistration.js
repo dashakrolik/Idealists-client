@@ -2,6 +2,7 @@
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
+import industryList from '../reogranisation/Start/industry-list';
 import countryList from '../reogranisation/Start/country-list';
 import posed from 'react-pose';
 import Select from 'react-select';
@@ -47,6 +48,16 @@ const InvestorRegistration = (props) => {
       shouldShowError: false,
       validated: true,
     },
+    industry: {
+        value: '',
+        shouldShowError: false,
+        validated: true
+    },
+    role: {
+        value: '',
+        shouldShowError: false,
+        validated: false
+    }
   });
 
   const passwordRegEx = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])");
@@ -76,6 +87,14 @@ const InvestorRegistration = (props) => {
       validator: (val) => (val === formData.country.value),
       shouldShowError: (val) => (val.length > 0),
     },
+    industry: {
+        validator: (val) => (val === formData.industry.value),
+        shouldShowError: (val) => (val.length > 0)
+    },
+    role: {
+        validator: (val) => (val.length <= 100),
+        shouldShowError: (val) => (val.length > 4)
+    }
   };
 
   useEffect(() => {
@@ -114,7 +133,7 @@ const InvestorRegistration = (props) => {
 
   const signup = () => {
 
-    const { firstName, lastName, email, password, country } = formData;
+    const { firstName, lastName, email, password, country, role, industry } = formData;
     request
       .post(`${baseUrl}/users`)
       .send({
@@ -123,10 +142,12 @@ const InvestorRegistration = (props) => {
         email: email.value,
         password: password.value,
         country: country.value,
+        role: role.value,
+        industry: industry.value
       })
       .then(res => {
         if (res.status === 200) {
-          props.history.push(`MyIdea/login`)
+          props.history.push(`Investors/login`)
         }
       })
       .catch(err => {
@@ -146,7 +167,7 @@ const InvestorRegistration = (props) => {
           <FlexRow>
             <FlexColumn>
               <FormGroup css={css`font-size: 24px; padding: 5px 10px;`}>
-                <b>Idea Submission</b> / New User
+                <b>Investors</b> / New User
               </FormGroup>
             </FlexColumn>
           </FlexRow>
@@ -154,7 +175,7 @@ const InvestorRegistration = (props) => {
           <FlexRow>
             <FlexColumn>
               <FormGroup css={css`font-size: 10px; padding: 5px 10px; margin: 0 0 30px;`}>
-                <a href='/MyIdea/login'> Already registered? Click here to log in</a>
+                <a href='/Investors/login'> Already registered? Click here to log in</a>
               </FormGroup>
             </FlexColumn>
           </FlexRow>
@@ -175,6 +196,15 @@ const InvestorRegistration = (props) => {
                   <span css={css`font-weight: 800; color: #ff4444;`}> / max 100 chars</span>}</label>
                 <input type='text' name='lastName' onChange={handleChange} onBlur={enableValidation}
                   value={formData.lastName.value} />
+              </FormGroup>
+            </FlexColumn>
+            <FlexColumn>
+              <FormGroup>
+                <label>Role{formData.role.shouldShowError && !formData.role.validated &&
+                  <span
+                    css={css`font-weight: 800; color: #ff4444;`}> / max 100 chars</span>}</label>
+                <input type='text' name='role' onChange={handleChange} onBlur={enableValidation}
+                  value={formData.role.value} />
               </FormGroup>
             </FlexColumn>
           </FlexRow>
@@ -236,6 +266,14 @@ const InvestorRegistration = (props) => {
               <FormGroup>
                 <label>What is your country of residence?</label>
                 <Select options={countryList} />
+              </FormGroup>
+            </FlexColumn>
+          </FlexRow>
+          <FlexRow>
+            <FlexColumn>
+              <FormGroup>
+                <label>What is your industry?</label>
+                <Select options={industryList} />
               </FormGroup>
             </FlexColumn>
           </FlexRow>
