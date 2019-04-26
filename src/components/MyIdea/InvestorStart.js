@@ -27,7 +27,7 @@ const InvestorStart = (props) => {
   };
 
   const existingUser = () => {
-    props.history.push('/MyIdea/login');
+    props.history.push('/Investors/login');
   };
 
   const closeRegistration = () => {
@@ -59,7 +59,7 @@ const InvestorStart = (props) => {
             <StartContent pose={uiState}
               css={css`display: flex; flex-direction: column; width: auto; margin-bottom: 60px;`}>
               <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
-                My Idea Page
+                My Investor Page
               </Heading>
               <Paragraph>
                 Welcome to your Investor Page. Below you can create a new account or login.
