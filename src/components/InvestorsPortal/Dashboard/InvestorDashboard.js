@@ -31,18 +31,34 @@ export default function investorDashboard(props) {
     return (
 
         <div className='dashboard-container'>
-
             <h2 className='title'>{userData.firstName}'s expert dashboard</h2>
-            <div className='flex-tilescontainer'>
-                <Link className='links' to='/investors/dashboard/assess'><div className='assess-tile'>
+                <div className='flex-tilescontainer'>
+                    <Link className='links' to='/investors/dashboard/assess'><div className='assess-tile'>
                     <img className='icons' src={assess}></img>
                     <h4>Assess ideas</h4>
-                </div></Link> 
-                <Link className='links' to='/investors/dashboard/invest'><div className='invest-tile'>
-                    <img className='icons' src={invest}></img>
-                    <h4>My Investments</h4>
-                </div></Link>
-                
+                </div>
+                </Link> 
+
+                <Link className='links' to='/investors/dashboard/invest'>
+                    <div className='invest-tile'>
+                        <img className='icons' src={invest}></img>
+                        <h4>My Investments</h4>
+                    </div>
+                </Link>
+
+                <Link className='links' to='/investors/dashboard/crowdfunding'>
+                    <div className='invest-tile'>
+                        <img className='icons' src={invest}></img>
+                        <h4>Crowd Funding</h4>
+                    </div>
+                </Link>
+
+                <Link className='links' to='/investors/dashboard/mymentorships'>
+                    <div className='invest-tile'>
+                        <img className='icons' src={invest}></img>
+                        <h4>My mentorships</h4>
+                    </div>
+                </Link>
                
         
             

@@ -20,6 +20,8 @@ import AutoMatch from './components/MyIdea/Dashboard/AutoMatch'
 import InvestorStart from './components/MyIdea/InvestorStart';
 import AssesIdeas from './components/InvestorsPortal/Dashboard/AssessIdeas'
 import MyInvestments from './components/InvestorsPortal/Dashboard/MyInvestments'
+import Crowdfunding from './components/InvestorsPortal/Dashboard/Crowdfunding'
+import MyMentorships from './components/InvestorsPortal/Dashboard/MyMentorships'
 import AutoMatchDetails from './components/MyIdea/Dashboard/AutoMatchDetails'
 
 
@@ -163,6 +165,12 @@ class App extends Component {
               }} />
               <Route exact path='/Investors/dashboard/assess' render={(props) => {
                 return <AssesIdeas {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
+              }} />
+              <Route exact path='/Investors/dashboard/crowdfunding' render={(props) => {
+                return <Crowdfunding {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
+              }} />
+              <Route exact path='/Investors/dashboard/mymentorships' render={(props) => {
+                return <MyMentorships {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
               }} />
               <Route exact path='/Investors/dashboard/invest' render={(props) => {
                 return <MyInvestments {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
