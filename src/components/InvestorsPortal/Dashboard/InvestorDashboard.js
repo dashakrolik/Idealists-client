@@ -17,7 +17,7 @@ export default function investorDashboard(props) {
                 .get(`${baseUrl}/current`)
                 .set("Authorization", `Bearer ${props.authState.token}`)
                 .then(res => setUserData(res.body))
-        else props.history.push('/Investors/login');
+        else props.history.push('/InvestorStart');
     }, []);
 
     // onClick = () => {
