@@ -55,8 +55,15 @@ export default function AssessIdeas(props) {
           Here you get to assess ideas in a very simple and fast way and get rewarded for it atthe same time. 
           When an idea you helped assess becomes incorporated, you’ll receive € 100,- worth of equity in that company. 
           Assessing an idea takes on average 3 minutes.[Open]
-          </StyledCard>
-        <div className='flex-tilescontainer'>
+        </StyledCard>
+        <StyledCard>
+          <Link to='/investors/dashboard/assess/:id'>Sample Idea 1</Link>
+        </StyledCard>
+
+        <StyledCard>
+          <Link to='/investors/dashboard/assess/:id'>Sample Idea 2</Link>
+        </StyledCard>
+        {/* <div className='flex-tilescontainer'>
           {expertIdeas.map(idea =>
             <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
               <div className='idea-tile' key={idea.id}>
@@ -80,7 +87,7 @@ export default function AssessIdeas(props) {
 
             </Link>
           )}
-        </div>
+        </div> */}
       </div>
     )}
 
