@@ -1,18 +1,20 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import { Redirect, Link } from 'react-router-dom';
 import './InvestorDashboard.css'
 import styled from '@emotion/styled';
-import Button from '../../reogranisation/Questions/Button';
-import posed from 'react-pose';
 import TextField from '@material-ui/core/TextField';
-import Card from '@material-ui/core/Card'
+import './InvestorDashboard.css'
 
 
 export default function FormAssessIdeas (props) {
+    const [userLoggedIn, setUserLoggedIn] = useState(true);
+    if (props.authState.loggedIn === false)
     return (
-        <div><br></br><br></br>
+      <Redirect to='/InvestorStart' />);
+    return (
+        <div className='dashboard-container'>
             <AddlQuestions>
                 Assess the idea: 
                 <StyledTextField
