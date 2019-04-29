@@ -52,10 +52,9 @@ export default function AssessIdeas(props) {
 
         <h4 className='title'>This is {userData.firstName}'s dashboard</h4>
         <StyledCard>
-          Here you get to assess ideas in a very simple and fast way and get rewarded for it atthe same time. 
-          When an idea you helped assess becomes incorporated, you’ll receive € 100,- worth of equity in that company. 
-          Assessing an idea takes on average 3 minutes.[Open]
-          </StyledCard>
+        Here you can track how all of your investments are performing and 
+        ask the founders questions or help them with your feedback.[Open]
+        </StyledCard>
         <div className='flex-tilescontainer'>
           {expertIdeas.map(idea =>
             <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>

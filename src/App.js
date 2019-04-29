@@ -19,7 +19,7 @@ import EnterNewPassword from './components/MyIdea/EnterNewPassword';
 import AutoMatch from './components/MyIdea/Dashboard/AutoMatch'
 import InvestorStart from './components/MyIdea/InvestorStart';
 import AssesIdeas from './components/InvestorsPortal/Dashboard/AssessIdeas'
-
+import MyInvestments from './components/InvestorsPortal/Dashboard/MyInvestments'
 import AutoMatchDetails from './components/MyIdea/Dashboard/AutoMatchDetails'
 
 
@@ -163,6 +163,9 @@ class App extends Component {
               }} />
               <Route exact path='/Investors/dashboard/assess' render={(props) => {
                 return <AssesIdeas {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
+              }} />
+              <Route exact path='/Investors/dashboard/invest' render={(props) => {
+                return <MyInvestments {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
               }} />
               <Route exact path='/Investors/login' render={(props) => {
                 return <InvestorLogin {...props} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;

@@ -40,7 +40,7 @@ export default function investorDashboard(props) {
                 </div></Link> 
                 <Link className='links' to='/investors/dashboard/invest'><div className='invest-tile'>
                     <img className='icons' src={invest}></img>
-                    <h4>Invest</h4>
+                    <h4>My Investments</h4>
                 </div></Link>
                 
                
