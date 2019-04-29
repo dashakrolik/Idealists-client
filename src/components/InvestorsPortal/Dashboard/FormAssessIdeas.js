@@ -11,14 +11,11 @@ import Card from '@material-ui/core/Card'
 
 
 export default function FormAssessIdeas (props) {
-
-
-
     return (
         <div><br></br><br></br>
-                           <AddlQuestions>
-                  Assess the idea: 
-                  <StyledTextField
+            <AddlQuestions>
+                Assess the idea: 
+                <StyledTextField
                     id="filled-multiline-flexible"
                     label="Will people want this?"
                     multiline
@@ -26,8 +23,8 @@ export default function FormAssessIdeas (props) {
                     fullWidth
                     margin="normal"
                     variant="filled"
-                  />
-                  <StyledTextField
+                    />
+                <StyledTextField
                     id="filled-multiline-flexible"
                     label="Does this solve a problem people currently have?"
                     multiline
@@ -35,8 +32,8 @@ export default function FormAssessIdeas (props) {
                     fullWidth
                     margin="normal"
                     variant="filled"
-                  />
-                  <StyledTextField
+                    />
+                <StyledTextField
                     id="filled-multiline-flexible"
                     label="Is it, in your opinion, a good idea?"
                     multiline
@@ -44,8 +41,8 @@ export default function FormAssessIdeas (props) {
                     fullWidth
                     margin="normal"
                     variant="filled"
-                  />
-                                    <StyledTextField
+                    />
+                <StyledTextField
                     id="filled-multiline-flexible"
                     label="Is it the right timing for this idea?"
                     multiline
@@ -53,8 +50,8 @@ export default function FormAssessIdeas (props) {
                     fullWidth
                     margin="normal"
                     variant="filled"
-                  />
-                  <StyledTextField
+                    />
+                <StyledTextField
                     id="filled-multiline-flexible"
                     label="Imagine you’re an advocate for this idea. Name up to 5 reasons why you would be so ‘pro’ this idea:"
                     multiline
@@ -62,8 +59,8 @@ export default function FormAssessIdeas (props) {
                     fullWidth
                     margin="normal"
                     variant="filled"
-                  />
-                  <StyledTextField
+                    />
+                <StyledTextField
                     id="filled-multiline-flexible"
                     label="Imagine you’re an opponent of this idea. Name up to 5 reasons why you would be so ‘against’ this idea:"
                     multiline
@@ -71,8 +68,8 @@ export default function FormAssessIdeas (props) {
                     fullWidth
                     margin="normal"
                     variant="filled"
-                  />
-                                   <StyledTextField
+                    />
+                <StyledTextField
                     id="filled-multiline-flexible"
                     label="What do you expect as time to impact for this idea"
                     multiline
@@ -80,8 +77,8 @@ export default function FormAssessIdeas (props) {
                     fullWidth
                     margin="normal"
                     variant="filled"
-                  />
-                                    <StyledTextField
+                    />
+                <StyledTextField
                     id="filled-multiline-flexible"
                     label="What do you expect as magnitude of impact for this idea"
                     multiline
@@ -89,8 +86,8 @@ export default function FormAssessIdeas (props) {
                     fullWidth
                     margin="normal"
                     variant="filled"
-                  />
-                  <StyledTextField
+                    />
+                <StyledTextField
                     id="filled-multiline-flexible"
                     label="Why is this not yet out there? Why have people in this field or that could be helped by it, not successfully created it yet?"
                     multiline
@@ -98,8 +95,8 @@ export default function FormAssessIdeas (props) {
                     fullWidth
                     margin="normal"
                     variant="filled"
-                  />
-                  <StyledTextField
+                    />
+                <StyledTextField
                     id="filled-multiline-flexible"
                     label="Who would, in your opinion, be the ideal customers for this idea?"
                     multiline
@@ -107,8 +104,8 @@ export default function FormAssessIdeas (props) {
                     fullWidth
                     margin="normal"
                     variant="filled"
-                  />
-                </AddlQuestions>
+                    />
+            </AddlQuestions>
         </div>
     )
 }
