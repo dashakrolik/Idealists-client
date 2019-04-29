@@ -54,7 +54,7 @@ return (
                 }
                 {
                 !localStorage.currentUserJwt || !props.authState.loggedIn ?
-                <Button color="inherit" onClick={() => props.history.push('/Investors/login')}>Expert Login</Button> : null
+                <Button color="inherit" onClick={() => props.history.push('/InvestorStart')}>Expert Login</Button> : null
                 }
 
                </Grid>
