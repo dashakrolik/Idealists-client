@@ -19,7 +19,6 @@ export default function IdeaDashboardDetail(props) {
   const [user, setUserData] = useState({});
   const [userLoggedIn, setUserLoggedIn] = useState(true);
   const [userIdeas, setUserIdeas] = useState([]);
-  const ideasId = props.match.params.id;
   const [automatchResults, DoAutomatch] = useState([]);
   const [currentValue, setCurrentValue] = useState([]);
 
@@ -28,14 +27,16 @@ export default function IdeaDashboardDetail(props) {
   const [problemSolution, setProblemSolution] = useState("");
   const [howProblemUnique, setHowProblemUnique] = useState("");
 
+  const ideasId = props.match.params.id
+
   useEffect(() => {
     request
-      .get(`${baseUrl}/automatch/986`)
+      .get(`${baseUrl}/ideas/${ideasId}/automatch`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
   }, []);
 
-
+  console.log(automatchResults)
   const ToggleContent = ({ toggle, content }) => {
     const [isShown, setIsShown] = useState(false);
     const hide = () => setIsShown(false);
