@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import { jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import {withRouter} from 'react-router-dom'
@@ -7,7 +7,7 @@ import {withRouter} from 'react-router-dom'
 function EnterNewPassword(props) {
   
   const [resetState, setLoginState] = useState({});
-  const [history, location,] = useState({});
+  const [history, location] = useState({});
   let initJwt = props.location.pathname.split('/')
  
   const jwt = initJwt[2]

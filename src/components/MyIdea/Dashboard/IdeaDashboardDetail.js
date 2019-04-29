@@ -1,11 +1,10 @@
-import React, { useEffect, useState, Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import './IdeaDashBoardDetail.css'
 import styled from '@emotion/styled';
 import Card from '@material-ui/core/Card'
-import { Redirect, Link } from 'react-router-dom';
-import Grid from '@material-ui/core/Grid'
+import { Redirect } from 'react-router-dom';
 import Button from '../../reogranisation/Questions/Button';
 
 
@@ -27,7 +26,6 @@ export default function IdeaDashboardDetail(props) {
             .then(res => setUserIdeas(res.body.idea))
     }, []);
 
-    // console.log("IDEAS", userIdeas)
 
     const processTitle = (title) => {
         let splitTitle = title.split('?')

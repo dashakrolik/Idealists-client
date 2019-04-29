@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react';
 import Button from '../reogranisation/Questions/Button';
 import posed from 'react-pose';
 import logo from '../../res/logo_horizontal_white.png';
-
 import Registration from './Registration';
 import { Redirect } from 'react-router-dom';
 
@@ -97,11 +96,6 @@ const StartContent = styled(PStartContent)`
   width: 100%;
 `;
 
-const Logo = styled.img`
-  height: 70px;
-  align-self: flex-start;
-  margin-right: 60px;
-`;
 
 const Controls = styled.div`
   justify-content: space-between;

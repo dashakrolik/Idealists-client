@@ -1,13 +1,11 @@
 /** @jsx jsx */
 import { css, Global, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../reogranisation/Questions/Button';
 import posed from 'react-pose';
-import logo from '../../res/logo_horizontal_white.png';
 
 import InvestorRegistration from './InvestorRegistration';
-import { Redirect } from 'react-router-dom';
 
 const InvestorStart = (props) => {
 
@@ -51,9 +49,6 @@ const InvestorStart = (props) => {
         }
       `} />
       <Content>
-        {/* <div css={css`grid-area: logo-area;`}>
-          <Logo src={logo} alt='Logo' />
-        </div> */}
         <div css={css`grid-area: content-area`}>
           <div css={css`display: flex; align-items: center; flex-direction: column;`}>
             <StartContent pose={uiState}
@@ -96,11 +91,6 @@ const StartContent = styled(PStartContent)`
   width: 100%;
 `;
 
-const Logo = styled.img`
-  height: 70px;
-  align-self: flex-start;
-  margin-right: 60px;
-`;
 
 const Controls = styled.div`
   justify-content: space-between;

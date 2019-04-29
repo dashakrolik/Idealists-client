@@ -1,18 +1,14 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import request from 'superagent';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { baseUrl } from '../../../constants';
 import './IdeaDashboard.css'
 /** @jsx jsx */
 import { css, Global, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import Button from '../../reogranisation/Questions/Button';
 import posed from 'react-pose';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'
-import FilledInput from '@material-ui/core/FilledInput';
-import { value } from 'popmotion';
-
 
 
 export default function IdeaDashboardDetail(props) {
@@ -34,15 +30,12 @@ export default function IdeaDashboardDetail(props) {
   
   console.log(automatchResults)
   let automatchTitle = automatchResults.map(result => result.bibliographic.title[0].text)
-//   console.log(automatchResults[0])
-  // console.log(automatchTitle)
-  // console.log(automatchResults)
+
   let automatchText = automatchResults.map(result => 
     result.passage.text.split('.').slice(1,-1).join() + '.'
   )
-  // console.log(automatchText)
+
   let relevanceScore = automatchResults.map(result => result.relevance.score)
-  // console.log(relevanceScore)
 
   let relevanceNumber = automatchResults.map(b => b.relevance.number)
   if (typeof automatchResults.autoMatch === 'object') {
@@ -60,14 +53,13 @@ export default function IdeaDashboardDetail(props) {
     console.log(currentValue)
 
   };
-  console.log(props.results)
+
   if (props) {
 
     return (
       
       <Container>
         <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-        <div>WOOOOOOOOOOOOOO</div>
         <Global styles={css`
           body {
             background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
