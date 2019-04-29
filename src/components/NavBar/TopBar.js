@@ -2,21 +2,17 @@ import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/Button'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './TopBar.css'
 import {withRouter} from 'react-router-dom'
 import logo from '../../res/logo_horizontal_white.png';
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
-import styled from '@emotion/styled';
-import { withStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid'
 
 const TopBar = (props) => {
 
 const [history, location, window] = useState({});
-const myStorage = localStorage
 
 const [authState] = useState({})
 
@@ -56,7 +52,6 @@ return (
                 !localStorage.currentUserJwt || !props.authState.loggedIn ?
                 <Button color="inherit" onClick={() => props.history.push('/InvestorStart')}>Expert Login</Button> : null
                 }
-
                </Grid>
             
             </Toolbar>
@@ -68,7 +63,6 @@ return (
 export default withRouter(TopBar) 
 
 var logoStyle = {
-  width: 200,
-//   marginLeft: 300
+  width: 200
 }
 

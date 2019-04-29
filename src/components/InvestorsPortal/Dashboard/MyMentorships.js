@@ -30,31 +30,23 @@ export default function MyMentorships(props) {
       
   }, []);
   
-  const userLogout = () => {
-    localStorage.removeItem('currentUserJwt');
-    setUserLoggedIn(false);
-  };
-
-  
   if (userLoggedIn === false)
     return (
       <Redirect to='/login' />);
     
     return (
-
       <div className='dashboard-container'>
         <br />
         <br />
-
         <h4 className='title'>This is {userData.firstName}'s dashboard</h4>
         <StyledCard>
-        My MentorshipsDid you apply for mentorship whilst assessing one of the ideas and want to see if theteam picked you as one of 3 mentors? 
-        Do it right here. Mentors receive a 1% equity-interest in the idea-company in exchange for 
-        being available to the founder-team at least 1 hour per week.[Open]
-          </StyledCard>
-
+          My MentorshipsDid you apply for mentorship whilst assessing one of the ideas and want to see if theteam picked you as one of 3 mentors? 
+          Do it right here. Mentors receive a 1% equity-interest in the idea-company in exchange for 
+          being available to the founder-team at least 1 hour per week.[Open]
+        </StyledCard>
       </div>
-    )}
+      )
+    }
 
 
     const StyledCard = styled(Card) `

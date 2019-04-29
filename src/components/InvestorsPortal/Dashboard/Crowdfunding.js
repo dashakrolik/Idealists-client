@@ -30,29 +30,21 @@ export default function CrowdFunding(props) {
       
   }, []);
   
-  const userLogout = () => {
-    localStorage.removeItem('currentUserJwt');
-    setUserLoggedIn(false);
-  };
-
-  
+  //line below does not make sense? should not use hooks but rather props?
   if (userLoggedIn === false)
     return (
       <Redirect to='/login' />);
     
     return (
-
       <div className='dashboard-container'>
         <br />
         <br />
-
         <h4 className='title'>This is {userData.firstName}'s dashboard</h4>
-        <StyledCard>
-        Back ideas through crowdfundingWhen an idea has successfully passed through the first 8 stages it is eligible for crowdfunding. 
-        Only validated, unique ideas with a complete founder-team will be presented on our crowdfunding platform. 
-        All idea files will include all the results from all past 8 stages, so you can easily assess whether this is a fitting investment for you [Open]
+          <StyledCard>
+            Back ideas through crowdfundingWhen an idea has successfully passed through the first 8 stages it is eligible for crowdfunding. 
+            Only validated, unique ideas with a complete founder-team will be presented on our crowdfunding platform. 
+            All idea files will include all the results from all past 8 stages, so you can easily assess whether this is a fitting investment for you [Open]
           </StyledCard>
-
       </div>
     )}
 

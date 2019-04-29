@@ -12,9 +12,6 @@ import Card from '@material-ui/core/Card'
 
 
 export default function IdeaDashboardDetail(props) {
-  const [user, setUserData] = useState({});
-  const [userLoggedIn, setUserLoggedIn] = useState(true);
-  const [userIdeas, setUserIdeas] = useState([]);
   const ideasId = props.match.params.id
   const [automatchResults, DoAutomatch] = useState([])
   const [currentValue, setCurrentValue] = useState([])
@@ -28,7 +25,6 @@ export default function IdeaDashboardDetail(props) {
       .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
   }, []);
   
-  console.log(automatchResults)
   let automatchTitle = automatchResults.map(result => result.bibliographic.title[0].text)
 
   let automatchText = automatchResults.map(result => 
@@ -42,22 +38,8 @@ export default function IdeaDashboardDetail(props) {
     // console.table(automatchResults.autoMatch['0'].relevance)
   }
 
-  const handleChange = (e) => {
-      setCurrentValue(e.target.value);
-    
-  };
-  console.log(props)
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(currentValue)
-
-  };
-
   if (props) {
-
     return (
-      
       <Container>
         <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
         <Global styles={css`
@@ -73,7 +55,6 @@ export default function IdeaDashboardDetail(props) {
                 <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
                   Automatch results
                 </Heading>
-
                 { Object.keys(automatchResults).map((key, index) => (
                   <StyledCard key={relevanceNumber[index]}>
                     <Link to={`ideas/${ideasId}/automatch/${relevanceNumber[index]}`}>
@@ -84,9 +65,7 @@ export default function IdeaDashboardDetail(props) {
                     <Paragraph>
                       {automatchText[index]}
                     </Paragraph>
-                    
                   </StyledCard>
-
                 ))}
                 <AddlQuestions>
                   Additional Questions: 

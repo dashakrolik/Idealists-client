@@ -37,24 +37,20 @@ export default function AssessIdeas(props) {
     localStorage.removeItem('currentUserJwt');
     setUserLoggedIn(false);
   };
-
-  console.log(expertIdeas)
   
   if (userLoggedIn === false)
     return (
       <Redirect to='/login' />);
     
     return (
-
       <div className='dashboard-container'>
         <br />
         <br />
-
         <h4 className='title'>This is {userData.firstName}'s dashboard</h4>
-        <StyledCard>
-        Here you can track how all of your investments are performing and 
-        ask the founders questions or help them with your feedback.[Open]
-        </StyledCard>
+          <StyledCard>
+            Here you can track how all of your investments are performing and 
+            ask the founders questions or help them with your feedback.[Open]
+          </StyledCard>
         <div className='flex-tilescontainer'>
           {expertIdeas.map(idea =>
             <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
@@ -64,19 +60,16 @@ export default function AssessIdeas(props) {
                 <p>{idea.idea[3].answers[1].qAnswer}</p>
                 {console.log(idea,"IDEAAA")}
                 {idea.progress.step01 === true &&
-                  idea.progress.step02 === true &&
-                  idea.progress.step03 === false && <p>Status: First patent check </p>}
+                idea.progress.step02 === true &&
+                idea.progress.step03 === false && <p>Status: First patent check </p>}
                 {idea.progress.step01 === true &&
-                  idea.progress.step02 === true &&
-                  idea.progress.step03 === true &&
-                  idea.progress.step04 === false && <p>Status: Expert check </p>}
+                idea.progress.step02 === true &&
+                idea.progress.step03 === true &&
+                idea.progress.step04 === false && <p>Status: Expert check </p>}
               </div>
               <div>
                 <br />
-                
               </div>
-
-
             </Link>
           )}
         </div>

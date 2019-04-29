@@ -11,9 +11,6 @@ import Button from '../../reogranisation/Questions/Button';
 export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
     
-    // progress bar
-    const [percentRange, setProgress] = useState(0);
-    
     const ideasId = props.match.params.id
     if (props.authState.LoggedIn === false) {
     return (

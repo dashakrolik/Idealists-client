@@ -1,8 +1,7 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import { jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
-import logo from '../../res/logo_horizontal_white.png';
+import { useState } from 'react';
 
 export default function InvestorLogin(props) {
   
@@ -34,13 +33,9 @@ export default function InvestorLogin(props) {
   
   if (props.authState.loggedIn !== true) return (
     <Container>
-      {/* <Header /> */}
-      
-      
       <LeftSide>
         <div>
           <h3>Login to my Investor Dashboard</h3>
-          {/* <a href='/MyIdea'> Don’t have an account yet? Create it here</a> */}
         </div>
       </LeftSide>
       <RightSide>
@@ -60,15 +55,6 @@ export default function InvestorLogin(props) {
     </Container>);
   else return <div></div>;
 }
-
-const Logo = styled.img`  
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  margin: -300px auto auto auto;
-  height: 70px;
-`;
 
 
 const LeftSide = styled.div`
