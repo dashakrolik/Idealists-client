@@ -11,8 +11,6 @@ import posed from 'react-pose';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'
 import FilledInput from '@material-ui/core/FilledInput';
-import { value } from 'popmotion';
-
 
 
 export default function IdeaDashboardDetail(props) {
@@ -33,10 +31,10 @@ export default function IdeaDashboardDetail(props) {
     request
       .get(`${baseUrl}/ideas/${ideasId}/automatch`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
+      .then(automatch => DoAutomatch(automatch.body.autoMatch['automatch-results']['index-1']))
   }, []);
 
-  console.log(automatchResults)
+  // console.log(automatchResults, "Resultss")
   const ToggleContent = ({ toggle, content }) => {
     const [isShown, setIsShown] = useState(false);
     const hide = () => setIsShown(false);
@@ -52,21 +50,18 @@ export default function IdeaDashboardDetail(props) {
 
   let automatchTitle = automatchResults.map(result => result.bibliographic.title[0].text)
 
-  // console.log(automatchTitle)
-  // console.log(automatchResults)
   let automatchText = automatchResults.map(result =>
     result.passage.text.split('.').slice(1, -1).join() + '.'
   )
-  // console.log(automatchText)
+
   let relevanceScore = automatchResults.map(result => result.relevance.score)
-  // console.log(relevanceScore)
 
   let relevanceNumber = automatchResults.map(b => b.relevance.number)
-  if (typeof automatchResults.autoMatch === 'object') {
-    // console.table(automatchResults.autoMatch['0'].relevance)
-  }
+  // if (typeof automatchResults.autoMatch === 'object') {
+  //   console.table(automatchResults.autoMatch['0'].relevance)
+  // }
 
-  console.log(automatchResults)
+  console.log(automatchResults, "Results222")
 
   const handleChange = (e) => {
     setCurrentValue(e.target.value);
@@ -102,11 +97,17 @@ export default function IdeaDashboardDetail(props) {
                   <StyledCard key={relevanceNumber[index]}>
                     <Link to={`ideas/${ideasId}/automatch/${relevanceNumber[index]}`} results={automatchResults}>
                       <Paragraph>
-                        {relevanceScore[index]} | {automatchTitle[index]}
+                        Title: {automatchTitle[index]}
                       </Paragraph>
                     </Link>
                     <Paragraph>
-                      {automatchText[index]}
+                      <strong>
+                        Relevance Score : {relevanceScore[index]}
+                        <br/>
+                        Text: 
+                        </strong> 
+                        <br/>
+                        {automatchText[index]}
                     </Paragraph>
                     {/* <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}> 
                       <Button text={`It's different`} onClick={handleClickOpen}/>  */}
@@ -121,22 +122,22 @@ export default function IdeaDashboardDetail(props) {
                             id="filled-multiline-flexible"
                             InputLabelProps={{
                               style: { color: '#fff' },
-                              }}
-                              label="Also then, please explain to us how your idea is different (especially better) or similar to this patent:"
-                              multiline
-                              rowsMax="4"
-                              fullWidth
-                              margin="normal"
-                              variant="filled"
-                              value={patentDifference}
-                              onChange={e => setPatentDifference(e.target.value)}
-                              name="patentDifference"
-                              type="text"
-                            />
-                            <Button text={`submit`} />
-                          </div>
-                        )}
-                      />
+                            }}
+                            label="Also then, please explain to us how your idea is different (especially better) or similar to this patent:"
+                            multiline
+                            rowsMax="4"
+                            fullWidth
+                            margin="normal"
+                            variant="filled"
+                            value={patentDifference}
+                            onChange={e => setPatentDifference(e.target.value)}
+                            name="patentDifference"
+                            type="text"
+                          />
+                          <Button text={`submit`} />
+                        </div>
+                      )}
+                    />
                     {/* </Controls> */}
 
                   </StyledCard>
@@ -165,7 +166,7 @@ export default function IdeaDashboardDetail(props) {
                     id="filled-multiline-flexible"
                     InputLabelProps={{
                       style: { color: '#fff' },
-                      }}
+                    }}
                     label="How do you solve this problem?"
                     multiline
                     rowsMax="4"
@@ -181,7 +182,7 @@ export default function IdeaDashboardDetail(props) {
                     id="filled-multiline-flexible"
                     InputLabelProps={{
                       style: { color: '#fff' },
-                      }}
+                    }}
                     label="How is this (technically) unique?"
                     multiline
                     rowsMax="4"

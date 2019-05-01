@@ -9,7 +9,6 @@ export default function IdeaDashboard(props) {
 
   const [user, setUserData] = useState({});
   const [userLoggedIn, setUserLoggedIn] = useState(true);
-
   const [userIdeas, setUserIdeas] = useState([]);
 
   useEffect(() => {
@@ -20,7 +19,7 @@ export default function IdeaDashboard(props) {
         .then(res => setUserData(res.body));
     else props.history.replace('/MyIdea/login');
   }, []);
-  console.log(props.authState)
+  
   useEffect(() => {
     request
       .get(`${baseUrl}/ideas`)
@@ -28,9 +27,6 @@ export default function IdeaDashboard(props) {
       .then(res => setUserIdeas(res.body));
   }, []);
 
-  const handleClick = () => {
-    props.history.replace('/MyIdea/')
-  }
 
   if (props.authState.LoggedIn === false)
     return (
