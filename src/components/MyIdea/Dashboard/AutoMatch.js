@@ -11,8 +11,6 @@ import posed from 'react-pose';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'
 import FilledInput from '@material-ui/core/FilledInput';
-import { value } from 'popmotion';
-
 
 export default function IdeaDashboardDetail(props) {
   const [user, setUserData] = useState({});
@@ -22,20 +20,35 @@ export default function IdeaDashboardDetail(props) {
   const [currentValue, setCurrentValue] = useState([]);
 
   const [patentDifference, setPatentDifference] = useState("");
+  // 0: "", 1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: ""
   const [identifyProblem, setIdentifyProblem] = useState("");
   const [problemSolution, setProblemSolution] = useState("");
   const [howProblemUnique, setHowProblemUnique] = useState("");
-
+  console.log(patentDifference, "PATENT")
   const ideasId = props.match.params.id
 
   useEffect(() => {
     request
       .get(`${baseUrl}/ideas/${ideasId}/automatch`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
+      .then(automatch => DoAutomatch(automatch.body.autoMatch['automatch-results']['index-1']))
   }, []);
 
-  console.log(automatchResults)
+  // console.log(automatchResults, "Resultss")
+  
+  // const ToggleContent = ({ toggle, content }) => {
+  //   const [isShown, setIsShown] = useState(false);
+  //   const hide = () => setIsShown(false);
+  //   const show = () => setIsShown(true);
+
+  //   return (
+  //     <>
+  //       {toggle(show)}
+  //       {isShown && content(hide)}
+  //     </>
+  //   );
+  // };
+
   const ToggleContent = ({ toggle, content }) => {
     const [isShown, setIsShown] = useState(false);
     const hide = () => setIsShown(false);
@@ -50,25 +63,29 @@ export default function IdeaDashboardDetail(props) {
   };
 
   let automatchTitle = automatchResults.map(result => result.bibliographic.title[0].text)
+
   let automatchText = automatchResults.map(result =>
     result.passage.text.split('.').slice(1, -1).join() + '.'
   )
+
   let relevanceScore = automatchResults.map(result => result.relevance.score)
   let relevanceNumber = automatchResults.map(b => b.relevance.number)
-  if (typeof automatchResults.autoMatch === 'object') {
-    // console.table(automatchResults.autoMatch['0'].relevance)
-  }
+  // if (typeof automatchResults.autoMatch === 'object') {
+  //   console.table(automatchResults.autoMatch['0'].relevance)
+  // }
 
-  const handleChange = (e) => {
-    setCurrentValue(e.target.value);
+  const updateDifference = e => {
+    // e.preventDefault()    
+    console.log("UpdateDifference")
+    setPatentDifference({
+      ...patentDifference,
+      [e.target.name]: e.target.value
+    });
 
   };
-
-
-  const handleSubmit = (e) => {
+  const printValues = e => {
     e.preventDefault();
-    console.log(currentValue)
-
+    console.log(patentDifference,identifyProblem, identifyProblem, problemSolution, howProblemUnique, "PrintValues!");
   };
 
   if (automatchResults) {
@@ -92,35 +109,50 @@ export default function IdeaDashboardDetail(props) {
                   <StyledCard key={relevanceNumber[index]}>
                     <Link to={`ideas/${ideasId}/automatch/${relevanceNumber[index]}`} results={automatchResults}>
                       <Paragraph>
-                        {relevanceScore[index]} | {automatchTitle[index]}
+                        Title: {automatchTitle[index]}
                       </Paragraph>
                     </Link>
                     <Paragraph>
+                      <strong>
+                        Relevance Score : {relevanceScore[index]}
+                        <br />
+                        Text:
+                        </strong>
+                      <br />
                       {automatchText[index]}
                     </Paragraph>
-                    <Button text={`It's the same`} />
+
+                    <Button onClick={console.log("Y")}  text={`It's the same`} />
+                    {/* <Button onClick={updateDifference} text={`It's different1111`} /> */}
+
                     <ToggleContent
                       toggle={show => <Button onClick={show} text={`It's different`} />}
+                      
                       content={hide => (
-                      <div>
-                        <StyledTextField
-                        id="filled-multiline-flexible"
-                        InputLabelProps={{style: { color: '#fff' },}}
-                        label="Also then, please explain to us how your idea is different (especially better) or similar to this patent:"
-                        multiline
-                        rowsMax="4"
-                        fullWidth
-                        margin="normal"
-                        variant="filled"
-                        value={patentDifference}
-                        onChange={e => setPatentDifference(e.target.value)}
-                        name="patentDifference"
-                        type="text"
-                        />
-                        <Button text={`submit`} />
-                      </div>
+
+                        <div>
+                          <StyledTextField
+                            id="filled-multiline-flexible"
+                            InputLabelProps={{
+                              style: { color: '#fff' },
+                            }}
+                            label="Also then, please explain to us how your idea is different (especially better) or similar to this patent:"
+                            multiline
+                            rowsMax="4"
+                            fullWidth
+                            margin="normal"
+                            variant="filled"
+                            value={patentDifference.key}
+                            name={key}
+                            type="text"
+                            onChange={e => updateDifference(e)}  
+                            // onSubmit={console.log("YEEEE")}
+                            >
+                          </StyledTextField>
+                          
+                        </div>
                       )}
-                      />
+                    />
                   </StyledCard>
                 ))}
                 <AddlQuestions>
@@ -142,7 +174,10 @@ export default function IdeaDashboardDetail(props) {
                   />
                   <StyledTextField
                     id="filled-multiline-flexible"
-                    InputLabelProps={{style: { color: '#fff' },}}
+
+                    InputLabelProps={{
+                      style: { color: '#fff' },
+                    }}
                     label="How do you solve this problem?"
                     multiline
                     rowsMax="4"
@@ -156,7 +191,9 @@ export default function IdeaDashboardDetail(props) {
                   />
                   <StyledTextField
                     id="filled-multiline-flexible"
-                    InputLabelProps={{style: { color: '#fff' },}}
+                    InputLabelProps={{
+                      style: { color: '#fff' },
+                    }}
                     label="How is this (technically) unique?"
                     multiline
                     rowsMax="4"
@@ -168,7 +205,7 @@ export default function IdeaDashboardDetail(props) {
                     name="howProblemUnique"
                     type="text"
                   />
-                  <Button text={`submit`} />
+                  <Button text={'Submit'} onClick={printValues} type="submit"/>
                 </AddlQuestions>
               </StartContent>
             </div>

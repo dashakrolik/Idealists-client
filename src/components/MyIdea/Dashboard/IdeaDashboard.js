@@ -18,7 +18,7 @@ export default function IdeaDashboard(props) {
         .then(res => setUserData(res.body));
     else props.history.replace('/MyIdea/login');
   }, []);
-  console.log(props.authState)
+  
   useEffect(() => {
     request
       .get(`${baseUrl}/ideas`)
