@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import { Redirect, Link } from 'react-router-dom';
@@ -8,7 +8,6 @@ import posed from 'react-pose';
 export default function IdeaDashboard(props) {
 
   const [user, setUserData] = useState({});
-  const [userLoggedIn, setUserLoggedIn] = useState(true);
   const [userIdeas, setUserIdeas] = useState([]);
 
   useEffect(() => {
@@ -27,11 +26,9 @@ export default function IdeaDashboard(props) {
       .then(res => setUserIdeas(res.body));
   }, []);
 
-
   if (props.authState.LoggedIn === false)
     return (
       <Redirect to='/myIdea' />)
-
 
   if (!props.authState.user) {
     props.user()
@@ -64,23 +61,11 @@ export default function IdeaDashboard(props) {
                     idea.progress.step04 === false && <p>Status: Expert check </p>}
                 </div>
               </Link>
-              )}
-      </div>
+            )}
+        </div>
     </div>
   );
 }
-
-const PStartContent = posed.div({
-  notDisplayingLogin: {
-    y: 0,
-    opacity: 1.0,
-  },
-  displayingLogin: {
-    y: -390,
-    opacity: 0.15,
-  },
-});
-
 
 const styledH2 = {
   fontSize: 20,

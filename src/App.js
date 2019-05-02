@@ -144,6 +144,10 @@ class App extends Component {
     })
   }
 
+  onDocumentLoadSuccess = ({ numPages }) => {
+    this.setState({ numPages });
+  }
+
   setAuthLoggedInTrue = () => {
     this.setState({
       auth: {
@@ -210,7 +214,7 @@ class App extends Component {
                 return <AutoMatch {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} />;
               }} />
               <Route exact path='/ideas/:id/ideas/:id/automatch/:patentNumber' render={(props) => {
-                return <AutoMatchDetails {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} />;
+                return <AutoMatchDetails {...props} loadPdf={this.onDocumentLoadSuccess} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} />;
               }} />
               <Route exact path="/" render={() => <Redirect to="/MyIdea" />} />
             </Application>

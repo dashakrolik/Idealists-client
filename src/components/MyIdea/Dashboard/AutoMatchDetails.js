@@ -1,24 +1,20 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import request from 'superagent';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { baseUrl } from '../../../constants';
 import './IdeaDashboard.css'
 /** @jsx jsx */
 import { css, Global, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import Button from '../../reogranisation/Questions/Button';
 import posed from 'react-pose';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'
-import FilledInput from '@material-ui/core/FilledInput';
-import { value } from 'popmotion';
-
-
+import { Page } from 'react-pdf';
+import { Document } from 'react-pdf/dist/entry.webpack'
+import { pdfjs } from 'react-pdf';
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function IdeaDashboardDetail(props) {
-  const [user, setUserData] = useState({});
-  const [userLoggedIn, setUserLoggedIn] = useState(true);
-  const [userIdeas, setUserIdeas] = useState([]);
   const ideasId = props.match.params.id
   const [automatchResults, DoAutomatch] = useState([])
   const [currentValue, setCurrentValue] = useState([])
@@ -27,47 +23,45 @@ export default function IdeaDashboardDetail(props) {
 
   useEffect(() => {
     request
-      .get(`${baseUrl}/automatch/986`)
+      .get(`${baseUrl}/ideas/${ideasId}/automatch`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
   }, []);
   
   console.log(automatchResults)
-  let automatchTitle = automatchResults.map(result => result.bibliographic.title[0].text)
-//   console.log(automatchResults[0])
-  // console.log(automatchTitle)
-  // console.log(automatchResults)
-  let automatchText = automatchResults.map(result => 
-    result.passage.text.split('.').slice(1,-1).join() + '.'
-  )
-  // console.log(automatchText)
-  let relevanceScore = automatchResults.map(result => result.relevance.score)
-  // console.log(relevanceScore)
+  let automatchPdf = automatchResults.map(result => result.pdf)
+  console.log(automatchPdf)
+  // let automatchText = automatchResults.map(result => 
+  //   result.passage.text.split('.').slice(1,-1).join() + '.'
+  // )
 
-  let relevanceNumber = automatchResults.map(b => b.relevance.number)
-  if (typeof automatchResults.autoMatch === 'object') {
+  // let relevanceScore = automatchResults.map(result => result.relevance.score)
+
+  // let relevanceNumber = automatchResults.map(b => b.relevance.number)
+  // if (typeof automatchResults.autoMatch === 'object') {
     // console.table(automatchResults.autoMatch['0'].relevance)
-  }
+  // }
 
-  const handleChange = (e) => {
-      setCurrentValue(e.target.value);
-    
-  };
-  console.log(props)
+  const [pageNumber, getPageNumber] = useState([null])
+  const [numPages, getNumPages] = useState([1])
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(currentValue)
-
-  };
-  console.log(props.results)
-  if (props) {
-
+  if (automatchPdf) {
     return (
-      
       <Container>
         <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-        <div>WOOOOOOOOOOOOOO</div>
+        <Content>{
+          automatchPdf.map(pdf => <div>
+            <Document
+              file={pdf}
+              onLoadSuccess={props.loadPdf}
+            >
+              <Page pageNumber={pageNumber} />
+            </Document>
+            <p>Page {pageNumber} of {numPages}</p>
+          </div>)
+        }
+          </Content>
+
         <Global styles={css`
           body {
             background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
@@ -81,8 +75,7 @@ export default function IdeaDashboardDetail(props) {
                 <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
                   Automatch results
                 </Heading>
-
-                { Object.keys(automatchResults).map((key, index) => (
+                {/* { Object.keys(automatchResults).map((key, index) => (
                   <StyledCard key={relevanceNumber[index]}>
                     <Link to={`ideas/${ideasId}/automatch/${relevanceNumber[index]}`}>
                       <Paragraph>
@@ -92,9 +85,7 @@ export default function IdeaDashboardDetail(props) {
                     <Paragraph>
                       {automatchText[index]}
                     </Paragraph>
-                    
-                  </StyledCard>
-
+                  </StyledCard> */}
                 ))}
                 <AddlQuestions>
                   Additional Questions: 

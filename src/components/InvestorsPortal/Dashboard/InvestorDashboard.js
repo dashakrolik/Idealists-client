@@ -19,10 +19,6 @@ export default function investorDashboard(props) {
                 .then(res => setUserData(res.body))
         else props.history.push('/InvestorStart');
     }, []);
-
-    // onClick = () => {
-    //     props.history.replace('investors/dashboard/assess')
-    // }
     
     if (userLoggedIn === false)
         return (

@@ -12,7 +12,6 @@ import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'
 import FilledInput from '@material-ui/core/FilledInput';
 
-
 export default function IdeaDashboardDetail(props) {
   const [user, setUserData] = useState({});
   const [userLoggedIn, setUserLoggedIn] = useState(true);
@@ -70,7 +69,6 @@ export default function IdeaDashboardDetail(props) {
   )
 
   let relevanceScore = automatchResults.map(result => result.relevance.score)
-
   let relevanceNumber = automatchResults.map(b => b.relevance.number)
   // if (typeof automatchResults.autoMatch === 'object') {
   //   console.table(automatchResults.autoMatch['0'].relevance)
@@ -83,6 +81,7 @@ export default function IdeaDashboardDetail(props) {
       ...patentDifference,
       [e.target.name]: e.target.value
     });
+
   };
   const printValues = e => {
     e.preventDefault();
@@ -106,7 +105,6 @@ export default function IdeaDashboardDetail(props) {
                 <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
                   Automatch results
                 </Heading>
-
                 {Object.keys(automatchResults).map((key, index) => (
                   <StyledCard key={relevanceNumber[index]}>
                     <Link to={`ideas/${ideasId}/automatch/${relevanceNumber[index]}`} results={automatchResults}>
@@ -123,8 +121,7 @@ export default function IdeaDashboardDetail(props) {
                       <br />
                       {automatchText[index]}
                     </Paragraph>
-                    {/* <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}> 
-                      <Button text={`It's different`} onClick={handleClickOpen}/>  */}
+
                     <Button onClick={console.log("Y")}  text={`It's the same`} />
                     {/* <Button onClick={updateDifference} text={`It's different1111`} /> */}
 
@@ -132,6 +129,7 @@ export default function IdeaDashboardDetail(props) {
                       toggle={show => <Button onClick={show} text={`It's different`} />}
                       
                       content={hide => (
+
                         <div>
                           <StyledTextField
                             id="filled-multiline-flexible"
@@ -155,19 +153,14 @@ export default function IdeaDashboardDetail(props) {
                         </div>
                       )}
                     />
-                    {/* </Controls> */}
-
                   </StyledCard>
-
                 ))}
                 <AddlQuestions>
                   <h1>Additional Questions:</h1>
                   <hr />
                   <StyledTextField
                     id="filled-multiline-flexible"
-                    InputLabelProps={{
-                      style: { color: '#fff' },
-                    }}
+                    InputLabelProps={{style: { color: '#fff' },}}
                     label="Now that you know what is already out there, which problem does your idea solve?"
                     multiline
                     rowsMax="4"
@@ -181,6 +174,7 @@ export default function IdeaDashboardDetail(props) {
                   />
                   <StyledTextField
                     id="filled-multiline-flexible"
+
                     InputLabelProps={{
                       style: { color: '#fff' },
                     }}
@@ -240,18 +234,6 @@ const StartContent = styled(PStartContent)`
     width: 100%;
   `;
 
-const Logo = styled.img`
-    height: 70px;
-    align-self: flex-start;
-    margin-right: 60px;
-  `;
-
-const Controls = styled.div`
-    justify-content: space-between;
-    display: flex;
-    flex-direction: row;
-  `;
-
 const Content = styled.div`
 
     color: #ffffff;
@@ -287,8 +269,6 @@ const Paragraph = styled.div`
     font-size: 14px;
 
   `;
-
-
 
 const StyledCard = styled(Card)`
     background-color: rgb(255,255,255, 0.3);
