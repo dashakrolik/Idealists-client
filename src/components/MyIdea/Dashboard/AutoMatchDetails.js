@@ -11,6 +11,8 @@ import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'
 import { Page } from 'react-pdf';
 import { Document } from 'react-pdf/dist/entry.webpack'
+import { pdfjs } from 'react-pdf';
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function IdeaDashboardDetail(props) {
   const ideasId = props.match.params.id
@@ -43,14 +45,14 @@ export default function IdeaDashboardDetail(props) {
   const [pageNumber, getPageNumber] = useState([null])
   const [numPages, getNumPages] = useState([1])
 
-  if (automatchResults) {
+  if (automatchPdf) {
     return (
       <Container>
         <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
         <Content>{
           automatchPdf.map(pdf => <div>
             <Document
-              file="pdf"
+              file={pdf}
               onLoadSuccess={props.loadPdf}
             >
               <Page pageNumber={pageNumber} />
