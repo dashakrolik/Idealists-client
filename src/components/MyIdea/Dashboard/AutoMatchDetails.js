@@ -9,7 +9,8 @@ import styled from '@emotion/styled';
 import posed from 'react-pose';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'
-import { Document, Page } from 'react-pdf';
+import { Page } from 'react-pdf';
+import { Document } from 'react-pdf/dist/entry.webpack'
 
 export default function IdeaDashboardDetail(props) {
   const ideasId = props.match.params.id
@@ -39,14 +40,25 @@ export default function IdeaDashboardDetail(props) {
     // console.table(automatchResults.autoMatch['0'].relevance)
   // }
 
-  if (props) {
+  const [pageNumber, getPageNumber] = useState([null])
+  const [numPages, getNumPages] = useState([1])
+
+  if (automatchResults) {
     return (
       <Container>
         <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-        <div>{
-          automatchPdf.map(pdf => <Content>{pdf}</Content>)
+        <Content>{
+          automatchPdf.map(pdf => <div>
+            <Document
+              file="pdf"
+              onLoadSuccess={props.loadPdf}
+            >
+              <Page pageNumber={pageNumber} />
+            </Document>
+            <p>Page {pageNumber} of {numPages}</p>
+          </div>)
         }
-          </div>
+          </Content>
 
         <Global styles={css`
           body {
