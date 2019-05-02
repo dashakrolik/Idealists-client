@@ -20,23 +20,24 @@ export default function IdeaDashboardDetail(props) {
 
   useEffect(() => {
     request
-      .get(`${baseUrl}/automatch/986`)
+      .get(`${baseUrl}/ideas/${ideasId}/automatch`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
   }, []);
   
-  let automatchTitle = automatchResults.map(result => result.bibliographic.title[0].text)
+  console.log(automatchResults)
+  let automatchPdf = automatchResults.map(result => result.pdf)
+  console.log(automatchPdf)
+  // let automatchText = automatchResults.map(result => 
+  //   result.passage.text.split('.').slice(1,-1).join() + '.'
+  // )
 
-  let automatchText = automatchResults.map(result => 
-    result.passage.text.split('.').slice(1,-1).join() + '.'
-  )
+  // let relevanceScore = automatchResults.map(result => result.relevance.score)
 
-  let relevanceScore = automatchResults.map(result => result.relevance.score)
-
-  let relevanceNumber = automatchResults.map(b => b.relevance.number)
-  if (typeof automatchResults.autoMatch === 'object') {
+  // let relevanceNumber = automatchResults.map(b => b.relevance.number)
+  // if (typeof automatchResults.autoMatch === 'object') {
     // console.table(automatchResults.autoMatch['0'].relevance)
-  }
+  // }
 
   if (props) {
     return (
@@ -55,7 +56,7 @@ export default function IdeaDashboardDetail(props) {
                 <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
                   Automatch results
                 </Heading>
-                { Object.keys(automatchResults).map((key, index) => (
+                {/* { Object.keys(automatchResults).map((key, index) => (
                   <StyledCard key={relevanceNumber[index]}>
                     <Link to={`ideas/${ideasId}/automatch/${relevanceNumber[index]}`}>
                       <Paragraph>
@@ -65,7 +66,7 @@ export default function IdeaDashboardDetail(props) {
                     <Paragraph>
                       {automatchText[index]}
                     </Paragraph>
-                  </StyledCard>
+                  </StyledCard> */}
                 ))}
                 <AddlQuestions>
                   Additional Questions: 
