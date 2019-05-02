@@ -9,7 +9,7 @@ import styled from '@emotion/styled';
 import posed from 'react-pose';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'
-
+import { Document, Page } from 'react-pdf';
 
 export default function IdeaDashboardDetail(props) {
   const ideasId = props.match.params.id
@@ -43,6 +43,11 @@ export default function IdeaDashboardDetail(props) {
     return (
       <Container>
         <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+        <div>{
+          automatchPdf.map(pdf => <Content>{pdf}</Content>)
+        }
+          </div>
+
         <Global styles={css`
           body {
             background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
