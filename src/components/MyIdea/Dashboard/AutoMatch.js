@@ -89,6 +89,7 @@ export default function IdeaDashboardDetail(props) {
                     <Link to={`ideas/${ideasId}/automatch/${relevanceNumber[index]}`} results={automatchResults}>
                       <Paragraph>
                         Title: {automatchTitle[index]}
+                        {console.log(automatchResults, "SSSS")}
                       </Paragraph>
                     </Link>
                     <Paragraph>

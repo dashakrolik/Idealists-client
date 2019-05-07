@@ -120,7 +120,7 @@
       },
       {
         "id": 1,
-        "type": "singleChoice",
+        "type": "multiChoice",
         "text": "Under which industry does your idea fit best?",
         "options": [
           {
