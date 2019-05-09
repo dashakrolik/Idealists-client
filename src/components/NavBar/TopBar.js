@@ -17,7 +17,7 @@ const [history, location, window] = useState({});
 const [authState] = useState({})
 
 const {classes} = props
-console.log(props.authState.user.role)
+
 return (
     
         <AppBar>
@@ -41,7 +41,7 @@ return (
                 <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Dashboard</Button> : null
                 }
                 {
-                props.authState.loggedIn && localStorage.currentUserJwt && props.authState.user.role === 'expert' ? 
+                props.authState.loggedIn && localStorage.currentUserJwt && props.user.role === 'expert' ? 
                 <Button color="inherit" onClick={() => props.history.push('/Investors/dashboard')}>Dashboard</Button> : null
                 }
                 {
