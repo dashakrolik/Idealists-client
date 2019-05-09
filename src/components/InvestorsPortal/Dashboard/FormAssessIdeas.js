@@ -12,17 +12,17 @@ import Button from '../../reogranisation/Questions/Button';
 export default function FormAssessIdeas (props) {
     const [userLoggedIn, setUserLoggedIn] = useState(true);
     if (props.authState.loggedIn === false)
-    return (
-      <Redirect to='/InvestorStart' />);
+        return (
+        <Redirect to='/InvestorStart' />);
 
-      const printValues = e => {
+    const printValues = e => {
         e.preventDefault();
         console.log("PrintValues!");
-      };
+    };
     
     return (
         <div className='dashboard-container'>
-        
+        <br></br><br></br><br></br><br></br>
             <AddlQuestions>
                 Assess the idea: 
                 <StyledTextField
