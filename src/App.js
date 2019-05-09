@@ -159,6 +159,7 @@ class App extends Component {
   }
   '/investors/dashboard/assess/:id'
   render() {
+    console.log(this.state.user)
     return (
       <Router>
         <div>
