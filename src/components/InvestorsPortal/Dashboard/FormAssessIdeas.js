@@ -19,7 +19,6 @@ export default function FormAssessIdeas (props) {
 
 
     const onSubmit = (data) => {
-        const { email, password } = data;
         props.sendAssessment()
       };
 

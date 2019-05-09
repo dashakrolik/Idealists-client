@@ -93,6 +93,15 @@ class App extends Component {
       })
   }
 
+  sendAssessment = () => {
+    request 
+      .post(`${baseUrl}/:ideasId/:investorId/assessment`)
+      .set("Authorization", `Bearer ${this.state.auth.token}`)
+      .then(res => {
+        res.status === 200 && console.log('form sent')
+      })
+  }
+
   resetPassword = (email) => {
     request
       .post(`${baseUrl}/reset-password`)
@@ -170,7 +179,7 @@ class App extends Component {
                 return <InvestorDashboard {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout} />;
               }} />
               <Route exact path='/Investors/dashboard/assess' render={(props) => {
-                return <AssesIdeas {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
+                return <AssesIdeas sendAssessment={this.sendAssessment} {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
               }} />
               <Route exact path='/Investors/dashboard/assess/:id' render={(props) => {
                 return <FormAssessIdeas {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
