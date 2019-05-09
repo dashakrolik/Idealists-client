@@ -11,7 +11,6 @@ import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'
 import { Page, Document, pdfjs } from 'react-pdf';
 import Button from '../../reogranisation/Questions/Button'
-import pdfff from '../../../AlperTunca_Resume.pdf'
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 
