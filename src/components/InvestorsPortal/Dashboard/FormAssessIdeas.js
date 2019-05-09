@@ -14,7 +14,40 @@ export default function FormAssessIdeas (props) {
     if (props.authState.loggedIn === false)
         return (
         <Redirect to='/InvestorStart' />);
+    
+    const submitIdea = () => {
+        const dataToSend = props.groups.map((group, index) => {
+            return {
+                groupName: group.groupTitle,
+                answers: group.questions.map((question) => {
+                    return {
+                    id: question.id,
+                    qTitle: question.text,
+                    qAnswer: props.answers[index.toString()][question.id],
+                  };
+                }),
+              };
+            });
+            
+            request
+              .post(`${baseUrl}/:ideaId/assessment`)
+              .set("Authorization", `Bearer ${props.authState.token}`)
+              .send({ idea: dataToSend })
+              .then(res => {
+                if (res.status === 201) {
+                  setDisplaySuccess(true);
+                }
+              })
+              .catch(err => {
+                if (err.status === 400) {
+                  // dispatch(userLoginFailed(err.response.body.message))
+                } else {
+                  console.error(err);
+                }
+              });
+          };
 
+    
     const printValues = e => {
         e.preventDefault();
         console.log("PrintValues!");
