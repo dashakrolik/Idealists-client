@@ -167,7 +167,7 @@ class App extends Component {
           <ThemeProvider theme={theme}>
             <Application>
               <Route exact path='/Investors/dashboard' render={(props) => {
-                return <InvestorDashboard {...props} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout} />;
+                return <InvestorDashboard {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout} />;
               }} />
               <Route exact path='/Investors/dashboard/assess' render={(props) => {
                 return <AssesIdeas {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;

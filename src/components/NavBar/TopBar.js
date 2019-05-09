@@ -37,15 +37,15 @@ return (
                 <Button color="inherit" onClick={() => props.history.push('/MyIdea')}>Sign Up</Button> : null
                 }
                 {
-                props.authState.loggedIn && localStorage.currentUserJwt ? 
+                props.authState.loggedIn && localStorage.currentUserJwt && props.authState.user.role === 'user' ? 
                 <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Dashboard</Button> : null
                 }
                 {
-                props.authState.loggedIn && localStorage.currentUserJwt && props.user.role === 'expert' ? 
+                props.authState.loggedIn && localStorage.currentUserJwt && props.authState.user.role === 'expert' ? 
                 <Button color="inherit" onClick={() => props.history.push('/Investors/dashboard')}>Dashboard</Button> : null
                 }
                 {
-                 props.authState.loggedIn && localStorage.currentUserJwt ?   
+                 props.authState.loggedIn && localStorage.currentUserJwt && props.authState.user.role === 'user' ?   
                 <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>New Idea</Button> : null
                 }
                 {
