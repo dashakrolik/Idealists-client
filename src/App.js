@@ -93,10 +93,11 @@ class App extends Component {
       })
   }
 
-  sendAssessment = () => {
+  sendAssessment = (content) => {
     request 
       .post(`${baseUrl}/:ideasId/:investorId/assessment`)
       .set("Authorization", `Bearer ${this.state.auth.token}`)
+      .send({ content })
       .then(res => {
         res.status === 200 && console.log('form sent')
       })

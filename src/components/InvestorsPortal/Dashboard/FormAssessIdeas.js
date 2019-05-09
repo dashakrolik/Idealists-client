@@ -19,6 +19,7 @@ export default function FormAssessIdeas (props) {
 
 
     const onSubmit = (data) => {
+        const { content } = data
         props.sendAssessment()
       };
 
@@ -137,7 +138,7 @@ export default function FormAssessIdeas (props) {
                     variant="filled"
                     />
             </AddlQuestions>
-            <Button text={'Submit'} onClick={printValues} type="submit" />
+            <Button text={'Submit'} onClick={onSubmit} type="submit" />
         </div>
     )
 }
