@@ -31,6 +31,8 @@ const IdeaDashboardDetail = (props) => {
   console.log(automatchResults)
   let automatchPdf = automatchResults.map(result => result.pdf)
   console.log(automatchPdf)
+  let automatchImage = automatchResults.map(result => result.image.data)
+  console.log(automatchImage[0])
   // let automatchText = automatchResults.map(result => 
   //   result.passage.text.split('.').slice(1,-1).join() + '.'
   // )
@@ -70,21 +72,23 @@ const IdeaDashboardDetail = (props) => {
       const { pageNumber, numPages, value } = this.state;
       return (
         <div>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
           <div style={{ width: 600 }}>
             <Document 
               onLoadError= {(error) => console.error()}
-              file= {{url:'http://www.africau.edu/images/default/sample.pdf',
+              file= {{url: automatchPdf[0],
               httpHeaders: { 'X-CustomHeader': '40359820958024350238508234' }, 
               'Access-Control-Allow-Credentials': true,
               'Access-Control-Allow-Origin' : true
             }}
               onLoadSuccess={this.onDocumentLoadSuccess}
             >
-              <Page pageNumber={pageNumber} width={600} />
+              <Page pageNumber={1} width={600} />
             </Document>
           </div>
+          <br></br>
           <br />
-
+            <div>I am PatentPdf class</div>
           <nav>
             <button style={{ backgroundColor: "inherit", color: "white", borderRadius: "10px" }}
               onClick={this.goToPrevPage}>Prev Page</button>
@@ -189,7 +193,7 @@ return (
   <GroupContainer>
     <PatentPdf />
 
-    <a href={'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'} download><Button text={'Download the Patent details pdf'}
+    <a href={'http://www.africau.edu/images/default/sample.pdf'} download><Button text={'Download the Patent details pdf'}
     /></a>
   </GroupContainer>
 );

@@ -36,7 +36,7 @@ export default function IdeaDashboardDetail(props) {
       .then(automatch => DoAutomatch(automatch.body.autoMatch['automatch-results']['index-1']))
   }, []);
  
-
+  console.log(automatchResults)
   const updateShow = e => {
     setIsShown({
       ...isShown,
