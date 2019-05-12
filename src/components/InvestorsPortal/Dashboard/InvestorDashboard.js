@@ -19,6 +19,10 @@ export default function investorDashboard(props) {
                 .then(res => setUserData(res.body))
         else props.history.push('/InvestorStart');
     }, []);
+
+    if (props.authState.loggedIn && !props.authState.user) {
+        props.user()
+      }
     
     if (userLoggedIn === false)
         return (

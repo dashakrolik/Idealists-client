@@ -6,15 +6,45 @@ import './InvestorDashboard.css'
 import styled from '@emotion/styled';
 import TextField from '@material-ui/core/TextField';
 import './InvestorDashboard.css'
+import Button from '../../reogranisation/Questions/Button';
 
 
 export default function FormAssessIdeas (props) {
     const [userLoggedIn, setUserLoggedIn] = useState(true);
     if (props.authState.loggedIn === false)
-    return (
-      <Redirect to='/InvestorStart' />);
+        return (
+        <Redirect to='/InvestorStart' />);
+
+    const [formData, setFormData] = useState({});
+
+
+    const onSubmit = (data) => {
+        const { content } = data
+        props.sendAssessment()
+      };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onSubmit(formData);
+    };
+      
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+          });
+        };
+
+    
+    const printValues = e => {
+        e.preventDefault();
+        console.log("PrintValues!");
+    };
+    
     return (
         <div className='dashboard-container'>
+        <br></br><br></br><br></br><br></br>
             <AddlQuestions>
                 Assess the idea: 
                 <StyledTextField
@@ -108,6 +138,7 @@ export default function FormAssessIdeas (props) {
                     variant="filled"
                     />
             </AddlQuestions>
+            <Button text={'Submit'} onClick={onSubmit} type="submit" />
         </div>
     )
 }

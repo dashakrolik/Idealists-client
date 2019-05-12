@@ -93,6 +93,16 @@ class App extends Component {
       })
   }
 
+  sendAssessment = (content) => {
+    request 
+      .post(`${baseUrl}/:ideasId/:investorId/assessment`)
+      .set("Authorization", `Bearer ${this.state.auth.token}`)
+      .send({ content })
+      .then(res => {
+        res.status === 200 && console.log('form sent')
+      })
+  }
+
   resetPassword = (email) => {
     request
       .post(`${baseUrl}/reset-password`)
@@ -167,10 +177,10 @@ class App extends Component {
           <ThemeProvider theme={theme}>
             <Application>
               <Route exact path='/Investors/dashboard' render={(props) => {
-                return <InvestorDashboard {...props} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout} />;
+                return <InvestorDashboard {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout} />;
               }} />
               <Route exact path='/Investors/dashboard/assess' render={(props) => {
-                return <AssesIdeas {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
+                return <AssesIdeas sendAssessment={this.sendAssessment} {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
               }} />
               <Route exact path='/Investors/dashboard/assess/:id' render={(props) => {
                 return <FormAssessIdeas {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
@@ -185,7 +195,7 @@ class App extends Component {
                 return <MyInvestments {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
               }} />
               <Route exact path='/Investors/login' render={(props) => {
-                return <InvestorLogin {...props} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
+                return <InvestorLogin {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
               }} />
               <Route exact path='/MyIdea' render={(props) => {
                 return <IdeaStart {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;

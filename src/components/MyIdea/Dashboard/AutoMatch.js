@@ -35,7 +35,8 @@ export default function IdeaDashboardDetail(props) {
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then(automatch => DoAutomatch(automatch.body.autoMatch['automatch-results']['index-1']))
   }, []);
-
+ 
+  console.log(automatchResults)
   const updateShow = e => {
     setIsShown({
       ...isShown,
@@ -64,7 +65,7 @@ export default function IdeaDashboardDetail(props) {
   };
   const printValues = e => {
     e.preventDefault();
-    console.log(patentDifference, "PrintValues!");
+   
   };
 
   if (automatchResults) {
