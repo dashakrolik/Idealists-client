@@ -169,7 +169,7 @@ class App extends Component {
   }
   '/investors/dashboard/assess/:id'
   render() {
-    console.log(this.state.user)
+    console.log(this.state)
     return (
       <Router>
         <div>
@@ -195,7 +195,7 @@ class App extends Component {
                 return <MyInvestments {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
               }} />
               <Route exact path='/Investors/login' render={(props) => {
-                return <InvestorLogin {...props} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
+                return <InvestorLogin {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
               }} />
               <Route exact path='/MyIdea' render={(props) => {
                 return <IdeaStart {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;

@@ -1,41 +1,49 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
 export default function InvestorLogin(props) {
-  
   const [loginState, setLoginState] = useState({});
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);
+    triggerUserData()
   };
-  
+
   const handleChange = (event) => {
     const { name, value } = event.target;
-    
     setLoginState({
       ...loginState,
       [name]: value,
     });
   };
-  
+
   const onSubmit = (data) => {
-    const { email, password } = data
+    const { email, password } = data;
     props.login(email, password);
   };
-  
-  if (props.authState.loggedIn) {
-    props.history.replace('/Investors/dashboard');
+
+  const triggerUserData = () => {
+    if (props.authState.loggedIn) {
+      props.user();
+    }
+  }
+
+  if (!localStorage.currentUserJwt) {
+    props.history.replace('/InvestorStart');
+    triggerUserData();
     return <div></div>;
   }
-  
+
   if (props.authState.loggedIn !== true) return (
     <Container>
       <LeftSide>
         <div>
-          <h3>Login to my Investor Dashboard</h3>
+          <h3>Login to My Idea Page</h3>
+
         </div>
       </LeftSide>
       <RightSide>
@@ -43,18 +51,27 @@ export default function InvestorLogin(props) {
           <label>Email</label>
           <input type='email' name='email' value={loginState.email || ''} onChange={handleChange} />
           <br />
-          
+
           <label>Password</label>
           <input type='password' name='password' value={loginState.password || ''} onChange={handleChange} />
           <br />
-          
-          <a>Forgot your password?</a>
+
           <button type='submit'>Login</button>
+          <button type='submit' onClick={() => { props.history.replace('/MyIdea/login/reset-password') }}>Forgot your password?</button>
         </form>
       </RightSide>
     </Container>);
-  else return <div></div>;
+  else return (<Redirect to='/Investors/dashboard' />)
 }
+
+const Logo = styled.img`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  margin: -300px auto auto auto;
+  height: 70px;
+`;
 
 
 const LeftSide = styled.div`
@@ -155,8 +172,8 @@ const RightSide = styled.div`
     position: relative;
     float: right;
     right: 10%;
-    width: 30%;
-    height: 30px;
+    width: 40%;
+    height: 60px;
     line-height: 30px;
     font-size: 12px;
     color: #233949;
