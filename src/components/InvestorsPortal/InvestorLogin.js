@@ -42,7 +42,7 @@ export default function InvestorLogin(props) {
     <Container>
       <LeftSide>
         <div>
-          <h3>Login to My Idea Page</h3>
+          <h3>Login to My Investor Page</h3>
 
         </div>
       </LeftSide>
