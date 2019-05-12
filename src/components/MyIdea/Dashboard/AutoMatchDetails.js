@@ -28,16 +28,16 @@ const IdeaDashboardDetail = (props) => {
       .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
   }, []);
   
-  console.log(automatchResults)
+  
 
   let automatchPdf = automatchResults.map(result => result.pdf)
-  console.log(automatchPdf)
+  
 
   let automatchImage = automatchResults.map(result => result.image.data)
-  console.log(automatchImage[0])
+  
 
   let automatchText = automatchResults.map(result => result.passage.text)
-  console.log(automatchText)
+  
 
   
   
@@ -52,79 +52,17 @@ const IdeaDashboardDetail = (props) => {
     // console.table(automatchResults.autoMatch['0'].relevance)
   // }
   // var base64ToImage = require('base64-to-image')
-  var base64Str = automatchImage[0]
-  var base64Str1 = automatchImage[1]
-  var base64Str2 = automatchImage[2]
-  // var path ='put a valid path where you want to save the image';
-  // var optionalObj = {'fileName': 'imageFileName', 'type':'png'};
+  let base64Str = automatchImage[0]
+  let base64Str1 = automatchImage[1]
+  let base64Str2 = automatchImage[2]
+  let base64Str3 = automatchImage[3]
+  let base64Str4 = automatchImage[4]
+  let base64Str5 = automatchImage[5]
+  let base64Str6 = automatchImage[6]
+  let base64Str7 = automatchImage[7]
+  let base64Str8 = automatchImage[8]
+  let base64Str9 = automatchImage[9]
 
-  // base64ToImage(base64Str,path,optionalObj); 
-  // var imageInfo = base64ToImage(base64Str,path,optionalObj); 
-
-
-
-
-
-
-
-  const [pageNumber, getPageNumber] = useState([null])
-  const [numPages, getNumPages] = useState([1])
-
-  class PatentPdf extends Component {
-
-    state = { numPages: null, pageNumber: 1, value: null };
-
-    onDocumentLoadSuccess = ({ numPages }) => {
-      this.setState({ numPages })
-    }
-    goToPrevPage = () =>{
-      if (this.state.pageNumber === 1) {
-        this.state.pageNumber = 1
-      }else{
-        this.setState(state => ({ pageNumber: state.pageNumber - 1 }));
-      }}
-    goToNextPage = () =>{
-    if (this.state.pageNumber === 2) {
-      this.state.pageNumber = 2
-    }else{
-      this.setState(state => ({ pageNumber: state.pageNumber + 1 }));
-    }}
-    
-
-    render() {
-      const { pageNumber, numPages, value } = this.state;
-      return (
-        <div>
-          <br></br><br></br><br></br><br></br><br></br><br></br>
-          <div style={{ width: 600 }}>
-            <Document 
-              onLoadError= {(error) => console.error()}
-              file= {{url: automatchPdf[0],
-              httpHeaders: { 'X-CustomHeader': '40359820958024350238508234' }, 
-              'Access-Control-Allow-Credentials': true,
-              'Access-Control-Allow-Origin' : true
-            }}
-              onLoadSuccess={this.onDocumentLoadSuccess}
-            >
-              <Page pageNumber={1} width={600} />
-            </Document>
-          </div>
-          <br></br>
-          <br />
-            <div>I am PatentPdf class</div>
-          <nav>
-            <button style={{ backgroundColor: "inherit", color: "white", borderRadius: "10px" }}
-              onClick={this.goToPrevPage}>Prev Page</button>
-            <button style={{ backgroundColor: "inherit", color: "white", borderRadius: "10px" }}
-              onClick={this.goToNextPage}>Next Page</button>
-          </nav>
-          <p>
-            Page {pageNumber} of {numPages}
-          </p>
-        </div>
-      );
-    }
-  }
 
   
 
@@ -213,21 +151,57 @@ const IdeaDashboardDetail = (props) => {
 // }
 
 return (
-  <GroupContainer>
-    <PatentPdf />
+  <Content>
+    <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
 
     <a href={'http://www.africau.edu/images/default/sample.pdf'} download><Button text={'Download the Patent details pdf'}
     /></a>
     <img src={`data:image/jpeg;base64,${base64Str}`} />
+    <p>{automatchText[0]}</p>
     <img src={`data:image/jpeg;base64,${base64Str1}`} />
+    <p>{automatchText[1]}</p>
     <img src={`data:image/jpeg;base64,${base64Str2}`} />
-    <p>{automatchText[0]}{automatchText[1]}{automatchText[2]}{automatchText[3]}
-    {automatchText[4]}</p>
-    <p></p>
-  </GroupContainer>
+    <p>{automatchText[2]}</p>
+    <img src={`data:image/jpeg;base64,${base64Str3}`} />
+    <p>{automatchText[3]}</p>
+    <img src={`data:image/jpeg;base64,${base64Str4}`} />
+    <p>{automatchText[4]}</p>
+    <img src={`data:image/jpeg;base64,${base64Str5}`} />
+    <p>{automatchText[5]}</p>
+    <img src={`data:image/jpeg;base64,${base64Str6}`} />
+    <p>{automatchText[6]}</p>
+    <img src={`data:image/jpeg;base64,${base64Str7}`} />
+    <p>{automatchText[7]}</p>
+    <img src={`data:image/jpeg;base64,${base64Str8}`} />
+    <p>{automatchText[8]}</p>
+    <img src={`data:image/jpeg;base64,${base64Str9}`} />
+    <p>{automatchText[9]}</p>
+  </Content>
 );
 }
 
+
+const Content = styled.div`
+
+    
+    width: 80vw;
+    max-width: 900px;
+    
+    
+    padding: 20px;
+    display: grid;
+    
+    @media only screen and (orientation:portrait) { 
+      grid-template-columns: 1fr;
+      grid-template-rows:  auto auto;
+      grid-template-areas: "logo-area" "content-area";
+    }
+    @media only screen and (orientation:landscape) { 
+      grid-template-columns: auto auto;
+      grid-template-rows: auto;
+      grid-template-areas: "logo-area content-area";
+    }
+  `;
 const FlexRow = styled.div`
   display: flex;
   width: 100%;
