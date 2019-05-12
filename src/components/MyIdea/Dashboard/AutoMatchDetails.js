@@ -29,10 +29,18 @@ const IdeaDashboardDetail = (props) => {
   }, []);
   
   console.log(automatchResults)
+
   let automatchPdf = automatchResults.map(result => result.pdf)
   console.log(automatchPdf)
+
   let automatchImage = automatchResults.map(result => result.image.data)
   console.log(automatchImage[0])
+
+  let automatchText = automatchResults.map(result => result.passage.text)
+  console.log(automatchText)
+
+  
+  
   // let automatchText = automatchResults.map(result => 
   //   result.passage.text.split('.').slice(1,-1).join() + '.'
   // )
@@ -43,6 +51,21 @@ const IdeaDashboardDetail = (props) => {
   // if (typeof automatchResults.autoMatch === 'object') {
     // console.table(automatchResults.autoMatch['0'].relevance)
   // }
+  // var base64ToImage = require('base64-to-image')
+  var base64Str = automatchImage[0]
+  var base64Str1 = automatchImage[1]
+  var base64Str2 = automatchImage[2]
+  // var path ='put a valid path where you want to save the image';
+  // var optionalObj = {'fileName': 'imageFileName', 'type':'png'};
+
+  // base64ToImage(base64Str,path,optionalObj); 
+  // var imageInfo = base64ToImage(base64Str,path,optionalObj); 
+
+
+
+
+
+
 
   const [pageNumber, getPageNumber] = useState([null])
   const [numPages, getNumPages] = useState([1])
@@ -195,6 +218,12 @@ return (
 
     <a href={'http://www.africau.edu/images/default/sample.pdf'} download><Button text={'Download the Patent details pdf'}
     /></a>
+    <img src={`data:image/jpeg;base64,${base64Str}`} />
+    <img src={`data:image/jpeg;base64,${base64Str1}`} />
+    <img src={`data:image/jpeg;base64,${base64Str2}`} />
+    <p>{automatchText[0]}{automatchText[1]}{automatchText[2]}{automatchText[3]}
+    {automatchText[4]}</p>
+    <p></p>
   </GroupContainer>
 );
 }
