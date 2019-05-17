@@ -11,10 +11,11 @@ import validator from 'validator';
 import { baseUrl } from '../../constants';
 import request from 'superagent';
 import { Redirect } from 'react-router'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import { handleInputChange } from 'react-select/lib/utils';
 
 const InvestorRegistration = (props) => {
-  
+
   const [formValidated, setFormValidated] = useState(false);
   const [history, location] = useState({});
   const [formData, setFormData] = useState({
@@ -44,19 +45,19 @@ const InvestorRegistration = (props) => {
       validated: false,
     },
     country: {
-      value: '',
+      value: 'NL',
       shouldShowError: false,
       validated: true,
     },
     industry: {
-        value: '',
-        shouldShowError: false,
-        validated: true
+      value: '',
+      shouldShowError: false,
+      validated: true
     },
     role: {
-        value: '',
-        shouldShowError: false,
-        validated: false
+      value: '',
+      shouldShowError: false,
+      validated: false
     }
   });
 
@@ -84,16 +85,16 @@ const InvestorRegistration = (props) => {
       shouldShowError: (val) => (val.length >= 8),
     },
     country: {
-      validator: (val) => (val === formData.country.value),
+      validator: (val) => (val.length <= 100),
       shouldShowError: (val) => (val.length > 0),
     },
     industry: {
-        validator: (val) => (val === formData.industry.value),
-        shouldShowError: (val) => (val.length > 0)
+      validator: (val) => (typeof val === "object"),
+      shouldShowError: (val) => (val.length > 0)
     },
     role: {
-        validator: (val) => (val.length <= 100),
-        shouldShowError: (val) => (val.length > 4)
+      validator: (val) => (val.length <= 100),
+      shouldShowError: (val) => (val.length > 4)
     }
   };
 
@@ -109,6 +110,27 @@ const InvestorRegistration = (props) => {
         value: e.target.value,
       },
     };
+
+    setFormData(Object.keys(formData).reduce((acc, currVal) => {
+      return {
+        ...acc,
+        [currVal]: {
+          ...newState[currVal],
+          validated: !!(formValidations[currVal].validator(newState[currVal].value)),
+        },
+      };
+    }, {}));
+  };
+  const handleChangeTwo = e => {
+    console.log(e, "EEEE")
+    const newState = {
+      ...formData,
+      ["industry"]: {
+        ...formData["industry"],
+        value: e[0].value 
+        // e.map(val =>  val.value)
+      },
+    }
 
     setFormData(Object.keys(formData).reduce((acc, currVal) => {
       return {
@@ -273,7 +295,17 @@ const InvestorRegistration = (props) => {
             <FlexColumn>
               <FormGroup>
                 <label>What is your industry?</label>
-                <Select options={industryList} />
+                <Select
+                  name="industry"
+                  // defaultValue={industryList[0].value}
+                  options={industryList}
+                  onChange={handleChangeTwo}
+                  value={formData.industry.value}
+                isMulti
+                // onInputChange={handleInputChange}
+                // inputValue={formData.industry.value}
+                // defaultInputValue={industryList['0'].value}
+                />
               </FormGroup>
             </FlexColumn>
           </FlexRow>
@@ -281,8 +313,8 @@ const InvestorRegistration = (props) => {
         <div css={css`float: right; width: 160px;`}>
           <Button disabled={!formValidated} text='Start my submission' disabledText='Sign up' withIcon
             onClick={signup} />
-            
         </div>
+        {console.log(formData, "DATAA")}
         <div css={css`float: right; width: 120px;`}>
           <Button text='Cancel' disabled={false} onClick={props.handleCancel} />
         </div>

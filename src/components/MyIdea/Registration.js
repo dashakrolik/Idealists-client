@@ -43,7 +43,7 @@ const Registration = (props) => {
       validated: false,
     },
     country: {
-      value: '',
+      value: 'NL',
       shouldShowError: false,
       validated: true,
     },

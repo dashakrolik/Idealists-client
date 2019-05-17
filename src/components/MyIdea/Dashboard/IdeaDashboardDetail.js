@@ -51,7 +51,7 @@ export default function IdeaDashboardDetail(props) {
     
 
     qAnswers = qAnswers.map(answer => typeof answer === 'object' ? answer[1] ? (answer[1].value +' & '+ answer[0].value) : answer[0] ? answer[0].value : answer.value : answer)
-console.log(qAnswers, "QQQQ")
+
     if (qAnswers[0] === 'true') {
         qAnswers[0] = 'yes'
     }
