@@ -1,4 +1,53 @@
-body {
+.assess-tile {
+    height: 40vh;
+    width: 25vw;
+    /* background: white; */
+    /* border: 1px solid silver;
+    border-radius: 10px; */
+    color: white;
+    margin: 20px;
+}
+
+.invest-tile {
+    height: 40vh;
+    width: 25vw;
+    /* background: white; */
+    /* border: 1px solid silver;
+    border-radius: 10px; */
+    color: white;
+    margin: 20px;
+}
+
+.icons {
+    width: 100px;
+    margin: 10px;
+    /* border: 2px solid white; */
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.icons:hover {
+     width: 100px;
+    margin: 10px;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 30px;
+    transition: ease-in;
+
+}
+
+.title {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 40px;
+}
+
+.links {
+    text-decoration: none;
+    text-decoration-color: none;
+}
+
+.form {
     margin: 0;
     font-size: 100%;
     padding: 10px;
@@ -21,9 +70,9 @@ body {
   }
   
   .my-button__red {
-    color: #fff;
+    color: rgb(252, 239, 239);
     border-radius: 2px;
-    background: #ff5a57;
+    background: #4387f3;
     padding: 10px;
     margin: 0 auto;
     text-align: center;
