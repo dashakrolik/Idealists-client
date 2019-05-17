@@ -42,12 +42,12 @@ const IdeaDashboardDetail = (props) => {
   
 
   let automatchImage = automatchResults.map(result => result.image.data)
-  console.log(automatchImage)
+  
 
-  let automatchText = automatchResults.map(result => result.passage.text)
+  let automatchText = automatchResults.map(result => result.description[0].text)
 
   let patentDetail = automatchImage.concat(automatchText)
-  console.log(patentDetail)
+
   // console.log(relScore)
   // function findByScore(score) {
   //   let larray = Object.values(automatchResults)
@@ -60,11 +60,11 @@ const IdeaDashboardDetail = (props) => {
 
   var textObject = {};
   relevanceNumber.forEach((key, i) => textObject[key] = automatchText[i]);
-  console.log(textObject);
+ 
 
   var imageObject = {};
   relevanceNumber.forEach((key, i) => imageObject[key] = automatchImage[i]);
-  console.log(imageObject);
+
 
   let arrText = []
   const newTextArray = () => {
@@ -77,11 +77,11 @@ const IdeaDashboardDetail = (props) => {
 
 
 newTextArray()
- console.log(arrText, "TEXTT")
+
 
   
 const key = props.location.pathname.split('/')[6]
-console.log(key)
+
   
  
 let arrImage = []
@@ -93,19 +93,17 @@ const newImageArray = () => {
   return arrImage
 }
 newImageArray()
-console.log(arrImage)
+
 
 let clickedText = arrText.find(o => o.key === key)
-console.log(clickedText)
+
 
 let clickedImage = arrImage.find(o => o.key === key)
 
-console.log(clickedImage)
+
 // ONLY PROCEED if (arr.length === 10) !!!!!!!!!!!!!!!!! coz it takes time for the loop to complete
 // let obj = newImageArray.find(o => o.name === 'string 1');
-if (clickedImage) {
-  console.log(clickedText.value)
-}
+
 // console.log(obj);
 
 

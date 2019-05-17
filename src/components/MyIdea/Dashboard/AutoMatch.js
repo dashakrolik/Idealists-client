@@ -60,7 +60,7 @@ export default function IdeaDashboardDetail(props) {
 
   let relevanceScore = automatch2.map(result => result.relevance.score)
   let relevanceNumber = automatch2.map(b => b.relevance.number)
-  console.log(relevanceNumber)
+
   // if (typeof automatchResults.autoMatch === 'object') {
   //   console.table(automatchResults.autoMatch['0'].relevance)
   // }
@@ -81,15 +81,15 @@ export default function IdeaDashboardDetail(props) {
   
   var textObject = {};
   relevanceNumber.forEach((key, i) => textObject[key] = automatchText[i]);
-  console.log(textObject);
+  
 
   var imageObject = {};
   relevanceNumber.forEach((key, i) => imageObject[key] = automatchImage[i]);
-  console.log(imageObject);
+
 
   
   var textArray = Object.keys(textObject).map(i => textObject[i])
-  console.log(textArray)
+
 
 
   // const key = props.location.pathname.split('/')[6]
