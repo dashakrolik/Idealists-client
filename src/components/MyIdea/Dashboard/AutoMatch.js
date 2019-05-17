@@ -76,46 +76,7 @@ export default function IdeaDashboardDetail(props) {
     e.preventDefault();
    
   };
-  let automatchImage = automatchResults.map(result => result.image.data)
-  
-  
-  var textObject = {};
-  relevanceNumber.forEach((key, i) => textObject[key] = automatchText[i]);
-  
-
-  var imageObject = {};
-  relevanceNumber.forEach((key, i) => imageObject[key] = automatchImage[i]);
-
-
-  
-  var textArray = Object.keys(textObject).map(i => textObject[i])
-
-
-
-  // const key = props.location.pathname.split('/')[6]
-  // console.log(key)
-
-  const newTextArray = () => {
-    let arr = []
-      for (let [key, value] of Object.entries(textObject)) {
-        let obj = {key, value}
-        arr.push(obj)
-        return arr
-      }
-    } 
-
-  newTextArray()
-
-  const newImageArray = () => {
-    let arr = []
-      for (let [key, value] of Object.entries(imageObject)) {
-        let obj = {key, value}
-        arr.push(obj)
-        return arr
-      }
-    }
-
-  newImageArray()
+ 
 
 // ONLY PROCEED if (arr.length === 10) !!!!!!!!!!!!!!!!! coz it takes time for the loop to complete
 // let obj = newImageArray.find(o => o.name === 'string 1');

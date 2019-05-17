@@ -112,7 +112,7 @@ let clickedImage = arrImage.find(o => o.key === key)
 
 
 let clickedTitle = arrTitle.find(o => o.key === key)
-console.log(clickedTitle)
+
 // ONLY PROCEED if (arr.length === 10) !!!!!!!!!!!!!!!!! coz it takes time for the loop to complete
 // let obj = newImageArray.find(o => o.name === 'string 1');
 
