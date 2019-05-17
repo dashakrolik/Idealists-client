@@ -8,6 +8,8 @@ import TextField from '@material-ui/core/TextField';
 import './InvestorDashboard.css'
 import Button from '../../reogranisation/Questions/Button';
 import Card from '@material-ui/core/Card'
+import { Textbox, Textarea, Radiobox, Checkbox, Select } from 'react-inputs-validation';
+import 'react-inputs-validation/lib/react-inputs-validation.min.css';
 
 export default function FormAssessIdeas (props) {
     const [userLoggedIn, setUserLoggedIn] = useState(true);
