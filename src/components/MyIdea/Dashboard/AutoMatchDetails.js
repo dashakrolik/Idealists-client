@@ -71,17 +71,27 @@ const IdeaDashboardDetail = (props) => {
   const key = props.location.pathname.split('/')[6]
   console.log(key)
 
-  function newArray() {
+  const newTextArray = () => {
   let arr = []
   for (let [key, value] of Object.entries(textObject)) {
     let obj = {key, value}
     arr.push(obj)
     console.log(arr)
-    
   }
 }
-newArray()
-// ONLY PROCEED if (arr.length === 10) !!!!!!!!!!!!!!!!!
+newTextArray()
+
+
+const newImageArray = () => {
+  let arr = []
+  for (let [key, value] of Object.entries(imageObject)) {
+    let obj = {key, value}
+    arr.push(obj)
+    console.log(arr)
+  }
+}
+newImageArray()
+// ONLY PROCEED if (arr.length === 10) !!!!!!!!!!!!!!!!! coz it takes time for the loop to complete
 
 
 
