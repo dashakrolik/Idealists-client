@@ -24,7 +24,8 @@
     "react-svg-morph": "^0.2.1",
     "react-textfit": "^1.1.0",
     "superagent": "^4.1.0",
-    "validator": "^10.11.0"
+    "validator": "^10.11.0",
+    "winterfell": "^1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
