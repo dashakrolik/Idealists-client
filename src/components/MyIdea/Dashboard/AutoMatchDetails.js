@@ -18,6 +18,7 @@ const IdeaDashboardDetail = (props) => {
   const ideasId = props.match.params.id
   const [automatchResults, DoAutomatch] = useState([])
   const [relScore, getScore] = useState([])
+  const [finalArray, makeArray] = useState([])
 
   const automatchId = props.match.params.patentNumber
 
@@ -64,12 +65,23 @@ const IdeaDashboardDetail = (props) => {
   relevanceNumber.forEach((key, i) => imageObject[key] = automatchImage[i]);
   console.log(imageObject);
 
-
-  var textArray = Object.entries(textObject)
+  
+  var textArray = Object.keys(textObject).map(i => textObject[i])
   console.log(textArray)
   const key = props.location.pathname.split('/')[6]
   console.log(key)
 
+  function newArray() {
+  let arr = []
+  for (let [key, value] of Object.entries(textObject)) {
+    let obj = {key, value}
+    arr.push(obj)
+    console.log(arr)
+    
+  }
+}
+newArray()
+// ONLY PROCEED if (arr.length === 10) !!!!!!!!!!!!!!!!!
 
 
 
