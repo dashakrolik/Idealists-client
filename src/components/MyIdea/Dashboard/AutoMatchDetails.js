@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import React, { useEffect, useState, Component } from 'react';
 import request from 'superagent';
 import { Link } from 'react-router-dom';
+
 import { baseUrl } from '../../../constants';
 import './IdeaDashboard.css'
 import { css, Global, jsx } from '@emotion/core';
@@ -65,32 +66,34 @@ const IdeaDashboardDetail = (props) => {
   relevanceNumber.forEach((key, i) => imageObject[key] = automatchImage[i]);
   console.log(imageObject);
 
+  let arrText = []
+  const newTextArray = () => {
+    for (let [key, value] of Object.entries(textObject)) {
+      let obj = {key, value}
+      arrText.push(obj)
+    }
+    return arrText
+  }
+
+
+newTextArray()
+ console.log(arrText, "TEXTT")
+
   
-  var textArray = Object.keys(textObject).map(i => textObject[i])
-  console.log(textArray)
   const key = props.location.pathname.split('/')[6]
   console.log(key)
-
-  const newTextArray = () => {
-  let arr = []
-  for (let [key, value] of Object.entries(textObject)) {
-    let obj = {key, value}
-    arr.push(obj)
-    return arr
-  }
-}
-newTextArray()
-
-
+  
+ 
+let arrImage = []
 const newImageArray = () => {
-  let arr = []
   for (let [key, value] of Object.entries(imageObject)) {
     let obj = {key, value}
-    arr.push(obj)
-    return arr
+    arrImage.push(obj)
   }
+  return arrImage
 }
 newImageArray()
+console.log(arrImage)
 // ONLY PROCEED if (arr.length === 10) !!!!!!!!!!!!!!!!! coz it takes time for the loop to complete
 // let obj = newImageArray.find(o => o.name === 'string 1');
 

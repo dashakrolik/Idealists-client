@@ -92,8 +92,8 @@ export default function IdeaDashboardDetail(props) {
   console.log(textArray)
 
 
-  const key = props.location.pathname.split('/')[6]
-  console.log(key)
+  // const key = props.location.pathname.split('/')[6]
+  // console.log(key)
 
   const newTextArray = () => {
     let arr = []
