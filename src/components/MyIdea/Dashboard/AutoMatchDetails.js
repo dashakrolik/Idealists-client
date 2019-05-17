@@ -39,7 +39,7 @@ const IdeaDashboardDetail = (props) => {
   }, []);
 
   let automatchPdf = automatchResults.map(result => result.pdf)
-  
+  let automatchTitle = automatchResults.map(result => result.bibliographic.title[0].text)
 
   let automatchImage = automatchResults.map(result => result.image.data)
   
@@ -65,6 +65,8 @@ const IdeaDashboardDetail = (props) => {
   var imageObject = {};
   relevanceNumber.forEach((key, i) => imageObject[key] = automatchImage[i]);
 
+  var titleObject = {};
+  relevanceNumber.forEach((key, i) => titleObject[key] = automatchTitle[i]);
 
   let arrText = []
   const newTextArray = () => {
@@ -75,10 +77,18 @@ const IdeaDashboardDetail = (props) => {
     return arrText
   }
 
-
 newTextArray()
 
+let arrTitle = []
+const newTitleArray = () => {
+  for (let [key, value] of Object.entries(titleObject)) {
+    let obj = {key, value}
+    arrTitle.push(obj)
+  }
+  return arrTitle
+}
 
+newTitleArray()
   
 const key = props.location.pathname.split('/')[6]
 
@@ -101,6 +111,8 @@ let clickedText = arrText.find(o => o.key === key)
 let clickedImage = arrImage.find(o => o.key === key)
 
 
+let clickedTitle = arrTitle.find(o => o.key === key)
+console.log(clickedTitle)
 // ONLY PROCEED if (arr.length === 10) !!!!!!!!!!!!!!!!! coz it takes time for the loop to complete
 // let obj = newImageArray.find(o => o.name === 'string 1');
 
@@ -203,13 +215,14 @@ let clickedImage = arrImage.find(o => o.key === key)
 //     return (<Heading>Loading...</Heading>)
 //   }
 // }
-if (clickedImage && clickedText) {
+if (clickedImage && clickedText && clickedTitle) {
 return (
   <Content>
     <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
 
     <a href={'http://www.africau.edu/images/default/sample.pdf'} download><Button text={'Download the Patent details pdf'}
     /></a>
+    <h2>Title: {clickedTitle.value}</h2>
     <img src={`data:image/jpeg;base64,${clickedImage.value}`} />
     <p>{clickedText.value}</p>
   </Content>
