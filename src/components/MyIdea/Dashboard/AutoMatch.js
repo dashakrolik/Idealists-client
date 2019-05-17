@@ -52,6 +52,7 @@ export default function IdeaDashboardDetail(props) {
 
   let relevanceScore = automatchResults.map(result => result.relevance.score)
   let relevanceNumber = automatchResults.map(b => b.relevance.number)
+  console.log(relevanceNumber)
   // if (typeof automatchResults.autoMatch === 'object') {
   //   console.table(automatchResults.autoMatch['0'].relevance)
   // }
@@ -87,16 +88,14 @@ export default function IdeaDashboardDetail(props) {
                 </Heading>
                 {Object.keys(automatchResults).map((key, index) => (
                   <StyledCard key={relevanceNumber[index]}>
-                    <Link to={`ideas/${ideasId}/automatch/${relevanceNumber[index]}`} results={automatchResults}>
+                    <Link to={`ideas/${ideasId}/automatch/${relevanceNumber[index]}`} results={automatchResults} relevancenumber={relevanceNumber}>
                       <Paragraph>
                         Title: {automatchTitle[index]}
-                        {console.log(automatchResults, "SSSS")}
+                        
                       </Paragraph>
                     </Link>
                     <Paragraph>
                       <strong>
-                        Relevance Score : {relevanceScore[index]}
-                        <br />
                         Text:
                         </strong>
                       <br />
