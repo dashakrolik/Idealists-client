@@ -7,13 +7,13 @@ import styled from '@emotion/styled';
 import TextField from '@material-ui/core/TextField';
 import './InvestorDashboard.css'
 import Button from '../../reogranisation/Questions/Button';
-
+import Card from '@material-ui/core/Card'
 
 export default function FormAssessIdeas (props) {
     const [userLoggedIn, setUserLoggedIn] = useState(true);
-    if (props.authState.loggedIn === false)
-        return (
-        <Redirect to='/InvestorStart' />);
+    // if (props.authState.loggedIn === false)
+    //     return (
+    //     <Redirect to='/InvestorStart' />);
 
     const [formData, setFormData] = useState({});
 
@@ -45,6 +45,25 @@ export default function FormAssessIdeas (props) {
     return (
         <div className='dashboard-container'>
         <br></br><br></br><br></br><br></br>
+        <Content>
+            <StyledCard>
+                <h4>Idea Question</h4>
+                <p>Answer</p>
+            </StyledCard>
+            <StyledCard>
+                <h4>Idea Question</h4>
+                <p>Answer</p>
+            </StyledCard>
+            <StyledCard>
+                <h4>Idea Question</h4>
+                <p>Answer</p>
+            </StyledCard>
+            <StyledCard>
+                <h4>Idea Question</h4>
+                <p>Answer</p>
+            </StyledCard>
+        </Content>
+        <Content>
             <AddlQuestions>
                 Assess the idea: 
                 <StyledTextField
@@ -138,6 +157,7 @@ export default function FormAssessIdeas (props) {
                     variant="filled"
                     />
             </AddlQuestions>
+            </Content>
             <Button text={'Submit'} onClick={onSubmit} type="submit" />
         </div>
     )
@@ -154,3 +174,19 @@ const AddlQuestions = styled.div `
 padding: 3em;
 border: 1px solid #ccc;
 `
+const Content = styled.div`
+    align-self: center;
+    justify-self: center;
+    color: #ffffff;
+    width: 90vw;
+    max-width: 800px;
+    height: auto;
+    padding: 20px;
+    
+`;
+
+const StyledCard = styled(Card) `
+    background-color: rgb(255,255,255, 0.3);
+    padding-left: 8px;
+    padding-right: 8px;
+`;
