@@ -17,6 +17,7 @@ export default function IdeaDashboardDetail(props) {
   const [userLoggedIn, setUserLoggedIn] = useState(true);
   const [userIdeas, setUserIdeas] = useState([]);
   const [automatchResults, DoAutomatch] = useState([]);
+  const [automatch2, Do2] = useState([])
   const [currentValue, setCurrentValue] = useState([]);
   const [isShown, setIsShown] = useState({
     // 0: false, 1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false
@@ -36,6 +37,13 @@ export default function IdeaDashboardDetail(props) {
       .then(automatch => DoAutomatch(automatch.body.autoMatch['automatch-results']['index-1']))
   }, []);
  
+  useEffect(() => {
+    request
+      .get(`${baseUrl}/ideas/${ideasId}/automatch`)
+      .set("Authorization", `Bearer ${props.authState.token}`)
+      .then(automatch => Do2(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
+  }, []);
+
   console.log(automatchResults)
   const updateShow = e => {
     setIsShown({
@@ -44,14 +52,14 @@ export default function IdeaDashboardDetail(props) {
     })
   }
 
-  let automatchTitle = automatchResults.map(result => result.bibliographic.title[0].text)
+  let automatchTitle = automatch2.map(result => result.bibliographic.title[0].text)
 
-  let automatchText = automatchResults.map(result =>
+  let automatchText = automatch2.map(result =>
     result.passage.text.split('.').slice(1, -1).join() + '.'
   )
 
-  let relevanceScore = automatchResults.map(result => result.relevance.score)
-  let relevanceNumber = automatchResults.map(b => b.relevance.number)
+  let relevanceScore = automatch2.map(result => result.relevance.score)
+  let relevanceNumber = automatch2.map(b => b.relevance.number)
   console.log(relevanceNumber)
   // if (typeof automatchResults.autoMatch === 'object') {
   //   console.table(automatchResults.autoMatch['0'].relevance)
@@ -68,6 +76,51 @@ export default function IdeaDashboardDetail(props) {
     e.preventDefault();
    
   };
+  let automatchImage = automatchResults.map(result => result.image.data)
+  
+  
+  var textObject = {};
+  relevanceNumber.forEach((key, i) => textObject[key] = automatchText[i]);
+  console.log(textObject);
+
+  var imageObject = {};
+  relevanceNumber.forEach((key, i) => imageObject[key] = automatchImage[i]);
+  console.log(imageObject);
+
+  
+  var textArray = Object.keys(textObject).map(i => textObject[i])
+  console.log(textArray)
+
+
+  const key = props.location.pathname.split('/')[6]
+  console.log(key)
+
+  const newTextArray = () => {
+    let arr = []
+      for (let [key, value] of Object.entries(textObject)) {
+        let obj = {key, value}
+        arr.push(obj)
+        return arr
+      }
+    } 
+
+  newTextArray()
+
+  const newImageArray = () => {
+    let arr = []
+      for (let [key, value] of Object.entries(imageObject)) {
+        let obj = {key, value}
+        arr.push(obj)
+        return arr
+      }
+    }
+
+  newImageArray()
+
+// ONLY PROCEED if (arr.length === 10) !!!!!!!!!!!!!!!!! coz it takes time for the loop to complete
+// let obj = newImageArray.find(o => o.name === 'string 1');
+
+// console.log(obj);
 
   if (automatchResults) {
 

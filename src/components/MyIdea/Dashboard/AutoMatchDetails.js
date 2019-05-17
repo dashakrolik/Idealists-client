@@ -76,7 +76,7 @@ const IdeaDashboardDetail = (props) => {
   for (let [key, value] of Object.entries(textObject)) {
     let obj = {key, value}
     arr.push(obj)
-    console.log(arr)
+    return arr
   }
 }
 newTextArray()
@@ -87,12 +87,14 @@ const newImageArray = () => {
   for (let [key, value] of Object.entries(imageObject)) {
     let obj = {key, value}
     arr.push(obj)
-    console.log(arr)
+    return arr
   }
 }
 newImageArray()
 // ONLY PROCEED if (arr.length === 10) !!!!!!!!!!!!!!!!! coz it takes time for the loop to complete
+// let obj = newImageArray.find(o => o.name === 'string 1');
 
+// console.log(obj);
 
 
   let base64Str = automatchImage[0]
