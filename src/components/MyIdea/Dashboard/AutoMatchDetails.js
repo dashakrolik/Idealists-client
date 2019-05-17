@@ -63,8 +63,8 @@ const IdeaDashboardDetail = (props) => {
   let base64Str8 = automatchImage[8]
   let base64Str9 = automatchImage[9]
 
-
-  
+  const key = props.location.pathname.split('/')[6]
+  console.log(key)  
 
 
 //   if (automatchPdf) {
