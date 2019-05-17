@@ -49,7 +49,7 @@ export default function AssessIdeas(props) {
         <h4 className='title'>This is {userData.firstName}'s dashboard</h4>
           <StyledCard>
             Here you can track how all of your investments are performing and 
-            ask the founders questions or help them with your feedback.[Open]
+            ask the founders questions or help them with your feedback.
           </StyledCard>
         <div className='flex-tilescontainer'>
           {expertIdeas.map(idea =>
