@@ -17,7 +17,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 const IdeaDashboardDetail = (props) => {
   const ideasId = props.match.params.id
   const [automatchResults, DoAutomatch] = useState([])
-  const [currentValue, setCurrentValue] = useState([])
+  const [relScore, getScore] = useState([])
 
   const automatchId = props.match.params.patentNumber
 
@@ -29,29 +29,50 @@ const IdeaDashboardDetail = (props) => {
   }, []);
   
   
+  useEffect(() => {
+    request
+      .get(`${baseUrl}/ideas/${ideasId}/automatch`)
+      .set("Authorization", `Bearer ${props.authState.token}`)
+      .then(automatch => getScore(automatch.body.autoMatch['automatch-results']['index-1']))
+  }, []);
 
   let automatchPdf = automatchResults.map(result => result.pdf)
   
 
   let automatchImage = automatchResults.map(result => result.image.data)
-  
+  console.log(automatchImage)
 
   let automatchText = automatchResults.map(result => result.passage.text)
-  
 
-  
-  
-  // let automatchText = automatchResults.map(result => 
-  //   result.passage.text.split('.').slice(1,-1).join() + '.'
-  // )
-
-  // let relevanceScore = automatchResults.map(result => result.relevance.score)
-
-  // let relevanceNumber = automatchResults.map(b => b.relevance.number)
-  // if (typeof automatchResults.autoMatch === 'object') {
-    // console.table(automatchResults.autoMatch['0'].relevance)
+  let patentDetail = automatchImage.concat(automatchText)
+  console.log(patentDetail)
+  // console.log(relScore)
+  // function findByScore(score) {
+  //   let larray = Object.values(automatchResults)
+  //   console.log(larray)
+  //   score = props.location.pathname.split('/')[6]
+  //   return console.log(score)
   // }
-  // var base64ToImage = require('base64-to-image')
+  // findByScore()
+  let relevanceNumber = relScore.map(b => b.relevance.number)
+
+  var textObject = {};
+  relevanceNumber.forEach((key, i) => textObject[key] = automatchText[i]);
+  console.log(textObject);
+
+  var imageObject = {};
+  relevanceNumber.forEach((key, i) => imageObject[key] = automatchImage[i]);
+  console.log(imageObject);
+
+
+  var textArray = Object.entries(textObject)
+  console.log(textArray)
+  const key = props.location.pathname.split('/')[6]
+  console.log(key)
+
+
+
+
   let base64Str = automatchImage[0]
   let base64Str1 = automatchImage[1]
   let base64Str2 = automatchImage[2]
@@ -63,8 +84,7 @@ const IdeaDashboardDetail = (props) => {
   let base64Str8 = automatchImage[8]
   let base64Str9 = automatchImage[9]
 
-  const key = props.location.pathname.split('/')[6]
-  console.log(key)  
+    
 
 
 //   if (automatchPdf) {
