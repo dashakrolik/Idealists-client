@@ -80,8 +80,8 @@ newTextArray()
  console.log(arrText, "TEXTT")
 
   
-  const key = props.location.pathname.split('/')[6]
-  console.log(key)
+const key = props.location.pathname.split('/')[6]
+console.log(key)
   
  
 let arrImage = []
@@ -94,6 +94,10 @@ const newImageArray = () => {
 }
 newImageArray()
 console.log(arrImage)
+
+let obj = arrText.find(o => o.key === key)
+console.log(obj)
+
 // ONLY PROCEED if (arr.length === 10) !!!!!!!!!!!!!!!!! coz it takes time for the loop to complete
 // let obj = newImageArray.find(o => o.name === 'string 1');
 
