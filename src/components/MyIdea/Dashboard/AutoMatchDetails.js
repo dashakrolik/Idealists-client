@@ -95,12 +95,17 @@ const newImageArray = () => {
 newImageArray()
 console.log(arrImage)
 
-let obj = arrText.find(o => o.key === key)
-console.log(obj)
+let clickedText = arrText.find(o => o.key === key)
+console.log(clickedText)
 
+let clickedImage = arrImage.find(o => o.key === key)
+
+console.log(clickedImage)
 // ONLY PROCEED if (arr.length === 10) !!!!!!!!!!!!!!!!! coz it takes time for the loop to complete
 // let obj = newImageArray.find(o => o.name === 'string 1');
-
+if (clickedImage) {
+  console.log(clickedText.value)
+}
 // console.log(obj);
 
 
@@ -200,35 +205,20 @@ console.log(obj)
 //     return (<Heading>Loading...</Heading>)
 //   }
 // }
-
+if (clickedImage && clickedText) {
 return (
   <Content>
     <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
 
     <a href={'http://www.africau.edu/images/default/sample.pdf'} download><Button text={'Download the Patent details pdf'}
     /></a>
-    <img src={`data:image/jpeg;base64,${base64Str}`} />
-    <p>{automatchText[0]}</p>
-    <img src={`data:image/jpeg;base64,${base64Str1}`} />
-    <p>{automatchText[1]}</p>
-    <img src={`data:image/jpeg;base64,${base64Str2}`} />
-    <p>{automatchText[2]}</p>
-    <img src={`data:image/jpeg;base64,${base64Str3}`} />
-    <p>{automatchText[3]}</p>
-    <img src={`data:image/jpeg;base64,${base64Str4}`} />
-    <p>{automatchText[4]}</p>
-    <img src={`data:image/jpeg;base64,${base64Str5}`} />
-    <p>{automatchText[5]}</p>
-    <img src={`data:image/jpeg;base64,${base64Str6}`} />
-    <p>{automatchText[6]}</p>
-    <img src={`data:image/jpeg;base64,${base64Str7}`} />
-    <p>{automatchText[7]}</p>
-    <img src={`data:image/jpeg;base64,${base64Str8}`} />
-    <p>{automatchText[8]}</p>
-    <img src={`data:image/jpeg;base64,${base64Str9}`} />
-    <p>{automatchText[9]}</p>
+    <img src={`data:image/jpeg;base64,${clickedImage.value}`} />
+    <p>{clickedText.value}</p>
   </Content>
 );
+} else {
+  return (<div>Loading</div>)
+}
 }
 
 
