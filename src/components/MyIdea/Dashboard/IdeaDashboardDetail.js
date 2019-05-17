@@ -116,7 +116,8 @@ const StyledDiv = styled.div `
     border: 1px solid #ccc;
     padding: 20px;
     color: white;
-    margin-bottom: 20px
+    margin-bottom: 20px;
+    margin-top: 45px
 `
 const StyledCard = styled(Card) `
     background-color: rgb(255,255,255, 0.3);
