@@ -11,10 +11,11 @@ import validator from 'validator';
 import { baseUrl } from '../../constants';
 import request from 'superagent';
 import { Redirect } from 'react-router'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import { handleInputChange } from 'react-select/lib/utils';
 
 const InvestorRegistration = (props) => {
-  
+
   const [formValidated, setFormValidated] = useState(false);
   const [history, location] = useState({});
   const [formData, setFormData] = useState({
@@ -49,14 +50,14 @@ const InvestorRegistration = (props) => {
       validated: true,
     },
     industry: {
-        value: '',
-        shouldShowError: false,
-        validated: true
+      value: '',
+      shouldShowError: false,
+      validated: true
     },
     role: {
-        value: '',
-        shouldShowError: false,
-        validated: false
+      value: 'expert',
+      shouldShowError: false,
+      validated: true
     }
   });
 
@@ -84,16 +85,16 @@ const InvestorRegistration = (props) => {
       shouldShowError: (val) => (val.length >= 8),
     },
     country: {
-      validator: (val) => (val === formData.country.value),
-      shouldShowError: (val) => (val.length > 0),
+      validator: (val) => (val),
+      shouldShowError: (val) => (!val),
     },
     industry: {
-        validator: (val) => (val === formData.industry.value),
-        shouldShowError: (val) => (val.length > 0)
+      validator: (val) => (val),
+      shouldShowError: (val) => (!val)
     },
     role: {
-        validator: (val) => (val.length <= 100),
-        shouldShowError: (val) => (val.length > 4)
+      validator: (val) => (val.length <= 100),
+      shouldShowError: (val) => (val.length > 4)
     }
   };
 
@@ -109,7 +110,50 @@ const InvestorRegistration = (props) => {
         value: e.target.value,
       },
     };
+    setFormData(Object.keys(formData).reduce((acc, currVal) => {
+      return {
+        ...acc,
+        [currVal]: {
+          ...newState[currVal],
+          validated: !!(formValidations[currVal].validator(newState[currVal].value)),
+        },
+      };
+    }, {}));
+  };
 
+  const handleChangeIndustry = (property, e) => {
+    const newState = {
+      ...formData,
+      [property]: {
+        ...formData[property],
+        value: []
+      },
+    }
+    for (let i = 0, l = e.length; i < l; i++) {
+      if (e[i]) {
+        newState[property].value.push(e[i]);
+      }
+    }
+    setFormData(Object.keys(formData).reduce((acc, currVal) => {
+      console.log(acc, currVal, "CURRR")
+      return {
+        ...acc,
+        [currVal]: {
+          ...newState[currVal],
+          validated: !!(formValidations[currVal].validator(newState[currVal].value)),
+        },
+      };
+    }, {}));
+  };
+
+  const handleChangeCountry = (property, e) => {
+    const newState = {
+      ...formData,
+      [property]: {
+        ...formData[property],
+        value: e.value
+      },
+    }
     setFormData(Object.keys(formData).reduce((acc, currVal) => {
       return {
         ...acc,
@@ -143,7 +187,7 @@ const InvestorRegistration = (props) => {
         password: password.value,
         country: country.value,
         role: role.value,
-        industry: industry.value
+        industry: industry.value.map(val => val.value)
       })
       .then(res => {
         if (res.status === 200) {
@@ -158,6 +202,8 @@ const InvestorRegistration = (props) => {
         }
       });
   };
+
+  const countryListNL = [{value:"The Netherlands", label:"The Netherlands"}]
 
   return (
     <Container pose={props.show ? 'show' : 'hide'} css={css`justify-self: flex-end; width: 100%;`}>
@@ -198,7 +244,7 @@ const InvestorRegistration = (props) => {
                   value={formData.lastName.value} />
               </FormGroup>
             </FlexColumn>
-            <FlexColumn>
+            {/* <FlexColumn>
               <FormGroup>
                 <label>Role{formData.role.shouldShowError && !formData.role.validated &&
                   <span
@@ -206,7 +252,7 @@ const InvestorRegistration = (props) => {
                 <input type='text' name='role' onChange={handleChange} onBlur={enableValidation}
                   value={formData.role.value} />
               </FormGroup>
-            </FlexColumn>
+            </FlexColumn> */}
           </FlexRow>
 
           <FlexRow>
@@ -265,7 +311,12 @@ const InvestorRegistration = (props) => {
             <FlexColumn>
               <FormGroup>
                 <label>What is your country of residence?</label>
-                <Select options={countryList} />
+                <Select 
+                name="country"
+                options={countryListNL} 
+                onChange={handleChangeCountry.bind(this, "country")}
+                value={formData.country.value.value}
+                />
               </FormGroup>
             </FlexColumn>
           </FlexRow>
@@ -273,7 +324,19 @@ const InvestorRegistration = (props) => {
             <FlexColumn>
               <FormGroup>
                 <label>What is your industry?</label>
-                <Select options={industryList} />
+                <Select
+                  name="industry"
+                  // className="industry"
+                  // defaultValue={industryList[0].value}
+                  options={industryList}
+                  onChange={handleChangeIndustry.bind(this, "industry")}
+                  value={formData.industry.value}
+                  // onBlur={enableValidation}
+                  isMulti
+                // onInputChange={handleInputChange}
+                // inputValue={formData.industry.value}
+                // defaultInputValue={industryList['0'].value}
+                />
               </FormGroup>
             </FlexColumn>
           </FlexRow>
@@ -281,8 +344,8 @@ const InvestorRegistration = (props) => {
         <div css={css`float: right; width: 160px;`}>
           <Button disabled={!formValidated} text='Start my submission' disabledText='Sign up' withIcon
             onClick={signup} />
-            
         </div>
+        {console.log(formData, "DATAA")}
         <div css={css`float: right; width: 120px;`}>
           <Button text='Cancel' disabled={false} onClick={props.handleCancel} />
         </div>

@@ -48,11 +48,11 @@ export default function AssessIdeas(props) {
     
     return (
 
-      <div className='dashboard-container'>
+      <div className='assessIdeas-container'>
         <br />
         <br />
 
-        <h4 className='title'>This is {userData.firstName}'s dashboard</h4>
+        <h4 className='title'>This is {userData.firstName}'s Expert dashboard</h4>
         <StyledCard>
           Here you get to assess ideas in a very simple and fast way and get rewarded for it at the same time. 
           When an idea you helped assess becomes incorporated, you’ll receive € 100,- worth of equity in that company. 
@@ -65,21 +65,21 @@ export default function AssessIdeas(props) {
         <StyledCard>
           <Link to='/investors/dashboard/assess/:id'>Sample Idea 2</Link>
         </StyledCard>
-        {/* <div className='flex-tilescontainer'>
+        <div className='flex-tilescontainer'>
           {expertIdeas.map(idea =>
-            <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
-              <div className='idea-tile' key={idea.id}>
+            <Link key={idea.id} className='tile-link' to={`/investors/dashboard/assess/${idea.id}`}>
+              <div className='assess-tile' key={idea.id}>
                 <p><b>{idea.idea[3].answers[0].qAnswer}</b></p>
-                <p>{idea.idea[3].answers[1].qAnswer}</p>
+                <br/>
                 <p>{idea.idea[3].answers[1].qAnswer}</p>
                 {console.log(idea,"IDEAAA")}
-                {idea.progress.step01 === true &&
+                {/* {idea.progress.step01 === true &&
                   idea.progress.step02 === true &&
                   idea.progress.step03 === false && <p>Status: First patent check </p>}
                 {idea.progress.step01 === true &&
                   idea.progress.step02 === true &&
                   idea.progress.step03 === true &&
-                  idea.progress.step04 === false && <p>Status: Expert check </p>}
+                  idea.progress.step04 === false && <p>Status: Expert check </p>} */}
               </div>
               <div>
                 <br />
@@ -89,7 +89,7 @@ export default function AssessIdeas(props) {
 
             </Link>
           )}
-        </div> */}
+        </div>
       </div>
     )}
 

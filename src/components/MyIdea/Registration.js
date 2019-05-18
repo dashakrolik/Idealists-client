@@ -73,8 +73,8 @@ const Registration = (props) => {
       shouldShowError: (val) => (val.length >= 8),
     },
     country: {
-      validator: (val) => (val === formData.country.value),
-      shouldShowError: (val) => (val.length > 0),
+      validator: (val) => (val),
+      shouldShowError: (val) => (!val),
     },
   };
 
@@ -90,7 +90,25 @@ const Registration = (props) => {
         value: e.target.value,
       },
     };
+    setFormData(Object.keys(formData).reduce((acc, currVal) => {
+      return {
+        ...acc,
+        [currVal]: {
+          ...newState[currVal],
+          validated: !!(formValidations[currVal].validator(newState[currVal].value)),
+        },
+      };
+    }, {}));
+  };
 
+  const handleChangeCountry = (property, e) => {
+    const newState = {
+      ...formData,
+      [property]: {
+        ...formData[property],
+        value: e.value
+      },
+    }
     setFormData(Object.keys(formData).reduce((acc, currVal) => {
       return {
         ...acc,
@@ -137,6 +155,7 @@ const Registration = (props) => {
         }
       });
   };
+  const countryListNL = [{value:"The Netherlands", label:"The Netherlands"}]
 
   return (
     <Container pose={props.show ? 'show' : 'hide'} css={css`justify-self: flex-end; width: 100%;`}>
@@ -235,7 +254,12 @@ const Registration = (props) => {
             <FlexColumn>
               <FormGroup>
                 <label>What is your country of residence?</label>
-                <Select options={countryList} />
+                <Select 
+                name="country"
+                options={countryListNL} 
+                onChange={handleChangeCountry.bind(this, "country")}
+                value={formData.country.value.value}
+                />
               </FormGroup>
             </FlexColumn>
           </FlexRow>
