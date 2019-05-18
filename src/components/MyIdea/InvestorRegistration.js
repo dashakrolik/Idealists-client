@@ -45,7 +45,7 @@ const InvestorRegistration = (props) => {
       validated: false,
     },
     country: {
-      value: 'NL',
+      value: '',
       shouldShowError: false,
       validated: true,
     },
@@ -55,9 +55,9 @@ const InvestorRegistration = (props) => {
       validated: true
     },
     role: {
-      value: '',
+      value: 'expert',
       shouldShowError: false,
-      validated: false
+      validated: true
     }
   });
 
@@ -85,12 +85,12 @@ const InvestorRegistration = (props) => {
       shouldShowError: (val) => (val.length >= 8),
     },
     country: {
-      validator: (val) => (val.length <= 100),
-      shouldShowError: (val) => (val.length > 0),
+      validator: (val) => (val),
+      shouldShowError: (val) => (!val),
     },
     industry: {
-      validator: (val) => (typeof val === "object"),
-      shouldShowError: (val) => (val.length > 0)
+      validator: (val) => (val),
+      shouldShowError: (val) => (!val)
     },
     role: {
       validator: (val) => (val.length <= 100),
@@ -110,7 +110,6 @@ const InvestorRegistration = (props) => {
         value: e.target.value,
       },
     };
-
     setFormData(Object.keys(formData).reduce((acc, currVal) => {
       return {
         ...acc,
@@ -121,17 +120,40 @@ const InvestorRegistration = (props) => {
       };
     }, {}));
   };
-  const handleChangeTwo = e => {
-    console.log(e, "EEEE")
+
+  const handleChangeIndustry = (property, e) => {
     const newState = {
       ...formData,
-      ["industry"]: {
-        ...formData["industry"],
-        value: e[0].value 
-        // e.map(val =>  val.value)
+      [property]: {
+        ...formData[property],
+        value: []
       },
     }
+    for (let i = 0, l = e.length; i < l; i++) {
+      if (e[i]) {
+        newState[property].value.push(e[i]);
+      }
+    }
+    setFormData(Object.keys(formData).reduce((acc, currVal) => {
+      console.log(acc, currVal, "CURRR")
+      return {
+        ...acc,
+        [currVal]: {
+          ...newState[currVal],
+          validated: !!(formValidations[currVal].validator(newState[currVal].value)),
+        },
+      };
+    }, {}));
+  };
 
+  const handleChangeCountry = (property, e) => {
+    const newState = {
+      ...formData,
+      [property]: {
+        ...formData[property],
+        value: e.value
+      },
+    }
     setFormData(Object.keys(formData).reduce((acc, currVal) => {
       return {
         ...acc,
@@ -165,7 +187,7 @@ const InvestorRegistration = (props) => {
         password: password.value,
         country: country.value,
         role: role.value,
-        industry: industry.value
+        industry: industry.value.map(val => val.value)
       })
       .then(res => {
         if (res.status === 200) {
@@ -180,6 +202,8 @@ const InvestorRegistration = (props) => {
         }
       });
   };
+
+  const countryListNL = [{value:"The Netherlands", label:"The Netherlands"}]
 
   return (
     <Container pose={props.show ? 'show' : 'hide'} css={css`justify-self: flex-end; width: 100%;`}>
@@ -220,7 +244,7 @@ const InvestorRegistration = (props) => {
                   value={formData.lastName.value} />
               </FormGroup>
             </FlexColumn>
-            <FlexColumn>
+            {/* <FlexColumn>
               <FormGroup>
                 <label>Role{formData.role.shouldShowError && !formData.role.validated &&
                   <span
@@ -228,7 +252,7 @@ const InvestorRegistration = (props) => {
                 <input type='text' name='role' onChange={handleChange} onBlur={enableValidation}
                   value={formData.role.value} />
               </FormGroup>
-            </FlexColumn>
+            </FlexColumn> */}
           </FlexRow>
 
           <FlexRow>
@@ -287,7 +311,12 @@ const InvestorRegistration = (props) => {
             <FlexColumn>
               <FormGroup>
                 <label>What is your country of residence?</label>
-                <Select options={countryList} />
+                <Select 
+                name="country"
+                options={countryListNL} 
+                onChange={handleChangeCountry.bind(this, "country")}
+                value={formData.country.value.value}
+                />
               </FormGroup>
             </FlexColumn>
           </FlexRow>
@@ -297,11 +326,13 @@ const InvestorRegistration = (props) => {
                 <label>What is your industry?</label>
                 <Select
                   name="industry"
+                  // className="industry"
                   // defaultValue={industryList[0].value}
                   options={industryList}
-                  onChange={handleChangeTwo}
+                  onChange={handleChangeIndustry.bind(this, "industry")}
                   value={formData.industry.value}
-                isMulti
+                  // onBlur={enableValidation}
+                  isMulti
                 // onInputChange={handleInputChange}
                 // inputValue={formData.industry.value}
                 // defaultInputValue={industryList['0'].value}
