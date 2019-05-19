@@ -56,7 +56,7 @@ export default function AssessIdeas(props) {
         <StyledCard>
           Here you get to assess ideas in a very simple and fast way and get rewarded for it at the same time. 
           When an idea you helped assess becomes incorporated, you’ll receive € 100,- worth of equity in that company. 
-          Assessing an idea takes on average 3 minutes.[Open]
+          Assessing an idea takes on average 3 minutes.
         </StyledCard>
         <StyledCard>
           <Link to='/investors/dashboard/assess/:id'>Sample Idea 1</Link>

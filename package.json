@@ -6,6 +6,7 @@
     "@emotion/core": "^10.0.7",
     "@emotion/styled": "^10.0.7",
     "@material-ui/core": "^3.9.3",
+    "babel-core": "^6.26.3",
     "base64-to-image": "^1.0.2",
     "country-json": "^1.0.8",
     "emotion-theming": "^10.0.7",
@@ -14,6 +15,7 @@
     "material-ui": "^0.20.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-inputs-validation": "^2.2.1",
     "react-lottie": "^1.2.3",
     "react-pdf": "^4.0.5",
     "react-pose": "^4.0.8",
@@ -24,7 +26,8 @@
     "react-svg-morph": "^0.2.1",
     "react-textfit": "^1.1.0",
     "superagent": "^4.1.0",
-    "validator": "^10.11.0"
+    "validator": "^10.11.0",
+    "winterfell": "^1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",

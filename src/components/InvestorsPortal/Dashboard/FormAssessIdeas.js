@@ -1,156 +1,368 @@
-import React, { useEffect, useState } from 'react';
-import request from 'superagent';
-import { baseUrl } from '../../../constants';
-import { Redirect, Link } from 'react-router-dom';
-import './InvestorDashboard.css'
 import styled from '@emotion/styled';
-import TextField from '@material-ui/core/TextField';
-import './InvestorDashboard.css'
-import Button from '../../reogranisation/Questions/Button';
+import Card from '@material-ui/core/Card'
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import {
+  Textbox,
+  Textarea,
+  Radiobox,
+  Checkbox,
+  Select
+} from "react-inputs-validation";
+import "react-inputs-validation/lib/react-inputs-validation.min.css";
+import "./styles.css";
+import "./InvestorDashboard.css";
+
+const SCALE_OPTIONS_LIST = [
+  { id: "1", name: "1" },
+  { id: "2", name: "2" },
+  { id: "3", name: "3" },
+  { id: "4", name: "4" },
+  { id: "5", name: "5" },
+  { id: "6", name: "6" },
+  { id: "7", name: "7" },
+  { id: "8", name: "8" },
+  { id: "9", name: "9" },
+  { id: "10", name: "10" }
+];
 
 
-export default function FormAssessIdeas (props) {
-    const [userLoggedIn, setUserLoggedIn] = useState(true);
-    if (props.authState.loggedIn === false)
-        return (
-        <Redirect to='/InvestorStart' />);
-
-    const [formData, setFormData] = useState({});
-
-
-    const onSubmit = (data) => {
-        const { content } = data
-        props.sendAssessment()
-      };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onSubmit(formData);
+export default class FormAssessIdeas extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      number: "",
+      explanation: "",
+      explanation2: "",
+      willPeopleWantThis: "",
+      doesThisSolveProblem: "",
+      hasExplanationError: true,
+      hasExplanation2Error: true,
+      hasMovieError: true,
+      hasWillPeopleWantThisError: true,
+      validate: false
     };
-      
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-          });
-        };
+    this.validateForm = this.validateForm.bind(this);
+  }
 
-    
-    const printValues = e => {
-        e.preventDefault();
-        console.log("PrintValues!");
+  toggleValidating(validate) {
+    this.setState({ validate });
+  }
+
+  validateForm(e) {
+    e.preventDefault();
+    this.toggleValidating(true);
+    const {
+      hasExplanationError,
+      hasExplanation2Error,
+      hasMovieError,
+      hasWillPeopleWantThisError,
+      hasDoesThisSolveProblem,
+    } = this.state;
+    if (
+      !hasExplanationError &&
+      !hasExplanation2Error &&
+      !hasMovieError &&
+      !hasWillPeopleWantThisError &&
+      !hasDoesThisSolveProblem 
+    ) {
+      alert("All validated!");
+    }
+  }
+
+  render() {
+    const {
+      number,
+      explanation,
+      explanation2,
+      willPeopleWantThis,
+      doesThisSolveProblem,
+      validate
+    } = this.state;
+    const rowStyle = {
+      display: "flex",
+      alignItems: "flex-start",
+      justifyContent: "space-between",
+      padding: "2%",
+      fontSize: "14px"
     };
-    
+    const rowWrapperStyle = {
+      display: "table",
+      width: "100%"
+    };
+    const rowContainerStyle = {
+      display: "table-cell",
+      verticalAlign: "middle",
+      borderBottom: "1px solid #e5e5e5"
+    };
+    const labelStyle = {
+      display: "inline-block"
+    };
+    const labelContentStyle = {
+      verticalAlign: "middle"
+    };
+
     return (
-        <div className='dashboard-container'>
+      <div
+        style={{
+          minHeight: "1000px",
+          padding: "10px",
+          border: "1px solid #e5e5e5"
+        }}
+      >
         <br></br><br></br><br></br><br></br>
-            <AddlQuestions>
-                Assess the idea: 
-                <StyledTextField
-                    id="filled-multiline-flexible"
-                    label="Will people want this?"
-                    multiline
-                    rowsMax="4"
-                    fullWidth
-                    margin="normal"
-                    variant="filled"
-                    />
-                <StyledTextField
-                    id="filled-multiline-flexible"
-                    label="Does this solve a problem people currently have?"
-                    multiline
-                    rowsMax="4"
-                    fullWidth
-                    margin="normal"
-                    variant="filled"
-                    />
-                <StyledTextField
-                    id="filled-multiline-flexible"
-                    label="Is it, in your opinion, a good idea?"
-                    multiline
-                    rowsMax="4"
-                    fullWidth
-                    margin="normal"
-                    variant="filled"
-                    />
-                <StyledTextField
-                    id="filled-multiline-flexible"
-                    label="Is it the right timing for this idea?"
-                    multiline
-                    rowsMax="4"
-                    fullWidth
-                    margin="normal"
-                    variant="filled"
-                    />
-                <StyledTextField
-                    id="filled-multiline-flexible"
-                    label="Imagine you’re an advocate for this idea. Name up to 5 reasons why you would be so ‘pro’ this idea:"
-                    multiline
-                    rowsMax="4"
-                    fullWidth
-                    margin="normal"
-                    variant="filled"
-                    />
-                <StyledTextField
-                    id="filled-multiline-flexible"
-                    label="Imagine you’re an opponent of this idea. Name up to 5 reasons why you would be so ‘against’ this idea:"
-                    multiline
-                    rowsMax="4"
-                    fullWidth
-                    margin="normal"
-                    variant="filled"
-                    />
-                <StyledTextField
-                    id="filled-multiline-flexible"
-                    label="What do you expect as time to impact for this idea"
-                    multiline
-                    rowsMax="4"
-                    fullWidth
-                    margin="normal"
-                    variant="filled"
-                    />
-                <StyledTextField
-                    id="filled-multiline-flexible"
-                    label="What do you expect as magnitude of impact for this idea"
-                    multiline
-                    rowsMax="4"
-                    fullWidth
-                    margin="normal"
-                    variant="filled"
-                    />
-                <StyledTextField
-                    id="filled-multiline-flexible"
-                    label="Why is this not yet out there? Why have people in this field or that could be helped by it, not successfully created it yet?"
-                    multiline
-                    rowsMax="4"
-                    fullWidth
-                    margin="normal"
-                    variant="filled"
-                    />
-                <StyledTextField
-                    id="filled-multiline-flexible"
-                    label="Who would, in your opinion, be the ideal customers for this idea?"
-                    multiline
-                    rowsMax="4"
-                    fullWidth
-                    margin="normal"
-                    variant="filled"
-                    />
-            </AddlQuestions>
-            <Button text={'Submit'} onClick={onSubmit} type="submit" />
-        </div>
-    )
+        <h1>Assess the idea</h1>
+        
+            <StyledCard>
+                <h4>Idea Question</h4>
+                <p>Answer</p>
+            </StyledCard>
+            <StyledCard>
+                <h4>Idea Question</h4>
+                <p>Answer</p>
+            </StyledCard>
+            <StyledCard>
+                <h4>Idea Question</h4>
+                <p>Answer</p>
+            </StyledCard>
+            <StyledCard>
+                <h4>Idea Question</h4>
+                <p>Answer</p>
+            </StyledCard>
+        <br></br><br></br><br></br>
+        <form onSubmit={this.validateForm} className='form'>
+  
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  {/*<div style={(labelStyle, { flex: '3 3 0px' })}>*/}
+                  <span
+                    className="icon icon-info"
+                    style={{ ...labelContentStyle, fontSize: "20px" }}
+                  />
+                  &nbsp;
+                  <span style={labelContentStyle}>Will people want this?</span>
+                </div>
+                <div style={{ flex: "6 6 0px", display: "flex" }}>
+                  <Radiobox
+                    tabIndex={2} 
+                    id="willPeopleWantThis" 
+                    name="willPeopleWantThis" 
+                    disabled={false} 
+                    value={willPeopleWantThis} 
+                    validate={validate} 
+                    validationCallback={res =>
+                      this.setState({ hasWillPeopleWantThisError: res, validate: false })
+                    } 
+                    optionList={SCALE_OPTIONS_LIST}
+                    classNameInput="" 
+                    classNameWrapper="" 
+                    classNameContainer="" 
+                    classNameOptionListItem="" 
+                    customStyleInput={{}} 
+                    customStyleWrapper={{}} 
+                    customStyleContainer={{
+                      display: "flex",
+                      justifyContent: "flex-start"
+                    }} 
+                    customStyleOptionListItem={{ marginRight: "20px" }} 
+                    onChange={(willPeopleWantThis, e) => {
+                      this.setState({ willPeopleWantThis });
+                    }} 
+                    onBlur={e => {
+                    }} 
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  <span
+                    className="icon icon-insert-drive-file"
+                    style={{ ...labelContentStyle, fontSize: "20px" }}
+                  />
+                  &nbsp;
+                  <span style={labelContentStyle}>Explanation</span>
+                </div>
+                <div style={{ flex: "6 6 0px" }}>
+                  <Textarea
+                    tabIndex="7" 
+                    id="explanation" 
+                    name="explanation" 
+                    value={explanation} 
+                    disabled={false} 
+                    placeholder="Place your explanation here" 
+                    validate={validate} 
+                    validationCallback={res =>
+                      this.setState({
+                        hasExplanationError: res,
+                        validate: false
+                      })
+                    } 
+                    classNameInput="" 
+                    classNameWrapper="" 
+                    classNameContainer="" 
+                    customStyleInput={{}} 
+                    customStyleWrapper={{}} 
+                    customStyleContainer={{}} 
+                    onChange={(explanation, e) => {
+                      this.setState({ explanation });
+
+                    }} 
+                    onBlur={e => {
+
+                    }} 
+                    validationOption={{
+                      name: "Explanation", 
+                      check: true,
+                      required: true, 
+                      type: "string" 
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  {/*<div style={(labelStyle, { flex: '3 3 0px' })}>*/}
+                  <span
+                    className="icon icon-info"
+                    style={{ ...labelContentStyle, fontSize: "20px" }}
+                  />
+                  &nbsp;
+                  <span style={labelContentStyle}>Does this solve a problem people currently have?</span>
+                </div>
+                <div style={{ flex: "6 6 0px", display: "flex" }}>
+                  <Radiobox
+                    tabIndex={2} 
+                    id="doesThisSolveProblem" 
+                    name="doesThisSolveProblem" 
+                    disabled={false} 
+                    value={doesThisSolveProblem} 
+                    validationCallback={res =>
+                      this.setState({ hasDoesThisSolveProblem: res, validate: false })
+                    } 
+                    optionList={SCALE_OPTIONS_LIST}
+                    classNameInput="" 
+                    classNameWrapper="" 
+                    classNameContainer="" 
+                    classNameOptionListItem="" 
+                    customStyleInput={{}} 
+                    customStyleWrapper={{}} 
+                    customStyleContainer={{
+                      display: "flex",
+                      justifyContent: "flex-start"
+                    }} 
+                    customStyleOptionListItem={{ marginRight: "20px" }} 
+                    onChange={(doesThisSolveProblem, e) => {
+                      this.setState({ doesThisSolveProblem });
+                    }} 
+                    onBlur={e => {
+                    }} 
+    
+                    validationOption={{
+                      name: "Name", 
+                      check: true, 
+                      required: true 
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  <span
+                    className="icon icon-insert-drive-file"
+                    style={{ ...labelContentStyle, fontSize: "20px" }}
+                  />
+                  &nbsp;
+                  <span style={labelContentStyle}>If so, which problem + explanation</span>
+                </div>
+                <div style={{ flex: "6 6 0px" }}>
+                  <Textarea
+                    tabIndex="7" 
+                    id="explanation2" 
+                    name="explanation2" 
+                    value={explanation2} 
+                    disabled={false} 
+                    placeholder="Place your explanation2 here" 
+                    validate={validate} 
+                    validationCallback={res =>
+                      this.setState({
+                        hasExplanation2Error: res,
+                        validate: false
+                      })
+                    } 
+                    classNameInput="" 
+                    classNameWrapper="" 
+                    classNameContainer="" 
+                    customStyleInput={{}} 
+                    customStyleWrapper={{}} 
+                    customStyleContainer={{}} 
+                    onChange={(explanation2, e) => {
+                      this.setState({ explanation2 });
+                    }} 
+                    onBlur={e => {
+                    }} 
+                    validationOption={{
+                      name: "Explanation2", 
+                      check: true, 
+                      required: true, 
+                      type: "string" 
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={{ height: "10px" }} />
+          <div
+            className={`my-button my-button__red save-button`}
+            onClick={this.validateForm}
+          >
+            Submit
+          </div>
+          <input type="submit" style={{ display: "none" }} />
+        </form>
+      </div>
+    );
+  }
 }
 
-const StyledTextField = styled(TextField)`
-background-color: rgb(255,255,255, 0.5);
-marginLeft: theme.spacing.unit;
-marginRight: theme.spacing.unit;
 
+
+
+const Content = styled.div`
+    align-self: center;
+    justify-self: center;
+    color: #ffffff;
+    width: 90vw;
+    max-width: 800px;
+    height: auto;
+    padding: 20px;
+    
 `;
 
-const AddlQuestions = styled.div `
-padding: 3em;
-border: 1px solid #ccc;
-`
+const StyledCard = styled(Card) `
+    background-color: rgb(255,255,255, 0.3);
+    padding-left: 8px;
+    padding-right: 8px;
+`;
