@@ -31,8 +31,9 @@ export default function AssessIdeas(props) {
     request
       .get(`${baseUrl}/ideas`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      .then(res => console.log(res.body, "RESSS") )
-        // setExpertIdeas(res.body));
+      .then(res => setExpertIdeas(res.body));
+        // console.log(res.body, "RESSS") )
+        
       
   }, []);
   
