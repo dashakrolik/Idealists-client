@@ -84,7 +84,6 @@ export default class FormAssessIdeas extends Component {
       hasAgainstReason5Error: true,
       hasWhatDoYouExpectAsTimeImpactError: true,
       hasWhatDoYouExpectAsMagnitudeError: true,
-      hasMovieError: true,
       hasWillPeopleWantThisError: true,
       validate: false
     };
@@ -117,7 +116,6 @@ export default class FormAssessIdeas extends Component {
       hasAgainstReason3Error,
       hasAgainstReason4Error,
       hasAgainstReason5Error,
-      hasMovieError,
       hasWillPeopleWantThisError,
       hasisItAGoodIdeaError,
       hasIsThisTheRightTiming,
@@ -160,6 +158,7 @@ export default class FormAssessIdeas extends Component {
       // !hasAgreementMentorNoError
     ) {
       alert("All validated!");
+      
       
     }
   }
@@ -1561,7 +1560,7 @@ export default class FormAssessIdeas extends Component {
           </div>
             </div>
             ) 
-            : this.state.validate === 'true' && (average / 4) <= 7 ? (<div>THANKSSS</div>) : null
+            : (this.state.validate === true) && (average / 4) <= 7 ? (<div>THANKSSS</div>) : (<div>NO THANKSSS</div>)
             }
           </div>
           <div style={{ height: "10px" }} />
