@@ -35,11 +35,15 @@ export default class FormAssessIdeas extends Component {
       explanation: "",
       explanation2: "",
       explanation3: "",
+      explanation4: "",
       willPeopleWantThis: "",
       doesThisSolveProblem: "",
+      isItAGoodIdea: "",
       isThisTheRightTiming: "",
       hasExplanationError: true,
       hasExplanation2Error: true,
+      hasExplanation3Error: true,
+      hasExplanation4Error: true,
       hasMovieError: true,
       hasWillPeopleWantThisError: true,
       validate: false
@@ -57,16 +61,22 @@ export default class FormAssessIdeas extends Component {
     const {
       hasExplanationError,
       hasExplanation2Error,
+      hasExplanation3Error,
+      hasExplanation4Error,
       hasMovieError,
       hasWillPeopleWantThisError,
+      hasisItAGoodIdeaError,
       hasIsThisTheRightTiming,
       hasDoesThisSolveProblem,
     } = this.state;
     if (
       !hasExplanationError &&
       !hasExplanation2Error &&
+      !hasExplanation3Error &&
+      !hasExplanation4Error &&
       !hasMovieError &&
       !hasWillPeopleWantThisError &&
+      !hasisItAGoodIdeaError &&
       !hasIsThisTheRightTiming &&
       !hasDoesThisSolveProblem 
     ) {
@@ -81,8 +91,10 @@ export default class FormAssessIdeas extends Component {
       explanation,
       explanation2,
       explanation3,
+      explanation4,
       willPeopleWantThis,
       isThisTheRightTiming,
+      isItAGoodIdea,
       doesThisSolveProblem,
       validate
     } = this.state;
@@ -354,6 +366,107 @@ export default class FormAssessIdeas extends Component {
                     style={{ ...labelContentStyle, fontSize: "20px" }}
                   />
                   &nbsp;
+                  <span style={labelContentStyle}>Is it, in your opinion, a good idea?</span>
+                </div>
+                <div style={{ flex: "6 6 0px", display: "flex" }}>
+                  <Radiobox
+                    tabIndex={2} 
+                    id="isThisAGoodIdea" 
+                    name="isItAGoodIdea" 
+                    disabled={false} 
+                    value={isItAGoodIdea} 
+                    validationCallback={res =>
+                      this.setState({ hasisItAGoodIdeaError: res, validate: false })
+                    } 
+                    optionList={SCALE_OPTIONS_LIST}
+                    classNameInput="" 
+                    classNameWrapper="" 
+                    classNameContainer="" 
+                    classNameOptionListItem="" 
+                    customStyleInput={{}} 
+                    customStyleWrapper={{}} 
+                    customStyleContainer={{
+                      display: "flex",
+                      justifyContent: "flex-start"
+                    }} 
+                    customStyleOptionListItem={{ marginRight: "20px" }} 
+                    onChange={(isItAGoodIdea, e) => {
+                      this.setState({ isItAGoodIdea });
+                    }} 
+                    onBlur={e => {
+                    }} 
+    
+                    validationOption={{
+                      name: "Name", 
+                      check: true, 
+                      required: true 
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  <span
+                    className="icon icon-insert-drive-file"
+                    style={{ ...labelContentStyle, fontSize: "20px" }}
+                  />
+                  &nbsp;
+                  <span style={labelContentStyle}>Explanation</span>
+                </div>
+                <div style={{ flex: "6 6 0px" }}>
+                  <Textarea
+                    tabIndex="7" 
+                    id="explanation4" 
+                    name="explanation4" 
+                    value={explanation4} 
+                    disabled={false} 
+                    placeholder="Place your explanation4 here" 
+                    validate={validate} 
+                    validationCallback={res =>
+                      this.setState({
+                        hasExplanation4Error: res,
+                        validate: false
+                      })
+                    } 
+                    classNameInput="" 
+                    classNameWrapper="" 
+                    classNameContainer="" 
+                    customStyleInput={{}} 
+                    customStyleWrapper={{}} 
+                    customStyleContainer={{}} 
+                    onChange={(explanation4, e) => {
+                      this.setState({ explanation4 });
+                    }} 
+                    onBlur={e => {
+                    }} 
+                    validationOption={{
+                      name: "Explanation4", 
+                      check: true, 
+                      required: true, 
+                      type: "string" 
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  {/*<div style={(labelStyle, { flex: '3 3 0px' })}>*/}
+                  <span
+                    className="icon icon-info"
+                    style={{ ...labelContentStyle, fontSize: "20px" }}
+                  />
+                  &nbsp;
                   <span style={labelContentStyle}>Is it the right timing for this idea?</span>
                 </div>
                 <div style={{ flex: "6 6 0px", display: "flex" }}>
@@ -428,7 +541,7 @@ export default class FormAssessIdeas extends Component {
                     customStyleInput={{}} 
                     customStyleWrapper={{}} 
                     customStyleContainer={{}} 
-                    onChange={(explanation2, e) => {
+                    onChange={(explanation3, e) => {
                       this.setState({ explanation3 });
                     }} 
                     onBlur={e => {
