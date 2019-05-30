@@ -896,7 +896,7 @@ export default class FormAssessIdeas extends Component {
                       tabIndex="7" 
                       id="againstReason3" 
                       name="againstReason3" 
-                      value={againstReason2} 
+                      value={againstReason3} 
                       disabled={false} 
                       placeholder="Place the reason 3 here" 
                       validate={validate} 
