@@ -22,8 +22,8 @@ export default function investorDashboard(props) {
 
     if (props.authState.loggedIn && !props.authState.user) {
         props.user()
-      }
-    
+    }
+
     if (userLoggedIn === false)
         return (
             <Redirect to='/Investors/login' />)
@@ -33,12 +33,13 @@ export default function investorDashboard(props) {
 
         <div className='dashboard-container'>
             <h2 className='title'>{userData.firstName}'s expert dashboard</h2>
-                <div className='flex-tilescontainer'>
-                    <Link className='links' to='/investors/dashboard/assess'><div className='assess-tile'>
-                    <img className='icons' src={assess}></img>
-                    <h4>Assess ideas</h4>
-                </div>
-                </Link> 
+            <div className='flex-tilescontainer'>
+                <Link className='links' to='/investors/dashboard/assess'>
+                    <div className='assess-tiles'>
+                        <img className='icons' src={assess}></img>
+                        <h4>Assess ideas</h4>
+                    </div>
+                </Link>
 
                 <Link className='links' to='/investors/dashboard/invest'>
                     <div className='invest-tile'>
@@ -60,9 +61,9 @@ export default function investorDashboard(props) {
                         <h4>My mentorships</h4>
                     </div>
                 </Link>
-               
-        
-            
+
+
+
             </div>
         </div>
     )

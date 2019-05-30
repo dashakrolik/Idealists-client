@@ -23,7 +23,7 @@ export default function IdeaDashboardDetail(props) {
             .then(res => setUserIdeas(res.body.idea))
     }, []);
 
-
+console.log(userIdeas, "IDEAAA")
     const processTitle = (title) => {
         let splitTitle = title.split('?')
         const processedTitle = splitTitle[0] 

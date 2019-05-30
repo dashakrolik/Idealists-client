@@ -50,7 +50,7 @@ const InvestorRegistration = (props) => {
       validated: true,
     },
     industry: {
-      value: '',
+      value: [],
       shouldShowError: false,
       validated: true
     },
@@ -127,7 +127,7 @@ const InvestorRegistration = (props) => {
       [property]: {
         ...formData[property],
         value: []
-      },
+      }
     }
     for (let i = 0, l = e.length; i < l; i++) {
       if (e[i]) {
@@ -135,7 +135,7 @@ const InvestorRegistration = (props) => {
       }
     }
     setFormData(Object.keys(formData).reduce((acc, currVal) => {
-      console.log(acc, currVal, "CURRR")
+      
       return {
         ...acc,
         [currVal]: {
@@ -143,7 +143,8 @@ const InvestorRegistration = (props) => {
           validated: !!(formValidations[currVal].validator(newState[currVal].value)),
         },
       };
-    }, {}));
+    }, []));
+    console.table(newState.industry.value.map(val => val.value), "CURRR")
   };
 
   const handleChangeCountry = (property, e) => {
@@ -152,7 +153,7 @@ const InvestorRegistration = (props) => {
       [property]: {
         ...formData[property],
         value: e.value
-      },
+      }
     }
     setFormData(Object.keys(formData).reduce((acc, currVal) => {
       return {
@@ -203,7 +204,7 @@ const InvestorRegistration = (props) => {
       });
   };
 
-  const countryListNL = [{value:"The Netherlands", label:"The Netherlands"}]
+  const countryListNL = [{ value: "The Netherlands", label: "The Netherlands" }]
 
   return (
     <Container pose={props.show ? 'show' : 'hide'} css={css`justify-self: flex-end; width: 100%;`}>
@@ -311,11 +312,11 @@ const InvestorRegistration = (props) => {
             <FlexColumn>
               <FormGroup>
                 <label>What is your country of residence?</label>
-                <Select 
-                name="country"
-                options={countryListNL} 
-                onChange={handleChangeCountry.bind(this, "country")}
-                value={formData.country.value.value}
+                <Select
+                  name="country"
+                  options={countryListNL}
+                  onChange={handleChangeCountry.bind(this, "country")}
+                  value={formData.country.value.value}
                 />
               </FormGroup>
             </FlexColumn>

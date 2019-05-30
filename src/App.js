@@ -184,7 +184,7 @@ class App extends Component {
                 return <InvestorDashboard {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout} user={this.getCurrentUser}/>;
               }} />
               <Route exact path='/Investors/dashboard/assess' render={(props) => {
-                return <AssesIdeas sendAssessment={this.sendAssessment} {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
+                return <AssesIdeas {...props} sendAssessment={this.sendAssessment} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
               }} />
               <Route exact path='/Investors/dashboard/assess/:id' render={(props) => {
                 return <FormAssessIdeas {...props} authState={this.state.auth} sendAssessment={this.sendAssessment} login={this.requestLogin} user={this.getCurrentUser} />;
