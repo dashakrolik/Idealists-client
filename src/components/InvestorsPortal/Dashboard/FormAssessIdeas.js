@@ -36,6 +36,7 @@ export default class FormAssessIdeas extends Component {
       explanation2: "",
       explanation3: "",
       explanation4: "",
+      explanation5: "",
       willPeopleWantThis: "",
       doesThisSolveProblem: "",
       isItAGoodIdea: "",
@@ -85,6 +86,7 @@ export default class FormAssessIdeas extends Component {
       hasExplanation2Error,
       hasExplanation3Error,
       hasExplanation4Error,
+      hasExplanation5Error,
       hasProReason1Error,
       hasProReason2Error,
       hasProReason3Error,
@@ -107,6 +109,7 @@ export default class FormAssessIdeas extends Component {
       !hasExplanation2Error &&
       !hasExplanation3Error &&
       !hasExplanation4Error &&
+      !hasExplanation5Error &&
       !hasMovieError &&
       !hasProReason1Error &&
       !hasProReason2Error &&
@@ -136,6 +139,7 @@ export default class FormAssessIdeas extends Component {
       explanation2,
       explanation3,
       explanation4,
+      explanation5,
       willPeopleWantThis,
       isThisTheRightTiming,
       isItAGoodIdea,
@@ -1068,7 +1072,7 @@ export default class FormAssessIdeas extends Component {
                     tabIndex="7" 
                     id="explanation5" 
                     name="explanation5" 
-                    value={explanation} 
+                    value={explanation5} 
                     disabled={false} 
                     placeholder="Place your explanation 5 here" 
                     validate={validate} 
