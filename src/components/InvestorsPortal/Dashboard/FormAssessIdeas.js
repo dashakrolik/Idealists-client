@@ -235,7 +235,8 @@ export default class FormAssessIdeas extends Component {
       alignItems: "flex-start",
       justifyContent: "space-between",
       padding: "2%",
-      fontSize: "14px"
+      fontSize: "14px",
+      color: "white"
     };
     const rowWrapperStyle = {
       display: "table",
@@ -254,32 +255,17 @@ export default class FormAssessIdeas extends Component {
     };
 
     return (
-      <div
+      <div 
         style={{
           minHeight: "1000px",
           padding: "10px",
-          border: "1px solid #e5e5e5"
+          border: "1px solid #e5e5e5",
+          backgroundImage: "linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1)"
         }}
       >
-        <br></br><br></br><br></br><br></br>
-        <h1>Assess the idea</h1>
-        
-            <StyledCard>
-                <h4>Idea Question</h4>
-                <p>Answer</p>
-            </StyledCard>
-            <StyledCard>
-                <h4>Idea Question</h4>
-                <p>Answer</p>
-            </StyledCard>
-            <StyledCard>
-                <h4>Idea Question</h4>
-                <p>Answer</p>
-            </StyledCard>
-            <StyledCard>
-                <h4>Idea Question</h4>
-                <p>Answer</p>
-            </StyledCard>
+        <br></br><br></br><br></br><br></br><br></br><br></br>
+        <h1 style={{ color: "white", display: "flex", justifyContent: "center" }}>Assess the idea</h1>
+
         <br></br><br></br><br></br>
         <form onSubmit={this.validateForm} className='form'>
   
@@ -454,7 +440,7 @@ export default class FormAssessIdeas extends Component {
                     name="explanation2" 
                     value={explanation2} 
                     disabled={false} 
-                    placeholder="Place your explanation2 here" 
+                    placeholder="Place your explanation here" 
                     validate={validate} 
                     validationCallback={res =>
                       this.setState({
@@ -556,7 +542,7 @@ export default class FormAssessIdeas extends Component {
                     name="explanation4" 
                     value={explanation4} 
                     disabled={false} 
-                    placeholder="Place your explanation4 here" 
+                    placeholder="Place your explanation here" 
                     validate={validate} 
                     validationCallback={res =>
                       this.setState({
@@ -658,7 +644,7 @@ export default class FormAssessIdeas extends Component {
                     name="explanation3" 
                     value={explanation3} 
                     disabled={false} 
-                    placeholder="Place your explanation3 here" 
+                    placeholder="Place your explanation here" 
                     validate={validate} 
                     validationCallback={res =>
                       this.setState({
@@ -1137,7 +1123,7 @@ export default class FormAssessIdeas extends Component {
                     name="explanation5" 
                     value={explanation5} 
                     disabled={false} 
-                    placeholder="Place your explanation 5 here" 
+                    placeholder="Place your explanation here" 
                     validate={validate} 
                     validationCallback={res =>
                       this.setState({
@@ -1405,8 +1391,8 @@ export default class FormAssessIdeas extends Component {
                     classNameInputBox="" // Optional.[String].Default: "".
                     classNameContainer="" // Optional.[String].Default: "".
                     customStyleWrapper={{}} // Optional.[Object].Default: {}.
-                    customStyleInputBox={{}} // Optional.[Object].Default: {}.
-                    customStyleContainer={{}} // Optional.[Object].Default: {}.
+                    customStyleInputBox={{ backgroundColor: "white" }} // Optional.[Object].Default: {}.
+                    customStyleContainer={{ }} // Optional.[Object].Default: {}.
                     onBlur={() => {}} // Optional.[Func].Default: none. In order to validate the value on blur, you MUST provide a function, even if it is an empty function. Missing this, the validation on blur will not work.
                     // onFocus={(e) => {console.log(e);}} // Optional.[Func].Default: none.
                     // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
@@ -1415,7 +1401,7 @@ export default class FormAssessIdeas extends Component {
                       console.log(e);
                     }} // Required.[Func].Default: () => {}. Will return the value.
                     labelHtml={
-                      <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
+                      <div style={{ color: "white", marginTop: "2px" }}>
                         Yes, I’d like to champion this idea because I believe it could be brilliant
                       </div>
                     } // Required.[Html].Default: none.
@@ -1447,7 +1433,7 @@ export default class FormAssessIdeas extends Component {
                     classNameInputBox="" // Optional.[String].Default: "".
                     classNameContainer="" // Optional.[String].Default: "".
                     customStyleWrapper={{}} // Optional.[Object].Default: {}.
-                    customStyleInputBox={{}} // Optional.[Object].Default: {}.
+                    customStyleInputBox={{ backgroundColor: "white" }} // Optional.[Object].Default: {}.
                     customStyleContainer={{}} // Optional.[Object].Default: {}.
                     onBlur={() => {}} // Optional.[Func].Default: none. In order to validate the value on blur, you MUST provide a function, even if it is an empty function. Missing this, the validation on blur will not work.
                     // onFocus={(e) => {console.log(e);}} // Optional.[Func].Default: none.
@@ -1457,7 +1443,7 @@ export default class FormAssessIdeas extends Component {
                       console.log(e);
                     }} // Required.[Func].Default: () => {}. Will return the value.
                     labelHtml={
-                      <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
+                      <div style={{ color: "white", marginTop: "2px" }}>
                         My feedback is sufficient, I don’t want to champion this idea
                       </div>
                     } // Required.[Html].Default: none.
@@ -1489,7 +1475,7 @@ export default class FormAssessIdeas extends Component {
                   &nbsp;
                   <span style={labelContentStyle}>Would you like to apply to become a mentor for this idea? If the team later picks you as one of the mentors, you will get a 1% share in the idea-company in exchange for being available to them for at least 1 hour per week.</span>
                 </div>
-                <div style={{ flex: "6 6 0px" }}>
+                <div style={{ flex: "6 6 0px", }}>
                   <Checkbox
                     tabIndex="5" // Optional.[String or Number].Default: -1.
                     id={"agreementMentor"} // Optional.[String].Default: "".  Input ID.
@@ -1508,7 +1494,7 @@ export default class FormAssessIdeas extends Component {
                     classNameInputBox="" // Optional.[String].Default: "".
                     classNameContainer="" // Optional.[String].Default: "".
                     customStyleWrapper={{}} // Optional.[Object].Default: {}.
-                    customStyleInputBox={{}} // Optional.[Object].Default: {}.
+                    customStyleInputBox={{ backgroundColor: "white" }} // Optional.[Object].Default: {}.
                     customStyleContainer={{}} // Optional.[Object].Default: {}.
                     onBlur={() => {}} // Optional.[Func].Default: none. In order to validate the value on blur, you MUST provide a function, even if it is an empty function. Missing this, the validation on blur will not work.
                     // onFocus={(e) => {console.log(e);}} // Optional.[Func].Default: none.
@@ -1518,7 +1504,7 @@ export default class FormAssessIdeas extends Component {
                       console.log(e);
                     }} // Required.[Func].Default: () => {}. Will return the value.
                     labelHtml={
-                      <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
+                      <div style={{ color: "white", marginTop: "2px" }}>
                         Yes, I’d like to become a mentor for this idea
                       </div>
                     } // Required.[Html].Default: none.
@@ -1533,6 +1519,7 @@ export default class FormAssessIdeas extends Component {
                     }}
                   />
                     <Checkbox
+                    
                     tabIndex="5" // Optional.[String or Number].Default: -1.
                     id={"agreementMentorNo"} // Optional.[String].Default: "".  Input ID.
                     name={"agreementMentorNo"} // Optional.[String].Default: "". Input name
@@ -1550,7 +1537,7 @@ export default class FormAssessIdeas extends Component {
                     classNameInputBox="" // Optional.[String].Default: "".
                     classNameContainer="" // Optional.[String].Default: "".
                     customStyleWrapper={{}} // Optional.[Object].Default: {}.
-                    customStyleInputBox={{}} // Optional.[Object].Default: {}.
+                    customStyleInputBox={{ backgroundColor: "white" }} // Optional.[Object].Default: {}.
                     customStyleContainer={{}} // Optional.[Object].Default: {}.
                     onBlur={() => {}} // Optional.[Func].Default: none. In order to validate the value on blur, you MUST provide a function, even if it is an empty function. Missing this, the validation on blur will not work.
                     // onFocus={(e) => {console.log(e);}} // Optional.[Func].Default: none.
@@ -1560,7 +1547,7 @@ export default class FormAssessIdeas extends Component {
                       console.log(e);
                     }} // Required.[Func].Default: () => {}. Will return the value.
                     labelHtml={
-                      <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
+                      <div style={{ color: "white", marginTop: "2px", display: "flex" }}>
                         No, thank you
                       </div>
                     } // Required.[Html].Default: none.
@@ -1580,7 +1567,7 @@ export default class FormAssessIdeas extends Component {
           </div>
             </div>
             ) 
-            : (this.state.validate === true) && (average / 4) <= 7 ? (<div>THANKSSS</div>) : (<div>NO THANKSSS</div>)
+            : (this.state.validate === true) && (average / 4) <= 7 ? (<div>TEST</div>) : (<div>TEST</div>)
             }
           </div>
           <div style={{ height: "10px" }} />
@@ -1598,7 +1585,7 @@ export default class FormAssessIdeas extends Component {
       </div>
     );
   }}
-}
+} 
 
 
 

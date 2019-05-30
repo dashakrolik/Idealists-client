@@ -60,7 +60,7 @@ export default function AssessIdeas(props) {
     
     return (
 
-      <div className='assessIdeas-container'>
+      <div className='dashboard-container'>
         <br />
         <br />
 
