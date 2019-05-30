@@ -16,6 +16,11 @@ export default function AssessIdeas(props) {
   // const [userLoggedIn, setUserLoggedIn] = useState(true);
   const [expertIdeas, setExpertIdeas] = useState([]);
 
+  const [assessments, getAssessments] = useState([])
+  
+
+
+
   useEffect(() => {
     if (props.authState.loggedIn)
       request
@@ -33,6 +38,24 @@ export default function AssessIdeas(props) {
         .then(res => setExpertIdeas(res.body));
   }, []);
 
+
+  useEffect(() => {
+    if (props.authState.loggedIn)
+      request
+        .get(`${baseUrl}/assessments`)
+        .set("Authorization", `Bearer ${props.authState.token}`)
+        .then(res => getAssessments(res.body))
+    else props.history.push('/InvestorStart');
+  }, []);
+  
+  console.log(assessments)
+  
+  const userLogout = () => {
+    localStorage.removeItem('currentUserJwt');
+    setUserLoggedIn(false);
+  };
+
+
   // const userLogout = () => {
   //   localStorage.removeItem('currentUserJwt');
   //   setUserLoggedIn(false);
@@ -44,9 +67,15 @@ export default function AssessIdeas(props) {
     return (
       <Redirect to='/login' />);
 
+
+      <div className='dashboard-container'>
+        <br />
+        <br />
+
   if (!props.authState.user) {
     props.user()
   }
+
 
   return (
 

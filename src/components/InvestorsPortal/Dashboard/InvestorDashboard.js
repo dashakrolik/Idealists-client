@@ -29,6 +29,7 @@ export default function investorDashboard(props) {
             <Redirect to='/Investors/login' />)
 
     return (
+        
 
         <div className='dashboard-container'>
             <h2 className='title'>{userData.firstName}'s expert dashboard</h2>
