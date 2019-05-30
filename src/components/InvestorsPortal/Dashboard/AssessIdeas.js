@@ -16,6 +16,7 @@ export default function AssessIdeas(props) {
   const [userLoggedIn, setUserLoggedIn] = useState(true);
   
   const [expertIdeas, setExpertIdeas] = useState([]);
+  const [assessments, getAssessments] = useState([])
   
   useEffect(() => {
     if (props.authState.loggedIn)
@@ -34,6 +35,17 @@ export default function AssessIdeas(props) {
       .then(res => setExpertIdeas(res.body));
       
   }, []);
+
+  useEffect(() => {
+    if (props.authState.loggedIn)
+      request
+        .get(`${baseUrl}/assessments`)
+        .set("Authorization", `Bearer ${props.authState.token}`)
+        .then(res => getAssessments(res.body))
+    else props.history.push('/InvestorStart');
+  }, []);
+  
+  console.log(assessments)
   
   const userLogout = () => {
     localStorage.removeItem('currentUserJwt');

@@ -169,7 +169,11 @@ class App extends Component {
   }
   
   render() {
-    console.log(this.state)
+    let str = '{"Animation","Accounting"}'
+    let edited = JSON.stringify(str)
+    console.log(edited)
+    let res = str.split(',');
+    console.log(res)
     return (
       <Router>
         <div>
