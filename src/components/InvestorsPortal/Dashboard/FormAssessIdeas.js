@@ -134,31 +134,30 @@ export default class FormAssessIdeas extends Component {
       !hasExplanation2Error &&
       !hasExplanation3Error &&
       !hasExplanation4Error &&
-      !hasExplanation5Error &&
-      !hasExplanation6Error &&
-      !hasExplanation7Error &&
-      !hasExplanation8Error &&
-      !hasMovieError &&
-      !hasProReason1Error &&
-      !hasProReason2Error &&
-      !hasProReason3Error &&
-      !hasProReason4Error &&
-      !hasProReason5Error &&
-      !hasAgainstReason1Error &&
-      !hasAgainstReason2Error &&
-      !hasAgainstReason3Error &&
-      !hasAgainstReason4Error &&
-      !hasAgainstReason5Error &&
+      // !hasExplanation5Error &&
+      // !hasExplanation6Error &&
+      // !hasExplanation7Error &&
+      // !hasExplanation8Error &&
+      // !hasProReason1Error &&
+      // !hasProReason2Error &&
+      // !hasProReason3Error &&
+      // !hasProReason4Error &&
+      // !hasProReason5Error &&
+      // !hasAgainstReason1Error &&
+      // !hasAgainstReason2Error &&
+      // !hasAgainstReason3Error &&
+      // !hasAgainstReason4Error &&
+      // !hasAgainstReason5Error &&
       !hasWillPeopleWantThisError &&
       !hasisItAGoodIdeaError &&
       !hasIsThisTheRightTiming &&
-      !hasDoesThisSolveProblem &&
-      !hasWhatDoYouExpectAsTimeImpactError &&
-      !hasWhatDoYouExpectAsMagnitudeError &&
-      !hasAgreementStarError &&
-      !hasAgreementStarNoError &&
-      !hasAgreementMentorError &&
-      !hasAgreementMentorNoError
+      !hasDoesThisSolveProblem 
+      // !hasWhatDoYouExpectAsTimeImpactError &&
+      // !hasWhatDoYouExpectAsMagnitudeError &&
+      // !hasAgreementStarError &&
+      // !hasAgreementStarNoError &&
+      // !hasAgreementMentorError &&
+      // !hasAgreementMentorNoError
     ) {
       alert("All validated!");
       
@@ -1562,14 +1561,17 @@ export default class FormAssessIdeas extends Component {
           </div>
             </div>
             ) 
-            :
-            (<div>Average is lower than 7</div>)}
+            : this.state.validate === 'true' && (average / 4) <= 7 ? (<div>THANKSSS</div>) : null
+            }
           </div>
           <div style={{ height: "10px" }} />
           <div
             className={`my-button my-button__red save-button`}
             onClick={this.validateForm}
           >
+          <div>
+            {this.state.validate === 'true' && (average / 4) <= 7 ? (<div>Thank you for your assessment. If this idea would later become an actual company, we will update you on how you will receive the EUR100, - worth of shares!</div>) : null}
+          </div>
             Submit
           </div>
           <input type="submit" style={{ display: "none" }} />
