@@ -37,6 +37,7 @@ export default class FormAssessIdeas extends Component {
       explanation3: "",
       explanation4: "",
       explanation5: "",
+      explanation6: "",
       willPeopleWantThis: "",
       doesThisSolveProblem: "",
       isItAGoodIdea: "",
@@ -52,10 +53,13 @@ export default class FormAssessIdeas extends Component {
       againstReason4: "",
       againstReason5: "",
       whatDoYouExpectAsTimeImpact: "",
+      whatDoYouExpectAsMagnitude: "",
       hasExplanationError: true,
       hasExplanation2Error: true,
       hasExplanation3Error: true,
       hasExplanation4Error: true,
+      hasExplanation5Error: true,
+      hasExplanation6Error: true,
       hasProReason1Error: true,
       hasProReason2Error: true,
       hasProReason3Error: true,
@@ -67,6 +71,7 @@ export default class FormAssessIdeas extends Component {
       hasAgainstReason4Error: true,
       hasAgainstReason5Error: true,
       hasWhatDoYouExpectAsTimeImpactError: true,
+      hasWhatDoYouExpectAsMagnitudeError: true,
       hasMovieError: true,
       hasWillPeopleWantThisError: true,
       validate: false
@@ -87,6 +92,7 @@ export default class FormAssessIdeas extends Component {
       hasExplanation3Error,
       hasExplanation4Error,
       hasExplanation5Error,
+      hasExplanation6Error,
       hasProReason1Error,
       hasProReason2Error,
       hasProReason3Error,
@@ -103,6 +109,7 @@ export default class FormAssessIdeas extends Component {
       hasIsThisTheRightTiming,
       hasDoesThisSolveProblem,
       hasWhatDoYouExpectAsTimeImpactError,
+      hasWhatDoYouExpectAsMagnitudeError,
     } = this.state;
     if (
       !hasExplanationError &&
@@ -125,7 +132,8 @@ export default class FormAssessIdeas extends Component {
       !hasisItAGoodIdeaError &&
       !hasIsThisTheRightTiming &&
       !hasDoesThisSolveProblem &&
-      !hasWhatDoYouExpectAsTimeImpactError
+      !hasWhatDoYouExpectAsTimeImpactError &&
+      !hasWhatDoYouExpectAsMagnitudeError
     ) {
       alert("All validated!");
       
@@ -140,6 +148,7 @@ export default class FormAssessIdeas extends Component {
       explanation3,
       explanation4,
       explanation5,
+      explanation6,
       willPeopleWantThis,
       isThisTheRightTiming,
       isItAGoodIdea,
@@ -155,6 +164,7 @@ export default class FormAssessIdeas extends Component {
       againstReason4,
       againstReason5,
       whatDoYouExpectAsTimeImpact,
+      whatDoYouExpectAsMagnitude,
       validate
     } = this.state;
     console.log(this.state)
@@ -1097,6 +1107,105 @@ export default class FormAssessIdeas extends Component {
                     }} 
                     validationOption={{
                       name: "Explanation5", 
+                      check: true,
+                      required: true, 
+                      type: "string" 
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  {/*<div style={(labelStyle, { flex: '3 3 0px' })}>*/}
+                  <span
+                    className="icon icon-info"
+                    style={{ ...labelContentStyle, fontSize: "20px" }}
+                  />
+                  &nbsp;
+                  <span style={labelContentStyle}>What do you expect as magnitude of impact for this idea?</span>
+                </div>
+                <div style={{ flex: "6 6 0px", display: "flex" }}>
+                  <Radiobox
+                    tabIndex={2} 
+                    id="whatDoYouExpectAsMagnitude" 
+                    name="whatDoYouExpectAsMagnitude" 
+                    disabled={false} 
+                    value={whatDoYouExpectAsMagnitude} 
+                    validate={validate} 
+                    validationCallback={res =>
+                      this.setState({ hasWhatDoYouExpectAsMagnitudeError: res, validate: false })
+                    } 
+                    optionList={SCALE_OPTIONS_LIST}
+                    classNameInput="" 
+                    classNameWrapper="" 
+                    classNameContainer="" 
+                    classNameOptionListItem="" 
+                    customStyleInput={{}} 
+                    customStyleWrapper={{}} 
+                    customStyleContainer={{
+                      display: "flex",
+                      justifyContent: "flex-start"
+                    }} 
+                    customStyleOptionListItem={{ marginRight: "20px" }} 
+                    onChange={(whatDoYouExpectAsMagnitude, e) => {
+                      this.setState({ whatDoYouExpectAsMagnitude });
+                    }} 
+                    onBlur={e => {
+                    }} 
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  <span
+                    className="icon icon-insert-drive-file"
+                    style={{ ...labelContentStyle, fontSize: "20px" }}
+                  />
+                  &nbsp;
+                  <span style={labelContentStyle}>Explanation</span>
+                </div>
+                <div style={{ flex: "6 6 0px" }}>
+                  <Textarea
+                    tabIndex="7" 
+                    id="explanation6" 
+                    name="explanation6" 
+                    value={explanation6} 
+                    disabled={false} 
+                    placeholder="Place your explanation 6 here" 
+                    validate={validate} 
+                    validationCallback={res =>
+                      this.setState({
+                        hasExplanation6Error: res,
+                        validate: false
+                      })
+                    } 
+                    classNameInput="" 
+                    classNameWrapper="" 
+                    classNameContainer="" 
+                    customStyleInput={{}} 
+                    customStyleWrapper={{}} 
+                    customStyleContainer={{}} 
+                    onChange={(explanation6, e) => {
+                      this.setState({ explanation6 });
+
+                    }} 
+                    onBlur={e => {
+
+                    }} 
+                    validationOption={{
+                      name: "Explanation6", 
                       check: true,
                       required: true, 
                       type: "string" 
