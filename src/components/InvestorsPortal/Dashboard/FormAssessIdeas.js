@@ -38,6 +38,8 @@ export default class FormAssessIdeas extends Component {
       explanation4: "",
       explanation5: "",
       explanation6: "",
+      explanation7: "",
+      explanation8: "",
       willPeopleWantThis: "",
       doesThisSolveProblem: "",
       isItAGoodIdea: "",
@@ -60,6 +62,8 @@ export default class FormAssessIdeas extends Component {
       hasExplanation4Error: true,
       hasExplanation5Error: true,
       hasExplanation6Error: true,
+      hasExplanation7Error: true,
+      hasExplanation8Error: true,
       hasProReason1Error: true,
       hasProReason2Error: true,
       hasProReason3Error: true,
@@ -93,6 +97,8 @@ export default class FormAssessIdeas extends Component {
       hasExplanation4Error,
       hasExplanation5Error,
       hasExplanation6Error,
+      hasExplanation7Error,
+      hasExplanation8Error,
       hasProReason1Error,
       hasProReason2Error,
       hasProReason3Error,
@@ -117,6 +123,9 @@ export default class FormAssessIdeas extends Component {
       !hasExplanation3Error &&
       !hasExplanation4Error &&
       !hasExplanation5Error &&
+      !hasExplanation6Error &&
+      !hasExplanation7Error &&
+      !hasExplanation8Error &&
       !hasMovieError &&
       !hasProReason1Error &&
       !hasProReason2Error &&
@@ -149,6 +158,8 @@ export default class FormAssessIdeas extends Component {
       explanation4,
       explanation5,
       explanation6,
+      explanation7,
+      explanation8,
       willPeopleWantThis,
       isThisTheRightTiming,
       isItAGoodIdea,
@@ -1206,6 +1217,110 @@ export default class FormAssessIdeas extends Component {
                     }} 
                     validationOption={{
                       name: "Explanation6", 
+                      check: true,
+                      required: true, 
+                      type: "string" 
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  <span
+                    className="icon icon-insert-drive-file"
+                    style={{ ...labelContentStyle, fontSize: "20px" }}
+                  />
+                  &nbsp;
+                  <span style={labelContentStyle}>Why is this not yet out there? Why have people in this field or that could be helped by it, not successfully created it yet?</span>
+                </div>
+                <div style={{ flex: "6 6 0px" }}>
+                  <Textarea
+                    tabIndex="7" 
+                    id="explanation7" 
+                    name="explanation7" 
+                    value={explanation7} 
+                    disabled={false} 
+                    placeholder="Place your explanation 7 here" 
+                    validate={validate} 
+                    validationCallback={res =>
+                      this.setState({
+                        hasExplanation7Error: res,
+                        validate: false
+                      })
+                    } 
+                    classNameInput="" 
+                    classNameWrapper="" 
+                    classNameContainer="" 
+                    customStyleInput={{}} 
+                    customStyleWrapper={{}} 
+                    customStyleContainer={{}} 
+                    onChange={(explanation7, e) => {
+                      this.setState({ explanation7 });
+
+                    }} 
+                    onBlur={e => {
+
+                    }} 
+                    validationOption={{
+                      name: "Explanation7", 
+                      check: true,
+                      required: true, 
+                      type: "string" 
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  <span
+                    className="icon icon-insert-drive-file"
+                    style={{ ...labelContentStyle, fontSize: "20px" }}
+                  />
+                  &nbsp;
+                  <span style={labelContentStyle}>Who would in your opinion be the ideal customers for this idea?</span>
+                </div>
+                <div style={{ flex: "6 6 0px" }}>
+                  <Textarea
+                    tabIndex="7" 
+                    id="explanation8" 
+                    name="explanation8" 
+                    value={explanation8} 
+                    disabled={false} 
+                    placeholder="Place your explanation 8 here" 
+                    validate={validate} 
+                    validationCallback={res =>
+                      this.setState({
+                        hasExplanation8Error: res,
+                        validate: false
+                      })
+                    } 
+                    classNameInput="" 
+                    classNameWrapper="" 
+                    classNameContainer="" 
+                    customStyleInput={{}} 
+                    customStyleWrapper={{}} 
+                    customStyleContainer={{}} 
+                    onChange={(explanation8, e) => {
+                      this.setState({ explanation8 });
+
+                    }} 
+                    onBlur={e => {
+
+                    }} 
+                    validationOption={{
+                      name: "Explanation8", 
                       check: true,
                       required: true, 
                       type: "string" 
