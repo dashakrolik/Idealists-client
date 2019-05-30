@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import Card from '@material-ui/core/Card'
 import React, { Component } from "react";
+import { Redirect } from 'react-router-dom';
 import ReactDOM from "react-dom";
 import {
   Textbox,
@@ -30,11 +31,11 @@ const SCALE_OPTIONS_LIST = [
 
 
 export default class FormAssessIdeas extends Component {
+
+
   constructor(props) {
     super(props);
     this.state = {
-      authState: "",
-      number: "",
       agreementStar: false,
       agreementStarNo: false,
       agreementMentor: false,
@@ -183,9 +184,11 @@ export default class FormAssessIdeas extends Component {
 
 
   render() {
-    console.log(this.props)
+    if (!this.props.authState.loggedIn) {
+    return (
+        <Redirect to='/Investors/login' />)
+    } else if (this.props.authState.loggedIn) {
     const {
-      number,
       agreementStar,
       agreementStarNo,
       agreementMentor,
@@ -220,15 +223,12 @@ export default class FormAssessIdeas extends Component {
       whatDoYouExpectAsMagnitude,
       validate
     } = this.state;
-    console.log(this.state)
-    console.log(this.state.willPeopleWantThis + this.state.isItAGoodIdea + this.state.isThisTheRightTiming + this.state.doesThisSolveProblem)
+
     const number1 = parseInt(this.state.willPeopleWantThis)
     const number2 = parseInt(this.state.isItAGoodIdea)
     const number3 = parseInt(this.state.isThisTheRightTiming)
     const number4 = parseInt(this.state.doesThisSolveProblem)
     const average = number1 + number2 + number3 + number4
-    console.log(typeof average)
-    console.log(number1 + number2 + number3 + number4)
 
     const rowStyle = {
       display: "flex",
@@ -1597,7 +1597,7 @@ export default class FormAssessIdeas extends Component {
         </form>
       </div>
     );
-  }
+  }}
 }
 
 
