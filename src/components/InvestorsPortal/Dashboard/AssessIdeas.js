@@ -71,21 +71,21 @@ export default function AssessIdeas(props) {
 
   return (
 
-    <div className='dashboard-container'>
+    <div className='assessIdeas-container'>
       <br />
       <br />
       <div className='title'>
         <h1 >This is {userData.firstName}'s Expert dashboard</h1>
       </div>
-      {/* <StyledCard>
+      <StyledCard>
         Here you get to assess ideas in a very simple and fast way and get rewarded for it at the same time.
         When an idea you helped assess becomes incorporated, you’ll receive € 100,- worth of equity in that company.
         Assessing an idea takes on average 3 minutes.
         </StyledCard>
       <StyledCard>
         <Link to='/investors/dashboard/assess/:id'>Sample Idea 2</Link>
-      </StyledCard> */}
-      {expertIdeas.length < 1 ? <h2 style={styledH2}><a href="/MyIdea/new">Sorry There is no idea related with your industry selection!</a></h2> : <h2 style={styledH2}>Please check the ideas related with your industries</h2>}
+      </StyledCard>
+      {expertIdeas.length < 1 ? <h2 style={styledH2}><a href="/Investors/dashboard">Sorry There is no idea related with your industry selection!</a></h2> : <h2 style={styledH2}>Please check the ideas related with your industries</h2>}
       <div className='flex-tilescontainer'>
         {expertIdeas.map(idea =>
           <Link key={idea.id} className='tile-link' to={`/investors/dashboard/assess/${idea.id}`}>
@@ -112,15 +112,17 @@ export default function AssessIdeas(props) {
 }
 
 const styledH2 = {
-  fontSize: 20,
-  fontWeight: 800,
+  fontSize: 15,
+  fontWeight: 400,
   color: 'white',
 }
 
-// const StyledCard = styled(Card)`
-//       background-color: rgb(255,255,255, 0.3);
-//       padding: 50px;
-//       width: 500px;
-//       margin-left: 70px;
-//       color: black
-//   `;
+const StyledCard = styled(Card)`
+      background-color: rgb(255,255,255, 0.3);
+      padding: 50px;
+      width: 500px;
+      margin-left: 130px;
+      color: white;
+      display: flex;
+      
+  `;
