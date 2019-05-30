@@ -455,6 +455,7 @@ export default class FormAssessIdeas extends Component {
                 </div>
               </div>
             </div>
+          </div>
           <div style={rowWrapperStyle}>
             <div style={rowContainerStyle}>
               <div style={rowStyle}>
@@ -557,7 +558,7 @@ export default class FormAssessIdeas extends Component {
               </div>
             </div>
           </div>
-          <div>{(this.state.willPeopleWantThis + this.state.doesThisSolveProblem + this.state.isThisTheRightTiming) / 3 >= 7 ? (<div>Average is higher than 7</div>) : (<div>Average is lower than 7></div>)}</div>
+          <div>{(this.state.willPeopleWantThis + this.state.doesThisSolveProblem + this.state.isThisTheRightTiming + this.state.isItAGoodIdea) / 4 >= 7 ? (<div>Average is higher than 7</div>) : (<div>Average is lower than 7></div>)}</div>
           <div style={{ height: "10px" }} />
           <div
             className={`my-button my-button__red save-button`}
