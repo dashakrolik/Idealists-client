@@ -49,11 +49,7 @@ export default function AssessIdeas(props) {
   }, []);
   
   console.log(assessments)
-  
-  const userLogout = () => {
-    localStorage.removeItem('currentUserJwt');
-    setUserLoggedIn(false);
-  };
+
 
 
   // const userLogout = () => {
@@ -68,10 +64,6 @@ export default function AssessIdeas(props) {
       <Redirect to='/login' />);
 
 
-      <div className='dashboard-container'>
-        <br />
-        <br />
-
   if (!props.authState.user) {
     props.user()
   }
@@ -79,7 +71,7 @@ export default function AssessIdeas(props) {
 
   return (
 
-    <div className='assessIdeas-container'>
+    <div className='dashboard-container'>
       <br />
       <br />
       <div className='title'>
