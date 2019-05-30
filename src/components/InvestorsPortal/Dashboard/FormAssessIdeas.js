@@ -40,10 +40,16 @@ export default class FormAssessIdeas extends Component {
       doesThisSolveProblem: "",
       isItAGoodIdea: "",
       isThisTheRightTiming: "",
+      proReason1: "",
+      proReason2: "",
+      proReason3: "",
+      proReason4: "",
+      proReason5: "",
       hasExplanationError: true,
       hasExplanation2Error: true,
       hasExplanation3Error: true,
       hasExplanation4Error: true,
+      hasFiveReasonsProError: true,
       hasMovieError: true,
       hasWillPeopleWantThisError: true,
       validate: false
@@ -63,6 +69,11 @@ export default class FormAssessIdeas extends Component {
       hasExplanation2Error,
       hasExplanation3Error,
       hasExplanation4Error,
+      hasProReason1Error,
+      hasProReason2Error,
+      hasProReason3Error,
+      hasProReason4Error,
+      hasProReason5Error,
       hasMovieError,
       hasWillPeopleWantThisError,
       hasisItAGoodIdeaError,
@@ -75,6 +86,11 @@ export default class FormAssessIdeas extends Component {
       !hasExplanation3Error &&
       !hasExplanation4Error &&
       !hasMovieError &&
+      !hasProReason1Error &&
+      !hasProReason2Error &&
+      !hasProReason3Error &&
+      !hasProReason4Error &&
+      !hasProReason5Error &&
       !hasWillPeopleWantThisError &&
       !hasisItAGoodIdeaError &&
       !hasIsThisTheRightTiming &&
@@ -96,9 +112,22 @@ export default class FormAssessIdeas extends Component {
       isThisTheRightTiming,
       isItAGoodIdea,
       doesThisSolveProblem,
+      proReason1,
+      proReason2,
+      proReason3,
+      proReason4,
+      proReason5,
       validate
     } = this.state;
     console.log(this.state)
+    console.log(this.state.willPeopleWantThis + this.state.isItAGoodIdea + this.state.isThisTheRightTiming + this.state.doesThisSolveProblem)
+    const number1 = parseInt(this.state.willPeopleWantThis)
+    const number2 = parseInt(this.state.isItAGoodIdea)
+    const number3 = parseInt(this.state.isThisTheRightTiming)
+    const number4 = parseInt(this.state.doesThisSolveProblem)
+    const average = number1 + number2 + number3 + number4
+    console.log(typeof average)
+    console.log(number1 + number2 + number3 + number4)
 
     const rowStyle = {
       display: "flex",
@@ -558,7 +587,102 @@ export default class FormAssessIdeas extends Component {
               </div>
             </div>
           </div>
-          <div>{(this.state.willPeopleWantThis + this.state.doesThisSolveProblem + this.state.isThisTheRightTiming + this.state.isItAGoodIdea) / 4 >= 7 ? (<div>Average is higher than 7</div>) : (<div>Average is lower than 7></div>)}</div>
+          <div>
+          { (this.state.willPeopleWantThis && this.state.doesThisSolveProblem && this.state.isThisTheRightTiming && this.state.isItAGoodIdea) && typeof average === "number" &&
+            (
+            average / 4) >= 7 
+            ?
+            (
+              <div style={rowWrapperStyle}>
+              <div style={rowContainerStyle}>
+                <div style={rowStyle}>
+                  <div
+                    style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                  >
+                    <span
+                      className="icon icon-insert-drive-file"
+                      style={{ ...labelContentStyle, fontSize: "20px" }}
+                    />
+                    &nbsp;
+                    <span style={labelContentStyle}>Five reasons pro</span>
+                  </div>
+                  <div style={{ flex: "6 6 0px" }}>
+                    <Textarea
+                      tabIndex="7" 
+                      id="fiveReasonsPro" 
+                      name="fiveReasonsPro" 
+                      value={proReason1} 
+                      disabled={false} 
+                      placeholder="Place the reason 1 here" 
+                      validate={validate} 
+                      validationCallback={res =>
+                        this.setState({
+                          hasProReason1Error: res,
+                          validate: false
+                        })
+                      } 
+                      classNameInput="" 
+                      classNameWrapper="" 
+                      classNameContainer="" 
+                      customStyleInput={{}} 
+                      customStyleWrapper={{}} 
+                      customStyleContainer={{}} 
+                      onChange={(proReason1, e) => {
+                        this.setState({ proReason1 });
+  
+                      }} 
+                      onBlur={e => {
+  
+                      }} 
+                      validationOption={{
+                        name: "proReason1", 
+                        check: true,
+                        required: true, 
+                        type: "string" 
+                      }}
+                    />
+                                        <Textarea
+                      tabIndex="7" 
+                      id="proReason2" 
+                      name="proReason2" 
+                      value={proReason2} 
+                      disabled={false} 
+                      placeholder="Place the reason 2 here" 
+                      validate={validate} 
+                      validationCallback={res =>
+                        this.setState({
+                          hasProReason2Error: res,
+                          validate: false
+                        })
+                      } 
+                      classNameInput="" 
+                      classNameWrapper="" 
+                      classNameContainer="" 
+                      customStyleInput={{}} 
+                      customStyleWrapper={{}} 
+                      customStyleContainer={{}} 
+                      onChange={(proReason2, e) => {
+                        this.setState({ proReason2 });
+  
+                      }} 
+                      onBlur={e => {
+  
+                      }} 
+                      validationOption={{
+                        name: "proReason2", 
+                        check: true,
+                        required: true, 
+                        type: "string" 
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            ) 
+            :
+            (<div>Average is lower than 7></div>)}
+          </div>
           <div style={{ height: "10px" }} />
           <div
             className={`my-button my-button__red save-button`}
