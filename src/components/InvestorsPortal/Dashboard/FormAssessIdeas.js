@@ -45,11 +45,25 @@ export default class FormAssessIdeas extends Component {
       proReason3: "",
       proReason4: "",
       proReason5: "",
+      againstReason1: "",
+      againstReason2: "",
+      againstReason3: "",
+      againstReason4: "",
+      againstReason5: "",
       hasExplanationError: true,
       hasExplanation2Error: true,
       hasExplanation3Error: true,
       hasExplanation4Error: true,
-      hasFiveReasonsProError: true,
+      hasProReason1Error: true,
+      hasProReason2Error: true,
+      hasProReason3Error: true,
+      hasProReason4Error: true,
+      hasProReason5Error: true,
+      hasAgainstReason1Error: true,
+      hasAgainstReason2Error: true,
+      hasAgainstReason3Error: true,
+      hasAgainstReason4Error: true,
+      hasAgainstReason5Error: true,
       hasMovieError: true,
       hasWillPeopleWantThisError: true,
       validate: false
@@ -74,6 +88,11 @@ export default class FormAssessIdeas extends Component {
       hasProReason3Error,
       hasProReason4Error,
       hasProReason5Error,
+      hasAgainstReason1Error,
+      hasAgainstReason2Error,
+      hasAgainstReason3Error,
+      hasAgainstReason4Error,
+      hasAgainstReason5Error,
       hasMovieError,
       hasWillPeopleWantThisError,
       hasisItAGoodIdeaError,
@@ -91,6 +110,11 @@ export default class FormAssessIdeas extends Component {
       !hasProReason3Error &&
       !hasProReason4Error &&
       !hasProReason5Error &&
+      !hasAgainstReason1Error &&
+      !hasAgainstReason2Error &&
+      !hasAgainstReason3Error &&
+      !hasAgainstReason4Error &&
+      !hasAgainstReason5Error &&
       !hasWillPeopleWantThisError &&
       !hasisItAGoodIdeaError &&
       !hasIsThisTheRightTiming &&
@@ -117,6 +141,11 @@ export default class FormAssessIdeas extends Component {
       proReason3,
       proReason4,
       proReason5,
+      againstReason1,
+      againstReason2,
+      againstReason3,
+      againstReason4,
+      againstReason5,
       validate
     } = this.state;
     console.log(this.state)
@@ -592,25 +621,25 @@ export default class FormAssessIdeas extends Component {
             (
             average / 4) >= 7 
             ?
-            (
+            ( <div>
               <div style={rowWrapperStyle}>
               <div style={rowContainerStyle}>
                 <div style={rowStyle}>
                   <div
-                    style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                    style={{ ...labelStyle, flex: "3 3 0px", marginTop: "px" }}
                   >
                     <span
                       className="icon icon-insert-drive-file"
                       style={{ ...labelContentStyle, fontSize: "20px" }}
                     />
                     &nbsp;
-                    <span style={labelContentStyle}>Five reasons pro</span>
+                    <span style={labelContentStyle}>Imagine you’re an advocate for this idea. Name up to 5 reasons why you would be so ‘pro’ this idea</span>
                   </div>
                   <div style={{ flex: "6 6 0px" }}>
                     <Textarea
                       tabIndex="7" 
-                      id="fiveReasonsPro" 
-                      name="fiveReasonsPro" 
+                      id="proReason1" 
+                      name="proReason1" 
                       value={proReason1} 
                       disabled={false} 
                       placeholder="Place the reason 1 here" 
@@ -640,8 +669,8 @@ export default class FormAssessIdeas extends Component {
                         required: true, 
                         type: "string" 
                       }}
-                    />
-                                        <Textarea
+                    /><br></br>
+                    <Textarea
                       tabIndex="7" 
                       id="proReason2" 
                       name="proReason2" 
@@ -674,14 +703,305 @@ export default class FormAssessIdeas extends Component {
                         required: true, 
                         type: "string" 
                       }}
+                    /><br></br>
+                    <Textarea
+                      tabIndex="7" 
+                      id="proReason3" 
+                      name="proReason3" 
+                      value={proReason3} 
+                      disabled={false} 
+                      placeholder="Place the reason 3 here" 
+                      validate={validate} 
+                      validationCallback={res =>
+                        this.setState({
+                          hasProReason3Error: res,
+                          validate: false
+                        })
+                      } 
+                      classNameInput="" 
+                      classNameWrapper="" 
+                      classNameContainer="" 
+                      customStyleInput={{}} 
+                      customStyleWrapper={{}} 
+                      customStyleContainer={{}} 
+                      onChange={(proReason3, e) => {
+                        this.setState({ proReason3 });
+  
+                      }} 
+                      onBlur={e => {
+  
+                      }} 
+                      validationOption={{
+                        name: "proReason3", 
+                        check: true,
+                        required: true, 
+                        type: "string" 
+                      }}
+                    /><br></br>
+                      <Textarea
+                      tabIndex="7" 
+                      id="proReason4" 
+                      name="proReason4" 
+                      value={proReason4} 
+                      disabled={false} 
+                      placeholder="Place the reason 4 here" 
+                      validate={validate} 
+                      validationCallback={res =>
+                        this.setState({
+                          hasProReason4Error: res,
+                          validate: false
+                        })
+                      } 
+                      classNameInput="" 
+                      classNameWrapper="" 
+                      classNameContainer="" 
+                      customStyleInput={{}} 
+                      customStyleWrapper={{}} 
+                      customStyleContainer={{}} 
+                      onChange={(proReason4, e) => {
+                        this.setState({ proReason4 });
+  
+                      }} 
+                      onBlur={e => {
+  
+                      }} 
+                      validationOption={{
+                        name: "proReason4", 
+                        check: true,
+                        required: true, 
+                        type: "string" 
+                      }}
+                    /><br></br>
+                      <Textarea
+                      tabIndex="7" 
+                      id="proReason5" 
+                      name="proReason5" 
+                      value={proReason5} 
+                      disabled={false} 
+                      placeholder="Place the reason 5 here" 
+                      validate={validate} 
+                      validationCallback={res =>
+                        this.setState({
+                          hasProReason5Error: res,
+                          validate: false
+                        })
+                      } 
+                      classNameInput="" 
+                      classNameWrapper="" 
+                      classNameContainer="" 
+                      customStyleInput={{}} 
+                      customStyleWrapper={{}} 
+                      customStyleContainer={{}} 
+                      onChange={(proReason5, e) => {
+                        this.setState({ proReason5 });
+  
+                      }} 
+                      onBlur={e => {
+  
+                      }} 
+                      validationOption={{
+                        name: "proReason5", 
+                        check: true,
+                        required: true, 
+                        type: "string" 
+                      }}
                     />
                   </div>
                 </div>
               </div>
             </div>
+            <div style={rowWrapperStyle}>
+              <div style={rowContainerStyle}>
+                <div style={rowStyle}>
+                  <div
+                    style={{ ...labelStyle, flex: "3 3 0px", marginTop: "px" }}
+                  >
+                    <span
+                      className="icon icon-insert-drive-file"
+                      style={{ ...labelContentStyle, fontSize: "20px" }}
+                    />
+                    &nbsp;
+                    <span style={labelContentStyle}>Imagine you’re an opponent of this idea. Name up to 5 reasons why you would be so ‘against’ this idea:</span>
+                  </div>
+                  <div style={{ flex: "6 6 0px" }}>
+                    <Textarea
+                      tabIndex="7" 
+                      id="againstReason1" 
+                      name="againstReason1" 
+                      value={againstReason1} 
+                      disabled={false} 
+                      placeholder="Place the reason 1 here" 
+                      validate={validate} 
+                      validationCallback={res =>
+                        this.setState({
+                          hasAgainstReason1Error: res,
+                          validate: false
+                        })
+                      } 
+                      classNameInput="" 
+                      classNameWrapper="" 
+                      classNameContainer="" 
+                      customStyleInput={{}} 
+                      customStyleWrapper={{}} 
+                      customStyleContainer={{}} 
+                      onChange={(againstReason1, e) => {
+                        this.setState({ againstReason1 });
+  
+                      }} 
+                      onBlur={e => {
+  
+                      }} 
+                      validationOption={{
+                        name: "againstReason1", 
+                        check: true,
+                        required: true, 
+                        type: "string" 
+                      }}
+                    /><br></br>
+                    <Textarea
+                      tabIndex="7" 
+                      id="againstReason2" 
+                      name="againstReason2" 
+                      value={againstReason2} 
+                      disabled={false} 
+                      placeholder="Place the reason 2 here" 
+                      validate={validate} 
+                      validationCallback={res =>
+                        this.setState({
+                          hasAgainstReason2Error: res,
+                          validate: false
+                        })
+                      } 
+                      classNameInput="" 
+                      classNameWrapper="" 
+                      classNameContainer="" 
+                      customStyleInput={{}} 
+                      customStyleWrapper={{}} 
+                      customStyleContainer={{}} 
+                      onChange={(againstReason2, e) => {
+                        this.setState({ againstReason2 });
+  
+                      }} 
+                      onBlur={e => {
+  
+                      }} 
+                      validationOption={{
+                        name: "againstReason2", 
+                        check: true,
+                        required: true, 
+                        type: "string" 
+                      }}
+                    /><br></br>
+                    <Textarea
+                      tabIndex="7" 
+                      id="againstReason3" 
+                      name="againstReason3" 
+                      value={againstReason2} 
+                      disabled={false} 
+                      placeholder="Place the reason 3 here" 
+                      validate={validate} 
+                      validationCallback={res =>
+                        this.setState({
+                          hasAgainstReason3Error: res,
+                          validate: false
+                        })
+                      } 
+                      classNameInput="" 
+                      classNameWrapper="" 
+                      classNameContainer="" 
+                      customStyleInput={{}} 
+                      customStyleWrapper={{}} 
+                      customStyleContainer={{}} 
+                      onChange={(againstReason3, e) => {
+                        this.setState({ againstReason3 });
+  
+                      }} 
+                      onBlur={e => {
+  
+                      }} 
+                      validationOption={{
+                        name: "againstReason3", 
+                        check: true,
+                        required: true, 
+                        type: "string" 
+                      }}
+                    /><br></br>
+                      <Textarea
+                      tabIndex="7" 
+                      id="againstReason4" 
+                      name="againstReason4" 
+                      value={againstReason4} 
+                      disabled={false} 
+                      placeholder="Place the reason 4 here" 
+                      validate={validate} 
+                      validationCallback={res =>
+                        this.setState({
+                          hasAgainstReason4Error: res,
+                          validate: false
+                        })
+                      } 
+                      classNameInput="" 
+                      classNameWrapper="" 
+                      classNameContainer="" 
+                      customStyleInput={{}} 
+                      customStyleWrapper={{}} 
+                      customStyleContainer={{}} 
+                      onChange={(againstReason4, e) => {
+                        this.setState({ againstReason4 });
+  
+                      }} 
+                      onBlur={e => {
+  
+                      }} 
+                      validationOption={{
+                        name: "againstReason4", 
+                        check: true,
+                        required: true, 
+                        type: "string" 
+                      }}
+                    /><br></br>
+                      <Textarea
+                      tabIndex="7" 
+                      id="againstReason5" 
+                      name="againstReason5" 
+                      value={againstReason5} 
+                      disabled={false} 
+                      placeholder="Place the reason 5 here" 
+                      validate={validate} 
+                      validationCallback={res =>
+                        this.setState({
+                          hasAgainstReason5Error: res,
+                          validate: false
+                        })
+                      } 
+                      classNameInput="" 
+                      classNameWrapper="" 
+                      classNameContainer="" 
+                      customStyleInput={{}} 
+                      customStyleWrapper={{}} 
+                      customStyleContainer={{}} 
+                      onChange={(againstReason5, e) => {
+                        this.setState({ againstReason5 });
+  
+                      }} 
+                      onBlur={e => {
+  
+                      }} 
+                      validationOption={{
+                        name: "againstReason5", 
+                        check: true,
+                        required: true, 
+                        type: "string" 
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
             ) 
             :
-            (<div>Average is lower than 7></div>)}
+            (<div>Average is lower than 7</div>)}
           </div>
           <div style={{ height: "10px" }} />
           <div
