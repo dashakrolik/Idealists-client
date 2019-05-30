@@ -50,6 +50,7 @@ export default class FormAssessIdeas extends Component {
       againstReason3: "",
       againstReason4: "",
       againstReason5: "",
+      whatDoYouExpectAsTimeImpact: "",
       hasExplanationError: true,
       hasExplanation2Error: true,
       hasExplanation3Error: true,
@@ -64,6 +65,7 @@ export default class FormAssessIdeas extends Component {
       hasAgainstReason3Error: true,
       hasAgainstReason4Error: true,
       hasAgainstReason5Error: true,
+      hasWhatDoYouExpectAsTimeImpactError: true,
       hasMovieError: true,
       hasWillPeopleWantThisError: true,
       validate: false
@@ -98,6 +100,7 @@ export default class FormAssessIdeas extends Component {
       hasisItAGoodIdeaError,
       hasIsThisTheRightTiming,
       hasDoesThisSolveProblem,
+      hasWhatDoYouExpectAsTimeImpactError,
     } = this.state;
     if (
       !hasExplanationError &&
@@ -118,7 +121,8 @@ export default class FormAssessIdeas extends Component {
       !hasWillPeopleWantThisError &&
       !hasisItAGoodIdeaError &&
       !hasIsThisTheRightTiming &&
-      !hasDoesThisSolveProblem 
+      !hasDoesThisSolveProblem &&
+      !hasWhatDoYouExpectAsTimeImpactError
     ) {
       alert("All validated!");
       
@@ -146,6 +150,7 @@ export default class FormAssessIdeas extends Component {
       againstReason3,
       againstReason4,
       againstReason5,
+      whatDoYouExpectAsTimeImpact,
       validate
     } = this.state;
     console.log(this.state)
@@ -998,6 +1003,105 @@ export default class FormAssessIdeas extends Component {
                 </div>
               </div>
             </div>
+            <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  {/*<div style={(labelStyle, { flex: '3 3 0px' })}>*/}
+                  <span
+                    className="icon icon-info"
+                    style={{ ...labelContentStyle, fontSize: "20px" }}
+                  />
+                  &nbsp;
+                  <span style={labelContentStyle}>What do you expect as time to impact for this idea</span>
+                </div>
+                <div style={{ flex: "6 6 0px", display: "flex" }}>
+                  <Radiobox
+                    tabIndex={2} 
+                    id="whatDoYouExpectAsTimeImpact" 
+                    name="whatDoYouExpectAsTimeImpact" 
+                    disabled={false} 
+                    value={whatDoYouExpectAsTimeImpact} 
+                    validate={validate} 
+                    validationCallback={res =>
+                      this.setState({ hasWhatDoYouExpectAsTimeImpactError: res, validate: false })
+                    } 
+                    optionList={SCALE_OPTIONS_LIST}
+                    classNameInput="" 
+                    classNameWrapper="" 
+                    classNameContainer="" 
+                    classNameOptionListItem="" 
+                    customStyleInput={{}} 
+                    customStyleWrapper={{}} 
+                    customStyleContainer={{
+                      display: "flex",
+                      justifyContent: "flex-start"
+                    }} 
+                    customStyleOptionListItem={{ marginRight: "20px" }} 
+                    onChange={(whatDoYouExpectAsTimeImpact, e) => {
+                      this.setState({ whatDoYouExpectAsTimeImpact });
+                    }} 
+                    onBlur={e => {
+                    }} 
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  <span
+                    className="icon icon-insert-drive-file"
+                    style={{ ...labelContentStyle, fontSize: "20px" }}
+                  />
+                  &nbsp;
+                  <span style={labelContentStyle}>Explanation</span>
+                </div>
+                <div style={{ flex: "6 6 0px" }}>
+                  <Textarea
+                    tabIndex="7" 
+                    id="explanation5" 
+                    name="explanation5" 
+                    value={explanation} 
+                    disabled={false} 
+                    placeholder="Place your explanation 5 here" 
+                    validate={validate} 
+                    validationCallback={res =>
+                      this.setState({
+                        hasExplanation5Error: res,
+                        validate: false
+                      })
+                    } 
+                    classNameInput="" 
+                    classNameWrapper="" 
+                    classNameContainer="" 
+                    customStyleInput={{}} 
+                    customStyleWrapper={{}} 
+                    customStyleContainer={{}} 
+                    onChange={(explanation5, e) => {
+                      this.setState({ explanation5 });
+
+                    }} 
+                    onBlur={e => {
+
+                    }} 
+                    validationOption={{
+                      name: "Explanation5", 
+                      check: true,
+                      required: true, 
+                      type: "string" 
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
             </div>
             ) 
             :
