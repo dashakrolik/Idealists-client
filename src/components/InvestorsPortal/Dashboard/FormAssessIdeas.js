@@ -9,6 +9,8 @@ import {
   Checkbox,
   Select
 } from "react-inputs-validation";
+import request from 'superagent';
+import { baseUrl } from '../../../constants';
 import "react-inputs-validation/lib/react-inputs-validation.min.css";
 import "./styles.css";
 import "./InvestorDashboard.css";
@@ -31,6 +33,7 @@ export default class FormAssessIdeas extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      authState: "",
       number: "",
       agreementStar: false,
       agreementStarNo: false,
@@ -158,12 +161,29 @@ export default class FormAssessIdeas extends Component {
       // !hasAgreementMentorNoError
     ) {
       alert("All validated!");
-      
+      request
+      .post(`${baseUrl}/assessments`)
+      .set("Authorization", `Bearer ${this.props.authState.token}`)
+      .send({ assessment: this.state })
+      .then(res => {
+        if (res.status === 201) {
+          console.log('yes')
+        }
+      })
+      .catch(err => {
+        if (err.status === 400) {
+          // dispatch(userLoginFailed(err.response.body.message))
+        } else {
+          console.error(err);
+        }
+      });
       
     }
   }
 
+
   render() {
+    console.log(this.props)
     const {
       number,
       agreementStar,

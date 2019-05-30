@@ -95,7 +95,7 @@ class App extends Component {
 
   sendAssessment = (content) => {
     request 
-      .post(`${baseUrl}/:ideasId/:investorId/assessment`)
+      .post(`${baseUrl}/assessments`)
       .set("Authorization", `Bearer ${this.state.auth.token}`)
       .send({ content })
       .then(res => {
@@ -167,7 +167,7 @@ class App extends Component {
       }
     })
   }
-  '/investors/dashboard/assess/:id'
+  
   render() {
     console.log(this.state)
     return (
@@ -183,7 +183,7 @@ class App extends Component {
                 return <AssesIdeas sendAssessment={this.sendAssessment} {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
               }} />
               <Route exact path='/Investors/dashboard/assess/:id' render={(props) => {
-                return <FormAssessIdeas {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
+                return <FormAssessIdeas {...props} authState={this.state.auth} sendAssessment={this.sendAssessment} login={this.requestLogin} user={this.getCurrentUser} />;
               }} />
               <Route exact path='/Investors/dashboard/crowdfunding' render={(props) => {
                 return <Crowdfunding {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
