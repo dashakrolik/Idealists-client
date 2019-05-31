@@ -28,7 +28,6 @@ return (
                         justify="flex-end"
                         alignItems="center"
                 >
-                    {console.log(props, "PROPS")}
                 {
                 !localStorage.currentUserJwt || !props.authState.loggedIn  ? 
                 <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Login</Button> : null
