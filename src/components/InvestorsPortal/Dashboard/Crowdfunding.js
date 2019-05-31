@@ -39,7 +39,7 @@ export default function CrowdFunding(props) {
       <div className='dashboard-container'>
         <br />
         <br />
-        <h4 className='title'>This is {userData.firstName}'s dashboard</h4>
+        <h2 className='title'>This is {userData.firstName}'s dashboard</h2>
           <StyledCard>
             Back ideas through crowdfundingWhen an idea has successfully passed through the first 8 stages it is eligible for crowdfunding. 
             Only validated, unique ideas with a complete founder-team will be presented on our crowdfunding platform. 
@@ -53,6 +53,7 @@ export default function CrowdFunding(props) {
     background-color: rgb(255,255,255, 0.3);
     padding: 50px;
     width: 500px;
-    margin-left: 70px;
+    margin: auto;
+    display: flex;
     color: white
   `;
