@@ -1,9 +1,8 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import jsonFormData from './idea-form-v1';
-import logo from '../../../res/logo_horizontal_white.png';
 import { PoseGroup } from 'react-pose';
 import posed from 'react-pose';
 import QuestionGroup from '../../reogranisation/Questions/QuestionGroup';
@@ -28,12 +27,7 @@ const Submission = (props) => {
   if (!props.authState.user) {
     props.user()
   }
-  // const checkLocalStorage = () => {
-  //   let token = localStorage.getItem('currentUserJwt')
-  //   console.log(token)
-  // }
 
-  // checkLocalStorage()
 
   const handleAnswers = (id, value) => {
     setAnswers({
@@ -116,38 +110,6 @@ const Submission = (props) => {
 };
 
 
-const FlexRow = styled.div`
-  display: flex;
-  @media only screen and (orientation:portrait) { 
-    flex-direction: column;
-}
-`;
-
-const FlexColumn = styled.div`
-  display: flex;
-  flex: 1;
-`;
-
-const FormGroup = styled.div`
-  width: 100%;
-  padding: 5px 10px;
-`;
-
-const TextTransitions = posed.div({
-  isActive: {
-    x: 0,
-    transition: {
-      default: { type: 'spring', stiffness: 1000, damping: 30 },
-    },
-  },
-  disabled: {
-    x: 0,
-    transition: {
-      default: { type: 'spring', stiffness: 1000, damping: 30 },
-    },
-  },
-});
-
 const PProgressBar = posed.div({
   visible: {
     width: (props) => {
@@ -217,13 +179,6 @@ const POverlay = posed.div({
   },
 });
 
-const Logo = styled.img`
-  position: absolute;
-  left: 30px;
-  top: 70px;
-  margin: 0 auto;
-  height: 70px;
-`;
 
 const Overlay = styled(POverlay)`
   width: 100vw;

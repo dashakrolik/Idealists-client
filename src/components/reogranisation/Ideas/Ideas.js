@@ -3,15 +3,7 @@ import React, {useState, useEffect} from 'react'
 // import {baseUrl} from '../../constants'
 
 export default function Ideas (props) {
-    // const [idea, setIdea] = useState({})
-    // const pageId = props.match.params.id
 
-
-    // useEffect(()=>{
-    //     request
-    //         .get(`${baseUrl}/ideas/${pageId}`)
-    //         .then(res => setIdea(res.body))
-    // })
     return (
         <div>
             {sampleData[0].idea}

@@ -2,6 +2,7 @@
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
+import industryList from '../reogranisation/Start/industry-list';
 import countryList from '../reogranisation/Start/country-list';
 import posed from 'react-pose';
 import Select from 'react-select';
@@ -10,10 +11,11 @@ import validator from 'validator';
 import { baseUrl } from '../../constants';
 import request from 'superagent';
 import { Redirect } from 'react-router'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import { handleInputChange } from 'react-select/lib/utils';
 
-const Registration = (props) => {
-  
+const InvestorRegistration = (props) => {
+
   const [formValidated, setFormValidated] = useState(false);
   const [history, location] = useState({});
   const [formData, setFormData] = useState({
@@ -47,8 +49,13 @@ const Registration = (props) => {
       shouldShowError: false,
       validated: true,
     },
+    industry: {
+      value: [],
+      shouldShowError: false,
+      validated: true
+    },
     role: {
-      value: 'user',
+      value: 'expert',
       shouldShowError: false,
       validated: true
     }
@@ -81,6 +88,10 @@ const Registration = (props) => {
       validator: (val) => (val),
       shouldShowError: (val) => (!val),
     },
+    industry: {
+      validator: (val) => (val),
+      shouldShowError: (val) => (!val)
+    },
     role: {
       validator: (val) => (val.length <= 100),
       shouldShowError: (val) => (val.length > 4)
@@ -110,13 +121,39 @@ const Registration = (props) => {
     }, {}));
   };
 
+  const handleChangeIndustry = (property, e) => {
+    const newState = {
+      ...formData,
+      [property]: {
+        ...formData[property],
+        value: []
+      }
+    }
+    for (let i = 0, l = e.length; i < l; i++) {
+      if (e[i]) {
+        newState[property].value.push(e[i]);
+      }
+    }
+    setFormData(Object.keys(formData).reduce((acc, currVal) => {
+      
+      return {
+        ...acc,
+        [currVal]: {
+          ...newState[currVal],
+          validated: !!(formValidations[currVal].validator(newState[currVal].value)),
+        },
+      };
+    }, []));
+    console.table(newState.industry.value.map(val => val.value), "CURRR")
+  };
+
   const handleChangeCountry = (property, e) => {
     const newState = {
       ...formData,
       [property]: {
         ...formData[property],
         value: e.value
-      },
+      }
     }
     setFormData(Object.keys(formData).reduce((acc, currVal) => {
       return {
@@ -141,7 +178,7 @@ const Registration = (props) => {
 
   const signup = () => {
 
-    const { firstName, lastName, email, password, country, role } = formData;
+    const { firstName, lastName, email, password, country, role, industry } = formData;
     request
       .post(`${baseUrl}/users`)
       .send({
@@ -150,11 +187,12 @@ const Registration = (props) => {
         email: email.value,
         password: password.value,
         country: country.value,
-        role: role.value
+        role: role.value,
+        industry: industry.value.map(val => val.value)
       })
       .then(res => {
         if (res.status === 200) {
-          props.history.push(`MyIdea/login`)
+          props.history.push(`Investors/login`)
         }
       })
       .catch(err => {
@@ -165,7 +203,8 @@ const Registration = (props) => {
         }
       });
   };
-  const countryListNL = [{value:"The Netherlands", label:"The Netherlands"}]
+
+  const countryListNL = [{ value: "The Netherlands", label: "The Netherlands" }]
 
   return (
     <Container pose={props.show ? 'show' : 'hide'} css={css`justify-self: flex-end; width: 100%;`}>
@@ -175,7 +214,7 @@ const Registration = (props) => {
           <FlexRow>
             <FlexColumn>
               <FormGroup css={css`font-size: 24px; padding: 5px 10px;`}>
-                <b>Idea Submission</b> / New User
+                <b>Investors</b> / New User
               </FormGroup>
             </FlexColumn>
           </FlexRow>
@@ -183,7 +222,7 @@ const Registration = (props) => {
           <FlexRow>
             <FlexColumn>
               <FormGroup css={css`font-size: 10px; padding: 5px 10px; margin: 0 0 30px;`}>
-                <a href='/MyIdea/login'> Already registered? Click here to log in</a>
+                <a href='/Investors/login'> Already registered? Click here to log in</a>
               </FormGroup>
             </FlexColumn>
           </FlexRow>
@@ -206,6 +245,15 @@ const Registration = (props) => {
                   value={formData.lastName.value} />
               </FormGroup>
             </FlexColumn>
+            {/* <FlexColumn>
+              <FormGroup>
+                <label>Role{formData.role.shouldShowError && !formData.role.validated &&
+                  <span
+                    css={css`font-weight: 800; color: #ff4444;`}> / max 100 chars</span>}</label>
+                <input type='text' name='role' onChange={handleChange} onBlur={enableValidation}
+                  value={formData.role.value} />
+              </FormGroup>
+            </FlexColumn> */}
           </FlexRow>
 
           <FlexRow>
@@ -264,11 +312,31 @@ const Registration = (props) => {
             <FlexColumn>
               <FormGroup>
                 <label>What is your country of residence?</label>
-                <Select 
-                name="country"
-                options={countryListNL} 
-                onChange={handleChangeCountry.bind(this, "country")}
-                value={formData.country.value.value}
+                <Select
+                  name="country"
+                  options={countryListNL}
+                  onChange={handleChangeCountry.bind(this, "country")}
+                  value={formData.country.value.value}
+                />
+              </FormGroup>
+            </FlexColumn>
+          </FlexRow>
+          <FlexRow>
+            <FlexColumn>
+              <FormGroup>
+                <label>What is your industry?</label>
+                <Select
+                  name="industry"
+                  // className="industry"
+                  // defaultValue={industryList[0].value}
+                  options={industryList}
+                  onChange={handleChangeIndustry.bind(this, "industry")}
+                  value={formData.industry.value}
+                  // onBlur={enableValidation}
+                  isMulti
+                // onInputChange={handleInputChange}
+                // inputValue={formData.industry.value}
+                // defaultInputValue={industryList['0'].value}
                 />
               </FormGroup>
             </FlexColumn>
@@ -277,8 +345,8 @@ const Registration = (props) => {
         <div css={css`float: right; width: 160px;`}>
           <Button disabled={!formValidated} text='Start my submission' disabledText='Sign up' withIcon
             onClick={signup} />
-            
         </div>
+
         <div css={css`float: right; width: 120px;`}>
           <Button text='Cancel' disabled={false} onClick={props.handleCancel} />
         </div>
@@ -370,4 +438,4 @@ const RegistrationForm = styled.div`
   }
 `;
 
-export default withRouter(Registration)
+export default withRouter(InvestorRegistration)
