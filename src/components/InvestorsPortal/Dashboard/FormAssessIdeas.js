@@ -161,7 +161,7 @@ export default class FormAssessIdeas extends Component {
       // !hasAgreementMentorError &&
       // !hasAgreementMentorNoError
     ) {
-      alert("All validated!");
+      
       request
       .post(`${baseUrl}/assessments`)
       .set("Authorization", `Bearer ${this.props.authState.token}`)
