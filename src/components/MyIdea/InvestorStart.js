@@ -18,7 +18,7 @@ const InvestorStart = (props) => {
 
   const newUser = () => {
     if (props.authState.loggedIn) {
-      props.history.push('/MyIdea/New');
+      props.history.push('/investor/dashboard');
     } else {
       setUiState('displayingLogin');
     }

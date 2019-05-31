@@ -47,6 +47,11 @@ const Registration = (props) => {
       shouldShowError: false,
       validated: true,
     },
+    role: {
+      value: 'user',
+      shouldShowError: false,
+      validated: true
+    }
   });
 
   const passwordRegEx = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])");
@@ -76,6 +81,10 @@ const Registration = (props) => {
       validator: (val) => (val),
       shouldShowError: (val) => (!val),
     },
+    role: {
+      validator: (val) => (val.length <= 100),
+      shouldShowError: (val) => (val.length > 4)
+    }
   };
 
   useEffect(() => {
@@ -132,7 +141,7 @@ const Registration = (props) => {
 
   const signup = () => {
 
-    const { firstName, lastName, email, password, country } = formData;
+    const { firstName, lastName, email, password, country, role } = formData;
     request
       .post(`${baseUrl}/users`)
       .send({
@@ -141,6 +150,7 @@ const Registration = (props) => {
         email: email.value,
         password: password.value,
         country: country.value,
+        role: role.value
       })
       .then(res => {
         if (res.status === 200) {
