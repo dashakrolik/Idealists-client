@@ -28,6 +28,7 @@ return (
                         justify="flex-end"
                         alignItems="center"
                 >
+                    {console.log(props, "PROPS")}
                 {
                 !localStorage.currentUserJwt || !props.authState.loggedIn  ? 
                 <Button color="inherit" onClick={() => props.history.push('/MyIdea/login')}>Login</Button> : null
@@ -36,16 +37,19 @@ return (
                 !props.authState.loggedIn ?
                 <Button color="inherit" onClick={() => props.history.push('/MyIdea')}>Sign Up</Button> : null
                 }
-                {   
-                props.authState.loggedIn && localStorage.currentUserJwt  ? 
+                {  
+                !props.authState.user ? null :
+                props.authState.loggedIn && localStorage.currentUserJwt && (props.authState.user.role === "user" || props.authState.user.role === "admin") ? 
                 <Button color="inherit" onClick={() => props.history.push('/MyIdea/dashboard')}>Dashboard</Button> : null
                 }
                 {
-                props.authState.loggedIn && localStorage.currentUserJwt  ? 
+                !props.authState.user ? null :
+                props.authState.loggedIn && localStorage.currentUserJwt && (props.authState.user.role === "expert" || props.authState.user.role === "admin") ? 
                 <Button color="inherit" onClick={() => props.history.push('/Investors/dashboard')}>Dashboard</Button> : null
                 }
                 {
-                 props.authState.loggedIn && localStorage.currentUserJwt  ?   
+                !props.authState.user ? null :
+                props.authState.loggedIn && localStorage.currentUserJwt && (props.authState.user.role === "user") ?   
                 <Button color="inherit" onClick={() => props.history.push('/MyIdea/new')}>New Idea</Button> : null
                 }
                 {
