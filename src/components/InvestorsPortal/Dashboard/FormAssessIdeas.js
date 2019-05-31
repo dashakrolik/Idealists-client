@@ -168,7 +168,7 @@ export default class FormAssessIdeas extends Component {
       .send({ assessment: this.state })
       .then(res => {
         if (res.status === 201) {
-          console.log('yes')
+          return this.props.history.push('/AssessmentSubmitted')
         }
       })
       .catch(err => {

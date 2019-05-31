@@ -24,6 +24,7 @@ import Crowdfunding from './components/InvestorsPortal/Dashboard/Crowdfunding'
 import MyMentorships from './components/InvestorsPortal/Dashboard/MyMentorships'
 import AutoMatchDetails from './components/MyIdea/Dashboard/AutoMatchDetails'
 import FormAssessIdeas from './components/InvestorsPortal/Dashboard/FormAssessIdeas';
+import CompleteAssessment from './components/InvestorsPortal/Dashboard/CompleteAssessment';
 
 
 class App extends Component {
@@ -180,6 +181,9 @@ class App extends Component {
               }} />
               <Route exact path='/Investors/dashboard/assess' render={(props) => {
                 return <AssesIdeas {...props} sendAssessment={this.sendAssessment} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
+              }} />
+              <Route exact path='/AssessmentSubmitted' render={(props) => {
+                return <CompleteAssessment {...props} sendAssessment={this.sendAssessment} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
               }} />
               <Route exact path='/Investors/dashboard/assess/:id' render={(props) => {
                 return <FormAssessIdeas {...props} authState={this.state.auth} sendAssessment={this.sendAssessment} login={this.requestLogin} user={this.getCurrentUser} />;
