@@ -51,7 +51,7 @@ export default function AssessIdeas(props) {
             Here you can track how all of your investments are performing and 
             ask the founders questions or help them with your feedback.
           </StyledCard>
-        <div className='flex-tilescontainer'>
+        {/* <div className='flex-tilescontainer'>
           {expertIdeas.map(idea =>
             <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
               <div className='idea-tile' key={idea.id}>
@@ -72,7 +72,7 @@ export default function AssessIdeas(props) {
               </div>
             </Link>
           )}
-        </div>
+        </div> */}
       </div>
     )}
 
