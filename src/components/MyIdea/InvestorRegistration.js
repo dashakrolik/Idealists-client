@@ -346,7 +346,7 @@ const InvestorRegistration = (props) => {
           <Button disabled={!formValidated} text='Start my submission' disabledText='Sign up' withIcon
             onClick={signup} />
         </div>
-        {console.log(formData, "DATAA")}
+
         <div css={css`float: right; width: 120px;`}>
           <Button text='Cancel' disabled={false} onClick={props.handleCancel} />
         </div>

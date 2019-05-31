@@ -45,7 +45,7 @@ export default function AssessIdeas(props) {
     else props.history.push('/InvestorStart');
   }, []);
   
-  console.log(assessments, "ASSessment")
+
 
 
 
