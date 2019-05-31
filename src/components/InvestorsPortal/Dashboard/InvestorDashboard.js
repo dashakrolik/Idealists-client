@@ -5,7 +5,8 @@ import { Redirect, Link } from 'react-router-dom';
 import './InvestorDashboard.css'
 import assess from '../../../res/assess-white.png'
 import invest from '../../../res/invest-white.png'
-
+import mentor from '../../../res/mentor.png'
+import crowdfunding from '../../../res/crowdfunding.png'
 
 export default function investorDashboard(props) {
     const [userData, setUserData] = useState({});
@@ -50,14 +51,14 @@ export default function investorDashboard(props) {
 
                 <Link className='links' to='/investors/dashboard/crowdfunding'>
                     <div className='invest-tile'>
-                        <img className='icons' src={invest}></img>
+                        <img className='icons' src={crowdfunding}></img>
                         <h4>Crowd Funding</h4>
                     </div>
                 </Link>
 
                 <Link className='links' to='/investors/dashboard/mymentorships'>
                     <div className='invest-tile'>
-                        <img className='icons' src={invest}></img>
+                        <img className='icons' src={mentor}></img>
                         <h4>My mentorships</h4>
                     </div>
                 </Link>
