@@ -8,8 +8,6 @@ import posed from 'react-pose';
 export default function IdeaDashboard(props) {
 
   const [user, setUserData] = useState({});
-  const [userLoggedIn, setUserLoggedIn] = useState(true);
-
   const [userIdeas, setUserIdeas] = useState([]);
 
   useEffect(() => {
@@ -20,7 +18,7 @@ export default function IdeaDashboard(props) {
         .then(res => setUserData(res.body));
     else props.history.replace('/MyIdea/login');
   }, []);
-
+  
   useEffect(() => {
     request
       .get(`${baseUrl}/ideas`)
@@ -28,14 +26,9 @@ export default function IdeaDashboard(props) {
       .then(res => setUserIdeas(res.body));
   }, []);
 
-  const handleClick = () => {
-    props.history.replace('/MyIdea/')
-  }
-
   if (props.authState.LoggedIn === false)
     return (
       <Redirect to='/myIdea' />)
-
 
   if (!props.authState.user) {
     props.user()
@@ -68,23 +61,11 @@ export default function IdeaDashboard(props) {
                     idea.progress.step04 === false && <p>Status: Expert check </p>}
                 </div>
               </Link>
-              )}
-      </div>
+            )}
+        </div>
     </div>
   );
 }
-
-const PStartContent = posed.div({
-  notDisplayingLogin: {
-    y: 0,
-    opacity: 1.0,
-  },
-  displayingLogin: {
-    y: -390,
-    opacity: 0.15,
-  },
-});
-
 
 const styledH2 = {
   fontSize: 20,

@@ -37,10 +37,12 @@ const CompleteSubmission = (props) => {
       };
     });
 
+    const dataIndustryToSend = props.answers[2][1].map(val => val.value)
+
     request
       .post(`${baseUrl}/ideas`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      .send({ idea: dataToSend })
+      .send({ idea: dataToSend, industryIdea: dataIndustryToSend })
       .then(res => {
         if (res.status === 201) {
           setDisplaySuccess(true);

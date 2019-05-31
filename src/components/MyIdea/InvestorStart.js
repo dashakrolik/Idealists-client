@@ -1,14 +1,13 @@
 /** @jsx jsx */
 import { css, Global, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../reogranisation/Questions/Button';
 import posed from 'react-pose';
-import logo from '../../res/logo_horizontal_white.png';
-import Registration from './Registration';
-import { Redirect } from 'react-router-dom';
 
-const IdeaStart = (props) => {
+import InvestorRegistration from './InvestorRegistration';
+
+const InvestorStart = (props) => {
 
   const [uiState, setUiState] = useState('notDisplayingLogin');
   const [emailAddress, setEmailAddress] = useState('');
@@ -19,14 +18,14 @@ const IdeaStart = (props) => {
 
   const newUser = () => {
     if (props.authState.loggedIn) {
-      props.history.push('/MyIdea/New');
+      props.history.push('/investor/dashboard');
     } else {
       setUiState('displayingLogin');
     }
   };
 
   const existingUser = () => {
-    props.history.push('/MyIdea/login');
+    props.history.push('/Investors/login');
   };
 
   const closeRegistration = () => {
@@ -50,30 +49,26 @@ const IdeaStart = (props) => {
         }
       `} />
       <Content>
-        {/* <div css={css`grid-area: logo-area;`}>
-          <Logo src={logo} alt='Logo' />
-        </div> */}
         <div css={css`grid-area: content-area`}>
           <div css={css`display: flex; align-items: center; flex-direction: column;`}>
             <StartContent pose={uiState}
               css={css`display: flex; flex-direction: column; width: auto; margin-bottom: 60px;`}>
               <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
-                My Idea Page
+                My Investor Page
               </Heading>
               <Paragraph>
-                Welcome to your Idea Page. Below you can submit your idea or check on the status of ideas you’ve already
-                submitted.
+                Welcome to your Investor Page. Below you can create a new account or login.
               </Paragraph>
               <Paragraph>
                 If you don’t have an account yet when clicking one of the buttons, you will be asked to make
-                one so we can keep you updated throughout the assessment process
+                one.
               </Paragraph>
               <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
                 <Button text={'New User'} onClick={newUser} />
                 <Button text={'Existing User'} onClick={existingUser} />
               </Controls>
             </StartContent>
-            <Registration show={uiState === 'displayingLogin'} handleCancel={closeRegistration} props={props} />
+            <InvestorRegistration show={uiState === 'displayingLogin'} handleCancel={closeRegistration} props={props} />
           </div>
         </div>
       </Content>
@@ -152,4 +147,4 @@ const Container = styled.div`
   display: flex;
 `;
 
-export default IdeaStart;
+export default InvestorStart;
