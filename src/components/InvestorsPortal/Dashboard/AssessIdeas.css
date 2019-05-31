@@ -1,0 +1,42 @@
+.assessIdeas-container {
+    min-height: 100%;
+    background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
+    text-align: center;
+}
+
+.flex-tilescontainer {
+    margin: auto;   
+    max-width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.title {
+    color: white;
+}
+
+.assess-tile {
+    width: 25vw;
+    height: 40vh;
+    margin: 10px;
+    border: 1px solid silver;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.assess-tile:hover {
+    width: 25vw;
+    height: 40vh;
+    margin: 10px;
+    border: 1px solid silver;
+    border-radius: 10px;
+    background-color: #DFEFF2;
+    transition: ease-in;
+}
+
+.tile-link {
+    text-decoration: none;
+    text-decoration-color: black;
+    color: black;
+}

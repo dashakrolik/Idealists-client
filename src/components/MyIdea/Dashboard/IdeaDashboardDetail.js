@@ -1,25 +1,22 @@
-import React, { useEffect, useState, Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import './IdeaDashBoardDetail.css'
 import styled from '@emotion/styled';
 import Card from '@material-ui/core/Card'
-import { Redirect, Link } from 'react-router-dom';
-import Grid from '@material-ui/core/Grid'
+import { Redirect } from 'react-router-dom';
 import Button from '../../reogranisation/Questions/Button';
 
 
 export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
     
-    // progress bar
-    const [percentRange, setProgress] = useState(0);
-    
     const ideasId = props.match.params.id
     if (props.authState.LoggedIn === false) {
-    return (
-      <Redirect to='/myIdea' />
-    ) }
+        return (
+        <Redirect to='/myIdea' />
+        ) }
+
     useEffect(() => {
         request
             .get(`${baseUrl}/ideas/${ideasId}`)
@@ -27,12 +24,11 @@ export default function IdeaDashboardDetail(props) {
             .then(res => setUserIdeas(res.body.idea))
     }, []);
 
-    // console.log("IDEAS", userIdeas)
-
+console.log(userIdeas, "IDEAAA")
     const processTitle = (title) => {
         let splitTitle = title.split('?')
         const processedTitle = splitTitle[0] 
-        return processedTitle
+            return processedTitle
     }
 
     let qAnswers = []
@@ -55,7 +51,7 @@ export default function IdeaDashboardDetail(props) {
     })
     
 
-    qAnswers = qAnswers.map(answer => typeof answer === 'object' ? answer[0] ? answer[0].value : answer.value : answer)
+    qAnswers = qAnswers.map(answer => typeof answer === 'object' ? answer[1] ? (answer[1].value +' & '+ answer[0].value) : answer[0] ? answer[0].value : answer.value : answer)
 
     if (qAnswers[0] === 'true') {
         qAnswers[0] = 'yes'
@@ -121,7 +117,8 @@ const StyledDiv = styled.div `
     border: 1px solid #ccc;
     padding: 20px;
     color: white;
-    margin-bottom: 20px
+    margin-bottom: 20px;
+    margin-top: 45px
 `
 const StyledCard = styled(Card) `
     background-color: rgb(255,255,255, 0.3);

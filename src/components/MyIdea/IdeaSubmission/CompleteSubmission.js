@@ -37,10 +37,12 @@ const CompleteSubmission = (props) => {
       };
     });
 
+    const dataIndustryToSend = props.answers[2][1].map(val => val.value)
+
     request
       .post(`${baseUrl}/ideas`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      .send({ idea: dataToSend })
+      .send({ idea: dataToSend, industryIdea: dataIndustryToSend })
       .then(res => {
         if (res.status === 201) {
           setDisplaySuccess(true);
@@ -77,8 +79,7 @@ const CompleteSubmission = (props) => {
 
     handleSubmit = (event) => {
       if (this.state.value === (props.authState.user.firstName + ' ' + props.authState.user.lastName)) {
-        alert(this.state.value + ' has given consent to the agreement!'); //change it
-        // setAgreeBttn(true)
+        alert(this.state.value + ' has given consent to the agreement!');
         submitIdea()
         event.preventDefault()
       } else {

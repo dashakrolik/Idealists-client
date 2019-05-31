@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import { jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import {withRouter} from 'react-router-dom'
@@ -7,12 +7,7 @@ import {withRouter} from 'react-router-dom'
 function EnterNewPassword(props) {
   
   const [resetState, setLoginState] = useState({});
-  const [history, location,] = useState({});
-  let initJwt = props.location.pathname.split('/')
- 
-  const jwt = initJwt[2]
-
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(resetState);
@@ -56,16 +51,6 @@ function EnterNewPassword(props) {
 
 
 export default withRouter(EnterNewPassword)
-
-const Logo = styled.img`
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  margin: -300px auto auto auto;
-  height: 70px;
-`;
-
 
 const LeftSide = styled.div`
   position: absolute;
