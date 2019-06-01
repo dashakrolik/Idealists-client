@@ -56,7 +56,7 @@ console.log(userIdeas, "IDEAAA")
         qAnswers[0] = 'yes'
     }
 
-    if (props.authState.LoggedIn === false && localStorage.currentUserJwt === null) {
+    if (props.authState.loggedIn === false) {
         return (
           <Redirect to='/myIdea' />
         ) }
