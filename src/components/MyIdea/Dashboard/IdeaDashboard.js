@@ -28,7 +28,7 @@ export default function IdeaDashboard(props) {
 
   if (props.authState.loggedIn === false)
     return (
-      <Redirect to='/myIdea' />)
+      <Redirect to='/MyIdea' />)
 
   if (!props.authState.user) {
     props.user()
