@@ -227,7 +227,7 @@ class App extends Component {
               <Route exact path='/ideas/:id/automatch' render={(props) => {
                 return <AutoMatch {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} />;
               }} />
-              <Route exact path='/ideas/:id/ideas/:id/automatch/:patentNumber' render={(props) => {
+              <Route exact path='/ideas/:id/automatch/:patentNumber' render={(props) => {
                 return <AutoMatchDetails {...props} loadPdf={this.onDocumentLoadSuccess} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} />;
               }} />
               <Route exact path="/" render={() => <Redirect to="/MyIdea" />} />

@@ -68,7 +68,7 @@ export default function AssessIdeas(props) {
     <div className='assessIdeas-container'>
       <br />
       <div className='title'>
-        <h1 >This is {userData.firstName}'s Expert dashboard</h1>
+        <h2 >This is {userData.firstName}'s Expert dashboard</h2>
       </div>
       {expertIdeas.length < 1 ? <h2 style={styledH2}><a href="/Investors/dashboard">Sorry There is no idea related with your industry selection!</a></h2> : <h2 style={styledH2}>Please check the ideas related with your industries</h2>}
 
