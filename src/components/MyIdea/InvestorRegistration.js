@@ -314,7 +314,7 @@ const InvestorRegistration = (props) => {
                 <label>What is your country of residence?</label>
                 <Select
                   name="country"
-                  options={countryListNL}
+                  options={countryList}
                   onChange={handleChangeCountry.bind(this, "country")}
                   value={formData.country.value.value}
                 />
@@ -324,7 +324,7 @@ const InvestorRegistration = (props) => {
           <FlexRow>
             <FlexColumn>
               <FormGroup>
-                <label>What is your industry?</label>
+                <label>What are your industry expertises?</label>
                 <Select
                   name="industry"
                   // className="industry"
