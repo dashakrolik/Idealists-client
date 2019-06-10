@@ -266,7 +266,7 @@ const Registration = (props) => {
                 <label>What is your country of residence?</label>
                 <Select 
                 name="country"
-                options={countryListNL} 
+                options={countryList} 
                 onChange={handleChangeCountry.bind(this, "country")}
                 value={formData.country.value.value}
                 />

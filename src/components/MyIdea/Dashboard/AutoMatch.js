@@ -103,7 +103,7 @@ export default function IdeaDashboardDetail(props) {
                 css={css`display: flex; flex-direction: column; width: auto; margin-bottom: 60px;`}>
 
                 <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
-                  
+
                   <GroupContainer>
                     <FlexRow><FlexColumn><GroupTitle>Succesfully submit your comments to explain difference with patents.</GroupTitle></FlexColumn></FlexRow>
                     <FlexRow><FlexColumn><GroupSubtitle>We'll be in touch with you soon.</GroupSubtitle></FlexColumn></FlexRow>
@@ -118,7 +118,7 @@ export default function IdeaDashboardDetail(props) {
     )
   }
 
-console.log(patentDifference, "DIFF")
+  console.log(patentDifference, "DIFF")
   // ONLY PROCEED if (arr.length === 10) !!!!!!!!!!!!!!!!! coz it takes time for the loop to complete
   // let obj = newImageArray.find(o => o.name === 'string 1');
 
@@ -143,27 +143,28 @@ console.log(patentDifference, "DIFF")
                   <StyledCard key={relevanceNumber[index]}>
                     <Link to={`/ideas/${ideasId}/automatch/${relevanceNumber[index]}`} results={automatchResults} relevancenumber={relevanceNumber}>
                       <Paragraph>
-                        Title: {automatchTitle[index]}
+                        <strong>{automatchTitle[index]}</strong><br />
+                        ( click to open patent )
 
                       </Paragraph>
                     </Link>
                     <Paragraph>
                       <strong>
-                        Text:
+                        Short summary:
                         </strong>
                       <br />
                       {automatchText[index]}
                     </Paragraph>
                     {/* <Button name={key} onClick={updateDifference} text={`It's the same`} value={false} /> */}
                     <div >
-                    <button onClick={updateDifference} text={`It's the same`} name={key} value={false} style={{
+                      <button onClick={updateDifference} text={`It's the same`} name={key} value={false} style={{
                         width: '100%', height: '30px', backgroundColor: 'inherit', color: 'inherit', position: 'relative',
                         alignSelf: 'flex-start', margin: '5px', borderRadius: '10px', padding: '2px', border: '1px solid',
                         alignItems: 'center', justifyContent: 'space-between'
                       }}
                       >It's the same</button>
 
-                    
+
                       <button onClick={updateShow} text={`It's different`} name={key} style={{
                         width: '100%', height: '30px', backgroundColor: 'inherit', color: 'inherit', position: 'relative',
                         alignSelf: 'flex-start', margin: '5px', borderRadius: '10px', padding: '2px', border: '1px solid',
