@@ -79,8 +79,7 @@ const CompleteSubmission = (props) => {
 
     handleSubmit = (event) => {
       if (this.state.value === (props.authState.user.firstName + ' ' + props.authState.user.lastName)) {
-        alert(this.state.value + ' has given consent to the agreement!'); //change it
-        // setAgreeBttn(true)
+        alert(this.state.value + ' has given consent to the agreement!');
         submitIdea()
         event.preventDefault()
       } else {

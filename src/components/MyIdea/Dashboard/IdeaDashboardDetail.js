@@ -12,10 +12,12 @@ export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
     
     const ideasId = props.match.params.id
+
     if (props.authState.loggedIn === false) {
     return (
       <Redirect to='/MyIdea' />
     ) }
+
     useEffect(() => {
         request
             .get(`${baseUrl}/ideas/${ideasId}`)
@@ -26,7 +28,7 @@ export default function IdeaDashboardDetail(props) {
     const processTitle = (title) => {
         let splitTitle = title.split('?')
         const processedTitle = splitTitle[0] 
-        return processedTitle
+            return processedTitle
     }
 
     let qAnswers = []

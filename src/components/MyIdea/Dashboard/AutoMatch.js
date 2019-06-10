@@ -250,8 +250,6 @@ export default function IdeaDashboardDetail(props) {
     return (<Heading>Loading...</Heading>)
   }
 }
-
-
 const PStartContent = posed.div({
   notDisplayingLogin: {
     y: 0,
@@ -262,13 +260,10 @@ const PStartContent = posed.div({
     opacity: 0.15,
   },
 });
-
 const StartContent = styled(PStartContent)`
     width: 100%;
   `;
-
 const Content = styled.div`
-
     color: #ffffff;
     width: 80vw;
     max-width: 900px;
@@ -287,27 +282,22 @@ const Content = styled.div`
       grid-template-areas: "logo-area content-area";
     }
   `;
-
 const Heading = styled.div`
     font-size: 30px;
     font-weight: 800;
     margin: 100px 10px 80px 10px;
   `;
-
 const Paragraph = styled.div`
     display: block;
     
     margin: 18px 10px 10px 10px;
     font-size: 14px;
-
   `;
-
 const StyledCard = styled(Card)`
     background-color: rgb(255,255,255, 0.3);
     padding-bottom: 5px;
     margin-bottom: 10px;
   `;
-
 const Container = styled.div`
     position: relative;
     align-items: center;
@@ -320,15 +310,12 @@ const Container = styled.div`
     background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
     display: flex;
   `;
-
-
 const StyledTextField = styled(TextField)`
     background-color: rgb(255,255,255, 0.5);
     marginLeft: theme.spacing.unit;
     marginRight: theme.spacing.unit;
     
   `;
-
 const AddlQuestions = styled.div`
     padding: 3em;
     border: 1px solid #ccc;
@@ -412,3 +399,4 @@ const GroupContainer = styled(PGroupContainer)`
   justify-content: space-evenly;
   flex-grow: 1;
 `;
+
