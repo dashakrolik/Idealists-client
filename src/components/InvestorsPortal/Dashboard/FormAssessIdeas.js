@@ -52,6 +52,7 @@ export default class FormAssessIdeas extends Component {
       explanation6: "",
       explanation7: "",
       explanation8: "",
+      explanation9: "",
       willPeopleWantThis: "",
       doesThisSolveProblem: "",
       isItAGoodIdea: "",
@@ -76,6 +77,7 @@ export default class FormAssessIdeas extends Component {
       hasExplanation6Error: true,
       hasExplanation7Error: true,
       hasExplanation8Error: true,
+      hasExplanation9Error: true,
       hasProReason1Error: true,
       hasProReason2Error: true,
       hasProReason3Error: true,
@@ -110,6 +112,7 @@ export default class FormAssessIdeas extends Component {
       hasExplanation6Error,
       hasExplanation7Error,
       hasExplanation8Error,
+      hasExplanation9Error,
       hasProReason1Error,
       hasProReason2Error,
       hasProReason3Error,
@@ -140,6 +143,7 @@ export default class FormAssessIdeas extends Component {
       // !hasExplanation6Error &&
       // !hasExplanation7Error &&
       // !hasExplanation8Error &&
+      // !hasExplanation9Error &&
       // !hasProReason1Error &&
       // !hasProReason2Error &&
       // !hasProReason3Error &&
@@ -161,7 +165,7 @@ export default class FormAssessIdeas extends Component {
       // !hasAgreementMentorError &&
       // !hasAgreementMentorNoError
     ) {
-      alert("All validated!");
+      
       request
       .post(`${baseUrl}/assessments`)
       .set("Authorization", `Bearer ${this.props.authState.token}`)
@@ -205,6 +209,7 @@ export default class FormAssessIdeas extends Component {
       explanation6,
       explanation7,
       explanation8,
+      explanation9,
       willPeopleWantThis,
       isThisTheRightTiming,
       isItAGoodIdea,
@@ -1222,7 +1227,7 @@ export default class FormAssessIdeas extends Component {
                     name="explanation6" 
                     value={explanation6} 
                     disabled={false} 
-                    placeholder="Place your explanation 6 here" 
+                    placeholder="Place your explanation here" 
                     validate={validate} 
                     validationCallback={res =>
                       this.setState({
@@ -1274,7 +1279,7 @@ export default class FormAssessIdeas extends Component {
                     name="explanation7" 
                     value={explanation7} 
                     disabled={false} 
-                    placeholder="Place your explanation 7 here" 
+                    placeholder="Place your explanation here" 
                     validate={validate} 
                     validationCallback={res =>
                       this.setState({
@@ -1326,7 +1331,7 @@ export default class FormAssessIdeas extends Component {
                     name="explanation8" 
                     value={explanation8} 
                     disabled={false} 
-                    placeholder="Place your explanation 8 here" 
+                    placeholder="Place your explanation here" 
                     validate={validate} 
                     validationCallback={res =>
                       this.setState({
@@ -1349,6 +1354,58 @@ export default class FormAssessIdeas extends Component {
                     }} 
                     validationOption={{
                       name: "Explanation8", 
+                      check: true,
+                      required: true, 
+                      type: "string" 
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  <span
+                    className="icon icon-insert-drive-file"
+                    style={{ ...labelContentStyle, fontSize: "20px" }}
+                  />
+                  &nbsp;
+                  <span style={labelContentStyle}>Can you think of a way to make this idea even better?</span>
+                </div>
+                <div style={{ flex: "6 6 0px" }}>
+                  <Textarea
+                    tabIndex="7" 
+                    id="explanation9" 
+                    name="explanation9" 
+                    value={explanation9} 
+                    disabled={false} 
+                    placeholder="Place your explanation here" 
+                    validate={validate} 
+                    validationCallback={res =>
+                      this.setState({
+                        hasExplanation9Error: res,
+                        validate: false
+                      })
+                    } 
+                    classNameInput="" 
+                    classNameWrapper="" 
+                    classNameContainer="" 
+                    customStyleInput={{}} 
+                    customStyleWrapper={{}} 
+                    customStyleContainer={{}} 
+                    onChange={(explanation9, e) => {
+                      this.setState({ explanation9 });
+
+                    }} 
+                    onBlur={e => {
+
+                    }} 
+                    validationOption={{
+                      name: "Explanation9", 
                       check: true,
                       required: true, 
                       type: "string" 

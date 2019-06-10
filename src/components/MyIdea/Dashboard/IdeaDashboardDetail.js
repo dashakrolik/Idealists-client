@@ -12,10 +12,11 @@ export default function IdeaDashboardDetail(props) {
     const [userIdeas, setUserIdeas] = useState([]);
     
     const ideasId = props.match.params.id
-    if (props.authState.LoggedIn === false) {
-        return (
-        <Redirect to='/myIdea' />
-        ) }
+
+    if (props.authState.loggedIn === false) {
+    return (
+      <Redirect to='/MyIdea' />
+    ) }
 
     useEffect(() => {
         request
@@ -24,7 +25,6 @@ export default function IdeaDashboardDetail(props) {
             .then(res => setUserIdeas(res.body.idea))
     }, []);
 
-console.log(userIdeas, "IDEAAA")
     const processTitle = (title) => {
         let splitTitle = title.split('?')
         const processedTitle = splitTitle[0] 
@@ -57,9 +57,9 @@ console.log(userIdeas, "IDEAAA")
         qAnswers[0] = 'yes'
     }
 
-    if (props.authState.LoggedIn === false && localStorage.currentUserJwt === null) {
+    if (props.authState.loggedIn === false) {
         return (
-          <Redirect to='/myIdea' />
+          <Redirect to='/MyIdea' />
         ) }
     return (
         

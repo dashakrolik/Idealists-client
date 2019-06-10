@@ -38,7 +38,7 @@ export default function MyMentorships(props) {
       <div className='dashboard-container'>
         <br />
         <br />
-        <h4 className='title'>This is {userData.firstName}'s dashboard</h4>
+        <h2 className='title'>This is {userData.firstName}'s dashboard</h2>
         <StyledCard>
           My MentorshipsDid you apply for mentorship whilst assessing one of the ideas and want to see if theteam picked you as one of 3 mentors? 
           Do it right here. Mentors receive a 1% equity-interest in the idea-company in exchange for 
@@ -53,6 +53,7 @@ export default function MyMentorships(props) {
     background-color: rgb(255,255,255, 0.3);
     padding: 50px;
     width: 500px;
-    margin-left: 70px;
+    margin: auto;
+    display: flex;
     color: white
   `;

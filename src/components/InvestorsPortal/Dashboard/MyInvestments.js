@@ -46,12 +46,12 @@ export default function AssessIdeas(props) {
       <div className='dashboard-container'>
         <br />
         <br />
-        <h4 className='title'>This is {userData.firstName}'s dashboard</h4>
+        <h2 className='title'>This is {userData.firstName}'s dashboard</h2>
           <StyledCard>
             Here you can track how all of your investments are performing and 
             ask the founders questions or help them with your feedback.
           </StyledCard>
-        <div className='flex-tilescontainer'>
+        {/* <div className='flex-tilescontainer'>
           {expertIdeas.map(idea =>
             <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
               <div className='idea-tile' key={idea.id}>
@@ -72,7 +72,7 @@ export default function AssessIdeas(props) {
               </div>
             </Link>
           )}
-        </div>
+        </div> */}
       </div>
     )}
 
@@ -81,6 +81,7 @@ export default function AssessIdeas(props) {
     background-color: rgb(255,255,255, 0.3);
     padding: 50px;
     width: 500px;
-    margin-left: 70px;
-    color: white
+    margin: auto;
+    color: white;
+    display: flex;
   `;
