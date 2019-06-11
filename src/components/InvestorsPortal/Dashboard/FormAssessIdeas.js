@@ -1455,10 +1455,10 @@ export default class FormAssessIdeas extends Component {
                     // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
                     onChange={(isAgreementStarChecked, e) => {
                       this.setState({ isAgreementStarChecked });
-                      console.log(e);
+                      // console.log(e);
                     }} // Required.[Func].Default: () => {}. Will return the value.
                     labelHtml={
-                      <div style={{ color: "white", marginTop: "2px" }}>
+                      <div style={{ color: "white", marginTop: "5px" }}>
                         Yes, I’d like to champion this idea because I believe it could be brilliant
                       </div>
                     } // Required.[Html].Default: none.
@@ -1497,10 +1497,10 @@ export default class FormAssessIdeas extends Component {
                     // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
                     onChange={(isAgreementStarNoChecked, e) => {
                       this.setState({ isAgreementStarNoChecked });
-                      console.log(e);
+                      // console.log(e);
                     }} // Required.[Func].Default: () => {}. Will return the value.
                     labelHtml={
-                      <div style={{ color: "white", marginTop: "2px" }}>
+                      <div style={{ color: "white", marginTop: "5px" }}>
                         My feedback is sufficient, I don’t want to champion this idea
                       </div>
                     } // Required.[Html].Default: none.
@@ -1558,10 +1558,10 @@ export default class FormAssessIdeas extends Component {
                     // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
                     onChange={(isAgreementMentorChecked, e) => {
                       this.setState({ isAgreementMentorChecked });
-                      console.log(e);
+                      // console.log(e);
                     }} // Required.[Func].Default: () => {}. Will return the value.
                     labelHtml={
-                      <div style={{ color: "white", marginTop: "2px" }}>
+                      <div style={{ color: "white", marginTop: "5px" }}>
                         Yes, I’d like to become a mentor for this idea
                       </div>
                     } // Required.[Html].Default: none.
@@ -1601,10 +1601,10 @@ export default class FormAssessIdeas extends Component {
                     // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
                     onChange={(isAgreementMentorNoChecked, e) => {
                       this.setState({ isAgreementMentorNoChecked });
-                      console.log(e);
+                      // console.log(e);
                     }} // Required.[Func].Default: () => {}. Will return the value.
                     labelHtml={
-                      <div style={{ color: "white", marginTop: "2px", display: "flex" }}>
+                      <div style={{ color: "white", marginTop: "5px", display: "flex" }}>
                         No, thank you
                       </div>
                     } // Required.[Html].Default: none.
@@ -1624,7 +1624,8 @@ export default class FormAssessIdeas extends Component {
           </div>
             </div>
             ) 
-            : (this.state.validate === true) && (average / 4) <= 7 ? (<div>TEST</div>) : (<div>TEST</div>)
+            : (this.state.validate === true) && (average / 4) <= 7 
+            // ? (<div>TEST</div>) : (<div>TEST</div>)
             }
           </div>
           <div style={{ height: "10px" }} />

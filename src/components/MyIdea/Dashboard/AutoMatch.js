@@ -118,7 +118,6 @@ export default function IdeaDashboardDetail(props) {
     )
   }
 
-  console.log(patentDifference, "DIFF")
   // ONLY PROCEED if (arr.length === 10) !!!!!!!!!!!!!!!!! coz it takes time for the loop to complete
   // let obj = newImageArray.find(o => o.name === 'string 1');
 

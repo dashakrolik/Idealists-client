@@ -148,8 +148,7 @@ const Useragreement = (props) => {
 
   return (
     <div >
-      {console.log(props, "PPPP")}
-      <div style={{ width: 1000, textAlign: 'left', padding:15, marginTop: 70, color:'black', backgroundColor:'rgb(255,255,255, 0.8)' } }>
+      <div style={{ width: 1000, textAlign: 'left', padding:15, marginTop: 70, color:'black', backgroundColor:'rgb(255,255,255, 0.8)', overflow:'auto' } }>
       {aggreementPage(props) }
       
       </div>

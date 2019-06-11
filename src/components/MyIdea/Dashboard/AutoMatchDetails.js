@@ -20,7 +20,7 @@ const IdeaDashboardDetail = (props) => {
   const [relScore, getScore] = useState([])
   const [finalArray, makeArray] = useState([])
   const automatchId = props.match.params.patentNumber
-  console.log(props, "PROPS")
+  
 
   useEffect(() => {
     request

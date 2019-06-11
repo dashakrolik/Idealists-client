@@ -144,7 +144,7 @@ const InvestorRegistration = (props) => {
         },
       };
     }, []));
-    console.table(newState.industry.value.map(val => val.value), "CURRR")
+    // console.table(newState.industry.value.map(val => val.value), "CURRR")
   };
 
   const handleChangeCountry = (property, e) => {
