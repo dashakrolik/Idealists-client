@@ -1,4 +1,6 @@
-export const baseUrl ='https://the-idealists-backend.herokuapp.com'
+export const baseUrl =
+// 'http://localhost:4000'
+'https://the-idealists-backend.herokuapp.com/'
 
 export const data =  {
     "questionsVersion": "1.0",
