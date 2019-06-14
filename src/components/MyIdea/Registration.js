@@ -59,11 +59,11 @@ const Registration = (props) => {
   const formValidations = {
     firstName: {
       validator: (val) => (val.length <= 100),
-      shouldShowError: (val) => (val.length > 4),
+      shouldShowError: (val) => true,
     },
     lastName: {
       validator: (val) => (val.length <= 100),
-      shouldShowError: (val) => (val.length > 4),
+      shouldShowError: (val) => true,
     },
     email: {
       validator: (val) => (val.length <= 100 && validator.isEmail(val)),
@@ -71,15 +71,15 @@ const Registration = (props) => {
     },
     password: {
       validator: (val) => (val.length >= 8 && passwordRegEx.test(val)),
-      shouldShowError: (val) => (val.length > 5),
+      shouldShowError: (val) => true,
     },
     passwordRepeat: {
       validator: (val) => (val === formData.password.value),
-      shouldShowError: (val) => (val.length >= 8),
+      shouldShowError: (val) => true,
     },
     country: {
-      validator: (val) => (val),
-      shouldShowError: (val) => (!val),
+      validator: (val) => (val !== null),
+      shouldShowError: (val) => true,
     },
     role: {
       validator: (val) => (val.length <= 100),
@@ -158,15 +158,14 @@ const Registration = (props) => {
         }
       })
       .catch(err => {
-        if (err.status === 400) {
-          // dispatch(userLoginFailed(err.response.body.message))
+        if (err.status === 409) {
+          alert("User with this email already exists")
         } else {
           console.error(err);
         }
       });
   };
-  const countryListNL = [{value:"The Netherlands", label:"The Netherlands"}]
-
+  
   return (
     <Container pose={props.show ? 'show' : 'hide'} css={css`justify-self: flex-end; width: 100%;`}>
       <form>
