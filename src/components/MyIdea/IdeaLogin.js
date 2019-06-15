@@ -201,6 +201,7 @@ const RightSide = styled.div`
 
 const Container = styled.div`
   position: absolute;
+  display: flex;
   top: 0;
   left: 0;
   width: 100%;

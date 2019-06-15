@@ -325,7 +325,7 @@ const RegistrationForm = styled.div`
   height: auto;
   padding: 20px;
   border-radius: 6px;
-  box-shadow: 2px 2px 23px 0 rgba(37,37,37,0.39);
+  box-shadow: 1em 1em 11.5em 0 rgba(37,37,37,0.39);
   background-color: rgba(255, 255, 255, 0.9);
   color: #233949;
   margin-bottom: 26px;
