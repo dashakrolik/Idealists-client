@@ -3,7 +3,7 @@
 https://imaengine.io
 
 
-![](demodisplay.mkv)
+![](demoDisplay.mkv)
 
 ## Overview
 Built the frontend for the webapp building on top of an existing code base using React Hooks and styled components.
