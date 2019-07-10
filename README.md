@@ -2,6 +2,7 @@
 
 https://imaengine.io
 
+![](https://github.com/TuncaAlper/Idealists-client/blob/gifAdd/demoDisplay.gif)
 
 ## Overview
 Built the frontend for the webapp building on top of an existing code base using React Hooks and styled components.
