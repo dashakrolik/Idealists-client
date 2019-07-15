@@ -31,8 +31,9 @@ const QuestionGroup = (props) => {
     }
   }, [validations]);
 
-  const handleDecidingQuestions = (from, answer) => {
-    props.handleDecidingQuestions(from, answer);
+  const handleDecidingQuestions = (from, answer, question) => {
+    
+    props.handleDecidingQuestions(from, answer, question);
   };
 
   const handleInputFocus = (isFocused) => {
@@ -47,6 +48,7 @@ const QuestionGroup = (props) => {
     <GroupContainer>
       {
         props.group.questions.map(question => {
+
           if (question.type === 'deciding')
             return <FlexRow><FlexColumn>
               <FormGroup css={css`text-align: center;`}>
@@ -54,7 +56,7 @@ const QuestionGroup = (props) => {
                 <FlexRow>
                   <FlexColumn css={css`justify-content: center; margin-top: 30px;`}>
                     <Button text={question.endOption} disabled={false}
-                      onClick={() => handleDecidingQuestions(question.id, false)} />
+                      onClick={() => handleDecidingQuestions(question.id, false, question)} />
                     <Button text={question.continueOption} disabled={false}
                       onClick={() => handleDecidingQuestions(question.id, true)} />
                   </FlexColumn>
