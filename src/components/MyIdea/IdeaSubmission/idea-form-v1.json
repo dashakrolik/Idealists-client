@@ -24,7 +24,7 @@
       {
         "id": 1,
         "type": "deciding",
-        "text": "Does your idea fall under one of the Sustainable Development Goals?",
+        "text": "Does your idea fall under one of the Sustainable Development Goals? *",
         "continueOption": "Yes",
         "endOption": "No",
         "decidingMessage": "Unfortunately, we cannot accept ideas that do not fall under the SDG's."
@@ -124,10 +124,6 @@
           {
             "value": "Partnerships to achieve the Goal",
             "label": "Partnerships to achieve the Goal"
-          },
-          {
-            "value": "none",
-            "label": "None"
           }
         ],
         "validationRegex": "^((?!none,).)*$",
@@ -706,7 +702,7 @@
     "id": 9,
     "groupTitle": "Is there anything that is close to your idea?",
     "groupType": "default",
-    "groupDescription": "Anything on the internet, any article or patent? Any companies who work in a similar area? Please do some Google searching and list 3 things that come closest to your idea. ",
+    "groupDescription": "Anything on the internet, any article or patent? Any companies who work in a similar area? Please do some Google searching and list the 3 things that come closest to your idea. ",
     "questions": [
       {
         "id": 0,
