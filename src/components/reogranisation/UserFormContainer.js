@@ -49,9 +49,6 @@ export default function UserFormContainer() {
   };
 
   const onSubmit = data => {
-    // console.log(data);
-    // setUserFormState()
-    // Post request here
   };
 
   const renderQuestion = question => {

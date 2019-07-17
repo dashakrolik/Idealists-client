@@ -48,13 +48,13 @@
   },
   {
     "id": 3,
-    "groupTitle": "Which categories does your idea fit?",
+    "groupTitle": "Which categories does youd idea fit?",
     "groupType": "default",
     "groupDescription": "Please note that we cannot accept ideas that are not within one of the Sustainable Development Goals (SDG)",
     "questions": [
       {
         "id": 0,
-        "type": "multiChoice",
+        "type": "industries",
         "text": "Under which of the SDGs does your idea fit best? You can select more than one.",
         "options": [
           {
@@ -124,10 +124,6 @@
           {
             "value": "Partnerships to achieve the Goal",
             "label": "Partnerships to achieve the Goal"
-          },
-          {
-            "value": "none",
-            "label": "None"
           }
         ],
         "validationRegex": "^((?!none,).)*$",
@@ -138,10 +134,10 @@
   },
   {
     "id": 4,
-    "groupTitle": "Which categories does your idea fit?",
+    "groupTitle": "Which categories does youd idea fit?",
     "groupType": "default",
     "groupDescription": "Please note that we cannot accept ideas that are not within one of the Industries.",
-    "questions":[
+    "questions": [
       {
         "id": 0,
         "type": "multiChoice",
@@ -656,7 +652,7 @@
     "groupDescription": "Please try to describe your idea in up to 3 words, up to 150, and up to 1500 characters. Don't worry, you can attach images later in the submission process.",
     "questions": [
       {
-        "id": 2,
+        "id": 0,
         "type": "multiLine",
         "text": "Describe your idea up to 1500 characters *",
         "validationRegex": "^(*.){1,1500}$",
@@ -694,7 +690,7 @@
         "validationErrorMsg": "Max 1000 chars."
       }
     ]
-},
+  },
   {
     "id": 9,
     "groupTitle": "Describe the steps and story how you came up with this idea",
@@ -714,7 +710,7 @@
     "id": 10,
     "groupTitle": "Is there anything that is close to your idea?",
     "groupType": "default",
-    "groupDescription": "Anything on the internet, any article or patent? Any companies who work in a similar area? Please do some Google searching and list 3 things that come closest to your idea. ",
+    "groupDescription": "Anything on the internet, any article or patent? Any companies who work in a similar area? Please do some Google searching and list the 3 things that come closest to your idea. ",
     "questions": [
       {
         "id": 0,

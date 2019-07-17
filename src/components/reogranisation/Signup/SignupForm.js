@@ -28,11 +28,6 @@ export default function SignupForm(props) {
     });
   };
 
-  // const submitForm = (data) => {
-  //   console.log(data);
-  // };
-  
-  // Do we still use dispatch?
   const submitForm = (data) => {
     const { firstName, lastName, email, password } = data
 
