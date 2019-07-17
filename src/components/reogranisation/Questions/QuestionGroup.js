@@ -19,6 +19,7 @@ const QuestionGroup = (props) => {
       ...validations,
         [from]: status,
       });
+      console.log(from, status, "STATUS", validations)
   };
 
   useEffect(() => {
