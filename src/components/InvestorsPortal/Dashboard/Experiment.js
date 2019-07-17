@@ -413,10 +413,10 @@ export default class FormAssessIdeas extends Component {
                     customStyleContainer={{}} // Optional.[Object].Default: {}.
                     onChange={(name, e) => {
                       this.setState({ name });
-                      console.log(e);
+                      // console.log(e);
                     }} // Required.[Func].Default: () => {}. Will return the value.
                     onBlur={e => {
-                      console.log(e);
+                      // console.log(e);
                     }} // Optional.[Func].Default: none. In order to validate the value on blur, you MUST provide a function, even if it is an empty function. Missing this, the validation on blur will not work.
                     // onFocus={(e) => {console.log(e);}} // Optional.[Func].Default: none.
                     // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
@@ -486,10 +486,10 @@ export default class FormAssessIdeas extends Component {
                     customStyleOptionListItem={{ marginRight: "20px" }} // Optional.[Object].Default: {}.
                     onChange={(job, e) => {
                       this.setState({ job });
-                      console.log(e);
+                      // console.log(e);
                     }} // Required.[Func].Default: () => {}. Will return the value.
                     onBlur={e => {
-                      console.log(e);
+                      // console.log(e);
                     }} // Optional.[Func].Default: none.
                     // onFocus={(e) => {console.log(e);}} // Optional.[Func].Default: none.
                     // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
@@ -547,7 +547,7 @@ export default class FormAssessIdeas extends Component {
                     // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
                     onChange={(isAgreementChecked, e) => {
                       this.setState({ isAgreementChecked });
-                      console.log(e);
+                      // console.log(e);
                     }} // Required.[Func].Default: () => {}. Will return the value.
                     labelHtml={
                       <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
@@ -609,7 +609,7 @@ export default class FormAssessIdeas extends Component {
                     customStyleOptionListItem={{}} // Optional.[Object].Default: {}.
                     onChange={(country, e) => {
                       this.setState({ country });
-                      console.log(e);
+                      // console.log(e);
                     }} // Optional.[Func].Default: () => {}. Will return the value.
                     onBlur={() => {}} // Optional.[Func].Default: none. In order to validate the value on blur, you MUST provide a function, even if it is an empty function. Missing this, the validation on blur will not work.
                     // onFocus={(e) => {console.log(e);}} // Optional.[Func].Default: none.
@@ -682,10 +682,10 @@ export default class FormAssessIdeas extends Component {
                     customStyleContainer={{}} // Optional.[Object].Default: {}.
                     onChange={(description, e) => {
                       this.setState({ description });
-                      console.log(e);
+                      // console.log(e);
                     }} // Required.[Func].Default: () => {}. Will return the value.
                     onBlur={e => {
-                      console.log(e);
+                      // console.log(e);
                     }} // Optional.[Func].Default: none. In order to validate the value on blur, you MUST provide a function, even if it is an empty function. Missing this, the validation on blur will not work.
                     // onFocus={(e) => {console.log(e);}} // Optional.[Func].Default: none.
                     // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.

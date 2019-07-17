@@ -200,10 +200,24 @@ const RightSide = styled.div`
 `;
 
 const Container = styled.div`
-  position: absolute;
+  position: relative;
+  padding-top: 40vw;
+  padding-bottom: 10px;
+  display: grid;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid #000;
+  };
+  ::-webkit-scrollbar-thumb{
+  background-color: #1f7fbb;
+  height: 15vh;
+  };
+
   background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
 `;

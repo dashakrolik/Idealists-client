@@ -1,6 +1,8 @@
 # The Idealists - a matching platform for investors and people with great ideas!
 
-https://idealists-client.herokuapp.com/MyIdea
+https://imaengine.io
+
+![](https://github.com/TuncaAlper/Idealists-client/blob/gifAdd/demoDisplay.gif)
 
 ## Overview
 Built the frontend for the webapp building on top of an existing code base using React Hooks and styled components.
@@ -10,10 +12,12 @@ Built the frontend for the webapp building on top of an existing code base using
 - User dashboard
 - Sumbit a new idea
 - Patent check
+- Comment on your patent results
 
 - Investor login
 - Investor dashboard
-- Match investors with ideas only relevant to the industry they are interested in
+- Match investors with ideas only relevant to the industries they are interested in
+- Investor comments on relevant ideas
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

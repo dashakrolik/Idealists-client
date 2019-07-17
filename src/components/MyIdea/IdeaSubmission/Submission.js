@@ -18,6 +18,8 @@ const Submission = (props) => {
   const [progress, setProgress] = useState(0);
   const [inputFocused, setInputFocused] = useState(0);
   const [answers, setAnswers] = useState({});
+  const [valueDecideProfit, setValueDecideProfit] = useState(false);
+  const [valueDecideSdg, setValueDecideSdg] = useState(false);
 
   useEffect(() => {
     setProgress(activeGroup / questionGroups.length);
@@ -59,6 +61,12 @@ const Submission = (props) => {
     if (continues) {
       handleAnswers(from, continues.toString());
       setActiveGroup(activeGroup + 1);
+      setValueDecideProfit(false);
+      setValueDecideSdg(false);
+    }else if (from === 0){
+      setValueDecideProfit(true)
+    } else if (from === 1) {
+      setValueDecideSdg(true)
     }
   };
 
@@ -93,7 +101,12 @@ const Submission = (props) => {
                       handleValidationChanges={handleValidationChange}
                       key={questionGroups[activeGroup].id.toString()}
                       answers={answers[activeGroup]}
+                      
                     />}
+                    {(valueDecideProfit)? <div style={{color:"red" }}> <br/>We are working very hard on building a non-profit version of The Idealists as well. Unfortunately, until that is ready, we cannot accept non-profit ideas yet.
+                     </div>:null}
+                     {(valueDecideSdg)? <div style={{color:"red" }}> <br/>We are sorry, but you cannot continue if your idea does not fit within one of the SDGs.
+                     </div>:null}
                 </PGroupContainer>
               }
             </PoseGroup>

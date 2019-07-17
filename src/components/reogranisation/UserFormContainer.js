@@ -49,7 +49,7 @@ export default function UserFormContainer() {
   };
 
   const onSubmit = data => {
-    console.log(data);
+    // console.log(data);
     // setUserFormState()
     // Post request here
   };

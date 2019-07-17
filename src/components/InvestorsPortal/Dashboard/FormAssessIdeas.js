@@ -67,30 +67,30 @@ export default class FormAssessIdeas extends Component {
       againstReason3: "",
       againstReason4: "",
       againstReason5: "",
-      whatDoYouExpectAsTimeImpact: "",
-      whatDoYouExpectAsMagnitude: "",
+      // whatDoYouExpectAsTimeImpact: "",
+      // whatDoYouExpectAsMagnitude: "",
       hasExplanationError: true,
       hasExplanation2Error: true,
       hasExplanation3Error: true,
       hasExplanation4Error: true,
-      hasExplanation5Error: true,
-      hasExplanation6Error: true,
-      hasExplanation7Error: true,
-      hasExplanation8Error: true,
-      hasExplanation9Error: true,
-      hasProReason1Error: true,
-      hasProReason2Error: true,
-      hasProReason3Error: true,
-      hasProReason4Error: true,
-      hasProReason5Error: true,
-      hasAgainstReason1Error: true,
-      hasAgainstReason2Error: true,
-      hasAgainstReason3Error: true,
-      hasAgainstReason4Error: true,
-      hasAgainstReason5Error: true,
-      hasWhatDoYouExpectAsTimeImpactError: true,
-      hasWhatDoYouExpectAsMagnitudeError: true,
-      hasWillPeopleWantThisError: true,
+      // hasExplanation5Error: true,
+      // hasExplanation6Error: true,
+      // hasExplanation7Error: true,
+      // hasExplanation8Error: true,
+      // hasExplanation9Error: true,
+      // hasProReason1Error: true,
+      // hasProReason2Error: true,
+      // hasProReason3Error: true,
+      // hasProReason4Error: true,
+      // hasProReason5Error: true,
+      // hasAgainstReason1Error: true,
+      // hasAgainstReason2Error: true,
+      // hasAgainstReason3Error: true,
+      // hasAgainstReason4Error: true,
+      // hasAgainstReason5Error: true,
+      // hasWhatDoYouExpectAsTimeImpactError: true,
+      // hasWhatDoYouExpectAsMagnitudeError: true,
+      // hasWillPeopleWantThisError: true,
       validate: false
     };
     this.validateForm = this.validateForm.bind(this);
@@ -108,21 +108,21 @@ export default class FormAssessIdeas extends Component {
       hasExplanation2Error,
       hasExplanation3Error,
       hasExplanation4Error,
-      hasExplanation5Error,
-      hasExplanation6Error,
-      hasExplanation7Error,
-      hasExplanation8Error,
-      hasExplanation9Error,
-      hasProReason1Error,
-      hasProReason2Error,
-      hasProReason3Error,
-      hasProReason4Error,
-      hasProReason5Error,
-      hasAgainstReason1Error,
-      hasAgainstReason2Error,
-      hasAgainstReason3Error,
-      hasAgainstReason4Error,
-      hasAgainstReason5Error,
+      // hasExplanation5Error,
+      // hasExplanation6Error,
+      // hasExplanation7Error,
+      // hasExplanation8Error,
+      // hasExplanation9Error,
+      // hasProReason1Error,
+      // hasProReason2Error,
+      // hasProReason3Error,
+      // hasProReason4Error,
+      // hasProReason5Error,
+      // hasAgainstReason1Error,
+      // hasAgainstReason2Error,
+      // hasAgainstReason3Error,
+      // hasAgainstReason4Error,
+      // hasAgainstReason5Error,
       hasWillPeopleWantThisError,
       hasisItAGoodIdeaError,
       hasIsThisTheRightTiming,
@@ -1455,10 +1455,10 @@ export default class FormAssessIdeas extends Component {
                     // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
                     onChange={(isAgreementStarChecked, e) => {
                       this.setState({ isAgreementStarChecked });
-                      console.log(e);
+                      // console.log(e);
                     }} // Required.[Func].Default: () => {}. Will return the value.
                     labelHtml={
-                      <div style={{ color: "white", marginTop: "2px" }}>
+                      <div style={{ color: "white", marginTop: "5px" }}>
                         Yes, I’d like to champion this idea because I believe it could be brilliant
                       </div>
                     } // Required.[Html].Default: none.
@@ -1497,10 +1497,10 @@ export default class FormAssessIdeas extends Component {
                     // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
                     onChange={(isAgreementStarNoChecked, e) => {
                       this.setState({ isAgreementStarNoChecked });
-                      console.log(e);
+                      // console.log(e);
                     }} // Required.[Func].Default: () => {}. Will return the value.
                     labelHtml={
-                      <div style={{ color: "white", marginTop: "2px" }}>
+                      <div style={{ color: "white", marginTop: "5px" }}>
                         My feedback is sufficient, I don’t want to champion this idea
                       </div>
                     } // Required.[Html].Default: none.
@@ -1558,10 +1558,10 @@ export default class FormAssessIdeas extends Component {
                     // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
                     onChange={(isAgreementMentorChecked, e) => {
                       this.setState({ isAgreementMentorChecked });
-                      console.log(e);
+                      // console.log(e);
                     }} // Required.[Func].Default: () => {}. Will return the value.
                     labelHtml={
-                      <div style={{ color: "white", marginTop: "2px" }}>
+                      <div style={{ color: "white", marginTop: "5px" }}>
                         Yes, I’d like to become a mentor for this idea
                       </div>
                     } // Required.[Html].Default: none.
@@ -1601,10 +1601,10 @@ export default class FormAssessIdeas extends Component {
                     // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
                     onChange={(isAgreementMentorNoChecked, e) => {
                       this.setState({ isAgreementMentorNoChecked });
-                      console.log(e);
+                      // console.log(e);
                     }} // Required.[Func].Default: () => {}. Will return the value.
                     labelHtml={
-                      <div style={{ color: "white", marginTop: "2px", display: "flex" }}>
+                      <div style={{ color: "white", marginTop: "5px", display: "flex" }}>
                         No, thank you
                       </div>
                     } // Required.[Html].Default: none.
@@ -1624,7 +1624,8 @@ export default class FormAssessIdeas extends Component {
           </div>
             </div>
             ) 
-            : (this.state.validate === true) && (average / 4) <= 7 ? (<div>TEST</div>) : (<div>TEST</div>)
+            : (this.state.validate === true) && (average / 4) <= 7 
+            // ? (<div>TEST</div>) : (<div>TEST</div>)
             }
           </div>
           <div style={{ height: "10px" }} />

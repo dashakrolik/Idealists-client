@@ -66,11 +66,11 @@ const InvestorRegistration = (props) => {
   const formValidations = {
     firstName: {
       validator: (val) => (val.length <= 100),
-      shouldShowError: (val) => (val.length > 4),
+      shouldShowError: (val) => true,
     },
     lastName: {
       validator: (val) => (val.length <= 100),
-      shouldShowError: (val) => (val.length > 4),
+      shouldShowError: (val) => true,
     },
     email: {
       validator: (val) => (val.length <= 100 && validator.isEmail(val)),
@@ -78,19 +78,19 @@ const InvestorRegistration = (props) => {
     },
     password: {
       validator: (val) => (val.length >= 8 && passwordRegEx.test(val)),
-      shouldShowError: (val) => (val.length > 5),
+      shouldShowError: (val) => true,
     },
     passwordRepeat: {
       validator: (val) => (val === formData.password.value),
-      shouldShowError: (val) => (val.length >= 8),
+      shouldShowError: (val) => true,
     },
     country: {
-      validator: (val) => (val),
-      shouldShowError: (val) => (!val),
+      validator: (val) => (val !== null),
+      shouldShowError: (val) => true,
     },
     industry: {
-      validator: (val) => (val),
-      shouldShowError: (val) => (!val)
+      validator: (val) => (val !== null),
+      shouldShowError: (val) => true
     },
     role: {
       validator: (val) => (val.length <= 100),
@@ -144,7 +144,6 @@ const InvestorRegistration = (props) => {
         },
       };
     }, []));
-    console.table(newState.industry.value.map(val => val.value), "CURRR")
   };
 
   const handleChangeCountry = (property, e) => {
@@ -203,8 +202,6 @@ const InvestorRegistration = (props) => {
         }
       });
   };
-
-  const countryListNL = [{ value: "The Netherlands", label: "The Netherlands" }]
 
   return (
     <Container pose={props.show ? 'show' : 'hide'} css={css`justify-self: flex-end; width: 100%;`}>
