@@ -152,7 +152,7 @@ class App extends Component {
             }
           })
 
-          alert("As an Expert, Please use User Login!")
+          alert("As an Idea Owner, Please use User Login!")
           localStorage.setItem('currentUserJwt', null)
         }else {
           console.error(err);

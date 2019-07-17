@@ -22,7 +22,7 @@
     "groupDescription": "Please tell us a little more about yourself and your idea",
     "questions": [
       {
-        "id": 1,
+        "id": 0,
         "type": "deciding",
         "text": "Does your idea fall under one of the Sustainable Development Goals? *",
         "continueOption": "Yes",
@@ -619,7 +619,7 @@
         "maxChar": 100,
         "validationErrorMsg": "Max 100 chars."
       }
-    ]
+    ]    
   },
   {
     "id": 5,
@@ -652,7 +652,7 @@
     "groupDescription": "Please try to describe your idea in up to 3 words, up to 150, and up to 1500 characters. Don't worry, you can attach images later in the submission process.",
     "questions": [
       {
-        "id": 2,
+        "id": 0,
         "type": "multiLine",
         "text": "Describe your idea up to 1500 characters *",
         "validationRegex": "^(*.){1,1500}$",
