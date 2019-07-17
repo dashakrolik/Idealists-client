@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 import posed from 'react-pose';
 import Select from 'react-select';
 import makeAnimated from 'react-select/lib/animated';
+<<<<<<< HEAD
 import jsonFormData from '../../MyIdea/IdeaSubmission/idea-form-v1'
+=======
+import ideaFormJson from '../../MyIdea/IdeaSubmission/idea-form-v1.json'
+>>>>>>> development-version2
 
 const customStyles = {
   option: (provided, state) => ({
@@ -48,8 +52,14 @@ const SingleChoiceQuestion = (props) => {
 
 
     if (!!props.multiChoice) {
+<<<<<<< HEAD
       if (currentValue.length >= 1) {
           setValidated(true);
+=======
+      console.log(currentValue.length > 0, currentValue.some(res => ideaFormJson[2].questions[0].options.map(val => val.value).indexOf(res)),"?????")
+      if (currentValue.length > 0 && currentValue.some(res => ideaFormJson[2].questions[0].options.map(val => val.value).indexOf(res))) {
+        setValidated(true);
+>>>>>>> development-version2
       } else {
         setValidated(false);
       }
@@ -72,6 +82,7 @@ const SingleChoiceQuestion = (props) => {
 
   const handleChange = (selectedOption) => {
     setCurrentValue(selectedOption);
+    console.log(currentValue, "CVV")
   };
 
   const handleFocus = () => {
