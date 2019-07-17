@@ -54,7 +54,7 @@
     "questions": [
       {
         "id": 0,
-        "type": "industries",
+        "type": "multiChoice",
         "text": "Under which of the SDGs does your idea fit best? You can select more than one.",
         "options": [
           {
@@ -134,7 +134,7 @@
   },
   {
     "id": 4,
-    "groupTitle": "Which categories does youd idea fit?",
+    "groupTitle": "Which categories does your idea fit?",
     "groupType": "default",
     "groupDescription": "Please note that we cannot accept ideas that are not within one of the Industries.",
     "questions": [
