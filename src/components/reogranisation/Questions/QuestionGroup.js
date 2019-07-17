@@ -13,12 +13,11 @@ const QuestionGroup = (props) => {
   const [validations, setValidations] = useState([]);
   const [answers, setAnswers] = useState([]);
 
-  const handleValidationChanges = (from,status) => {
-    console.log(from, status, "STATUS", validations)
+  const handleValidationChanges = (from, status) => {
     setValidations({
       ...validations,
-        [from]: status,
-      });
+      [from]: status,
+    });
   };
 
   useEffect(() => {
@@ -33,7 +32,7 @@ const QuestionGroup = (props) => {
   }, [validations]);
 
   const handleDecidingQuestions = (from, answer, question) => {
-    
+
     props.handleDecidingQuestions(from, answer, question);
   };
 
@@ -49,7 +48,6 @@ const QuestionGroup = (props) => {
     <GroupContainer>
       {
         props.group.questions.map(question => {
-
           if (question.type === 'deciding')
             return <FlexRow><FlexColumn>
               <FormGroup css={css`text-align: center;`}>
@@ -96,6 +94,17 @@ const QuestionGroup = (props) => {
                 id={question.id.toString()}
               />}
             {(question.type === 'multiChoice')
+              && <SingleChoiceQuestion questionTitle={question.text}
+                options={question.options}
+                errorMessage={question.validationErrorMsg}
+                maxChar={question.maxChar}
+                onChange={handleValueChanges}
+                onFocusChanged={handleInputFocus}
+                onValidationChange={handleValidationChanges}
+                id={question.id.toString()}
+                multiChoice
+              />}
+            {(question.type === 'industries')
               && <SingleChoiceQuestion questionTitle={question.text}
                 options={question.options}
                 errorMessage={question.validationErrorMsg}
