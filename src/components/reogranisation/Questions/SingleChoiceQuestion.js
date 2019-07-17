@@ -40,11 +40,7 @@ const SingleChoiceQuestion = (props) => {
 
   useEffect(() => {
     if (!!props.multiChoice) {
-      // console.log(ideaFormJson[3].questions[0].options.map(val => val.value), "JSON")
-      // console.log(currentValue.length > 0, currentValue.some(res => ideaFormJson[3].questions[0].options.map(val => val.value).indexOf(res) >= 0),"?????")
-      console.log(currentValue.length > 0, currentValue.map(res => res.value).some(res => ideaFormJson[3].questions[0].options.map(val => val.value).indexOf(res) >= 0),"?????")
-      // .includes(ideaFormJson[3].questions[0].options.map(val => val.value)),"?????")
-      console.log(currentValue.map(res => res.value), "Current")
+      // console.log(currentValue.length > 0, currentValue.map(res => res.value).some(res => ideaFormJson[3].questions[0].options.map(val => val.value).indexOf(res) >= 0),"?????")
       if (currentValue.length > 0 ) {
         setValidated(true);
       } else {

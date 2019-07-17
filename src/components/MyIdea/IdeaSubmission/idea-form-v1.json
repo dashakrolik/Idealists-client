@@ -133,9 +133,17 @@
         "validationRegex": "^((?!none,).)*$",
         "maxChar": 5,
         "validationErrorMsg": "We are sorry, but you cannot continue if your idea does not fit within one of the SDGs."
-      },
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "groupTitle": "Which categories does your idea fit?",
+    "groupType": "default",
+    "groupDescription": "Please note that we cannot accept ideas that are not within one of the Industries.",
+    "questions":[
       {
-        "id": 1,
+        "id": 0,
         "type": "multiChoice",
         "text": "Under which industry does your idea fit best?",
         "options": [
@@ -615,10 +623,10 @@
         "maxChar": 100,
         "validationErrorMsg": "Max 100 chars."
       }
-    ]
+    ]    
   },
   {
-    "id": 4,
+    "id": 5,
     "groupTitle": "Describe your Idea",
     "groupType": "default",
     "groupDescription": "Please try to describe your idea in up to 3 words, up to 150, and up to 1500 characters. Don't worry, you can attach images later in the submission process.",
@@ -642,7 +650,7 @@
     ]
   },
   {
-    "id": 5,
+    "id": 6,
     "groupTitle": "Describe your Idea",
     "groupType": "default",
     "groupDescription": "Please try to describe your idea in up to 3 words, up to 150, and up to 1500 characters. Don't worry, you can attach images later in the submission process.",
@@ -658,7 +666,7 @@
     ]
   },
   {
-    "id": 6,
+    "id": 7,
     "groupTitle": "Why is this a great idea?",
     "groupType": "singleQuestion",
     "groupDescription": "Please describe your answer up to 1500 characters. Don't worry, you can attach images later in the submission process",
@@ -673,7 +681,7 @@
     ]
   },
   {
-    "id": 7,
+    "id": 8,
     "groupTitle": "How far developed is your idea?",
     "groupType": "singleQuestion",
     "groupDescription": "Please describe your progress up to 1000 characters.",
@@ -688,7 +696,7 @@
     ]
 },
   {
-    "id": 8,
+    "id": 9,
     "groupTitle": "Describe the steps and story how you came up with this idea",
     "groupType": "singleQuestion",
     "groupDescription": "Please describe your steps up to 2000 characters.",
@@ -703,7 +711,7 @@
     ]
   },
   {
-    "id": 9,
+    "id": 10,
     "groupTitle": "Is there anything that is close to your idea?",
     "groupType": "default",
     "groupDescription": "Anything on the internet, any article or patent? Any companies who work in a similar area? Please do some Google searching and list 3 things that come closest to your idea. ",
@@ -759,7 +767,7 @@
     ]
   },
   {
-    "id": 10,
+    "id": 11,
     "groupTitle": "Anything else you want to tell us about your idea?",
     "groupType": "singleQuestion",
     "groupDescription": "Please describe your answer up to 2000 characters",
