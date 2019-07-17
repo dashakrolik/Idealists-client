@@ -331,6 +331,11 @@ const RegistrationForm = styled.div`
   margin-bottom: 26px;
   display: flex;
   flex-direction: column;
+
+  @media screen and (min-width 800px) {
+    color: red;
+    padding: 100em;
+  }
   
   label {
     display: block;

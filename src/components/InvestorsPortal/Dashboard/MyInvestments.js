@@ -51,28 +51,6 @@ export default function AssessIdeas(props) {
             Here you can track how all of your investments are performing and 
             ask the founders questions or help them with your feedback.
           </StyledCard>
-        {/* <div className='flex-tilescontainer'>
-          {expertIdeas.map(idea =>
-            <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
-              <div className='idea-tile' key={idea.id}>
-                <p><b>{idea.idea[3].answers[0].qAnswer}</b></p>
-                <p>{idea.idea[3].answers[1].qAnswer}</p>
-                <p>{idea.idea[3].answers[1].qAnswer}</p>
-                {console.log(idea,"IDEAAA")}
-                {idea.progress.step01 === true &&
-                idea.progress.step02 === true &&
-                idea.progress.step03 === false && <p>Status: First patent check </p>}
-                {idea.progress.step01 === true &&
-                idea.progress.step02 === true &&
-                idea.progress.step03 === true &&
-                idea.progress.step04 === false && <p>Status: Expert check </p>}
-              </div>
-              <div>
-                <br />
-              </div>
-            </Link>
-          )}
-        </div> */}
       </div>
     )}
 
