@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import posed from 'react-pose';
 import Select from 'react-select';
 import makeAnimated from 'react-select/lib/animated';
+import jsonFormData from '../../MyIdea/IdeaSubmission/idea-form-v1'
 
 const customStyles = {
   option: (provided, state) => ({
@@ -36,16 +37,19 @@ const SingleChoiceQuestion = (props) => {
   const [isStillInit, setIsStillInit] = useState(true);
   const [validated, setValidated] = useState(false);
   const [currentValue, setCurrentValue] = useState([]);
-
+  const [currentValue2, setCurrentValue2] = useState([]);
   useEffect(() => {
+
     if (!!props.multiChoice) {
-      if (currentValue.length > 0) {
-        setValidated(true);
+      
+      if (currentValue.length >= 1) {
+          setValidated(true);
       } else {
         setValidated(false);
       }
     } else {
       if (currentValue.value) {
+
         setValidated(true);
       } else {
         setValidated(false);

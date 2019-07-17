@@ -13,11 +13,11 @@ const QuestionGroup = (props) => {
   const [validations, setValidations] = useState([]);
   const [answers, setAnswers] = useState([]);
 
-  const handleValidationChanges = (from, status) => {
+  const handleValidationChanges = (from,status) => {
     setValidations({
       ...validations,
-      [from]: status,
-    });
+        [from]: status,
+      });
   };
 
   useEffect(() => {

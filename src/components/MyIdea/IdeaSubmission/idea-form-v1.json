@@ -18,6 +18,22 @@
   {
     "id": 1,
     "groupTitle": "Let's get started",
+    "groupType": "deciding",
+    "groupDescription": "Please tell us a little more about yourself and your idea",
+    "questions": [
+      {
+        "id": 0,
+        "type": "deciding",
+        "text": "Does your idea fall under one of the Sustainable Development Goals? *",
+        "continueOption": "Yes",
+        "endOption": "No",
+        "decidingMessage": "Unfortunately, we cannot accept ideas that do not fall under the SDG's."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "groupTitle": "Let's get started",
     "groupType": "singleQuestion",
     "groupDescription": "Please tell us a little more about yourself and your idea",
     "questions": [
@@ -31,14 +47,14 @@
     ]
   },
   {
-    "id": 2,
+    "id": 3,
     "groupTitle": "Which categories does youd idea fit?",
     "groupType": "default",
     "groupDescription": "Please note that we cannot accept ideas that are not within one of the Sustainable Development Goals (SDG)",
     "questions": [
       {
         "id": 0,
-        "type": "multiChoice",
+        "type": "industries",
         "text": "Under which of the SDGs does your idea fit best? You can select more than one.",
         "options": [
           {
@@ -108,18 +124,22 @@
           {
             "value": "Partnerships to achieve the Goal",
             "label": "Partnerships to achieve the Goal"
-          },
-          {
-            "value": "none",
-            "label": "None"
           }
         ],
         "validationRegex": "^((?!none,).)*$",
         "maxChar": 5,
         "validationErrorMsg": "We are sorry, but you cannot continue if your idea does not fit within one of the SDGs."
-      },
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "groupTitle": "Which categories does youd idea fit?",
+    "groupType": "default",
+    "groupDescription": "Please note that we cannot accept ideas that are not within one of the Industries.",
+    "questions": [
       {
-        "id": 1,
+        "id": 0,
         "type": "multiChoice",
         "text": "Under which industry does your idea fit best?",
         "options": [
@@ -599,10 +619,10 @@
         "maxChar": 100,
         "validationErrorMsg": "Max 100 chars."
       }
-    ]
+    ]    
   },
   {
-    "id": 3,
+    "id": 5,
     "groupTitle": "Describe your Idea",
     "groupType": "default",
     "groupDescription": "Please try to describe your idea in up to 3 words, up to 150, and up to 1500 characters. Don't worry, you can attach images later in the submission process.",
@@ -626,13 +646,13 @@
     ]
   },
   {
-    "id": 3,
+    "id": 6,
     "groupTitle": "Describe your Idea",
     "groupType": "default",
     "groupDescription": "Please try to describe your idea in up to 3 words, up to 150, and up to 1500 characters. Don't worry, you can attach images later in the submission process.",
     "questions": [
       {
-        "id": 2,
+        "id": 0,
         "type": "multiLine",
         "text": "Describe your idea up to 1500 characters *",
         "validationRegex": "^(*.){1,1500}$",
@@ -642,7 +662,7 @@
     ]
   },
   {
-    "id": 4,
+    "id": 7,
     "groupTitle": "Why is this a great idea?",
     "groupType": "singleQuestion",
     "groupDescription": "Please describe your answer up to 1500 characters. Don't worry, you can attach images later in the submission process",
@@ -657,7 +677,7 @@
     ]
   },
   {
-    "id": 5,
+    "id": 8,
     "groupTitle": "How far developed is your idea?",
     "groupType": "singleQuestion",
     "groupDescription": "Please describe your progress up to 1000 characters.",
@@ -670,9 +690,9 @@
         "validationErrorMsg": "Max 1000 chars."
       }
     ]
-},
+  },
   {
-    "id": 6,
+    "id": 9,
     "groupTitle": "Describe the steps and story how you came up with this idea",
     "groupType": "singleQuestion",
     "groupDescription": "Please describe your steps up to 2000 characters.",
@@ -687,10 +707,10 @@
     ]
   },
   {
-    "id": 7,
+    "id": 10,
     "groupTitle": "Is there anything that is close to your idea?",
     "groupType": "default",
-    "groupDescription": "Anything on the internet, any article or patent? Any companies who work in a similar area? Please do some Google searching and list 3 things that come closest to your idea. ",
+    "groupDescription": "Anything on the internet, any article or patent? Any companies who work in a similar area? Please do some Google searching and list the 3 things that come closest to your idea. ",
     "questions": [
       {
         "id": 0,
@@ -743,7 +763,7 @@
     ]
   },
   {
-    "id": 8,
+    "id": 11,
     "groupTitle": "Anything else you want to tell us about your idea?",
     "groupType": "singleQuestion",
     "groupDescription": "Please describe your answer up to 2000 characters",

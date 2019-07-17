@@ -40,9 +40,9 @@ class App extends Component {
   };
 
 
-  requestLogin = (email, password) => {
+  requestLoginUser = (email, password) => {
     request
-      .post(`${baseUrl}/login`)
+      .post(`${baseUrl}/loginUser`)
       .send({ email, password })
       .then(res => {
         if (res.status === 200) {
@@ -58,7 +58,7 @@ class App extends Component {
         }
       })
       .catch(err => {
-        if (err.status === 400) {
+        if (err.status === 404) {
           this.setState({
             ...this.state,
             auth: {
@@ -68,9 +68,93 @@ class App extends Component {
             }
           })
 
-          alert("You have entered an incorrect email or password, Please try again!")
+          alert("You have entered an incorrect email. If you do not have an account, Please signup!")
           localStorage.setItem('currentUserJwt', null)
-        } else {
+        }else if (err.status === 401) {
+          this.setState({
+            ...this.state,
+            auth: {
+              ...this.state.auth,
+              loggedIn: false,
+              token: null
+            }
+          })
+
+          alert("You have entered an incorrect password, Please try again!")
+          localStorage.setItem('currentUserJwt', null)
+        }else if (err.status === 403) {
+          this.setState({
+            ...this.state,
+            auth: {
+              ...this.state.auth,
+              loggedIn: false,
+              token: null
+            }
+          })
+
+          alert("As an Expert, Please use Expert Login!")
+          localStorage.setItem('currentUserJwt', null)
+        }else {
+          console.error(err);
+        }
+      });
+  };
+
+  requestLoginExpert = (email, password) => {
+    request
+      .post(`${baseUrl}/loginExpert`)
+      .send({ email, password })
+      .then(res => {
+        if (res.status === 200) {
+          this.setState({
+            ...this.state,
+            auth: {
+              ...this.state.auth,
+              loggedIn: true,
+              token: res.body.jwt,
+            },
+          });
+          localStorage.setItem('currentUserJwt', res.body.jwt)
+        }
+      })
+      .catch(err => {
+        if (err.status === 404) {
+          this.setState({
+            ...this.state,
+            auth: {
+              ...this.state.auth,
+              loggedIn: false,
+              token: null
+            }
+          })
+
+          alert("You have entered an incorrect email. If you do not have an account, Please signup!")
+          localStorage.setItem('currentUserJwt', null)
+        }else if (err.status === 401) {
+          this.setState({
+            ...this.state,
+            auth: {
+              ...this.state.auth,
+              loggedIn: false,
+              token: null
+            }
+          })
+
+          alert("You have entered an incorrect password, Please try again!")
+          localStorage.setItem('currentUserJwt', null)
+        }else if (err.status === 403) {
+          this.setState({
+            ...this.state,
+            auth: {
+              ...this.state.auth,
+              loggedIn: false,
+              token: null
+            }
+          })
+
+          alert("As an Idea Owner, Please use User Login!")
+          localStorage.setItem('currentUserJwt', null)
+        }else {
           console.error(err);
         }
       });
@@ -177,58 +261,58 @@ class App extends Component {
           <ThemeProvider theme={theme}>
             <Application>
               <Route exact path='/Investors/dashboard' render={(props) => {
-                return <InvestorDashboard {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout} user={this.getCurrentUser}/>;
+                return <InvestorDashboard {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLoginExpert} updateLocalStorage={this.updateLocalStorage} logout={this.logout} user={this.getCurrentUser}/>;
               }} />
               <Route exact path='/Investors/dashboard/assess' render={(props) => {
-                return <AssesIdeas {...props} sendAssessment={this.sendAssessment} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
+                return <AssesIdeas {...props} sendAssessment={this.sendAssessment} authState={this.state.auth} login={this.requestLoginExpert} user={this.getCurrentUser} />;
               }} />
               <Route exact path='/AssessmentSubmitted' render={(props) => {
-                return <CompleteAssessment {...props} sendAssessment={this.sendAssessment} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
+                return <CompleteAssessment {...props} sendAssessment={this.sendAssessment} authState={this.state.auth} login={this.requestLoginExpert} user={this.getCurrentUser} />;
               }} />
               <Route exact path='/Investors/dashboard/assess/:id' render={(props) => {
-                return <FormAssessIdeas {...props} authState={this.state.auth} sendAssessment={this.sendAssessment} login={this.requestLogin} user={this.getCurrentUser} />;
+                return <FormAssessIdeas {...props} authState={this.state.auth} sendAssessment={this.sendAssessment} login={this.requestLoginExpert} user={this.getCurrentUser} />;
               }} />
               <Route exact path='/Investors/dashboard/crowdfunding' render={(props) => {
-                return <Crowdfunding {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
+                return <Crowdfunding {...props} authState={this.state.auth} login={this.requestLoginExpert} user={this.getCurrentUser} />;
               }} />
               <Route exact path='/Investors/dashboard/mymentorships' render={(props) => {
-                return <MyMentorships {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
+                return <MyMentorships {...props} authState={this.state.auth} login={this.requestLoginExpert} user={this.getCurrentUser} />;
               }} />
               <Route exact path='/Investors/dashboard/invest' render={(props) => {
-                return <MyInvestments {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} />;
+                return <MyInvestments {...props} authState={this.state.auth} login={this.requestLoginExpert} user={this.getCurrentUser} />;
               }} />
               <Route exact path='/Investors/login' render={(props) => {
-                return <InvestorLogin {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLogin} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
+                return <InvestorLogin {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLoginExpert} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
               }} />
               <Route exact path='/MyIdea' render={(props) => {
-                return <IdeaStart {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
+                return <IdeaStart {...props} authState={this.state.auth} login={this.requestLoginUser} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
               }} />
               <Route exact path='/InvestorStart' render={(props) => {
-                return <InvestorStart {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
+                return <InvestorStart {...props} authState={this.state.auth} login={this.requestLoginExpert} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
               }} />
               <Route exact path='/MyIdea/dashboard' render={(props) => {
-                return <IdeaDashboard {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} />;
+                return <IdeaDashboard {...props} authState={this.state.auth} login={this.requestLoginUser} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} />;
               }} />
               <Route exact path='/dashboard/ideas/:id' render={(props) => {
-                return <IdeaDashboardDetail {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} />;
+                return <IdeaDashboardDetail {...props} authState={this.state.auth} login={this.requestLoginUser} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} />;
               }} />
               <Route exact path='/MyIdea/login' render={(props) => {
-                return <IdeaLogin {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
+                return <IdeaLogin {...props} authState={this.state.auth} login={this.requestLoginUser} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
               }} />
               <Route exact path='/MyIdea/new' render={(props) => {
-                return <Submission {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
+                return <Submission {...props} authState={this.state.auth} login={this.requestLoginUser} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
               }} />
               <Route exact path='/MyIdea/login/reset-password' render={(props) => {
-                return <ResetPassword {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} updateLocalStorage={this.updateLocalStorage} logout={this.logout} />;
+                return <ResetPassword {...props} authState={this.state.auth} login={this.requestLoginUser} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} updateLocalStorage={this.updateLocalStorage} logout={this.logout} />;
               }} />
               <Route exact path='/reset-password/:jwt' render={(props) => {
-                return <EnterNewPassword {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} updateLocalStorage={this.updateLocalStorage} logout={this.logout} />;
+                return <EnterNewPassword {...props} authState={this.state.auth} login={this.requestLoginUser} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} updateLocalStorage={this.updateLocalStorage} logout={this.logout} />;
               }} />
               <Route exact path='/ideas/:id/automatch' render={(props) => {
-                return <AutoMatch {...props} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} />;
+                return <AutoMatch {...props} authState={this.state.auth} login={this.requestLoginUser} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} />;
               }} />
               <Route exact path='/ideas/:id/automatch/:patentNumber' render={(props) => {
-                return <AutoMatchDetails {...props} loadPdf={this.onDocumentLoadSuccess} authState={this.state.auth} login={this.requestLogin} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} />;
+                return <AutoMatchDetails {...props} loadPdf={this.onDocumentLoadSuccess} authState={this.state.auth} login={this.requestLoginUser} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} />;
               }} />
               <Route exact path="/" render={() => <Redirect to="/MyIdea" />} />
             </Application>
