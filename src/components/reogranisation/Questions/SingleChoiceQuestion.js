@@ -39,13 +39,6 @@ const SingleChoiceQuestion = (props) => {
   const [currentValue, setCurrentValue] = useState([]);
   const [currentValue2, setCurrentValue2] = useState([]);
   useEffect(() => {
-    const formData = jsonFormData[3]
-
-    const questionSdg = formData.questions[0]
-    const questionIndustry = formData.questions[1]
-
-    console.log(currentValue)
-
 
     if (!!props.multiChoice) {
       
@@ -73,7 +66,6 @@ const SingleChoiceQuestion = (props) => {
 
   const handleChange = (selectedOption) => {
     setCurrentValue(selectedOption);
-    console.log(currentValue, "CVV")
   };
 
   const handleFocus = () => {

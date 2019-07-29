@@ -13,11 +13,11 @@ const QuestionGroup = (props) => {
   const [validations, setValidations] = useState([]);
   const [answers, setAnswers] = useState([]);
 
-  const handleValidationChanges = (from, status) => {
+  const handleValidationChanges = (from,status) => {
     setValidations({
       ...validations,
-      [from]: status,
-    });
+        [from]: status,
+      });
   };
 
   useEffect(() => {
@@ -31,9 +31,8 @@ const QuestionGroup = (props) => {
     }
   }, [validations]);
 
-  const handleDecidingQuestions = (from, answer, question) => {
-
-    props.handleDecidingQuestions(from, answer, question);
+  const handleDecidingQuestions = (from, answer) => {
+    props.handleDecidingQuestions(from, answer);
   };
 
   const handleInputFocus = (isFocused) => {
@@ -55,7 +54,7 @@ const QuestionGroup = (props) => {
                 <FlexRow>
                   <FlexColumn css={css`justify-content: center; margin-top: 30px;`}>
                     <Button text={question.endOption} disabled={false}
-                      onClick={() => handleDecidingQuestions(question.id, false, question)} />
+                      onClick={() => handleDecidingQuestions(question.id, false)} />
                     <Button text={question.continueOption} disabled={false}
                       onClick={() => handleDecidingQuestions(question.id, true)} />
                   </FlexColumn>
@@ -94,17 +93,6 @@ const QuestionGroup = (props) => {
                 id={question.id.toString()}
               />}
             {(question.type === 'multiChoice')
-              && <SingleChoiceQuestion questionTitle={question.text}
-                options={question.options}
-                errorMessage={question.validationErrorMsg}
-                maxChar={question.maxChar}
-                onChange={handleValueChanges}
-                onFocusChanged={handleInputFocus}
-                onValidationChange={handleValidationChanges}
-                id={question.id.toString()}
-                multiChoice
-              />}
-            {(question.type === 'industries')
               && <SingleChoiceQuestion questionTitle={question.text}
                 options={question.options}
                 errorMessage={question.validationErrorMsg}
