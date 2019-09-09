@@ -47,7 +47,7 @@ export default function IdeaDashboard(props) {
             {userIdeas.map(idea => 
               <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
                 <div className='idea-tile' key={idea.id}> 
-                  <p>{console.log(idea.idea, "IDEA") && idea.idea[5].answers[0].qAnswer}</p>
+                  <p>{idea.idea[5].answers[0].qAnswer}</p>
                   <br />
                   <p>{idea.idea[5].answers[1].qAnswer }</p>
                   { idea.progress === null || 
