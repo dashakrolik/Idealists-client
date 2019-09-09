@@ -37,7 +37,7 @@ const CompleteSubmission = (props) => {
       };
     });
 
-    const dataIndustryToSend = props.answers[2][1].map(val => val.value)
+    const dataIndustryToSend = props.answers[4][0].map(val => val.value)
 
     request
       .post(`${baseUrl}/ideas`)

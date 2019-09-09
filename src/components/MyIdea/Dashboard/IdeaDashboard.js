@@ -46,10 +46,10 @@ export default function IdeaDashboard(props) {
         <div className='flex-tilescontainer'>
             {userIdeas.map(idea => 
               <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
-                <div className='idea-tile' key={idea.id}>
-                  <p>{idea.idea[3].answers[0].qAnswer}</p>
+                <div className='idea-tile' key={idea.id}> 
+                  <p>{console.log(idea.idea, "IDEA") && idea.idea[5].answers[0].qAnswer}</p>
                   <br />
-                  <p>{idea.idea[3].answers[1].qAnswer }</p>
+                  <p>{idea.idea[5].answers[1].qAnswer }</p>
                   { idea.progress === null || 
                     idea.progress.step01 === true && 
                     idea.progress.step02 === true && 

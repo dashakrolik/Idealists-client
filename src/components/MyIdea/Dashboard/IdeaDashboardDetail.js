@@ -156,6 +156,7 @@ const Content = styled.div`
     color: #ffffff;
     width: 90vw;
     max-width: 800px;
+    max-height: 2000px;
     height: auto;
     padding: 20px;
     
@@ -166,6 +167,8 @@ const Right = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
     justify-content:start;
     align-items:flex-start;
     padding-top:100px;
@@ -173,7 +176,7 @@ const Right = styled.div`
 
 const Container = styled.div`
     width: 100vw;
-    
+
     display: grid;
     grid-template-columns: 1fr 3fr;
     grid-template-rows: 1fr;
