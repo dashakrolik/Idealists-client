@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/Button'
 import { useState } from 'react';
 import './TopBar.css'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import logo from '../../res/logo_horizontal_white.png';
 
 /** @jsx jsx */
@@ -22,7 +22,11 @@ const TopBar = (props) => {
 
         <AppBar>
             <Toolbar className="topBar">
-                <Link to="/MyIdea/new"><img src={logo} alt='Logo' style={logoStyle} /></Link>
+                <img src={logo} alt='Logo' style={logoStyle} onClick={() =>
+                    props.authState.loggedIn && localStorage.currentUserJwt &&
+                        (props.authState.user.role === "user" || props.authState.user.role === "expert" || props.authState.user.role === "admin") ?
+                        props.history.push('/MyIdea/new') : null
+                } />
                 <Grid container
                     direction="row"
                     justify="flex-end"
