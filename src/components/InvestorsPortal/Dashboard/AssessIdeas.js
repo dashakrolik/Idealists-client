@@ -64,7 +64,7 @@ export default function AssessIdeas(props) {
   }
 
   return (
-
+    
     <div className='assessIdeas-container'>
       <br />
       <div className='title'>
@@ -82,11 +82,11 @@ export default function AssessIdeas(props) {
         {expertIdeas.map(idea =>
           <Link key={idea.id} className='tile-link' to={`/investors/dashboard/assess/${idea.id}`}>
             <div className='assess-tile' key={idea.id}>
-              <p style={{ color: "black" }}><b>Title: </b><br />{idea.idea[3].answers[0].qAnswer}</p>
+              <p style={{ color: "black" }}><b>Title: </b><br />{idea.idea[5].answers[0].qAnswer}</p>
               <br />
-              <p style={{ color: "black" }}><b>Description: </b><br />{idea.idea[3].answers[1].qAnswer}</p>
+              <p style={{ color: "black" }}><b>Description: </b><br />{idea.idea[5].answers[1].qAnswer}</p>
               <br />
-              <p style={{ color: "black" }}><b>Industries: </b>{idea.idea[2].answers[1].qAnswer.map(industries => <li>{industries.value}</li>)}</p>
+              <p style={{ color: "black" }}><b>Industries: </b>{idea.idea[4].answers[0].qAnswer.map(industries => <li>{industries.value}</li>)}</p>
 
               {/* {idea.progress.step01 === true &&
                   idea.progress.step02 === true &&
