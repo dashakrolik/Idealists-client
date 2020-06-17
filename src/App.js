@@ -95,7 +95,7 @@ class App extends Component {
             }
           })
 
-          alert("As an Expert, Please use Expert Login!")
+          alert("This login is for Idea Owners only, Please use Expert Login as an Expert or user Specialist Login as a Specialist!")
           localStorage.setItem('currentUserJwt', null)
         }else {
           console.error(err);
@@ -155,7 +155,68 @@ class App extends Component {
             }
           })
 
-          alert("As an Idea Owner, Please use User Login!")
+          alert("This login is for Experts only, Please use User Login as an Idea Owner or Specialist Login as a Specialist!")
+          localStorage.setItem('currentUserJwt', null)
+        }else {
+          console.error(err);
+        }
+        
+      });
+  };
+
+  requestLoginSpecialist = (email, password) => {
+    request
+      .post(`${baseUrl}/loginSpecialist`)
+      .send({ email, password })
+      .then(res => {
+        if (res.status === 200) {
+          this.setState({
+            ...this.state,
+            auth: {
+              ...this.state.auth,
+              loggedIn: true,
+              token: res.body.jwt,
+            },
+          });
+          localStorage.setItem('currentUserJwt', res.body.jwt)
+        }
+      })
+      .catch(err => {
+        if (err.status === 404) {
+          this.setState({
+            ...this.state,
+            auth: {
+              ...this.state.auth,
+              loggedIn: false,
+              token: null
+            }
+          })
+
+          alert("You have entered an incorrect email. If you do not have an account, Please contact the admin!")
+          localStorage.setItem('currentUserJwt', null)
+        }else if (err.status === 401) {
+          this.setState({
+            ...this.state,
+            auth: {
+              ...this.state.auth,
+              loggedIn: false,
+              token: null
+            }
+          })
+
+          alert("You have entered an incorrect password, Please try again!")
+          localStorage.setItem('currentUserJwt', null)  
+        }else if (err.status === 403) {
+          this.setState({
+            ...this.state,
+            auth: {
+              ...this.state.auth,
+              loggedIn: false,
+              token: null
+            }
+          })
+
+          alert("This login is for Specialists only, Please use User Login as an Idea Owner or Expert Login as an Expert!")
           localStorage.setItem('currentUserJwt', null)
         }else {
           console.error(err);
@@ -264,13 +325,13 @@ class App extends Component {
           <ThemeProvider theme={theme}>
             <Application>
             <Route exact path='/Specialist/dashboard' render={(props) => {
-                return <SpecialistDashboard {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLoginExpert} updateLocalStorage={this.updateLocalStorage} logout={this.logout} user={this.getCurrentUser}/>;
+                return <SpecialistDashboard {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLoginSpecialist} updateLocalStorage={this.updateLocalStorage} logout={this.logout} user={this.getCurrentUser}/>;
               }} />
               <Route exact path='/Specialist/login' render={(props) => {
-                return <SpecialistLogin {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLoginExpert} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
+                return <SpecialistLogin {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLoginSpecialist} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
               }} />
               <Route exact path='/SpecialistStart' render={(props) => {
-                return <SpecialistStart {...props} authState={this.state.auth} login={this.requestLoginExpert} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
+                return <SpecialistStart {...props} authState={this.state.auth} login={this.requestLoginSpecialist} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
               }} />
               <Route exact path='/Investors/dashboard' render={(props) => {
                 return <InvestorDashboard {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLoginExpert} updateLocalStorage={this.updateLocalStorage} logout={this.logout} user={this.getCurrentUser}/>;
