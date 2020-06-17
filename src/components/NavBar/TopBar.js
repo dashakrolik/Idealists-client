@@ -50,6 +50,11 @@ const TopBar = (props) => {
                             props.authState.loggedIn && localStorage.currentUserJwt && (props.authState.user.role === "expert" || props.authState.user.role === "admin") ?
                                 <Button color="inherit" onClick={() => props.history.push('/Investors/dashboard')}>Dashboard</Button> : null
                     }
+                                        {
+                        !props.authState.user ? null :
+                            props.authState.loggedIn && localStorage.currentUserJwt && (props.authState.user.role === "specialist" || props.authState.user.role === "admin") ?
+                                <Button color="inherit" onClick={() => props.history.push('/Specialist/dashboard')}>Dashboard</Button> : null
+                    }
                     {
                         !props.authState.user ? null :
                             props.authState.loggedIn && localStorage.currentUserJwt && (props.authState.user.role === "user") ?
@@ -62,6 +67,10 @@ const TopBar = (props) => {
                     {
                         !localStorage.currentUserJwt || !props.authState.loggedIn ?
                             <Button color="inherit" onClick={() => props.history.push('/InvestorStart')}>Expert Login</Button> : null
+                    }
+                                        {
+                        !localStorage.currentUserJwt || !props.authState.loggedIn ?
+                            <Button color="inherit" onClick={() => props.history.push('/SpecialistStart')}>Specialist Login</Button> : null
                     }
                 </Grid>
 
