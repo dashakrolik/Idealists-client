@@ -5,6 +5,8 @@ import { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import InvestorDashboard from './components/InvestorsPortal/Dashboard/InvestorDashboard';
 import InvestorLogin from './components/InvestorsPortal/InvestorLogin';
+import SpecialistDashboard from './components/SpecialistPortal/Dashboard/SpecialistDashboard';
+import SpecialistLogin from './components/SpecialistPortal/SpecialistLogin';
 import { ThemeProvider } from 'emotion-theming';
 import IdeaStart from './components/MyIdea/IdeaStart';
 import Submission from './components/MyIdea/IdeaSubmission/Submission';
@@ -18,6 +20,7 @@ import ResetPassword from './components/MyIdea/ResetPassword';
 import EnterNewPassword from './components/MyIdea/EnterNewPassword';
 import AutoMatch from './components/MyIdea/Dashboard/AutoMatch'
 import InvestorStart from './components/MyIdea/InvestorStart';
+import SpecialistStart from './components/MyIdea/SpecialistStart';
 import AssesIdeas from './components/InvestorsPortal/Dashboard/AssessIdeas'
 import MyInvestments from './components/InvestorsPortal/Dashboard/MyInvestments'
 import Crowdfunding from './components/InvestorsPortal/Dashboard/Crowdfunding'
@@ -260,6 +263,15 @@ class App extends Component {
           <TopBar authState={this.state.auth} user={this.getCurrentUser} logout={this.logout} resetPassword={this.resetPassword} updatePassword={this.updatePassword} updateLocalStorage={this.updateLocalStorage} />
           <ThemeProvider theme={theme}>
             <Application>
+            <Route exact path='/Specialist/dashboard' render={(props) => {
+                return <SpecialistDashboard {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLoginExpert} updateLocalStorage={this.updateLocalStorage} logout={this.logout} user={this.getCurrentUser}/>;
+              }} />
+              <Route exact path='/Specialist/login' render={(props) => {
+                return <SpecialistLogin {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLoginExpert} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
+              }} />
+              <Route exact path='/SpecialistStart' render={(props) => {
+                return <SpecialistStart {...props} authState={this.state.auth} login={this.requestLoginExpert} user={this.getCurrentUser} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
+              }} />
               <Route exact path='/Investors/dashboard' render={(props) => {
                 return <InvestorDashboard {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLoginExpert} updateLocalStorage={this.updateLocalStorage} logout={this.logout} user={this.getCurrentUser}/>;
               }} />
