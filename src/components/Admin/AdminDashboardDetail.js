@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from "react";
 import request from "superagent";
-import { baseUrl } from "../../../constants";
-import "./IdeaDashBoardDetail.css";
+import { baseUrl } from "../../constants";
+import "../MyIdea/Dashboard/IdeaDashBoardDetail.css";
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import { Redirect } from "react-router-dom";
-import Button from "../../reogranisation/Questions/Button";
+import Button from "../reogranisation/Questions/Button";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
-
+  const [rejected, setRejected] = useState(false);
   const ideasId = props.match.params.id;
+
+  const rejectIdea = () => {
+    const confirmRejected = window.confirm(
+      "Are you sure you want to reject this idea?"
+    );
+    if (confirmRejected) {
+      console.log("rejected");
+      setRejected(true);
+      props.rejectIdea(rejected);
+    } else {
+      console.log("not rejected");
+    }
+  };
 
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
@@ -22,6 +35,7 @@ export default function IdeaDashboardDetail(props) {
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then((res) => setUserIdeas(res.body.idea));
   }, []);
+  console.log("ideas", userIdeas);
 
   const processTitle = (title) => {
     let splitTitle = title.split("?");
@@ -112,11 +126,20 @@ export default function IdeaDashboardDetail(props) {
               text="Patent Check"
               onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}
             />
+            <Button
+              color="inherit"
+              text="Reject Idea"
+              onClick={() => rejectIdea()}
+            />
           </div>
         </Left>
         <Right>
           <Content>
-            <h1 className="header"> Questions and Answers about Idea:</h1>
+            <h1 className="header">
+              Admin View | Questions and Answers about Idea:
+            </h1>
+            {rejected && <h2>This idea has been rejected</h2>}
+
             {qTitles.map((title, index) => (
               <div key={index}>
                 <StyledCard>

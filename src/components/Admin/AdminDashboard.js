@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import request from "superagent";
-import { baseUrl } from "../../../constants";
+import { baseUrl } from "../../constants";
 import { Redirect, Link } from "react-router-dom";
-import "./IdeaDashboard.css";
+import "../MyIdea/Dashboard/IdeaDashboard.css";
 import posed from "react-pose";
 
 export default function AdminDashboard(props) {
@@ -46,7 +46,7 @@ export default function AdminDashboard(props) {
           <Link
             key={idea.id}
             className="tile-link"
-            to={`/dashboard/ideas/${idea.id}`}
+            to={`/AdminDashboard/ideas/${idea.id}`}
           >
             <div className="idea-tile" key={idea.id}>
               <p>{idea.idea[5].answers[0].qAnswer}</p>

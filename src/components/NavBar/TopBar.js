@@ -66,7 +66,7 @@ const TopBar = (props) => {
             props.authState.user.role === "admin" ? (
             <Button
               color="inherit"
-              onClick={() => props.history.push("/MyIdea/adminDashboard")}
+              onClick={() => props.history.push("/AdminDashboard")}
             >
               Dashboard
             </Button>

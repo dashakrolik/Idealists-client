@@ -11,7 +11,8 @@ import Submission from "./components/MyIdea/IdeaSubmission/Submission";
 import { baseUrl } from "./constants";
 import request from "superagent";
 import IdeaDashboard from "./components/MyIdea/Dashboard/IdeaDashboard";
-import AdminDashboard from "./components/MyIdea/Dashboard/AdminDashboard";
+import AdminDashboard from "./components/Admin/AdminDashboard";
+import AdminDashboardDetail from "./components/Admin/AdminDashboardDetail";
 import IdeaDashboardDetail from "./components/MyIdea/Dashboard/IdeaDashboardDetail";
 import IdeaLogin from "./components/MyIdea/IdeaLogin";
 import TopBar from "./components/NavBar/TopBar";
@@ -37,6 +38,23 @@ class App extends Component {
     navigation: {
       activePath: "",
     },
+  };
+
+  rejectIdea = (rejected) => {
+    request
+      .put(`${baseUrl}/ideas/1/progress`)
+      .set("Authorization", `Bearer ${this.state.auth.token}`)
+      .send({ rejected })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log("success, idea rejected");
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+      });
   };
 
   requestLoginUser = (email, password) => {
@@ -455,7 +473,7 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/MyIdea/AdminDashboard"
+                path="/AdminDashboard"
                 render={(props) => {
                   return (
                     <AdminDashboard
@@ -465,6 +483,23 @@ class App extends Component {
                       user={this.getCurrentUser}
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/AdminDashboard/ideas/:id"
+                render={(props) => {
+                  return (
+                    <AdminDashboardDetail
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                      rejectIdea={this.rejectIdea}
                     />
                   );
                 }}
