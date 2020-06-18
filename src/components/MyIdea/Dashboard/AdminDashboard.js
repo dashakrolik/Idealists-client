@@ -39,7 +39,8 @@ export default function AdminDashboard(props) {
       <div className="title">
         <h1>{user.firstName}'s Admin Dashboard</h1>
       </div>
-      <h2>Ideas:</h2>
+      <h2 style={styledH2}>Ideas:</h2>
+
       <div className="flex-tilescontainer">
         {userIdeas.map((idea) => (
           <Link
