@@ -7,6 +7,7 @@ import InvestorDashboard from './components/InvestorsPortal/Dashboard/InvestorDa
 import InvestorLogin from './components/InvestorsPortal/InvestorLogin';
 import SpecialistDashboard from './components/SpecialistPortal/Dashboard/SpecialistDashboard';
 import SpecialistLogin from './components/SpecialistPortal/SpecialistLogin';
+import FormInputIdeas from './components/SpecialistPortal/Dashboard/FormInputIdeas';
 import { ThemeProvider } from 'emotion-theming';
 import IdeaStart from './components/MyIdea/IdeaStart';
 import Submission from './components/MyIdea/IdeaSubmission/Submission';
@@ -252,6 +253,16 @@ class App extends Component {
       })
   }
 
+  sendInput = (content) => {
+    request 
+      .post(`${baseUrl}/input`)
+      .set("Authorization", `Bearer ${this.state.auth.token}`)
+      .send({ content })
+      .then(res => {
+        res.status === 200 && console.log('form sent')
+      })
+  }
+
   resetPassword = (email) => {
     request
       .post(`${baseUrl}/reset-password`)
@@ -326,6 +337,9 @@ class App extends Component {
             <Application>
             <Route exact path='/Specialist/dashboard' render={(props) => {
                 return <SpecialistDashboard {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLoginSpecialist} updateLocalStorage={this.updateLocalStorage} logout={this.logout} user={this.getCurrentUser}/>;
+              }} />
+              <Route exact path='/Specialist/dashboard/ideas/:id' render={(props) => {
+                return <FormInputIdeas {...props} authState={this.state.auth} sendInput={this.sendInput} login={this.requestLoginSpecialist} user={this.getCurrentUser} logout={this.logout} updateLocalStorage={this.updateLocalStorage}/>;
               }} />
               <Route exact path='/Specialist/login' render={(props) => {
                 return <SpecialistLogin {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLoginSpecialist} updateLocalStorage={this.updateLocalStorage} logout={this.logout} setAuthLoggedInTrue={this.setAuthLoggedInTrue} />;
