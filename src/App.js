@@ -1,4 +1,5 @@
 /** @jsx jsx */
+
 import { jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { Component } from 'react';
@@ -35,20 +36,19 @@ class App extends Component {
   state = {
     auth: {
       loggedIn: false,
-      token: '',
-      user: ''
+      token: "",
+      user: "",
     },
     navigation: {
-      activePath: '',
-    }
+      activePath: "",
+    },
   };
-
 
   requestLoginUser = (email, password) => {
     request
       .post(`${baseUrl}/loginUser`)
       .send({ email, password })
-      .then(res => {
+      .then((res) => {
         if (res.status === 200) {
           this.setState({
             ...this.state,
@@ -58,47 +58,51 @@ class App extends Component {
               token: res.body.jwt,
             },
           });
-          localStorage.setItem('currentUserJwt', res.body.jwt)
+          localStorage.setItem("currentUserJwt", res.body.jwt);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.status === 404) {
           this.setState({
             ...this.state,
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null
-            }
-          })
+              token: null,
+            },
+          });
 
-          alert("You have entered an incorrect email. If you do not have an account, Please signup!")
-          localStorage.setItem('currentUserJwt', null)
-        }else if (err.status === 401) {
+          alert(
+            "You have entered an incorrect email. If you do not have an account, Please signup!"
+          );
+          localStorage.setItem("currentUserJwt", null);
+        } else if (err.status === 401) {
           this.setState({
             ...this.state,
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null
-            }
-          })
+              token: null,
+            },
+          });
 
-          alert("You have entered an incorrect password, Please try again!")
-          localStorage.setItem('currentUserJwt', null)
-        }else if (err.status === 403) {
+          alert("You have entered an incorrect password, Please try again!");
+          localStorage.setItem("currentUserJwt", null);
+        } else if (err.status === 403) {
           this.setState({
             ...this.state,
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null
-            }
-          })
+              token: null,
+            },
+          });
 
-          alert("This login is for Idea Owners only, Please use Expert Login as an Expert or user Specialist Login as a Specialist!")
-          localStorage.setItem('currentUserJwt', null)
-        }else {
+          alert(
+            "This login is for Idea Owners only, Please use Expert Login as an Expert or user Specialist Login as a Specialist!"
+          );
+          localStorage.setItem("currentUserJwt", null);
+        } else {
           console.error(err);
         }
       });
@@ -108,7 +112,7 @@ class App extends Component {
     request
       .post(`${baseUrl}/loginExpert`)
       .send({ email, password })
-      .then(res => {
+      .then((res) => {
         if (res.status === 200) {
           this.setState({
             ...this.state,
@@ -118,50 +122,53 @@ class App extends Component {
               token: res.body.jwt,
             },
           });
-          localStorage.setItem('currentUserJwt', res.body.jwt)
+          localStorage.setItem("currentUserJwt", res.body.jwt);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.status === 404) {
           this.setState({
             ...this.state,
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null
-            }
-          })
+              token: null,
+            },
+          });
 
-          alert("You have entered an incorrect email. If you do not have an account, Please signup!")
-          localStorage.setItem('currentUserJwt', null)
-        }else if (err.status === 401) {
+          alert(
+            "You have entered an incorrect email. If you do not have an account, Please signup!"
+          );
+          localStorage.setItem("currentUserJwt", null);
+        } else if (err.status === 401) {
           this.setState({
             ...this.state,
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null
-            }
-          })
+              token: null,
+            },
+          });
 
-          alert("You have entered an incorrect password, Please try again!")
-          localStorage.setItem('currentUserJwt', null)
-        }else if (err.status === 403) {
+          alert("You have entered an incorrect password, Please try again!");
+          localStorage.setItem("currentUserJwt", null);
+        } else if (err.status === 403) {
           this.setState({
             ...this.state,
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null
-            }
-          })
+              token: null,
+            },
+          });
 
-          alert("This login is for Experts only, Please use User Login as an Idea Owner or Specialist Login as a Specialist!")
-          localStorage.setItem('currentUserJwt', null)
-        }else {
+          alert(
+            "This login is for Experts only, Please use User Login as an Idea Owner or Specialist Login as a Specialist!"
+          );
+          localStorage.setItem("currentUserJwt", null);
+        } else {
           console.error(err);
         }
-        
       });
   };
 
@@ -169,7 +176,7 @@ class App extends Component {
     request
       .post(`${baseUrl}/loginSpecialist`)
       .send({ email, password })
-      .then(res => {
+      .then((res) => {
         if (res.status === 200) {
           this.setState({
             ...this.state,
@@ -179,47 +186,51 @@ class App extends Component {
               token: res.body.jwt,
             },
           });
-          localStorage.setItem('currentUserJwt', res.body.jwt)
+          localStorage.setItem("currentUserJwt", res.body.jwt);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.status === 404) {
           this.setState({
             ...this.state,
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null
-            }
-          })
+              token: null,
+            },
+          });
 
-          alert("You have entered an incorrect email. If you do not have an account, Please contact the admin!")
-          localStorage.setItem('currentUserJwt', null)
-        }else if (err.status === 401) {
+          alert(
+            "You have entered an incorrect email. If you do not have an account, Please contact the admin!"
+          );
+          localStorage.setItem("currentUserJwt", null);
+        } else if (err.status === 401) {
           this.setState({
             ...this.state,
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null
-            }
-          })
+              token: null,
+            },
+          });
 
-          alert("You have entered an incorrect password, Please try again!")
-          localStorage.setItem('currentUserJwt', null)  
-        }else if (err.status === 403) {
+          alert("You have entered an incorrect password, Please try again!");
+          localStorage.setItem("currentUserJwt", null);
+        } else if (err.status === 403) {
           this.setState({
             ...this.state,
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null
-            }
-          })
+              token: null,
+            },
+          });
 
-          alert("This login is for Specialists only, Please use User Login as an Idea Owner or Expert Login as an Expert!")
-          localStorage.setItem('currentUserJwt', null)
-        }else {
+          alert(
+            "This login is for Specialists only, Please use User Login as an Idea Owner or Expert Login as an Expert!"
+          );
+          localStorage.setItem("currentUserJwt", null);
+        } else {
           console.error(err);
         }
       });
@@ -229,29 +240,29 @@ class App extends Component {
     request
       .get(`${baseUrl}/current`)
       .set("Authorization", `Bearer ${this.state.auth.token}`)
-      .then(res => {
+      .then((res) => {
         this.setState({
-          ...this.state, auth: {
+          ...this.state,
+          auth: {
             ...this.state.auth,
             loggedIn: true,
-            user: res.body
-          }
-
-        })
-        localStorage.setItem('currentUserJwt', this.state.auth.token)
-        localStorage.setItem('user', this.state.auth.user)
-      })
-  }
+            user: res.body,
+          },
+        });
+        localStorage.setItem("currentUserJwt", this.state.auth.token);
+        localStorage.setItem("user", this.state.auth.user);
+      });
+  };
 
   sendAssessment = (content) => {
-    request 
+    request
       .post(`${baseUrl}/assessments`)
       .set("Authorization", `Bearer ${this.state.auth.token}`)
       .send({ content })
-      .then(res => {
-        res.status === 200 && console.log('form sent')
-      })
-  }
+      .then((res) => {
+        res.status === 200 && console.log("form sent");
+      });
+  };
 
   sendInput = (content) => {
     request 
@@ -267,74 +278,82 @@ class App extends Component {
     request
       .post(`${baseUrl}/reset-password`)
       .send({ email })
-      .then(res => {
+      .then((res) => {
         if (res.status === 200) {
           this.setState({
             ...this.state,
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null
+              token: null,
             },
           });
         }
-      })
-  }
+      });
+  };
 
   updatePassword = (jwt, password) => {
     request
       .put(`${baseUrl}/users`)
       .set("Authorization", `Bearer ${jwt}`)
       .send({ password })
-      .then(res => res.status === 200)
-  }
+      .then((res) => res.status === 200);
+  };
 
   updateLocalStorage = (key, value) => {
-    localStorage.setItem('User first name', this.state.auth.user.firstName)
-    localStorage.setItem('User last name', this.state.auth.user.lastName)
-    localStorage.setItem('User email', this.state.auth.user.email)
-    localStorage.setItem('Current user', this.state.auth.user.email)
+    localStorage.setItem("User first name", this.state.auth.user.firstName);
+    localStorage.setItem("User last name", this.state.auth.user.lastName);
+    localStorage.setItem("User email", this.state.auth.user.email);
+    localStorage.setItem("Current user", this.state.auth.user.email);
 
-    let retrievedToken = localStorage.getItem('currentUserJwt')
+    let retrievedToken = localStorage.getItem("currentUserJwt");
 
-    return retrievedToken
-  }
+    return retrievedToken;
+  };
 
   logout = () => {
     localStorage.clear();
-    localStorage.removeItem('currentUserJwt')
-    sessionStorage.clear()
-    localStorage.setItem('currentUserJwt', null)
+    localStorage.removeItem("currentUserJwt");
+    sessionStorage.clear();
+    localStorage.setItem("currentUserJwt", null);
     this.setState({
       auth: {
         loggedIn: false,
         token: null,
-        user: null
-      }
-    })
-  }
+        user: null,
+      },
+    });
+  };
 
   onDocumentLoadSuccess = ({ numPages }) => {
     this.setState({ numPages });
-  }
+  };
 
   setAuthLoggedInTrue = () => {
     this.setState({
       auth: {
         loggedIn: true,
         token: localStorage.currentUserJwt,
-        user: ''
-      }
-    })
-  }
-  
+        user: "",
+      },
+    });
+  };
+
   render() {
     return (
       <Router>
         <div>
-          <TopBar authState={this.state.auth} user={this.getCurrentUser} logout={this.logout} resetPassword={this.resetPassword} updatePassword={this.updatePassword} updateLocalStorage={this.updateLocalStorage} />
+          <TopBar
+            authState={this.state.auth}
+            user={this.getCurrentUser}
+            logout={this.logout}
+            resetPassword={this.resetPassword}
+            updatePassword={this.updatePassword}
+            updateLocalStorage={this.updateLocalStorage}
+          />
           <ThemeProvider theme={theme}>
             <Application>
+
             <Route exact path='/Specialist/dashboard' render={(props) => {
                 return <SpecialistDashboard {...props} user={this.getCurrentUser} authState={this.state.auth} login={this.requestLoginSpecialist} updateLocalStorage={this.updateLocalStorage} logout={this.logout} user={this.getCurrentUser}/>;
               }} />
@@ -401,6 +420,7 @@ class App extends Component {
               <Route exact path='/ideas/:id/automatch/:patentNumber' render={(props) => {
                 return <AutoMatchDetails {...props} loadPdf={this.onDocumentLoadSuccess} authState={this.state.auth} login={this.requestLoginUser} user={this.getCurrentUser} resetPassword={this.resetPassword} updatePassword={this.updatePassword} logout={this.logout} updateLocalStorage={this.updateLocalStorage}/>;
               }} />
+
               <Route exact path="/" render={() => <Redirect to="/MyIdea" />} />
             </Application>
           </ThemeProvider>
@@ -412,18 +432,18 @@ class App extends Component {
 
 const theme = {
   colors: {
-    titleText: '#444444',
+    titleText: "#444444",
     accents: {
       primary: {
-        dark: '#1A3D7C',
-        light: '#4CC5F1',
+        dark: "#1A3D7C",
+        light: "#4CC5F1",
       },
       secondary: {
-        dark: '#233949',
-        light: '#DFEFF2',
+        dark: "#233949",
+        light: "#DFEFF2",
       },
     },
-    bodyText: '#636363',
+    bodyText: "#636363",
   },
 };
 
@@ -433,7 +453,7 @@ const Application = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  color: ${props => props.theme.colors.bodyText};
+  color: ${(props) => props.theme.colors.bodyText};
 `;
 
 export default App;
