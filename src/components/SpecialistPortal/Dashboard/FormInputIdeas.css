@@ -1,0 +1,88 @@
+.wrapper {
+	margin: 0 auto;
+	width: 330px;
+	font-family: 'Helvetica';
+	font-size: 14px;
+	border: 1px solid #ccc;
+	padding: 20px;
+  }
+  .step-progress {
+	position: relative;
+	padding-left: 45px;
+	list-style: none;
+  }
+  .step-progress::before {
+	display: inline-block;
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 24px;
+	width: 10px;
+	height: 100%;
+	border-left: 2px solid #ccc;
+  }
+  .step-progress-item {
+	position: relative;
+	counter-increment: list;
+	padding-top: 10px;
+	padding-left: 15px;
+  }
+  .step-progress-item:not(:last-child) {
+	padding-bottom: 50px;
+  }
+  .step-progress-item::before {
+	display: inline-block;
+	content: '';
+	position: absolute;
+	left: -21px;
+	height: 100%;
+	width: 10px;
+  }
+  .step-progress-item::after {
+	content: '';
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	left: -38px;
+	width: 32px;
+	height: 32px;
+	border: 2px solid #ccc;
+	border-radius: 50%;
+	background-color: #fff;
+  }
+  .step-progress-item.is-done::before {
+	border-left: 2px solid #1A3D7C;
+  }
+  .step-progress-item.is-done::after {
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzJweCIgaGVpZ2h0PSIzMnB4IiB2aWV3Qm94PSIxMjAgNDUgMzIgMzIiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+PGcgaWQ9ImNoZWNrLTMyIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMjAuMDAwMDAwLCA0NS4wMDAwMDApIj48ZyBpZD0iY2hlY2stMzItY3JvcCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNy4wMDAwMDAsIDkuMDAwMDAwKSIgZmlsbD0iIzAwNWFhMCI+PHBvbHlnb24gaWQ9IlBhZ2UtMSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoOS40MDc1NjcsIDcuMjI5MDk2KSByb3RhdGUoLTM2MC4wMDAwMDApIHRyYW5zbGF0ZSgtOS40MDc1NjcsIC03LjIyOTA5NikgIiBwb2ludHM9IjE3LjI4MDQ4NjIgMC42MDgyMTc2MzcgNi44NjcxNTU2OCAxMS4wMjE1NDgyIDEuNTU1OTE0MzIgNS43MTAzMDY3OCAwLjEyNzAzNDA4NyA3LjEwOTg1MzY4IDYuODY3MTU1NjggMTMuODQ5OTc1MyAxOC42ODgwOTk4IDIuMDI5MDMxMiI+PC9wb2x5Z29uPjwvZz48L2c+PC9zdmc+);
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	border: 2px solid #1A3D7C;
+  }
+  
+  .step-progress-item.current::before {
+	border-left: 2px solid #1A3D7C;
+  }
+  .step-progress-item.current::after {
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzIgMzIiIGlkPSJpY29uLWdlYXItMzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSI+PGcgZmlsbD0iIzAwNDE3YiIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTYuMDAyIDE4LjE4YTIuMTMzIDIuMTMzIDAgMCAxLTIuMTMxLTIuMTMyYzAtMS4xNzUuOTU2LTIuMTMgMi4xMzEtMi4xMyAxLjE3NSAwIDIuMTMxLjk1NSAyLjEzMSAyLjEzYTIuMTMzIDIuMTMzIDAgMCAxLTIuMTMxIDIuMTMxbTAtNi4yNjJhNC4xMzUgNC4xMzUgMCAwIDAtNC4xMzEgNC4xMzEgNC4xMzUgNC4xMzUgMCAwIDAgNC4xMzEgNC4xMzEgNC4xMzUgNC4xMzUgMCAwIDAgNC4xMzEtNC4xMyA0LjEzNSA0LjEzNSAwIDAgMC00LjEzMS00LjEzMiI+PC9wYXRoPjxwYXRoIGQ9Ik0yMy43ODcgMTguNDU2YTEwLjI2MiAxMC4yNjIgMCAwIDEtMS43NjUgMi45ODVsLS40NTUuNTM3IDEuNDk0IDIuNTgtMy4xMTkgMS44MjQtMS41MDMtMi41OTctLjcxNS4xNTlhNy41NzUgNy41NzUgMCAwIDEtMS43MjIuMTk5IDcuMTE2IDcuMTE2IDAgMCAxLTEuNjk2LS4xOTNsLS43My0uMTgzLTEuNTE1IDIuNjE1LTMuMTE4LTEuODIzIDEuNTEtMi42MS0uNS0uNTRjLS44NjctLjk0LTEuNDEtMS44NTYtMS43MTMtMi44ODRsLS4yMS0uNzE4SDV2LTMuNTkxaDIuOTczbC4yNDQtLjY1YTEwLjI2MiAxMC4yNjIgMCAwIDEgMS43NjUtMi45ODRsLjQ1NC0uNTM4LTEuNDkzLTIuNTggMy4xMTgtMS44MjMgMS41MDUgMi41OTguNzE1LS4xNmE3LjQ3NyA3LjQ3NyAwIDAgMSAxLjcyMS0uMmMuNjAzIDAgMS4xOS4wNjggMS42OTYuMTk1bC43MzEuMTgzIDEuNTEzLTIuNjE2IDMuMTIgMS44MjMtMS41MSAyLjYwOS41LjU0Yy44NjUuOTQgMS40MSAxLjg1NyAxLjcxMiAyLjg4NWwuMjExLjcxOGgzLjAzdjMuNTlIMjQuMDNsLS4yNDQuNjV6bTUuMjE3IDEuMzV2LTcuNTloLTMuNTY3YTguOTM1IDguOTM1IDAgMCAwLTEuNDI4LTIuMzk3bDEuNzgxLTMuMDc2TDE5LjIxOCAyLjlsLTEuNzg1IDMuMDg1YTkuNTQ4IDkuNTQ4IDAgMCAwLTIuODU5LjAwNGwtMS43ODgtMy4wOS02LjU3MiAzLjg0NCAxLjc5NyAzLjEwNGExMi4zNyAxMi4zNyAwIDAgMC0xLjQgMi4zNjlIM3Y3LjU5aDMuNTY2YTguOTQ2IDguOTQ2IDAgMCAwIDEuNDI4IDIuMzk4bC0xLjc4IDMuMDc3IDYuNTcxIDMuODQyIDEuNzg2LTMuMDg0YTkuNDc3IDkuNDc3IDAgMCAwIDIuODU4LS4wMDVsMS43ODggMy4wODkgNi41NzItMy44NDItMS43OTctMy4xMDVjLjU1Ni0uNzQgMS4wMy0xLjU0MiAxLjQtMi4zN2gzLjYxMXoiPjwvcGF0aD48L2c+PC9zdmc+);
+	background-size: 24px 24px;
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 32px;
+	height: 32px;
+	top: 0;
+	left: -38px;
+	font-size: 14px;
+	text-align: center;
+	color: #1A3D7C;
+	border: 2px solid #1A3D7C;
+	background-color: white;
+  }
+  .step-progress strong {
+	display: block;
+	}
+
+	.header {
+		color:white
+	}
