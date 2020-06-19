@@ -40,9 +40,10 @@ class App extends Component {
     },
   };
 
-  rejectIdea = (rejected) => {
+  rejectIdea = (rejected, ideasId) => {
+    console.log("whats the idea id:", ideasId);
     request
-      .put(`${baseUrl}/ideas/1/progress`)
+      .put(`${baseUrl}/ideas/${ideasId}/progress`)
       .set("Authorization", `Bearer ${this.state.auth.token}`)
       .send({ rejected })
       .then((res) => {

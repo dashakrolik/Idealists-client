@@ -9,19 +9,17 @@ import Button from "../reogranisation/Questions/Button";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
-  const [rejected, setRejected] = useState(false);
-  const ideasId = props.match.params.id;
+  const [ideaProgress, setIdeaProgress] = useState([]);
+  const [rejected, setRejected] = useState(true);
+  const [ideasId, setIdeasId] = useState(props.match.params.id);
 
   const rejectIdea = () => {
     const confirmRejected = window.confirm(
       "Are you sure you want to reject this idea?"
     );
     if (confirmRejected) {
-      console.log("rejected");
-      setRejected(true);
-      props.rejectIdea(rejected);
-    } else {
-      console.log("not rejected");
+      setRejected(false);
+      props.rejectIdea(rejected, ideasId);
     }
   };
 
@@ -33,9 +31,12 @@ export default function IdeaDashboardDetail(props) {
     request
       .get(`${baseUrl}/ideas/${ideasId}`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      .then((res) => setUserIdeas(res.body.idea));
+      .then((res) => {
+        setUserIdeas(res.body.idea);
+        setIdeaProgress(res.body.progress);
+      });
   }, []);
-  console.log("ideas", userIdeas);
+  console.log("IDEA PROGRESS:", ideaProgress);
 
   const processTitle = (title) => {
     let splitTitle = title.split("?");
@@ -138,7 +139,11 @@ export default function IdeaDashboardDetail(props) {
             <h1 className="header">
               Admin View | Questions and Answers about Idea:
             </h1>
-            {rejected && <h2>This idea has been rejected</h2>}
+            {ideaProgress.length !== 0 && (!rejected || ideaProgress.rejected) && (
+              <h2>
+                <em>This idea has been rejected</em>
+              </h2>
+            )}
 
             {qTitles.map((title, index) => (
               <div key={index}>

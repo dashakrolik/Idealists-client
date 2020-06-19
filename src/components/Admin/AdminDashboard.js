@@ -42,32 +42,36 @@ export default function AdminDashboard(props) {
       <h2 style={styledH2}>Ideas:</h2>
 
       <div className="flex-tilescontainer">
-        {userIdeas.map((idea) => (
-          <Link
-            key={idea.id}
-            className="tile-link"
-            to={`/AdminDashboard/ideas/${idea.id}`}
-          >
-            <div className="idea-tile" key={idea.id}>
-              <p>{idea.idea[5].answers[0].qAnswer}</p>
-              <br />
-              <p>{idea.idea[5].answers[1].qAnswer}</p>
-              {idea.progress === null ||
-                (idea.progress.step01 === true &&
-                  idea.progress.step02 === true &&
-                  idea.progress.step03 === false && (
-                    <p>Status: First patent check </p>
-                  ))}
-              {idea.progress === null ||
-                (idea.progress.step01 === true &&
-                  idea.progress.step02 === true &&
-                  idea.progress.step03 === true &&
-                  idea.progress.step04 === false && (
-                    <p>Status: Expert check </p>
-                  ))}
-            </div>
-          </Link>
-        ))}
+        {userIdeas.map((idea) => {
+          if (idea && !idea.progress.rejected) {
+            return (
+              <Link
+                key={idea.id}
+                className="tile-link"
+                to={`/AdminDashboard/ideas/${idea.id}`}
+              >
+                <div className="idea-tile" key={idea.id}>
+                  <p>{idea.idea[5].answers[0].qAnswer}</p>
+                  <br />
+                  <p>{idea.idea[5].answers[1].qAnswer}</p>
+                  {idea.progress === null ||
+                    (idea.progress.step01 === true &&
+                      idea.progress.step02 === true &&
+                      idea.progress.step03 === false && (
+                        <p>Status: First patent check </p>
+                      ))}
+                  {idea.progress === null ||
+                    (idea.progress.step01 === true &&
+                      idea.progress.step02 === true &&
+                      idea.progress.step03 === true &&
+                      idea.progress.step04 === false && (
+                        <p>Status: Expert check </p>
+                      ))}
+                </div>
+              </Link>
+            );
+          }
+        })}
       </div>
     </div>
   );
