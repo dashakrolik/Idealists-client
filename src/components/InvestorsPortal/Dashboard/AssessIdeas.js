@@ -44,13 +44,12 @@ export default function AssessIdeas(props) {
   }, []);
 
   useEffect(() => {
-    // items for the  dropdown with all ideas' industries
+    // extracting all items for the dropdown with all ideas' industries
     const ideasIndustries = ideas
       .map((idea) => idea.industryIdea)
       .map((arr) => arr.replace(/[{}"]/g, "").split(","))
       .flat()
       .filter((industry, index, arr) => arr.indexOf(industry) === index);
-    // console.log("ideasIndustries", ideasIndustries);
     setIndustries(ideasIndustries);
   }, [ideas]);
 
@@ -74,44 +73,26 @@ export default function AssessIdeas(props) {
     props.user();
   }
 
-  //TOP - TESTING SORTING AND INDUSTRY SELECTION - NOT DONE YET!
-
-  console.log("ideas", ideas);
-
   if (userData.industry && ideas[0]) {
     // Expert-Investor industries
     const expertIndustries = userData.industry.replace(/[{}"]/g, "").split(",");
-
-    console.log("expertIndustries", expertIndustries);
-
-    // Sorting ideas according to industries
-
-    // console.log("industries", industries);
-    ideas.sort((ideaA, ideaB) => {
-      var index = 0;
-      //extract an array of all industries in the Idea
-      const ideasArr = ideaA.industryIdea.replace(/[{}"]/g, "").split(",");
-      console.log("ideasArr", ideasArr);
-
-      // for each Expert's industry check if it is in the Idea's array, if so move idea up
-      expertIndustries.forEach((expInd) => {
-        console.log(ideasArr.includes(expInd));
-        index = ideasArr.includes(expInd) ? -ideasArr.length : 0;
-        console.log("index", index);
-      });
-      console.log(ideaB.industryIdea.length);
+    // Sorting ideas according to expert industries
+    sortedIdeas.sort((ideaA, ideaB) => {
+      //extract an array of all industries in an idea
+      const ideaIndustryArr = ideaA.industryIdea
+        .replace(/[{}"]/g, "")
+        .split(",");
+      // check wheter above array contains any of the expert industries and set index accordingly for sorting (-1 - move to the front, 0 - no change)
+      var index = ideaIndustryArr.some((industry) =>
+        expertIndustries.includes(industry)
+      )
+        ? -1
+        : 0;
+      console.log("index", index);
       return index;
     });
-
-    //BOTTOM - TESTING SORTING AND INDUSTRY SELECTION - NOT DONE YET!
-
-    // const filterIdeas = ideas.filter(
-    //   (idea) => idea.industryIdea.includes(selection)
-    //   // console.log(idea.industryIdea.includes(selection));
-    // );
   }
-
-  // var filteredIdeas = undefined;
+  // filtering ideas by industries
   const filterIdeas = (e) => {
     setSelection(e.target.value);
     let filteredIdeas = ideas.filter((idea) =>
@@ -120,8 +101,6 @@ export default function AssessIdeas(props) {
         : idea.industryIdea.includes(e.target.value)
     );
     setSortedIdeas(filteredIdeas);
-    // console.log("selection", e.target.value);
-    // console.log("filteredIdeas", filteredIdeas);
   };
 
   console.log("sortedIdeas", sortedIdeas);
@@ -152,19 +131,24 @@ export default function AssessIdeas(props) {
       </StyledCard>
       <br />
       <form
-        className="demo"
+        className="dropdown"
         onChange={(e) => {
           filterIdeas(e);
         }}
       >
+        <p className="dropdown-label">Select an industry:</p>
         <select
           id="industries"
           name="industries"
           className="dropdown-container"
         >
-          <option value="show all">Choose an industry </option>
-          {industries.map((idea) => (
-            <option value={idea}>{idea}</option>
+          <option className="showAll" value="show all">
+            Show all
+          </option>
+          {industries.map((industry) => (
+            <option key={industry} value={industry}>
+              {industry}
+            </option>
           ))}
         </select>
       </form>
