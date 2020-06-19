@@ -10,9 +10,8 @@ import Button from "../../reogranisation/Questions/Button";
 import { fetchDocs, openUploadWidget } from "./CloudinaryService";
 import { Image } from "cloudinary-react";
 
-
 import IdeaPDFCreator from "./Download/IdeaPDFCreator";
-
+import AssessmentsPDFCreator from "./Download/AssessmentsPDFCreator";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
@@ -22,19 +21,16 @@ export default function IdeaDashboardDetail(props) {
 
   const docsSection = (
     <section>
-    {docs.map(i => <Image
-          key={i}
-          publicId={i}
-          fetch-format="auto"
-          quality="auto"
-        />)}
-  </section>
+      {docs.map((i) => (
+        <Image key={i} publicId={i} fetch-format="auto" quality="auto" />
+      ))}
+    </section>
   );
 
   const beginUpload = (tag) => {
     const uploadOptions = {
       cloudName: "idealists",
-      tags: [tag, 'aDoc'],
+      tags: [tag, "aDoc"],
       uploadPreset: "upload",
     };
 
@@ -51,16 +47,16 @@ export default function IdeaDashboardDetail(props) {
   };
 
   const [ideaOwner, setIdeaOwner] = useState({});
+  const [assessments, setAssessments] = useState({});
 
-
-  useEffect( () => {
+  useEffect(() => {
     fetchDocs("docs", setDocs);
-  }, [])
+  }, []);
   //   console.log("progress", progress);
 
   const ideasId = props.match.params.id;
 
-  console.log("props.auth?", props.authState);
+  console.log("assessments", assessments);
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
   }
@@ -71,6 +67,7 @@ export default function IdeaDashboardDetail(props) {
       .set("Authorization", `Bearer ${props.authState.token}`)
       //   .then((res) => console.log("res.body", res.body));
       .then((res) => {
+        setAssessments(res.body.assessment);
         setIdeaOwner(res.body.user);
         setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
@@ -120,12 +117,12 @@ export default function IdeaDashboardDetail(props) {
     return <Redirect to="/MyIdea" />;
   }
 
-  console.log("progress", progress[`step0` + 8]);
+  // console.log("progress", progress[`step0` + 8]);
 
   const progressStep = [""];
 
   for (let i = 1; i < 10; i++) {
-    console.log("steps", progress[`step0${i - 1}`]);
+    // console.log("steps", progress[`step0${i - 1}`]);
     const step = progress[`step0${i}`]
       ? "is-done"
       : progress[`step0${i - 1}`]
@@ -190,6 +187,13 @@ export default function IdeaDashboardDetail(props) {
               idea={userIdeas}
               printer={props.authState.user}
             />
+            <AssessmentsPDFCreator
+              user={ideaOwner}
+              ideaId={ideasId}
+              idea={userIdeas}
+              printer={props.authState.user}
+              assessments={assessments}
+            />
           </div>
         </Left>
         <Right>
@@ -206,7 +210,6 @@ export default function IdeaDashboardDetail(props) {
             ))}
           </Content>
           <Content>
-
             <h1 className="header"> Specialist input:</h1>
             <StyledCard>
               <form>
@@ -221,7 +224,6 @@ export default function IdeaDashboardDetail(props) {
                 </textarea>
                 <Button text="Submit" type="submit" />
               </form>
-
             </StyledCard>
           </Content>
         </Right>
