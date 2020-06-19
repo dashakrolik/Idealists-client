@@ -13,7 +13,7 @@ import Card from "@material-ui/core/Card";
 
 export default function specialistDashboard(props) {
   const [userData, setUserData] = useState({
-    specialistType: "Not a specialist",
+    specialistType: "Admin",
   });
   const [ideaList, setIdeaList] = useState(false);
   const [userLoggedIn, setUserLoggedIn] = useState(true);
@@ -41,15 +41,19 @@ export default function specialistDashboard(props) {
   if (userLoggedIn === false) return <Redirect to="/Specialist/login" />;
 
   //this below should go in new ADMIN dashboard
-  const showNewSpecialist =
-    props.authState.user.role === "admin" ? (
-      <Link className="links" to="/Admin/dashboard/newspecialist">
-        <div className="invest-tile">
-          <img className="icons" src={mentor}></img>
-          <h4>Add Specialist</h4>
-        </div>
-      </Link>
-    ) : null;
+  const showNewSpecialist = () => {
+    if (!props.authState.user) return null;
+    if (props.authState.user.role === "admin") {
+      return (
+        <Link className="links" to="/Admin/dashboard/newspecialist">
+          <div className="invest-tile">
+            <img className="icons" src={mentor}></img>
+            <h4>Add Specialist</h4>
+          </div>
+        </Link>
+      );
+    } else return null;
+  };
 
   const renderTitle =
     userData && props.authState.user ? (
@@ -74,7 +78,7 @@ export default function specialistDashboard(props) {
         <Link
           key={idea.id}
           className="tile-link"
-          to={`/specialist/dashboard/${idea.id}`}
+          to={`/Specialist/dashboard/ideas/${idea.id}`}
         >
           <div className="assess-tile" key={idea.id}>
             <p style={{ color: "black" }}>
@@ -97,7 +101,7 @@ export default function specialistDashboard(props) {
         <Link
           key={idea.id}
           className="tile-link"
-          to={`/specialist/dashboard/${idea.id}`}
+          to={`/Specialist/dashboard/ideas/${idea.id}`}
         >
           <div className="assess-tile" key={idea.id}>
             <p style={{ color: "black" }}>
@@ -174,31 +178,33 @@ export default function specialistDashboard(props) {
         );
     } else
       return ideaList.map((idea) => (
-        <div className="flex-tilescontainer">
+        <>
           {props.authState.user.role === "admin"
             ? null
             : renderCard(props.authState.user.specialistType)}
-          <Link
-            key={idea.id}
-            className="tile-link"
-            to={`/specialist/dashboard/${idea.id}`}
-          >
-            <div className="assess-tile" key={idea.id}>
-              <p style={{ color: "black" }}>
-                <b>Title: </b>
+          <div className="flex-tilescontainer">
+            <Link
+              key={idea.id}
+              className="tile-link"
+              to={`/Specialist/dashboard/ideas/${idea.id}`}
+            >
+              <div className="assess-tile" key={idea.id}>
+                <p style={{ color: "black" }}>
+                  <b>Title: </b>
+                  <br />
+                  {idea.idea[5].answers[0].qAnswer}
+                </p>
                 <br />
-                {idea.idea[5].answers[0].qAnswer}
-              </p>
-              <br />
-              <p style={{ color: "black" }}>
-                <b>Description: </b>
+                <p style={{ color: "black" }}>
+                  <b>Description: </b>
+                  <br />
+                  {idea.idea[5].answers[1].qAnswer}
+                </p>
                 <br />
-                {idea.idea[5].answers[1].qAnswer}
-              </p>
-              <br />
-            </div>
-          </Link>
-        </div>
+              </div>
+            </Link>
+          </div>
+        </>
       ));
   };
 
@@ -222,7 +228,7 @@ export default function specialistDashboard(props) {
   return (
     <div className="dashboard-container">
       {renderTitle}
-      <div className="flex-tilescontainer">{showNewSpecialist}</div>
+      <div className="flex-tilescontainer">{showNewSpecialist()}</div>
 
       {ideaList ? renderIdeaList() : null}
     </div>
@@ -244,3 +250,14 @@ const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
 `;
+
+function generateNewProgress(phase) {
+  let newProgress = {};
+  for (let i = 1; i < phase + 1; i++) {
+    newProgress[`step0${i}`] = true;
+  }
+  for (let i = phase + 1; i < 10; i++) {
+    newProgress[`step0${i}`] = false;
+  }
+  return newProgress;
+}
