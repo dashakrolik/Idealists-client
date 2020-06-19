@@ -11,8 +11,6 @@ export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
 
-  //   console.log("progress", progress);
-
   const ideasId = props.match.params.id;
 
   if (props.authState.loggedIn === false) {
@@ -23,11 +21,15 @@ export default function IdeaDashboardDetail(props) {
     request
       .get(`${baseUrl}/ideas/${ideasId}`)
       .set("Authorization", `Bearer ${props.authState.token}`)
+
+
       //   .then((res) => console.log("res.body", res.body));
+
       .then((res) => {
         setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
       });
+
   }, []);
 
   const processTitle = (title) => {
@@ -73,12 +75,12 @@ export default function IdeaDashboardDetail(props) {
     return <Redirect to="/MyIdea" />;
   }
 
-  console.log("progress", progress[`step0` + 8]);
 
   const progressStep = [""];
+  // console.log("progress", progress);
 
   for (let i = 1; i < 10; i++) {
-    console.log("steps", progress[`step0${i - 1}`]);
+    // console.log("steps", progress[`step0${i - 1}`]);
     const step = progress[`step0${i}`]
       ? "is-done"
       : progress[`step0${i - 1}`]
@@ -87,8 +89,6 @@ export default function IdeaDashboardDetail(props) {
     progressStep.push(step);
   }
 
-  //   console.log("progressStep1", progressStep1);
-  //   const progressStep = ["", "is-done", "current", "", "", "", "", "", "", ""];
 
   return (
     <div className="dashboard-container">
@@ -100,6 +100,7 @@ export default function IdeaDashboardDetail(props) {
                 <h1>Assessing Your Idea:</h1>
                 <hr />
                 <ul className="step-progress">
+
                   <li className={`step-progress-item ${progressStep[1]}`}>
                     <strong>Submit your idea</strong>
                   </li>
@@ -125,6 +126,7 @@ export default function IdeaDashboardDetail(props) {
                     <strong>Funding phase (2 weeks)</strong>
                   </li>
                   <li className={`step-progress-item ${progressStep[9]}`}>
+
                     <strong>Company is born (1 week)</strong>
                   </li>
                 </ul>

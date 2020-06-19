@@ -1,66 +1,28 @@
 import React, { useEffect, useState } from "react";
 import request from "superagent";
-import { baseUrl } from "../../../constants";
-import "./FormInputIdeas.css";
+import { baseUrl } from "../../constants";
+import "../MyIdea/Dashboard/IdeaDashBoardDetail.css";
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import { Redirect } from "react-router-dom";
-import Button from "../../reogranisation/Questions/Button";
-
-import { fetchDocs, openUploadWidget } from "./CloudinaryService";
-import { Image } from "cloudinary-react";
-
-
-import IdeaPDFCreator from "./Download/IdeaPDFCreator";
-
+import Button from "../reogranisation/Questions/Button";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
-  const [progress, setProgress] = useState([]);
+  const [ideaProgress, setIdeaProgress] = useState([]);
+  const [rejected, setRejected] = useState(true);
+  const [ideasId, setIdeasId] = useState(props.match.params.id);
 
-  const [docs, setDocs] = useState([]);
-
-  const docsSection = (
-    <section>
-    {docs.map(i => <Image
-          key={i}
-          publicId={i}
-          fetch-format="auto"
-          quality="auto"
-        />)}
-  </section>
-  );
-
-  const beginUpload = (tag) => {
-    const uploadOptions = {
-      cloudName: "idealists",
-      tags: [tag, 'aDoc'],
-      uploadPreset: "upload",
-    };
-
-    openUploadWidget(uploadOptions, (error, doc) => {
-      if (!error) {
-        console.log("docs", doc);
-        if (doc.event === "success") {
-          setDocs([...docs, doc.info.public_id]);
-        }
-      } else {
-        console.log(error);
-      }
-    });
+  const rejectIdea = () => {
+    const confirmRejected = window.confirm(
+      "Are you sure you want to reject this idea?"
+    );
+    if (confirmRejected) {
+      setRejected(false);
+      props.rejectIdea(rejected, ideasId);
+    }
   };
 
-  const [ideaOwner, setIdeaOwner] = useState({});
-
-
-  useEffect( () => {
-    fetchDocs("docs", setDocs);
-  }, [])
-  //   console.log("progress", progress);
-
-  const ideasId = props.match.params.id;
-
-  console.log("props.auth?", props.authState);
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
   }
@@ -69,13 +31,12 @@ export default function IdeaDashboardDetail(props) {
     request
       .get(`${baseUrl}/ideas/${ideasId}`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      //   .then((res) => console.log("res.body", res.body));
       .then((res) => {
-        setIdeaOwner(res.body.user);
-        setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
+        setIdeaProgress(res.body.progress);
       });
   }, []);
+  console.log("IDEA PROGRESS:", ideaProgress);
 
   const processTitle = (title) => {
     let splitTitle = title.split("?");
@@ -119,24 +80,6 @@ export default function IdeaDashboardDetail(props) {
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
   }
-
-  console.log("progress", progress[`step0` + 8]);
-
-  const progressStep = [""];
-
-  for (let i = 1; i < 10; i++) {
-    console.log("steps", progress[`step0${i - 1}`]);
-    const step = progress[`step0${i}`]
-      ? "is-done"
-      : progress[`step0${i - 1}`]
-      ? "current"
-      : "";
-    progressStep.push(step);
-  }
-
-  //   console.log("progressStep1", progressStep1);
-  //   const progressStep = ["", "is-done", "current", "", "", "", "", "", "", ""];
-
   return (
     <div className="dashboard-container">
       <Container>
@@ -144,34 +87,34 @@ export default function IdeaDashboardDetail(props) {
           <FlexRow>
             <FlexColumn>
               <StyledDiv>
-                <h1>Assessing Idea:</h1>
+                <h1>Assessing Your Idea:</h1>
                 <hr />
                 <ul className="step-progress">
-                  <li className={`step-progress-item ${progressStep[1]}`}>
+                  <li className="step-progress-item is-done">
                     <strong>Submit your idea</strong>
                   </li>
-                  <li className={`step-progress-item ${progressStep[2]}`}>
+                  <li className="step-progress-item current">
                     <strong>First patent check (1 week)</strong>
                   </li>
-                  <li className={`step-progress-item ${progressStep[3]}`}>
+                  <li className="step-progress-item">
                     <strong>Expert check (2 weeks)</strong>
                   </li>
-                  <li className={`step-progress-item ${progressStep[4]}`}>
+                  <li className="step-progress-item">
                     <strong>Second patent check (2 weeks)</strong>
                   </li>
-                  <li className={`step-progress-item ${progressStep[5]}`}>
+                  <li className="step-progress-item">
                     <strong>Validation phase (4 weeks)</strong>
                   </li>
-                  <li className={`step-progress-item ${progressStep[6]}`}>
+                  <li className="step-progress-item">
                     <strong>Final patent check (2 weeks)</strong>
                   </li>
-                  <li className={`step-progress-item ${progressStep[7]}`}>
+                  <li className="step-progress-item">
                     <strong>Business plan phase (2 weeks)</strong>
                   </li>
-                  <li className={`step-progress-item ${progressStep[8]}`}>
+                  <li className="step-progress-item">
                     <strong>Funding phase (2 weeks)</strong>
                   </li>
-                  <li className={`step-progress-item ${progressStep[9]}`}>
+                  <li className="step-progress-item">
                     <strong>Company is born (1 week)</strong>
                   </li>
                 </ul>
@@ -184,17 +127,23 @@ export default function IdeaDashboardDetail(props) {
               text="Patent Check"
               onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}
             />
-            <IdeaPDFCreator
-              user={ideaOwner}
-              ideaId={ideasId}
-              idea={userIdeas}
-              printer={props.authState.user}
+            <Button
+              color="inherit"
+              text="Reject Idea"
+              onClick={() => rejectIdea()}
             />
           </div>
         </Left>
         <Right>
           <Content>
-            <h1 className="header"> Questions and Answers about Idea:</h1>
+            <h1 className="header">
+              Admin View | Questions and Answers about Idea:
+            </h1>
+            {ideaProgress.length !== 0 && (!rejected || ideaProgress.rejected) && (
+              <h2>
+                <em>This idea has been rejected</em>
+              </h2>
+            )}
 
             {qTitles.map((title, index) => (
               <div key={index}>
@@ -204,25 +153,6 @@ export default function IdeaDashboardDetail(props) {
                 </StyledCard>
               </div>
             ))}
-          </Content>
-          <Content>
-
-            <h1 className="header"> Specialist input:</h1>
-            <StyledCard>
-              <form>
-                {docsSection}
-                <Button text="Upload Doc" onClick={() => beginUpload("docs")} />
-              </form>
-            </StyledCard>
-            <StyledCard>
-              <form>
-                <textarea name="Text" cols="40" rows="5">
-                  Add your input here...
-                </textarea>
-                <Button text="Submit" type="submit" />
-              </form>
-
-            </StyledCard>
           </Content>
         </Right>
       </Container>
