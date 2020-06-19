@@ -8,13 +8,10 @@ import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 // import assess from '../../../res/assess-white.png'
 // import invest from '../../../res/invest-white.png'
-
 // import crowdfunding from '../../../res/crowdfunding.png'
 
 export default function specialistDashboard(props) {
-  const [userData, setUserData] = useState({
-    specialistType: "Admin",
-  });
+  const [userData, setUserData] = useState({});
   const [ideaList, setIdeaList] = useState(false);
   const [userLoggedIn, setUserLoggedIn] = useState(true);
 
@@ -68,13 +65,19 @@ export default function specialistDashboard(props) {
   const renderIdeaList = () => {
     if (ideaList.length < 1) {
       return (
-        <h2 style={styledH2}>
-          There are no idea's available in your relevant phase(s)
-        </h2>
+        <>
+          {" "}
+          {renderCard(props.authState.user.specialistType)}
+          <h2 style={styledH2}>
+            There are no idea's available in your relevant phase(s)
+          </h2>
+        </>
       );
     }
     if (props.authState.user.specialistType === "patent") {
-      const render4 = ideaList.ideasPhase4.map((idea) => (
+      return renderPatentIdeaList();
+    } else {
+      const list = ideaList.map((idea) => (
         <Link
           key={idea.id}
           className="tile-link"
@@ -96,8 +99,42 @@ export default function specialistDashboard(props) {
           </div>
         </Link>
       ));
-      const card = renderCard("patent2");
-      const render6 = ideaList.ideasPhase4.map((idea) => (
+
+      return (
+        <>
+          {renderCard(props.authState.user.specialistType)}
+          <div className="flex-tilescontainer">{list}</div>
+        </>
+      );
+    }
+  };
+
+  const renderPatentIdeaList = () => {
+    if (!ideaList) return null;
+    else {
+      const list4 = ideaList.ideasPhase4.map((idea) => (
+        <Link
+          key={idea.id}
+          className="tile-link"
+          to={`/Specialist/dashboard/ideas/${idea.id}`}
+        >
+          <div className="assess-tile" key={idea.id}>
+            <p style={{ color: "black" }}>
+              <b>Title: </b>
+              <br />
+              {idea.idea[5].answers[0].qAnswer}
+            </p>
+            <br />
+            <p style={{ color: "black" }}>
+              <b>Description: </b>
+              <br />
+              {idea.idea[5].answers[1].qAnswer}
+            </p>
+            <br />
+          </div>
+        </Link>
+      ));
+      const list6 = ideaList.ideasPhase6.map((idea) => (
         <Link
           key={idea.id}
           className="tile-link"
@@ -121,19 +158,18 @@ export default function specialistDashboard(props) {
       ));
       if (ideaList.ideasPhase4.length < 1 && ideaList.ideasPhase6.length < 1) {
         return (
+          <h2 style={styledH2}>
+            There are no idea's available in phase 4 or 6
+          </h2>
+        );
+      }
+      if (ideaList.ideasPhase4.length >= 1 && ideaList.ideasPhase6.length < 1) {
+        return (
           <>
             {renderCard(props.authState.user.specialistType)}
-            <div className="flex-tilescontainer">
-              <h2 style={styledH2}>
-                There are no idea's available in your relevant phase
-              </h2>
-            </div>{" "}
-            {card}
-            <div className="flex-tilescontainer">
-              <h2 style={styledH2}>
-                There are no idea's available in your relevant phase
-              </h2>
-            </div>
+            <h2 style={styledH2}>These are idea's in phase 4</h2>
+            <div className="flex-tilescontainer">{list4}</div>
+            <h2 style={styledH2}>There are no idea's available in phase 6</h2>
           </>
         );
       }
@@ -141,86 +177,42 @@ export default function specialistDashboard(props) {
         return (
           <>
             {renderCard(props.authState.user.specialistType)}
-            <div className="flex-tilescontainer">
-              <h2 style={styledH2}>
-                There are no idea's available in your relevant phase
-              </h2>
-            </div>
-
-            {card}
-            <div className="flex-tilescontainer">{render6}</div>
-          </>
-        );
-      }
-      if (ideaList.ideasPhase4.length >= 1 && ideaList.ideasPhase6.length < 1) {
-        return (
-          <>
-            {renderCard(props.authState.user.specialistType)}
-            <div className="flex-tilescontainer">{render4}</div>
-
-            {card}
-            <div className="flex-tilescontainer">
-              <h2 style={styledH2}>
-                There are no idea's available in your relevant phase
-              </h2>
-            </div>
+            <h2 style={styledH2}>These are idea's in phase 6</h2>
+            <div className="flex-tilescontainer">{list6}</div>
+            <h2 style={styledH2}>There are no idea's available in phase 4</h2>
           </>
         );
       } else
         return (
           <>
             {renderCard(props.authState.user.specialistType)}
-            <div className="flex-tilescontainer">{render4}</div>
-
-            {card}
-            <div className="flex-tilescontainer">{render6}</div>
+            <h2 style={styledH2}>These are idea's in phase 4</h2>
+            <div className="flex-tilescontainer">{list4}</div>
+            <h2 style={styledH2}>These are idea's in phase 6</h2>
+            <div className="flex-tilescontainer">{list6}</div>
           </>
         );
-    } else
-      return ideaList.map((idea) => (
-        <>
-          {props.authState.user.role === "admin"
-            ? null
-            : renderCard(props.authState.user.specialistType)}
-          <div className="flex-tilescontainer">
-            <Link
-              key={idea.id}
-              className="tile-link"
-              to={`/Specialist/dashboard/ideas/${idea.id}`}
-            >
-              <div className="assess-tile" key={idea.id}>
-                <p style={{ color: "black" }}>
-                  <b>Title: </b>
-                  <br />
-                  {idea.idea[5].answers[0].qAnswer}
-                </p>
-                <br />
-                <p style={{ color: "black" }}>
-                  <b>Description: </b>
-                  <br />
-                  {idea.idea[5].answers[1].qAnswer}
-                </p>
-                <br />
-              </div>
-            </Link>
-          </div>
-        </>
-      ));
+    }
   };
 
   function specialistPhase(type) {
-    if (type === "patent") return "4";
-    if (type === "patent2") return "6";
+    if (type === "patent") return "4 and 6";
     if (type === "validation") return "5";
     if (type === "calculation" || type === "subsidy") return "7";
   }
   const renderCard = (type) => {
     if (!props.authState.user) return null;
-    else
+    if (props.authState.user.role !== "admin") {
       return (
         <StyledCard>
           Here are the ideas that are currently in phase {specialistPhase(type)}
           .<p>You can view and edit the ideas.</p>
+        </StyledCard>
+      );
+    } else
+      return (
+        <StyledCard>
+          Here are all the ideas.<p>You can view and edit the ideas.</p>
         </StyledCard>
       );
   };
@@ -229,7 +221,6 @@ export default function specialistDashboard(props) {
     <div className="dashboard-container">
       {renderTitle}
       <div className="flex-tilescontainer">{showNewSpecialist()}</div>
-
       {ideaList ? renderIdeaList() : null}
     </div>
   );
@@ -250,14 +241,3 @@ const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
 `;
-
-function generateNewProgress(phase) {
-  let newProgress = {};
-  for (let i = 1; i < phase + 1; i++) {
-    newProgress[`step0${i}`] = true;
-  }
-  for (let i = phase + 1; i < 10; i++) {
-    newProgress[`step0${i}`] = false;
-  }
-  return newProgress;
-}
