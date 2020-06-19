@@ -8,6 +8,8 @@
     "@material-ui/core": "^3.9.4",
     "babel-core": "^6.26.3",
     "base64-to-image": "^1.0.2",
+    "cloudinary-core": "^2.8.2",
+    "cloudinary-react": "^1.5.0",
     "country-json": "^1.1.0",
     "emotion-theming": "^10.0.27",
     "jspdf": "^1.5.3",
