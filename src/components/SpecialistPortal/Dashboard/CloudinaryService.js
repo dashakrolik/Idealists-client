@@ -1,5 +1,4 @@
-
-import { Cloudinary as CoreCloudinary, Util } from 'cloudinary-core';
+import { Cloudinary as CoreCloudinary, Util } from "cloudinary-core";
 
 export const url = (publicId, options) => {
   const scOptions = Util.withSnakeCaseKeys(options);
@@ -12,18 +11,20 @@ export const openUploadWidget = (options, callback) => {
   window.cloudinary.openUploadWidget(scOptions, callback);
 };
 
-export async function  fetchDocs  (docTag, setter)  {
+export async function fetchDocs(docTag, setter) {
   const options = {
-  cloudName: 'idealists',
-  format: 'json',
-  type: 'list',
-  version: Math.ceil(new Date().getTime() / 1000),
-};
+    cloudName: "idealists",
+    format: "json",
+    type: "list",
+    version: Math.ceil(new Date().getTime() / 1000),
+  };
 
-const urlPath = url(docTag.toString(), options);
+  const urlPath = url(docTag.toString(), options);
 
-fetch(urlPath)
-.then(res => res.text())
-.then(text => (text ? setter(JSON.parse(text).resources.map(doc => doc.public_id)) : []))
-.catch(err => console.log(err));
-};
+  fetch(urlPath)
+    .then((res) => res.text())
+    .then((text) =>
+      text ? setter(JSON.parse(text).resources.map((doc) => doc.public_id)) : []
+    )
+    .catch((err) => console.log(err));
+}
