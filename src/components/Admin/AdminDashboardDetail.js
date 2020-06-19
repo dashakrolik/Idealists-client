@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from "react";
 import request from "superagent";
-import { baseUrl } from "../../../constants";
-import "./IdeaDashBoardDetail.css";
+import { baseUrl } from "../../constants";
+import "../MyIdea/Dashboard/IdeaDashBoardDetail.css";
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import { Redirect } from "react-router-dom";
-import Button from "../../reogranisation/Questions/Button";
+import Button from "../reogranisation/Questions/Button";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
-  const [progress, setProgress] = useState([]);
+  const [ideaProgress, setIdeaProgress] = useState([]);
+  const [rejected, setRejected] = useState(true);
+  const [ideasId, setIdeasId] = useState(props.match.params.id);
 
-  const ideasId = props.match.params.id;
+  const rejectIdea = () => {
+    const confirmRejected = window.confirm(
+      "Are you sure you want to reject this idea?"
+    );
+    if (confirmRejected) {
+      setRejected(false);
+      props.rejectIdea(rejected, ideasId);
+    }
+  };
 
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
@@ -21,16 +31,12 @@ export default function IdeaDashboardDetail(props) {
     request
       .get(`${baseUrl}/ideas/${ideasId}`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-
-
-      //   .then((res) => console.log("res.body", res.body));
-
       .then((res) => {
-        setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
+        setIdeaProgress(res.body.progress);
       });
-
   }, []);
+  console.log("IDEA PROGRESS:", ideaProgress);
 
   const processTitle = (title) => {
     let splitTitle = title.split("?");
@@ -74,22 +80,6 @@ export default function IdeaDashboardDetail(props) {
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
   }
-
-
-  const progressStep = [""];
-  // console.log("progress", progress);
-
-  for (let i = 1; i < 10; i++) {
-    // console.log("steps", progress[`step0${i - 1}`]);
-    const step = progress[`step0${i}`]
-      ? "is-done"
-      : progress[`step0${i - 1}`]
-      ? "current"
-      : "";
-    progressStep.push(step);
-  }
-
-
   return (
     <div className="dashboard-container">
       <Container>
@@ -100,33 +90,31 @@ export default function IdeaDashboardDetail(props) {
                 <h1>Assessing Your Idea:</h1>
                 <hr />
                 <ul className="step-progress">
-
-                  <li className={`step-progress-item ${progressStep[1]}`}>
+                  <li className="step-progress-item is-done">
                     <strong>Submit your idea</strong>
                   </li>
-                  <li className={`step-progress-item ${progressStep[2]}`}>
+                  <li className="step-progress-item current">
                     <strong>First patent check (1 week)</strong>
                   </li>
-                  <li className={`step-progress-item ${progressStep[3]}`}>
+                  <li className="step-progress-item">
                     <strong>Expert check (2 weeks)</strong>
                   </li>
-                  <li className={`step-progress-item ${progressStep[4]}`}>
+                  <li className="step-progress-item">
                     <strong>Second patent check (2 weeks)</strong>
                   </li>
-                  <li className={`step-progress-item ${progressStep[5]}`}>
+                  <li className="step-progress-item">
                     <strong>Validation phase (4 weeks)</strong>
                   </li>
-                  <li className={`step-progress-item ${progressStep[6]}`}>
+                  <li className="step-progress-item">
                     <strong>Final patent check (2 weeks)</strong>
                   </li>
-                  <li className={`step-progress-item ${progressStep[7]}`}>
+                  <li className="step-progress-item">
                     <strong>Business plan phase (2 weeks)</strong>
                   </li>
-                  <li className={`step-progress-item ${progressStep[8]}`}>
+                  <li className="step-progress-item">
                     <strong>Funding phase (2 weeks)</strong>
                   </li>
-                  <li className={`step-progress-item ${progressStep[9]}`}>
-
+                  <li className="step-progress-item">
                     <strong>Company is born (1 week)</strong>
                   </li>
                 </ul>
@@ -139,11 +127,24 @@ export default function IdeaDashboardDetail(props) {
               text="Patent Check"
               onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}
             />
+            <Button
+              color="inherit"
+              text="Reject Idea"
+              onClick={() => rejectIdea()}
+            />
           </div>
         </Left>
         <Right>
           <Content>
-            <h1 className="header"> Questions and Answers about Idea:</h1>
+            <h1 className="header">
+              Admin View | Questions and Answers about Idea:
+            </h1>
+            {ideaProgress.length !== 0 && (!rejected || ideaProgress.rejected) && (
+              <h2>
+                <em>This idea has been rejected</em>
+              </h2>
+            )}
+
             {qTitles.map((title, index) => (
               <div key={index}>
                 <StyledCard>

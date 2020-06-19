@@ -15,6 +15,8 @@ import Submission from "./components/MyIdea/IdeaSubmission/Submission";
 import { baseUrl } from "./constants";
 import request from "superagent";
 import IdeaDashboard from "./components/MyIdea/Dashboard/IdeaDashboard";
+import AdminDashboard from "./components/Admin/AdminDashboard";
+import AdminDashboardDetail from "./components/Admin/AdminDashboardDetail";
 import IdeaDashboardDetail from "./components/MyIdea/Dashboard/IdeaDashboardDetail";
 import IdeaLogin from "./components/MyIdea/IdeaLogin";
 import TopBar from "./components/NavBar/TopBar";
@@ -32,6 +34,7 @@ import FormAssessIdeas from "./components/InvestorsPortal/Dashboard/FormAssessId
 import CompleteAssessment from "./components/InvestorsPortal/Dashboard/CompleteAssessment";
 import AddSpecialistStart from "./components/SpecialistPortal/SpecialistCreation/AddSpecialistStart";
 
+
 class App extends Component {
   state = {
     auth: {
@@ -42,6 +45,25 @@ class App extends Component {
     navigation: {
       activePath: "",
     },
+  };
+
+
+  rejectIdea = (rejected, ideasId) => {
+    console.log("whats the idea id:", ideasId);
+    request
+      .put(`${baseUrl}/ideas/${ideasId}/progress`)
+      .set("Authorization", `Bearer ${this.state.auth.token}`)
+      .send({ rejected })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log("success, idea rejected");
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+      });
   };
 
   requestLoginUser = (email, password) => {
@@ -98,9 +120,9 @@ class App extends Component {
             },
           });
 
-          alert(
-            "This login is for Idea Owners only, Please use Expert Login as an Expert or user Specialist Login as a Specialist!"
-          );
+
+          alert("As an Expert, Please use Expert Login!");
+
           localStorage.setItem("currentUserJwt", null);
         } else {
           console.error(err);
@@ -161,6 +183,8 @@ class App extends Component {
               token: null,
             },
           });
+
+
 
           alert(
             "This login is for Experts only, Please use User Login as an Idea Owner or Specialist Login as a Specialist!"
@@ -229,6 +253,7 @@ class App extends Component {
           alert(
             "This login is for Specialists only, Please use User Login as an Idea Owner or Expert Login as an Expert!"
           );
+
           localStorage.setItem("currentUserJwt", null);
         } else {
           console.error(err);
@@ -264,6 +289,7 @@ class App extends Component {
       });
   };
 
+
   sendInput = (content) => {
     request
       .post(`${baseUrl}/input`)
@@ -273,6 +299,7 @@ class App extends Component {
         res.status === 200 && console.log("form sent");
       });
   };
+
 
   resetPassword = (email) => {
     request
@@ -355,6 +382,7 @@ class App extends Component {
             <Application>
               <Route
                 exact
+
                 path="/Specialist/dashboard"
                 render={(props) => {
                   return (
@@ -440,6 +468,7 @@ class App extends Component {
               />
               <Route
                 exact
+
                 path="/Investors/dashboard"
                 render={(props) => {
                   return (
@@ -623,6 +652,41 @@ class App extends Component {
               />
               <Route
                 exact
+
+                path="/AdminDashboard"
+                render={(props) => {
+                  return (
+                    <AdminDashboard
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/AdminDashboard/ideas/:id"
+                render={(props) => {
+                  return (
+                    <AdminDashboardDetail
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                      rejectIdea={this.rejectIdea}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+
                 path="/dashboard/ideas/:id"
                 render={(props) => {
                   return (
