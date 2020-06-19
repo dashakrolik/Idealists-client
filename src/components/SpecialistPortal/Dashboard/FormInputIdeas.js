@@ -6,10 +6,12 @@ import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import { Redirect } from "react-router-dom";
 import Button from "../../reogranisation/Questions/Button";
+import IdeaPDFCreator from "./Download/IdeaPDFCreator";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
+  const [ideaOwner, setIdeaOwner] = useState({});
 
   //   console.log("progress", progress);
 
@@ -26,6 +28,7 @@ export default function IdeaDashboardDetail(props) {
       .set("Authorization", `Bearer ${props.authState.token}`)
       //   .then((res) => console.log("res.body", res.body));
       .then((res) => {
+        setIdeaOwner(res.body.user);
         setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
       });
@@ -138,6 +141,12 @@ export default function IdeaDashboardDetail(props) {
               text="Patent Check"
               onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}
             />
+            <IdeaPDFCreator
+              user={ideaOwner}
+              ideaId={ideasId}
+              idea={userIdeas}
+              printer={props.authState.user}
+            />
           </div>
         </Left>
         <Right>
@@ -154,11 +163,11 @@ export default function IdeaDashboardDetail(props) {
             ))}
           </Content>
           <Content>
-          <h1 className="header"> Add input:</h1>
-          <StyledCard>
-            <input type="file" name="file" />
-          </StyledCard>
-        </Content>
+            <h1 className="header"> Add input:</h1>
+            <StyledCard>
+              <input type="file" name="file" />
+            </StyledCard>
+          </Content>
         </Right>
       </Container>
     </div>
