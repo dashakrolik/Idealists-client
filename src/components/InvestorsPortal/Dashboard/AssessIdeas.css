@@ -56,14 +56,20 @@
   align-items: center;
   background-color: #ffffff;
 }
-/* .dropdown option {
-  padding: 1em;
-  color: rgb(0, 0, 0);
+.showAll {
+  background-color: #37608f;
+  font-size: 112%;
+
+  font-weight: 900;
+  color: white;
 }
 
-.demo {
-  margin: 100px auto;
-} */
+.dropdown-label {
+  margin-bottom: 0;
+  font-size: 120%;
+  font-weight: bold;
+  color: #ffffff;
+}
 
 .dropdown-container {
   width: 250px;
@@ -80,7 +86,6 @@ select {
   border-style: solid;
   border-color: #ffffff;
   border-radius: 25px;
-  /* background-color: #ffffff !important; */
 
   color: rgb(255, 255, 255);
   padding: 10px;
