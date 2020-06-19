@@ -22,7 +22,9 @@ export default function IdeaDashboardDetail(props) {
       .get(`${baseUrl}/ideas/${ideasId}`)
       .set("Authorization", `Bearer ${props.authState.token}`)
 
+
       //   .then((res) => console.log("res.body", res.body));
+
       .then((res) => {
         setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
@@ -74,12 +76,11 @@ export default function IdeaDashboardDetail(props) {
   }
 
 
-  console.log("progress", progress[`step0` + 8]);
-
   const progressStep = [""];
+  // console.log("progress", progress);
 
   for (let i = 1; i < 10; i++) {
-    console.log("steps", progress[`step0${i - 1}`]);
+    // console.log("steps", progress[`step0${i - 1}`]);
     const step = progress[`step0${i}`]
       ? "is-done"
       : progress[`step0${i - 1}`]
@@ -87,9 +88,6 @@ export default function IdeaDashboardDetail(props) {
       : "";
     progressStep.push(step);
   }
-
-  //   console.log("progressStep1", progressStep1);
-  //   const progressStep = ["", "is-done", "current", "", "", "", "", "", "", ""];
 
 
   return (
