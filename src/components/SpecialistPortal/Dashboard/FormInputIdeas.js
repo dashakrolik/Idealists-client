@@ -10,9 +10,7 @@ import Button from "../../reogranisation/Questions/Button";
 import { fetchDocs, openUploadWidget } from "./CloudinaryService";
 import { Image } from "cloudinary-react";
 
-
 import IdeaPDFCreator from "./Download/IdeaPDFCreator";
-
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
@@ -22,19 +20,16 @@ export default function IdeaDashboardDetail(props) {
 
   const docsSection = (
     <section>
-    {docs.map(i => <Image
-          key={i}
-          publicId={i}
-          fetch-format="auto"
-          quality="auto"
-        />)}
-  </section>
+      {docs.map((i) => (
+        <Image key={i} publicId={i} fetch-format="auto" quality="auto" />
+      ))}
+    </section>
   );
 
   const beginUpload = (tag) => {
     const uploadOptions = {
       cloudName: "idealists",
-      tags: [tag, 'aDoc'],
+      tags: [tag, "Specialist Input"],
       uploadPreset: "upload",
     };
 
@@ -52,10 +47,9 @@ export default function IdeaDashboardDetail(props) {
 
   const [ideaOwner, setIdeaOwner] = useState({});
 
-
-  useEffect( () => {
+  useEffect(() => {
     fetchDocs("docs", setDocs);
-  }, [])
+  }, []);
   //   console.log("progress", progress);
 
   const ideasId = props.match.params.id;
@@ -206,12 +200,14 @@ export default function IdeaDashboardDetail(props) {
             ))}
           </Content>
           <Content>
-
             <h1 className="header"> Specialist input:</h1>
             <StyledCard>
               <form>
                 {docsSection}
-                <Button text="Upload Doc" onClick={() => beginUpload("docs")} />
+                <Button
+                  text="Upload Doc"
+                  onClick={() => beginUpload(`IdeasId: ${ideasId}`)}
+                />
               </form>
             </StyledCard>
             <StyledCard>
@@ -221,7 +217,6 @@ export default function IdeaDashboardDetail(props) {
                 </textarea>
                 <Button text="Submit" type="submit" />
               </form>
-
             </StyledCard>
           </Content>
         </Right>
