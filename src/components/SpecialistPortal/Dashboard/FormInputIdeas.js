@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
 import request from "superagent";
 import { baseUrl } from "../../../constants";
-import "./IdeaDashBoardDetail.css";
+import "./FormInputIdeas.css";
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import { Redirect } from "react-router-dom";
 import Button from "../../reogranisation/Questions/Button";
+import IdeaPDFCreator from "./Download/IdeaPDFCreator";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
+  const [ideaOwner, setIdeaOwner] = useState({});
+
+  //   console.log("progress", progress);
 
   const ideasId = props.match.params.id;
 
+  console.log("props.auth?", props.authState);
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
   }
@@ -21,13 +26,12 @@ export default function IdeaDashboardDetail(props) {
     request
       .get(`${baseUrl}/ideas/${ideasId}`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-
       //   .then((res) => console.log("res.body", res.body));
       .then((res) => {
+        setIdeaOwner(res.body.user);
         setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
       });
-
   }, []);
 
   const processTitle = (title) => {
@@ -73,7 +77,6 @@ export default function IdeaDashboardDetail(props) {
     return <Redirect to="/MyIdea" />;
   }
 
-
   console.log("progress", progress[`step0` + 8]);
 
   const progressStep = [""];
@@ -91,7 +94,6 @@ export default function IdeaDashboardDetail(props) {
   //   console.log("progressStep1", progressStep1);
   //   const progressStep = ["", "is-done", "current", "", "", "", "", "", "", ""];
 
-
   return (
     <div className="dashboard-container">
       <Container>
@@ -99,10 +101,9 @@ export default function IdeaDashboardDetail(props) {
           <FlexRow>
             <FlexColumn>
               <StyledDiv>
-                <h1>Assessing Your Idea:</h1>
+                <h1>Assessing Idea:</h1>
                 <hr />
                 <ul className="step-progress">
-
                   <li className={`step-progress-item ${progressStep[1]}`}>
                     <strong>Submit your idea</strong>
                   </li>
@@ -128,7 +129,6 @@ export default function IdeaDashboardDetail(props) {
                     <strong>Funding phase (2 weeks)</strong>
                   </li>
                   <li className={`step-progress-item ${progressStep[9]}`}>
-
                     <strong>Company is born (1 week)</strong>
                   </li>
                 </ul>
@@ -141,11 +141,18 @@ export default function IdeaDashboardDetail(props) {
               text="Patent Check"
               onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}
             />
+            <IdeaPDFCreator
+              user={ideaOwner}
+              ideaId={ideasId}
+              idea={userIdeas}
+              printer={props.authState.user}
+            />
           </div>
         </Left>
         <Right>
           <Content>
             <h1 className="header"> Questions and Answers about Idea:</h1>
+
             {qTitles.map((title, index) => (
               <div key={index}>
                 <StyledCard>
@@ -154,6 +161,12 @@ export default function IdeaDashboardDetail(props) {
                 </StyledCard>
               </div>
             ))}
+          </Content>
+          <Content>
+            <h1 className="header"> Add input:</h1>
+            <StyledCard>
+              <input type="file" name="file" />
+            </StyledCard>
           </Content>
         </Right>
       </Container>

@@ -1,10 +1,14 @@
 /** @jsx jsx */
+
 import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { Component } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import InvestorDashboard from "./components/InvestorsPortal/Dashboard/InvestorDashboard";
 import InvestorLogin from "./components/InvestorsPortal/InvestorLogin";
+import SpecialistDashboard from "./components/SpecialistPortal/Dashboard/SpecialistDashboard";
+import SpecialistLogin from "./components/SpecialistPortal/SpecialistLogin";
+import FormInputIdeas from "./components/SpecialistPortal/Dashboard/FormInputIdeas";
 import { ThemeProvider } from "emotion-theming";
 import IdeaStart from "./components/MyIdea/IdeaStart";
 import Submission from "./components/MyIdea/IdeaSubmission/Submission";
@@ -20,6 +24,7 @@ import ResetPassword from "./components/MyIdea/ResetPassword";
 import EnterNewPassword from "./components/MyIdea/EnterNewPassword";
 import AutoMatch from "./components/MyIdea/Dashboard/AutoMatch";
 import InvestorStart from "./components/MyIdea/InvestorStart";
+import SpecialistStart from "./components/MyIdea/SpecialistStart";
 import AssesIdeas from "./components/InvestorsPortal/Dashboard/AssessIdeas";
 import MyInvestments from "./components/InvestorsPortal/Dashboard/MyInvestments";
 import Crowdfunding from "./components/InvestorsPortal/Dashboard/Crowdfunding";
@@ -27,6 +32,8 @@ import MyMentorships from "./components/InvestorsPortal/Dashboard/MyMentorships"
 import AutoMatchDetails from "./components/MyIdea/Dashboard/AutoMatchDetails";
 import FormAssessIdeas from "./components/InvestorsPortal/Dashboard/FormAssessIdeas";
 import CompleteAssessment from "./components/InvestorsPortal/Dashboard/CompleteAssessment";
+import AddSpecialistStart from "./components/SpecialistPortal/SpecialistCreation/AddSpecialistStart";
+
 
 class App extends Component {
   state = {
@@ -39,6 +46,7 @@ class App extends Component {
       activePath: "",
     },
   };
+
 
   rejectIdea = (rejected, ideasId) => {
     console.log("whats the idea id:", ideasId);
@@ -112,7 +120,9 @@ class App extends Component {
             },
           });
 
+
           alert("As an Expert, Please use Expert Login!");
+
           localStorage.setItem("currentUserJwt", null);
         } else {
           console.error(err);
@@ -174,7 +184,76 @@ class App extends Component {
             },
           });
 
-          alert("As an Idea Owner, Please use User Login!");
+
+
+          alert(
+            "This login is for Experts only, Please use User Login as an Idea Owner or Specialist Login as a Specialist!"
+          );
+          localStorage.setItem("currentUserJwt", null);
+        } else {
+          console.error(err);
+        }
+      });
+  };
+
+  requestLoginSpecialist = (email, password) => {
+    request
+      .post(`${baseUrl}/loginSpecialist`)
+      .send({ email, password })
+      .then((res) => {
+        if (res.status === 200) {
+          this.setState({
+            ...this.state,
+            auth: {
+              ...this.state.auth,
+              loggedIn: true,
+              token: res.body.jwt,
+            },
+          });
+          localStorage.setItem("currentUserJwt", res.body.jwt);
+        }
+      })
+      .catch((err) => {
+        if (err.status === 404) {
+          this.setState({
+            ...this.state,
+            auth: {
+              ...this.state.auth,
+              loggedIn: false,
+              token: null,
+            },
+          });
+
+          alert(
+            "You have entered an incorrect email. If you do not have an account, Please contact the admin!"
+          );
+          localStorage.setItem("currentUserJwt", null);
+        } else if (err.status === 401) {
+          this.setState({
+            ...this.state,
+            auth: {
+              ...this.state.auth,
+              loggedIn: false,
+              token: null,
+            },
+          });
+
+          alert("You have entered an incorrect password, Please try again!");
+          localStorage.setItem("currentUserJwt", null);
+        } else if (err.status === 403) {
+          this.setState({
+            ...this.state,
+            auth: {
+              ...this.state.auth,
+              loggedIn: false,
+              token: null,
+            },
+          });
+
+          alert(
+            "This login is for Specialists only, Please use User Login as an Idea Owner or Expert Login as an Expert!"
+          );
+
           localStorage.setItem("currentUserJwt", null);
         } else {
           console.error(err);
@@ -209,6 +288,18 @@ class App extends Component {
         res.status === 200 && console.log("form sent");
       });
   };
+
+
+  sendInput = (content) => {
+    request
+      .post(`${baseUrl}/input`)
+      .set("Authorization", `Bearer ${this.state.auth.token}`)
+      .send({ content })
+      .then((res) => {
+        res.status === 200 && console.log("form sent");
+      });
+  };
+
 
   resetPassword = (email) => {
     request
@@ -291,6 +382,93 @@ class App extends Component {
             <Application>
               <Route
                 exact
+
+                path="/Specialist/dashboard"
+                render={(props) => {
+                  return (
+                    <SpecialistDashboard
+                      {...props}
+                      user={this.getCurrentUser}
+                      authState={this.state.auth}
+                      login={this.requestLoginSpecialist}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                      user={this.getCurrentUser}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/Admin/dashboard/newspecialist"
+                render={(props) => {
+                  return (
+                    <AddSpecialistStart
+                      {...props}
+                      user={this.getCurrentUser}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                      user={this.getCurrentUser}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/Specialist/dashboard/ideas/:id"
+                render={(props) => {
+                  return (
+                    <FormInputIdeas
+                      {...props}
+                      authState={this.state.auth}
+                      sendInput={this.sendInput}
+                      login={this.requestLoginSpecialist}
+                      user={this.getCurrentUser}
+                      logout={this.logout}
+                      updateLocalStorage={this.updateLocalStorage}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/Specialist/login"
+                render={(props) => {
+                  return (
+                    <SpecialistLogin
+                      {...props}
+                      user={this.getCurrentUser}
+                      authState={this.state.auth}
+                      login={this.requestLoginSpecialist}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                      setAuthLoggedInTrue={this.setAuthLoggedInTrue}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/SpecialistStart"
+                render={(props) => {
+                  return (
+                    <SpecialistStart
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginSpecialist}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                      setAuthLoggedInTrue={this.setAuthLoggedInTrue}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+
                 path="/Investors/dashboard"
                 render={(props) => {
                   return (
@@ -474,6 +652,7 @@ class App extends Component {
               />
               <Route
                 exact
+
                 path="/AdminDashboard"
                 render={(props) => {
                   return (
@@ -507,6 +686,7 @@ class App extends Component {
               />
               <Route
                 exact
+
                 path="/dashboard/ideas/:id"
                 render={(props) => {
                   return (
@@ -630,6 +810,7 @@ class App extends Component {
                   );
                 }}
               />
+
               <Route exact path="/" render={() => <Redirect to="/MyIdea" />} />
             </Application>
           </ThemeProvider>
