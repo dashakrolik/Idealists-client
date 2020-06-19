@@ -78,7 +78,7 @@ export default function specialistDashboard(props) {
         <Link
           key={idea.id}
           className="tile-link"
-          to={`/specialist/dashboard/${idea.id}`}
+          to={`/Specialist/dashboard/ideas/${idea.id}`}
         >
           <div className="assess-tile" key={idea.id}>
             <p style={{ color: "black" }}>
@@ -101,7 +101,7 @@ export default function specialistDashboard(props) {
         <Link
           key={idea.id}
           className="tile-link"
-          to={`/specialist/dashboard/${idea.id}`}
+          to={`/Specialist/dashboard/ideas/${idea.id}`}
         >
           <div className="assess-tile" key={idea.id}>
             <p style={{ color: "black" }}>
@@ -186,7 +186,7 @@ export default function specialistDashboard(props) {
             <Link
               key={idea.id}
               className="tile-link"
-              to={`/specialist/dashboard/${idea.id}`}
+              to={`/Specialist/dashboard/ideas/${idea.id}`}
             >
               <div className="assess-tile" key={idea.id}>
                 <p style={{ color: "black" }}>
@@ -250,3 +250,14 @@ const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
 `;
+
+function generateNewProgress(phase) {
+  let newProgress = {};
+  for (let i = 1; i < phase + 1; i++) {
+    newProgress[`step0${i}`] = true;
+  }
+  for (let i = phase + 1; i < 10; i++) {
+    newProgress[`step0${i}`] = false;
+  }
+  return newProgress;
+}
