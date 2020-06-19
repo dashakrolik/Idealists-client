@@ -6,11 +6,48 @@ import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import { Redirect } from "react-router-dom";
 import Button from "../../reogranisation/Questions/Button";
+import { fetchDocs, openUploadWidget } from "./CloudinaryService";
+import { Image } from "cloudinary-react";
+
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
+  const [docs, setDocs] = useState([]);
 
+  const docsSection = (
+    <section>
+    {docs.map(i => <Image
+          key={i}
+          publicId={i}
+          fetch-format="auto"
+          quality="auto"
+        />)}
+  </section>
+  );
+
+  const beginUpload = (tag) => {
+    const uploadOptions = {
+      cloudName: "idealists",
+      tags: [tag, 'aDoc'],
+      uploadPreset: "upload",
+    };
+
+    openUploadWidget(uploadOptions, (error, doc) => {
+      if (!error) {
+        console.log("docs", doc);
+        if (doc.event === "success") {
+          setDocs([...docs, doc.info.public_id]);
+        }
+      } else {
+        console.log(error);
+      }
+    });
+  };
+
+  useEffect( () => {
+    fetchDocs("docs", setDocs);
+  }, [])
   //   console.log("progress", progress);
 
   const ideasId = props.match.params.id;
@@ -154,11 +191,22 @@ export default function IdeaDashboardDetail(props) {
             ))}
           </Content>
           <Content>
-          <h1 className="header"> Add input:</h1>
-          <StyledCard>
-            <input type="file" name="file" />
-          </StyledCard>
-        </Content>
+            <h1 className="header"> Specialist input:</h1>
+            <StyledCard>
+              <form>
+                {docsSection}
+                <Button text="Upload Doc" onClick={() => beginUpload("docs")} />
+              </form>
+            </StyledCard>
+            <StyledCard>
+              <form>
+                <textarea name="Text" cols="40" rows="5">
+                  Add your input here...
+                </textarea>
+                <Button text="Submit" type="submit" />
+              </form>
+            </StyledCard>
+          </Content>
         </Right>
       </Container>
     </div>
