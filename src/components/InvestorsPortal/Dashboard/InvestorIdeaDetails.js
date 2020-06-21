@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import request from "superagent";
 import { baseUrl } from "../../../constants";
-import "./IdeaDashBoardDetail.css";
+import "./InvestorIdeaDetails.css";
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import { Redirect } from "react-router-dom";
 import Button from "../../reogranisation/Questions/Button";
 
+import IdeaPDFCreator from "./Download/IdeaPDFCreator";
+
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
+
+  const [ideaOwner, setIdeaOwner] = useState({});
 
   const ideasId = props.match.params.id;
 
@@ -22,6 +26,7 @@ export default function IdeaDashboardDetail(props) {
       .get(`${baseUrl}/ideas/${ideasId}`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then((res) => {
+        setIdeaOwner(res.body.user);
         setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
       });
@@ -125,8 +130,16 @@ export default function IdeaDashboardDetail(props) {
           <div>
             <Button
               color="inherit"
-              text="Patent Check"
-              onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}
+              text="Assess this idea"
+              onClick={() =>
+                props.history.push(`/Investors/dashboard/assess/${ideasId}`)
+              }
+            />
+            <IdeaPDFCreator
+              user={ideaOwner}
+              ideaId={ideasId}
+              idea={userIdeas}
+              printer={props.authState.user}
             />
           </div>
         </Left>

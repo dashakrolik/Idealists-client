@@ -83,13 +83,13 @@ export default function AssessIdeas(props) {
       const ideaIndustryArr = ideaA.industryIdea
         .replace(/[{}"]/g, "")
         .split(",");
-      // check wheter above array contains any of the expert industries and set index accordingly for sorting (-1 - move to the front, 0 - no change)
+      // check whether above array contains any of the expert industries and set index accordingly for sorting (-1 - move to the front, 0 - no change)
       var index = ideaIndustryArr.some((industry) =>
         expertIndustries.includes(industry)
       )
         ? -1
         : 0;
-      console.log("index", index);
+
       return index;
     });
   }
@@ -103,8 +103,6 @@ export default function AssessIdeas(props) {
     );
     setSortedIdeas(filteredIdeas);
   };
-
-  console.log("sortedIdeas", sortedIdeas);
 
   return (
     <div className="assessIdeas-container">
@@ -158,7 +156,7 @@ export default function AssessIdeas(props) {
           <Link
             key={idea.id}
             className="tile-link"
-            to={`/investors/dashboard/assess/${idea.id}`}
+            to={`/investors/dashboard/idea/${idea.id}`}
           >
             <div className="assess-tile" key={idea.id}>
               <p style={{ color: "black" }}>
