@@ -31,9 +31,10 @@ import Crowdfunding from "./components/InvestorsPortal/Dashboard/Crowdfunding";
 import MyMentorships from "./components/InvestorsPortal/Dashboard/MyMentorships";
 import AutoMatchDetails from "./components/MyIdea/Dashboard/AutoMatchDetails";
 import FormAssessIdeas from "./components/InvestorsPortal/Dashboard/FormAssessIdeas";
+import InvestorIdeaDetails from "./components/InvestorsPortal/Dashboard/InvestorIdeaDetails";
+
 import CompleteAssessment from "./components/InvestorsPortal/Dashboard/CompleteAssessment";
 import AddSpecialistStart from "./components/SpecialistPortal/SpecialistCreation/AddSpecialistStart";
-
 
 class App extends Component {
   state = {
@@ -46,7 +47,6 @@ class App extends Component {
       activePath: "",
     },
   };
-
 
   rejectIdea = (rejected, ideasId) => {
     console.log("whats the idea id:", ideasId);
@@ -120,7 +120,6 @@ class App extends Component {
             },
           });
 
-
           alert("As an Expert, Please use Expert Login!");
 
           localStorage.setItem("currentUserJwt", null);
@@ -183,8 +182,6 @@ class App extends Component {
               token: null,
             },
           });
-
-
 
           alert(
             "This login is for Experts only, Please use User Login as an Idea Owner or Specialist Login as a Specialist!"
@@ -289,7 +286,6 @@ class App extends Component {
       });
   };
 
-
   sendInput = (content) => {
     request
       .post(`${baseUrl}/input`)
@@ -299,7 +295,6 @@ class App extends Component {
         res.status === 200 && console.log("form sent");
       });
   };
-
 
   resetPassword = (email) => {
     request
@@ -382,7 +377,6 @@ class App extends Component {
             <Application>
               <Route
                 exact
-
                 path="/Specialist/dashboard"
                 render={(props) => {
                   return (
@@ -420,7 +414,7 @@ class App extends Component {
                 path="/Specialist/dashboard/ideas/:id"
                 render={(props) => {
                   return (
-                    <FormInputIdeas
+                    <InvestorIdeaDetails
                       {...props}
                       authState={this.state.auth}
                       sendInput={this.sendInput}
@@ -468,7 +462,6 @@ class App extends Component {
               />
               <Route
                 exact
-
                 path="/Investors/dashboard"
                 render={(props) => {
                   return (
@@ -510,6 +503,23 @@ class App extends Component {
                       {...props}
                       sendAssessment={this.sendAssessment}
                       authState={this.state.auth}
+                      login={this.requestLoginExpert}
+                      user={this.getCurrentUser}
+                      logout={this.logout}
+                      updateLocalStorage={this.updateLocalStorage}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/Investors/dashboard/idea/:id"
+                render={(props) => {
+                  return (
+                    <InvestorIdeaDetails
+                      {...props}
+                      authState={this.state.auth}
+                      sendAssessment={this.sendAssessment}
                       login={this.requestLoginExpert}
                       user={this.getCurrentUser}
                       logout={this.logout}
@@ -652,7 +662,6 @@ class App extends Component {
               />
               <Route
                 exact
-
                 path="/AdminDashboard"
                 render={(props) => {
                   return (
@@ -686,7 +695,6 @@ class App extends Component {
               />
               <Route
                 exact
-
                 path="/dashboard/ideas/:id"
                 render={(props) => {
                   return (
