@@ -44,12 +44,13 @@ export default function AssessIdeas(props) {
   }, []);
 
   useEffect(() => {
-    // extracting all items for the dropdown with all ideas' industries
+    // extracting all items for the dropdown selector with all ideas' industries
     const ideasIndustries = ideas
       .map((idea) => idea.industryIdea)
       .map((arr) => arr.replace(/[{}"]/g, "").split(","))
       .flat()
-      .filter((industry, index, arr) => arr.indexOf(industry) === index);
+      .filter((industry, index, arr) => arr.indexOf(industry) === index)
+      .sort((a, b) => a.localeCompare(b));
     setIndustries(ideasIndustries);
   }, [ideas]);
 
