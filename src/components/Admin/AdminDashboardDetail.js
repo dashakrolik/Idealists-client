@@ -11,15 +11,26 @@ export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
   const [rejected, setRejected] = useState(true);
+  const [updatePhase, setUpdatePhase] = useState(true);
   const [ideasId, setIdeasId] = useState(props.match.params.id);
 
   const rejectIdea = () => {
     const confirmRejected = window.confirm(
-      "Are you sure you want to reject this idea? The user who submitted the idea will be immediately notified by email."
+      "Are you sure you want to reject this idea? The user who submitted the idea will be immediately notified via email."
     );
     if (confirmRejected) {
       setRejected(false);
       props.rejectIdea(rejected, ideasId);
+    }
+  };
+
+  const updateProgress = (stepNameInEntity) => {
+    const confirmPhaseUpdate = window.confirm(
+      "Move idea progress to the next phase?"
+    );
+    if (confirmPhaseUpdate) {
+      setUpdatePhase(false);
+      props.updateProgress(stepNameInEntity, ideasId);
     }
   };
 
@@ -35,7 +46,7 @@ export default function IdeaDashboardDetail(props) {
         setUserIdeas(res.body.idea);
         setProgress(res.body.progress);
       });
-  }, []);
+  }, [updatePhase]);
 
   const processTitle = (title) => {
     let splitTitle = title.split("?");
@@ -100,61 +111,44 @@ export default function IdeaDashboardDetail(props) {
   switch (currentStep) {
     case 1:
       nextPhaseName = "First Patent Check";
-      stepNameInEntity = "step02"; // this is the step of the next phase in the database
+      stepNameInEntity = { step01: true };
       break;
     case 2:
       nextPhaseName = "Expert Check";
-      stepNameInEntity = "step03";
+      stepNameInEntity = { step02: true };
       break;
     case 3:
       nextPhaseName = "Second Patent Check";
-      stepNameInEntity = "step04";
+      stepNameInEntity = { step03: true };
       break;
     case 4:
       nextPhaseName = "Validation Phase";
-      stepNameInEntity = "step05";
+      stepNameInEntity = { step04: true };
       break;
     case 5:
       nextPhaseName = "Final Patent Check";
-      stepNameInEntity = "step06";
+      stepNameInEntity = { step05: true };
       break;
     case 6:
       nextPhaseName = "Business Plan Phase";
-      stepNameInEntity = "step07";
+      stepNameInEntity = { step06: true };
       break;
     case 7:
       nextPhaseName = "Funding Phase";
-      stepNameInEntity = "step08";
+      stepNameInEntity = { step07: true };
       break;
     case 8:
       nextPhaseName = "Company Is Born";
-      stepNameInEntity = "step09";
+      stepNameInEntity = { step08: true };
       break;
     case 9:
       nextPhaseName = "Final Phase";
-      stepNameInEntity = "step10";
+      stepNameInEntity = { step09: true };
+      break;
+    case 10:
+      nextPhaseName = "Project Complete";
+      stepNameInEntity = { step10: true };
   }
-
-  // const { nextPhaseName, stepNameInEntity } =
-  //   currentStep === 1
-  //     ? { nextPhaseName: "First Patent Check", stepNameInEntity: "step02" }
-  //     : currentStep === 2
-  //     ? { nextPhaseName: "Expert Check", stepNameInEntity: "step02" }
-  //     : currentStep === 3
-  //     ? { nextPhaseName: "Second Patent Check", stepNameInEntity: "step02" }
-  //     : currentStep === 4
-  //     ? { nextPhaseName: "Validation Phase", stepNameInEntity: "step02" }
-  //     : currentStep === 5
-  //     ? { nextPhaseName: "Final Patent Check", stepNameInEntity: "step02" }
-  //     : currentStep === 6
-  //     ? { nextPhaseName: "Business Plan Phase", stepNameInEntity: "step02" }
-  //     : currentStep === 7
-  //     ? { nextPhaseName: "Funding Phase", stepNameInEntity: "step02" }
-  //     : currentStep === 8
-  //     ? { nextPhaseName: "Company Is Born", stepNameInEntity: "step02" }
-  //     : currentStep === 9
-  //     ? { nextPhaseName: "Final Phase", stepNameInEntity: "step02" }
-  //     : null;
 
   return (
     <div className="dashboard-container">
@@ -206,8 +200,18 @@ export default function IdeaDashboardDetail(props) {
 
             <Button
               color="inherit"
-              text={`Move to next phase: ${nextPhaseName} ${stepNameInEntity}`}
-              onClick={() => console.log("phase update")}
+              text={
+                updatePhase && nextPhaseName !== undefined
+                  ? `Move to next phase: ${nextPhaseName}`
+                  : nextPhaseName === undefined
+                  ? "Idea has reached final phase"
+                  : "Phase Updated"
+              }
+              onClick={
+                nextPhaseName !== undefined
+                  ? () => updateProgress(stepNameInEntity)
+                  : null
+              }
             />
           </div>
         </Left>

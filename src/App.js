@@ -66,6 +66,26 @@ class App extends Component {
       });
   };
 
+  updateProgress = (stepNameInEntity, ideasId) => {
+    console.log("whats the idea id:", ideasId);
+    console.log("whats the step:", stepNameInEntity);
+
+    request
+      .put(`${baseUrl}/ideas/${ideasId}/progress`)
+      .set("Authorization", `Bearer ${this.state.auth.token}`)
+      .send(stepNameInEntity)
+      .then((res) => {
+        if (res.status === 200) {
+          console.log("success, idea progress moved forward");
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+      });
+  };
+
   requestLoginUser = (email, password) => {
     request
       .post(`${baseUrl}/loginUser`)
@@ -689,6 +709,7 @@ class App extends Component {
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
                       rejectIdea={this.rejectIdea}
+                      updateProgress={this.updateProgress}
                     />
                   );
                 }}
