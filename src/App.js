@@ -818,6 +818,23 @@ class App extends Component {
                   );
                 }}
               />
+              <Route
+                exact
+                path="/dashboard/assess/:id"
+                render={(props) => {
+                  return (
+                    <FormAssessIdeas
+                      {...props}
+                      authState={this.state.auth}
+                      sendAssessment={this.sendAssessment}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      logout={this.logout}
+                      updateLocalStorage={this.updateLocalStorage}
+                    />
+                  );
+                }}
+              />
 
               <Route exact path="/" render={() => <Redirect to="/MyIdea" />} />
             </Application>
