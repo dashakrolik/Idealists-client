@@ -4,7 +4,23 @@ import Card from "@material-ui/core/Card";
 import "./AssessmentSection.css";
 
 export default function AssessmentSection(props) {
-  const { assessments } = props;
+  const { assessments, industryIdea } = props;
+
+  function renderIndustry(user) {
+    const expertIndustryArr = user.industry.replace(/[{}"]/g, "").split(",");
+    const ideaIndustryArr = industryIdea.replace(/[{}"]/g, "").split(",");
+    return expertIndustryArr.map((indu) => {
+      if (ideaIndustryArr.includes(indu)) {
+        return (
+          <strong key={indu}>
+            <li key={indu}>{indu}</li>
+          </strong>
+        );
+      } else {
+        return <li key={indu}>{indu}</li>;
+      }
+    });
+  }
 
   const renderAssessments =
     assessments.length >= 1 ? (
@@ -31,13 +47,9 @@ export default function AssessmentSection(props) {
                     </>
                   ) : null}
                 </h5>
-                {user.role === "expert" && user.industry >= 1 ? (
+                {user.role === "expert" && user.industry ? (
                   <>
-                    <ul>
-                      {user.industry.map((indu) => (
-                        <li>{indu}</li>
-                      ))}
-                    </ul>
+                    <ul>{renderIndustry(user)}</ul>
                   </>
                 ) : null}
                 <footer>{date.toUTCString()}</footer>
