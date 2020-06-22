@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import request from "superagent";
 import { baseUrl } from "../../../constants";
-import "./FormInputIdeas.css";
+import "./SpecialistDashboard.css";
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import { Redirect } from "react-router-dom";
@@ -12,23 +12,19 @@ import AssessmentSection from "./AssessmentSection/AssessmentSection";
 import CommentSection from "./CommentSection/CommentSection";
 import IdeaPDFCreator from "./Download/IdeaPDFCreator";
 
-
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
-
   const [ideaOwner, setIdeaOwner] = useState({});
-
   const [showCommentSection, setShowCommentSection] = useState(false);
   const [showAssessmentSection, setShowAssessmentSection] = useState(false);
   const [showIdeaDetails, setShowIdeaDetails] = useState(false);
-  const [ideaOwner, setIdeaOwner] = useState({});
+
   const [assessments, setAssessments] = useState([]);
   const [docs, setDocs] = useState([]);
 
   const docsUploaded = (
     <section>
-
       {/* { === ideasId ?  */}
       {docs.map((i) => (
         <Image
@@ -42,7 +38,6 @@ export default function IdeaDashboardDetail(props) {
           crop="scale"
           responsiveUseBreakpoints="true"
         ></Image>
-
       ))}
     </section>
   );
@@ -68,11 +63,9 @@ export default function IdeaDashboardDetail(props) {
     });
   };
 
-
   useEffect(() => {
     fetchDocs(`IdeasId: ${ideasId}`, setDocs);
   }, []);
-
 
   //   console.log("progress", progress);
 
@@ -212,6 +205,12 @@ export default function IdeaDashboardDetail(props) {
     </>
   ) : (
     <>
+      <StyledCard>
+        <Button
+          text="Hide details"
+          onClick={() => setShowIdeaDetails(!showIdeaDetails)}
+        />
+      </StyledCard>
       {qTitles.map((title, index) => (
         <div key={index}>
           <StyledCard>
@@ -220,18 +219,23 @@ export default function IdeaDashboardDetail(props) {
           </StyledCard>
         </div>
       ))}
-      <Button
-        text="Hide details"
-        onClick={() => setShowIdeaDetails(!showIdeaDetails)}
-      />
+      <StyledCard>
+        <Button
+          text="Hide details"
+          onClick={() => setShowIdeaDetails(!showIdeaDetails)}
+        />
+      </StyledCard>
     </>
+  );
 
   const renderCommentSection = !showCommentSection ? (
     <>
-      <Button
-        text="Show Comments"
-        onClick={() => setShowCommentSection(!showCommentSection)}
-      />
+      <StyledCard>
+        <Button
+          text="Show Comments"
+          onClick={() => setShowCommentSection(!showCommentSection)}
+        />
+      </StyledCard>
     </>
   ) : (
     <CommentSection
@@ -241,7 +245,6 @@ export default function IdeaDashboardDetail(props) {
         setShowCommentSection(e);
       }}
     />
-
   );
 
   return (
@@ -334,19 +337,19 @@ export default function IdeaDashboardDetail(props) {
           >
             <h1 className="header"> Specialist Comments</h1>
             {renderCommentSection}
-
           </div>
-    <Content>
+          <Content>
             <h1 className="header"> Specialist input:</h1>
             <StyledCard>
+              {docsUploaded}
               <form>
-                {docsUploaded}
                 <Button
                   text="Upload Doc"
                   onClick={() => beginUpload(`IdeasId: ${ideasId}`)}
                 />
               </form>
             </StyledCard>
+          </Content>
         </Right>
       </Container>
     </div>
