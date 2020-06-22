@@ -1,0 +1,23 @@
+.comment-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
+.comment-container .left {
+  width: 30%;
+  text-align: left;
+}
+
+.comment-container .left h4 {
+  margin-bottom: -1rem;
+}
+
+.comment-container .right {
+  width: 70%;
+  text-align: left;
+}
+
+.comment-container .left p {
+  font-size: small;
+}

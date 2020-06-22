@@ -9,32 +9,28 @@ import Button from "../../reogranisation/Questions/Button";
 
 import { fetchDocs, openUploadWidget } from "./CloudinaryService";
 import { Image } from "cloudinary-react";
-
-
+import CommentSection from "./CommentSection/CommentSection";
 import IdeaPDFCreator from "./Download/IdeaPDFCreator";
-
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
+  const [showCommentSection, setShowCommentSection] = useState(false);
 
   const [docs, setDocs] = useState([]);
 
   const docsSection = (
     <section>
-    {docs.map(i => <Image
-          key={i}
-          publicId={i}
-          fetch-format="auto"
-          quality="auto"
-        />)}
-  </section>
+      {docs.map((i) => (
+        <Image key={i} publicId={i} fetch-format="auto" quality="auto" />
+      ))}
+    </section>
   );
 
   const beginUpload = (tag) => {
     const uploadOptions = {
       cloudName: "idealists",
-      tags: [tag, 'aDoc'],
+      tags: [tag, "aDoc"],
       uploadPreset: "upload",
     };
 
@@ -52,10 +48,9 @@ export default function IdeaDashboardDetail(props) {
 
   const [ideaOwner, setIdeaOwner] = useState({});
 
-
-  useEffect( () => {
+  useEffect(() => {
     fetchDocs("docs", setDocs);
-  }, [])
+  }, []);
   //   console.log("progress", progress);
 
   const ideasId = props.match.params.id;
@@ -137,6 +132,23 @@ export default function IdeaDashboardDetail(props) {
   //   console.log("progressStep1", progressStep1);
   //   const progressStep = ["", "is-done", "current", "", "", "", "", "", "", ""];
 
+  const renderCommentSection = !showCommentSection ? (
+    <>
+      <Button
+        text="Show Comments"
+        onClick={() => setShowCommentSection(!showCommentSection)}
+      />
+    </>
+  ) : (
+    <CommentSection
+      id={ideasId}
+      authState={props.authState}
+      show={(e) => {
+        setShowCommentSection(e);
+      }}
+    />
+  );
+
   return (
     <div className="dashboard-container">
       <Container>
@@ -206,7 +218,6 @@ export default function IdeaDashboardDetail(props) {
             ))}
           </Content>
           <Content>
-
             <h1 className="header"> Specialist input:</h1>
             <StyledCard>
               <form>
@@ -214,15 +225,10 @@ export default function IdeaDashboardDetail(props) {
                 <Button text="Upload Doc" onClick={() => beginUpload("docs")} />
               </form>
             </StyledCard>
-            <StyledCard>
-              <form>
-                <textarea name="Text" cols="40" rows="5">
-                  Add your input here...
-                </textarea>
-                <Button text="Submit" type="submit" />
-              </form>
-
-            </StyledCard>
+          </Content>
+          <Content>
+            <h1 className="header"> Specialist Comments</h1>
+            {renderCommentSection}
           </Content>
         </Right>
       </Container>
