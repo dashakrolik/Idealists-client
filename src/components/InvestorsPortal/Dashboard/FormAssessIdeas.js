@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import React, { Component } from "react";
+
 import { Redirect } from "react-router-dom";
+
 import ReactDOM from "react-dom";
 import {
   Textbox,
@@ -162,6 +164,7 @@ export default class FormAssessIdeas extends Component {
       // !hasAgreementMentorError &&
       // !hasAgreementMentorNoError
     ) {
+<<<<<<< HEAD
       //calculate a complete score given to an idea and pass it in the post req. alongside the assessment
       const rawScore =
         parseInt(this.state.willPeopleWantThis) +
@@ -175,6 +178,9 @@ export default class FormAssessIdeas extends Component {
           ? parseInt(this.state.whatDoYouExpectAsMagnitude)
           : 0);
       // submit assessment and score to the server/database
+=======
+
+>>>>>>> cf70d6c684ad1de59cc9ace74303b986416ad8da
       request
         .post(`${baseUrl}/assessments/${this.props.match.params.id}`)
         .set("Authorization", `Bearer ${this.props.authState.token}`)
@@ -195,7 +201,9 @@ export default class FormAssessIdeas extends Component {
   }
 
   render() {
+
     if (!this.props.authState.loggedIn) {
+
       return <Redirect to="/Investors/login" />;
     } else if (this.props.authState.loggedIn) {
       const {

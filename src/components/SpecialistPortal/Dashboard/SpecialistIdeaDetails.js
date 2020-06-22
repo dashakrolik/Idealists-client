@@ -1,28 +1,43 @@
 import React, { useEffect, useState } from "react";
 import request from "superagent";
 import { baseUrl } from "../../../constants";
-import "./FormInputIdeas.css";
+import "./SpecialistDashboard.css";
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import { Redirect } from "react-router-dom";
 import Button from "../../reogranisation/Questions/Button";
-
 import { fetchDocs, openUploadWidget } from "./CloudinaryService";
 import { Image } from "cloudinary-react";
+import AssessmentSection from "./AssessmentSection/AssessmentSection";
 import CommentSection from "./CommentSection/CommentSection";
 import IdeaPDFCreator from "./Download/IdeaPDFCreator";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
+  const [ideaOwner, setIdeaOwner] = useState({});
   const [showCommentSection, setShowCommentSection] = useState(false);
+  const [showAssessmentSection, setShowAssessmentSection] = useState(false);
+  const [showIdeaDetails, setShowIdeaDetails] = useState(false);
 
+  const [assessments, setAssessments] = useState([]);
   const [docs, setDocs] = useState([]);
 
-  const docsSection = (
+  const docsUploaded = (
     <section>
+      {/* { === ideasId ?  */}
       {docs.map((i) => (
-        <Image key={i} publicId={i} fetch-format="auto" quality="auto" />
+        <Image
+          key={i}
+          publicId={i}
+          fetch-format="auto"
+          quality="auto"
+          dpr="auto"
+          responsive
+          width="auto"
+          crop="scale"
+          responsiveUseBreakpoints="true"
+        ></Image>
       ))}
     </section>
   );
@@ -30,13 +45,15 @@ export default function IdeaDashboardDetail(props) {
   const beginUpload = (tag) => {
     const uploadOptions = {
       cloudName: "idealists",
-      tags: [tag, "aDoc"],
+
+      tags: [tag, "Specialist Input"],
+
       uploadPreset: "upload",
     };
 
     openUploadWidget(uploadOptions, (error, doc) => {
       if (!error) {
-        console.log("docs", doc);
+        console.log("docs:", doc);
         if (doc.event === "success") {
           setDocs([...docs, doc.info.public_id]);
         }
@@ -46,15 +63,17 @@ export default function IdeaDashboardDetail(props) {
     });
   };
 
-  const [ideaOwner, setIdeaOwner] = useState({});
-
   useEffect(() => {
-    fetchDocs("docs", setDocs);
+    fetchDocs(`IdeasId: ${ideasId}`, setDocs);
   }, []);
+<<<<<<< HEAD:src/components/SpecialistPortal/Dashboard/FormInputIdeas.js
+=======
+
+  //   console.log("progress", progress);
+>>>>>>> cf70d6c684ad1de59cc9ace74303b986416ad8da:src/components/SpecialistPortal/Dashboard/SpecialistIdeaDetails.js
 
   const ideasId = props.match.params.id;
 
-  console.log("props.auth?", props.authState);
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
   }
@@ -67,6 +86,7 @@ export default function IdeaDashboardDetail(props) {
         setIdeaOwner(res.body.user);
         setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
+        setAssessments(res.body.assessments);
       });
   }, []);
 
@@ -127,12 +147,100 @@ export default function IdeaDashboardDetail(props) {
     progressStep.push(step);
   }
 
+<<<<<<< HEAD:src/components/SpecialistPortal/Dashboard/FormInputIdeas.js
+=======
+  //   console.log("progressStep1", progressStep1);
+  //   const progressStep = ["", "is-done", "current", "", "", "", "", "", "", ""];
+
+  const renderAssessmentSection = !showAssessmentSection ? (
+    <>
+      {assessments.length < 0 ? (
+        <StyledCard>
+          There are currently no assessments for this idea.
+        </StyledCard>
+      ) : (
+        <StyledCard>
+          <Button
+            text="Show Assessments"
+            onClick={() => setShowAssessmentSection(!showAssessmentSection)}
+          />{" "}
+        </StyledCard>
+      )}
+    </>
+  ) : (
+    <>
+      <StyledCard>
+        <Button
+          text="Hide Assessments"
+          onClick={() => setShowAssessmentSection(!showAssessmentSection)}
+        />{" "}
+      </StyledCard>
+      <AssessmentSection assessments={assessments} />
+      <StyledCard>
+        <Button
+          text="Hide Assessments"
+          onClick={() => setShowAssessmentSection(!showAssessmentSection)}
+        />{" "}
+      </StyledCard>
+    </>
+  );
+
+  const renderIdeaDetails = !showIdeaDetails ? (
+    <>
+      {" "}
+      <div key="1">
+        <StyledCard>
+          <h4>{qTitles[5]}:</h4>
+          <p>{qAnswers[5]}</p>
+        </StyledCard>
+      </div>
+      <div key="2">
+        <StyledCard>
+          <h4>{qTitles[6]}:</h4>
+          <p>{qAnswers[6]}</p>
+        </StyledCard>
+      </div>
+      <StyledCard>
+        <Button
+          text="Show details"
+          onClick={() => setShowIdeaDetails(!showIdeaDetails)}
+        />
+      </StyledCard>
+    </>
+  ) : (
+    <>
+      <StyledCard>
+        <Button
+          text="Hide details"
+          onClick={() => setShowIdeaDetails(!showIdeaDetails)}
+        />
+      </StyledCard>
+      {qTitles.map((title, index) => (
+        <div key={index}>
+          <StyledCard>
+            <h4>{title}:</h4>
+            <p>{qAnswers[index]}</p>
+          </StyledCard>
+        </div>
+      ))}
+      <StyledCard>
+        <Button
+          text="Hide details"
+          onClick={() => setShowIdeaDetails(!showIdeaDetails)}
+        />
+      </StyledCard>
+    </>
+  );
+
+>>>>>>> cf70d6c684ad1de59cc9ace74303b986416ad8da:src/components/SpecialistPortal/Dashboard/SpecialistIdeaDetails.js
   const renderCommentSection = !showCommentSection ? (
     <>
-      <Button
-        text="Show Comments"
-        onClick={() => setShowCommentSection(!showCommentSection)}
-      />
+      <StyledCard>
+        <Button
+          text="Show Comments"
+          onClick={() => setShowCommentSection(!showCommentSection)}
+        />
+      </StyledCard>
     </>
   ) : (
     <CommentSection
@@ -202,28 +310,50 @@ export default function IdeaDashboardDetail(props) {
         <Right>
           <Content>
             <h1 className="header"> Questions and Answers about Idea:</h1>
-
-            {qTitles.map((title, index) => (
-              <div key={index}>
-                <StyledCard>
-                  <h4>{title}:</h4>
-                  <p>{qAnswers[index]}</p>
-                </StyledCard>
-              </div>
-            ))}
+            {renderIdeaDetails}
           </Content>
+
+          <div
+            className="assessment-section"
+            style={{
+              alignSelf: "center",
+              justifySelf: "center",
+              color: "#ffffff",
+              width: "90vw",
+              maxWidth: "800px",
+              height: "auto",
+              padding: "20px",
+            }}
+          >
+            <h1 className="header"> Assessments:</h1>
+            {renderAssessmentSection}
+          </div>
+          <div
+            className="comment-section"
+            style={{
+              alignSelf: "center",
+              justifySelf: "center",
+              color: "#ffffff",
+              width: "90vw",
+              maxWidth: "800px",
+              height: "auto",
+              padding: "20px",
+            }}
+          >
+            <h1 className="header"> Specialist Comments</h1>
+            {renderCommentSection}
+          </div>
           <Content>
             <h1 className="header"> Specialist input:</h1>
             <StyledCard>
+              {docsUploaded}
               <form>
-                {docsSection}
-                <Button text="Upload Doc" onClick={() => beginUpload("docs")} />
+                <Button
+                  text="Upload Doc"
+                  onClick={() => beginUpload(`IdeasId: ${ideasId}`)}
+                />
               </form>
             </StyledCard>
-          </Content>
-          <Content>
-            <h1 className="header"> Specialist Comments</h1>
-            {renderCommentSection}
           </Content>
         </Right>
       </Container>
@@ -297,7 +427,6 @@ const Right = styled.div`
 
 const Container = styled.div`
   width: 100vw;
-
   display: grid;
   grid-template-columns: 1fr 3fr;
   grid-template-rows: 1fr;
