@@ -9,6 +9,7 @@ export default function IdeaDashboard(props) {
 
   const [user, setUserData] = useState({});
   const [userIdeas, setUserIdeas] = useState([]);
+  const [allIdeas, setAllIdeas] = useState([]);
 
   useEffect(() => {
     if (props.authState.loggedIn)
@@ -24,6 +25,13 @@ export default function IdeaDashboard(props) {
       .get(`${baseUrl}/ideas`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then(res => setUserIdeas(res.body));
+  }, []);
+
+  useEffect(() => {
+    request
+      .get(`${baseUrl}/ideas/all`)
+      .set("Authorization", `Bearer ${props.authState.token}`)
+      .then(res => setAllIdeas(res.body));
   }, []);
 
   if (props.authState.loggedIn === false)
@@ -45,6 +53,27 @@ export default function IdeaDashboard(props) {
         {userIdeas.length < 1 ? <h2 style={styledH2}><a href="/MyIdea/new">Submit your first idea</a></h2> : <h2 style={styledH2}>Please follow your next step: your market check</h2>}
         <div className='flex-tilescontainer'>
             {userIdeas.map(idea => 
+              <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
+                <div className='idea-tile' key={idea.id}> 
+                  <p>{idea.idea[5].answers[0].qAnswer}</p>
+                  <br />
+                  <p>{idea.idea[5].answers[1].qAnswer }</p>
+                  { idea.progress === null || 
+                    idea.progress.step01 === true && 
+                    idea.progress.step02 === true && 
+                    idea.progress.step03 === false && <p>Status: First patent check </p>}
+                  { idea.progress === null || 
+                    idea.progress.step01 === true &&
+                    idea.progress.step02 === true &&
+                    idea.progress.step03 === true && 
+                    idea.progress.step04 === false && <p>Status: Expert check </p>}
+                </div>
+              </Link>
+            )}
+        </div>
+        <h2 style={styledH2}>Ideas from other users</h2>
+        <div className='flex-tilescontainer'>
+            {allIdeas.map(idea => 
               <Link key={idea.id} className='tile-link' to={`/dashboard/ideas/${idea.id}`}>
                 <div className='idea-tile' key={idea.id}> 
                   <p>{idea.idea[5].answers[0].qAnswer}</p>
