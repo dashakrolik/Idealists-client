@@ -66,11 +66,6 @@ export default function IdeaDashboardDetail(props) {
   useEffect(() => {
     fetchDocs(`IdeasId: ${ideasId}`, setDocs);
   }, []);
-<<<<<<< HEAD:src/components/SpecialistPortal/Dashboard/FormInputIdeas.js
-=======
-
-  //   console.log("progress", progress);
->>>>>>> cf70d6c684ad1de59cc9ace74303b986416ad8da:src/components/SpecialistPortal/Dashboard/SpecialistIdeaDetails.js
 
   const ideasId = props.match.params.id;
 
@@ -146,11 +141,6 @@ export default function IdeaDashboardDetail(props) {
       : "";
     progressStep.push(step);
   }
-
-<<<<<<< HEAD:src/components/SpecialistPortal/Dashboard/FormInputIdeas.js
-=======
-  //   console.log("progressStep1", progressStep1);
-  //   const progressStep = ["", "is-done", "current", "", "", "", "", "", "", ""];
 
   const renderAssessmentSection = !showAssessmentSection ? (
     <>
@@ -232,7 +222,6 @@ export default function IdeaDashboardDetail(props) {
     </>
   );
 
->>>>>>> cf70d6c684ad1de59cc9ace74303b986416ad8da:src/components/SpecialistPortal/Dashboard/SpecialistIdeaDetails.js
   const renderCommentSection = !showCommentSection ? (
     <>
       <StyledCard>
