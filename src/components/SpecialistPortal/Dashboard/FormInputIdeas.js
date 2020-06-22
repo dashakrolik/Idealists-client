@@ -51,7 +51,6 @@ export default function IdeaDashboardDetail(props) {
   useEffect(() => {
     fetchDocs("docs", setDocs);
   }, []);
-  //   console.log("progress", progress);
 
   const ideasId = props.match.params.id;
 
@@ -64,7 +63,6 @@ export default function IdeaDashboardDetail(props) {
     request
       .get(`${baseUrl}/ideas/${ideasId}`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      //   .then((res) => console.log("res.body", res.body));
       .then((res) => {
         setIdeaOwner(res.body.user);
         setProgress(res.body.progress);
@@ -128,9 +126,6 @@ export default function IdeaDashboardDetail(props) {
       : "";
     progressStep.push(step);
   }
-
-  //   console.log("progressStep1", progressStep1);
-  //   const progressStep = ["", "is-done", "current", "", "", "", "", "", "", ""];
 
   const renderCommentSection = !showCommentSection ? (
     <>
