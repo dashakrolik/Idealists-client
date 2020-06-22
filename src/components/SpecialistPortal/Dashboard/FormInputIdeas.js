@@ -9,13 +9,18 @@ import Button from "../../reogranisation/Questions/Button";
 
 import { fetchDocs, openUploadWidget } from "./CloudinaryService";
 import { Image } from "cloudinary-react";
-
+// import CommentSection from "./CommentSection/CommentSection";
 import IdeaPDFCreator from "./Download/IdeaPDFCreator";
-import AssessmentsPDFCreator from "./Download/AssessmentsPDFCreator";
+import AssessmentSection from "./AssessmentSection/AssessmentSection";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
+  const [showCommentSection, setShowCommentSection] = useState(false);
+  const [showAssessmentSection, setShowAssessmentSection] = useState(false);
+  const [showIdeaDetails, setShowIdeaDetails] = useState(false);
+  const [ideaOwner, setIdeaOwner] = useState({});
+  const [assessments, setAssessments] = useState([]);
 
   const [docs, setDocs] = useState([]);
 
@@ -46,9 +51,6 @@ export default function IdeaDashboardDetail(props) {
     });
   };
 
-  const [ideaOwner, setIdeaOwner] = useState({});
-  const [assessments, setAssessments] = useState({});
-
   useEffect(() => {
     fetchDocs("docs", setDocs);
   }, []);
@@ -56,7 +58,7 @@ export default function IdeaDashboardDetail(props) {
 
   const ideasId = props.match.params.id;
 
-  console.log("assessments", assessments);
+  console.log("props.auth?", props.authState);
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
   }
@@ -67,10 +69,10 @@ export default function IdeaDashboardDetail(props) {
       .set("Authorization", `Bearer ${props.authState.token}`)
       //   .then((res) => console.log("res.body", res.body));
       .then((res) => {
-        setAssessments(res.body.assessment);
         setIdeaOwner(res.body.user);
         setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
+        setAssessments(res.body.assessments);
       });
   }, []);
 
@@ -117,12 +119,12 @@ export default function IdeaDashboardDetail(props) {
     return <Redirect to="/MyIdea" />;
   }
 
-  // console.log("progress", progress[`step0` + 8]);
+  console.log("progress", progress[`step0` + 8]);
 
   const progressStep = [""];
 
   for (let i = 1; i < 10; i++) {
-    // console.log("steps", progress[`step0${i - 1}`]);
+    console.log("steps", progress[`step0${i - 1}`]);
     const step = progress[`step0${i}`]
       ? "is-done"
       : progress[`step0${i - 1}`]
@@ -133,6 +135,95 @@ export default function IdeaDashboardDetail(props) {
 
   //   console.log("progressStep1", progressStep1);
   //   const progressStep = ["", "is-done", "current", "", "", "", "", "", "", ""];
+
+  // const renderCommentSection = !showCommentSection ? (
+  //   <>
+  //     <Button
+  //       text="Show Comments"
+  //       onClick={() => setShowCommentSection(!showCommentSection)}
+  //     />
+  //   </>
+  // ) : (
+  //   <CommentSection
+  //     id={ideasId}
+  //     authState={props.authState}
+  //     show={(e) => {
+  //       setShowCommentSection(e);
+  //     }}
+  //   />
+  // );
+
+  const renderAssessmentSection = !showAssessmentSection ? (
+    <>
+      {assessments.length < 0 ? (
+        <StyledCard>
+          There are currently no assessments for this idea.
+        </StyledCard>
+      ) : (
+        <StyledCard>
+          <Button
+            text="Show Assessments"
+            onClick={() => setShowAssessmentSection(!showAssessmentSection)}
+          />{" "}
+        </StyledCard>
+      )}
+    </>
+  ) : (
+    <>
+      <StyledCard>
+        <Button
+          text="Hide Assessments"
+          onClick={() => setShowAssessmentSection(!showAssessmentSection)}
+        />{" "}
+      </StyledCard>
+      <AssessmentSection assessments={assessments} />
+      <StyledCard>
+        <Button
+          text="Hide Assessments"
+          onClick={() => setShowAssessmentSection(!showAssessmentSection)}
+        />{" "}
+      </StyledCard>
+    </>
+  );
+
+  const renderIdeaDetails = !showIdeaDetails ? (
+    <>
+      {" "}
+      <div key="1">
+        <StyledCard>
+          <h4>{qTitles[5]}:</h4>
+          <p>{qAnswers[5]}</p>
+        </StyledCard>
+      </div>
+      <div key="2">
+        <StyledCard>
+          <h4>{qTitles[6]}:</h4>
+          <p>{qAnswers[6]}</p>
+        </StyledCard>
+      </div>
+      <StyledCard>
+        <Button
+          text="Show details"
+          onClick={() => setShowIdeaDetails(!showIdeaDetails)}
+        />
+      </StyledCard>
+    </>
+  ) : (
+    <>
+      {qTitles.map((title, index) => (
+        <div key={index}>
+          <StyledCard>
+            <h4>{title}:</h4>
+            <p>{qAnswers[index]}</p>
+          </StyledCard>
+        </div>
+      ))}
+      <Button
+        text="Hide details"
+        onClick={() => setShowIdeaDetails(!showIdeaDetails)}
+      />
+    </>
+  );
 
   return (
     <div className="dashboard-container">
@@ -187,28 +278,29 @@ export default function IdeaDashboardDetail(props) {
               idea={userIdeas}
               printer={props.authState.user}
             />
-            <AssessmentsPDFCreator
-              user={ideaOwner}
-              ideaId={ideasId}
-              idea={userIdeas}
-              printer={props.authState.user}
-              assessments={assessments}
-            />
           </div>
         </Left>
         <Right>
           <Content>
             <h1 className="header"> Questions and Answers about Idea:</h1>
-
-            {qTitles.map((title, index) => (
-              <div key={index}>
-                <StyledCard>
-                  <h4>{title}:</h4>
-                  <p>{qAnswers[index]}</p>
-                </StyledCard>
-              </div>
-            ))}
+            {renderIdeaDetails}
           </Content>
+          <div
+            className="assessment-section"
+            style={{
+              alignSelf: "center",
+              justifySelf: "center",
+              color: "#ffffff",
+              width: "90vw",
+              maxWidth: "800px",
+              height: "auto",
+              padding: "20px",
+            }}
+          >
+            <h1 className="header"> Assessments:</h1>
+            {renderAssessmentSection}
+          </div>
+
           <Content>
             <h1 className="header"> Specialist input:</h1>
             <StyledCard>
@@ -217,15 +309,11 @@ export default function IdeaDashboardDetail(props) {
                 <Button text="Upload Doc" onClick={() => beginUpload("docs")} />
               </form>
             </StyledCard>
-            <StyledCard>
-              <form>
-                <textarea name="Text" cols="40" rows="5">
-                  Add your input here...
-                </textarea>
-                <Button text="Submit" type="submit" />
-              </form>
-            </StyledCard>
           </Content>
+          {/* <Content>
+            <h1 className="header"> Specialist Comments</h1>
+            {renderCommentSection}
+          </Content> */}
         </Right>
       </Container>
     </div>
@@ -298,7 +386,6 @@ const Right = styled.div`
 
 const Container = styled.div`
   width: 100vw;
-
   display: grid;
   grid-template-columns: 1fr 3fr;
   grid-template-rows: 1fr;
