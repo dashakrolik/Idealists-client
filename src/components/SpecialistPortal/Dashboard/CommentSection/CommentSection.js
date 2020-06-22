@@ -45,10 +45,12 @@ export default function CommentSection(props) {
   const renderAddComment = () => {
     if (!showAddComment)
       return (
-        <Button
-          text="Add Comment"
-          onClick={() => setShowAddComment(!showAddComment)}
-        />
+        <StyledCard>
+          <Button
+            text="Add Comment"
+            onClick={() => setShowAddComment(!showAddComment)}
+          />
+        </StyledCard>
       );
     else
       return (
@@ -62,8 +64,13 @@ export default function CommentSection(props) {
 
   return (
     <>
+      <StyledCard>
+        <Button text="Hide Comments" onClick={() => show(false)} />
+      </StyledCard>
       {renderComments()}
-      <Button text="Hide Comments" onClick={() => show(false)} />
+      <StyledCard>
+        <Button text="Hide Comments" onClick={() => show(false)} />
+      </StyledCard>
       {renderAddComment()}
     </>
   );

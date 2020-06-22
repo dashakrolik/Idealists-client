@@ -8,7 +8,7 @@ import InvestorDashboard from "./components/InvestorsPortal/Dashboard/InvestorDa
 import InvestorLogin from "./components/InvestorsPortal/InvestorLogin";
 import SpecialistDashboard from "./components/SpecialistPortal/Dashboard/SpecialistDashboard";
 import SpecialistLogin from "./components/SpecialistPortal/SpecialistLogin";
-import FormInputIdeas from "./components/SpecialistPortal/Dashboard/FormInputIdeas";
+import SpecialistIdeaDetails from "./components/SpecialistPortal/Dashboard/SpecialistIdeaDetails";
 import { ThemeProvider } from "emotion-theming";
 import IdeaStart from "./components/MyIdea/IdeaStart";
 import Submission from "./components/MyIdea/IdeaSubmission/Submission";
@@ -414,7 +414,7 @@ class App extends Component {
                 path="/Specialist/dashboard/ideas/:id"
                 render={(props) => {
                   return (
-                    <InvestorIdeaDetails
+                    <SpecialistIdeaDetails
                       {...props}
                       authState={this.state.auth}
                       sendInput={this.sendInput}
