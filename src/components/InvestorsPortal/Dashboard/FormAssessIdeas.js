@@ -164,11 +164,27 @@ export default class FormAssessIdeas extends Component {
       // !hasAgreementMentorError &&
       // !hasAgreementMentorNoError
     ) {
+<<<<<<< HEAD
+      //calculate a complete score given to an idea and pass it in the post req. alongside the assessment
+      const rawScore =
+        parseInt(this.state.willPeopleWantThis) +
+        parseInt(this.state.isItAGoodIdea) +
+        parseInt(this.state.isThisTheRightTiming) +
+        parseInt(this.state.doesThisSolveProblem) +
+        (this.state.whatDoYouExpectAsTimeImpact
+          ? parseInt(this.state.whatDoYouExpectAsTimeImpact)
+          : 0) +
+        (this.state.whatDoYouExpectAsMagnitude
+          ? parseInt(this.state.whatDoYouExpectAsMagnitude)
+          : 0);
+      // submit assessment and score to the server/database
+=======
 
+>>>>>>> cf70d6c684ad1de59cc9ace74303b986416ad8da
       request
         .post(`${baseUrl}/assessments/${this.props.match.params.id}`)
         .set("Authorization", `Bearer ${this.props.authState.token}`)
-        .send({ assessment: this.state })
+        .send({ assessment: this.state, weight: rawScore })
         .then((res) => {
           if (res.status === 201) {
             return this.props.history.push("/AssessmentSubmitted");
