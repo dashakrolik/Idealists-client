@@ -9,13 +9,13 @@ import Button from "../reogranisation/Questions/Button";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
-  const [ideaProgress, setIdeaProgress] = useState([]);
+  const [progress, setProgress] = useState([]);
   const [rejected, setRejected] = useState(true);
   const [ideasId, setIdeasId] = useState(props.match.params.id);
 
   const rejectIdea = () => {
     const confirmRejected = window.confirm(
-      "Are you sure you want to reject this idea?"
+      "Are you sure you want to reject this idea? The user who submitted the idea will be immediately notified by email."
     );
     if (confirmRejected) {
       setRejected(false);
@@ -33,10 +33,9 @@ export default function IdeaDashboardDetail(props) {
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then((res) => {
         setUserIdeas(res.body.idea);
-        setIdeaProgress(res.body.progress);
+        setProgress(res.body.progress);
       });
   }, []);
-  console.log("IDEA PROGRESS:", ideaProgress);
 
   const processTitle = (title) => {
     let splitTitle = title.split("?");
@@ -80,6 +79,83 @@ export default function IdeaDashboardDetail(props) {
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
   }
+
+  // progress phases for phase bar
+  const progressStep = [""];
+  for (let i = 1; i < 10; i++) {
+    const step = progress[`step0${i}`]
+      ? "is-done"
+      : progress[`step0${i - 1}`]
+      ? "current"
+      : "";
+    progressStep.push(step);
+  }
+
+  // determining the next phase
+  let currentStep = progressStep.indexOf("current");
+
+  let nextPhaseName;
+  let stepNameInEntity;
+
+  switch (currentStep) {
+    case 1:
+      nextPhaseName = "First Patent Check";
+      stepNameInEntity = "step02"; // this is the step of the next phase in the database
+      break;
+    case 2:
+      nextPhaseName = "Expert Check";
+      stepNameInEntity = "step03";
+      break;
+    case 3:
+      nextPhaseName = "Second Patent Check";
+      stepNameInEntity = "step04";
+      break;
+    case 4:
+      nextPhaseName = "Validation Phase";
+      stepNameInEntity = "step05";
+      break;
+    case 5:
+      nextPhaseName = "Final Patent Check";
+      stepNameInEntity = "step06";
+      break;
+    case 6:
+      nextPhaseName = "Business Plan Phase";
+      stepNameInEntity = "step07";
+      break;
+    case 7:
+      nextPhaseName = "Funding Phase";
+      stepNameInEntity = "step08";
+      break;
+    case 8:
+      nextPhaseName = "Company Is Born";
+      stepNameInEntity = "step09";
+      break;
+    case 9:
+      nextPhaseName = "Final Phase";
+      stepNameInEntity = "step10";
+  }
+
+  // const { nextPhaseName, stepNameInEntity } =
+  //   currentStep === 1
+  //     ? { nextPhaseName: "First Patent Check", stepNameInEntity: "step02" }
+  //     : currentStep === 2
+  //     ? { nextPhaseName: "Expert Check", stepNameInEntity: "step02" }
+  //     : currentStep === 3
+  //     ? { nextPhaseName: "Second Patent Check", stepNameInEntity: "step02" }
+  //     : currentStep === 4
+  //     ? { nextPhaseName: "Validation Phase", stepNameInEntity: "step02" }
+  //     : currentStep === 5
+  //     ? { nextPhaseName: "Final Patent Check", stepNameInEntity: "step02" }
+  //     : currentStep === 6
+  //     ? { nextPhaseName: "Business Plan Phase", stepNameInEntity: "step02" }
+  //     : currentStep === 7
+  //     ? { nextPhaseName: "Funding Phase", stepNameInEntity: "step02" }
+  //     : currentStep === 8
+  //     ? { nextPhaseName: "Company Is Born", stepNameInEntity: "step02" }
+  //     : currentStep === 9
+  //     ? { nextPhaseName: "Final Phase", stepNameInEntity: "step02" }
+  //     : null;
+
   return (
     <div className="dashboard-container">
       <Container>
@@ -87,34 +163,34 @@ export default function IdeaDashboardDetail(props) {
           <FlexRow>
             <FlexColumn>
               <StyledDiv>
-                <h1>Assessing Your Idea:</h1>
+                <h1>Assessing Idea:</h1>
                 <hr />
                 <ul className="step-progress">
-                  <li className="step-progress-item is-done">
+                  <li className={`step-progress-item ${progressStep[1]}`}>
                     <strong>Submit your idea</strong>
                   </li>
-                  <li className="step-progress-item current">
+                  <li className={`step-progress-item ${progressStep[2]}`}>
                     <strong>First patent check (1 week)</strong>
                   </li>
-                  <li className="step-progress-item">
+                  <li className={`step-progress-item ${progressStep[3]}`}>
                     <strong>Expert check (2 weeks)</strong>
                   </li>
-                  <li className="step-progress-item">
+                  <li className={`step-progress-item ${progressStep[4]}`}>
                     <strong>Second patent check (2 weeks)</strong>
                   </li>
-                  <li className="step-progress-item">
+                  <li className={`step-progress-item ${progressStep[5]}`}>
                     <strong>Validation phase (4 weeks)</strong>
                   </li>
-                  <li className="step-progress-item">
+                  <li className={`step-progress-item ${progressStep[6]}`}>
                     <strong>Final patent check (2 weeks)</strong>
                   </li>
-                  <li className="step-progress-item">
+                  <li className={`step-progress-item ${progressStep[7]}`}>
                     <strong>Business plan phase (2 weeks)</strong>
                   </li>
-                  <li className="step-progress-item">
+                  <li className={`step-progress-item ${progressStep[8]}`}>
                     <strong>Funding phase (2 weeks)</strong>
                   </li>
-                  <li className="step-progress-item">
+                  <li className={`step-progress-item ${progressStep[9]}`}>
                     <strong>Company is born (1 week)</strong>
                   </li>
                 </ul>
@@ -124,13 +200,14 @@ export default function IdeaDashboardDetail(props) {
           <div>
             <Button
               color="inherit"
-              text="Patent Check"
-              onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}
-            />
-            <Button
-              color="inherit"
               text="Reject Idea"
               onClick={() => rejectIdea()}
+            />
+
+            <Button
+              color="inherit"
+              text={`Move to next phase: ${nextPhaseName} ${stepNameInEntity}`}
+              onClick={() => console.log("phase update")}
             />
           </div>
         </Left>
@@ -139,7 +216,7 @@ export default function IdeaDashboardDetail(props) {
             <h1 className="header">
               Admin View | Questions and Answers about Idea:
             </h1>
-            {ideaProgress.length !== 0 && (!rejected || ideaProgress.rejected) && (
+            {progress.length !== 0 && (!rejected || progress.rejected) && (
               <h2>
                 <em>This idea has been rejected</em>
               </h2>
