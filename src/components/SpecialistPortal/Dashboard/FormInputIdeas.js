@@ -6,7 +6,6 @@ import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import { Redirect } from "react-router-dom";
 import Button from "../../reogranisation/Questions/Button";
-
 import { fetchDocs, openUploadWidget } from "./CloudinaryService";
 import { Image } from "cloudinary-react";
 import AssessmentSection from "./AssessmentSection/AssessmentSection";
@@ -17,19 +16,33 @@ import IdeaPDFCreator from "./Download/IdeaPDFCreator";
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
+
+  const [ideaOwner, setIdeaOwner] = useState({});
+
   const [showCommentSection, setShowCommentSection] = useState(false);
   const [showAssessmentSection, setShowAssessmentSection] = useState(false);
   const [showIdeaDetails, setShowIdeaDetails] = useState(false);
   const [ideaOwner, setIdeaOwner] = useState({});
   const [assessments, setAssessments] = useState([]);
-
-
   const [docs, setDocs] = useState([]);
 
-  const docsSection = (
+  const docsUploaded = (
     <section>
+
+      {/* { === ideasId ?  */}
       {docs.map((i) => (
-        <Image key={i} publicId={i} fetch-format="auto" quality="auto" />
+        <Image
+          key={i}
+          publicId={i}
+          fetch-format="auto"
+          quality="auto"
+          dpr="auto"
+          responsive
+          width="auto"
+          crop="scale"
+          responsiveUseBreakpoints="true"
+        ></Image>
+
       ))}
     </section>
   );
@@ -37,13 +50,15 @@ export default function IdeaDashboardDetail(props) {
   const beginUpload = (tag) => {
     const uploadOptions = {
       cloudName: "idealists",
-      tags: [tag, "aDoc"],
+
+      tags: [tag, "Specialist Input"],
+
       uploadPreset: "upload",
     };
 
     openUploadWidget(uploadOptions, (error, doc) => {
       if (!error) {
-        console.log("docs", doc);
+        console.log("docs:", doc);
         if (doc.event === "success") {
           setDocs([...docs, doc.info.public_id]);
         }
@@ -55,13 +70,14 @@ export default function IdeaDashboardDetail(props) {
 
 
   useEffect(() => {
-    fetchDocs("docs", setDocs);
+    fetchDocs(`IdeasId: ${ideasId}`, setDocs);
   }, []);
+
+
   //   console.log("progress", progress);
 
   const ideasId = props.match.params.id;
 
-  console.log("props.auth?", props.authState);
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
   }
@@ -324,12 +340,13 @@ export default function IdeaDashboardDetail(props) {
             <h1 className="header"> Specialist input:</h1>
             <StyledCard>
               <form>
-                {docsSection}
-                <Button text="Upload Doc" onClick={() => beginUpload("docs")} />
+                {docsUploaded}
+                <Button
+                  text="Upload Doc"
+                  onClick={() => beginUpload(`IdeasId: ${ideasId}`)}
+                />
               </form>
             </StyledCard>
-          </Content>
-      
         </Right>
       </Container>
     </div>
