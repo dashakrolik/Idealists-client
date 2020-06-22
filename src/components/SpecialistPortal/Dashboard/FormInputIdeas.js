@@ -6,13 +6,12 @@ import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import { Redirect } from "react-router-dom";
 import Button from "../../reogranisation/Questions/Button";
-
 import { fetchDocs, openUploadWidget } from "./CloudinaryService";
 import { Image } from "cloudinary-react";
-
+import AssessmentSection from "./AssessmentSection/AssessmentSection";
 import CommentSection from "./CommentSection/CommentSection";
-
 import IdeaPDFCreator from "./Download/IdeaPDFCreator";
+
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
@@ -21,8 +20,10 @@ export default function IdeaDashboardDetail(props) {
   const [ideaOwner, setIdeaOwner] = useState({});
 
   const [showCommentSection, setShowCommentSection] = useState(false);
-
-
+  const [showAssessmentSection, setShowAssessmentSection] = useState(false);
+  const [showIdeaDetails, setShowIdeaDetails] = useState(false);
+  const [ideaOwner, setIdeaOwner] = useState({});
+  const [assessments, setAssessments] = useState([]);
   const [docs, setDocs] = useState([]);
 
   const docsUploaded = (
@@ -90,6 +91,7 @@ export default function IdeaDashboardDetail(props) {
         setIdeaOwner(res.body.user);
         setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
+        setAssessments(res.body.assessments);
       });
   }, []);
 
@@ -153,6 +155,77 @@ export default function IdeaDashboardDetail(props) {
   //   console.log("progressStep1", progressStep1);
   //   const progressStep = ["", "is-done", "current", "", "", "", "", "", "", ""];
 
+  const renderAssessmentSection = !showAssessmentSection ? (
+    <>
+      {assessments.length < 0 ? (
+        <StyledCard>
+          There are currently no assessments for this idea.
+        </StyledCard>
+      ) : (
+        <StyledCard>
+          <Button
+            text="Show Assessments"
+            onClick={() => setShowAssessmentSection(!showAssessmentSection)}
+          />{" "}
+        </StyledCard>
+      )}
+    </>
+  ) : (
+    <>
+      <StyledCard>
+        <Button
+          text="Hide Assessments"
+          onClick={() => setShowAssessmentSection(!showAssessmentSection)}
+        />{" "}
+      </StyledCard>
+      <AssessmentSection assessments={assessments} />
+      <StyledCard>
+        <Button
+          text="Hide Assessments"
+          onClick={() => setShowAssessmentSection(!showAssessmentSection)}
+        />{" "}
+      </StyledCard>
+    </>
+  );
+
+  const renderIdeaDetails = !showIdeaDetails ? (
+    <>
+      {" "}
+      <div key="1">
+        <StyledCard>
+          <h4>{qTitles[5]}:</h4>
+          <p>{qAnswers[5]}</p>
+        </StyledCard>
+      </div>
+      <div key="2">
+        <StyledCard>
+          <h4>{qTitles[6]}:</h4>
+          <p>{qAnswers[6]}</p>
+        </StyledCard>
+      </div>
+      <StyledCard>
+        <Button
+          text="Show details"
+          onClick={() => setShowIdeaDetails(!showIdeaDetails)}
+        />
+      </StyledCard>
+    </>
+  ) : (
+    <>
+      {qTitles.map((title, index) => (
+        <div key={index}>
+          <StyledCard>
+            <h4>{title}:</h4>
+            <p>{qAnswers[index]}</p>
+          </StyledCard>
+        </div>
+      ))}
+      <Button
+        text="Hide details"
+        onClick={() => setShowIdeaDetails(!showIdeaDetails)}
+      />
+    </>
+
   const renderCommentSection = !showCommentSection ? (
     <>
       <Button
@@ -168,6 +241,7 @@ export default function IdeaDashboardDetail(props) {
         setShowCommentSection(e);
       }}
     />
+
   );
 
   return (
@@ -228,17 +302,41 @@ export default function IdeaDashboardDetail(props) {
         <Right>
           <Content>
             <h1 className="header"> Questions and Answers about Idea:</h1>
-
-            {qTitles.map((title, index) => (
-              <div key={index}>
-                <StyledCard>
-                  <h4>{title}:</h4>
-                  <p>{qAnswers[index]}</p>
-                </StyledCard>
-              </div>
-            ))}
+            {renderIdeaDetails}
           </Content>
-          <Content>
+
+          <div
+            className="assessment-section"
+            style={{
+              alignSelf: "center",
+              justifySelf: "center",
+              color: "#ffffff",
+              width: "90vw",
+              maxWidth: "800px",
+              height: "auto",
+              padding: "20px",
+            }}
+          >
+            <h1 className="header"> Assessments:</h1>
+            {renderAssessmentSection}
+          </div>
+          <div
+            className="comment-section"
+            style={{
+              alignSelf: "center",
+              justifySelf: "center",
+              color: "#ffffff",
+              width: "90vw",
+              maxWidth: "800px",
+              height: "auto",
+              padding: "20px",
+            }}
+          >
+            <h1 className="header"> Specialist Comments</h1>
+            {renderCommentSection}
+
+          </div>
+    <Content>
             <h1 className="header"> Specialist input:</h1>
             <StyledCard>
               <form>
@@ -249,22 +347,6 @@ export default function IdeaDashboardDetail(props) {
                 />
               </form>
             </StyledCard>
-
-            <StyledCard>
-              <form>
-                <textarea name="Text" cols="40" rows="5">
-                  Add your input here...
-                </textarea>
-                <Button text="Submit" type="submit" />
-              </form>
-            </StyledCard>
-
-          </Content>
-          <Content>
-            <h1 className="header"> Specialist Comments</h1>
-            {renderCommentSection}
-
-          </Content>
         </Right>
       </Container>
     </div>
@@ -337,7 +419,6 @@ const Right = styled.div`
 
 const Container = styled.div`
   width: 100vw;
-
   display: grid;
   grid-template-columns: 1fr 3fr;
   grid-template-rows: 1fr;

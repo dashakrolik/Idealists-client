@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import React, { Component } from "react";
+
 import { Redirect } from "react-router-dom";
+
 import ReactDOM from "react-dom";
 import {
   Textbox,
@@ -162,7 +164,6 @@ export default class FormAssessIdeas extends Component {
       // !hasAgreementMentorError &&
       // !hasAgreementMentorNoError
     ) {
-      // console.log("Idea ID:", this.props.match.params.id);
 
       request
         .post(`${baseUrl}/assessments/${this.props.match.params.id}`)
@@ -184,7 +185,9 @@ export default class FormAssessIdeas extends Component {
   }
 
   render() {
+
     if (!this.props.authState.loggedIn) {
+
       return <Redirect to="/Investors/login" />;
     } else if (this.props.authState.loggedIn) {
       const {
