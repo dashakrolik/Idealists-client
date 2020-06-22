@@ -11,6 +11,9 @@ import { Image } from "cloudinary-react";
 import AssessmentSection from "./AssessmentSection/AssessmentSection";
 import CommentSection from "./CommentSection/CommentSection";
 import IdeaPDFCreator from "./Download/IdeaPDFCreator";
+import AssessmentsPDFCreator from "./Download/AssessmentsPDFCreator";
+import CommentsPDFCreator from "./Download/CommentsPDFCreator";
+import FullPDFCreator from "./Download/FullPDFCreator";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
@@ -19,8 +22,8 @@ export default function IdeaDashboardDetail(props) {
   const [showCommentSection, setShowCommentSection] = useState(false);
   const [showAssessmentSection, setShowAssessmentSection] = useState(false);
   const [showIdeaDetails, setShowIdeaDetails] = useState(false);
-
   const [assessments, setAssessments] = useState([]);
+  const [comments, setComments] = useState([]);
   const [docs, setDocs] = useState([]);
 
   const docsUploaded = (
@@ -82,6 +85,7 @@ export default function IdeaDashboardDetail(props) {
         setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
         setAssessments(res.body.assessments);
+        setComments(res.body.comments);
       });
   }, []);
 
@@ -293,6 +297,28 @@ export default function IdeaDashboardDetail(props) {
               ideaId={ideasId}
               idea={userIdeas}
               printer={props.authState.user}
+            />
+            <AssessmentsPDFCreator
+              user={ideaOwner}
+              ideaId={ideasId}
+              idea={userIdeas}
+              printer={props.authState.user}
+              assessments={assessments}
+            />
+            <CommentsPDFCreator
+              user={ideaOwner}
+              ideaId={ideasId}
+              idea={userIdeas}
+              printer={props.authState.user}
+              comments={comments}
+            />
+            <FullPDFCreator
+              user={ideaOwner}
+              ideaId={ideasId}
+              idea={userIdeas}
+              printer={props.authState.user}
+              comments={comments}
+              assessments={assessments}
             />
           </div>
         </Left>

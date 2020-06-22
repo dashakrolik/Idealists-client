@@ -3,8 +3,8 @@ import * as jsPDF from "jspdf";
 import { withRouter } from "react-router-dom";
 import Button from "../../../reogranisation/Questions/Button";
 
-const AssessmentsPDFCreator = (props) => {
-  const { assessments, user, idea, printer, ideaId } = props;
+const FullPDFCreator = (props) => {
+  const { idea, user, printer, comments, assessments } = props;
 
   const processTitle = (title) => {
     let splitTitle = title.split("?");
@@ -154,13 +154,39 @@ ${qTitles[i]}
         `;
   });
 
+  function renderCommenter(user, date) {
+    if (user.role !== "specialist")
+      return `By: ${user.firstName} ${user.lastName}
+          ${user.role.charAt(0).toUpperCase() + user.role.slice(1)}    
+          Date: ${date.toUTCString()}`;
+    if (user.role === "specialist")
+      return `By: ${user.firstName} ${user.lastName}
+          ${
+            user.specialistType.charAt(0).toUpperCase() +
+            user.specialistType.slice(1)
+          } Specialist 
+          Date: ${date.toUTCString()}`;
+  }
+
+  let commentsText = comments.map((comm) => {
+    let { user, comment, createdAt, id } = comm;
+    let date = new Date(createdAt);
+    return `
+    Comment 
+        Comment ID: ${id}
+        ${renderCommenter(user, date)}
+
+        ${comment.title}
+            ${comment.message}`;
+  });
+
   let pdfDownload = () => {
     return `
     Idea submitted by: 
         Name: ${user.firstName} ${user.lastName}
         E-mail: ${user.email}
         User ID: ${user.id}
-        Idea ID: ${ideaId}
+        Idea ID: ${props.ideaId}
   
     This document was created by: 
         Name: ${printer.firstName} ${printer.lastName} 
@@ -168,18 +194,19 @@ ${qTitles[i]}
         Role: ${printer.role}
         Type: ${printer.specialistType}
 
-    Idea Description:
-        ${qAnswers[6]}
+Idea:
+    ${QandA.map((qanda) => `${qanda}`)}
 
     Assessments:
-        ${assessmentsText}
+    ${assessmentsText}
 
-    
+    Comments:
+    ${commentsText}
 
   `;
   };
 
-  const header = `Assessments for Idea ${qAnswers[5]}`;
+  const header = `Idea ${qAnswers[5]}`;
 
   const downloadPDF = () => {
     let doc = new jsPDF();
@@ -201,7 +228,7 @@ ${qTitles[i]}
       doc.text(20, y, bodyContent[i]);
       y = y + 7;
     }
-    doc.save(`Assessments_for_Idea_${ideaId}.pdf`);
+    doc.save(`Complete_Idea_${props.ideaId}.pdf`);
   };
 
   const download = () => {
@@ -211,10 +238,10 @@ ${qTitles[i]}
   return (
     <Button
       color="inherit"
-      text="Download Assessments as PDF"
+      text="Download All as PDF"
       onClick={() => download()}
     />
   );
 };
 
-export default withRouter(AssessmentsPDFCreator);
+export default withRouter(FullPDFCreator);
