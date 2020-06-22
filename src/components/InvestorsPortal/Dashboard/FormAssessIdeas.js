@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import React, { Component } from "react";
-import { Redirect, useParams } from "react-router-dom";
+
+import { Redirect } from "react-router-dom";
+
 import ReactDOM from "react-dom";
 import {
   Textbox,
@@ -162,6 +164,7 @@ export default class FormAssessIdeas extends Component {
       // !hasAgreementMentorError &&
       // !hasAgreementMentorNoError
     ) {
+
       request
         .post(`${baseUrl}/assessments/${this.props.match.params.id}`)
         .set("Authorization", `Bearer ${this.props.authState.token}`)
@@ -182,7 +185,9 @@ export default class FormAssessIdeas extends Component {
   }
 
   render() {
-    if (!this.props) {
+
+    if (!this.props.authState.loggedIn) {
+
       return <Redirect to="/Investors/login" />;
     } else if (this.props.authState.loggedIn) {
       const {

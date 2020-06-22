@@ -9,9 +9,10 @@ import Button from "../../reogranisation/Questions/Button";
 
 import { fetchDocs, openUploadWidget } from "./CloudinaryService";
 import { Image } from "cloudinary-react";
-// import CommentSection from "./CommentSection/CommentSection";
-import IdeaPDFCreator from "./Download/IdeaPDFCreator";
 import AssessmentSection from "./AssessmentSection/AssessmentSection";
+import CommentSection from "./CommentSection/CommentSection";
+import IdeaPDFCreator from "./Download/IdeaPDFCreator";
+
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
@@ -21,6 +22,7 @@ export default function IdeaDashboardDetail(props) {
   const [showIdeaDetails, setShowIdeaDetails] = useState(false);
   const [ideaOwner, setIdeaOwner] = useState({});
   const [assessments, setAssessments] = useState([]);
+
 
   const [docs, setDocs] = useState([]);
 
@@ -50,6 +52,7 @@ export default function IdeaDashboardDetail(props) {
       }
     });
   };
+
 
   useEffect(() => {
     fetchDocs("docs", setDocs);
@@ -136,23 +139,6 @@ export default function IdeaDashboardDetail(props) {
   //   console.log("progressStep1", progressStep1);
   //   const progressStep = ["", "is-done", "current", "", "", "", "", "", "", ""];
 
-  // const renderCommentSection = !showCommentSection ? (
-  //   <>
-  //     <Button
-  //       text="Show Comments"
-  //       onClick={() => setShowCommentSection(!showCommentSection)}
-  //     />
-  //   </>
-  // ) : (
-  //   <CommentSection
-  //     id={ideasId}
-  //     authState={props.authState}
-  //     show={(e) => {
-  //       setShowCommentSection(e);
-  //     }}
-  //   />
-  // );
-
   const renderAssessmentSection = !showAssessmentSection ? (
     <>
       {assessments.length < 0 ? (
@@ -223,6 +209,23 @@ export default function IdeaDashboardDetail(props) {
         onClick={() => setShowIdeaDetails(!showIdeaDetails)}
       />
     </>
+
+  const renderCommentSection = !showCommentSection ? (
+    <>
+      <Button
+        text="Show Comments"
+        onClick={() => setShowCommentSection(!showCommentSection)}
+      />
+    </>
+  ) : (
+    <CommentSection
+      id={ideasId}
+      authState={props.authState}
+      show={(e) => {
+        setShowCommentSection(e);
+      }}
+    />
+
   );
 
   return (
@@ -285,6 +288,7 @@ export default function IdeaDashboardDetail(props) {
             <h1 className="header"> Questions and Answers about Idea:</h1>
             {renderIdeaDetails}
           </Content>
+
           <div
             className="assessment-section"
             style={{
@@ -300,8 +304,23 @@ export default function IdeaDashboardDetail(props) {
             <h1 className="header"> Assessments:</h1>
             {renderAssessmentSection}
           </div>
+          <div
+            className="comment-section"
+            style={{
+              alignSelf: "center",
+              justifySelf: "center",
+              color: "#ffffff",
+              width: "90vw",
+              maxWidth: "800px",
+              height: "auto",
+              padding: "20px",
+            }}
+          >
+            <h1 className="header"> Specialist Comments</h1>
+            {renderCommentSection}
 
-          <Content>
+          </div>
+    <Content>
             <h1 className="header"> Specialist input:</h1>
             <StyledCard>
               <form>
@@ -310,10 +329,7 @@ export default function IdeaDashboardDetail(props) {
               </form>
             </StyledCard>
           </Content>
-          {/* <Content>
-            <h1 className="header"> Specialist Comments</h1>
-            {renderCommentSection}
-          </Content> */}
+      
         </Right>
       </Container>
     </div>
