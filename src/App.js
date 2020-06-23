@@ -67,9 +67,6 @@ class App extends Component {
   };
 
   updateProgress = (stepNameInEntity, ideasId) => {
-    console.log("whats the idea id:", ideasId);
-    console.log("whats the step:", stepNameInEntity);
-
     request
       .put(`${baseUrl}/ideas/${ideasId}/progress`)
       .set("Authorization", `Bearer ${this.state.auth.token}`)
@@ -442,6 +439,7 @@ class App extends Component {
                       user={this.getCurrentUser}
                       logout={this.logout}
                       updateLocalStorage={this.updateLocalStorage}
+                      updateProgress={this.updateProgress}
                     />
                   );
                 }}

@@ -169,7 +169,7 @@ export default function specialistDashboard(props) {
             {renderCard(props.authState.user.specialistType)}
             <h2 style={styledH2}>These are idea's in phase 4</h2>
             <div className="flex-tilescontainer">{list4}</div>
-            <h2 style={styledH2}>There are no idea's available in phase 6</h2>
+            <h2 style={styledH2}>There are no ideas available in phase 6</h2>
           </>
         );
       }
@@ -177,9 +177,9 @@ export default function specialistDashboard(props) {
         return (
           <>
             {renderCard(props.authState.user.specialistType)}
-            <h2 style={styledH2}>These are idea's in phase 6</h2>
+            <h2 style={styledH2}>These are ideas in phase 6</h2>
             <div className="flex-tilescontainer">{list6}</div>
-            <h2 style={styledH2}>There are no idea's available in phase 4</h2>
+            <h2 style={styledH2}>There are no ideas available in phase 4</h2>
           </>
         );
       } else

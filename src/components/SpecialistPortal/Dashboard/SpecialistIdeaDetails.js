@@ -26,6 +26,7 @@ export default function IdeaDashboardDetail(props) {
   const [comments, setComments] = useState([]);
   const [docs, setDocs] = useState([]);
   const [industryIdea, setIndustryIdea] = useState({});
+  const [updatePhase, setUpdatePhase] = useState(true);
 
   const docsUploaded = (
     <section>
@@ -132,17 +133,6 @@ export default function IdeaDashboardDetail(props) {
 
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
-  }
-
-  const progressStep = [""];
-
-  for (let i = 1; i < 10; i++) {
-    const step = progress[`step0${i}`]
-      ? "is-done"
-      : progress[`step0${i - 1}`]
-      ? "current"
-      : "";
-    progressStep.push(step);
   }
 
   const renderAssessmentSection = !showAssessmentSection ? (
@@ -273,6 +263,75 @@ export default function IdeaDashboardDetail(props) {
     />
   );
 
+  const updateProgress = () => {
+    const confirmPhaseUpdate = window.confirm(
+      "Move idea progress to the next phase?"
+    );
+    if (confirmPhaseUpdate) {
+      setUpdatePhase(false);
+      props.updateProgress(stepNameInEntity, ideasId);
+    }
+  };
+
+  // progress phases for phase bar
+  const progressStep = [""];
+  for (let i = 1; i < 10; i++) {
+    const step = progress[`step0${i}`]
+      ? "is-done"
+      : progress[`step0${i - 1}`]
+      ? "current"
+      : "";
+    progressStep.push(step);
+  }
+
+  // determining the next phase
+  let currentStep = progressStep.indexOf("current");
+
+  let nextPhaseName;
+  let stepNameInEntity;
+
+  switch (currentStep) {
+    case 1:
+      nextPhaseName = "First Patent Check";
+      stepNameInEntity = { step01: true };
+      break;
+    case 2:
+      nextPhaseName = "Expert Check";
+      stepNameInEntity = { step02: true };
+      break;
+    case 3:
+      nextPhaseName = "Second Patent Check";
+      stepNameInEntity = { step03: true };
+      break;
+    case 4:
+      nextPhaseName = "Validation Phase";
+      stepNameInEntity = { step04: true };
+      break;
+    case 5:
+      nextPhaseName = "Final Patent Check";
+      stepNameInEntity = { step05: true };
+      break;
+    case 6:
+      nextPhaseName = "Business Plan Phase";
+      stepNameInEntity = { step06: true };
+      break;
+    case 7:
+      nextPhaseName = "Funding Phase";
+      stepNameInEntity = { step07: true };
+      break;
+    case 8:
+      nextPhaseName = "Company Is Born";
+      stepNameInEntity = { step08: true };
+      break;
+    case 9:
+      nextPhaseName = "Final Phase";
+      stepNameInEntity = { step09: true };
+      break;
+    case 10:
+      nextPhaseName = "Project Complete";
+      stepNameInEntity = { step10: true };
+  }
+
   return (
     <div className="dashboard-container">
       <Container>
@@ -315,11 +374,28 @@ export default function IdeaDashboardDetail(props) {
             </FlexColumn>
           </FlexRow>
           <div>
-            <Button
+            {/* <Button
               color="inherit"
               text="Patent Check"
               onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}
+            /> */}
+
+            <Button
+              color="inherit"
+              text={
+                updatePhase && nextPhaseName !== undefined
+                  ? `Move to next phase: ${nextPhaseName}`
+                  : nextPhaseName === undefined
+                  ? "Idea has reached final phase"
+                  : "Phase Updated"
+              }
+              onClick={
+                nextPhaseName !== undefined && updatePhase
+                  ? () => updateProgress(stepNameInEntity)
+                  : null
+              }
             />
+
             <IdeaPDFCreator
               user={ideaOwner}
               ideaId={ideasId}

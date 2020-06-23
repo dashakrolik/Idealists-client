@@ -10,26 +10,29 @@ import Button from "../reogranisation/Questions/Button";
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
-  const [rejected, setRejected] = useState(true);
-  const [updatePhase, setUpdatePhase] = useState(true);
-  const [ideasId, setIdeasId] = useState(props.match.params.id);
+
+  const [rejected, setRejected] = useState(false);
+  const [updatePhase, setUpdatePhase] = useState(false);
+
+  const [ideaUpdated, setIdeaUpdated] = useState(false);
+  const ideasId = props.match.params.id;
 
   const rejectIdea = () => {
     const confirmRejected = window.confirm(
       "Are you sure you want to reject this idea? The user who submitted the idea will be immediately notified via email."
     );
     if (confirmRejected) {
-      setRejected(false);
+      setRejected(true);
       props.rejectIdea(rejected, ideasId);
     }
   };
 
-  const updateProgress = (stepNameInEntity) => {
+  const updateProgress = () => {
     const confirmPhaseUpdate = window.confirm(
       "Move idea progress to the next phase?"
     );
     if (confirmPhaseUpdate) {
-      setUpdatePhase(false);
+      setUpdatePhase(true);
       props.updateProgress(stepNameInEntity, ideasId);
     }
   };
@@ -46,7 +49,7 @@ export default function IdeaDashboardDetail(props) {
         setUserIdeas(res.body.idea);
         setProgress(res.body.progress);
       });
-  }, [updatePhase]);
+  }, []);
 
   const processTitle = (title) => {
     let splitTitle = title.split("?");
@@ -93,6 +96,7 @@ export default function IdeaDashboardDetail(props) {
 
   // progress phases for phase bar
   const progressStep = [""];
+
   for (let i = 1; i < 10; i++) {
     const step = progress[`step0${i}`]
       ? "is-done"
@@ -100,6 +104,7 @@ export default function IdeaDashboardDetail(props) {
       ? "current"
       : "";
     progressStep.push(step);
+    console.log("progress step", progressStep);
   }
 
   // determining the next phase
@@ -110,8 +115,8 @@ export default function IdeaDashboardDetail(props) {
 
   switch (currentStep) {
     case 1:
-      nextPhaseName = "First Patent Check";
-      stepNameInEntity = { step01: true };
+      nextPhaseName = "First Patent Check"; // used in the button text
+      stepNameInEntity = { step01: true }; // sent in body req to server
       break;
     case 2:
       nextPhaseName = "Expert Check";
@@ -194,21 +199,21 @@ export default function IdeaDashboardDetail(props) {
           <div>
             <Button
               color="inherit"
-              text="Reject Idea"
-              onClick={() => rejectIdea()}
+              text={rejected ? "Idea Rejected" : "Reject Idea"}
+              onClick={!rejected ? () => rejectIdea() : null}
             />
 
             <Button
               color="inherit"
               text={
-                updatePhase && nextPhaseName !== undefined
+                !updatePhase && nextPhaseName !== undefined
                   ? `Move to next phase: ${nextPhaseName}`
                   : nextPhaseName === undefined
                   ? "Idea has reached final phase"
                   : "Phase Updated"
               }
               onClick={
-                nextPhaseName !== undefined
+                nextPhaseName !== undefined && !updatePhase
                   ? () => updateProgress(stepNameInEntity)
                   : null
               }
@@ -220,7 +225,7 @@ export default function IdeaDashboardDetail(props) {
             <h1 className="header">
               Admin View | Questions and Answers about Idea:
             </h1>
-            {progress.length !== 0 && (!rejected || progress.rejected) && (
+            {progress.length !== 0 && (rejected || progress.rejected) && (
               <h2>
                 <em>This idea has been rejected</em>
               </h2>
