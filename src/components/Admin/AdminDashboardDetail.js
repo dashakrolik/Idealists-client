@@ -23,23 +23,36 @@ export default function IdeaDashboardDetail(props) {
     );
     if (confirmRejected) {
       setRejected(true);
-      props.rejectIdea(rejected, ideasId);
-    }
-  };
-
-  const updateProgress = () => {
-    const confirmPhaseUpdate = window.confirm(
-      "Move idea progress to the next phase?"
-    );
-    if (confirmPhaseUpdate) {
-      setUpdatePhase(true);
-      props.updateProgress(stepNameInEntity, ideasId);
+      props.rejectIdea({ rejected: true }, ideasId);
     }
   };
 
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
   }
+
+  const updateProgressAPICall = (stepNameInEntity) => {
+    const confirmPhaseUpdate = window.confirm(
+      "Move idea progress to the next phase?"
+    );
+    if (confirmPhaseUpdate && stepNameInEntity !== undefined) {
+      request
+        .put(`${baseUrl}/ideas/${ideasId}/progress`)
+        .set("Authorization", `Bearer ${props.authState.token}`)
+        .send(stepNameInEntity)
+        .then((res) => {
+          if (res.status === 200) {
+            console.log("success, idea progress moved forward");
+            setProgress(res.body);
+          }
+        })
+        .catch((err) => {
+          if (err) {
+            console.log("error", err);
+          }
+        });
+    } else return null;
+  };
 
   useEffect(() => {
     request
@@ -214,7 +227,7 @@ export default function IdeaDashboardDetail(props) {
               }
               onClick={
                 nextPhaseName !== undefined && !updatePhase
-                  ? () => updateProgress(stepNameInEntity)
+                  ? () => updateProgressAPICall(stepNameInEntity)
                   : null
               }
             />
