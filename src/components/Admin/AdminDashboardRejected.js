@@ -3,11 +3,8 @@ import request from "superagent";
 import { baseUrl } from "../../constants";
 import { Redirect, Link } from "react-router-dom";
 import "../MyIdea/Dashboard/IdeaDashboard.css";
-import posed from "react-pose";
-import mentor from "../../res/mentor.png";
-import assess from "../../res/assess-white.png";
 
-export default function AdminDashboard(props) {
+export default function AdminDashboardRejected(props) {
   const [user, setUserData] = useState({});
   const [userIdeas, setUserIdeas] = useState([]);
 
@@ -22,7 +19,7 @@ export default function AdminDashboard(props) {
 
   useEffect(() => {
     request
-      .get(`${baseUrl}/ideas`)
+      .get(`${baseUrl}/ideas/rejected`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then((res) => setUserIdeas(res.body));
   }, []);
@@ -33,20 +30,6 @@ export default function AdminDashboard(props) {
     props.user();
   }
 
-  const showNewSpecialist = () => {
-    if (!props.authState.user) return null;
-    if (props.authState.user.role === "admin") {
-      return (
-        <Link className="links" to="/AdminDashboard/newspecialist">
-          <div className="invest-tile">
-            <img className="icons" src={mentor}></img>
-            <h4>Add Specialist</h4>
-          </div>
-        </Link>
-      );
-    } else return null;
-  };
-
   return (
     <div className="dashboard-container">
       <br />
@@ -55,20 +38,11 @@ export default function AdminDashboard(props) {
       <div className="title">
         <h1>{user.firstName}'s Admin Dashboard</h1>
       </div>
-      <div className="flex-tilescontainer">
-        {showNewSpecialist()}{" "}
-        <Link className="links" to="/AdminDashboard/rejected">
-          <div className="invest-tile">
-            <img className="icons" src={assess}></img>
-            <h4>Rejected Ideas</h4>
-          </div>
-        </Link>
-      </div>
-      <h2 style={styledH2}>Ideas:</h2>
+      <h2 style={styledH2}>Rejected Ideas</h2>
 
       <div className="flex-tilescontainer">
         {userIdeas.map((idea) => {
-          if (idea && !idea.progress.rejected) {
+          if (idea) {
             return (
               <Link
                 key={idea.id}
