@@ -48,29 +48,29 @@ class App extends Component {
     },
   };
 
-  // componentDidMount() {
-  //   const jwt = localStorage.getItem("currentUserJwt");
-  //   console.log(jwt)
-  //   if(jwt !== "") {
-  //     const user = JSON.parse(localStorage.getItem("user"))
-  //     console.log(user)
-  //     this.setState({
-  //       auth: {
-  //         token: jwt,
-  //         loggedIn: true,
-  //         user: user
-  //       },
-  //     });
-  //   } else {
-  //     this.setState({
-  //       auth: {
-  //         token: "",
-  //         loggedIn: false,
-  //         user: ""
-  //       }
-  //     })
-  //   }
-  // }
+  componentDidMount() {
+    const jwt = localStorage.getItem("currentUserJwt");
+    console.log(jwt)
+    if(jwt) {
+      const user = JSON.parse(localStorage.getItem("user"))
+      console.log(user)
+      this.setState({
+        auth: {
+          token: jwt,
+          loggedIn: true,
+          user: user
+        },
+      });
+    } else {
+      this.setState({
+        auth: {
+          token: "",
+          loggedIn: false,
+          user: ""
+        }
+      })
+    }
+  }
 
   rejectIdea = (rejected, ideasId) => {
     console.log("whats the idea id:", ideasId);

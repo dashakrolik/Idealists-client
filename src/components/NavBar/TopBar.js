@@ -17,6 +17,7 @@ const TopBar = (props) => {
   const [authState] = useState({});
 
   const { classes } = props;
+  console.log(localStorage.currentUserJwt, 'jwt')
 
   return (
     <AppBar>
