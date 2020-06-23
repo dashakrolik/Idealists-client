@@ -27,3 +27,22 @@
   margin-right: 1rem;
   text-align: left;
 }
+
+.assessments-content {
+  animation-name: slide;
+  animation-timing-function: ease-in-out;
+  animation-duration: 0.3s;
+}
+
+@keyframes slide {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 1;
+  }
+}
