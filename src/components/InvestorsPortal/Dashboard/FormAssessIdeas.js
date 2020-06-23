@@ -1599,6 +1599,8 @@ export default class FormAssessIdeas extends Component {
                         </div>
                       </div>
                     </div>
+
+                    {this.props.authState.user.role === "user" ? null : (
                     <div style={rowWrapperStyle}>
                       <div style={rowContainerStyle}>
                         <div style={rowStyle}>
@@ -1721,7 +1723,7 @@ export default class FormAssessIdeas extends Component {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div>)}
                   </div>
                 ) : (
                   this.state.validate === true && average / 4 <= 7
