@@ -41,42 +41,46 @@ export default function AdminDashboardRejected(props) {
       <h2 style={styledH2}>Rejected Ideas</h2>
 
       <div className="flex-tilescontainer">
-        {userIdeas.map((idea) => {
-          if (idea) {
-            return (
-              <Link
-                key={idea.id}
-                className="tile-link"
-                to={`/AdminDashboard/ideas/${idea.id}`}
-              >
-                <div className="idea-tile" key={idea.id}>
-                  <p>
-                    <strong>Title:</strong>
-                  </p>
-                  <p>{idea.idea[5].answers[0].qAnswer}</p>
-                  <br />
-                  <p>
-                    <strong>Description:</strong>
-                  </p>
-                  <p>{idea.idea[5].answers[1].qAnswer}</p>
-                  {idea.progress === null ||
-                    (idea.progress.step01 === true &&
-                      idea.progress.step02 === true &&
-                      idea.progress.step03 === false && (
-                        <p>Status: First patent check </p>
-                      ))}
-                  {idea.progress === null ||
-                    (idea.progress.step01 === true &&
-                      idea.progress.step02 === true &&
-                      idea.progress.step03 === true &&
-                      idea.progress.step04 === false && (
-                        <p>Status: Expert check </p>
-                      ))}
-                </div>
-              </Link>
-            );
-          }
-        })}
+        {userIdeas.length >= 1 ? (
+          userIdeas.map((idea) => {
+            if (idea) {
+              return (
+                <Link
+                  key={idea.id}
+                  className="tile-link"
+                  to={`/AdminDashboard/ideas/${idea.id}`}
+                >
+                  <div className="idea-tile" key={idea.id}>
+                    <p>
+                      <strong>Title:</strong>
+                    </p>
+                    <p>{idea.idea[5].answers[0].qAnswer}</p>
+                    <br />
+                    <p>
+                      <strong>Description:</strong>
+                    </p>
+                    <p>{idea.idea[5].answers[1].qAnswer}</p>
+                    {idea.progress === null ||
+                      (idea.progress.step01 === true &&
+                        idea.progress.step02 === true &&
+                        idea.progress.step03 === false && (
+                          <p>Status: First patent check </p>
+                        ))}
+                    {idea.progress === null ||
+                      (idea.progress.step01 === true &&
+                        idea.progress.step02 === true &&
+                        idea.progress.step03 === true &&
+                        idea.progress.step04 === false && (
+                          <p>Status: Expert check </p>
+                        ))}
+                  </div>
+                </Link>
+              );
+            }
+          })
+        ) : (
+          <h2 style={styledH2}>There are currently no rejected ideas</h2>
+        )}
       </div>
     </div>
   );

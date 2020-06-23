@@ -441,6 +441,8 @@ class App extends Component {
                       login={this.requestLoginSpecialist}
                       user={this.getCurrentUser}
                       logout={this.logout}
+                      rejectIdea={this.rejectIdea}
+                      updateProgress={this.updateProgress}
                       updateLocalStorage={this.updateLocalStorage}
                     />
                   );
