@@ -7,8 +7,6 @@ import Card from "@material-ui/core/Card";
 import { Redirect } from "react-router-dom";
 import Button from "../../reogranisation/Questions/Button";
 
-// import IdeaPDFCreator from "./Download/IdeaPDFCreator";
-
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
@@ -135,12 +133,6 @@ export default function IdeaDashboardDetail(props) {
                 props.history.push(`/Investors/dashboard/assess/${ideasId}`)
               }
             />
-            {/* <IdeaPDFCreator
-              user={ideaOwner}
-              ideaId={ideasId}
-              idea={userIdeas}
-              printer={props.authState.user}
-            /> */}
           </div>
         </Left>
         <Right>
