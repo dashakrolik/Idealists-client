@@ -52,6 +52,7 @@ export default function AssessmentSection(props) {
                     <ul>{renderIndustry(user)}</ul>
                   </>
                 ) : null}
+                <p>Assessment weight: {assessm.weight}</p>
                 <footer>{date.toUTCString()}</footer>
               </div>
               <div className="right">
