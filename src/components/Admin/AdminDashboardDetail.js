@@ -192,27 +192,30 @@ export default function IdeaDashboardDetail(props) {
             </FlexColumn>
           </FlexRow>
           <div>
-            <Button
-              color="inherit"
-              text="Reject Idea"
-              onClick={() => rejectIdea()}
-            />
-
-            <Button
-              color="inherit"
-              text={
-                updatePhase && nextPhaseName !== undefined
-                  ? `Move to next phase: ${nextPhaseName}`
-                  : nextPhaseName === undefined
-                  ? "Idea has reached final phase"
-                  : "Phase Updated"
-              }
-              onClick={
-                nextPhaseName !== undefined
-                  ? () => updateProgress(stepNameInEntity)
-                  : null
-              }
-            />
+            {!rejected || progress.rejected ? null : (
+              <>
+                <Button
+                  color="inherit"
+                  text="Reject Idea"
+                  onClick={() => rejectIdea()}
+                />
+                <Button
+                  color="inherit"
+                  text={
+                    updatePhase && nextPhaseName !== undefined
+                      ? `Move to next phase: ${nextPhaseName}`
+                      : nextPhaseName === undefined
+                      ? "Idea has reached final phase"
+                      : "Phase Updated"
+                  }
+                  onClick={
+                    nextPhaseName !== undefined
+                      ? () => updateProgress(stepNameInEntity)
+                      : null
+                  }
+                />
+              </>
+            )}
           </div>
         </Left>
         <Right>
