@@ -10,7 +10,7 @@ import Button from "../reogranisation/Questions/Button";
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
-  const [rejected, setRejected] = useState(true);
+  const [rejected, setRejected] = useState(false);
   const [updatePhase, setUpdatePhase] = useState(true);
   const [ideasId, setIdeasId] = useState(props.match.params.id);
 
@@ -19,8 +19,18 @@ export default function IdeaDashboardDetail(props) {
       "Are you sure you want to reject this idea? The user who submitted the idea will be immediately notified via email."
     );
     if (confirmRejected) {
+      setRejected(true);
+      props.rejectIdea(true, ideasId);
+    }
+  };
+
+  const undoRejection = () => {
+    const confirmUndoRejected = window.confirm(
+      "Are you sure you want to undo the rejection of this idea?"
+    );
+    if (confirmUndoRejected) {
       setRejected(false);
-      props.rejectIdea(rejected, ideasId);
+      props.rejectIdea(false, ideasId);
     }
   };
 
@@ -45,6 +55,7 @@ export default function IdeaDashboardDetail(props) {
       .then((res) => {
         setUserIdeas(res.body.idea);
         setProgress(res.body.progress);
+        setRejected(res.body.progress.rejected);
       });
   }, [updatePhase]);
 
@@ -191,39 +202,51 @@ export default function IdeaDashboardDetail(props) {
               </StyledDiv>
             </FlexColumn>
           </FlexRow>
-          <div>
-            {!rejected || progress.rejected ? null : (
-              <>
-                <Button
-                  color="inherit"
-                  text="Reject Idea"
-                  onClick={() => rejectIdea()}
-                />
-                <Button
-                  color="inherit"
-                  text={
-                    updatePhase && nextPhaseName !== undefined
-                      ? `Move to next phase: ${nextPhaseName}`
-                      : nextPhaseName === undefined
-                      ? "Idea has reached final phase"
-                      : "Phase Updated"
-                  }
-                  onClick={
-                    nextPhaseName !== undefined
-                      ? () => updateProgress(stepNameInEntity)
-                      : null
-                  }
-                />
-              </>
-            )}
-          </div>
+          <FlexRow>
+            <FlexColumn>
+              <StyledDiv>
+                <h1>Control Idea</h1>
+                {rejected ? (
+                  <Button
+                    color="inherit"
+                    text="Undo Rejection"
+                    onClick={() => undoRejection()}
+                  />
+                ) : (
+                  <>
+                    <Button
+                      color="inherit"
+                      text={
+                        updatePhase && nextPhaseName !== undefined
+                          ? `Move to next phase: 
+                          ${nextPhaseName}`
+                          : nextPhaseName === undefined
+                          ? "Idea has reached final phase"
+                          : "Phase Updated"
+                      }
+                      onClick={
+                        nextPhaseName !== undefined
+                          ? () => updateProgress(stepNameInEntity)
+                          : null
+                      }
+                    />
+                    <Button
+                      color="inherit"
+                      text="Reject Idea"
+                      onClick={() => rejectIdea()}
+                    />
+                  </>
+                )}
+              </StyledDiv>
+            </FlexColumn>
+          </FlexRow>
         </Left>
         <Right>
           <Content>
             <h1 className="header">
               Admin View | Questions and Answers about Idea:
             </h1>
-            {progress.length !== 0 && (!rejected || progress.rejected) && (
+            {progress.length !== 0 && rejected && (
               <h2>
                 <em>This idea has been rejected</em>
               </h2>
