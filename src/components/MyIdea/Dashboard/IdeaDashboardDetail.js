@@ -10,6 +10,7 @@ import Button from "../../reogranisation/Questions/Button";
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
+  const [userId, setUserId] = useState([]);
 
   const ideasId = props.match.params.id;
 
@@ -24,6 +25,7 @@ export default function IdeaDashboardDetail(props) {
       .then((res) => {
         setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
+        setUserId(res.body.user);
       });
   }, []);
 
@@ -142,6 +144,28 @@ export default function IdeaDashboardDetail(props) {
               </div>
             ))}
           </Content>
+          {userId.id === props.authState.user.id ? null : (
+            <Content>
+              <StyledCard>
+                <div>
+                  <Button
+                    color="inherit"
+                    text="Assess this idea"
+                    onClick={() =>
+                      props.history.push(`/dashboard/assess/${ideasId}`)
+                    }
+                  />
+                </div>
+                <p>
+                  Here you get to assess ideas in a very simple and fast way and
+                  get rewarded for it at the same time. When an idea you helped
+                  assess becomes incorporated, you’ll receive € 100,- worth of
+                  equity in that company. Assessing an idea takes on average 3
+                  minutes.
+                </p>
+              </StyledCard>
+            </Content>
+          )}
         </Right>
       </Container>
     </div>
