@@ -25,6 +25,7 @@ export default function IdeaDashboardDetail(props) {
   const [assessments, setAssessments] = useState([]);
   const [comments, setComments] = useState([]);
   const [docs, setDocs] = useState([]);
+  const [industryIdea, setIndustryIdea] = useState({});
 
   const docsUploaded = (
     <section>
@@ -86,6 +87,7 @@ export default function IdeaDashboardDetail(props) {
         setUserIdeas(res.body.idea);
         setAssessments(res.body.assessments);
         setComments(res.body.comments);
+        setIndustryIdea(res.body.industryIdea);
       });
   }, []);
 
@@ -132,12 +134,9 @@ export default function IdeaDashboardDetail(props) {
     return <Redirect to="/MyIdea" />;
   }
 
-  console.log("progress", progress[`step0` + 8]);
-
   const progressStep = [""];
 
   for (let i = 1; i < 10; i++) {
-    console.log("steps", progress[`step0${i - 1}`]);
     const step = progress[`step0${i}`]
       ? "is-done"
       : progress[`step0${i - 1}`]
@@ -169,7 +168,10 @@ export default function IdeaDashboardDetail(props) {
           onClick={() => setShowAssessmentSection(!showAssessmentSection)}
         />{" "}
       </StyledCard>
-      <AssessmentSection assessments={assessments} />
+      <AssessmentSection
+        assessments={assessments}
+        industryIdea={industryIdea}
+      />
       <StyledCard>
         <Button
           text="Hide Assessments"
@@ -178,6 +180,26 @@ export default function IdeaDashboardDetail(props) {
       </StyledCard>
     </>
   );
+
+  const renderIndustryList = (industries) => {
+    if (!industryIdea) return null;
+    else {
+      const ideaIndustryArr = JSON.stringify(industries)
+        .replace(/[{}"]/g, "")
+        .replace(/\\/g, "")
+        .split(",");
+
+      if (ideaIndustryArr.length < 1) return null;
+      else
+        return (
+          <ul style={{ listStyle: "none" }}>
+            {ideaIndustryArr.map((indu) => (
+              <li key={indu}>{indu}</li>
+            ))}
+          </ul>
+        );
+    }
+  };
 
   const renderIdeaDetails = !showIdeaDetails ? (
     <>
@@ -194,6 +216,12 @@ export default function IdeaDashboardDetail(props) {
           <p>{qAnswers[6]}</p>
         </StyledCard>
       </div>
+      {industryIdea ? (
+        <StyledCard>
+          <h4>Industries</h4>
+          {renderIndustryList(industryIdea)}
+        </StyledCard>
+      ) : null}
       <StyledCard>
         <Button
           text="Show details"
