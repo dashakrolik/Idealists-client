@@ -3,7 +3,6 @@ import request from "superagent";
 import { baseUrl } from "../../../constants";
 import { Redirect, Link } from "react-router-dom";
 import "./SpecialistDashboard.css";
-import mentor from "../../../res/mentor.png";
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 // import assess from '../../../res/assess-white.png'
@@ -36,21 +35,6 @@ export default function specialistDashboard(props) {
   }, []);
 
   if (userLoggedIn === false) return <Redirect to="/Specialist/login" />;
-
-  //this below should go in new ADMIN dashboard
-  const showNewSpecialist = () => {
-    if (!props.authState.user) return null;
-    if (props.authState.user.role === "admin") {
-      return (
-        <Link className="links" to="/Admin/dashboard/newspecialist">
-          <div className="invest-tile">
-            <img className="icons" src={mentor}></img>
-            <h4>Add Specialist</h4>
-          </div>
-        </Link>
-      );
-    } else return null;
-  };
 
   const renderTitle =
     userData && props.authState.user ? (
@@ -220,7 +204,6 @@ export default function specialistDashboard(props) {
   return (
     <div className="dashboard-container">
       {renderTitle}
-      <div className="flex-tilescontainer">{showNewSpecialist()}</div>
       {ideaList ? renderIdeaList() : null}
     </div>
   );
