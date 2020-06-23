@@ -84,6 +84,7 @@ ${qTitles[i]}
     return `
         Assessment 
         Assessment id: ${assessm.id}
+        Assessment weight: ${assessm.weight}
         ${renderAssessor(user, date)}
 
         Will people want this?
