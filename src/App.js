@@ -48,6 +48,30 @@ class App extends Component {
     },
   };
 
+  // componentDidMount() {
+  //   const jwt = localStorage.getItem("currentUserJwt");
+  //   console.log(jwt)
+  //   if(jwt !== "") {
+  //     const user = JSON.parse(localStorage.getItem("user"))
+  //     console.log(user)
+  //     this.setState({
+  //       auth: {
+  //         token: jwt,
+  //         loggedIn: true,
+  //         user: user
+  //       },
+  //     });
+  //   } else {
+  //     this.setState({
+  //       auth: {
+  //         token: "",
+  //         loggedIn: false,
+  //         user: ""
+  //       }
+  //     })
+  //   }
+  // }
+
   rejectIdea = (rejected, ideasId) => {
     console.log("whats the idea id:", ideasId);
     request
@@ -110,11 +134,11 @@ class App extends Component {
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null,
+              token: "",
             },
           });
-
-          alert(
+ 
+          alert( 
             "You have entered an incorrect email. If you do not have an account, Please signup!"
           );
           localStorage.setItem("currentUserJwt", null);
@@ -124,7 +148,7 @@ class App extends Component {
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null,
+              token: "",
             },
           });
 
@@ -136,7 +160,7 @@ class App extends Component {
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null,
+              token: "",
             },
           });
 
@@ -173,7 +197,7 @@ class App extends Component {
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null,
+              token: "",
             },
           });
 
@@ -187,7 +211,7 @@ class App extends Component {
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null,
+              token: "",
             },
           });
 
@@ -199,7 +223,7 @@ class App extends Component {
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null,
+              token: "",
             },
           });
 
@@ -237,7 +261,7 @@ class App extends Component {
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null,
+              token: "",
             },
           });
 
@@ -251,7 +275,7 @@ class App extends Component {
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null,
+              token: "",
             },
           });
 
@@ -263,7 +287,7 @@ class App extends Component {
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null,
+              token: "",
             },
           });
 
@@ -292,8 +316,20 @@ class App extends Component {
           },
         });
         localStorage.setItem("currentUserJwt", this.state.auth.token);
-        localStorage.setItem("user", this.state.auth.user);
-      });
+        const stringifiedUser = JSON.stringify(res.body);
+        console.log(stringifiedUser)
+        localStorage.setItem("user", stringifiedUser);
+      })
+      .catch((err) => {
+        this.setState({
+          auth: {
+            loggedIn: false,
+            token: "",
+            user: "",
+          }
+        })
+      })
+      ;
   };
 
   sendAssessment = (content) => {
@@ -327,7 +363,7 @@ class App extends Component {
             auth: {
               ...this.state.auth,
               loggedIn: false,
-              token: null,
+              token: "",
             },
           });
         }
@@ -357,12 +393,13 @@ class App extends Component {
     localStorage.clear();
     localStorage.removeItem("currentUserJwt");
     sessionStorage.clear();
-    localStorage.setItem("currentUserJwt", null);
+    localStorage.setItem("currentUserJwt", "");
+    localStorage.setItem("user", "");
     this.setState({
       auth: {
         loggedIn: false,
-        token: null,
-        user: null,
+        token: "",
+        user: "",
       },
     });
   };

@@ -10,6 +10,7 @@ import logo from "../../res/logo_horizontal_white.png";
 /** @jsx jsx */
 import Grid from "@material-ui/core/Grid";
 import { jsx } from "@emotion/core";
+
 const TopBar = (props) => {
   const [history, location, window] = useState({});
 
@@ -104,7 +105,7 @@ const TopBar = (props) => {
             </Button>
           ) : null}
           {props.authState.loggedIn === true &&
-          localStorage.currentUserJwt !== null ? (
+          localStorage.currentUserJwt ? (
             <Button
               color="inherit"
               onClick={() =>

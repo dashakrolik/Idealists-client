@@ -25,6 +25,8 @@ const InvestorStart = (props) => {
   };
 
   const existingUser = () => {
+    if (!props.authState.loggedIn)
+    setUiState('displayingLogin');
     props.history.push('/Investors/login');
   };
 
