@@ -167,7 +167,7 @@ export default function AssessmentSection(props) {
       </StyledCard>
     );
 
-  return <>{renderAssessments} </>;
+  return <div className="assessments-content">{renderAssessments} </div>;
 }
 
 const StyledCard = styled(Card)`

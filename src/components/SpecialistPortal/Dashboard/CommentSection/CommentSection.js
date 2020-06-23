@@ -6,6 +6,7 @@ import Card from "@material-ui/core/Card";
 import Button from "../../../reogranisation/Questions/Button";
 import CommentRender from "./CommentRender";
 import CommentForm from "./CommentForm";
+import "./CommentSection.css";
 
 export default function CommentSection(props) {
   const { id, show } = props;
@@ -67,7 +68,7 @@ export default function CommentSection(props) {
       <StyledCard>
         <Button text="Hide Comments" onClick={() => show(false)} />
       </StyledCard>
-      {renderComments()}
+      <div className="commentsectioncontent">{renderComments()}</div>
       <StyledCard>
         <Button text="Hide Comments" onClick={() => show(false)} />
       </StyledCard>
