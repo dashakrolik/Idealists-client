@@ -10,11 +10,8 @@ import Button from "../reogranisation/Questions/Button";
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
-
   const [rejected, setRejected] = useState(false);
-  const [updatePhase, setUpdatePhase] = useState(false);
 
-  const [ideaUpdated, setIdeaUpdated] = useState(false);
   const ideasId = props.match.params.id;
 
   const rejectIdea = () => {
@@ -22,6 +19,7 @@ export default function IdeaDashboardDetail(props) {
       "Are you sure you want to reject this idea? The user who submitted the idea will be immediately notified via email."
     );
     if (confirmRejected) {
+      // if the user selects "ok" in the window.confirm, it returns true. If the user cancels, it returns false
       setRejected(true);
       props.rejectIdea({ rejected: true }, ideasId);
     }
@@ -31,6 +29,7 @@ export default function IdeaDashboardDetail(props) {
     return <Redirect to="/MyIdea" />;
   }
 
+  // API call to update the progress phase when user moves it
   const updateProgressAPICall = (stepNameInEntity) => {
     const confirmPhaseUpdate = window.confirm(
       "Move idea progress to the next phase?"
@@ -107,9 +106,10 @@ export default function IdeaDashboardDetail(props) {
     return <Redirect to="/MyIdea" />;
   }
 
-  // progress phases for phase bar
+  // This loop results in an array that determines the current phase and completed phase(s).
+  // "is-done" and "current" refer to CSS class names used in the progress bar
+  // the switch statement below the loop depends on this progressStep array
   const progressStep = [""];
-
   for (let i = 1; i < 10; i++) {
     const step = progress[`step0${i}`]
       ? "is-done"
@@ -117,16 +117,16 @@ export default function IdeaDashboardDetail(props) {
       ? "current"
       : "";
     progressStep.push(step);
-    console.log("progress step", progressStep);
+    // console.log("progress step:", progressStep);
   }
 
-  // determining the next phase
-  let currentStep = progressStep.indexOf("current");
+  // determining the index of the current phase, as setup for the switch statement
+  let currentStepIndex = progressStep.indexOf("current");
 
   let nextPhaseName;
   let stepNameInEntity;
 
-  switch (currentStep) {
+  switch (currentStepIndex) {
     case 1:
       nextPhaseName = "First Patent Check"; // used in the button text
       stepNameInEntity = { step01: true }; // sent in body req to server
@@ -219,14 +219,14 @@ export default function IdeaDashboardDetail(props) {
             <Button
               color="inherit"
               text={
-                !updatePhase && nextPhaseName !== undefined
+                nextPhaseName !== undefined
                   ? `Move to next phase: ${nextPhaseName}`
                   : nextPhaseName === undefined
                   ? "Idea has reached final phase"
                   : "Phase Updated"
               }
               onClick={
-                nextPhaseName !== undefined && !updatePhase
+                nextPhaseName !== undefined
                   ? () => updateProgressAPICall(stepNameInEntity)
                   : null
               }

@@ -27,6 +27,7 @@ export default function IdeaDashboardDetail(props) {
   const [docs, setDocs] = useState([]);
   const [industryIdea, setIndustryIdea] = useState({});
   const [updatePhase, setUpdatePhase] = useState(true);
+  const ideasId = props.match.params.id;
 
   const docsUploaded = (
     <section>
@@ -72,11 +73,34 @@ export default function IdeaDashboardDetail(props) {
     fetchDocs(`IdeasId: ${ideasId}`, setDocs);
   }, []);
 
-  const ideasId = props.match.params.id;
-
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
   }
+
+  // API call to update the progress phase when user moves it
+  const updateProgressAPICall = (stepNameInEntity) => {
+    const confirmPhaseUpdate = window.confirm(
+      "Move idea progress to the next phase?"
+    );
+    // if the user selects "ok" in the window.confirm, it returns true. If the user cancels, it returns false
+    if (confirmPhaseUpdate && stepNameInEntity !== undefined) {
+      request
+        .put(`${baseUrl}/ideas/${ideasId}/progress`)
+        .set("Authorization", `Bearer ${props.authState.token}`)
+        .send(stepNameInEntity)
+        .then((res) => {
+          if (res.status === 200) {
+            console.log("success, idea progress moved forward");
+            setProgress(res.body);
+          }
+        })
+        .catch((err) => {
+          if (err) {
+            console.log("error", err);
+          }
+        });
+    } else return null;
+  };
 
   useEffect(() => {
     request
@@ -263,17 +287,9 @@ export default function IdeaDashboardDetail(props) {
     />
   );
 
-  const updateProgress = () => {
-    const confirmPhaseUpdate = window.confirm(
-      "Move idea progress to the next phase?"
-    );
-    if (confirmPhaseUpdate) {
-      setUpdatePhase(false);
-      props.updateProgress(stepNameInEntity, ideasId);
-    }
-  };
-
-  // progress phases for phase bar
+  // This loop results in an array that determines the current phase and completed phase(s).
+  // "is-done" and "current" refer to CSS class names used in the progress bar
+  // the switch statement below the loop depends on this progressStep array
   const progressStep = [""];
   for (let i = 1; i < 10; i++) {
     const step = progress[`step0${i}`]
@@ -284,7 +300,7 @@ export default function IdeaDashboardDetail(props) {
     progressStep.push(step);
   }
 
-  // determining the next phase
+  // determining the index of the current phase, as setup for the switch statement
   let currentStep = progressStep.indexOf("current");
 
   let nextPhaseName;
@@ -292,8 +308,8 @@ export default function IdeaDashboardDetail(props) {
 
   switch (currentStep) {
     case 1:
-      nextPhaseName = "First Patent Check";
-      stepNameInEntity = { step01: true };
+      nextPhaseName = "First Patent Check"; // used in the button text
+      stepNameInEntity = { step01: true }; // sent in body req to server
       break;
     case 2:
       nextPhaseName = "Expert Check";
@@ -391,7 +407,7 @@ export default function IdeaDashboardDetail(props) {
               }
               onClick={
                 nextPhaseName !== undefined && updatePhase
-                  ? () => updateProgress(stepNameInEntity)
+                  ? () => updateProgressAPICall(stepNameInEntity)
                   : null
               }
             />
