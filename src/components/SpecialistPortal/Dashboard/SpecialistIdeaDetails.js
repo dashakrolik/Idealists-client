@@ -315,11 +315,6 @@ export default function IdeaDashboardDetail(props) {
             </FlexColumn>
           </FlexRow>
           <div>
-            <Button
-              color="inherit"
-              text="Patent Check"
-              onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}
-            />
             <IdeaPDFCreator
               user={ideaOwner}
               ideaId={ideasId}
