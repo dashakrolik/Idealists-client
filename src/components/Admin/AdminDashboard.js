@@ -51,8 +51,14 @@ export default function AdminDashboard(props) {
                 to={`/AdminDashboard/ideas/${idea.id}`}
               >
                 <div className="idea-tile" key={idea.id}>
+                  <p>
+                    <strong>Title:</strong>
+                  </p>
                   <p>{idea.idea[5].answers[0].qAnswer}</p>
                   <br />
+                  <p>
+                    <strong>Description:</strong>
+                  </p>
                   <p>{idea.idea[5].answers[1].qAnswer}</p>
                   {idea.progress === null ||
                     (idea.progress.step01 === true &&

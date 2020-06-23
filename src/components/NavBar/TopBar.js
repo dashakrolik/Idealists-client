@@ -68,7 +68,7 @@ const TopBar = (props) => {
               color="inherit"
               onClick={() => props.history.push("/AdminDashboard")}
             >
-              Dashboard
+              Admin Dashboard
             </Button>
           ) : null}
           {!props.authState.user ? null : props.authState.loggedIn &&
@@ -79,7 +79,7 @@ const TopBar = (props) => {
               color="inherit"
               onClick={() => props.history.push("/Investors/dashboard")}
             >
-              Dashboard
+              Investor Dashboard
             </Button>
           ) : null}
           {!props.authState.user ? null : props.authState.loggedIn &&
@@ -90,7 +90,7 @@ const TopBar = (props) => {
               color="inherit"
               onClick={() => props.history.push("/Specialist/dashboard")}
             >
-              Dashboard
+              Specialist Dashboard
             </Button>
           ) : null}
           {!props.authState.user ? null : props.authState.loggedIn &&
