@@ -6,10 +6,10 @@ import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import { Redirect } from "react-router-dom";
 import Button from "../../reogranisation/Questions/Button";
+import ProgressBar from "../../reogranisation/ProgressBar/ProgressBar";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
-  const [progress, setProgress] = useState([]);
   const [userId, setUserId] = useState([]);
 
   const ideasId = props.match.params.id;
@@ -23,7 +23,6 @@ export default function IdeaDashboardDetail(props) {
       .get(`${baseUrl}/ideas/${ideasId}`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then((res) => {
-        setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
         setUserId(res.body.user);
         if (res.body.user.id === props.authState.user.id) {
@@ -81,21 +80,11 @@ export default function IdeaDashboardDetail(props) {
     return <Redirect to="/MyIdea" />;
   }
 
-  const progressStep = [""];
-
-  for (let i = 1; i < 10; i++) {
-    const step = progress[`step0${i}`]
-      ? "is-done"
-      : progress[`step0${i - 1}`]
-      ? "current"
-      : "";
-    progressStep.push(step);
-  }
-
   return (
     <div className="dashboard-container">
       <Container>
         <Left>
+
           <FlexRow>
             <FlexColumn>
               {userId.id !== props.authState.user.id ? null : (
@@ -160,6 +149,11 @@ export default function IdeaDashboardDetail(props) {
               )}
             </FlexColumn>
           </FlexRow>
+
+//           <ProgressBar
+//             token={props.authState.token}
+//             ideasId={props.match.params.id}
+//           />
         </Left>
         <Right>
           <Content>
