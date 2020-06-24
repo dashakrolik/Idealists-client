@@ -7,7 +7,6 @@ export default function ProgressBar(props) {
   const [progress, setProgress] = useState([]);
 
   const ideasId = props.ideasId;
-console.log("rpog??????", progress)
 
   useEffect(() => {
     request
@@ -16,7 +15,7 @@ console.log("rpog??????", progress)
       .then((res) => {
         setProgress(res.body.progress);
       });
-  }, []);
+  }, [progress]);
 
   const progressStep = [""];
 
@@ -29,7 +28,9 @@ console.log("rpog??????", progress)
     progressStep.push(step);
   }
 
-  progressStep.push(progress[`step10`] ? "is-done" : progress['step09'] ? "current" : "")
+  progressStep.push(
+    progress[`step10`] ? "is-done" : progress["step09"] ? "current" : ""
+  );
 
   return (
     <FlexRow>

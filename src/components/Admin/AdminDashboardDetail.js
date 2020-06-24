@@ -13,7 +13,6 @@ export default function IdeaDashboardDetail(props) {
   const [progress, setProgress] = useState([]);
   const [rejected, setRejected] = useState(false);
   const ideasId = props.match.params.id;
-  
 
   const rejectIdea = () => {
     const confirmRejected = window.confirm(
@@ -32,7 +31,7 @@ export default function IdeaDashboardDetail(props) {
     );
     if (confirmUndoRejected) {
       setRejected(false);
-      props.rejectIdea({ rejected: false}, ideasId);
+      props.rejectIdea({ rejected: false }, ideasId);
     }
   };
 
@@ -132,7 +131,6 @@ export default function IdeaDashboardDetail(props) {
     // console.log("progress step:", progressStep);
   }
 
-
   // this determines the index of the current phase, as setup for the switch statement
   let currentStepIndex = progressStep.indexOf("current");
 
@@ -165,15 +163,15 @@ export default function IdeaDashboardDetail(props) {
       stepNameInEntity = { step06: true };
       break;
     case 7:
-      nextPhaseName = "Funding Phase";
+      nextPhaseName = "Co-Founder Phase";
       stepNameInEntity = { step07: true };
       break;
     case 8:
-      nextPhaseName = "Company Is Born";
+      nextPhaseName = "Funding Phase";
       stepNameInEntity = { step08: true };
       break;
     case 9:
-      nextPhaseName = "Final Phase";
+      nextPhaseName = "Company is Born";
       stepNameInEntity = { step09: true };
       break;
     case 10:
@@ -201,21 +199,21 @@ export default function IdeaDashboardDetail(props) {
                   />
                 ) : (
                   <>
-                     <Button
-              color="inherit"
-              text={
-                nextPhaseName !== undefined
-                  ? `Move to next phase: ${nextPhaseName}`
-                  : nextPhaseName === undefined
-                  ? "Idea has reached final phase"
-                  : "Phase Updated"
-              }
-              onClick={
-                nextPhaseName !== undefined
-                  ? () => updateProgressAPICall(stepNameInEntity)
-                  : null
-              }
-            />
+                    <Button
+                      color="inherit"
+                      text={
+                        nextPhaseName !== undefined
+                          ? `Move to next phase: ${nextPhaseName}`
+                          : nextPhaseName === undefined
+                          ? "Idea has reached final phase"
+                          : "Phase Updated"
+                      }
+                      onClick={
+                        nextPhaseName !== undefined
+                          ? () => updateProgressAPICall(stepNameInEntity)
+                          : null
+                      }
+                    />
                     <Button
                       color="inherit"
                       text="Reject Idea"
@@ -226,7 +224,6 @@ export default function IdeaDashboardDetail(props) {
               </StyledDiv>
             </FlexColumn>
           </FlexRow>
-
         </Left>
         <Right>
           <Content>
