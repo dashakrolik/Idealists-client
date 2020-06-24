@@ -35,6 +35,7 @@ import InvestorIdeaDetails from "./components/InvestorsPortal/Dashboard/Investor
 import AdminDashboardRejected from "./components/Admin/AdminDashboardRejected";
 import CompleteAssessment from "./components/InvestorsPortal/Dashboard/CompleteAssessment";
 import AddSpecialistStart from "./components/SpecialistPortal/SpecialistCreation/AddSpecialistStart";
+import UserAssessIdeas from "./components/MyIdea/Dashboard/UserAssessIdeas";
 
 class App extends Component {
   state = {
@@ -719,6 +720,22 @@ class App extends Component {
                 render={(props) => {
                   return (
                     <IdeaDashboardDetail
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/dashboard/assess"
+                render={(props) => {
+                  return (
+                    <UserAssessIdeas
                       {...props}
                       authState={this.state.auth}
                       login={this.requestLoginUser}
