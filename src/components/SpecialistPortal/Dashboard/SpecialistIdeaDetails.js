@@ -115,7 +115,7 @@ export default function IdeaDashboardDetail(props) {
         .send(stepNameInEntity)
         .then((res) => {
           if (res.status === 200) {
-           setProgress(res.body);
+            setProgress(res.body);
           }
         })
         .catch((err) => {
@@ -356,15 +356,15 @@ export default function IdeaDashboardDetail(props) {
       stepNameInEntity = { step06: true };
       break;
     case 7:
-      nextPhaseName = "Funding Phase";
+      nextPhaseName = "Co-Founder Phase";
       stepNameInEntity = { step07: true };
       break;
     case 8:
-      nextPhaseName = "Company Is Born";
+      nextPhaseName = "Funding Phase";
       stepNameInEntity = { step08: true };
       break;
     case 9:
-      nextPhaseName = "Final Phase";
+      nextPhaseName = "Company is Born";
       stepNameInEntity = { step09: true };
       break;
     case 10:
