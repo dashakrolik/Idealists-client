@@ -26,7 +26,6 @@ export default function IdeaDashboardDetail(props) {
   const [comments, setComments] = useState([]);
   const [docs, setDocs] = useState([]);
   const [industryIdea, setIndustryIdea] = useState({});
-  const [updatePhase, setUpdatePhase] = useState(true);
   const ideasId = props.match.params.id;
 
   const docsUploaded = (
@@ -47,6 +46,26 @@ export default function IdeaDashboardDetail(props) {
       ))}
     </section>
   );
+
+  // to be sure that specialists cannot update the progress phase that doesn't match their role,
+  // the following code checks their specialist type and stores the number of the phase(s) they can change
+  // to "specialistStepNumber". This way, we can compare the phase number the specialist is authorized to change,
+  // with the current phase number
+  const { specialistType } = props.authState.user;
+  const specialistStepNumber =
+    specialistType === "patent"
+      ? 4
+      : specialistType === "validation"
+      ? 5
+      : specialistType === "calculation" || specialistType === "subsidy"
+      ? 7
+      : null;
+
+  console.log(
+    "what phase number can this specialist change?",
+    specialistStepNumber
+  );
+  console.log("whats the specialist type?", specialistType);
 
   const beginUpload = (tag) => {
     const uploadOptions = {
@@ -300,7 +319,7 @@ export default function IdeaDashboardDetail(props) {
     progressStep.push(step);
   }
 
-  // determining the index of the current phase, as setup for the switch statement
+  // this determines the index of the current phase, as setup for the switch statement
   let currentStep = progressStep.indexOf("current");
 
   let nextPhaseName;
@@ -347,6 +366,13 @@ export default function IdeaDashboardDetail(props) {
       nextPhaseName = "Project Complete";
       stepNameInEntity = { step10: true };
   }
+
+  console.log(
+    "current step:",
+    currentStep,
+    "specialist can change steps:",
+    specialistStepNumber
+  );
 
   return (
     <div className="dashboard-container">
@@ -396,17 +422,23 @@ export default function IdeaDashboardDetail(props) {
               onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}
             /> */}
 
+            {/* this button moves idea progress to the next phase, 
+with conditions to validate that the user has the correct role. */}
             <Button
               color="inherit"
               text={
-                updatePhase && nextPhaseName !== undefined
+                (nextPhaseName !== undefined &&
+                  currentStep === specialistStepNumber) || // match the current step to the specialists matched steps (which steps they can change an idea from)
+                (specialistType === "patent" && currentStep === 6) // patent specialists can also move idea from phase 6
                   ? `Move to next phase: ${nextPhaseName}`
                   : nextPhaseName === undefined
                   ? "Idea has reached final phase"
                   : "Phase Updated"
               }
               onClick={
-                nextPhaseName !== undefined && updatePhase
+                (nextPhaseName !== undefined &&
+                  currentStep === specialistStepNumber) ||
+                (specialistType === "patent" && currentStep === 6)
                   ? () => updateProgressAPICall(stepNameInEntity)
                   : null
               }

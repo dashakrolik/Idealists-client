@@ -120,7 +120,7 @@ export default function IdeaDashboardDetail(props) {
     // console.log("progress step:", progressStep);
   }
 
-  // determining the index of the current phase, as setup for the switch statement
+  // this determines the index of the current phase, as setup for the switch statement
   let currentStepIndex = progressStep.indexOf("current");
 
   let nextPhaseName;
