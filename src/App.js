@@ -53,30 +53,10 @@ class App extends Component {
     request
       .put(`${baseUrl}/ideas/${ideasId}/progress`)
       .set("Authorization", `Bearer ${this.state.auth.token}`)
-      .send({ rejected })
+      .send(rejected)
       .then((res) => {
         if (res.status === 200) {
           console.log("success, idea rejected");
-        }
-      })
-      .catch((err) => {
-        if (err) {
-          console.log("error", err);
-        }
-      });
-  };
-
-  updateProgress = (stepNameInEntity, ideasId) => {
-    console.log("whats the idea id:", ideasId);
-    console.log("whats the step:", stepNameInEntity);
-
-    request
-      .put(`${baseUrl}/ideas/${ideasId}/progress`)
-      .set("Authorization", `Bearer ${this.state.auth.token}`)
-      .send(stepNameInEntity)
-      .then((res) => {
-        if (res.status === 200) {
-          console.log("success, idea progress moved forward");
         }
       })
       .catch((err) => {
@@ -444,6 +424,7 @@ class App extends Component {
                       rejectIdea={this.rejectIdea}
                       updateProgress={this.updateProgress}
                       updateLocalStorage={this.updateLocalStorage}
+                      updateProgress={this.updateProgress}
                     />
                   );
                 }}

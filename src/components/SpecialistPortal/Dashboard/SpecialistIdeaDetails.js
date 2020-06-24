@@ -26,7 +26,7 @@ export default function IdeaDashboardDetail(props) {
   const [comments, setComments] = useState([]);
   const [docs, setDocs] = useState([]);
   const [industryIdea, setIndustryIdea] = useState({});
-  const [updatePhase, setUpdatePhase] = useState(true);
+  const ideasId = props.match.params.id;
   const [rejected, setRejected] = useState(false);
 
   const docsUploaded = (
@@ -47,6 +47,20 @@ export default function IdeaDashboardDetail(props) {
       ))}
     </section>
   );
+
+  // to be sure that specialists cannot update the progress phase that doesn't match their role,
+  // the following code checks their specialist type and stores the number of the phase(s) they can change
+  // to "specialistStepNumber". This way, we can compare the phase number the specialist is authorized to change,
+  // with the current phase number
+  const { specialistType } = props.authState.user;
+  const specialistStepNumber =
+    specialistType === "patent"
+      ? 4
+      : specialistType === "validation"
+      ? 5
+      : specialistType === "calculation" || specialistType === "subsidy"
+      ? 7
+      : null;
 
   const beginUpload = (tag) => {
     const uploadOptions = {
@@ -79,84 +93,37 @@ export default function IdeaDashboardDetail(props) {
     }
   };
 
-  const updateProgress = (stepNameInEntity) => {
-    const confirmPhaseUpdate = window.confirm(
-      "Move idea progress to the next phase?"
-    );
-    if (confirmPhaseUpdate) {
-      setUpdatePhase(false);
-      props.updateProgress(stepNameInEntity, ideasId);
-    }
-  };
-
-  // progress phases for phase bar
-  const progressStep = [""];
-  for (let i = 1; i < 10; i++) {
-    const step = progress[`step0${i}`]
-      ? "is-done"
-      : progress[`step0${i - 1}`]
-      ? "current"
-      : "";
-    progressStep.push(step);
-  }
-
-  // determining the next phase
-  let currentStep = progressStep.indexOf("current");
-
-  let nextPhaseName;
-  let stepNameInEntity;
-
-  switch (currentStep) {
-    case 1:
-      nextPhaseName = "First Patent Check";
-      stepNameInEntity = { step01: true };
-      break;
-    case 2:
-      nextPhaseName = "Expert Check";
-      stepNameInEntity = { step02: true };
-      break;
-    case 3:
-      nextPhaseName = "Second Patent Check";
-      stepNameInEntity = { step03: true };
-      break;
-    case 4:
-      nextPhaseName = "Validation Phase";
-      stepNameInEntity = { step04: true };
-      break;
-    case 5:
-      nextPhaseName = "Final Patent Check";
-      stepNameInEntity = { step05: true };
-      break;
-    case 6:
-      nextPhaseName = "Business Plan Phase";
-      stepNameInEntity = { step06: true };
-      break;
-    case 7:
-      nextPhaseName = "Funding Phase";
-      stepNameInEntity = { step07: true };
-      break;
-    case 8:
-      nextPhaseName = "Company Is Born";
-      stepNameInEntity = { step08: true };
-      break;
-    case 9:
-      nextPhaseName = "Final Phase";
-      stepNameInEntity = { step09: true };
-      break;
-    case 10:
-      nextPhaseName = "Project Complete";
-      stepNameInEntity = { step10: true };
-  }
-
   useEffect(() => {
     fetchDocs(`IdeasId: ${ideasId}`, setDocs);
   }, []);
 
-  const ideasId = props.match.params.id;
-
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
   }
+
+  // API call to update the progress phase when user moves it
+  const updateProgressAPICall = (stepNameInEntity) => {
+    const confirmPhaseUpdate = window.confirm(
+      "Move idea progress to the next phase?"
+    );
+    // if the user selects "ok" in the window.confirm, it returns true. If the user cancels, it returns false
+    if (confirmPhaseUpdate && stepNameInEntity !== undefined) {
+      request
+        .put(`${baseUrl}/ideas/${ideasId}/progress`)
+        .set("Authorization", `Bearer ${props.authState.token}`)
+        .send(stepNameInEntity)
+        .then((res) => {
+          if (res.status === 200) {
+           setProgress(res.body);
+          }
+        })
+        .catch((err) => {
+          if (err) {
+            console.log("error", err);
+          }
+        });
+    } else return null;
+  };
 
   useEffect(() => {
     request
@@ -343,6 +310,67 @@ export default function IdeaDashboardDetail(props) {
     />
   );
 
+  // This loop results in an array that determines the current phase and completed phase(s).
+  // "is-done" and "current" refer to CSS class names used in the progress bar
+  // the switch statement below the loop depends on this progressStep array
+  const progressStep = [""];
+  for (let i = 1; i < 10; i++) {
+    const step = progress[`step0${i}`]
+      ? "is-done"
+      : progress[`step0${i - 1}`]
+      ? "current"
+      : "";
+    progressStep.push(step);
+  }
+
+  // this determines the index of the current phase, as setup for the switch statement
+  let currentStep = progressStep.indexOf("current");
+
+  let nextPhaseName;
+  let stepNameInEntity;
+
+  switch (currentStep) {
+    case 1:
+      nextPhaseName = "First Patent Check"; // used in the button text
+      stepNameInEntity = { step01: true }; // sent in body req to server
+      break;
+    case 2:
+      nextPhaseName = "Expert Check";
+      stepNameInEntity = { step02: true };
+      break;
+    case 3:
+      nextPhaseName = "Second Patent Check";
+      stepNameInEntity = { step03: true };
+      break;
+    case 4:
+      nextPhaseName = "Validation Phase";
+      stepNameInEntity = { step04: true };
+      break;
+    case 5:
+      nextPhaseName = "Final Patent Check";
+      stepNameInEntity = { step05: true };
+      break;
+    case 6:
+      nextPhaseName = "Business Plan Phase";
+      stepNameInEntity = { step06: true };
+      break;
+    case 7:
+      nextPhaseName = "Funding Phase";
+      stepNameInEntity = { step07: true };
+      break;
+    case 8:
+      nextPhaseName = "Company Is Born";
+      stepNameInEntity = { step08: true };
+      break;
+    case 9:
+      nextPhaseName = "Final Phase";
+      stepNameInEntity = { step09: true };
+      break;
+    case 10:
+      nextPhaseName = "Project Complete";
+      stepNameInEntity = { step10: true };
+  }
+
   return (
     <div className="dashboard-container">
       <Container>
@@ -384,37 +412,48 @@ export default function IdeaDashboardDetail(props) {
               </StyledDiv>
             </FlexColumn>
           </FlexRow>
-          <FlexRow>
-            <FlexColumn>
-              <StyledDiv>
-                <h1>Control Idea</h1>
-                {!rejected ? (
-                  <>
-                    <Button
-                      color="inherit"
-                      text={
-                        updatePhase && nextPhaseName !== undefined
-                          ? `Move to next phase: ${nextPhaseName}`
-                          : nextPhaseName === undefined
-                          ? "Idea has reached final phase"
-                          : "Phase Updated"
-                      }
-                      onClick={
-                        nextPhaseName !== undefined
-                          ? () => updateProgress(stepNameInEntity)
-                          : null
-                      }
-                    />
-                    <Button
-                      color="inherit"
-                      text="Reject Idea"
-                      onClick={() => rejectIdea()}
-                    />
-                  </>
-                ) : null}
-              </StyledDiv>
-            </FlexColumn>
-          </FlexRow>
+          {!rejected ? (
+            <FlexRow>
+              <FlexColumn>
+                <StyledDiv>
+                  <h1>Control Idea</h1>
+
+                  {/* <Button
+              color="inherit"
+              text="Patent Check"
+              onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}
+            /> */}
+
+                  {/* this button moves idea progress to the next phase, 
+with conditions to validate that the user has the correct role. */}
+                  <Button
+                    color="inherit"
+                    text={
+                      (nextPhaseName !== undefined &&
+                        currentStep === specialistStepNumber) || // match the current step to the specialists matched steps (which steps they can change an idea from)
+                      (specialistType === "patent" && currentStep === 6) // patent specialists can also move idea from phase 6
+                        ? `Move to next phase: ${nextPhaseName}`
+                        : nextPhaseName === undefined
+                        ? "Idea has reached final phase"
+                        : "Phase Updated"
+                    }
+                    onClick={
+                      (nextPhaseName !== undefined &&
+                        currentStep === specialistStepNumber) ||
+                      (specialistType === "patent" && currentStep === 6)
+                        ? () => updateProgressAPICall(stepNameInEntity)
+                        : null
+                    }
+                  />
+                  <Button
+                    color="inherit"
+                    text="Reject Idea"
+                    onClick={() => rejectIdea()}
+                  />
+                </StyledDiv>
+              </FlexColumn>
+            </FlexRow>
+          ) : null}
           <FlexRow>
             <FlexColumn>
               <StyledDiv>
