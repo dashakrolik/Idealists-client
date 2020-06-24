@@ -1,0 +1,107 @@
+.assessIdeas-container {
+  min-height: 100%;
+  background-image: linear-gradient(
+    to right top,
+    #1a3d7c,
+    #195d9c,
+    #1f7fbb,
+    #31a2d7,
+    #4cc5f1
+  );
+  text-align: center;
+}
+
+.flex-tilescontainer {
+  margin: auto;
+  max-width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.title {
+  color: white;
+}
+
+.assess-tile {
+  width: 25vw;
+  height: 40vh;
+  margin: 10px;
+  border: 1px solid silver;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.assess-tile:hover {
+  width: 25vw;
+  height: 40vh;
+  margin: 10px;
+  border: 1px solid silver;
+  border-radius: 10px;
+  background-color: #dfeff2;
+  transition: ease-in;
+}
+
+.tile-link {
+  text-decoration: none;
+  text-decoration-color: black;
+  color: black;
+}
+
+.dropdown form {
+  width: 400px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+.showAll {
+  background-color: #37608f;
+  font-size: 112%;
+
+  font-weight: 900;
+  color: white;
+}
+
+.dropdown-label {
+  margin-bottom: 0;
+  font-size: 120%;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.dropdown-container {
+  width: 250px;
+  margin: 10px auto;
+  position: relative;
+}
+
+select {
+  width: 100%;
+  height: 2.5em;
+  font-size: 110%;
+  font-weight: bold;
+  cursor: pointer;
+  border-style: solid;
+  border-color: #ffffff;
+  border-radius: 25px;
+
+  color: rgb(255, 255, 255);
+  padding: 10px;
+}
+
+/* For IE <= 11 */
+select::-ms-expand {
+  display: none;
+}
+
+select:hover,
+select:focus {
+  background-color: rgb(255, 255, 255);
+  border-bottom-color: #dcdcdc;
+}
+
+option {
+  color: #272727;
+}

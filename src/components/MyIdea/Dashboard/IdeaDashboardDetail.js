@@ -26,6 +26,15 @@ export default function IdeaDashboardDetail(props) {
         setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
         setUserId(res.body.user);
+        if (res.body.user.id === props.authState.user.id) {
+          if (
+            progress.rejected === true ||
+            progress.step02 === false ||
+            progress.step03 === true
+          ) {
+            return <Redirect to="/MyIdea/dashboard" />;
+          }
+        }
       });
   }, []);
 
@@ -89,39 +98,66 @@ export default function IdeaDashboardDetail(props) {
         <Left>
           <FlexRow>
             <FlexColumn>
-              <StyledDiv>
-                <h1>Assessing Your Idea:</h1>
-                <hr />
-                <ul className="step-progress">
-                  <li className={`step-progress-item ${progressStep[1]}`}>
-                    <strong>Submit your idea</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[2]}`}>
-                    <strong>First patent check (1 week)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[3]}`}>
-                    <strong>Expert check (2 weeks)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[4]}`}>
-                    <strong>Second patent check (2 weeks)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[5]}`}>
-                    <strong>Validation phase (4 weeks)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[6]}`}>
-                    <strong>Final patent check (2 weeks)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[7]}`}>
-                    <strong>Business plan phase (2 weeks)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[8]}`}>
-                    <strong>Funding phase (2 weeks)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[9]}`}>
-                    <strong>Company is born (1 week)</strong>
-                  </li>
-                </ul>
-              </StyledDiv>
+              {userId.id !== props.authState.user.id ? null : (
+                <StyledDiv>
+                  <h1>Assessing Your Idea:</h1>
+                  <hr />
+                  <ul className="step-progress">
+                    <li className={`step-progress-item ${progressStep[1]}`}>
+                      <strong>Submit your idea</strong>
+                    </li>
+                    <li className={`step-progress-item ${progressStep[2]}`}>
+                      <strong>First patent check (1 week)</strong>
+                    </li>
+                    <li className={`step-progress-item ${progressStep[3]}`}>
+                      <strong>Expert check (2 weeks)</strong>
+                    </li>
+                    <li className={`step-progress-item ${progressStep[4]}`}>
+                      <strong>Second patent check (2 weeks)</strong>
+                    </li>
+                    <li className={`step-progress-item ${progressStep[5]}`}>
+                      <strong>Validation phase (4 weeks)</strong>
+                    </li>
+                    <li className={`step-progress-item ${progressStep[6]}`}>
+                      <strong>Final patent check (2 weeks)</strong>
+                    </li>
+                    <li className={`step-progress-item ${progressStep[7]}`}>
+                      <strong>Business plan phase (2 weeks)</strong>
+                    </li>
+                    <li className={`step-progress-item ${progressStep[8]}`}>
+                      <strong>Funding phase (2 weeks)</strong>
+                    </li>
+                    <li className={`step-progress-item ${progressStep[9]}`}>
+                      <strong>Company is born (1 week)</strong>
+                    </li>
+                  </ul>
+                </StyledDiv>
+              )}
+            </FlexColumn>
+          </FlexRow>
+          <FlexRow>
+            <FlexColumn>
+              {" "}
+              {userId.id === props.authState.user.id ? null : (
+                <StyledDiv>
+                  <div>
+                    <Button
+                      color="inherit"
+                      text="Assess this idea"
+                      onClick={() =>
+                        props.history.push(`/dashboard/assess/${ideasId}`)
+                      }
+                    />
+                  </div>
+                  <p>
+                    Here you get to assess ideas in a very simple and fast way
+                    and get rewarded for it at the same time. When an idea you
+                    helped assess becomes incorporated, you’ll receive € 100,-
+                    worth of equity in that company. Assessing an idea takes on
+                    average 3 minutes.
+                  </p>
+                </StyledDiv>
+              )}
             </FlexColumn>
           </FlexRow>
         </Left>
@@ -137,28 +173,6 @@ export default function IdeaDashboardDetail(props) {
               </div>
             ))}
           </Content>
-          {userId.id === props.authState.user.id ? null : (
-            <Content>
-              <StyledCard>
-                <div>
-                  <Button
-                    color="inherit"
-                    text="Assess this idea"
-                    onClick={() =>
-                      props.history.push(`/dashboard/assess/${ideasId}`)
-                    }
-                  />
-                </div>
-                <p>
-                  Here you get to assess ideas in a very simple and fast way and
-                  get rewarded for it at the same time. When an idea you helped
-                  assess becomes incorporated, you’ll receive € 100,- worth of
-                  equity in that company. Assessing an idea takes on average 3
-                  minutes.
-                </p>
-              </StyledCard>
-            </Content>
-          )}
         </Right>
       </Container>
     </div>
