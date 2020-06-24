@@ -14,6 +14,7 @@ import IdeaPDFCreator from "./Download/IdeaPDFCreator";
 import AssessmentsPDFCreator from "./Download/AssessmentsPDFCreator";
 import CommentsPDFCreator from "./Download/CommentsPDFCreator";
 import FullPDFCreator from "./Download/FullPDFCreator";
+import ProgressBar from "../../reogranisation/ProgressBar/ProgressBar";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
@@ -375,43 +376,10 @@ export default function IdeaDashboardDetail(props) {
     <div className="dashboard-container">
       <Container>
         <Left>
-          <FlexRow>
-            <FlexColumn>
-              <StyledDiv>
-                <h1>Assessing Idea:</h1>
-                <hr />
-                <ul className="step-progress">
-                  <li className={`step-progress-item ${progressStep[1]}`}>
-                    <strong>Submit your idea</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[2]}`}>
-                    <strong>First patent check (1 week)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[3]}`}>
-                    <strong>Expert check (2 weeks)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[4]}`}>
-                    <strong>Second patent check (2 weeks)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[5]}`}>
-                    <strong>Validation phase (4 weeks)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[6]}`}>
-                    <strong>Final patent check (2 weeks)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[7]}`}>
-                    <strong>Business plan phase (2 weeks)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[8]}`}>
-                    <strong>Funding phase (2 weeks)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[9]}`}>
-                    <strong>Company is born (1 week)</strong>
-                  </li>
-                </ul>
-              </StyledDiv>
-            </FlexColumn>
-          </FlexRow>
+          <ProgressBar
+            token={props.authState.token}
+            ideasId={props.match.params.id}
+          />
           {!rejected ? (
             <FlexRow>
               <FlexColumn>
