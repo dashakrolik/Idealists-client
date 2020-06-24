@@ -10,7 +10,7 @@ import Button from "../../reogranisation/Questions/Button";
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
-
+  const [assessments, setAssessments] = useState([]);
   const [ideaOwner, setIdeaOwner] = useState({});
 
   const ideasId = props.match.params.id;
@@ -27,6 +27,7 @@ export default function IdeaDashboardDetail(props) {
         setIdeaOwner(res.body.user);
         setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
+        setAssessments(res.body.assessments);
       });
   }, []);
 
@@ -91,7 +92,7 @@ export default function IdeaDashboardDetail(props) {
           <FlexRow>
             <FlexColumn>
               <StyledDiv>
-                <h1>Assessing Your Idea:</h1>
+                <h1>Assessing this Idea:</h1>
                 <hr />
                 <ul className="step-progress">
                   <li className={`step-progress-item ${progressStep[1]}`}>
@@ -125,15 +126,36 @@ export default function IdeaDashboardDetail(props) {
               </StyledDiv>
             </FlexColumn>
           </FlexRow>
-          <div>
-            <Button
-              color="inherit"
-              text="Assess this idea"
-              onClick={() =>
-                props.history.push(`/Investors/dashboard/assess/${ideasId}`)
-              }
-            />
-          </div>
+          <FlexRow>
+            <FlexColumn>
+              <StyledDiv>
+                <p>
+                  Here you get to assess ideas in a very simple and fast way and
+                  get rewarded for it at the same time. When an idea you helped
+                  assess becomes incorporated, you’ll receive € 100,- worth of
+                  equity in that company. Assessing an idea takes on average 3
+                  minutes.
+                </p>
+                {assessments
+                  .map((ass) => ass.user.id)
+                  .includes(props.authState.user.id) ? (
+                  <h2>You have already assessed this idea!</h2>
+                ) : (
+                  <div>
+                    <Button
+                      color="inherit"
+                      text="Assess this idea"
+                      onClick={() =>
+                        props.history.push(
+                          `/Investors/dashboard/assess/${ideasId}`
+                        )
+                      }
+                    />
+                  </div>
+                )}
+              </StyledDiv>
+            </FlexColumn>
+          </FlexRow>
         </Left>
         <Right>
           <Content>
