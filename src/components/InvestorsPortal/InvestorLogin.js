@@ -68,10 +68,7 @@ export default function InvestorLogin(props) {
             <br />
 
             <button type="submit">Login</button>
-            {/* <button  onClick={() => {props.history.replace("/MyIdea/login/reset-password")}}></button> */}
-            <Link to="/MyIdea/login/reset-password">
-              Forgot your password?{" "}
-            </Link>
+            <Link to="/MyIdea/login/reset-password">Forgot your password?</Link>
           </form>
         </RightSide>
       </Container>

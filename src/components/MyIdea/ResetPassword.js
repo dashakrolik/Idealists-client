@@ -20,10 +20,12 @@ export default function ResetPassword(props) {
       [name]: value,
     });
   };
+  console.log("props.history.", props.history);
 
   const onSubmit = (data) => {
     const { email } = data;
     props.resetPassword(email);
+    props.history.replace(`/Investors/login`);
   };
 
   if (props)

@@ -317,9 +317,10 @@ class App extends Component {
   };
 
   resetPassword = (email) => {
+    const clientUrl = window.location.origin;
     request
       .post(`${baseUrl}/reset-password`)
-      .send({ email })
+      .send({ email, clientUrl })
       .then((res) => {
         if (res.status === 200) {
           this.setState({
@@ -336,10 +337,12 @@ class App extends Component {
 
   updatePassword = (jwt, password) => {
     request
-      .put(`${baseUrl}/users`)
-      .set("Authorization", `Bearer ${jwt}`)
-      .send({ password })
-      .then((res) => res.status === 200);
+      .put(`${baseUrl}/reset-password`)
+      .send({ jwt, password })
+      .then((res) => res.status === 200)
+      .catch((err) => {
+        alert("Something went wrong, please try again.");
+      });
   };
 
   updateLocalStorage = (key, value) => {
