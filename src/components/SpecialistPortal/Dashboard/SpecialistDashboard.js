@@ -40,8 +40,10 @@ export default function specialistDashboard(props) {
     userData && props.authState.user ? (
       <h2 className="title">
         {userData.firstName}'s{" "}
-        {props.authState.user.specialistType.charAt(0).toUpperCase() +
-          props.authState.user.specialistType.slice(1)}{" "}
+        {props.authState.user.specialistType !== "not a specialist"
+          ? props.authState.user.specialistType.charAt(0).toUpperCase() +
+            props.authState.user.specialistType.slice(1)
+          : null}{" "}
         Specialist Dashboard
       </h2>
     ) : null;
@@ -142,18 +144,16 @@ export default function specialistDashboard(props) {
       ));
       if (ideaList.ideasPhase4.length < 1 && ideaList.ideasPhase6.length < 1) {
         return (
-          <h2 style={styledH2}>
-            There are no idea's available in phase 4 or 6
-          </h2>
+          <h2 style={styledH2}>There are no ideas available in phase 4 or 6</h2>
         );
       }
       if (ideaList.ideasPhase4.length >= 1 && ideaList.ideasPhase6.length < 1) {
         return (
           <>
             {renderCard(props.authState.user.specialistType)}
-            <h2 style={styledH2}>These are idea's in phase 4</h2>
+            <h2 style={styledH2}>These are ideas in phase 4</h2>
             <div className="flex-tilescontainer">{list4}</div>
-            <h2 style={styledH2}>There are no idea's available in phase 6</h2>
+            <h2 style={styledH2}>There are no ideas available in phase 6</h2>
           </>
         );
       }
@@ -161,18 +161,18 @@ export default function specialistDashboard(props) {
         return (
           <>
             {renderCard(props.authState.user.specialistType)}
-            <h2 style={styledH2}>These are idea's in phase 6</h2>
+            <h2 style={styledH2}>These are ideas in phase 6</h2>
             <div className="flex-tilescontainer">{list6}</div>
-            <h2 style={styledH2}>There are no idea's available in phase 4</h2>
+            <h2 style={styledH2}>There are no ideas available in phase 4</h2>
           </>
         );
       } else
         return (
           <>
             {renderCard(props.authState.user.specialistType)}
-            <h2 style={styledH2}>These are idea's in phase 4</h2>
+            <h2 style={styledH2}>These are ideas in phase 4</h2>
             <div className="flex-tilescontainer">{list4}</div>
-            <h2 style={styledH2}>These are idea's in phase 6</h2>
+            <h2 style={styledH2}>These are ideas in phase 6</h2>
             <div className="flex-tilescontainer">{list6}</div>
           </>
         );

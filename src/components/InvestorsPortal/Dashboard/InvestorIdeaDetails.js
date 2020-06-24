@@ -6,11 +6,14 @@ import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import { Redirect } from "react-router-dom";
 import Button from "../../reogranisation/Questions/Button";
+import ProgressBar from "../../reogranisation/ProgressBar/ProgressBar";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
+
   const [progress, setProgress] = useState([]);
   const [assessments, setAssessments] = useState([]);
+
   const [ideaOwner, setIdeaOwner] = useState({});
 
   const ideasId = props.match.params.id;
@@ -25,7 +28,6 @@ export default function IdeaDashboardDetail(props) {
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then((res) => {
         setIdeaOwner(res.body.user);
-        setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
         setAssessments(res.body.assessments);
       });
@@ -74,88 +76,92 @@ export default function IdeaDashboardDetail(props) {
     return <Redirect to="/MyIdea" />;
   }
 
-  const progressStep = [""];
-
-  for (let i = 1; i < 10; i++) {
-    const step = progress[`step0${i}`]
-      ? "is-done"
-      : progress[`step0${i - 1}`]
-      ? "current"
-      : "";
-    progressStep.push(step);
-  }
-
   return (
     <div className="dashboard-container">
       <Container>
         <Left>
-          <FlexRow>
-            <FlexColumn>
-              <StyledDiv>
-                <h1>Assessing this Idea:</h1>
-                <hr />
-                <ul className="step-progress">
-                  <li className={`step-progress-item ${progressStep[1]}`}>
-                    <strong>Submit your idea</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[2]}`}>
-                    <strong>First patent check (1 week)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[3]}`}>
-                    <strong>Expert check (2 weeks)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[4]}`}>
-                    <strong>Second patent check (2 weeks)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[5]}`}>
-                    <strong>Validation phase (4 weeks)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[6]}`}>
-                    <strong>Final patent check (2 weeks)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[7]}`}>
-                    <strong>Business plan phase (2 weeks)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[8]}`}>
-                    <strong>Funding phase (2 weeks)</strong>
-                  </li>
-                  <li className={`step-progress-item ${progressStep[9]}`}>
-                    <strong>Company is born (1 week)</strong>
-                  </li>
-                </ul>
-              </StyledDiv>
-            </FlexColumn>
-          </FlexRow>
-          <FlexRow>
-            <FlexColumn>
-              <StyledDiv>
-                <p>
-                  Here you get to assess ideas in a very simple and fast way and
-                  get rewarded for it at the same time. When an idea you helped
-                  assess becomes incorporated, you’ll receive € 100,- worth of
-                  equity in that company. Assessing an idea takes on average 3
-                  minutes.
-                </p>
-                {assessments
-                  .map((ass) => ass.user.id)
-                  .includes(props.authState.user.id) ? (
-                  <h2>You have already assessed this idea!</h2>
-                ) : (
-                  <div>
-                    <Button
-                      color="inherit"
-                      text="Assess this idea"
-                      onClick={() =>
-                        props.history.push(
-                          `/Investors/dashboard/assess/${ideasId}`
-                        )
-                      }
-                    />
-                  </div>
-                )}
-              </StyledDiv>
-            </FlexColumn>
-          </FlexRow>
+//           <FlexRow>
+//             <FlexColumn>
+//               <StyledDiv>
+//                 <h1>Assessing this Idea:</h1>
+//                 <hr />
+//                 <ul className="step-progress">
+//                   <li className={`step-progress-item ${progressStep[1]}`}>
+//                     <strong>Submit your idea</strong>
+//                   </li>
+//                   <li className={`step-progress-item ${progressStep[2]}`}>
+//                     <strong>First patent check (1 week)</strong>
+//                   </li>
+//                   <li className={`step-progress-item ${progressStep[3]}`}>
+//                     <strong>Expert check (2 weeks)</strong>
+//                   </li>
+//                   <li className={`step-progress-item ${progressStep[4]}`}>
+//                     <strong>Second patent check (2 weeks)</strong>
+//                   </li>
+//                   <li className={`step-progress-item ${progressStep[5]}`}>
+//                     <strong>Validation phase (4 weeks)</strong>
+//                   </li>
+//                   <li className={`step-progress-item ${progressStep[6]}`}>
+//                     <strong>Final patent check (2 weeks)</strong>
+//                   </li>
+//                   <li className={`step-progress-item ${progressStep[7]}`}>
+//                     <strong>Business plan phase (2 weeks)</strong>
+//                   </li>
+//                   <li className={`step-progress-item ${progressStep[8]}`}>
+//                     <strong>Funding phase (2 weeks)</strong>
+//                   </li>
+//                   <li className={`step-progress-item ${progressStep[9]}`}>
+//                     <strong>Company is born (1 week)</strong>
+//                   </li>
+//                 </ul>
+//               </StyledDiv>
+//             </FlexColumn>
+//           </FlexRow>
+//           <FlexRow>
+//             <FlexColumn>
+//               <StyledDiv>
+//                 <p>
+//                   Here you get to assess ideas in a very simple and fast way and
+//                   get rewarded for it at the same time. When an idea you helped
+//                   assess becomes incorporated, you’ll receive € 100,- worth of
+//                   equity in that company. Assessing an idea takes on average 3
+//                   minutes.
+//                 </p>
+//                 {assessments
+//                   .map((ass) => ass.user.id)
+//                   .includes(props.authState.user.id) ? (
+//                   <h2>You have already assessed this idea!</h2>
+//                 ) : (
+//                   <div>
+//                     <Button
+//                       color="inherit"
+//                       text="Assess this idea"
+//                       onClick={() =>
+//                         props.history.push(
+//                           `/Investors/dashboard/assess/${ideasId}`
+//                         )
+//                       }
+//                     />
+//                   </div>
+//                 )}
+//               </StyledDiv>
+//             </FlexColumn>
+//           </FlexRow>
+
+          <ProgressBar
+            token={props.authState.token}
+            ideasId={props.match.params.id}
+          />
+          <div>
+            <Button
+              color="inherit"
+              text="Assess this idea"
+              onClick={() =>
+                props.history.push(`/Investors/dashboard/assess/${ideasId}`)
+              }
+            />
+          </div>
+
         </Left>
         <Right>
           <Content>
