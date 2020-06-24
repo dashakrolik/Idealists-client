@@ -11,6 +11,7 @@ import ProgressBar from "../../reogranisation/ProgressBar/ProgressBar";
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [userId, setUserId] = useState([]);
+  const [assessments, setAssessments] = useState([]);
 
   const ideasId = props.match.params.id;
 
@@ -25,6 +26,7 @@ export default function IdeaDashboardDetail(props) {
       .then((res) => {
         setUserIdeas(res.body.idea);
         setUserId(res.body.user);
+        setAssessments(res.body.assessments);
         if (res.body.user.id === props.authState.user.id) {
           if (
             progress.rejected === true ||
@@ -129,15 +131,6 @@ export default function IdeaDashboardDetail(props) {
               {" "}
               {userId.id === props.authState.user.id ? null : (
                 <StyledDiv>
-                  <div>
-                    <Button
-                      color="inherit"
-                      text="Assess this idea"
-                      onClick={() =>
-                        props.history.push(`/dashboard/assess/${ideasId}`)
-                      }
-                    />
-                  </div>
                   <p>
                     Here you get to assess ideas in a very simple and fast way
                     and get rewarded for it at the same time. When an idea you
@@ -145,6 +138,21 @@ export default function IdeaDashboardDetail(props) {
                     worth of equity in that company. Assessing an idea takes on
                     average 3 minutes.
                   </p>
+                  {assessments
+                    .map((ass) => ass.user.id)
+                    .includes(props.authState.user.id) ? (
+                    <h2>You have already assessed this idea!</h2>
+                  ) : (
+                    <div>
+                      <Button
+                        color="inherit"
+                        text="Assess this idea"
+                        onClick={() =>
+                          props.history.push(`/dashboard/assess/${ideasId}`)
+                        }
+                      />
+                    </div>
+                  )}
                 </StyledDiv>
               )}
             </FlexColumn>
