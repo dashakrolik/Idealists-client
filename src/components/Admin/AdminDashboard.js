@@ -27,6 +27,21 @@ export default function AdminDashboard(props) {
       .then((res) => setUserIdeas(res.body));
   }, []);
 
+  // to add a new specialist
+  const showNewSpecialist = () => {
+    if (!props.authState.user) return null;
+    if (props.authState.user.role === "admin") {
+      return (
+        <Link className="links" to="/Admin/dashboard/newspecialist">
+          <div className="invest-tile">
+            <img className="icons" src={mentor}></img>
+            <h4>Add Specialist</h4>
+          </div>
+        </Link>
+      );
+    } else return null;
+  };
+
   if (props.authState.loggedIn === false) return <Redirect to="/MyIdea" />;
 
   if (!props.authState.user) {
@@ -51,6 +66,7 @@ export default function AdminDashboard(props) {
     <div className="dashboard-container">
       <br />
       <br />
+
       <br />
       <div className="title">
         <h1>{user.firstName}'s Admin Dashboard</h1>
