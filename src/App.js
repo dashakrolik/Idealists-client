@@ -32,7 +32,7 @@ import MyMentorships from "./components/InvestorsPortal/Dashboard/MyMentorships"
 import AutoMatchDetails from "./components/MyIdea/Dashboard/AutoMatchDetails";
 import FormAssessIdeas from "./components/InvestorsPortal/Dashboard/FormAssessIdeas";
 import InvestorIdeaDetails from "./components/InvestorsPortal/Dashboard/InvestorIdeaDetails";
-
+import AdminDashboardRejected from "./components/Admin/AdminDashboardRejected";
 import CompleteAssessment from "./components/InvestorsPortal/Dashboard/CompleteAssessment";
 import AddSpecialistStart from "./components/SpecialistPortal/SpecialistCreation/AddSpecialistStart";
 
@@ -394,7 +394,7 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/Admin/dashboard/newspecialist"
+                path="/AdminDashboard/newspecialist"
                 render={(props) => {
                   return (
                     <AddSpecialistStart
@@ -421,6 +421,8 @@ class App extends Component {
                       login={this.requestLoginSpecialist}
                       user={this.getCurrentUser}
                       logout={this.logout}
+                      rejectIdea={this.rejectIdea}
+                      updateProgress={this.updateProgress}
                       updateLocalStorage={this.updateLocalStorage}
                       updateProgress={this.updateProgress}
                     />
@@ -697,6 +699,22 @@ class App extends Component {
               />
               <Route
                 exact
+                path="/AdminDashboard/rejected"
+                render={(props) => {
+                  return (
+                    <AdminDashboardRejected
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
                 path="/dashboard/ideas/:id"
                 render={(props) => {
                   return (
@@ -837,7 +855,6 @@ class App extends Component {
                   );
                 }}
               />
-
               <Route exact path="/" render={() => <Redirect to="/MyIdea" />} />
             </Application>
           </ThemeProvider>

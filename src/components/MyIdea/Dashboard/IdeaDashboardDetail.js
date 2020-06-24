@@ -124,13 +124,6 @@ export default function IdeaDashboardDetail(props) {
               </StyledDiv>
             </FlexColumn>
           </FlexRow>
-          <div>
-            <Button
-              color="inherit"
-              text="Patent Check"
-              onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}
-            />
-          </div>
         </Left>
         <Right>
           <Content>

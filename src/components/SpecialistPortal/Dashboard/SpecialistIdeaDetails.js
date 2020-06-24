@@ -27,6 +27,7 @@ export default function IdeaDashboardDetail(props) {
   const [docs, setDocs] = useState([]);
   const [industryIdea, setIndustryIdea] = useState({});
   const ideasId = props.match.params.id;
+  const [rejected, setRejected] = useState(false);
 
   const docsUploaded = (
     <section>
@@ -61,12 +62,6 @@ export default function IdeaDashboardDetail(props) {
       ? 7
       : null;
 
-  console.log(
-    "what phase number can this specialist change?",
-    specialistStepNumber
-  );
-  console.log("whats the specialist type?", specialistType);
-
   const beginUpload = (tag) => {
     const uploadOptions = {
       cloudName: "idealists",
@@ -86,6 +81,16 @@ export default function IdeaDashboardDetail(props) {
         console.log(error);
       }
     });
+  };
+
+  const rejectIdea = () => {
+    const confirmRejected = window.confirm(
+      "Are you sure you want to reject this idea? The user who submitted the idea will be immediately notified via email. Only the ADMIN can undo a rejection."
+    );
+    if (confirmRejected) {
+      setRejected(true);
+      props.rejectIdea(true, ideasId);
+    }
   };
 
   useEffect(() => {
@@ -109,8 +114,7 @@ export default function IdeaDashboardDetail(props) {
         .send(stepNameInEntity)
         .then((res) => {
           if (res.status === 200) {
-            console.log("success, idea progress moved forward");
-            setProgress(res.body);
+           setProgress(res.body);
           }
         })
         .catch((err) => {
@@ -367,13 +371,6 @@ export default function IdeaDashboardDetail(props) {
       stepNameInEntity = { step10: true };
   }
 
-  console.log(
-    "current step:",
-    currentStep,
-    "specialist can change steps:",
-    specialistStepNumber
-  );
-
   return (
     <div className="dashboard-container">
       <Container>
@@ -415,67 +412,92 @@ export default function IdeaDashboardDetail(props) {
               </StyledDiv>
             </FlexColumn>
           </FlexRow>
-          <div>
-            {/* <Button
+          {!rejected ? (
+            <FlexRow>
+              <FlexColumn>
+                <StyledDiv>
+                  <h1>Control Idea</h1>
+
+                  {/* <Button
               color="inherit"
               text="Patent Check"
               onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}
             /> */}
 
-            {/* this button moves idea progress to the next phase, 
+                  {/* this button moves idea progress to the next phase, 
 with conditions to validate that the user has the correct role. */}
-            <Button
-              color="inherit"
-              text={
-                (nextPhaseName !== undefined &&
-                  currentStep === specialistStepNumber) || // match the current step to the specialists matched steps (which steps they can change an idea from)
-                (specialistType === "patent" && currentStep === 6) // patent specialists can also move idea from phase 6
-                  ? `Move to next phase: ${nextPhaseName}`
-                  : nextPhaseName === undefined
-                  ? "Idea has reached final phase"
-                  : "Phase Updated"
-              }
-              onClick={
-                (nextPhaseName !== undefined &&
-                  currentStep === specialistStepNumber) ||
-                (specialistType === "patent" && currentStep === 6)
-                  ? () => updateProgressAPICall(stepNameInEntity)
-                  : null
-              }
-            />
-
-            <IdeaPDFCreator
-              user={ideaOwner}
-              ideaId={ideasId}
-              idea={userIdeas}
-              printer={props.authState.user}
-            />
-            <AssessmentsPDFCreator
-              user={ideaOwner}
-              ideaId={ideasId}
-              idea={userIdeas}
-              printer={props.authState.user}
-              assessments={assessments}
-            />
-            <CommentsPDFCreator
-              user={ideaOwner}
-              ideaId={ideasId}
-              idea={userIdeas}
-              printer={props.authState.user}
-              comments={comments}
-            />
-            <FullPDFCreator
-              user={ideaOwner}
-              ideaId={ideasId}
-              idea={userIdeas}
-              printer={props.authState.user}
-              comments={comments}
-              assessments={assessments}
-            />
-          </div>
+                  <Button
+                    color="inherit"
+                    text={
+                      (nextPhaseName !== undefined &&
+                        currentStep === specialistStepNumber) || // match the current step to the specialists matched steps (which steps they can change an idea from)
+                      (specialistType === "patent" && currentStep === 6) // patent specialists can also move idea from phase 6
+                        ? `Move to next phase: ${nextPhaseName}`
+                        : nextPhaseName === undefined
+                        ? "Idea has reached final phase"
+                        : "Phase Updated"
+                    }
+                    onClick={
+                      (nextPhaseName !== undefined &&
+                        currentStep === specialistStepNumber) ||
+                      (specialistType === "patent" && currentStep === 6)
+                        ? () => updateProgressAPICall(stepNameInEntity)
+                        : null
+                    }
+                  />
+                  <Button
+                    color="inherit"
+                    text="Reject Idea"
+                    onClick={() => rejectIdea()}
+                  />
+                </StyledDiv>
+              </FlexColumn>
+            </FlexRow>
+          ) : null}
+          <FlexRow>
+            <FlexColumn>
+              <StyledDiv>
+                <h1>Downloads</h1>
+                <IdeaPDFCreator
+                  user={ideaOwner}
+                  ideaId={ideasId}
+                  idea={userIdeas}
+                  printer={props.authState.user}
+                />
+                <AssessmentsPDFCreator
+                  user={ideaOwner}
+                  ideaId={ideasId}
+                  idea={userIdeas}
+                  printer={props.authState.user}
+                  assessments={assessments}
+                />
+                <CommentsPDFCreator
+                  user={ideaOwner}
+                  ideaId={ideasId}
+                  idea={userIdeas}
+                  printer={props.authState.user}
+                  comments={comments}
+                />
+                <FullPDFCreator
+                  user={ideaOwner}
+                  ideaId={ideasId}
+                  idea={userIdeas}
+                  printer={props.authState.user}
+                  comments={comments}
+                  assessments={assessments}
+                />
+              </StyledDiv>
+            </FlexColumn>
+          </FlexRow>
         </Left>
         <Right>
           <Content>
+            {rejected ? (
+              <h2>
+                <em>This idea has been rejected</em>
+              </h2>
+            ) : null}
+
             <h1 className="header"> Questions and Answers about Idea:</h1>
             {renderIdeaDetails}
           </Content>

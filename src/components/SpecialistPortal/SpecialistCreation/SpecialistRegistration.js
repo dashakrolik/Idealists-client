@@ -2,7 +2,6 @@
 import { css, jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
-import countryList from "../../reogranisation/Start/country-list.json";
 import posed from "react-pose";
 import Select from "react-select";
 import Button from "../../reogranisation/Questions/Button";
@@ -43,11 +42,6 @@ const SpecialistRegistration = (props) => {
       value: "",
       shouldShowError: false,
       validated: false,
-    },
-    country: {
-      value: "",
-      shouldShowError: false,
-      validated: true,
     },
     role: {
       value: "specialist",
@@ -101,10 +95,6 @@ const SpecialistRegistration = (props) => {
     },
     passwordRepeat: {
       validator: (val) => val === formData.password.value,
-      shouldShowError: (val) => true,
-    },
-    country: {
-      validator: (val) => val !== null,
       shouldShowError: (val) => true,
     },
     role: {
@@ -190,7 +180,6 @@ const SpecialistRegistration = (props) => {
       lastName,
       email,
       password,
-      country,
       role,
       specialistType,
     } = formData;
@@ -202,7 +191,6 @@ const SpecialistRegistration = (props) => {
         lastName: lastName.value,
         email: email.value,
         password: password.value,
-        country: country.value,
         role: role.value,
         specialistType: specialistType.value,
       })
@@ -440,20 +428,6 @@ const SpecialistRegistration = (props) => {
           >
             <FormGroup>
               <div></div>
-            </FormGroup>
-          </FlexColumn>
-        </FlexRow>
-
-        <FlexRow>
-          <FlexColumn>
-            <FormGroup>
-              <label>What is the specialist's country of residence?</label>
-              <Select
-                name="country"
-                options={countryList}
-                onChange={handleChangeSelect.bind(this, "country")}
-                value={formData.country.value.value}
-              />
             </FormGroup>
           </FlexColumn>
         </FlexRow>

@@ -11,8 +11,8 @@ export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
   const [rejected, setRejected] = useState(false);
-
   const ideasId = props.match.params.id;
+  
 
   const rejectIdea = () => {
     const confirmRejected = window.confirm(
@@ -22,6 +22,16 @@ export default function IdeaDashboardDetail(props) {
       // if the user selects "ok" in the window.confirm, it returns true. If the user cancels, it returns false
       setRejected(true);
       props.rejectIdea({ rejected: true }, ideasId);
+    }
+  };
+
+  const undoRejection = () => {
+    const confirmUndoRejected = window.confirm(
+      "Are you sure you want to undo the rejection of this idea?"
+    );
+    if (confirmUndoRejected) {
+      setRejected(false);
+      props.rejectIdea({ rejected: false}, ideasId);
     }
   };
 
@@ -60,6 +70,7 @@ export default function IdeaDashboardDetail(props) {
       .then((res) => {
         setUserIdeas(res.body.idea);
         setProgress(res.body.progress);
+        setRejected(res.body.progress.rejected);
       });
   }, []);
 
@@ -209,14 +220,19 @@ export default function IdeaDashboardDetail(props) {
               </StyledDiv>
             </FlexColumn>
           </FlexRow>
-          <div>
-            <Button
-              color="inherit"
-              text={rejected ? "Idea Rejected" : "Reject Idea"}
-              onClick={!rejected ? () => rejectIdea() : null}
-            />
-
-            <Button
+          <FlexRow>
+            <FlexColumn>
+              <StyledDiv>
+                <h1>Control Idea</h1>
+                {rejected ? (
+                  <Button
+                    color="inherit"
+                    text="Undo Rejection"
+                    onClick={() => undoRejection()}
+                  />
+                ) : (
+                  <>
+                     <Button
               color="inherit"
               text={
                 nextPhaseName !== undefined
@@ -231,7 +247,17 @@ export default function IdeaDashboardDetail(props) {
                   : null
               }
             />
-          </div>
+                    <Button
+                      color="inherit"
+                      text="Reject Idea"
+                      onClick={() => rejectIdea()}
+                    />
+                  </>
+                )}
+              </StyledDiv>
+            </FlexColumn>
+          </FlexRow>
+
         </Left>
         <Right>
           <Content>
