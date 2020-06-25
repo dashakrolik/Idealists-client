@@ -29,7 +29,8 @@ export default function IdeaDashboardDetail(props) {
         setAssessments(res.body.assessments);
         if (res.body.user.id === props.authState.user.id) {
           if (
-            res.body.idea.progress.rejected === true ||
+            (res.body.idea.progress.rejected !== undefined &&
+              res.body.idea.progress.rejected === true) ||
             res.body.idea.progress.step02 === false ||
             res.body.idea.progress.step03 === true
           ) {

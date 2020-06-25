@@ -20,21 +20,21 @@ const TopBar = (props) => {
   return (
     <AppBar>
       <Toolbar className="topBar">
-        {/* <Link
-          to={
+        <img
+          src={logo}
+          alt="Logo"
+          style={logoStyle}
+          onClick={() =>
             props.authState.loggedIn &&
             localStorage.currentUserJwt &&
-            ((props.authState.user.role !== undefined &&
-              props.authState.user.role === "user") ||
+            (props.authState.user.role === "user" ||
               props.authState.user.role === "expert" ||
               props.authState.user.role === "specialist" ||
               props.authState.user.role === "admin")
-              ? "/MyIdea/new"
-              : "/"
+              ? props.history.push("/MyIdea/new")
+              : null
           }
-        > */}
-        <img src={logo} alt="Logo" style={logoStyle} />
-        {/* </Link> */}
+        />
 
         <Grid container direction="row" justify="flex-end" alignItems="center">
           {!localStorage.currentUserJwt || !props.authState.loggedIn ? (

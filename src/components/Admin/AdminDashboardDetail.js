@@ -27,7 +27,7 @@ export default function IdeaDashboardDetail(props) {
 
   const undoRejection = () => {
     const confirmUndoRejected = window.confirm(
-      "Are you sure you want to undo the rejection of this idea?"
+      "Are you sure you want to undo the rejection of this idea? The user who submitted the idea has been notified via email about the rejection."
     );
     if (confirmUndoRejected) {
       setRejected(false);
@@ -51,7 +51,7 @@ export default function IdeaDashboardDetail(props) {
         .send(stepNameInEntity)
         .then((res) => {
           if (res.status === 200) {
-            console.log("success, idea progress moved forward");
+            // console.log("success, idea progress moved forward");
             setProgress(res.body);
           }
         })
@@ -128,7 +128,6 @@ export default function IdeaDashboardDetail(props) {
       ? "current"
       : "";
     progressStep.push(step);
-    // console.log("progress step:", progressStep);
   }
 
   // this determines the index of the current phase, as setup for the switch statement

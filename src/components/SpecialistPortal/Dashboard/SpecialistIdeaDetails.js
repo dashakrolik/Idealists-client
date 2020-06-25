@@ -399,7 +399,8 @@ with conditions to validate that the user has the correct role. */}
                     text={
                       (nextPhaseName !== undefined &&
                         currentStep === specialistStepNumber) || // match the current step to the specialists matched steps (which steps they can change an idea from)
-                      (specialistType === "patent" && currentStep === 6) // patent specialists can also move idea from phase 6
+                      (specialistType === "patent" && currentStep === 6) || // patent specialists can also move idea from phase 6
+                      props.authState.user.role === "admin"
                         ? `Move to next phase: ${nextPhaseName}`
                         : nextPhaseName === undefined
                         ? "Idea has reached final phase"
@@ -408,6 +409,7 @@ with conditions to validate that the user has the correct role. */}
                     onClick={
                       (nextPhaseName !== undefined &&
                         currentStep === specialistStepNumber) ||
+                      props.authState.user.role === "admin" ||
                       (specialistType === "patent" && currentStep === 6)
                         ? () => updateProgressAPICall(stepNameInEntity)
                         : null
