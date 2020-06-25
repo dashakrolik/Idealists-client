@@ -20,8 +20,8 @@ import AdminDashboardDetail from "./components/Admin/AdminDashboardDetail";
 import IdeaDashboardDetail from "./components/MyIdea/Dashboard/IdeaDashboardDetail";
 import IdeaLogin from "./components/MyIdea/IdeaLogin";
 import TopBar from "./components/NavBar/TopBar";
-import ResetPassword from "./components/MyIdea/ResetPassword";
-import EnterNewPassword from "./components/MyIdea/EnterNewPassword";
+import ResetPassword from "./components/ResetPassword/ResetPassword";
+import EnterNewPassword from "./components/ResetPassword/EnterNewPassword";
 import AutoMatch from "./components/MyIdea/Dashboard/AutoMatch";
 import InvestorStart from "./components/MyIdea/InvestorStart";
 import SpecialistStart from "./components/MyIdea/SpecialistStart";
@@ -298,9 +298,10 @@ class App extends Component {
   };
 
   resetPassword = (email) => {
+    const clientUrl = window.location.origin;
     request
       .post(`${baseUrl}/reset-password`)
-      .send({ email })
+      .send({ email, clientUrl })
       .then((res) => {
         if (res.status === 200) {
           this.setState({
@@ -317,10 +318,12 @@ class App extends Component {
 
   updatePassword = (jwt, password) => {
     request
-      .put(`${baseUrl}/users`)
-      .set("Authorization", `Bearer ${jwt}`)
-      .send({ password })
-      .then((res) => res.status === 200);
+      .put(`${baseUrl}/reset-password`)
+      .send({ jwt, password })
+      .then((res) => res.status === 200)
+      .catch((err) => {
+        alert("Something went wrong, please try again.");
+      });
   };
 
   updateLocalStorage = (key, value) => {
@@ -784,7 +787,7 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/MyIdea/login/reset-password"
+                path="/reset-password"
                 render={(props) => {
                   return (
                     <ResetPassword
