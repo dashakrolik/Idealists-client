@@ -175,14 +175,3 @@ const StyledCard = styled(Card)`
   padding-left: 8px;
   padding-right: 8px;
 `;
-
-const Content = styled.div`
-  align-self: center;
-  justify-self: center;
-  color: #ffffff;
-  width: 90vw;
-  max-width: 800px;
-  max-height: 2000px;
-  height: auto;
-  padding: 20px;
-`;

@@ -16,19 +16,19 @@ const FullPDFCreator = (props) => {
   const qTitles = [];
 
   idea.map((idea) => {
-    idea.answers.map((question) => {
+    return idea.answers.map((question) => {
       if (question.qTitle.length > 50) {
         const title = processTitle(question.qTitle);
-        qTitles.push(title);
+        return qTitles.push(title);
       } else {
-        qTitles.push(question.qTitle);
+        return qTitles.push(question.qTitle);
       }
     });
   });
 
   idea.map((idea) => {
-    idea.answers.map((answer) => {
-      qAnswers.push(answer.qAnswer);
+    return idea.answers.map((answer) => {
+      return qAnswers.push(answer.qAnswer);
     });
   });
 
