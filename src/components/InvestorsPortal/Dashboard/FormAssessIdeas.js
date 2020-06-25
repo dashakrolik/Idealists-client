@@ -1,17 +1,8 @@
-import styled from "@emotion/styled";
-import Card from "@material-ui/core/Card";
 import React, { Component } from "react";
 
 import { Redirect } from "react-router-dom";
 
-import ReactDOM from "react-dom";
-import {
-  Textbox,
-  Textarea,
-  Radiobox,
-  Checkbox,
-  Select,
-} from "react-inputs-validation";
+import { Textarea, Radiobox, Checkbox } from "react-inputs-validation";
 import request from "superagent";
 import { baseUrl } from "../../../constants";
 import "react-inputs-validation/lib/react-inputs-validation.min.css";
@@ -126,12 +117,12 @@ export default class FormAssessIdeas extends Component {
       hasisItAGoodIdeaError,
       hasIsThisTheRightTiming,
       hasDoesThisSolveProblem,
-      hasWhatDoYouExpectAsTimeImpactError,
-      hasWhatDoYouExpectAsMagnitudeError,
-      hasAgreementStarError,
-      hasAgreementStarNoError,
-      hasAgreementMentorError,
-      hasAgreementMentorNoError,
+      // hasWhatDoYouExpectAsTimeImpactError,
+      // hasWhatDoYouExpectAsMagnitudeError,
+      // hasAgreementStarError,
+      // hasAgreementStarNoError,
+      // hasAgreementMentorError,
+      // hasAgreementMentorNoError,
     } = this.state;
     if (
       !hasExplanationError &&
@@ -1601,129 +1592,140 @@ export default class FormAssessIdeas extends Component {
                     </div>
 
                     {this.props.authState.user.role === "user" ? null : (
-                    <div style={rowWrapperStyle}>
-                      <div style={rowContainerStyle}>
-                        <div style={rowStyle}>
-                          <div
-                            style={{
-                              ...labelStyle,
-                              flex: "3 3 0px",
-                              marginTop: "3px",
-                            }}
-                          >
-                            {/*<div style={(labelStyle, { flex: '3 3 0px' })}>*/}
-                            <span
-                              className="icon icon-assignment-late"
-                              style={{ ...labelContentStyle, fontSize: "20px" }}
-                            />
-                            &nbsp;
-                            <span style={labelContentStyle}>
-                              Would you like to apply to become a mentor for
-                              this idea? If the team later picks you as one of
-                              the mentors, you will get a 1% share in the
-                              idea-company in exchange for being available to
-                              them for at least 1 hour per week.
-                            </span>
-                          </div>
-                          <div style={{ flex: "6 6 0px" }}>
-                            <Checkbox
-                              tabIndex="5" // Optional.[String or Number].Default: -1.
-                              id={"agreementMentor"} // Optional.[String].Default: "".  Input ID.
-                              name={"agreementMentor"} // Optional.[String].Default: "". Input name
-                              value={agreementMentor} // Required.[String].Default: "".
-                              checked={isAgreementMentorChecked} // Required.[Bool].Default: false.
-                              disabled={
-                                isAgreementMentorNoChecked ? true : false
-                              } // Optional.[Bool].Default: false.
-                              validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
-                              validationCallback={(res) => {
-                                this.setState({
-                                  hasAgreementMentorError: res,
-                                  validate: false,
-                                });
-                              }} // Optional.[Func].Default: none. Return the validation result.
-                              classNameWrapper="" // Optional.[String].Default: "".
-                              classNameInputBox="" // Optional.[String].Default: "".
-                              classNameContainer="" // Optional.[String].Default: "".
-                              customStyleWrapper={{}} // Optional.[Object].Default: {}.
-                              customStyleInputBox={{ backgroundColor: "white" }} // Optional.[Object].Default: {}.
-                              customStyleContainer={{}} // Optional.[Object].Default: {}.
-                              onBlur={() => {}} // Optional.[Func].Default: none. In order to validate the value on blur, you MUST provide a function, even if it is an empty function. Missing this, the validation on blur will not work.
-                              // onFocus={(e) => {console.log(e);}} // Optional.[Func].Default: none.
-                              // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
-                              onChange={(isAgreementMentorChecked, e) => {
-                                this.setState({ isAgreementMentorChecked });
-                                // console.log(e);
-                              }} // Required.[Func].Default: () => {}. Will return the value.
-                              labelHtml={
-                                <div
-                                  style={{ color: "white", marginTop: "5px" }}
-                                >
-                                  Yes, I’d like to become a mentor for this idea
-                                </div>
-                              } // Required.[Html].Default: none.
-                              validationOption={{
-                                name: "agreementMentor", // Optional.[String].Default: "". To display in the Error message. i.e Please check the ${name}.
-                                check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
-                                required: false, // Optional.[Bool].Default: true. To determin if it is a required field.
-                                // showMsg: true, // Optional.[Bool].Default: true. To determin display the error message or not.
-                                // locale: 'en-US', // Optional.[String].Default: "en-US". For error message display. Current options are ['zh-CN', 'en-US']; Default is 'en-US'.
-                                // msgOnError: "Your custom error message if you provide the validationOption['msgOnError']", // Optional.[String].Default: "". Show your custom error message no matter what when it has error if it is provied.
-                                // msgOnSuccess: "Your custom success message if you provide the validationOption['msgOnSuccess']. Otherwise, it will not show, not even green border." // Optional.[String].Default: "". Show your custom success message no matter what when it has error if it is provied.
+                      <div style={rowWrapperStyle}>
+                        <div style={rowContainerStyle}>
+                          <div style={rowStyle}>
+                            <div
+                              style={{
+                                ...labelStyle,
+                                flex: "3 3 0px",
+                                marginTop: "3px",
                               }}
-                            />
-                            <Checkbox
-                              tabIndex="5" // Optional.[String or Number].Default: -1.
-                              id={"agreementMentorNo"} // Optional.[String].Default: "".  Input ID.
-                              name={"agreementMentorNo"} // Optional.[String].Default: "". Input name
-                              value={agreementMentorNo} // Required.[String].Default: "".
-                              checked={isAgreementMentorNoChecked} // Required.[Bool].Default: false.
-                              disabled={isAgreementMentorChecked ? true : false} // Optional.[Bool].Default: false.
-                              validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
-                              validationCallback={(res) => {
-                                this.setState({
-                                  hasAgreementMentorNoError: res,
-                                  validate: false,
-                                });
-                              }} // Optional.[Func].Default: none. Return the validation result.
-                              classNameWrapper="" // Optional.[String].Default: "".
-                              classNameInputBox="" // Optional.[String].Default: "".
-                              classNameContainer="" // Optional.[String].Default: "".
-                              customStyleWrapper={{}} // Optional.[Object].Default: {}.
-                              customStyleInputBox={{ backgroundColor: "white" }} // Optional.[Object].Default: {}.
-                              customStyleContainer={{}} // Optional.[Object].Default: {}.
-                              onBlur={() => {}} // Optional.[Func].Default: none. In order to validate the value on blur, you MUST provide a function, even if it is an empty function. Missing this, the validation on blur will not work.
-                              // onFocus={(e) => {console.log(e);}} // Optional.[Func].Default: none.
-                              // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
-                              onChange={(isAgreementMentorNoChecked, e) => {
-                                this.setState({ isAgreementMentorNoChecked });
-                                // console.log(e);
-                              }} // Required.[Func].Default: () => {}. Will return the value.
-                              labelHtml={
-                                <div
-                                  style={{
-                                    color: "white",
-                                    marginTop: "5px",
-                                    display: "flex",
-                                  }}
-                                >
-                                  No, thank you
-                                </div>
-                              } // Required.[Html].Default: none.
-                              validationOption={{
-                                name: "agreementMentorNo", // Optional.[String].Default: "". To display in the Error message. i.e Please check the ${name}.
-                                check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
-                                required: false, // Optional.[Bool].Default: true. To determin if it is a required field.
-                                // showMsg: true, // Optional.[Bool].Default: true. To determin display the error message or not.
-                                // locale: 'en-US', // Optional.[String].Default: "en-US". For error message display. Current options are ['zh-CN', 'en-US']; Default is 'en-US'.
-                                // msgOnError: "Your custom error message if you provide the validationOption['msgOnError']", // Optional.[String].Default: "". Show your custom error message no matter what when it has error if it is provied.
-                                // msgOnSuccess: "Your custom success message if you provide the validationOption['msgOnSuccess']. Otherwise, it will not show, not even green border." // Optional.[String].Default: "". Show your custom success message no matter what when it has error if it is provied.
-                              }}
-                            />
+                            >
+                              {/*<div style={(labelStyle, { flex: '3 3 0px' })}>*/}
+                              <span
+                                className="icon icon-assignment-late"
+                                style={{
+                                  ...labelContentStyle,
+                                  fontSize: "20px",
+                                }}
+                              />
+                              &nbsp;
+                              <span style={labelContentStyle}>
+                                Would you like to apply to become a mentor for
+                                this idea? If the team later picks you as one of
+                                the mentors, you will get a 1% share in the
+                                idea-company in exchange for being available to
+                                them for at least 1 hour per week.
+                              </span>
+                            </div>
+                            <div style={{ flex: "6 6 0px" }}>
+                              <Checkbox
+                                tabIndex="5" // Optional.[String or Number].Default: -1.
+                                id={"agreementMentor"} // Optional.[String].Default: "".  Input ID.
+                                name={"agreementMentor"} // Optional.[String].Default: "". Input name
+                                value={agreementMentor} // Required.[String].Default: "".
+                                checked={isAgreementMentorChecked} // Required.[Bool].Default: false.
+                                disabled={
+                                  isAgreementMentorNoChecked ? true : false
+                                } // Optional.[Bool].Default: false.
+                                validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
+                                validationCallback={(res) => {
+                                  this.setState({
+                                    hasAgreementMentorError: res,
+                                    validate: false,
+                                  });
+                                }} // Optional.[Func].Default: none. Return the validation result.
+                                classNameWrapper="" // Optional.[String].Default: "".
+                                classNameInputBox="" // Optional.[String].Default: "".
+                                classNameContainer="" // Optional.[String].Default: "".
+                                customStyleWrapper={{}} // Optional.[Object].Default: {}.
+                                customStyleInputBox={{
+                                  backgroundColor: "white",
+                                }} // Optional.[Object].Default: {}.
+                                customStyleContainer={{}} // Optional.[Object].Default: {}.
+                                onBlur={() => {}} // Optional.[Func].Default: none. In order to validate the value on blur, you MUST provide a function, even if it is an empty function. Missing this, the validation on blur will not work.
+                                // onFocus={(e) => {console.log(e);}} // Optional.[Func].Default: none.
+                                // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
+                                onChange={(isAgreementMentorChecked, e) => {
+                                  this.setState({ isAgreementMentorChecked });
+                                  // console.log(e);
+                                }} // Required.[Func].Default: () => {}. Will return the value.
+                                labelHtml={
+                                  <div
+                                    style={{ color: "white", marginTop: "5px" }}
+                                  >
+                                    Yes, I’d like to become a mentor for this
+                                    idea
+                                  </div>
+                                } // Required.[Html].Default: none.
+                                validationOption={{
+                                  name: "agreementMentor", // Optional.[String].Default: "". To display in the Error message. i.e Please check the ${name}.
+                                  check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
+                                  required: false, // Optional.[Bool].Default: true. To determin if it is a required field.
+                                  // showMsg: true, // Optional.[Bool].Default: true. To determin display the error message or not.
+                                  // locale: 'en-US', // Optional.[String].Default: "en-US". For error message display. Current options are ['zh-CN', 'en-US']; Default is 'en-US'.
+                                  // msgOnError: "Your custom error message if you provide the validationOption['msgOnError']", // Optional.[String].Default: "". Show your custom error message no matter what when it has error if it is provied.
+                                  // msgOnSuccess: "Your custom success message if you provide the validationOption['msgOnSuccess']. Otherwise, it will not show, not even green border." // Optional.[String].Default: "". Show your custom success message no matter what when it has error if it is provied.
+                                }}
+                              />
+                              <Checkbox
+                                tabIndex="5" // Optional.[String or Number].Default: -1.
+                                id={"agreementMentorNo"} // Optional.[String].Default: "".  Input ID.
+                                name={"agreementMentorNo"} // Optional.[String].Default: "". Input name
+                                value={agreementMentorNo} // Required.[String].Default: "".
+                                checked={isAgreementMentorNoChecked} // Required.[Bool].Default: false.
+                                disabled={
+                                  isAgreementMentorChecked ? true : false
+                                } // Optional.[Bool].Default: false.
+                                validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
+                                validationCallback={(res) => {
+                                  this.setState({
+                                    hasAgreementMentorNoError: res,
+                                    validate: false,
+                                  });
+                                }} // Optional.[Func].Default: none. Return the validation result.
+                                classNameWrapper="" // Optional.[String].Default: "".
+                                classNameInputBox="" // Optional.[String].Default: "".
+                                classNameContainer="" // Optional.[String].Default: "".
+                                customStyleWrapper={{}} // Optional.[Object].Default: {}.
+                                customStyleInputBox={{
+                                  backgroundColor: "white",
+                                }} // Optional.[Object].Default: {}.
+                                customStyleContainer={{}} // Optional.[Object].Default: {}.
+                                onBlur={() => {}} // Optional.[Func].Default: none. In order to validate the value on blur, you MUST provide a function, even if it is an empty function. Missing this, the validation on blur will not work.
+                                // onFocus={(e) => {console.log(e);}} // Optional.[Func].Default: none.
+                                // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
+                                onChange={(isAgreementMentorNoChecked, e) => {
+                                  this.setState({ isAgreementMentorNoChecked });
+                                  // console.log(e);
+                                }} // Required.[Func].Default: () => {}. Will return the value.
+                                labelHtml={
+                                  <div
+                                    style={{
+                                      color: "white",
+                                      marginTop: "5px",
+                                      display: "flex",
+                                    }}
+                                  >
+                                    No, thank you
+                                  </div>
+                                } // Required.[Html].Default: none.
+                                validationOption={{
+                                  name: "agreementMentorNo", // Optional.[String].Default: "". To display in the Error message. i.e Please check the ${name}.
+                                  check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
+                                  required: false, // Optional.[Bool].Default: true. To determin if it is a required field.
+                                  // showMsg: true, // Optional.[Bool].Default: true. To determin display the error message or not.
+                                  // locale: 'en-US', // Optional.[String].Default: "en-US". For error message display. Current options are ['zh-CN', 'en-US']; Default is 'en-US'.
+                                  // msgOnError: "Your custom error message if you provide the validationOption['msgOnError']", // Optional.[String].Default: "". Show your custom error message no matter what when it has error if it is provied.
+                                  // msgOnSuccess: "Your custom success message if you provide the validationOption['msgOnSuccess']. Otherwise, it will not show, not even green border." // Optional.[String].Default: "". Show your custom success message no matter what when it has error if it is provied.
+                                }}
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>)}
+                    )}
                   </div>
                 ) : (
                   this.state.validate === true && average / 4 <= 7
@@ -1754,19 +1756,3 @@ export default class FormAssessIdeas extends Component {
     }
   }
 }
-
-const Content = styled.div`
-  align-self: center;
-  justify-self: center;
-  color: #ffffff;
-  width: 90vw;
-  max-width: 800px;
-  height: auto;
-  padding: 20px;
-`;
-
-const StyledCard = styled(Card)`
-  background-color: rgb(255, 255, 255, 0.3);
-  padding-left: 8px;
-  padding-right: 8px;
-`;
