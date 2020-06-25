@@ -1,39 +1,16 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { useState } from "react";
-import { withRouter } from "react-router-dom";
-import SimpleReactValidator from "simple-react-validator";
+import { Redirect } from "react-router-dom";
+import { request } from "https";
 
-function EnterNewPassword(props) {
+export default function ResetPassword(props) {
   const [resetState, setLoginState] = useState({});
-
-  const validator = new SimpleReactValidator({
-    validators: {
-      password: {
-        message:
-          "Password must include at least one capital letter and one number",
-        rule: (val, params, validator) => {
-          return (
-            validator.helpers.testRegex(
-              val,
-              /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/
-            ) && params.indexOf(val) === -1
-          );
-        },
-        messageReplace: (message, params) =>
-          message.replace(":values", validator.helpers.toSentence(params)), // optional
-        required: true, // optional
-      },
-    },
-  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validator.fieldValid("password")) {
-      // console.log("Valid pass", validator.fieldValid("password"));
-      onSubmit(resetState);
-    }
+    onSubmit(resetState);
   };
 
   const handleChange = (event) => {
@@ -45,10 +22,10 @@ function EnterNewPassword(props) {
   };
 
   const onSubmit = (data) => {
-    const { password } = data;
-    const token = props.location.pathname.split("/")[2];
-    props.updatePassword(token, password);
-    props.history.replace(`/Investors/login`);
+    const { email } = data;
+    props.resetPassword(email);
+    alert("Please check your mailbox for instructions.");
+    props.history.replace(`/`);
   };
 
   if (props)
@@ -56,29 +33,21 @@ function EnterNewPassword(props) {
       <Container>
         <LeftSide>
           <div>
-            <h3>Enter New Password</h3>
+            <h3>Reset Password</h3>
           </div>
         </LeftSide>
+
         <RightSide>
           <form onSubmit={handleSubmit}>
-            <label>New password</label>
+            <label>Email</label>
             <input
-              type="password"
-              required="required"
-              name="password"
-              value={resetState.password || ""}
+              type="email"
+              name="email"
+              value={resetState.email || ""}
               onChange={handleChange}
             />
-            {resetState.password &&
-              validator.message(
-                "password",
-                resetState.password,
-                `required|password:|min:8`
-              )}
-            <ErrorMsg>
-              <p>{validator.errorMessages.password}</p>
-            </ErrorMsg>
-            <button type="submit">Submit</button>
+            <br />
+            <button type="submit">Reset Password</button>
           </form>
         </RightSide>
       </Container>
@@ -86,13 +55,13 @@ function EnterNewPassword(props) {
   else return <div></div>;
 }
 
-export default withRouter(EnterNewPassword);
-
-const ErrorMsg = styled.div`
-  color: #ff0000;
-  font-size: 0.7em;
-  padding-left: 2.7em;
-  padding-right: 1em;
+const Logo = styled.img`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  margin: -300px auto auto auto;
+  height: 70px;
 `;
 
 const LeftSide = styled.div`
@@ -192,8 +161,8 @@ const RightSide = styled.div`
     position: relative;
     float: right;
     right: 10%;
-    width: 30%;
-    height: 30px;
+    width: 50%;
+    height: 50px;
     line-height: 30px;
     font-size: 12px;
     color: #233949;

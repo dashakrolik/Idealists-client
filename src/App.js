@@ -20,8 +20,8 @@ import AdminDashboardDetail from "./components/Admin/AdminDashboardDetail";
 import IdeaDashboardDetail from "./components/MyIdea/Dashboard/IdeaDashboardDetail";
 import IdeaLogin from "./components/MyIdea/IdeaLogin";
 import TopBar from "./components/NavBar/TopBar";
-import ResetPassword from "./components/MyIdea/ResetPassword";
-import EnterNewPassword from "./components/MyIdea/EnterNewPassword";
+import ResetPassword from "./components/ResetPassword/ResetPassword";
+import EnterNewPassword from "./components/ResetPassword/EnterNewPassword";
 import AutoMatch from "./components/MyIdea/Dashboard/AutoMatch";
 import InvestorStart from "./components/MyIdea/InvestorStart";
 import SpecialistStart from "./components/MyIdea/SpecialistStart";
@@ -771,7 +771,7 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/MyIdea/login/reset-password"
+                path="/reset-password"
                 render={(props) => {
                   return (
                     <ResetPassword
