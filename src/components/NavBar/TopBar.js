@@ -20,7 +20,7 @@ const TopBar = (props) => {
   return (
     <AppBar>
       <Toolbar className="topBar">
-        <Link
+        {/* <Link
           to={
             props.authState.loggedIn &&
             localStorage.currentUserJwt &&
@@ -32,9 +32,9 @@ const TopBar = (props) => {
               ? "/MyIdea/new"
               : "/"
           }
-        >
-          <img src={logo} alt="Logo" style={logoStyle} />
-        </Link>
+        > */}
+        <img src={logo} alt="Logo" style={logoStyle} />
+        {/* </Link> */}
 
         <Grid container direction="row" justify="flex-end" alignItems="center">
           {!localStorage.currentUserJwt || !props.authState.loggedIn ? (
