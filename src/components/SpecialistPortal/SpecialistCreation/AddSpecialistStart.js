@@ -1,11 +1,9 @@
 /** @jsx jsx */
 import { css, Global, jsx } from "@emotion/core";
 import styled from "@emotion/styled";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../reogranisation/Questions/Button";
 import posed from "react-pose";
-
-import { Redirect } from "react-router-dom";
 import SpecialistRegistration from "./SpecialistRegistration";
 
 const CreateSpecialist = (props) => {

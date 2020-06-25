@@ -149,19 +149,19 @@ export default function IdeaDashboardDetail(props) {
   let qAnswers = [];
   const qTitles = [];
   userIdeas.map((idea) => {
-    idea.answers.map((question) => {
+    return idea.answers.map((question) => {
       if (question.qTitle.length > 50) {
         const title = processTitle(question.qTitle);
-        qTitles.push(title);
+        return qTitles.push(title);
       } else {
-        qTitles.push(question.qTitle);
+        return qTitles.push(question.qTitle);
       }
     });
   });
 
   userIdeas.map((idea) => {
-    idea.answers.map((answer) => {
-      qAnswers.push(answer.qAnswer);
+    return idea.answers.map((answer) => {
+      return qAnswers.push(answer.qAnswer);
     });
   });
 
@@ -370,6 +370,9 @@ export default function IdeaDashboardDetail(props) {
     case 10:
       nextPhaseName = "Project Complete";
       stepNameInEntity = { step10: true };
+      break;
+    default:
+      nextPhaseName = "Reload page first";
   }
 
   return (

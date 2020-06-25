@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import request from "superagent";
 import { baseUrl } from "../../../constants";
 import { Redirect, Link } from "react-router-dom";
@@ -12,7 +12,6 @@ import Card from "@material-ui/core/Card";
 export default function specialistDashboard(props) {
   const [userData, setUserData] = useState({});
   const [ideaList, setIdeaList] = useState(false);
-  const [userLoggedIn, setUserLoggedIn] = useState(true);
 
   useEffect(() => {
     if (props.authState.loggedIn)
@@ -34,7 +33,7 @@ export default function specialistDashboard(props) {
       .then((res) => setIdeaList(res.body));
   }, []);
 
-  if (userLoggedIn === false) return <Redirect to="/Specialist/login" />;
+  if (!props.authState.loggedIn) return <Redirect to="/Specialist/login" />;
 
   const renderTitle =
     userData && props.authState.user ? (
