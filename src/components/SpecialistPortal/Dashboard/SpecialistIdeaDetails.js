@@ -386,11 +386,13 @@ export default function IdeaDashboardDetail(props) {
                 <StyledDiv>
                   <h1>Control Idea</h1>
 
-                  {/* <Button
-              color="inherit"
-              text="Patent Check"
-              onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}
-            /> */}
+                  <Button
+                    color="inherit"
+                    text="View Patent Check"
+                    onClick={() =>
+                      props.history.push(`/ideas/${ideasId}/automatch`)
+                    }
+                  />
 
                   {/* this button moves idea progress to the next phase, 
 with conditions to validate that the user has the correct role. */}
