@@ -33,7 +33,7 @@ export default function AdminDashboard(props) {
       return (
         <Link className="links" to="/AdminDashboard/newspecialist">
           <div className="invest-tile">
-            <img className="icons" src={mentor}></img>
+            <img className="icons" src={mentor} alt="mentor icon"></img>
             <h4>Add Specialist</h4>
           </div>
         </Link>
@@ -60,7 +60,7 @@ export default function AdminDashboard(props) {
         {showNewSpecialist()}{" "}
         <Link className="links" to="/AdminDashboard/rejected">
           <div className="invest-tile">
-            <img className="icons" src={assess}></img>
+            <img className="icons" src={assess} alt="assessment icon"></img>
             <h4>Rejected Ideas</h4>
           </div>
         </Link>
@@ -69,8 +69,9 @@ export default function AdminDashboard(props) {
 
       <div className="flex-tilescontainer">
         {userIdeas.map((idea) => {
-          if (idea && !idea.progress.rejected) {
-            return (
+          return (
+            idea &&
+            !idea.progress.rejected && (
               <Link
                 key={idea.id}
                 className="tile-link"
@@ -101,8 +102,8 @@ export default function AdminDashboard(props) {
                       ))}
                 </div>
               </Link>
-            );
-          }
+            )
+          );
         })}
       </div>
     </div>

@@ -50,14 +50,13 @@ class App extends Component {
   };
 
   rejectIdea = (rejected, ideasId) => {
-    console.log("whats the idea id:", ideasId);
     request
       .put(`${baseUrl}/ideas/${ideasId}/progress`)
       .set("Authorization", `Bearer ${this.state.auth.token}`)
       .send(rejected)
       .then((res) => {
         if (res.status === 200) {
-          console.log("success, idea rejected");
+          console.log("idea rejection request successful");
         }
       })
       .catch((err) => {
