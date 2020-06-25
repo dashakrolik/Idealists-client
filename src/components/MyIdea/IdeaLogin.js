@@ -1,63 +1,74 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
-import styled from '@emotion/styled';
-import { useState } from 'react';
+import { jsx } from "@emotion/core";
+import styled from "@emotion/styled";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function InvestorLogin(props) {
-  
   const [loginState, setLoginState] = useState({});
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);
   };
-  
+
   const handleChange = (event) => {
     const { name, value } = event.target;
-    
+
     setLoginState({
       ...loginState,
       [name]: value,
     });
   };
-  
+
   const onSubmit = (data) => {
-    const { email, password } = data
+    const { email, password } = data;
     props.login(email, password);
   };
-  
+
   if (props.authState.loggedIn) {
-    props.user()
-    
-    props.history.replace('/MyIdea/new');
+    props.user();
+
+    props.history.replace("/MyIdea/new");
     return <div></div>;
   }
-  
-  if (props.authState.loggedIn !== true) return (
-    <Container>
-      <LeftSide>
-        <div>
-          <h3>Login to my Idea Dashboard</h3>
-        </div>
-      </LeftSide>
-      <RightSide>
-        <form onSubmit={handleSubmit}>
-          <label>Email</label>
-          <input type='email' name='email' value={loginState.email || ''} onChange={handleChange} />
-          <br />
-          
-          <label>Password</label>
-          <input type='password' name='password' value={loginState.password || ''} onChange={handleChange} />
-          <br />
-          
-          <a>Forgot your password?</a>
-          <button type='submit'>Login</button>
-        </form>
-      </RightSide>
-    </Container>);
+
+  if (props.authState.loggedIn !== true)
+    return (
+      <Container>
+        <LeftSide>
+          <div>
+            <h3>Login to my Idea Dashboard</h3>
+          </div>
+        </LeftSide>
+        <RightSide>
+          <form onSubmit={handleSubmit}>
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              value={loginState.email || ""}
+              onChange={handleChange}
+            />
+            <br />
+
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              value={loginState.password || ""}
+              onChange={handleChange}
+            />
+            <br />
+
+            <Link to="/reset-password">Forgot your password?</Link>
+            <button type="submit">Login</button>
+          </form>
+        </RightSide>
+      </Container>
+    );
   else return <div></div>;
 }
-
 
 const LeftSide = styled.div`
   position: absolute;
@@ -69,7 +80,7 @@ const LeftSide = styled.div`
   margin-left: -360px;
   margin-top: -150px;
   padding-top: 10px;
-  
+
   h3 {
     display: block;
     position: relative;
@@ -80,8 +91,8 @@ const LeftSide = styled.div`
     padding: 5px;
     margin: 50px 5px 5px;
   }
-  
-   p {
+
+  p {
     display: block;
     position: relative;
     left: 47px;
@@ -92,15 +103,14 @@ const LeftSide = styled.div`
     padding: 5px;
     margin: 5px;
   }
-  
+
   a {
     font-weight: 800;
     &:hover {
       cursor: pointer;
-      color: #DFEFF2;
+      color: #dfeff2;
     }
   }
-  
 `;
 
 const RightSide = styled.div`
@@ -115,10 +125,10 @@ const RightSide = styled.div`
   margin-left: 0px;
   margin-top: -150px;
   border-radius: 6px;
-  box-shadow: 2px 2px 23px 0px rgba(37,37,37,0.39);;
+  box-shadow: 2px 2px 23px 0px rgba(37, 37, 37, 0.39);
   background-color: rgba(255, 255, 255, 0.9);
   color: #233949;
-  
+
   label {
     display: block;
     position: relative;
@@ -135,7 +145,7 @@ const RightSide = styled.div`
     outline: none;
     -webkit-appearance: none;
   }
-  
+
   input {
     display: block;
     position: relative;
@@ -151,7 +161,7 @@ const RightSide = styled.div`
     outline: none;
     -webkit-appearance: none;
   }
-  
+
   button {
     display: inline-block;
     position: relative;
@@ -166,16 +176,16 @@ const RightSide = styled.div`
     border-color: transparent;
     outline: none;
     -webkit-appearance: none;
-    background-color: #DFEFF2;
+    background-color: #dfeff2;
     transition: all 100ms ease-in-out;
-    
+
     &:hover {
       color: white;
-      background-color: #4CC5F1;
+      background-color: #4cc5f1;
       cursor: pointer;
     }
   }
-  
+
   a {
     display: inline-block;
     position: relative;
@@ -189,14 +199,12 @@ const RightSide = styled.div`
     outline: none;
     -webkit-appearance: none;
     transition: all 100ms ease-in-out;
-    
-    &:hover {
 
+    &:hover {
       cursor: pointer;
-      color: #1A3D7C;
+      color: #1a3d7c;
     }
   }
-  
 `;
 
 const Container = styled.div`
@@ -206,5 +214,12 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
 
-  background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
+  background-image: linear-gradient(
+    to right top,
+    #1a3d7c,
+    #195d9c,
+    #1f7fbb,
+    #31a2d7,
+    #4cc5f1
+  );
 `;

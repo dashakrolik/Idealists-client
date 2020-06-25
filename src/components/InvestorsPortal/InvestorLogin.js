@@ -68,7 +68,7 @@ export default function InvestorLogin(props) {
             <br />
 
             <button type="submit">Login</button>
-            <Link to="/MyIdea/login/reset-password">Forgot your password?</Link>
+            <Link to="/reset-password">Forgot your password?</Link>
           </form>
         </RightSide>
       </Container>
