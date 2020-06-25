@@ -1,17 +1,9 @@
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
-import React, { useState, Component } from "react";
 import posed from "react-pose";
 import Button from "../../reogranisation/Questions/Button";
-import request from "superagent";
-import { baseUrl } from "../../../constants";
-import { pdfjs } from "react-pdf";
-import { color } from "style-value-types";
-import { borderRadius } from "react-select/lib/theme";
-import { relative } from "path";
 import { withRouter } from "react-router-dom";
-import Card from "@material-ui/core/Card";
 
 const CompleteAssessment = (props) => {
   return (
@@ -60,11 +52,6 @@ const FlexRow = styled.div`
 
 const FlexColumn = styled.div`
   display: flex;
-  flex: 1;
-`;
-
-const FormGroup = styled.div`
-  padding: 5px 10px;
   flex: 1;
 `;
 
@@ -131,15 +118,6 @@ const GroupContainer = styled(PGroupContainer)`
   justify-content: space-evenly;
   flex-grow: 1;
   margin-top: 70px;
-`;
-
-const StyledCard = styled(Card)`
-  background-color: rgb(255, 255, 255, 0.3);
-  padding: 50px;
-  width: 500px;
-  margin-left: 130px;
-  color: white;
-  display: flex;
 `;
 
 export default withRouter(CompleteAssessment);
