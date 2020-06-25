@@ -3,13 +3,37 @@ import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { withRouter } from "react-router-dom";
+import SimpleReactValidator from "simple-react-validator";
 
 function EnterNewPassword(props) {
   const [resetState, setLoginState] = useState({});
 
+  const validator = new SimpleReactValidator({
+    validators: {
+      password: {
+        message:
+          "Password must include at least one capital letter and one number",
+        rule: (val, params, validator) => {
+          return (
+            validator.helpers.testRegex(
+              val,
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/
+            ) && params.indexOf(val) === -1
+          );
+        },
+        messageReplace: (message, params) =>
+          message.replace(":values", validator.helpers.toSentence(params)), // optional
+        required: true, // optional
+      },
+    },
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(resetState);
+    if (validator.fieldValid("password")) {
+      // console.log("Valid pass", validator.fieldValid("password"));
+      onSubmit(resetState);
+    }
   };
 
   const handleChange = (event) => {
@@ -40,11 +64,20 @@ function EnterNewPassword(props) {
             <label>New password</label>
             <input
               type="password"
+              required="required"
               name="password"
               value={resetState.password || ""}
               onChange={handleChange}
             />
-
+            {resetState.password &&
+              validator.message(
+                "password",
+                resetState.password,
+                `required|password:|min:8`
+              )}
+            <ErrorMsg>
+              <p>{validator.errorMessages.password}</p>
+            </ErrorMsg>
             <button type="submit">Submit</button>
           </form>
         </RightSide>
@@ -54,6 +87,13 @@ function EnterNewPassword(props) {
 }
 
 export default withRouter(EnterNewPassword);
+
+const ErrorMsg = styled.div`
+  color: #ff0000;
+  font-size: 0.7em;
+  padding-left: 2.7em;
+  padding-right: 1em;
+`;
 
 const LeftSide = styled.div`
   position: absolute;
