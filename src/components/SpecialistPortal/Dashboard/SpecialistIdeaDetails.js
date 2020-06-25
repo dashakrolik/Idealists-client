@@ -90,7 +90,7 @@ export default function IdeaDashboardDetail(props) {
     );
     if (confirmRejected) {
       setRejected(true);
-      props.rejectIdea(true, ideasId);
+      props.rejectIdea({ rejected: true }, ideasId);
     }
   };
 

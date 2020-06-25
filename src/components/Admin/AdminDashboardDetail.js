@@ -82,8 +82,8 @@ export default function IdeaDashboardDetail(props) {
 
   let qAnswers = [];
   const qTitles = [];
-  userIdeas.map((idea) => {
-    idea.answers.map((question) => {
+  userIdeas.forEach((idea) => {
+    return idea.answers.forEach((question) => {
       if (question.qTitle.length > 50) {
         const title = processTitle(question.qTitle);
         qTitles.push(title);
@@ -93,8 +93,8 @@ export default function IdeaDashboardDetail(props) {
     });
   });
 
-  userIdeas.map((idea) => {
-    idea.answers.map((answer) => {
+  userIdeas.forEach((idea) => {
+    return idea.answers.forEach((answer) => {
       qAnswers.push(answer.qAnswer);
     });
   });
@@ -176,6 +176,9 @@ export default function IdeaDashboardDetail(props) {
     case 10:
       nextPhaseName = "Project Complete";
       stepNameInEntity = { step10: true };
+      break;
+    default:
+      console.log("step not found");
   }
 
   return (
@@ -185,6 +188,7 @@ export default function IdeaDashboardDetail(props) {
           <ProgressBar
             token={props.authState.token}
             ideasId={props.match.params.id}
+            progress={progress}
           />
           <FlexRow>
             <FlexColumn>
@@ -229,11 +233,11 @@ export default function IdeaDashboardDetail(props) {
             <h1 className="header">
               Admin View | Questions and Answers about Idea:
             </h1>
-            {progress.length !== 0 && (rejected || progress.rejected) && (
+            {rejected ? (
               <h2>
                 <em>This idea has been rejected</em>
               </h2>
-            )}
+            ) : null}
 
             {qTitles.map((title, index) => (
               <div key={index}>

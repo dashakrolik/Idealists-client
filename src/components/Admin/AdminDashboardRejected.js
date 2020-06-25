@@ -43,8 +43,8 @@ export default function AdminDashboardRejected(props) {
       <div className="flex-tilescontainer">
         {userIdeas.length >= 1 ? (
           userIdeas.map((idea) => {
-            if (idea) {
-              return (
+            return (
+              idea && (
                 <Link
                   key={idea.id}
                   className="tile-link"
@@ -75,8 +75,8 @@ export default function AdminDashboardRejected(props) {
                         ))}
                   </div>
                 </Link>
-              );
-            }
+              )
+            );
           })
         ) : (
           <h2 style={styledH2}>There are currently no rejected ideas</h2>

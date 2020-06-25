@@ -15,7 +15,7 @@ export default function ProgressBar(props) {
       .then((res) => {
         setProgress(res.body.progress);
       });
-  }, [progress]);
+  }, [props.progress]);
 
   const progressStep = [""];
 
