@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import request from "superagent";
 import { baseUrl } from "../../../constants";
-import { Redirect } from "react-router-dom";
 import "./InvestorDashboard.css";
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 
 export default function AssessIdeas(props) {
   const [userData, setUserData] = useState({});
-  const [userLoggedIn, setUserLoggedIn] = useState(true);
 
   useEffect(() => {
     if (props.authState.loggedIn)
@@ -24,8 +22,6 @@ export default function AssessIdeas(props) {
       .get(`${baseUrl}/ideas`)
       .set("Authorization", `Bearer ${props.authState.token}`);
   }, []);
-
-  if (userLoggedIn === false) return <Redirect to="/login" />;
 
   return (
     <div className="dashboard-container">
