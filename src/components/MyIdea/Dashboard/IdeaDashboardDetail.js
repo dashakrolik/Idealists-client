@@ -92,11 +92,6 @@ export default function IdeaDashboardDetail(props) {
           token={props.authState.token}
           ideasId={props.match.params.id}
         />{" "}
-        <Button
-          color="inherit"
-          text="View Patent Check"
-          onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}
-        />
       </>
     ) : (
       <FlexRow>
