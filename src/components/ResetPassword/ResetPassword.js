@@ -43,6 +43,7 @@ export default function ResetPassword(props) {
             <input
               type="email"
               name="email"
+              required="required"
               value={resetState.email || ""}
               onChange={handleChange}
             />
