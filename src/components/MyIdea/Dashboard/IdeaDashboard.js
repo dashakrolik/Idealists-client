@@ -3,13 +3,11 @@ import request from "superagent";
 import { baseUrl } from "../../../constants";
 import { Redirect, Link } from "react-router-dom";
 import "./IdeaDashboard.css";
-import posed from "react-pose";
 import assess from "../../../res/assess-white.png";
 
 export default function IdeaDashboard(props) {
   const [user, setUserData] = useState({});
   const [userIdeas, setUserIdeas] = useState([]);
-  const [allIdeas, setAllIdeas] = useState([]);
 
   useEffect(() => {
     if (props.authState.loggedIn)
@@ -25,13 +23,6 @@ export default function IdeaDashboard(props) {
       .get(`${baseUrl}/ideas`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then((res) => setUserIdeas(res.body));
-  }, []);
-
-  useEffect(() => {
-    request
-      .get(`${baseUrl}/ideas/all`)
-      .set("Authorization", `Bearer ${props.authState.token}`)
-      .then((res) => setAllIdeas(res.body));
   }, []);
 
   if (props.authState.loggedIn === false) return <Redirect to="/MyIdea" />;

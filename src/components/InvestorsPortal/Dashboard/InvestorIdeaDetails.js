@@ -10,15 +10,15 @@ import ProgressBar from "../../reogranisation/ProgressBar/ProgressBar";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
-
-  const [progress, setProgress] = useState([]);
   const [assessments, setAssessments] = useState([]);
-
-  const [ideaOwner, setIdeaOwner] = useState({});
-
   const ideasId = props.match.params.id;
 
   if (props.authState.loggedIn === false) {
+    return <Redirect to="/MyIdea" />;
+  }
+  if (!props.authState.user) {
+    return <Redirect to="/MyIdea" />;
+  } else if (props.authState.user.role === "user") {
     return <Redirect to="/MyIdea" />;
   }
 
@@ -27,7 +27,6 @@ export default function IdeaDashboardDetail(props) {
       .get(`${baseUrl}/ideas/${ideasId}`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then((res) => {
-        setIdeaOwner(res.body.user);
         setUserIdeas(res.body.idea);
         setAssessments(res.body.assessments);
       });
@@ -76,23 +75,42 @@ export default function IdeaDashboardDetail(props) {
     return <Redirect to="/MyIdea" />;
   }
 
+  const renderButton = assessments
+    .map((ass) => ass.user.id)
+    .includes(props.authState.user.id) ? (
+    <h2>You have already assessed this idea!</h2>
+  ) : (
+    <Button
+      color="inherit"
+      text="Assess this idea"
+      onClick={() =>
+        props.history.push(`/Investors/dashboard/assess/${ideasId}`)
+      }
+    />
+  );
+
   return (
     <div className="dashboard-container">
       <Container>
         <Left>
+          <FlexRow>
+            <FlexColumn>
+              <StyledDiv>
+                <p>
+                  Here you get to assess ideas in a very simple and fast way and
+                  get rewarded for it at the same time. When an idea you helped
+                  assess becomes incorporated, you’ll receive € 100,- worth of
+                  equity in that company. Assessing an idea takes on average 3
+                  minutes.
+                </p>
+                {renderButton}
+              </StyledDiv>
+            </FlexColumn>
+          </FlexRow>
           <ProgressBar
             token={props.authState.token}
             ideasId={props.match.params.id}
           />
-          <div>
-            <Button
-              color="inherit"
-              text="Assess this idea"
-              onClick={() =>
-                props.history.push(`/Investors/dashboard/assess/${ideasId}`)
-              }
-            />
-          </div>
         </Left>
 
         <Right>
