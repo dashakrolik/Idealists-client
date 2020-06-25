@@ -12,7 +12,7 @@ export default function UserAssessIdeas(props) {
   // const [userLoggedIn, setUserLoggedIn] = useState(true);
   const [ideas, setIdeas] = useState([]);
   const [industries, setIndustries] = useState([]);
-  const [selection, setSelection] = useState("show all");
+  // const [selection, setSelection] = useState("show all");
   const [sortedIdeas, setSortedIdeas] = useState([]);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function UserAssessIdeas(props) {
 
   // filtering ideas by industries
   const filterIdeas = (e) => {
-    setSelection(e.target.value);
+    // setSelection(e.target.value);
     let filteredIdeas = ideas.filter((idea) =>
       e.target.value === "show all"
         ? true
@@ -69,7 +69,7 @@ export default function UserAssessIdeas(props) {
       <div className="title">
         <h2>Assess ideas here</h2>
       </div>
-      {sortedIdeas.length < 1 ? (
+      {ideas.length < 1 ? (
         <>
           <h2 style={styledH2}>
             Sorry, there are currently no ideas for you to assess.
@@ -90,28 +90,30 @@ export default function UserAssessIdeas(props) {
         Assessing an idea takes on average 3 minutes.
       </StyledCard>
       <br />
-      <form
-        className="dropdown"
-        onChange={(e) => {
-          filterIdeas(e);
-        }}
-      >
-        <p className="dropdown-label">Select an industry:</p>
-        <select
-          id="industries"
-          name="industries"
-          className="dropdown-container"
+      {ideas.length < 1 ? null : (
+        <form
+          className="dropdown"
+          onChange={(e) => {
+            filterIdeas(e);
+          }}
         >
-          <option className="showAll" value="show all">
-            Show all
-          </option>
-          {industries.map((industry) => (
-            <option key={industry} value={industry}>
-              {industry}
+          <p className="dropdown-label">Select an industry:</p>
+          <select
+            id="industries"
+            name="industries"
+            className="dropdown-container"
+          >
+            <option className="showAll" value="show all">
+              Show all
             </option>
-          ))}
-        </select>
-      </form>
+            {industries.map((industry) => (
+              <option key={industry} value={industry}>
+                {industry}
+              </option>
+            ))}
+          </select>
+        </form>
+      )}
       <div className="flex-tilescontainer">
         {sortedIdeas.map((idea) => (
           <Link

@@ -27,7 +27,10 @@ export default function IdeaDashboardDetail(props) {
         setUserIdeas(res.body.idea);
         setUserId(res.body.user);
         setAssessments(res.body.assessments);
-        if (res.body.user.id === props.authState.user.id) {
+        if (
+          res.body.user.id === props.authState.user.id &&
+          res.body.idea.progress
+        ) {
           if (
             res.body.idea.progress.rejected === true ||
             res.body.idea.progress.step02 === false ||
@@ -82,15 +85,44 @@ export default function IdeaDashboardDetail(props) {
     return <Redirect to="/MyIdea" />;
   }
 
+  const renderLeft =
+    userId.id === props.authState.user.id ? (
+      <ProgressBar
+        token={props.authState.token}
+        ideasId={props.match.params.id}
+      />
+    ) : (
+      <FlexRow>
+        <FlexColumn>
+          <StyledDiv>
+            <p>
+              Here you get to assess ideas in a very simple and fast way and get
+              rewarded for it at the same time. When an idea you helped assess
+              becomes incorporated, you’ll receive € 100,- worth of equity in
+              that company. Assessing an idea takes on average 3 minutes.
+            </p>
+            {assessments
+              .map((ass) => ass.user.id)
+              .includes(props.authState.user.id) ? (
+              <h2>You have already assessed this idea!</h2>
+            ) : (
+              <Button
+                color="inherit"
+                text="Assess this idea"
+                onClick={() =>
+                  props.history.push(`/dashboard/assess/${ideasId}`)
+                }
+              />
+            )}
+          </StyledDiv>
+        </FlexColumn>
+      </FlexRow>
+    );
+
   return (
     <div className="dashboard-container">
       <Container>
-        <Left>
-          <ProgressBar
-            token={props.authState.token}
-            ideasId={props.match.params.id}
-          />
-        </Left>
+        <Left>{renderLeft}</Left>
         <Right>
           <Content>
             <h1 className="header"> Questions and Answers about Idea:</h1>
