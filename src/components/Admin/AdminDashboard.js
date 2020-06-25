@@ -31,7 +31,7 @@ export default function AdminDashboard(props) {
     if (!props.authState.user) return null;
     if (props.authState.user.role === "admin") {
       return (
-        <Link className="links" to="/Admin/dashboard/newspecialist">
+        <Link className="links" to="/AdminDashboard/newspecialist">
           <div className="invest-tile">
             <img className="icons" src={mentor}></img>
             <h4>Add Specialist</h4>
