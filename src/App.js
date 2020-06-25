@@ -390,7 +390,6 @@ class App extends Component {
                       login={this.requestLoginSpecialist}
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
-                      user={this.getCurrentUser}
                     />
                   );
                 }}
@@ -407,7 +406,6 @@ class App extends Component {
                       login={this.requestLoginUser}
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
-                      user={this.getCurrentUser}
                     />
                   );
                 }}
@@ -427,7 +425,6 @@ class App extends Component {
                       rejectIdea={this.rejectIdea}
                       updateProgress={this.updateProgress}
                       updateLocalStorage={this.updateLocalStorage}
-                      updateProgress={this.updateProgress}
                     />
                   );
                 }}
@@ -478,7 +475,6 @@ class App extends Component {
                       login={this.requestLoginExpert}
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
-                      user={this.getCurrentUser}
                     />
                   );
                 }}

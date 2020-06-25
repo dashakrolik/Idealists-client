@@ -1,22 +1,15 @@
-import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
-import { useState } from "react";
 import "./TopBar.css";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import logo from "../../res/logo_horizontal_white.png";
 
 /** @jsx jsx */
 import Grid from "@material-ui/core/Grid";
 import { jsx } from "@emotion/core";
+
 const TopBar = (props) => {
-  const [history, location, window] = useState({});
-
-  const [authState] = useState({});
-
-  const { classes } = props;
-
   return (
     <AppBar>
       <Toolbar className="topBar">

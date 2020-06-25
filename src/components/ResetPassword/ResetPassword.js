@@ -1,9 +1,7 @@
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { useState } from "react";
-import { Redirect } from "react-router-dom";
-import { request } from "https";
 
 export default function ResetPassword(props) {
   const [resetState, setLoginState] = useState({});
@@ -56,14 +54,14 @@ export default function ResetPassword(props) {
   else return <div></div>;
 }
 
-const Logo = styled.img`
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  margin: -300px auto auto auto;
-  height: 70px;
-`;
+// const Logo = styled.img`
+//   position: absolute;
+//   left: 0;
+//   right: 0;
+//   top: 50%;
+//   margin: -300px auto auto auto;
+//   height: 70px;
+// `;
 
 const LeftSide = styled.div`
   position: absolute;
