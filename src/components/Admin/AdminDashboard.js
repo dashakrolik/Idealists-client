@@ -3,7 +3,6 @@ import request from "superagent";
 import { baseUrl } from "../../constants";
 import { Redirect, Link } from "react-router-dom";
 import "../MyIdea/Dashboard/IdeaDashboard.css";
-import posed from "react-pose";
 import mentor from "../../res/mentor.png";
 import assess from "../../res/assess-white.png";
 
