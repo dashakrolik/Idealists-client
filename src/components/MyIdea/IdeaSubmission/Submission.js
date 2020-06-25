@@ -11,8 +11,6 @@ import SubmissionSideScreen from './SubmissionSideScreen';
 import CompleteSubmission from './CompleteSubmission';
 
 const Submission = (props) => {
-
-  const [questionGroups, setQuestionGroups] = useState([...jsonFormData]);
   const [activeGroup, setActiveGroup] = useState(0);
   const [activeGroupComplete, setActiveGroupComplete] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -20,6 +18,8 @@ const Submission = (props) => {
   const [answers, setAnswers] = useState({});
   const [valueDecideProfit, setValueDecideProfit] = useState(false);
   const [valueDecideSdg, setValueDecideSdg] = useState(false);
+
+  const questionGroups = [...jsonFormData]
 
   useEffect(() => {
     setProgress(activeGroup / questionGroups.length);

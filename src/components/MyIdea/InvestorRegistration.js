@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import industryList from '../reogranisation/Start/industry-list';
 import countryList from '../reogranisation/Start/country-list';
 import posed from 'react-pose';
@@ -10,14 +10,12 @@ import Button from '../reogranisation/Questions/Button';
 import validator from 'validator';
 import { baseUrl } from '../../constants';
 import request from 'superagent';
-import { Redirect } from 'react-router'
 import { withRouter } from 'react-router-dom'
-import { handleInputChange } from 'react-select/lib/utils';
 
 const InvestorRegistration = (props) => {
 
   const [formValidated, setFormValidated] = useState(false);
-  const [history, location] = useState({});
+  // const [history, location] = useState({});
   const [formData, setFormData] = useState({
     firstName: {
       value: '',

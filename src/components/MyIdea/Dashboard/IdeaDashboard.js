@@ -42,7 +42,7 @@ export default function IdeaDashboard(props) {
       <div className="flex-tilescontainer">
         <Link className="links" to="/dashboard/assess">
           <div className="assess-tiles">
-            <img className="icons" src={assess}></img>
+            <img alt="icon" className="icons" src={assess}></img>
             <h4>Assess ideas</h4>
           </div>
         </Link>

@@ -1,15 +1,12 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import { jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import React, { useState, Component } from 'react';
+import { useState, Component } from 'react';
 import posed from 'react-pose';
 import Button from '../../reogranisation/Questions/Button';
 import request from 'superagent';
 import { baseUrl } from '../../../constants';
 import { pdfjs } from "react-pdf";
-import { color } from 'style-value-types';
-import { borderRadius } from 'react-select/lib/theme';
-import { relative } from 'path';
 import { withRouter } from 'react-router-dom'
 import UserAgreement from './agreement.jsx'
 
@@ -18,12 +15,12 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 const CompleteSubmission = (props) => {
 
   const [displaySuccess, setDisplaySuccess] = useState(false);
-  const [agreeBttn, setAgreeBttn] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [history, location] = useState({});
+  // const [agreeBttn, setAgreeBttn] = useState(false);
+  // const [isSubmitting, setIsSubmitting] = useState(false);
+  // const [history, location] = useState({});
 
   const submitIdea = () => {
-    setIsSubmitting(true);
+    // setIsSubmitting(true);
     const dataToSend = props.groups.map((group, index) => {
       return {
         groupName: group.groupTitle,
@@ -129,11 +126,6 @@ const FlexRow = styled.div`
 
 const FlexColumn = styled.div`
   display: flex;
-  flex: 1;
-`;
-
-const FormGroup = styled.div`
-  padding: 5px 10px;
   flex: 1;
 `;
 

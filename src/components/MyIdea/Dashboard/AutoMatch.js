@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import request from 'superagent';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { baseUrl } from '../../../constants';
 import './IdeaDashboard.css'
 /** @jsx jsx */
@@ -10,15 +10,14 @@ import Button from '../../reogranisation/Questions/Button';
 import posed from 'react-pose';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'
-import FilledInput from '@material-ui/core/FilledInput';
 
 export default function IdeaDashboardDetail(props) {
-  const [user, setUserData] = useState({});
-  const [userLoggedIn, setUserLoggedIn] = useState(true);
-  const [userIdeas, setUserIdeas] = useState([]);
+  // const [user, setUserData] = useState({});
+  // const [userLoggedIn, setUserLoggedIn] = useState(true);
+  // const [userIdeas, setUserIdeas] = useState([]);
   const [automatchResults, DoAutomatch] = useState([]);
-  const [automatch2, Do2] = useState([])
-  const [currentValue, setCurrentValue] = useState([]);
+  // const [automatch2, Do2] = useState([])
+  // const [currentValue, setCurrentValue] = useState([]);
   const [displaySuccess, setDisplaySuccess] = useState(false);
   const [isShown, setIsShown] = useState({
   })
@@ -58,7 +57,7 @@ export default function IdeaDashboardDetail(props) {
     result.passage.text.split('.').slice(1, -1).join() + '.'
   )
 
-  let relevanceScore = automatchResults.map(result => result.relevance.score)
+  // let relevanceScore = automatchResults.map(result => result.relevance.score)
   let relevanceNumber = automatchResults.map(b => b.relevance.number)
 
 

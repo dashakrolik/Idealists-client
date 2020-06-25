@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { css, Global, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
 import Button from '../reogranisation/Questions/Button';
 import posed from 'react-pose';
 
@@ -9,37 +8,9 @@ import posed from 'react-pose';
 
 const SpecialistStart = (props) => {
 
-  const [uiState, setUiState] = useState('notDisplayingLogin');
-  const [emailAddress, setEmailAddress] = useState('');
-  const [loginButtonEnabled, setLoginButtonEnabled] = useState(false);
-  const [password, setPassword] = useState('');
-  const [signUpFormValidated, setSignUpFormValidated] = useState(false);
-
-
-  const newUser = () => {
-    if (props.authState.loggedIn) {
-      props.history.push('/Specialist/dashboard');
-    } else {
-      setUiState('displayingLogin');
-    }
-  };
-
   const existingUser = () => {
     props.history.push('/Specialist/login');
   };
-
-  const closeRegistration = () => {
-    setUiState('notDisplayingLogin');
-  };
-
-  useEffect(() => {
-    if (emailAddress.length > 6 && password.length > 6) {
-      setLoginButtonEnabled(true);
-      setSignUpFormValidated(true);
-    }
-  }, [emailAddress, password]);
-
-
 
   return (
     <Container>
@@ -51,7 +22,7 @@ const SpecialistStart = (props) => {
       <Content>
         <div css={css`grid-area: content-area`}>
           <div css={css`display: flex; align-items: center; flex-direction: column;`}>
-            <StartContent pose={uiState}
+            <StartContent pose={'notDisplayingLogin'}
               css={css`display: flex; flex-direction: column; width: auto; margin-bottom: 60px;`}>
               <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
                 My Specialist Page
@@ -63,11 +34,9 @@ const SpecialistStart = (props) => {
                 If you don’t have an account yet, please contact us to request access.
               </Paragraph>
               <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
-                {/* <Button text={'New User'} onClick={newUser} /> */}
                 <Button text={'Existing User'} onClick={existingUser} />
               </Controls>
             </StartContent>
-            {/* <SpecialistRegistration show={uiState === 'displayingLogin'} handleCancel={closeRegistration} props={props} /> */}
           </div>
         </div>
       </Content>
