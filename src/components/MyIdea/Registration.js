@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import countryList from '../reogranisation/Start/country-list';
 import posed from 'react-pose';
 import Select from 'react-select';
@@ -9,13 +9,12 @@ import Button from '../reogranisation/Questions/Button';
 import validator from 'validator';
 import { baseUrl } from '../../constants';
 import request from 'superagent';
-import { Redirect } from 'react-router'
 import {withRouter} from 'react-router-dom'
 
 const Registration = (props) => {
   
   const [formValidated, setFormValidated] = useState(false);
-  const [history, location] = useState({});
+  // const [history, location] = useState({});
   const [formData, setFormData] = useState({
     firstName: {
       value: '',

@@ -8,7 +8,7 @@ import Button from "../../reogranisation/Questions/Button";
 import Card from "@material-ui/core/Card";
 
 export default function UserAssessIdeas(props) {
-  const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useState({});
   // const [userLoggedIn, setUserLoggedIn] = useState(true);
   const [ideas, setIdeas] = useState([]);
   const [industries, setIndustries] = useState([]);
@@ -16,12 +16,12 @@ export default function UserAssessIdeas(props) {
   const [sortedIdeas, setSortedIdeas] = useState([]);
 
   useEffect(() => {
-    if (props.authState.loggedIn)
-      request
-        .get(`${baseUrl}/current`)
-        .set("Authorization", `Bearer ${props.authState.token}`)
-        .then((res) => setUserData(res.body));
-    else props.history.push("/MyIdea/login");
+    if (!props.authState.loggedIn) props.history.push("/MyIdea/login");
+      // request
+      //   .get(`${baseUrl}/current`)
+      //   .set("Authorization", `Bearer ${props.authState.token}`)
+      //   .then((res) => setUserData(res.body));
+    // else 
   }, []);
 
   useEffect(() => {

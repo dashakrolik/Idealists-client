@@ -1,25 +1,19 @@
 /** @jsx jsx */
 import styled from '@emotion/styled';
-import React, { useEffect, useState, Component } from 'react';
+import { useEffect, useState } from 'react';
 import request from 'superagent';
-import { Link } from 'react-router-dom';
 
 import { baseUrl } from '../../../constants';
 import './IdeaDashboard.css'
-import { css, Global, jsx } from '@emotion/core';
-import posed from 'react-pose';
-import TextField from '@material-ui/core/TextField';
-import Card from '@material-ui/core/Card'
-import { Page, Document, pdfjs } from 'react-pdf';
-import Button from '../../reogranisation/Questions/Button'
+import { jsx } from '@emotion/core';
 // pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const IdeaDashboardDetail = (props) => {
   const ideasId = props.match.params.id
   const [automatchResults, DoAutomatch] = useState([])
-  const [relScore, getScore] = useState([])
-  const [finalArray, makeArray] = useState([])
-  const automatchId = props.match.params.patentNumber
+  // const [relScore, getScore] = useState([])
+  // const [finalArray, makeArray] = useState([])
+  // const automatchId = props.match.params.patentNumber
   
 
   useEffect(() => {
@@ -80,7 +74,7 @@ const IdeaDashboardDetail = (props) => {
     return (
       <Container>
         <FlexRow>
-          <img src={`data:image/jpeg;base64,${clickedImage.value}`} />
+          <img alt="icon" src={`data:image/jpeg;base64,${clickedImage.value}`} />
         </FlexRow>
         <Content>
           {/* <a href={'http://www.africau.edu/images/default/sample.pdf'} download><Button text={'Download the Patent details pdf'}/></a> */}
@@ -166,77 +160,77 @@ const FlexRow = styled.div`
 }
 `;
 
-const FlexColumn = styled.div`
-  display: flex;
-  flex: 1;
-`;
+// const FlexColumn = styled.div`
+//   display: flex;
+//   flex: 1;
+// `;
 
-const FormGroup = styled.div`
-  padding: 5px 10px;
-  flex: 1;
-`;
+// const FormGroup = styled.div`
+//   padding: 5px 10px;
+//   flex: 1;
+// `;
 
-const GroupTitle = styled.div`
-  font-size: 30px;
-  font-weight: 800;
-  text-align: left;
-  color: #ffffff;
-  position:relative;
-  padding: 5px 15px;
-  flex: 1;
-  margin-bottom: 16px;
-`;
+// const GroupTitle = styled.div`
+//   font-size: 30px;
+//   font-weight: 800;
+//   text-align: left;
+//   color: #ffffff;
+//   position:relative;
+//   padding: 5px 15px;
+//   flex: 1;
+//   margin-bottom: 16px;
+// `;
 
-const GroupSubtitle = styled.div`
-  font-size: 12px;
-  font-weight: 400;
-  text-align: left;
-  color: #ffffff;
-  position:relative;
-  padding: 5px 15px;
-  flex: 1;
-  margin-bottom: 32px;
-`;
+// const GroupSubtitle = styled.div`
+//   font-size: 12px;
+//   font-weight: 400;
+//   text-align: left;
+//   color: #ffffff;
+//   position:relative;
+//   padding: 5px 15px;
+//   flex: 1;
+//   margin-bottom: 32px;
+// `;
 
-const PGroupContainer = posed.div({
-  preEnter: {
-    x: 600,
-    originX: '50%',
-    originY: '50%',
-    opacity: 0,
-    scale: 0.69,
-    transition: {
-      default: { ease: 'easeInOut', duration: 400 },
-    },
-  },
-  enter: {
-    x: 0,
-    originX: '50%',
-    originY: '50%',
-    opacity: 1.0,
-    scale: 1.0,
-    transition: {
-      default: { ease: 'easeInOut', duration: 400 },
-    },
-  },
-  exit: {
-    x: -600,
-    originX: '50%',
-    originY: '50%',
-    opacity: 0,
-    scale: 0.69,
-    transition: { ease: 'easeInOut', duration: 400 },
-  },
-});
+// const PGroupContainer = posed.div({
+//   preEnter: {
+//     x: 600,
+//     originX: '50%',
+//     originY: '50%',
+//     opacity: 0,
+//     scale: 0.69,
+//     transition: {
+//       default: { ease: 'easeInOut', duration: 400 },
+//     },
+//   },
+//   enter: {
+//     x: 0,
+//     originX: '50%',
+//     originY: '50%',
+//     opacity: 1.0,
+//     scale: 1.0,
+//     transition: {
+//       default: { ease: 'easeInOut', duration: 400 },
+//     },
+//   },
+//   exit: {
+//     x: -600,
+//     originX: '50%',
+//     originY: '50%',
+//     opacity: 0,
+//     scale: 0.69,
+//     transition: { ease: 'easeInOut', duration: 400 },
+//   },
+// });
 
-const GroupContainer = styled(PGroupContainer)`
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: space-evenly;
-  flex-grow: 1;
-`;
+// const GroupContainer = styled(PGroupContainer)`
+//   width: 100%;
+//   height: auto;
+//   display: flex;
+//   flex-direction: column;
+//   flex-wrap: wrap;
+//   align-content: center;
+//   justify-content: space-evenly;
+//   flex-grow: 1;
+// `;
 export default IdeaDashboardDetail;

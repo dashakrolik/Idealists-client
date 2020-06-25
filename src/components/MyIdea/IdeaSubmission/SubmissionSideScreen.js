@@ -1,7 +1,6 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import { jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import React from 'react';
 
 const SubmissionSideScreen = (props) => {
   return (
@@ -70,20 +69,20 @@ const FlexColumn = styled.div`
   flex: 1;
 `;
 
-const FormGroup = styled.div`
-  width: 100%;
-  padding: 5px 10px;
-`;
+// const FormGroup = styled.div`
+//   width: 100%;
+//   padding: 5px 10px;
+// `;
 
 
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: "left right";
-`;
+// const Container = styled.div`
+//   width: 100vw;
+//   height: 100vh;
+//   display: grid;
+//   grid-template-columns: 1fr 3fr;
+//   grid-template-rows: 1fr;
+//   grid-template-areas: "left right";
+// `;
 
 
 export default SubmissionSideScreen;

@@ -50,8 +50,8 @@ export default function IdeaDashboardDetail(props) {
 
   let qAnswers = [];
   const qTitles = [];
-  userIdeas.map((idea) => {
-    idea.answers.map((question) => {
+  userIdeas.forEach((idea) => {
+    idea.answers.forEach((question) => {
       if (question.qTitle.length > 50) {
         const title = processTitle(question.qTitle);
         qTitles.push(title);
@@ -61,8 +61,8 @@ export default function IdeaDashboardDetail(props) {
     });
   });
 
-  userIdeas.map((idea) => {
-    idea.answers.map((answer) => {
+  userIdeas.forEach((idea) => {
+    idea.answers.forEach((answer) => {
       qAnswers.push(answer.qAnswer);
     });
   });
