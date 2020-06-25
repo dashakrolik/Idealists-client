@@ -87,10 +87,12 @@ export default function IdeaDashboardDetail(props) {
 
   const renderLeft =
     userId.id === props.authState.user.id ? (
-      <ProgressBar
-        token={props.authState.token}
-        ideasId={props.match.params.id}
-      />
+      <>
+        <ProgressBar
+          token={props.authState.token}
+          ideasId={props.match.params.id}
+        />{" "}
+      </>
     ) : (
       <FlexRow>
         <FlexColumn>
