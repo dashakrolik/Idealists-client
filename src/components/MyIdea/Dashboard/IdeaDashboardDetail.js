@@ -3,10 +3,10 @@ import request from "superagent";
 import { baseUrl } from "../../../constants";
 import "./IdeaDashBoardDetail.css";
 import styled from "@emotion/styled";
-import Card from "@material-ui/core/Card";
 import { Redirect } from "react-router-dom";
 import Button from "../../reogranisation/Questions/Button";
 import ProgressBar from "../../reogranisation/ProgressBar/ProgressBar";
+import IdeaDetails from "../../reogranisation/IdeaDetails/IdeaDetails";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
@@ -41,45 +41,6 @@ export default function IdeaDashboardDetail(props) {
         }
       });
   }, []);
-
-  const processTitle = (title) => {
-    let splitTitle = title.split("?");
-    const processedTitle = splitTitle[0];
-    return processedTitle;
-  };
-
-  let qAnswers = [];
-  const qTitles = [];
-  userIdeas.forEach((idea) => {
-    idea.answers.forEach((question) => {
-      if (question.qTitle.length > 50) {
-        const title = processTitle(question.qTitle);
-        qTitles.push(title);
-      } else {
-        qTitles.push(question.qTitle);
-      }
-    });
-  });
-
-  userIdeas.forEach((idea) => {
-    idea.answers.forEach((answer) => {
-      qAnswers.push(answer.qAnswer);
-    });
-  });
-
-  qAnswers = qAnswers.map((answer) =>
-    typeof answer === "object"
-      ? answer[1]
-        ? answer[1].value + " & " + answer[0].value
-        : answer[0]
-        ? answer[0].value
-        : answer.value
-      : answer
-  );
-
-  if (qAnswers[0] === "true") {
-    qAnswers[0] = "yes";
-  }
 
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
@@ -128,14 +89,7 @@ export default function IdeaDashboardDetail(props) {
         <Right>
           <Content>
             <h1 className="header"> Questions and Answers about Idea:</h1>
-            {qTitles.map((title, index) => (
-              <div key={index}>
-                <StyledCard>
-                  <h4>{title}:</h4>
-                  <p>{qAnswers[index]}</p>
-                </StyledCard>
-              </div>
-            ))}
+            <IdeaDetails ideas={userIdeas} />
           </Content>
         </Right>
       </Container>
@@ -154,11 +108,7 @@ const StyledDiv = styled.div`
   margin-bottom: 20px;
   margin-top: 45px;
 `;
-const StyledCard = styled(Card)`
-  background-color: rgb(255, 255, 255, 0.3);
-  padding-left: 8px;
-  padding-right: 8px;
-`;
+
 const Left = styled.div`
   grid-area: left;
   width: 100%;
