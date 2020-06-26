@@ -456,7 +456,6 @@ const Content = styled.div`
   color: #ffffff;
   width: 90vw;
   max-width: 800px;
-  max-height: 2000px;
   height: auto;
   padding: 20px;
 `;
