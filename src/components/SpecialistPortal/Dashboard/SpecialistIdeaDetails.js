@@ -15,6 +15,7 @@ import AssessmentsPDFCreator from "./Download/AssessmentsPDFCreator";
 import CommentsPDFCreator from "./Download/CommentsPDFCreator";
 import FullPDFCreator from "./Download/FullPDFCreator";
 import ProgressBar from "../../reogranisation/ProgressBar/ProgressBar";
+import IdeaDetails from "../../reogranisation/IdeaDetails/IdeaDetails";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
@@ -22,7 +23,6 @@ export default function IdeaDashboardDetail(props) {
   const [ideaOwner, setIdeaOwner] = useState({});
   const [showCommentSection, setShowCommentSection] = useState(false);
   const [showAssessmentSection, setShowAssessmentSection] = useState(false);
-  const [showIdeaDetails, setShowIdeaDetails] = useState(false);
   const [assessments, setAssessments] = useState([]);
   const [comments, setComments] = useState([]);
   const [docs, setDocs] = useState([]);
@@ -140,49 +140,6 @@ export default function IdeaDashboardDetail(props) {
       });
   }, []);
 
-  const processTitle = (title) => {
-    let splitTitle = title.split("?");
-    const processedTitle = splitTitle[0];
-    return processedTitle;
-  };
-
-  let qAnswers = [];
-  const qTitles = [];
-  userIdeas.map((idea) => {
-    return idea.answers.map((question) => {
-      if (question.qTitle.length > 50) {
-        const title = processTitle(question.qTitle);
-        return qTitles.push(title);
-      } else {
-        return qTitles.push(question.qTitle);
-      }
-    });
-  });
-
-  userIdeas.map((idea) => {
-    return idea.answers.map((answer) => {
-      return qAnswers.push(answer.qAnswer);
-    });
-  });
-
-  qAnswers = qAnswers.map((answer) =>
-    typeof answer === "object"
-      ? answer[1]
-        ? answer[1].value + " & " + answer[0].value
-        : answer[0]
-        ? answer[0].value
-        : answer.value
-      : answer
-  );
-
-  if (qAnswers[0] === "true") {
-    qAnswers[0] = "yes";
-  }
-
-  if (props.authState.loggedIn === false) {
-    return <Redirect to="/MyIdea" />;
-  }
-
   const renderAssessmentSection = !showAssessmentSection ? (
     <>
       {assessments.length < 0 ? (
@@ -215,79 +172,6 @@ export default function IdeaDashboardDetail(props) {
           text="Hide Assessments"
           onClick={() => setShowAssessmentSection(!showAssessmentSection)}
         />{" "}
-      </StyledCard>
-    </>
-  );
-
-  const renderIndustryList = (industries) => {
-    if (!industryIdea) return null;
-    else {
-      const ideaIndustryArr = JSON.stringify(industries)
-        .replace(/[{}"]/g, "")
-        .replace(/\\/g, "")
-        .split(",");
-
-      if (ideaIndustryArr.length < 1) return null;
-      else
-        return (
-          <ul style={{ listStyle: "none" }}>
-            {ideaIndustryArr.map((indu) => (
-              <li key={indu}>{indu}</li>
-            ))}
-          </ul>
-        );
-    }
-  };
-
-  const renderIdeaDetails = !showIdeaDetails ? (
-    <>
-      {" "}
-      <div key="1">
-        <StyledCard>
-          <h4>{qTitles[5]}:</h4>
-          <p>{qAnswers[5]}</p>
-        </StyledCard>
-      </div>
-      <div key="2">
-        <StyledCard>
-          <h4>{qTitles[6]}:</h4>
-          <p>{qAnswers[6]}</p>
-        </StyledCard>
-      </div>
-      {industryIdea ? (
-        <StyledCard>
-          <h4>Industries</h4>
-          {renderIndustryList(industryIdea)}
-        </StyledCard>
-      ) : null}
-      <StyledCard>
-        <Button
-          text="Show details"
-          onClick={() => setShowIdeaDetails(!showIdeaDetails)}
-        />
-      </StyledCard>
-    </>
-  ) : (
-    <>
-      <StyledCard>
-        <Button
-          text="Hide details"
-          onClick={() => setShowIdeaDetails(!showIdeaDetails)}
-        />
-      </StyledCard>
-      {qTitles.map((title, index) => (
-        <div key={index}>
-          <StyledCard>
-            <h4>{title}:</h4>
-            <p>{qAnswers[index]}</p>
-          </StyledCard>
-        </div>
-      ))}
-      <StyledCard>
-        <Button
-          text="Hide details"
-          onClick={() => setShowIdeaDetails(!showIdeaDetails)}
-        />
       </StyledCard>
     </>
   );
@@ -474,7 +358,7 @@ with conditions to validate that the user has the correct role. */}
             ) : null}
 
             <h1 className="header"> Questions and Answers about Idea:</h1>
-            {renderIdeaDetails}
+            <IdeaDetails ideas={userIdeas} />
           </Content>
 
           <div
