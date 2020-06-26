@@ -8,16 +8,55 @@ https://imaengine.io
 Built the frontend for the webapp building on top of an existing code base using React Hooks and styled components.
 
 ## Features
-- User login
-- User dashboard
-- Sumbit a new idea
-- Patent check
-- Comment on your patent results
+1. User login
+  - User dashboard
+  - Submit a new idea
+  - Patent check
+  - Comment on your patent results
+  - Assess other ideas
 
-- Investor login
-- Investor dashboard
-- Match investors with ideas only relevant to the industries they are interested in
-- Investor comments on relevant ideas
+2. Investor login
+  - Investor dashboard
+  - Dynamically filter ideas on industry
+  - Sort ideas by relevance to investor’s industry
+  - Assess ideas
+  - Investor comments on relevant ideas (?)
+
+3. Admin login
+  - Admin dashboard
+    - Add a new specialist
+    - See rejected ideas
+      - Undo rejection
+  - See idea details
+    - Reject an idea
+    - Move an idea to the next phase
+
+4. Specialist login
+  - Specialist dashboard
+    - See ideas in specialist’s relevant phase
+  - See idea details
+    - Reject an idea
+    - Move an idea to the next phase
+    - See assessments
+    - See and add comments
+    - Upload files
+    - Download PDFs
+
+5. Other features:
+Forgot password feature
+Display Idea stage progress bar 
+
+## Future Features / To-Do
+### Admin Dashboard
+* a combined Admin dashboard where the Admin can control an idea and view input from the specialist on the same page
+### Specialist Dashboard
+* Have an in-app document editor
+* Version control of documents
+* Claiming of an idea (so specialists dont work on the same idea at the same time)
+### Searching
+* Possibly more sorting/filter/searching options to find more specific ideas
+### Pagination
+* When there are lots of ideas maybe pagination would prevent over-fetching
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -87,3 +126,6 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+
