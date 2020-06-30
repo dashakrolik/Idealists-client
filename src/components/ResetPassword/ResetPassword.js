@@ -1,18 +1,16 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
-import styled from '@emotion/styled';
-import { useState } from 'react';
-import {withRouter} from 'react-router-dom'
+import { jsx } from "@emotion/core";
+import styled from "@emotion/styled";
+import { useState } from "react";
 
-function EnterNewPassword(props) {
-  
+export default function ResetPassword(props) {
   const [resetState, setLoginState] = useState({});
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(resetState);
   };
-  
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setLoginState({
@@ -20,37 +18,50 @@ function EnterNewPassword(props) {
       [name]: value,
     });
   };
-  
+
   const onSubmit = (data) => {
-    const { password } = data;
-    const  token  = props.location.pathname.split('/')[2]
- 
-    props.updatePassword(token, password)
-    
+    const { email } = data;
+    props.resetPassword(email);
+    alert("Please check your mailbox for instructions.");
+    props.history.replace(`/`);
   };
 
+  if (props)
+    return (
+      <Container>
+        <LeftSide>
+          <div>
+            <h3>Reset Password</h3>
+          </div>
+        </LeftSide>
 
-  if (props) return (
-    <Container>
-      <LeftSide>
-        <div>
-          <h3>Enter New Password</h3>
-        </div>
-      </LeftSide>
-      <RightSide>
-        <form onSubmit={handleSubmit}>
-          <label>New password</label>
-          <input type='password' name='password' value={resetState.password || ''} onChange={handleChange} />
-       
-          <button type='submit'>Submimt new password</button>
-        </form>
-      </RightSide>
-  </Container>);
+        <RightSide>
+          <form onSubmit={handleSubmit}>
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              required="required"
+              value={resetState.email || ""}
+              onChange={handleChange}
+            />
+            <br />
+            <button type="submit">Reset Password</button>
+          </form>
+        </RightSide>
+      </Container>
+    );
   else return <div></div>;
 }
 
-
-export default withRouter(EnterNewPassword)
+// const Logo = styled.img`
+//   position: absolute;
+//   left: 0;
+//   right: 0;
+//   top: 50%;
+//   margin: -300px auto auto auto;
+//   height: 70px;
+// `;
 
 const LeftSide = styled.div`
   position: absolute;
@@ -62,7 +73,7 @@ const LeftSide = styled.div`
   margin-left: -360px;
   margin-top: -150px;
   padding-top: 10px;
-  
+
   h3 {
     display: block;
     position: relative;
@@ -73,8 +84,8 @@ const LeftSide = styled.div`
     padding: 5px;
     margin: 50px 5px 5px;
   }
-  
-   p {
+
+  p {
     display: block;
     position: relative;
     left: 47px;
@@ -85,15 +96,14 @@ const LeftSide = styled.div`
     padding: 5px;
     margin: 5px;
   }
-  
+
   a {
     font-weight: 800;
     &:hover {
       cursor: pointer;
-      color: #DFEFF2;
+      color: #dfeff2;
     }
   }
-  
 `;
 
 const RightSide = styled.div`
@@ -108,10 +118,10 @@ const RightSide = styled.div`
   margin-left: 0px;
   margin-top: -150px;
   border-radius: 6px;
-  box-shadow: 2px 2px 23px 0px rgba(37,37,37,0.39);;
+  box-shadow: 2px 2px 23px 0px rgba(37, 37, 37, 0.39);
   background-color: rgba(255, 255, 255, 0.9);
   color: #233949;
-  
+
   label {
     display: block;
     position: relative;
@@ -128,7 +138,7 @@ const RightSide = styled.div`
     outline: none;
     -webkit-appearance: none;
   }
-  
+
   input {
     display: block;
     position: relative;
@@ -144,14 +154,14 @@ const RightSide = styled.div`
     outline: none;
     -webkit-appearance: none;
   }
-  
+
   button {
     display: inline-block;
     position: relative;
     float: right;
     right: 10%;
-    width: 30%;
-    height: 30px;
+    width: 50%;
+    height: 50px;
     line-height: 30px;
     font-size: 12px;
     color: #233949;
@@ -159,16 +169,16 @@ const RightSide = styled.div`
     border-color: transparent;
     outline: none;
     -webkit-appearance: none;
-    background-color: #DFEFF2;
+    background-color: #dfeff2;
     transition: all 100ms ease-in-out;
-    
+
     &:hover {
       color: white;
-      background-color: #4CC5F1;
+      background-color: #4cc5f1;
       cursor: pointer;
     }
   }
-  
+
   a {
     display: inline-block;
     position: relative;
@@ -182,14 +192,12 @@ const RightSide = styled.div`
     outline: none;
     -webkit-appearance: none;
     transition: all 100ms ease-in-out;
-    
-    &:hover {
 
+    &:hover {
       cursor: pointer;
-      color: #1A3D7C;
+      color: #1a3d7c;
     }
   }
-  
 `;
 
 const Container = styled.div`
@@ -198,5 +206,12 @@ const Container = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
+  background-image: linear-gradient(
+    to right top,
+    #1a3d7c,
+    #195d9c,
+    #1f7fbb,
+    #31a2d7,
+    #4cc5f1
+  );
 `;

@@ -1,21 +1,14 @@
 /** @jsx jsx */
 import { css, Global, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Button from '../reogranisation/Questions/Button';
 import posed from 'react-pose';
-import logo from '../../res/logo_horizontal_white.png';
 import Registration from './Registration';
-import { Redirect } from 'react-router-dom';
 
 const IdeaStart = (props) => {
 
   const [uiState, setUiState] = useState('notDisplayingLogin');
-  const [emailAddress, setEmailAddress] = useState('');
-  const [loginButtonEnabled, setLoginButtonEnabled] = useState(false);
-  const [password, setPassword] = useState('');
-  const [signUpFormValidated, setSignUpFormValidated] = useState(false);
-
 
   const newUser = () => {
     if (props.authState.loggedIn) {
@@ -32,15 +25,6 @@ const IdeaStart = (props) => {
   const closeRegistration = () => {
     setUiState('notDisplayingLogin');
   };
-
-  useEffect(() => {
-    if (emailAddress.length > 6 && password.length > 6) {
-      setLoginButtonEnabled(true);
-      setSignUpFormValidated(true);
-    }
-  }, [emailAddress, password]);
-
-
 
   return (
     <Container>

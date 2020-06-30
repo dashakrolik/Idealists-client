@@ -1,21 +1,20 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
-import React, { useEffect, useState } from 'react';
-import styled from '@emotion/styled';
-import PropTypes from 'prop-types';
-import posed from 'react-pose';
+import { jsx } from "@emotion/core";
+import { useEffect, useState } from "react";
+import styled from "@emotion/styled";
+import PropTypes from "prop-types";
+import posed from "react-pose";
 
 const SingleLineQuestion = (props) => {
-  
   const [isFocused, setIsFocused] = useState(false);
   const [isStillInit, setIsStillInit] = useState(true);
   const [validated, setValidated] = useState(false);
-  const [currentValue, setCurrentValue] = useState('');
-  
+  const [currentValue, setCurrentValue] = useState("");
+
   useEffect(() => {
     props.onValidationChange && props.onValidationChange(props.id, validated);
   }, [validated]);
-  
+
   useEffect(() => {
     if (currentValue.length > 1 && currentValue.length < props.maxChar) {
       setValidated(true);
@@ -26,36 +25,68 @@ const SingleLineQuestion = (props) => {
       props.onChange(props.id, currentValue);
     }
   }, [currentValue]);
-  
+
   const handleChange = (e) => {
     setCurrentValue(e.target.value);
   };
-  
+
   const handleFocus = () => {
     setIsFocused(true);
     props.onFocusChanged && props.onFocusChanged(true);
   };
-  
+
   const handleLostFocus = () => {
     setIsFocused(false);
     setIsStillInit(false);
     props.onFocusChanged && props.onFocusChanged(false);
   };
-  
+
   return (
-    <Container pose={isFocused ? 'focused' : 'default'}>
+    <Container pose={isFocused ? "focused" : "default"}>
       <QuestionTitle>{props.questionTitle}</QuestionTitle>
-      {!props.multiLine && <TextField onChange={handleChange} value={currentValue}
-                                      pose={(isStillInit || validated) ? (isFocused ? 'tfFocused' : 'tfDefault') : (isFocused ? 'tfFocusedError' : 'tfError')}
-                                      onFocus={handleFocus} onBlur={handleLostFocus}
-                                      placeholder={props.placeholder.length > 0 ? props.placeholder : ""}
-      />}
-      {!!props.multiLine && <TextArea onChange={handleChange} value={currentValue}
-                                      pose={(isStillInit || validated) ? (isFocused ? 'tfFocused' : 'tfDefault') : (isFocused ? 'tfFocusedError' : 'tfError')}
-                                      onFocus={handleFocus} onBlur={handleLostFocus}
-      />}
-      <ErrorMessage pose={(!isStillInit && !!props.validationRegex && !validated) ? 'show' : 'hide'}>
-        {props.errorMessage || 'Validation error'}
+      {!props.multiLine && (
+        <TextField
+          onChange={handleChange}
+          value={currentValue}
+          pose={
+            isStillInit || validated
+              ? isFocused
+                ? "tfFocused"
+                : "tfDefault"
+              : isFocused
+              ? "tfFocusedError"
+              : "tfError"
+          }
+          onFocus={handleFocus}
+          onBlur={handleLostFocus}
+          placeholder={props.placeholder.length > 0 ? props.placeholder : ""}
+        />
+      )}
+      {!!props.multiLine && (
+        <TextArea
+          onChange={handleChange}
+          value={currentValue}
+          pose={
+            isStillInit || validated
+              ? isFocused
+                ? "tfFocused"
+                : "tfDefault"
+              : isFocused
+              ? "tfFocusedError"
+              : "tfError"
+          }
+          onFocus={handleFocus}
+          onBlur={handleLostFocus}
+        />
+      )}
+      <ErrorMessage
+        pose={
+          !isStillInit && !!props.validationRegex && !validated
+            ? "show"
+            : "hide"
+        }
+      >
+        {props.errorMessage || "Validation error"}
       </ErrorMessage>
     </Container>
   );
@@ -73,30 +104,30 @@ SingleLineQuestion.propTypes = {
 
 const poses = {
   tfDefault: {
-    backgroundColor: 'rgba(255, 255, 255, 1.0)',
-    color: '#252525',
+    backgroundColor: "rgba(255, 255, 255, 1.0)",
+    color: "#252525",
     scale: 1.0,
-    transition: { ease: 'easeInOut', duration: 200 },
+    transition: { ease: "easeInOut", duration: 200 },
   },
   tfFocused: {
-    backgroundColor: 'rgba(255, 255, 255, 1.0)',
-    color: '#252525',
+    backgroundColor: "rgba(255, 255, 255, 1.0)",
+    color: "#252525",
     scale: 1.0,
-    transition: { ease: 'easeInOut', duration: 120 },
+    transition: { ease: "easeInOut", duration: 120 },
   },
   tfError: {
-    backgroundColor: 'rgba(255, 115, 141, 1.0)',
-    color: '#ffffff',
+    backgroundColor: "rgba(255, 115, 141, 1.0)",
+    color: "#ffffff",
     scale: 1.0,
-    transition: { ease: 'easeInOut', duration: 200 },
+    transition: { ease: "easeInOut", duration: 200 },
   },
   tfFocusedError: {
-    backgroundColor: 'rgba(255, 115, 141, 1.0)',
-    color: '#ffffff',
+    backgroundColor: "rgba(255, 115, 141, 1.0)",
+    color: "#ffffff",
     scale: 1.0,
-    transition: { ease: 'easeInOut', duration: 200 },
+    transition: { ease: "easeInOut", duration: 200 },
   },
-}
+};
 
 const PTextField = posed.input(poses);
 const PTextArea = posed.textarea(poses);
@@ -105,12 +136,12 @@ const PErrorMessage = posed.p({
   hide: {
     opacity: 0,
     y: 10,
-    transition: { ease: 'easeInOut', duration: 200 },
+    transition: { ease: "easeInOut", duration: 200 },
   },
   show: {
     opacity: 0.69,
     y: 0,
-    transition: { ease: 'easeInOut', duration: 200 },
+    transition: { ease: "easeInOut", duration: 200 },
   },
 });
 
@@ -132,7 +163,7 @@ const ErrorMessage = styled(PErrorMessage)`
 
 const TextField = styled(PTextField)`
   position: relative;
-  box-sizing:border-box;
+  box-sizing: border-box;
   display: block;
   width: 100%;
   height: 40px;
@@ -147,7 +178,7 @@ const TextField = styled(PTextField)`
 `;
 
 const TextArea = styled(PTextArea)`
-  box-sizing:border-box;
+  box-sizing: border-box;
   display: block;
   width: 100%;
   height: 320px;
@@ -167,13 +198,13 @@ const PContainer = posed.div({
     opacity: 0.69,
     y: 0,
     scale: 1.0,
-    transition: { ease: 'easeInOut', duration: 120 },
+    transition: { ease: "easeInOut", duration: 120 },
   },
   focused: {
     opacity: 1.0,
     y: 0,
     scale: 1.02,
-    transition: { ease: 'easeInOut', duration: 120 },
+    transition: { ease: "easeInOut", duration: 120 },
   },
 });
 

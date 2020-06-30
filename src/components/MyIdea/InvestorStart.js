@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, Global, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Button from '../reogranisation/Questions/Button';
 import posed from 'react-pose';
 
@@ -10,11 +10,6 @@ import InvestorRegistration from './InvestorRegistration';
 const InvestorStart = (props) => {
 
   const [uiState, setUiState] = useState('notDisplayingLogin');
-  const [emailAddress, setEmailAddress] = useState('');
-  const [loginButtonEnabled, setLoginButtonEnabled] = useState(false);
-  const [password, setPassword] = useState('');
-  const [signUpFormValidated, setSignUpFormValidated] = useState(false);
-
 
   const newUser = () => {
     if (props.authState.loggedIn) {
@@ -31,15 +26,6 @@ const InvestorStart = (props) => {
   const closeRegistration = () => {
     setUiState('notDisplayingLogin');
   };
-
-  useEffect(() => {
-    if (emailAddress.length > 6 && password.length > 6) {
-      setLoginButtonEnabled(true);
-      setSignUpFormValidated(true);
-    }
-  }, [emailAddress, password]);
-
-
 
   return (
     <Container>

@@ -1,0 +1,36 @@
+.assessment-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.assessment-container .left {
+  width: 30%;
+  text-align: left;
+}
+
+.assessment-container .left h4 {
+  font-weight: bolder;
+}
+
+.assessment-container .left li {
+  font-size: 14px;
+}
+
+.assessment-container footer {
+  font-size: small;
+}
+
+.assessment-container .right {
+  width: 70%;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  text-align: left;
+}
+
+.assessments-content {
+  --origin: top;
+  animation-name: slide;
+  animation-timing-function: ease-in-out;
+  animation-duration: 0.3s;
+}

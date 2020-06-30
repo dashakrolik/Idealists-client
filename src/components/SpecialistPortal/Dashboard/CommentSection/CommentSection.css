@@ -1,0 +1,6 @@
+.commentsectioncontent {
+  --origin: top;
+  animation-name: slide;
+  animation-timing-function: ease-in-out;
+  animation-duration: 0.3s;
+}
