@@ -870,7 +870,7 @@ class App extends Component {
                   );
                 }}
               />
-              <Route exact path="/" render={() => <Redirect to="/MyIdea" />} />
+              {/* <Route exact path="/" render={() => <Redirect to="/MyIdea" />} /> */}
             </Application>
           </ThemeProvider>
         </div>

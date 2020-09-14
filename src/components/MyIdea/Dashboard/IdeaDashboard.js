@@ -25,9 +25,10 @@ export default function IdeaDashboard(props) {
       .then((res) => setUserIdeas(res.body));
   }, []);
 
-  if (props.authState.loggedIn === false) return <Redirect to="/MyIdea" />;
-
+  if (props.authState.loggedIn === false) return <h1>Not logged in</h1>;
+  
   if (!props.authState.user) {
+    console.log(props.authState)
     props.user();
   }
 
