@@ -870,7 +870,7 @@ class App extends Component {
                   );
                 }}
               />
-              <Route exact path="/" render={() =>
+              <Route exact path="/" render={(props) =>
                 <IdeaStart
                   {...props}
                   authState={this.state.auth}
