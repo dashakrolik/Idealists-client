@@ -26,7 +26,7 @@ export default function IdeaDashboard(props) {
   }, []);
 
   if (props.authState.loggedIn === false) return <h1>Not logged in</h1>;
-  
+
   if (!props.authState.user) {
     console.log(props.authState)
     props.user();
@@ -49,14 +49,17 @@ export default function IdeaDashboard(props) {
         </Link>
       </div>
       {userIdeas.length < 1 ? (
-        <h2 style={styledH2}>
-          <a href="/MyIdea/new">Submit your first idea</a>
-        </h2>
+        <Link className="links" to="/MyIdea/new">
+          <h2 style={styledH2}>
+            Submit your first idea
+          </h2>
+        </Link>
+
       ) : (
-        <h2 style={styledH2}>
-          Please follow your next step: your market check
-        </h2>
-      )}
+          <h2 style={styledH2}>
+            Please follow your next step: your market check
+          </h2>
+        )}
       <div className="flex-tilescontainer">
         {userIdeas.map((idea) => (
           <Link
