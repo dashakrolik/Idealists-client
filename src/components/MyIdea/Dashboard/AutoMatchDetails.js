@@ -20,14 +20,14 @@ const IdeaDashboardDetail = (props) => {
     request
       .get(`${baseUrl}/ideas/${ideasId}/automatch`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
+      .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['ipscreener-results']['index-1'])))
   }, []);
 
   // useEffect(() => {
   //   request
   //     .get(`${baseUrl}/ideas/${ideasId}/automatch`)
   //     .set("Authorization", `Bearer ${props.authState.token}`)
-  //     .then(automatch => getScore(automatch.body.autoMatch['automatch-results']['index-1']))
+  //     .then(automatch => getScore(automatch.body.autoMatch['ipscreener-results']['index-1']))
   // }, []);
 
   
