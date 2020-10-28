@@ -42,7 +42,7 @@ const IdeaStart = (props) => {
             <StartContent pose={uiState}
               css={css`display: flex; flex-direction: column; width: auto; margin-bottom: 60px;`}>
               <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
-                My Idea Page
+                My Idea Page TEST!!!!!!!!
               </Heading>
               <Paragraph>
                 Welcome to your Idea Page. Below you can submit your idea or check on the status of ideas you’ve already
