@@ -14,7 +14,7 @@ const IdeaDashboardDetail = (props) => {
   // const [relScore, getScore] = useState([])
   // const [finalArray, makeArray] = useState([])
   // const automatchId = props.match.params.patentNumber
-  
+
 
   useEffect(() => {
     request
@@ -30,13 +30,13 @@ const IdeaDashboardDetail = (props) => {
   //     .then(automatch => getScore(automatch.body.autoMatch['ipscreener-results']['index-1']))
   // }, []);
 
-  
+
 
   let automatchTitle = automatchResults.map(result => result.bibliographic.title[0].text)
   let automatchImage = automatchResults.map(result => result.image.data)
   let automatchText = automatchResults.map(result => result.description[0].text)
   let relevanceNumber = automatchResults.map(result => result.relevance.number)
-  
+
   var textObject = {};
   relevanceNumber.forEach((key, i) => textObject[key] = automatchText[i]);
 
@@ -47,34 +47,39 @@ const IdeaDashboardDetail = (props) => {
   relevanceNumber.forEach((key, i) => titleObject[key] = automatchTitle[i]);
 
   let arrText = []
-    for (let [key, value] of Object.entries(textObject)) {
-      let obj = { key, value }
-      arrText.push(obj)
-    }
-    
+  for (let [key, value] of Object.entries(textObject)) {
+    let obj = { key, value }
+    arrText.push(obj)
+  }
+
   let arrTitle = []
-    for (let [key, value] of Object.entries(titleObject)) {
-      let obj = { key, value }
-      arrTitle.push(obj)
-    }
-    
+  for (let [key, value] of Object.entries(titleObject)) {
+    let obj = { key, value }
+    arrTitle.push(obj)
+  }
+
   const key = props.match.params.patentNumber
 
   let arrImage = []
-    for (let [key, value] of Object.entries(imageObject)) {
-      let obj = { key, value }
-      arrImage.push(obj)
-    }
-    
+  for (let [key, value] of Object.entries(imageObject)) {
+    let obj = { key, value }
+    arrImage.push(obj)
+  }
+
   let clickedText = arrText.find(o => o.key === key)
   let clickedImage = arrImage.find(o => o.key === key)
   let clickedTitle = arrTitle.find(o => o.key === key)
-  
+
   if (clickedImage && clickedText && clickedTitle) {
     return (
       <Container>
         <FlexRow>
-          <img alt="icon" src={`data:image/jpeg;base64,${clickedImage.value}`} />
+
+          <img style={{
+            width: "400px", position: "relative",
+            left: "35px"
+          }} alt="icon" src={`data:image/jpeg;base64,${clickedImage.value}`} />
+
         </FlexRow>
         <Content>
           {/* <a href={'http://www.africau.edu/images/default/sample.pdf'} download><Button text={'Download the Patent details pdf'}/></a> */}
