@@ -48,9 +48,9 @@
   },
   {
     "id": 3,
-    "groupTitle": "Which categories does your idea fit?",
+    "groupTitle": "Under which of the SDGs does your idea fit best?",
     "groupType": "default",
-    "groupDescription": "Please note that we cannot accept ideas that are not within one of the Sustainable Development Goals (SDG)",
+    "groupDescription": "Please note that we cannot accept ideas that don’t match with at least one of the Sustainable Development Goals (SDG’s)",
     "questions": [
       {
         "id": 0,
@@ -619,7 +619,7 @@
         "maxChar": 100,
         "validationErrorMsg": "Max 100 chars."
       }
-    ]    
+    ]
   },
   {
     "id": 5,
