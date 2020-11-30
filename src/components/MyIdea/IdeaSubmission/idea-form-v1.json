@@ -134,9 +134,9 @@
   },
   {
     "id": 4,
-    "groupTitle": "Which categories does your idea fit?",
+    "groupTitle": "Under which industry does your idea fit best?",
     "groupType": "default",
-    "groupDescription": "Please note that we cannot accept ideas that are not within one of the Industries.",
+    "groupDescription": "Please note that we cannot accept ideas that do not match with at least one of the Industries on the list.",
     "questions": [
       {
         "id": 0,
