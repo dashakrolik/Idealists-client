@@ -695,7 +695,7 @@
     "id": 9,
     "groupTitle": "Describe the steps and story how you came up with this idea",
     "groupType": "singleQuestion",
-    "groupDescription": "Please describe your steps up to 2000 characters.",
+    "groupDescription": "Please describe your steps in up to 2000 characters.",
     "questions": [
       {
         "id": 0,
