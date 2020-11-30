@@ -710,7 +710,7 @@
     "id": 10,
     "groupTitle": "Is there anything that is close to your idea?",
     "groupType": "default",
-    "groupDescription": "Anything on the internet, any article or patent? Any companies who work in a similar area? Please do some Google searching and list the 3 things that come closest to your idea. ",
+    "groupDescription": "Anything on the internet, any article or patent? Any companies who work in a similar area? Please do some Google searching and list the 3 things that come closest to your idea. If your idea is truly unique, please still list the 3 things that you can find online that come closest to being similar.",
     "questions": [
       {
         "id": 0,
@@ -766,7 +766,7 @@
     "id": 11,
     "groupTitle": "Anything else you want to tell us about your idea?",
     "groupType": "singleQuestion",
-    "groupDescription": "Please describe your answer up to 2000 characters",
+    "groupDescription": "Please describe your answer in up to 2000 characters",
     "questions": [
       {
         "id": 0,
