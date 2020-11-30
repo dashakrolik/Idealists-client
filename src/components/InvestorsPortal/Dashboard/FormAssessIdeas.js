@@ -726,7 +726,6 @@ export default class FormAssessIdeas extends Component {
                               className="icon icon-insert-drive-file"
                               style={{ ...labelContentStyle, fontSize: "20px" }}
                             />
-                            &nbsp;
                             <span style={labelContentStyle}>
                               Imagine you’re an advocate for this idea. Name up
                               to 5 reasons why you would be so ‘pro’ this idea
@@ -910,7 +909,6 @@ export default class FormAssessIdeas extends Component {
                               className="icon icon-insert-drive-file"
                               style={{ ...labelContentStyle, fontSize: "20px" }}
                             />
-                            &nbsp;
                             <span style={labelContentStyle}>
                               Imagine you’re an opponent of this idea. Name up
                               to 5 reasons why you would be so ‘against’ this
@@ -1096,7 +1094,6 @@ export default class FormAssessIdeas extends Component {
                               className="icon icon-info"
                               style={{ ...labelContentStyle, fontSize: "20px" }}
                             />
-                            &nbsp;
                             <span style={labelContentStyle}>
                               How long do you expect it will take before this
                               solution is widely-used by the target-audience?
@@ -1208,7 +1205,6 @@ export default class FormAssessIdeas extends Component {
                               className="icon icon-info"
                               style={{ ...labelContentStyle, fontSize: "20px" }}
                             />
-                            &nbsp;
                             <span style={labelContentStyle}>
                               How much of an impact do you expect this idea to
                               have on the current industry? (10 being a future
@@ -1320,7 +1316,6 @@ export default class FormAssessIdeas extends Component {
                               className="icon icon-insert-drive-file"
                               style={{ ...labelContentStyle, fontSize: "20px" }}
                             />
-                            &nbsp;
                             <span style={labelContentStyle}>
                               Why is this not yet out there? Why have people in
                               this field or that could be helped by this idea,
@@ -1377,7 +1372,6 @@ export default class FormAssessIdeas extends Component {
                               className="icon icon-insert-drive-file"
                               style={{ ...labelContentStyle, fontSize: "20px" }}
                             />
-                            &nbsp;
                             <span style={labelContentStyle}>
                               Who would in your opinion be the ideal customers
                               for this idea?
@@ -1433,7 +1427,6 @@ export default class FormAssessIdeas extends Component {
                               className="icon icon-insert-drive-file"
                               style={{ ...labelContentStyle, fontSize: "20px" }}
                             />
-                            &nbsp;
                             <span style={labelContentStyle}>
                               Can you think of a way to make this idea even
                               better?
@@ -1490,7 +1483,6 @@ export default class FormAssessIdeas extends Component {
                               className="icon icon-assignment-late"
                               style={{ ...labelContentStyle, fontSize: "20px" }}
                             />
-                            &nbsp;
                             <span style={labelContentStyle}>
                               Do you want to champion this idea by giving it a
                               star? By doing this, we will more
@@ -1614,7 +1606,6 @@ export default class FormAssessIdeas extends Component {
                                   fontSize: "20px",
                                 }}
                               />
-                              &nbsp;
                               <span style={labelContentStyle}>
                                 Would you like to apply to become a mentor for
                                 this idea? If the team later picks you as one of
