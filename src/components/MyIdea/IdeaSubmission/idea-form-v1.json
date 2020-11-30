@@ -680,7 +680,7 @@
     "id": 8,
     "groupTitle": "How far developed is your idea?",
     "groupType": "singleQuestion",
-    "groupDescription": "Please describe your progress up to 1000 characters.",
+    "groupDescription": "Please describe your progress in up to 1000 characters.",
     "questions": [
       {
         "id": 0,
