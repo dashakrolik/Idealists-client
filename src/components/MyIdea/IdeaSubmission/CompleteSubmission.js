@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import { useState, Component } from 'react';
+import { useState, Component, Fragment } from 'react';
 import posed from 'react-pose';
 import Button from '../../reogranisation/Questions/Button';
 import request from 'superagent';
@@ -9,6 +9,7 @@ import { baseUrl } from '../../../constants';
 import { pdfjs } from "react-pdf";
 import { withRouter } from 'react-router-dom'
 import UserAgreement from './agreement.jsx'
+import SubmissionSideScreen from './SubmissionSideScreen';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -105,13 +106,24 @@ const CompleteSubmission = (props) => {
   }
 
   return (
-    <GroupContainer>
-      <UserAgreement authState={props.authState} login={props.login} />
-      <AgreementConfirm />
-      {/* <Button text={'I agree'} onClick={submitIdea}
+    <Fragment>
+      {/* <SubmissionSideScreen
+        title={'Almost done'}
+        description={'Please download the Participants Agreement by pressing on the button. After reading it carefully, and if you agree with its terms and conditions, press I agree to finish your submission.'}
+      /> */}
+      <div style={{marginTop: '100px'}}>
+        <h1>Almost done</h1>
+        <p>Please download the Participants Agreement by pressing on the button. After reading it carefully, and if you agree with its terms and conditions, press I agree to finish your submission.</p>
+      </div>
+      <GroupContainer>
+
+        <UserAgreement authState={props.authState} login={props.login} />
+        <AgreementConfirm />
+        {/* <Button text={'I agree'} onClick={submitIdea}
         disabled={!agreeBttn}
         withIcon /> */}
-    </GroupContainer>
+      </GroupContainer>
+      </Fragment>
   );
 };
 
