@@ -700,7 +700,7 @@
       {
         "id": 0,
         "type": "multiLine",
-        "text": "What triggered you to come up with this idea and how did it evolve into the idea you submit now? *",
+        "text": "What triggered you to come up with this idea and how did it evolve into the idea you’re submitting now?",
         "maxChar": 2000,
         "validationErrorMsg": "Max 2000 chars."
       }
