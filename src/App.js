@@ -36,6 +36,8 @@ import AdminDashboardRejected from "./components/Admin/AdminDashboardRejected";
 import CompleteAssessment from "./components/InvestorsPortal/Dashboard/CompleteAssessment";
 import AddSpecialistStart from "./components/SpecialistPortal/SpecialistCreation/AddSpecialistStart";
 import UserAssessIdeas from "./components/MyIdea/Dashboard/UserAssessIdeas";
+import CofounderStart from './components/Creator/Co-founderStart'
+
 
 class App extends Component {
   state = {
@@ -629,6 +631,40 @@ class App extends Component {
                   );
                 }}
               />
+              <Route
+                exact
+                path="/cofounderStart"
+                render={(props) => {
+                  return (
+                    <CofounderStart
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                      setAuthLoggedInTrue={this.setAuthLoggedInTrue}
+                    />
+                  );
+                }}
+              />
+                            {/* <Route
+                exact
+                path="/cofounder/signup"
+                render={(props) => {
+                  return (
+                    <CofounderStart
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                      setAuthLoggedInTrue={this.setAuthLoggedInTrue}
+                    />
+                  );
+                }}
+              /> */}
               <Route
                 exact
                 path="/InvestorStart"
