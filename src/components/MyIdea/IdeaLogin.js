@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 export default function InvestorLogin(props) {
   const [loginState, setLoginState] = useState({});
 
+  console.log(props.loaded)
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);
@@ -27,10 +29,12 @@ export default function InvestorLogin(props) {
   };
 
   if (props.authState.loggedIn) {
-    props.user();
+    setTimeout(function(){
+      props.user();
 
     props.history.replace("/MyIdea/new");
     return <div></div>;
+    }, 5000)
   }
 
   if (props.authState.loggedIn !== true)
@@ -51,7 +55,7 @@ export default function InvestorLogin(props) {
               onChange={handleChange}
             />
             <br />
-
+  
             <label>Password</label>
             <input
               type="password"
@@ -60,15 +64,29 @@ export default function InvestorLogin(props) {
               onChange={handleChange}
             />
             <br />
-
+  
             <Link to="/reset-password">Forgot your password?</Link>
             <button type="submit">Login</button>
           </form>
         </RightSide>
       </Container>
     );
-  else return <div></div>;
+  else 
+  return (
+    <Container>
+      <Middle>
+        <props.spinner />
+      </Middle>
+    </Container>
+  );
 }
+
+const Middle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 400px;
+`
 
 const LeftSide = styled.div`
   position: absolute;
