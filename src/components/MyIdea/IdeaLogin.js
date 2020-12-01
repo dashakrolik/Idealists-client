@@ -7,8 +7,6 @@ import { Link } from "react-router-dom";
 export default function InvestorLogin(props) {
   const [loginState, setLoginState] = useState({});
 
-  console.log(props.loaded)
-
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);

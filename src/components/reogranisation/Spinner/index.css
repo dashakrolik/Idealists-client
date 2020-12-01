@@ -1,7 +1,7 @@
 .loadingBar {
     width:80px;
     height:80px;
-    border:8px solid #fcd779; /*Default circle color*/
+    border:8px solid #fcd779; /*circle color*/
     border-top:8px solid white; /*Highlighted color*/
     border-radius:50%;
 
