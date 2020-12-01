@@ -13,7 +13,7 @@ export default function CommentSection(props) {
   const [commentsData, setCommentsData] = useState([]);
   const [showAddComment, setShowAddComment] = useState(false);
 
-  useEffect(() => {
+  const fetchComments = () => {
     request
       .get(`${baseUrl}/ideas/${id}/comments`)
       .set("Authorization", `Bearer ${props.authState.token}`)
@@ -21,10 +21,14 @@ export default function CommentSection(props) {
       .then((res) => {
         setCommentsData(res.body);
       });
-  }, [id]);
+  }
+  
+  useEffect(() => {
+    fetchComments()
+  }, []);
 
   const renderComments = () => {
-    if (commentsData.length < 1)
+    if (commentsData.length === 0)
       return (
         <StyledCard>
           There are currently no specialist comments on this idea.
@@ -69,9 +73,9 @@ export default function CommentSection(props) {
         <Button text="Hide Comments" onClick={() => show(false)} />
       </StyledCard>
       <div className="commentsectioncontent">{renderComments()}</div>
-      <StyledCard>
+      {/* <StyledCard>
         <Button text="Hide Comments" onClick={() => show(false)} />
-      </StyledCard>
+      </StyledCard> */}
       {renderAddComment()}
     </>
   );

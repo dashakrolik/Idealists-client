@@ -21,7 +21,7 @@ export default function CommentForm(props) {
         .send({ comment: { title, message } })
         .then((res) => {
           if (res.status === 201) {
-            return setSucces(true);
+            setSucces(true);
           }
         })
         .catch((err) => {
