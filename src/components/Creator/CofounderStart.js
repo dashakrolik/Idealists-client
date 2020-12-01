@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import Button from '../reogranisation/Questions/Button';
 import posed from 'react-pose';
 import { useState } from 'react'
-import CreatorRegistration from './CreatorRegisteration'
+import CofounderRegisteration from './CofounderRegisteration'
 
 
 const CofounderStart = (props) => {
@@ -51,7 +51,7 @@ const CofounderStart = (props) => {
                                 <Button text={'New User'} onClick={newUser} />
                             </Controls>
                         </StartContent>
-                        <CreatorRegistration show={uiState === 'displayingLogin'} handleCancel={closeRegistration} props={props} />
+                        <CofounderRegisteration show={uiState === 'displayingLogin'} handleCancel={closeRegistration} props={props} />
                     </div>
                 </div>
             </Content>
