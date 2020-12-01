@@ -189,6 +189,7 @@ export default function IdeaDashboardDetail(props) {
     <CommentSection
       id={ideasId}
       authState={props.authState}
+      loading={props.location.state.loading}
       show={(e) => {
         setShowCommentSection(e);
       }}

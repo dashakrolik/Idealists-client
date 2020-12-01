@@ -9,10 +9,11 @@ import CommentForm from "./CommentForm";
 import "./CommentSection.css";
 
 export default function CommentSection(props) {
-  const { id, show } = props;
+  const { id, show, loading } = props;
   const [commentsData, setCommentsData] = useState([]);
   const [showAddComment, setShowAddComment] = useState(false);
-
+  console.log('comSection:', loading)
+  
   const fetchComments = () => {
     request
       .get(`${baseUrl}/ideas/${id}/comments`)
@@ -22,12 +23,12 @@ export default function CommentSection(props) {
         setCommentsData(res.body);
       });
   }
-  
   useEffect(() => {
     fetchComments()
   }, []);
 
   const renderComments = () => {
+    console.log('comments', commentsData)
     if (commentsData.length === 0)
       return (
         <StyledCard>
@@ -62,6 +63,8 @@ export default function CommentSection(props) {
         <CommentForm
           token={props.authState.token}
           id={id}
+          loaded={loading}
+          reFetch={fetchComments}
           showForm={(e) => setShowAddComment(e)}
         />
       );

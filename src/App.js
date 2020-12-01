@@ -276,6 +276,7 @@ class App extends Component {
             loggedIn: true,
             user: res.body,
           },
+          loading: true,
         });
         localStorage.setItem("currentUserJwt", this.state.auth.token);
         localStorage.setItem("user", this.state.auth.user);
@@ -394,6 +395,8 @@ class App extends Component {
                       {...props}
                       user={this.getCurrentUser}
                       authState={this.state.auth}
+                      spinner={Spinner}
+                      loaded={this.state.loading}
                       login={this.requestLoginSpecialist}
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}

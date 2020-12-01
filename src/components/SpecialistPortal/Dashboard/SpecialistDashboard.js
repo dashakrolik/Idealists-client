@@ -66,7 +66,12 @@ export default function specialistDashboard(props) {
         <Link
           key={idea.id}
           className="tile-link"
-          to={`/Specialist/dashboard/ideas/${idea.id}`}
+          to={{
+            pathname: `/Specialist/dashboard/ideas/${idea.id}`,
+            state: {
+              loading: props.loaded,
+            },
+          }}
         >
           <div className="assess-tile" key={idea.id}>
             <p style={{ color: "black" }}>
