@@ -98,9 +98,9 @@ const QuestionGroup = (props) => {
                     questionTitle={question.text}
                     errorMessage={question.validationErrorMsg}
                     maxChar={question.maxChar}
-                    maxWords={question.maxWords}
                     onChange={handleValueChanges}
                     onFocusChanged={handleInputFocus}
+                    groupId={props.group.id}
                     id={question.id.toString()}
                     onValidationChange={handleValidationChanges}
                     placeholder={
