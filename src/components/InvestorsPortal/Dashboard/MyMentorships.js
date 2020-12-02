@@ -25,9 +25,10 @@ export default function MyMentorships(props) {
       <h2 className="title">My Mentorships</h2>
       <StyledCard>
         Did you apply for mentorship whilst assessing one of the ideas and want
-        to see if theteam picked you as one of 3 mentors? Do it right here.
-        Mentors receive a 1% equity-interest in the idea-company in exchange for
-        being available to the founder-team at least 1 hour per week.
+        to see if the team picked you as one of their 3 mentors? Do it right
+        here. Mentors receive a 1% equity-interest in the idea-company in
+        exchange for being available to the founder-team for at least 1 hour a
+        week.
       </StyledCard>
     </div>
   );

@@ -34,7 +34,7 @@ export default function IdeaDashboardDetail(props) {
     request
       .get(`${baseUrl}/ideas/${ideasId}/automatch`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
+      .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['ipscreener-results']['index-1'])))
       .catch(err => console.error(err))
   }, []);
 
@@ -42,7 +42,7 @@ export default function IdeaDashboardDetail(props) {
   //   request
   //     .get(`${baseUrl}/ideas/${ideasId}/automatch`)
   //     .set("Authorization", `Bearer ${props.authState.token}`)
-  //     .then(automatch => Do2(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
+  //     .then(automatch => Do2(Object.values(automatch.body.autoMatch['ipscreener-results']['index-1'])))
   // }, []);
 
   const updateShow = e => {

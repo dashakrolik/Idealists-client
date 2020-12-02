@@ -360,7 +360,7 @@ export default class FormAssessIdeas extends Component {
                       name="explanation"
                       value={explanation}
                       disabled={false}
-                      placeholder="Place your explanation here"
+                      placeholder="Please write your explanation here"
                       validate={validate}
                       validationCallback={(res) =>
                         this.setState({
@@ -466,7 +466,7 @@ export default class FormAssessIdeas extends Component {
                       name="explanation2"
                       value={explanation2}
                       disabled={false}
-                      placeholder="Place your explanation here"
+                      placeholder="Please write your explanation here"
                       validate={validate}
                       validationCallback={(res) =>
                         this.setState({
@@ -570,7 +570,7 @@ export default class FormAssessIdeas extends Component {
                       name="explanation4"
                       value={explanation4}
                       disabled={false}
-                      placeholder="Place your explanation here"
+                      placeholder="Please write your explanation here"
                       validate={validate}
                       validationCallback={(res) =>
                         this.setState({
@@ -674,7 +674,7 @@ export default class FormAssessIdeas extends Component {
                       name="explanation3"
                       value={explanation3}
                       disabled={false}
-                      placeholder="Place your explanation here"
+                      placeholder="Please write your explanation here"
                       validate={validate}
                       validationCallback={(res) =>
                         this.setState({
@@ -726,7 +726,6 @@ export default class FormAssessIdeas extends Component {
                               className="icon icon-insert-drive-file"
                               style={{ ...labelContentStyle, fontSize: "20px" }}
                             />
-                            &nbsp;
                             <span style={labelContentStyle}>
                               Imagine you’re an advocate for this idea. Name up
                               to 5 reasons why you would be so ‘pro’ this idea
@@ -739,7 +738,7 @@ export default class FormAssessIdeas extends Component {
                               name="proReason1"
                               value={proReason1}
                               disabled={false}
-                              placeholder="Place the reason 1 here"
+                              placeholder="Please write your reason 1 here"
                               validate={validate}
                               validationCallback={(res) =>
                                 this.setState({
@@ -771,7 +770,7 @@ export default class FormAssessIdeas extends Component {
                               name="proReason2"
                               value={proReason2}
                               disabled={false}
-                              placeholder="Place the reason 2 here"
+                              placeholder="Please write your reason 2 here"
                               validate={validate}
                               validationCallback={(res) =>
                                 this.setState({
@@ -803,7 +802,7 @@ export default class FormAssessIdeas extends Component {
                               name="proReason3"
                               value={proReason3}
                               disabled={false}
-                              placeholder="Place the reason 3 here"
+                              placeholder="Please write your reason 3 here"
                               validate={validate}
                               validationCallback={(res) =>
                                 this.setState({
@@ -835,7 +834,7 @@ export default class FormAssessIdeas extends Component {
                               name="proReason4"
                               value={proReason4}
                               disabled={false}
-                              placeholder="Place the reason 4 here"
+                              placeholder="Please write your reason 4 here"
                               validate={validate}
                               validationCallback={(res) =>
                                 this.setState({
@@ -867,7 +866,7 @@ export default class FormAssessIdeas extends Component {
                               name="proReason5"
                               value={proReason5}
                               disabled={false}
-                              placeholder="Place the reason 5 here"
+                              placeholder="Please write your reason 5 here"
                               validate={validate}
                               validationCallback={(res) =>
                                 this.setState({
@@ -910,7 +909,6 @@ export default class FormAssessIdeas extends Component {
                               className="icon icon-insert-drive-file"
                               style={{ ...labelContentStyle, fontSize: "20px" }}
                             />
-                            &nbsp;
                             <span style={labelContentStyle}>
                               Imagine you’re an opponent of this idea. Name up
                               to 5 reasons why you would be so ‘against’ this
@@ -924,7 +922,7 @@ export default class FormAssessIdeas extends Component {
                               name="againstReason1"
                               value={againstReason1}
                               disabled={false}
-                              placeholder="Place the reason 1 here"
+                              placeholder="Please write your reason 1 here"
                               validate={validate}
                               validationCallback={(res) =>
                                 this.setState({
@@ -956,7 +954,7 @@ export default class FormAssessIdeas extends Component {
                               name="againstReason2"
                               value={againstReason2}
                               disabled={false}
-                              placeholder="Place the reason 2 here"
+                              placeholder="Please write your reason 2 here"
                               validate={validate}
                               validationCallback={(res) =>
                                 this.setState({
@@ -988,7 +986,7 @@ export default class FormAssessIdeas extends Component {
                               name="againstReason3"
                               value={againstReason3}
                               disabled={false}
-                              placeholder="Place the reason 3 here"
+                              placeholder="Please write your reason 3 here"
                               validate={validate}
                               validationCallback={(res) =>
                                 this.setState({
@@ -1020,7 +1018,7 @@ export default class FormAssessIdeas extends Component {
                               name="againstReason4"
                               value={againstReason4}
                               disabled={false}
-                              placeholder="Place the reason 4 here"
+                              placeholder="Please write your reason 4 here"
                               validate={validate}
                               validationCallback={(res) =>
                                 this.setState({
@@ -1052,7 +1050,7 @@ export default class FormAssessIdeas extends Component {
                               name="againstReason5"
                               value={againstReason5}
                               disabled={false}
-                              placeholder="Place the reason 5 here"
+                              placeholder="Please write your reason 5 here"
                               validate={validate}
                               validationCallback={(res) =>
                                 this.setState({
@@ -1096,9 +1094,10 @@ export default class FormAssessIdeas extends Component {
                               className="icon icon-info"
                               style={{ ...labelContentStyle, fontSize: "20px" }}
                             />
-                            &nbsp;
                             <span style={labelContentStyle}>
-                              What do you expect as time to impact for this idea
+                              How long do you expect it will take before this
+                              solution is widely-used by the target-audience?
+                              (10 being rapid adaptation, 1 being very slow)
                             </span>
                           </div>
                           <div style={{ flex: "6 6 0px", display: "flex" }}>
@@ -1162,7 +1161,7 @@ export default class FormAssessIdeas extends Component {
                               name="explanation5"
                               value={explanation5}
                               disabled={false}
-                              placeholder="Place your explanation here"
+                              placeholder="Please write your explanation here"
                               validate={validate}
                               validationCallback={(res) =>
                                 this.setState({
@@ -1206,10 +1205,11 @@ export default class FormAssessIdeas extends Component {
                               className="icon icon-info"
                               style={{ ...labelContentStyle, fontSize: "20px" }}
                             />
-                            &nbsp;
                             <span style={labelContentStyle}>
-                              What do you expect as magnitude of impact for this
-                              idea?
+                              How much of an impact do you expect this idea to
+                              have on the current industry? (10 being a future
+                              market leader, 1 being a niche product within the
+                              sector)
                             </span>
                           </div>
                           <div style={{ flex: "6 6 0px", display: "flex" }}>
@@ -1273,7 +1273,7 @@ export default class FormAssessIdeas extends Component {
                               name="explanation6"
                               value={explanation6}
                               disabled={false}
-                              placeholder="Place your explanation here"
+                              placeholder="Please write your explanation here"
                               validate={validate}
                               validationCallback={(res) =>
                                 this.setState({
@@ -1316,11 +1316,10 @@ export default class FormAssessIdeas extends Component {
                               className="icon icon-insert-drive-file"
                               style={{ ...labelContentStyle, fontSize: "20px" }}
                             />
-                            &nbsp;
                             <span style={labelContentStyle}>
                               Why is this not yet out there? Why have people in
-                              this field or that could be helped by it, not
-                              successfully created it yet?
+                              this field or that could be helped by this idea,
+                              not successfully created it yet?
                             </span>
                           </div>
                           <div style={{ flex: "6 6 0px" }}>
@@ -1373,7 +1372,6 @@ export default class FormAssessIdeas extends Component {
                               className="icon icon-insert-drive-file"
                               style={{ ...labelContentStyle, fontSize: "20px" }}
                             />
-                            &nbsp;
                             <span style={labelContentStyle}>
                               Who would in your opinion be the ideal customers
                               for this idea?
@@ -1386,7 +1384,7 @@ export default class FormAssessIdeas extends Component {
                               name="explanation8"
                               value={explanation8}
                               disabled={false}
-                              placeholder="Place your explanation here"
+                              placeholder="Please write your explanation here"
                               validate={validate}
                               validationCallback={(res) =>
                                 this.setState({
@@ -1429,7 +1427,6 @@ export default class FormAssessIdeas extends Component {
                               className="icon icon-insert-drive-file"
                               style={{ ...labelContentStyle, fontSize: "20px" }}
                             />
-                            &nbsp;
                             <span style={labelContentStyle}>
                               Can you think of a way to make this idea even
                               better?
@@ -1442,7 +1439,7 @@ export default class FormAssessIdeas extends Component {
                               name="explanation9"
                               value={explanation9}
                               disabled={false}
-                              placeholder="Place your explanation here"
+                              placeholder="Please write your explanation here"
                               validate={validate}
                               validationCallback={(res) =>
                                 this.setState({
@@ -1486,7 +1483,6 @@ export default class FormAssessIdeas extends Component {
                               className="icon icon-assignment-late"
                               style={{ ...labelContentStyle, fontSize: "20px" }}
                             />
-                            &nbsp;
                             <span style={labelContentStyle}>
                               Do you want to champion this idea by giving it a
                               star? By doing this, we will more
@@ -1610,7 +1606,6 @@ export default class FormAssessIdeas extends Component {
                                   fontSize: "20px",
                                 }}
                               />
-                              &nbsp;
                               <span style={labelContentStyle}>
                                 Would you like to apply to become a mentor for
                                 this idea? If the team later picks you as one of
