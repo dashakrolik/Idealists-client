@@ -24,11 +24,9 @@ export default function CommentForm(props) {
         .send({ comment: { title, message } })
         .then((res) => {
           if (res.status === 201) {
-            setTimeout(function(){
               setSucces(true);
               setSentComment(false)
               reFetch()
-            }, 3000)
           }
         })
         .catch((err) => {
@@ -40,7 +38,6 @@ export default function CommentForm(props) {
   }
 
   const CancelAddComment = () => props.showForm(false);
-  console.log("loading:", loaded)
   const render = !succes ? (
     <form className="comment-form">
       Title:

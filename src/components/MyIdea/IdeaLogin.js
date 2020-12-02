@@ -27,12 +27,10 @@ export default function InvestorLogin(props) {
   };
 
   if (props.authState.loggedIn) {
-    setTimeout(function(){
       props.user();
 
-    props.history.replace("/MyIdea/new");
-    return <div></div>;
-    }, 5000)
+      props.history.replace("/MyIdea/new");
+      return <div></div>;
   }
 
   if (props.authState.loggedIn !== true)

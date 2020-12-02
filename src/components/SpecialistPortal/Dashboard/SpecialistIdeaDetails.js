@@ -133,7 +133,6 @@ export default function IdeaDashboardDetail(props) {
       .get(`${baseUrl}/ideas/${ideasId}`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then((res) => {
-        setTimeout(function(){
         setIdeaOwner(res.body.user);
         setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
@@ -141,7 +140,6 @@ export default function IdeaDashboardDetail(props) {
         setComments(res.body.comments);
         setIndustryIdea(res.body.industryIdea);
         setLoading(false);
-        }, 3000)
       });
   }, []);
 

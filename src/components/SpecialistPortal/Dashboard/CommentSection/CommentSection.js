@@ -12,7 +12,6 @@ export default function CommentSection(props) {
   const { id, show, loading } = props;
   const [commentsData, setCommentsData] = useState([]);
   const [showAddComment, setShowAddComment] = useState(false);
-  console.log('comSection:', loading)
   
   const fetchComments = () => {
     request
@@ -28,7 +27,6 @@ export default function CommentSection(props) {
   }, []);
 
   const renderComments = () => {
-    console.log('comments', commentsData)
     if (commentsData.length === 0)
       return (
         <StyledCard>
@@ -76,9 +74,6 @@ export default function CommentSection(props) {
         <Button text="Hide Comments" onClick={() => show(false)} />
       </StyledCard>
       <div className="commentsectioncontent">{renderComments()}</div>
-      {/* <StyledCard>
-        <Button text="Hide Comments" onClick={() => show(false)} />
-      </StyledCard> */}
       {renderAddComment()}
     </>
   );
