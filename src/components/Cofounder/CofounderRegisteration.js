@@ -20,7 +20,6 @@ import CofounderStart from './CofounderStart';
 const CofounderRegistration = (props) => {
 
     const [formValidated, setFormValidated] = useState(false);
-    const [value, setValue] = useState('')
 
     const [formData, setFormData] = useState({
         firstName: {
@@ -54,12 +53,12 @@ const CofounderRegistration = (props) => {
             validated: true,
         },
         role: {
-            value: 'creator' || 'catalyst',
+            value: '',
             shouldShowError: false,
-            validated: true
+            validated: false,
         }
     });
-
+    console.log('formData', formData)
     const passwordRegEx = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])");
 
     const formValidations = {
@@ -88,8 +87,8 @@ const CofounderRegistration = (props) => {
             shouldShowError: (val) => true,
         },
         role: {
-            validator: (val) => (val.length <= 100),
-            shouldShowError: (val) => (val.length > 4)
+            validator: (val) => (val === 'catalyst' || 'creator'),
+            shouldShowError: (val) => true,
         }
     };
 
@@ -151,6 +150,8 @@ const CofounderRegistration = (props) => {
         });
     };
 
+
+
     const signup = () => {
 
         const { firstName, lastName, email, password, country, role } = formData;
@@ -166,7 +167,7 @@ const CofounderRegistration = (props) => {
             })
             .then(res => {
                 if (res.status === 200) {
-                    props.history.push(`MyIdea/login`)
+                    props.history.push(`Cofounder/login`)
                 }
             })
             .catch(err => {
@@ -178,18 +179,7 @@ const CofounderRegistration = (props) => {
             });
     };
 
-    const handleRoleChange = (event) => {
-        event.preventDefault()
-        setValue(event.target.value);
-        if (value === null) {
-            alert('you must chose your role to submit the form')
-        }
-        // if (value === 'creator') {
-        //     setRole('creator')
-        // } else {
-        //     setRole('catalyst')
-        // }
-    };
+
 
     return (
         <Container pose={props.show ? 'show' : 'hide'} css={css`justify-self: flex-end; width: 100%;`}>
@@ -300,8 +290,12 @@ const CofounderRegistration = (props) => {
                     <FlexRow>
                         <FlexColumn>
                             <FormGroup>
-                                <label>Co-founder's role</label>
-                                <RadioGroup row aria-label='roles' name="role" value={value} onChange={handleRoleChange} style={{
+                                <label>
+                                    {formData.role.shouldShowError && !formData.role.validated &&
+                                        <span css={css`font-weight: 800; color: #ff4444;`}
+                                        > / filed can not be left empty</span>}
+                                    Co-founder's role</label>
+                                <RadioGroup row aria-label='roles' name="role" value={formData.role.value} onChange={handleChange} style={{
                                     display: 'flex', flexWrap: 'nowrap',
                                     flexDirection: 'row'
                                 }}>
