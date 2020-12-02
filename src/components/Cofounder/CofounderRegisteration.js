@@ -179,8 +179,8 @@ const CofounderRegistration = (props) => {
     };
 
     const handleRoleChange = (event) => {
-        setValue(event.target.value);
         event.preventDefault()
+        setValue(event.target.value);
         if (value === null) {
             alert('you must chose your role to submit the form')
         }
