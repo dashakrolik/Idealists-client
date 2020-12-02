@@ -10,12 +10,25 @@ const SingleLineQuestion = (props) => {
   const [isStillInit, setIsStillInit] = useState(true);
   const [validated, setValidated] = useState(false);
   const [currentValue, setCurrentValue] = useState("");
+  const [errors, setErrors] = useState(false);
 
   useEffect(() => {
     props.onValidationChange && props.onValidationChange(props.id, validated);
   }, [validated]);
 
   useEffect(() => {
+    if (props.maxWords) {
+      const replaceComma = currentValue.trim().replace(/,/g, " ");
+      const removeSpaces = replaceComma.replace(/\s\s+/g, " ");
+      const splitBySpace = removeSpaces.trim().split(" ");
+      const numOfWords = splitBySpace.length;
+      if (numOfWords > props.maxWords) {
+        setErrors(true);
+      } else {
+        setErrors(false);
+      }
+    }
+
     if (currentValue.length > 1 && currentValue.length < props.maxChar) {
       setValidated(true);
     } else {
@@ -81,7 +94,7 @@ const SingleLineQuestion = (props) => {
       )}
       <ErrorMessage
         pose={
-          !isStillInit && !!props.validationRegex && !validated
+          (!isStillInit && !!props.validationRegex && !validated) || errors
             ? "show"
             : "hide"
         }
