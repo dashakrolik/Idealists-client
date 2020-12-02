@@ -10,27 +10,26 @@ const SingleLineQuestion = (props) => {
   const [isStillInit, setIsStillInit] = useState(true);
   const [validated, setValidated] = useState(false);
   const [currentValue, setCurrentValue] = useState("");
-  const [errors, setErrors] = useState(false);
 
   useEffect(() => {
     props.onValidationChange && props.onValidationChange(props.id, validated);
   }, [validated]);
 
   useEffect(() => {
-    if (props.maxWords) {
-      const replaceComma = currentValue.trim().replace(/,/g, " ");
-      const removeSpaces = replaceComma.replace(/\s\s+/g, " ");
-      const splitBySpace = removeSpaces.trim().split(" ");
-      const numOfWords = splitBySpace.length;
-      if (numOfWords > props.maxWords) {
-        setErrors(true);
-      } else {
-        setErrors(false);
-      }
-    }
-
     if (currentValue.length > 1 && currentValue.length < props.maxChar) {
-      setValidated(true);
+      if (props.maxWords) {
+        const replaceComma = currentValue.trim().replace(/,/g, " ");
+        const removeSpaces = replaceComma.replace(/\s\s+/g, " ");
+        const splitBySpace = removeSpaces.trim().split(" ");
+        const numOfWords = splitBySpace.length;
+        if (numOfWords <= props.maxWords) {
+          setValidated(true);
+        } else {
+          setValidated(false);
+        }
+      } else {
+        setValidated(true);
+      }
     } else {
       setValidated(false);
     }
@@ -94,7 +93,7 @@ const SingleLineQuestion = (props) => {
       )}
       <ErrorMessage
         pose={
-          (!isStillInit && !!props.validationRegex && !validated) || errors
+          !isStillInit && !!props.validationRegex && !validated
             ? "show"
             : "hide"
         }
