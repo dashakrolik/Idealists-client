@@ -37,6 +37,7 @@ import CompleteAssessment from "./components/InvestorsPortal/Dashboard/CompleteA
 import AddSpecialistStart from "./components/SpecialistPortal/SpecialistCreation/AddSpecialistStart";
 import UserAssessIdeas from "./components/MyIdea/Dashboard/UserAssessIdeas";
 import CofounderStart from './components/Cofounder/CofounderStart'
+import CofounderLogin from "./components/Cofounder/CofounderLogin";
 
 
 class App extends Component {
@@ -648,12 +649,12 @@ class App extends Component {
                   );
                 }}
               />
-                            {/* <Route
+              <Route
                 exact
-                path="/cofounder/signup"
+                path="/Cofounder/login"
                 render={(props) => {
                   return (
-                    <CofounderStart
+                    <CofounderLogin
                       {...props}
                       authState={this.state.auth}
                       login={this.requestLoginUser}
@@ -664,7 +665,7 @@ class App extends Component {
                     />
                   );
                 }}
-              /> */}
+              />
               <Route
                 exact
                 path="/InvestorStart"

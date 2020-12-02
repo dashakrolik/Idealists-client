@@ -12,7 +12,7 @@ const CofounderStart = (props) => {
 
 
     const existingUser = () => {
-        props.history.push('/Myidea/login');
+        props.history.push('/Cofounder/login');
     };
     const newUser = () => {
         if (props.authState.loggedIn) {
@@ -28,10 +28,10 @@ const CofounderStart = (props) => {
     return (
         <Container>
             <Global styles={css`
-        body {
-          background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
-        }
-      `} />
+            body {
+            background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
+            }
+        `} />
             <Content>
                 <div css={css`grid-area: content-area`}>
                     <div css={css`display: flex; align-items: center; flex-direction: column;`}>
@@ -39,13 +39,13 @@ const CofounderStart = (props) => {
                             css={css`display: flex; flex-direction: column; width: auto; margin-bottom: 60px;`}>
                             <Heading css={css`@media only screen and (orientation:portrait) { margin-top: 60px;}`}>
                                 My co-founder page
-                            </Heading>
+                        </Heading>
                             <Paragraph>
                                 Welcome to your co-founder Page. Below you can login.
-                            </Paragraph>
+                        </Paragraph>
                             <Paragraph>
                                 If you don’t have an account yet, create your account below.
-                            </Paragraph>
+                        </Paragraph>
                             <Controls css={css`display: flex; flex-wrap: wrap; justify-content: flex-start;`}>
                                 <Button text={'Existing User'} onClick={existingUser} />
                                 <Button text={'New User'} onClick={newUser} />
