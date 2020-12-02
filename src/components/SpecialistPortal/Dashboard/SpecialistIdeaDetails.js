@@ -16,6 +16,7 @@ import CommentsPDFCreator from "./Download/CommentsPDFCreator";
 import FullPDFCreator from "./Download/FullPDFCreator";
 import ProgressBar from "../../reogranisation/ProgressBar/ProgressBar";
 import IdeaDetails from "../../reogranisation/IdeaDetails/IdeaDetails";
+import Spinner from "../../reogranisation/Spinner";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
@@ -29,6 +30,7 @@ export default function IdeaDashboardDetail(props) {
   const [industryIdea, setIndustryIdea] = useState({});
   const ideasId = props.match.params.id;
   const [rejected, setRejected] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const docsUploaded = (
     <section>
@@ -131,14 +133,27 @@ export default function IdeaDashboardDetail(props) {
       .get(`${baseUrl}/ideas/${ideasId}`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then((res) => {
+        setTimeout(function(){
         setIdeaOwner(res.body.user);
         setProgress(res.body.progress);
         setUserIdeas(res.body.idea);
         setAssessments(res.body.assessments);
         setComments(res.body.comments);
         setIndustryIdea(res.body.industryIdea);
+        setLoading(false);
+        }, 3000)
       });
   }, []);
+
+  if(loading){
+    return (
+      <SpinnerStyle>
+        <SpinnerPostion>
+          <Spinner />
+        </SpinnerPostion>
+      </SpinnerStyle>
+    )
+  }
 
   const renderAssessmentSection = !showAssessmentSection ? (
     <>
@@ -438,6 +453,22 @@ const Left = styled.div`
   padding-top: 100px;
   padding-left: 30px;
 `;
+
+const SpinnerStyle = styled.div`
+  display: flex;
+  align-itmes: center;
+  justify-content: center;
+  background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+`;
+
+const SpinnerPostion = styled.div`
+  margin-top: 370px;
+`
 
 const FlexRow = styled.div`
   display: flex;

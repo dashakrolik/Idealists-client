@@ -83,7 +83,7 @@ const Middle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 400px;
+  margin-top: 370px;
 `
 
 const LeftSide = styled.div`
