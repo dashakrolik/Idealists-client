@@ -36,6 +36,11 @@ import AdminDashboardRejected from "./components/Admin/AdminDashboardRejected";
 import CompleteAssessment from "./components/InvestorsPortal/Dashboard/CompleteAssessment";
 import AddSpecialistStart from "./components/SpecialistPortal/SpecialistCreation/AddSpecialistStart";
 import UserAssessIdeas from "./components/MyIdea/Dashboard/UserAssessIdeas";
+import { useHistory } from "react-router-dom";
+import Button from './components/reogranisation/Questions/Button';
+
+// const history = useHistory(); 
+
 
 class App extends Component {
   state = {
@@ -48,6 +53,7 @@ class App extends Component {
       activePath: "",
     },
   };
+
 
   rejectIdea = (rejected, ideasId) => {
     request
@@ -366,7 +372,12 @@ class App extends Component {
 
   render() {
     return (
+      <div>
+    
       <Router>
+      <div>
+         <p>ooooooooo</p>
+         </div>
         <div>
           <TopBar
             authState={this.state.auth}
@@ -885,9 +896,11 @@ class App extends Component {
           </ThemeProvider>
         </div>
       </Router>
+      </div>
     );
   }
 }
+
 
 const theme = {
   colors: {

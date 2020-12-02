@@ -3,7 +3,7 @@ import { jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 
 const SubmissionSideScreen = (props) => {
-  console.log(props.agreementSection)
+  console.log("SubmissionSideScreen",props.agreementSection)
   return (
     <div style={{width: props.agreementSection ? '150xp' : 'auto'}}>
     <Left>

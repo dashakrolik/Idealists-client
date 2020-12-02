@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import React from "react"
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
@@ -9,6 +10,9 @@ import QuestionGroup from '../../reogranisation/Questions/QuestionGroup';
 import Button from '../../reogranisation/Questions/Button';
 import SubmissionSideScreen from './SubmissionSideScreen';
 import CompleteSubmission from './CompleteSubmission';
+import { useHistory } from "react-router-dom";
+
+
 
 const Submission = (props) => {
   const [activeGroup, setActiveGroup] = useState(0);
@@ -19,12 +23,12 @@ const Submission = (props) => {
   const [valueDecideProfit, setValueDecideProfit] = useState(false);
   const [valueDecideSdg, setValueDecideSdg] = useState(false);
   const [agreementSection, setAgreementSection] = useState(false);
-  const questionGroups = [...jsonFormData]
+  const questionGroups = [...jsonFormData];
+  const history = useHistory(); 
 
   useEffect(() => {
     setProgress(activeGroup / questionGroups.length);
   }, [activeGroup]);
-
 
   if (!props.authState.user) {
     props.user()
@@ -39,12 +43,13 @@ const Submission = (props) => {
         [id]: value,
       },
     });
+    console.log(answers, 'answers in Submission.js; handleAnswers function');
   };
 
   const handleNextBttnClick = () => {
-    console.log(activeGroup, questionGroups.length)
+    // console.log(activeGroup, questionGroups.length)
     if ((activeGroup) === questionGroups.length) {
-      console.log(activeGroup, questionGroups.length)
+      // console.log(activeGroup, questionGroups.length)
       setAgreementSection(false);
     }
     else if ((activeGroup === 11) && (questionGroups.length === 12)) {
@@ -53,7 +58,7 @@ const Submission = (props) => {
     
     } else {
       setActiveGroup(activeGroup + 1);
-      console.log(activeGroup, questionGroups.length)
+      // console.log(activeGroup, questionGroups.length)
       setAgreementSection(false);
     }
   };
@@ -85,6 +90,15 @@ const Submission = (props) => {
     return <div></div>;
   }
   if (questionGroups.length === 0) return <div>Loading...</div>;
+
+  const handleBackBttnClick = () => {
+
+      setActiveGroup(activeGroup - 1);
+      // console.log(activeGroup, questionGroups.length)
+      console.log(answers)
+      console.log("questionGroups", questionGroups)
+      setAgreementSection(false);
+  }
 
   return (
     <div>
@@ -130,15 +144,17 @@ const Submission = (props) => {
           </Content>
         </Right>
         <div css={css`position: absolute; right: 20px; bottom: 20px; width: 160px;`}>
-          {activeGroup !== questionGroups.length &&
+          {activeGroup !== questionGroups.length && 
             <Button text='Next' disabled={!activeGroupComplete} onClick={handleNextBttnClick} withIcon />}
-        </div>
 
+            {activeGroup !== 0 &&  <Button text="Back" onClick={handleBackBttnClick}/>}
+              {/* <Button text="Back" disabled={activeGroup === 0} onClick={handleBackBttnClick}/> */}
+              {/* <Button text="Previous" onClick={() => history.goBack()}/> */}
+        </div>
       </Container>
     </div>
   );
 };
-
 
 const PProgressBar = posed.div({
   visible: {
