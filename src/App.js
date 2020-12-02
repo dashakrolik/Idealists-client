@@ -36,7 +36,7 @@ import AdminDashboardRejected from "./components/Admin/AdminDashboardRejected";
 import CompleteAssessment from "./components/InvestorsPortal/Dashboard/CompleteAssessment";
 import AddSpecialistStart from "./components/SpecialistPortal/SpecialistCreation/AddSpecialistStart";
 import UserAssessIdeas from "./components/MyIdea/Dashboard/UserAssessIdeas";
-import CofounderStart from './components/Creator/CofounderStart'
+import CofounderStart from './components/Cofounder/CofounderStart'
 
 
 class App extends Component {
@@ -633,7 +633,7 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/cofounderStart"
+                path="/CofounderStart"
                 render={(props) => {
                   return (
                     <CofounderStart

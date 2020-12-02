@@ -16,7 +16,7 @@ const CofounderStart = (props) => {
     };
     const newUser = () => {
         if (props.authState.loggedIn) {
-            props.history.push('/cofounder/signup');
+            props.history.push('/Cofounder');
         } else {
             setUiState('displayingLogin');
         }

@@ -37,7 +37,7 @@ const TopBar = (props) => {
 
               <Button
                 color="inherit"
-                onClick={() => props.history.push("/cofounderStart")}
+                onClick={() => props.history.push("/CofounderStart")}
               >
                 Co-founder
             </Button >
