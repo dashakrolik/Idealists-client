@@ -633,7 +633,6 @@
         "text": "Describe your idea in up to 3 words *",
         "validationRegex": "^(?:[A-Za-z,]+ ){0,2}[A-Za-z]+$",
         "maxChar": 150,
-        "maxWords": 3,
         "validationErrorMsg": "Please separate the words by commas or spaces only, and number of words cannot be more than 3 words."
       },
       {
