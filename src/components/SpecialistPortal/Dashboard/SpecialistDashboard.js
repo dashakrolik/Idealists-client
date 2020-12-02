@@ -5,6 +5,7 @@ import { Redirect, Link } from "react-router-dom";
 import "./SpecialistDashboard.css";
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
+import Spinner from "../../reogranisation/Spinner";
 // import assess from '../../../res/assess-white.png'
 // import invest from '../../../res/invest-white.png'
 // import crowdfunding from '../../../res/crowdfunding.png'
@@ -12,6 +13,7 @@ import Card from "@material-ui/core/Card";
 export default function specialistDashboard(props) {
   const [userData, setUserData] = useState({});
   const [ideaList, setIdeaList] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (props.authState.loggedIn)
@@ -30,8 +32,15 @@ export default function specialistDashboard(props) {
     request
       .get(`${baseUrl}/ideas/specialist`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      .then((res) => setIdeaList(res.body));
+      .then((res) => {
+        setIdeaList(res.body)
+        setLoading(false)
+      });
   }, []);
+  
+  if(loading && !ideaList){
+    return <Container><Spinner /></Container>
+  }
 
   if (!props.authState.loggedIn) return <Redirect to="/Specialist/login" />;
 
@@ -228,3 +237,16 @@ const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
 `;
+
+const Container = styled.div`
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
+    display: flex;
+  `;
