@@ -87,7 +87,7 @@ const CofounderRegistration = (props) => {
             shouldShowError: (val) => true,
         },
         role: {
-            validator: (val) => (val === 'catalyst' || 'creator'),
+            validator: (val) => (val !== ''),
             shouldShowError: (val) => true,
         }
     };
@@ -298,7 +298,7 @@ const CofounderRegistration = (props) => {
                                 <RadioGroup row aria-label='roles' name="role" value={formData.role.value} onChange={handleChange} style={{
                                     display: 'flex', flexWrap: 'nowrap',
                                     flexDirection: 'row'
-                                }}>
+                                }} onBlur={enableValidation} require>
                                     <FormControlLabel value='creator' control={<Radio />} label="creator" labelPlacement="start" style={{
                                         display: 'flex',
                                         justifyContent: 'center',
