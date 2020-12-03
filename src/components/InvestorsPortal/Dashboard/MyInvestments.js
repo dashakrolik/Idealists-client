@@ -4,9 +4,13 @@ import { baseUrl } from "../../../constants";
 import "./InvestorDashboard.css";
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
+import { useHistory } from "react-router-dom";
+import Button from '../../reogranisation/Questions/Button';
+
 
 export default function AssessIdeas(props) {
   const [userData, setUserData] = useState({});
+  const history = useHistory(); 
 
   useEffect(() => {
     if (props.authState.loggedIn)
@@ -28,6 +32,9 @@ export default function AssessIdeas(props) {
       <br />
       <br />
       <h2 className="title">This is {userData.firstName}'s dashboard</h2>
+      <div style={{ width: "12rem", margin: "auto" }}>
+      <Button text="Go back" onClick={() => history.goBack()}/>
+      </div>
       <StyledCard>
         Here you can track how all of your investments are performing and ask
         the founders questions or help them with your feedback.

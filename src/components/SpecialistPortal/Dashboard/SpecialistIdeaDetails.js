@@ -16,6 +16,7 @@ import CommentsPDFCreator from "./Download/CommentsPDFCreator";
 import FullPDFCreator from "./Download/FullPDFCreator";
 import ProgressBar from "../../reogranisation/ProgressBar/ProgressBar";
 import IdeaDetails from "../../reogranisation/IdeaDetails/IdeaDetails";
+import { useHistory } from "react-router-dom";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
@@ -29,6 +30,8 @@ export default function IdeaDashboardDetail(props) {
   const [industryIdea, setIndustryIdea] = useState({});
   const ideasId = props.match.params.id;
   const [rejected, setRejected] = useState(false);
+  const history = useHistory(); 
+
 
   const docsUploaded = (
     <section>
@@ -261,6 +264,9 @@ export default function IdeaDashboardDetail(props) {
 
   return (
     <div className="dashboard-container">
+      <div style={{ width: "12rem", margin: "auto" }}>
+      <Button text="Go back" onClick={() => history.goBack()}/>
+      </div>
       <Container>
         <Left>
           <ProgressBar

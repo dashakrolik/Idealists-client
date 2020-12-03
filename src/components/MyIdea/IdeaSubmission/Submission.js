@@ -146,7 +146,6 @@ const Submission = (props) => {
         <div css={css`position: absolute; right: 20px; bottom: 20px; width: 160px;`}>
           {activeGroup !== questionGroups.length && 
             <Button text='Next' disabled={!activeGroupComplete} onClick={handleNextBttnClick} withIcon />}
-
             {activeGroup !== 0 &&  <Button text="Back" onClick={handleBackBttnClick}/>}
               {/* <Button text="Back" disabled={activeGroup === 0} onClick={handleBackBttnClick}/> */}
               {/* <Button text="Previous" onClick={() => history.goBack()}/> */}

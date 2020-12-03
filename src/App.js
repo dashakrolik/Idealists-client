@@ -375,9 +375,6 @@ class App extends Component {
       <div>
     
       <Router>
-      <div>
-         <p>ooooooooo</p>
-         </div>
         <div>
           <TopBar
             authState={this.state.auth}
