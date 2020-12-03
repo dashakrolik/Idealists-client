@@ -81,18 +81,35 @@ export default function IdeaDashboardDetail(props) {
   // This loop results in an array that determines the current phase and completed phase(s).
   // "is-done" and "current" refer to CSS class names used in the progress bar
   // the switch statement below the loop depends on this progressStep array
-  const progressStep = [""];
-  for (let i = 1; i < 10; i++) {
-    const step = progress[`step0${i}`]
-      ? "is-done"
-      : progress[`step0${i - 1}`]
-      ? "current"
-      : "";
-    progressStep.push(step);
-  }
+
+  // const progressStep = [""];
+  // for (let i = 1; i <= 10; i++) {
+  //   if (i === 1) {
+  //     !progress.step01
+  //       ? progressStep.push(`current`)
+  //       : progressStep.push(`is-done`);
+  //   } else {
+  //     const step =
+  //       progress[`step0${i}`] && !progress[`step0${i + 1}`]
+  //         ? "is-done"
+  //         : progress[`step0${i - 1}`]
+  //         ? "current"
+  //         : "";
+  //     progressStep.push(step);
+  //   }
+  // }
+  // console.log(progressStep);
 
   // this determines the index of the current phase, as setup for the switch statement
-  let currentStepIndex = progressStep.indexOf("current");
+
+  const progressStep = (progress) => {
+    for (let i = 1; i < 10; i++) {
+      if (progress[`step0${i}`] && !progress[`step0${i + 1}`])
+        return i === 1 ? 1 : i + 1;
+    }
+  };
+
+  let currentStepIndex = progressStep(progress);
 
   let nextPhaseName;
   let stepNameInEntity;
