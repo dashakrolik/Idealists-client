@@ -7,8 +7,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import ApproveButton from "./ApproveButton";
-import RejectButton from "./RejectButton";
+import ApproveRejectButton from "./ApproveRejectButton";
 
 // HOW TO USE THIS COMPONENT!
 // This is a re usable component for lists.
@@ -21,7 +20,12 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BasicTable({ data }) {
+export default function BasicTable({
+  data,
+  authState,
+  setCofounders,
+  coFounders,
+}) {
   const classes = useStyles();
 
   return (
@@ -49,10 +53,20 @@ export default function BasicTable({ data }) {
               <TableCell align="right">{row.country}</TableCell>
               <TableCell align="right">{row.industry}</TableCell>
               <TableCell align="right">
-                <RejectButton />
+                <ApproveRejectButton
+                  id={row.id}
+                  authState={authState}
+                  approved={false}
+                />
               </TableCell>
               <TableCell align="right">
-                <ApproveButton />
+                <ApproveRejectButton
+                  coFounders={coFounders}
+                  setCofounders={setCofounders}
+                  id={row.id}
+                  authState={authState}
+                  approved={true}
+                />
               </TableCell>
             </TableRow>
           ))}

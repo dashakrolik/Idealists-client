@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import request from "superagent";
 import { baseUrl } from "../../constants";
-import CofounderApllicant from "./CofounderApplicant";
 import List from "../../material-UI/List";
 
 export default function AdminDashboardCofounders(props) {
@@ -12,7 +11,6 @@ export default function AdminDashboardCofounders(props) {
         .get(`${baseUrl}/users/cofounders`)
         .set("Authorization", `Bearer ${props.authState.token}`)
         .then((res) => {
-          console.log(res.body);
           set_coFounder(res.body);
         });
     else props.history.replace("/login");
@@ -21,8 +19,13 @@ export default function AdminDashboardCofounders(props) {
   return (
     <div style={styles.div}>
       <h1 style={styles.h1}>Admin DashBoard</h1>
-      <h3 style={styles.h3}>Data</h3>
-      <List data={coFounders} />
+      <h3 style={styles.h3}>These co-founders are still awaiting approval:</h3>
+      <List
+        data={coFounders}
+        authState={props.authState}
+        setCofounders={set_coFounder}
+        coFounders={coFounders}
+      />
     </div>
   );
 }
@@ -37,9 +40,9 @@ const styles = {
     // The reason of margin Top is because the initial
     //  element is behind the NavBar! CSS needs to be changed
     marginTop: "100px",
-    color: "Blue",
+    color: "#0f8ddb",
   },
   h3: {
-    color: "lightblue",
+    color: "#0f8ddb",
   },
 };
