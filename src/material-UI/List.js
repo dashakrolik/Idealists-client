@@ -7,6 +7,8 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import ApproveButton from "./ApproveButton";
+import RejectButton from "./RejectButton";
 
 // HOW TO USE THIS COMPONENT!
 // This is a re usable component for lists.
@@ -32,6 +34,8 @@ export default function BasicTable({ data }) {
             <TableCell align="right">Role</TableCell>
             <TableCell align="right">Country</TableCell>
             <TableCell align="right">Industry</TableCell>
+            <TableCell align="right">Reject</TableCell>
+            <TableCell align="right">Approve</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -44,6 +48,12 @@ export default function BasicTable({ data }) {
               <TableCell align="right">{row.role}</TableCell>
               <TableCell align="right">{row.country}</TableCell>
               <TableCell align="right">{row.industry}</TableCell>
+              <TableCell align="right">
+                <RejectButton />
+              </TableCell>
+              <TableCell align="right">
+                <ApproveButton />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

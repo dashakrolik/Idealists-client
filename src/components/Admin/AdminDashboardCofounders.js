@@ -20,8 +20,8 @@ export default function AdminDashboardCofounders(props) {
 
   return (
     <div style={styles.div}>
-      <h1 style={styles.h1}>Approve Page</h1>
-      <h3 style={styles.h3}>Welcome</h3>
+      <h1 style={styles.h1}>Admin DashBoard</h1>
+      <h3 style={styles.h3}>Data</h3>
       <List data={coFounders} />
     </div>
   );
@@ -37,7 +37,7 @@ const styles = {
     // The reason of margin Top is because the initial
     //  element is behind the NavBar! CSS needs to be changed
     marginTop: "100px",
-    color: "green",
+    color: "Blue",
   },
   h3: {
     color: "lightblue",

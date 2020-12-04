@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 // The color which can be "primary" || "secondary" as strings, primary will Render BLUE
 // and secondary color will render RED, no color will Render Grey.
 // Disabled is making the button look like it's DISABLED and its a boolen. true || false value!
+// onClick function takes your functionality
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,12 +18,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ContainedButtons(name, color, disabled) {
+export default function ContainedButtons(name, color, disabled, onClick) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Button variant="contained" color={color} disabled={disabled}>
+      <Button
+        onClick={onClick}
+        variant="contained"
+        color={color}
+        disabled={disabled}
+      >
         {name}
       </Button>
     </div>
