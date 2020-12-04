@@ -15,7 +15,6 @@ export default function AdminDashboardCofounders(props) {
     else props.history.replace("/login");
   }, []);
 
-  console.log(coFounders);
   return (
     <div>
       {coFounders ? (
