@@ -5,15 +5,12 @@ import { Redirect, Link } from "react-router-dom";
 import "../MyIdea/Dashboard/IdeaDashboard.css";
 import mentor from "../../res/mentor.png";
 import assess from "../../res/assess-white.png";
-import { useHistory } from "react-router-dom";
-import Button from '../reogranisation/Questions/Button';
 
 
 
 export default function AdminDashboard(props) {
   const [user, setUserData] = useState({});
   const [userIdeas, setUserIdeas] = useState([]);
-  const history = useHistory(); 
 
 
   useEffect(() => {
@@ -59,9 +56,6 @@ export default function AdminDashboard(props) {
       <br />
 
       <br />
-      <div>
-      <Button text="Previous" onClick={() => history.goBack()}/>
-      </div>
       <div className="title">
         <h1>{user.firstName}'s Admin Dashboard</h1>
       </div>
