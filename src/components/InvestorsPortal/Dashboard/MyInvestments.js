@@ -32,7 +32,7 @@ export default function AssessIdeas(props) {
       <br />
       <br />
       <h2 className="title">This is {userData.firstName}'s dashboard</h2>
-      <div style={{ width: "12rem", margin: "auto" }}>
+      <div style={{ width: "12rem", margin: "auto", paddingBottom: "50px" }}>
       <Button text="Go back" onClick={() => history.goBack()}/>
       </div>
       <StyledCard>
