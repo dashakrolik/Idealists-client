@@ -127,7 +127,7 @@ const TopBar = (props) => {
               color="inherit"
               onClick={() => props.history.push("/InvestorStart")}
             >
-              Expert Login
+              Investor Login
             </Button>
           ) : null}
           {!localStorage.currentUserJwt || !props.authState.loggedIn ? (

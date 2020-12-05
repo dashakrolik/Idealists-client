@@ -10,6 +10,7 @@ import Button from '../../reogranisation/Questions/Button';
 import posed from 'react-pose';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'
+import Spinner from '../../reogranisation/Spinner';
 
 export default function IdeaDashboardDetail(props) {
   // const [user, setUserData] = useState({});
@@ -245,7 +246,11 @@ export default function IdeaDashboardDetail(props) {
       </Container>
     )
   } else {
-    return (<Heading>Loading...</Heading>)
+    return (
+      <Container>
+        <Spinner />
+      </Container>
+    )
   }
 }
 const PStartContent = posed.div({
