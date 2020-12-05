@@ -26,7 +26,7 @@ export default function CofounderDashboard(props) {
   if (props.authState.isApproved === false) return <h1>Your Application has been rejected, you wont be able to view and bid on ideas</h1>;
 
   
-  if (props.authState.isApproved === true)
+  // if (props.authState.isApproved === true)
     return (
       <div className="dashboard-container">
         <br />

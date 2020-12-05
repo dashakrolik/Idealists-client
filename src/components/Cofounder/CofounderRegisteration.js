@@ -58,7 +58,6 @@ const CofounderRegistration = (props) => {
             validated: false,
         }
     });
-    console.log('formData', formData)
     const passwordRegEx = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])");
 
     const formValidations = {
