@@ -64,11 +64,11 @@ export default function AdminDashboard(props) {
 
     for (let i = 1; i <= 10; i++) {
       if (i === 10) return "Company is born!";
+      if (i === 1 && !idea.progress[`step0${i}`]) return progress[0];
       if (
         idea.progress[`step0${i}`] === true &&
         idea.progress[`step0${i + 1}`] === false
       ) {
-        // console.log("Idea Progress step @AdminDashboard.js i = ", i);
         return progress[i - 1];
       }
     }
