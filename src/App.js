@@ -36,7 +36,9 @@ import AdminDashboardRejected from "./components/Admin/AdminDashboardRejected";
 import CompleteAssessment from "./components/InvestorsPortal/Dashboard/CompleteAssessment";
 import AddSpecialistStart from "./components/SpecialistPortal/SpecialistCreation/AddSpecialistStart";
 import UserAssessIdeas from "./components/MyIdea/Dashboard/UserAssessIdeas";
-import ProfileUpdateForm from "./components/Catalyst/ProfileUpdateForm"
+
+import CofounderPersonalityTest from "./components/Cofounder/CofounderPersonalityTest"
+import CofounderProfileVideo from "./components/Cofounder/CofounderProfileVideo"
 
 class App extends Component {
   state = {
@@ -731,16 +733,32 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/updateProfile"
+                path="/cofounderProfileVideo"
                 render={(props) => {
                   return (
-                    <ProfileUpdateForm  
-                      {...props}
-                      authState={this.state.auth}
-                      login={this.requestLoginUser}
-                      user={this.getCurrentUser}
-                      updateLocalStorage={this.updateLocalStorage}
-                      logout={this.logout}
+                    <CofounderProfileVideo  
+                      // {...props}
+                      // authState={this.state.auth}
+                      // login={this.requestLoginUser}
+                      // user={this.getCurrentUser}
+                      // updateLocalStorage={this.updateLocalStorage}
+                      // logout={this.logout}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/cofounderPersonalityTest"
+                render={(props) => {
+                  return (
+                    <CofounderPersonalityTest 
+                      // {...props}
+                      // authState={this.state.auth}
+                      // login={this.requestLoginUser}
+                      // user={this.getCurrentUser}
+                      // updateLocalStorage={this.updateLocalStorage}
+                      // logout={this.logout}
                     />
                   );
                 }}
