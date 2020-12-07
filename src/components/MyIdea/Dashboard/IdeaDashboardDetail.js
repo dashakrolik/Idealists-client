@@ -12,6 +12,7 @@ export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [userId, setUserId] = useState([]);
   const [assessments, setAssessments] = useState([]);
+  const [progress, setProgress] = useState([]);
 
   const ideasId = props.match.params.id;
 
@@ -42,10 +43,18 @@ export default function IdeaDashboardDetail(props) {
       });
   }, []);
 
+  useEffect(() => {
+    request
+      .get(`${baseUrl}/ideas/${ideasId}`)
+      .set("Authorization", `Bearer ${props.authState.token}`)
+      .then((res) => {
+        setProgress(res.body.progress);
+      });
+  }, [props.progress]);
+
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
   }
-
   const renderLeft =
     userId.id === props.authState.user.id ? (
       <>
@@ -53,11 +62,13 @@ export default function IdeaDashboardDetail(props) {
           token={props.authState.token}
           ideasId={props.match.params.id}
         />{" "}
-         <Button
-          color="inherit"
-          text="View Patent Check"
-          onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}
-        />
+        {progress.step01 ? (
+          <Button
+            color="inherit"
+            text="View Patent Check"
+            onClick={() => props.history.push(`/ideas/${ideasId}/automatch`)}
+          />
+        ) : null}
       </>
     ) : (
       <FlexRow>
