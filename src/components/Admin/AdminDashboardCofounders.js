@@ -6,6 +6,11 @@ import List from "../../material-UI/List";
 export default function AdminDashboardCofounders(props) {
   const [coFounders, set_coFounder] = useState([]);
   useEffect(() => {
+    console.log("props.authState", props.authState);
+    console.log("props.authState", props.authState);
+    console.log("props.authState", props.authState);
+    console.log("props.authState", props.authState);
+    console.log("props.authState", props.authState);
     if (props.authState.loggedIn)
       request
         .get(`${baseUrl}/users/cofounders`)

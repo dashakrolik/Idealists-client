@@ -28,7 +28,7 @@ export default function ContainedButtons(props) {
     else props.history.replace("/login");
   };
 
-  console.log(props.coFounders);
+  console.log(props);
   console.log(props.coFounders);
   console.log(props.coFounders);
   console.log(props.coFounders);
