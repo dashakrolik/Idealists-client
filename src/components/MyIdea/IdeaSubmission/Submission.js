@@ -24,7 +24,6 @@ const Submission = (props) => {
   const [valueDecideSdg, setValueDecideSdg] = useState(false);
   const [agreementSection, setAgreementSection] = useState(false);
   const questionGroups = [...jsonFormData];
-  const history = useHistory(); 
 
   useEffect(() => {
     setProgress(activeGroup / questionGroups.length);
@@ -94,9 +93,6 @@ const Submission = (props) => {
   const handleBackBttnClick = () => {
 
       setActiveGroup(activeGroup - 1);
-      // console.log(activeGroup, questionGroups.length)
-      console.log(answers)
-      console.log("questionGroups", questionGroups)
       setAgreementSection(false);
   }
 
@@ -132,6 +128,7 @@ const Submission = (props) => {
                       handleValidationChanges={handleValidationChange}
                       key={questionGroups[activeGroup].id.toString()}
                       answers={answers[activeGroup]}
+                      // onChange={}
 
                     />}
                   {(valueDecideProfit) ? <div style={{ color: "red" }}> <br />We are working very hard on building a non-profit version of The Idealists as well. Unfortunately, until that is ready, we cannot accept non-profit ideas yet.
@@ -147,8 +144,6 @@ const Submission = (props) => {
           {activeGroup !== questionGroups.length && 
             <Button text='Next' disabled={!activeGroupComplete} onClick={handleNextBttnClick} withIcon />}
             {activeGroup !== 0 &&  <Button text="Back" onClick={handleBackBttnClick}/>}
-              {/* <Button text="Back" disabled={activeGroup === 0} onClick={handleBackBttnClick}/> */}
-              {/* <Button text="Previous" onClick={() => history.goBack()}/> */}
         </div>
       </Container>
     </div>
