@@ -33,7 +33,7 @@ export default function BasicTable({
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Co-Founders</TableCell>
+            <TableCell>Name</TableCell>
             <TableCell align="right">E-mail</TableCell>
             <TableCell align="right">Role</TableCell>
             <TableCell align="right">Industry</TableCell>
