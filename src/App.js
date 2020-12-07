@@ -17,6 +17,7 @@ import request from "superagent";
 import IdeaDashboard from "./components/MyIdea/Dashboard/IdeaDashboard";
 import AdminDashboard from "./components/Admin/AdminDashboard";
 import AdminDashboardDetail from "./components/Admin/AdminDashboardDetail";
+import AdminDashboardCofounders from "./components/Admin/AdminDashboardCofounders"
 import IdeaDashboardDetail from "./components/MyIdea/Dashboard/IdeaDashboardDetail";
 import IdeaLogin from "./components/MyIdea/IdeaLogin";
 import TopBar from "./components/NavBar/TopBar";
@@ -783,6 +784,22 @@ class App extends Component {
                 render={(props) => {
                   return (
                     <AdminDashboardRejected
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/AdminDashboard/cofounders"
+                render={(props) => {
+                  return (
+                    <AdminDashboardCofounders
                       {...props}
                       authState={this.state.auth}
                       login={this.requestLoginUser}
