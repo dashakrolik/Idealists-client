@@ -42,7 +42,6 @@ const Submission = (props) => {
         [id]: value,
       },
     });
-    console.log(answers, 'answers in Submission.js; handleAnswers function');
   };
 
   const handleNextBttnClick = () => {
@@ -127,9 +126,7 @@ const Submission = (props) => {
                       handleInputFocus={handleInputFocus}
                       handleValidationChanges={handleValidationChange}
                       key={questionGroups[activeGroup].id.toString()}
-                      answers={answers[activeGroup]}
-                      // onChange={}
-
+                      answers={answers}
                     />}
                   {(valueDecideProfit) ? <div style={{ color: "red" }}> <br />We are working very hard on building a non-profit version of The Idealists as well. Unfortunately, until that is ready, we cannot accept non-profit ideas yet.
                      </div> : null}

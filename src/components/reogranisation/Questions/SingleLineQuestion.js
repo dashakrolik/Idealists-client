@@ -9,11 +9,20 @@ const SingleLineQuestion = (props) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isStillInit, setIsStillInit] = useState(true);
   const [validated, setValidated] = useState(false);
-  const [currentValue, setCurrentValue] = useState("");
+  const [currentValue, setCurrentValue] = useState([]);
+  // console.log(props.value, "props in  single line question")
+  const [currentValue2, setCurrentValue2] = useState([]);
 
   useEffect(() => {
     props.onValidationChange && props.onValidationChange(props.id, validated);
   }, [validated]);
+
+  useEffect(()=> { 
+    if
+    (props.value) {
+      console.log("typo", props.value )
+      setCurrentValue(props.value)}
+  },[])
 
   useEffect(() => {
     if (currentValue.length > 1 && currentValue.length < props.maxChar) {
@@ -59,7 +68,7 @@ const SingleLineQuestion = (props) => {
           }
           onFocus={handleFocus}
           onBlur={handleLostFocus}
-          placeholder={props.placeholder.length > 0 ? props.placeholder : ""}
+          placeholder={props.placeholder.length > 0 ? props.placeholder : currentValue}
         />
       )}
       {!!props.multiLine && (

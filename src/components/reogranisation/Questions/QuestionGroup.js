@@ -9,14 +9,9 @@ import posed from "react-pose";
 
 const QuestionGroup = (props) => {
   const [validations, setValidations] = useState([]);
-  // const [answers, setAnswers] = useState([]);
+  const [answers, setAnswers] = useState([]);
+  // console.log(props.answers, 'question group');
 
-  const handleValidationChanges = (from, status) => {
-    setValidations({
-      ...validations,
-      [from]: status,
-    });
-  };
 
   useEffect(() => {
     if (validations.length === 0) return;
@@ -31,6 +26,11 @@ const QuestionGroup = (props) => {
     }
   }, [validations]);
 
+  useEffect(()=> {
+    
+    console.log("answers in questionGroup.js", props.answers)
+  }, [])
+
   const handleDecidingQuestions = (from, answer) => {
     props.handleDecidingQuestions(from, answer);
   };
@@ -42,7 +42,7 @@ const QuestionGroup = (props) => {
   const handleValueChanges = (from, newValue) => {
     props.answersHandler(from, newValue);
   };
-
+ 
   return (
     <GroupContainer>
       {props.group.questions.map((question) => {
@@ -101,10 +101,11 @@ const QuestionGroup = (props) => {
                     onChange={handleValueChanges}
                     onFocusChanged={handleInputFocus}
                     id={question.id.toString()}
-                    onValidationChange={handleValidationChanges}
+                    onValidationChange={props.handleValidationChanges}
                     placeholder={
-                      question.placeholder ? question.placeholder : ""
+                        props.answers
                     }
+                    value={props.answers}
                   />
                 )}
                 {question.type === "multiLine" && (
@@ -115,8 +116,12 @@ const QuestionGroup = (props) => {
                     onChange={handleValueChanges}
                     onFocusChanged={handleInputFocus}
                     id={question.id.toString()}
-                    onValidationChange={handleValidationChanges}
+                    onValidationChange={props.handleValidationChanges}
                     multiLine
+                    value={props.answers}
+                    placeholder={
+                      props.answers
+                  }
                   />
                 )}
                 {question.type === "singleChoice" && (
@@ -127,8 +132,13 @@ const QuestionGroup = (props) => {
                     maxChar={question.maxChar}
                     onChange={handleValueChanges}
                     onFocusChanged={handleInputFocus}
-                    onValidationChange={handleValidationChanges}
+                    onValidationChange={props.handleValidationChanges}
                     id={question.id.toString()}
+                    value={props.answers}
+                    placeholder={
+                      props.answers
+                  }
+
                   />
                 )}
                 {question.type === "multiChoice" && (
@@ -139,9 +149,14 @@ const QuestionGroup = (props) => {
                     maxChar={question.maxChar}
                     onChange={handleValueChanges}
                     onFocusChanged={handleInputFocus}
-                    onValidationChange={handleValidationChanges}
+                    onValidationChange={props.handleValidationChanges}
                     id={question.id.toString()}
                     multiChoice
+                    value={props.answers}
+                    placeholder={
+                      props.answers
+                  }
+
                   />
                 )}
               </FormGroup>
