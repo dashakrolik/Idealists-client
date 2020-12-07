@@ -19,7 +19,7 @@ export default function ContainedButtons(props) {
     if (props.authState.loggedIn)
       request
         .put(`${baseUrl}/users/cofounders/${props.id}`, {
-          approved: props.approved,
+          isApproved: props.isApproved,
         })
         .set("Authorization", `Bearer ${props.authState.token}`)
         .then((res) => {
@@ -36,9 +36,9 @@ export default function ContainedButtons(props) {
       <Button
         onClick={() => clickHandler()}
         variant="contained"
-        color={props.approved ? "primary" : "secondary"}
+        color={props.isApproved ? "primary" : "secondary"}
       >
-        {props.approved ? "approve" : "reject"}
+        {props.isApproved ? "approve" : "reject"}
       </Button>
     </div>
   );

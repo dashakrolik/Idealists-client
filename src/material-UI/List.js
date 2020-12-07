@@ -56,7 +56,7 @@ export default function BasicTable({
                   setCofounders={setCofounders}
                   id={row.id}
                   authState={authState}
-                  approved={false}
+                  isApproved={false}
                 />
               </TableCell>
               <TableCell align="right">
@@ -65,7 +65,7 @@ export default function BasicTable({
                   setCofounders={setCofounders}
                   id={row.id}
                   authState={authState}
-                  approved={true}
+                  isApproved={true}
                 />
               </TableCell>
             </TableRow>
