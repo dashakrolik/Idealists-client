@@ -882,7 +882,17 @@ class App extends Component {
                   );
                 }}
               />
-              <Route exact path="/" render={() => <Redirect to="/MyIdea" />} />
+              <Route exact path="/" render={(props) =>
+                <IdeaStart
+                  {...props}
+                  authState={this.state.auth}
+                  login={this.requestLoginUser}
+                  user={this.getCurrentUser}
+                  updateLocalStorage={this.updateLocalStorage}
+                  logout={this.logout}
+                  setAuthLoggedInTrue={this.setAuthLoggedInTrue}
+                />
+              } />
             </Application>
           </ThemeProvider>
         </div>

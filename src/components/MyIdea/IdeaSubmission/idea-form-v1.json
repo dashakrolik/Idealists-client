@@ -48,9 +48,9 @@
   },
   {
     "id": 3,
-    "groupTitle": "Which categories does your idea fit?",
+    "groupTitle": "Under which of the SDGs does your idea fit best?",
     "groupType": "default",
-    "groupDescription": "Please note that we cannot accept ideas that are not within one of the Sustainable Development Goals (SDG)",
+    "groupDescription": "Please note that we cannot accept ideas that don’t match with at least one of the Sustainable Development Goals (SDG’s)",
     "questions": [
       {
         "id": 0,
@@ -134,9 +134,9 @@
   },
   {
     "id": 4,
-    "groupTitle": "Which categories does your idea fit?",
+    "groupTitle": "Under which industry does your idea fit best?",
     "groupType": "default",
-    "groupDescription": "Please note that we cannot accept ideas that are not within one of the Industries.",
+    "groupDescription": "Please note that we cannot accept ideas that do not match with at least one of the Industries on the list.",
     "questions": [
       {
         "id": 0,
@@ -619,13 +619,13 @@
         "maxChar": 100,
         "validationErrorMsg": "Max 100 chars."
       }
-    ]    
+    ]
   },
   {
     "id": 5,
     "groupTitle": "Describe your Idea",
     "groupType": "default",
-    "groupDescription": "Please try to describe your idea in up to 3 words, up to 150, and up to 1500 characters. Don't worry, you can attach images later in the submission process.",
+    "groupDescription": "Please try to describe your idea in up to 3 words, up to 150, and up to 1500 characters. Don't worry, you can add attachments such as images later in the submission process.",
     "questions": [
       {
         "id": 0,
@@ -665,7 +665,7 @@
     "id": 7,
     "groupTitle": "Why is this a great idea?",
     "groupType": "singleQuestion",
-    "groupDescription": "Please describe your answer up to 1500 characters. Don't worry, you can attach images later in the submission process",
+    "groupDescription": "Please describe your answer in up to 1500 characters. Don't worry, you can add attachments such as images later in the submission process.",
     "questions": [
       {
         "id": 0,
@@ -680,7 +680,7 @@
     "id": 8,
     "groupTitle": "How far developed is your idea?",
     "groupType": "singleQuestion",
-    "groupDescription": "Please describe your progress up to 1000 characters.",
+    "groupDescription": "Please describe your progress in up to 1000 characters.",
     "questions": [
       {
         "id": 0,
@@ -695,12 +695,12 @@
     "id": 9,
     "groupTitle": "Describe the steps and story how you came up with this idea",
     "groupType": "singleQuestion",
-    "groupDescription": "Please describe your steps up to 2000 characters.",
+    "groupDescription": "Please describe your steps in up to 2000 characters.",
     "questions": [
       {
         "id": 0,
         "type": "multiLine",
-        "text": "What triggered you to come up with this idea and how did it evolve into the idea you submit now? *",
+        "text": "What triggered you to come up with this idea and how did it evolve into the idea you’re submitting now?",
         "maxChar": 2000,
         "validationErrorMsg": "Max 2000 chars."
       }
@@ -710,7 +710,7 @@
     "id": 10,
     "groupTitle": "Is there anything that is close to your idea?",
     "groupType": "default",
-    "groupDescription": "Anything on the internet, any article or patent? Any companies who work in a similar area? Please do some Google searching and list the 3 things that come closest to your idea. ",
+    "groupDescription": "Anything on the internet, any article or patent? Any companies who work in a similar area? Please do some Google searching and list the 3 things that come closest to your idea. If your idea is truly unique, please still list the 3 things that you can find online that come closest to being similar.",
     "questions": [
       {
         "id": 0,
@@ -766,7 +766,7 @@
     "id": 11,
     "groupTitle": "Anything else you want to tell us about your idea?",
     "groupType": "singleQuestion",
-    "groupDescription": "Please describe your answer up to 2000 characters",
+    "groupDescription": "Please describe your answer in up to 2000 characters",
     "questions": [
       {
         "id": 0,
