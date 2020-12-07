@@ -62,7 +62,7 @@ export default function IdeaDashboardDetail(props) {
           token={props.authState.token}
           ideasId={props.match.params.id}
         />{" "}
-        {progress.step01 ? (
+        {progress.step01 && !progress.step02 ? (
           <Button
             color="inherit"
             text="View Patent Check"
