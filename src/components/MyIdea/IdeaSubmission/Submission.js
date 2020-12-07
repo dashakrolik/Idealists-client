@@ -18,7 +18,7 @@ const Submission = (props) => {
   const [answers, setAnswers] = useState({});
   const [valueDecideProfit, setValueDecideProfit] = useState(false);
   const [valueDecideSdg, setValueDecideSdg] = useState(false);
-
+  const [agreementSection, setAgreementSection] = useState(false);
   const questionGroups = [...jsonFormData]
 
   useEffect(() => {
@@ -42,12 +42,22 @@ const Submission = (props) => {
   };
 
   const handleNextBttnClick = () => {
-    
+    console.log(activeGroup, questionGroups.length)
     if ((activeGroup) === questionGroups.length) {
+      console.log(activeGroup, questionGroups.length)
+      setAgreementSection(false);
+    }
+    else if ((activeGroup === 11) && (questionGroups.length === 12)) {
+      setActiveGroup(12);
+      setAgreementSection(true);
+    
     } else {
       setActiveGroup(activeGroup + 1);
+      console.log(activeGroup, questionGroups.length)
+      setAgreementSection(false);
     }
   };
+
 
   const handleInputFocus = (isFocused) => {
     setInputFocused(isFocused);
@@ -63,7 +73,7 @@ const Submission = (props) => {
       setActiveGroup(activeGroup + 1);
       setValueDecideProfit(false);
       setValueDecideSdg(false);
-    }else if (from === 0){
+    } else if (from === 0) {
       setValueDecideProfit(true)
     } else if (from === 1) {
       setValueDecideSdg(true)
@@ -75,16 +85,23 @@ const Submission = (props) => {
     return <div></div>;
   }
   if (questionGroups.length === 0) return <div>Loading...</div>;
+
   return (
     <div>
       <Container>
         <Overlay pose={inputFocused ? 'isFocusing' : 'default'} />
         <ProgressBar pose='visible' poseKey={progress} progress={progress} />
 
-        <SubmissionSideScreen
+        {/* <SubmissionSideScreen
+          agreementSection={agreementSection}
           title={activeGroup === questionGroups.length ? 'Almost done' : questionGroups[activeGroup].groupTitle}
-          description={activeGroup === questionGroups.length ? 'Please download the Participants Agreement by pressing on the button. After reading it carefully, and if you agree with its terms and conditions, press I agree to finish your submission.' : questionGroups[activeGroup].groupDescription} />
-
+          description={activeGroup === questionGroups.length ? 'Please download the Participants Agreement by pressing on the button. After reading it carefully, and if you agree with its terms and conditions, press I agree to finish your submission.' : questionGroups[activeGroup].groupDescription}
+        /> */}
+        <SubmissionSideScreen
+          agreementSection={agreementSection}
+          title={activeGroup === questionGroups.length ? '' : questionGroups[activeGroup].groupTitle}
+          description={activeGroup === questionGroups.length ? '' : questionGroups[activeGroup].groupDescription}
+        />
         <Right>
           <Content>
             <PoseGroup animateOnMount={false} withParent={true} preEnterPose='preEnter'>
@@ -101,12 +118,12 @@ const Submission = (props) => {
                       handleValidationChanges={handleValidationChange}
                       key={questionGroups[activeGroup].id.toString()}
                       answers={answers[activeGroup]}
-                      
+
                     />}
-                    {(valueDecideProfit)? <div style={{color:"red" }}> <br/>We are working very hard on building a non-profit version of The Idealists as well. Unfortunately, until that is ready, we cannot accept non-profit ideas yet.
-                     </div>:null}
-                     {(valueDecideSdg)? <div style={{color:"red" }}> <br/>We are sorry, but you cannot continue if your idea does not fit within one of the SDGs.
-                     </div>:null}
+                  {(valueDecideProfit) ? <div style={{ color: "red" }}> <br />We are working very hard on building a non-profit version of The Idealists as well. Unfortunately, until that is ready, we cannot accept non-profit ideas yet.
+                     </div> : null}
+                  {(valueDecideSdg) ? <div style={{ color: "red" }}> <br />We are sorry, but you cannot continue if your idea does not fit within one of the SDGs.
+                     </div> : null}
                 </PGroupContainer>
               }
             </PoseGroup>

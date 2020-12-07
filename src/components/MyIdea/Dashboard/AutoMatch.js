@@ -10,6 +10,7 @@ import Button from '../../reogranisation/Questions/Button';
 import posed from 'react-pose';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card'
+import Spinner from '../../reogranisation/Spinner';
 
 export default function IdeaDashboardDetail(props) {
   // const [user, setUserData] = useState({});
@@ -33,7 +34,7 @@ export default function IdeaDashboardDetail(props) {
     request
       .get(`${baseUrl}/ideas/${ideasId}/automatch`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
+      .then(automatch => DoAutomatch(Object.values(automatch.body.autoMatch['ipscreener-results']['index-1'])))
       .catch(err => console.error(err))
   }, []);
 
@@ -41,7 +42,7 @@ export default function IdeaDashboardDetail(props) {
   //   request
   //     .get(`${baseUrl}/ideas/${ideasId}/automatch`)
   //     .set("Authorization", `Bearer ${props.authState.token}`)
-  //     .then(automatch => Do2(Object.values(automatch.body.autoMatch['automatch-results']['index-1'])))
+  //     .then(automatch => Do2(Object.values(automatch.body.autoMatch['ipscreener-results']['index-1'])))
   // }, []);
 
   const updateShow = e => {
@@ -245,7 +246,11 @@ export default function IdeaDashboardDetail(props) {
       </Container>
     )
   } else {
-    return (<Heading>Loading...</Heading>)
+    return (
+      <Container>
+        <Spinner />
+      </Container>
+    )
   }
 }
 const PStartContent = posed.div({

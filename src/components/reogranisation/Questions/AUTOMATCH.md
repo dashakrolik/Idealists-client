@@ -50,7 +50,7 @@ AutoMatchPatent {
 }
 ```
 
-response -> data -> automatch-results -> index-1 -> [result]  
+response -> data -> ipscreener-results -> index-1 -> [result]  
 result -> relevance -> country + '-' + number + '-' + kind-code => patent number we use for retreival of the pdf
 I would save the other data as is, ie each results maybe even just as a json into one AutoMatchPatent entity, no time to parse it into separate columns, there's more important stuff now
 
