@@ -1,108 +1,88 @@
 /** @jsx jsx */
-import { css,jsx } from "@emotion/core";
-import styled from "@emotion/styled";
-import { baseUrl } from "../../constants";
-import { useState,useEffect } from "react";
-import Button from "../reogranisation/Questions/Button"
-import { Link } from "react-router-dom";
-
-
+import { jsx } from '@emotion/core'
+import styled from '@emotion/styled'
+import { baseUrl } from '../../constants'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function CofounderPersonalityTest(props) {
-    const [testResult,setTestResult]= useState("")
-     const [errorCheck,seterrorCheck]= useState("false")
-     const [successMsg,setSuccessMsg]= useState(false)
+  const [testResult, setTestResult] = useState('')
+  const [errorCheck, seterrorCheck] = useState('false')
+  const [successMsg, setSuccessMsg] = useState(false)
+  const handelSubmit = async (e) => {
+    e.preventDefault()
+    setSuccessMsg(true)
+    const response = await fetch(`${baseUrl}/users`, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(testResult),
+    })
 
-    const textRegEx =  new RegExp("([A-Z]{4}$)");
-  
-    const handelSubmit = async(e)=>{
-        e.preventDefault()
-        console.log("Testing")
-        console.log(e.target.value)
-        setSuccessMsg(true)
-        const response = await fetch(`${baseUrl}/users`, { 
-      method: 'PUT', 
-      headers: { 
-        'Content-type': 'application/json'
-      }, 
-      body: JSON.stringify(testResult) 
-    }); 
-      
-    // Awaiting response.json() 
-    const resData = await response.json(); 
+    // Awaiting response.json()
+    const resData = await response.json()
     console.log(resData)
-    
-  
-    // Return response data  
-    return resData;  
-    
-    }
+    // Return response data
+    return resData
+  }
 
-    const setValue =(e)=>{
-        let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?0-9a-z]+/;
-        setTestResult(e.target.value)
-      
-        if(e.target.value.match(format) ){        
-            seterrorCheck("only cpatial 4 letters allowed")
-        }else if (e.target.value.length >4){
-            seterrorCheck("only cpatial 4 letters allowed")
-        }
-        else{  
-             seterrorCheck("false")
-        }
+  const setValue = (e) => {
+    let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?0-9a-z]+/
+    setTestResult(e.target.value)
 
-    
+    if (e.target.value.match(format)) {
+      seterrorCheck('only cpatial 4 letters allowed')
+    } else if (e.target.value.length > 4) {
+      seterrorCheck('only cpatial 4 letters allowed')
+    } else {
+      seterrorCheck('false')
     }
-    
-return (
+  }
+
+  return (
     <div>
-        
-       <Container> 
-           {successMsg ? (<div>
-               <LeftSide>
-            <h3>Thank you. Your Profile assesement test results submitted successfully.</h3>
-            </LeftSide>
-            </div> ):(<div>
-        <LeftSide>
+      <Container>
+        {successMsg ? (
           <div>
-            <h3>Take your Pesonality Test</h3>
+            <LeftSide>
+              <h3>
+                Thank you. Your Profile assesement test results submitted
+                successfully.
+              </h3>
+            </LeftSide>
           </div>
-        </LeftSide>
-        <RightSide>
-          <form onSubmit={handelSubmit}>
-            <label> <h3>Click below</h3></label>
-            <br></br>
-            <a href="https://www.16personalities.com/nl">Start the test</a>
-            <br></br>
-            <br></br>
-            <label>Upload your result here</label>
-            <input
-                type = "text"
-                type="text"
-                value={testResult}
-                // required 
-                // requiredError="This field is required." 
-                // validations={{matchRegexp:textRegEx}} 
-                // validationErrors={{matchRegexp:'The result should contain 4 Capital letters.'}}
-                // onChange={e => setTestResult(e.target.value)}
-                onChange={setValue}
-            />{
-                errorCheck!= 'false' &&
-            <label>{errorCheck}</label>
-            }
-            <br />
-          <button type="submit" >Submit</button>
-          <br />
-          </form>
-        </RightSide>
-        </div>)}
-         
-        </Container> 
-        
-        </div>
-    );
-
- }
+        ) : (
+          <div>
+            <LeftSide>
+              <div>
+                <h3>Take your Pesonality Test</h3>
+              </div>
+            </LeftSide>
+            <RightSide>
+              <form onSubmit={handelSubmit}>
+                <label>
+                  {' '}
+                  <h3>Click below</h3>
+                </label>
+                <br />
+                <a href="https://www.16personalities.com/nl">Start the test</a>
+                <br />
+                <br />
+                <label>Upload your result here</label>
+                <input type="text" value={testResult} onChange={setValue} />
+                {errorCheck !== 'false' && <label>{errorCheck}</label>}
+                <br />
+                <button type="submit">Submit</button>
+                <br />
+              </form>
+            </RightSide>
+          </div>
+        )}
+      </Container>
+    </div>
+  )
+}
 
 const LeftSide = styled.div`
   position: absolute;
@@ -140,14 +120,13 @@ const LeftSide = styled.div`
 
   a {
     font-weight: 800;
-    
+
     &:hover {
       cursor: pointer;
       color: #dfeff2;
-      
     }
   }
-`;
+`
 
 const RightSide = styled.div`
   position: absolute;
@@ -231,7 +210,7 @@ const RightSide = styled.div`
     height: 30px;
     line-height: 30px;
     font-size: 15px;
-    
+
     color: #233949;
     outline: none;
     -webkit-appearance: none;
@@ -242,7 +221,7 @@ const RightSide = styled.div`
       color: #1a3d7c;
     }
   }
-`;
+`
 
 const Container = styled.div`
   position: absolute;
@@ -259,4 +238,4 @@ const Container = styled.div`
     #31a2d7,
     #4cc5f1
   );
-`;
+`

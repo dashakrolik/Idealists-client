@@ -1,151 +1,148 @@
 /** @jsx jsx */
-import { css,jsx } from "@emotion/core";
-import styled from "@emotion/styled";
-import { baseUrl } from "../../constants";
-import { useState,useEffect } from "react";
-import Button from "../reogranisation/Questions/Button"
-
-import { Link } from "react-router-dom";
-
-
+import { css, jsx } from '@emotion/core'
+import styled from '@emotion/styled'
+import { baseUrl } from '../../constants'
+import { useState } from 'react'
+import Button from '../reogranisation/Questions/Button'
+import { Link } from 'react-router-dom'
 
 export default function CofounderProfileVideo(props) {
-  const [ProfileVideoState, setProfileVideoState] = useState('');
-//   const [selectedVideo,setSelectedVideo] = useState('')
-  const [previewSource,setPreviewSource] = useState('')
-  const[successMsg,setSuccessMsg] = useState(false)
-  const [videos,setVideos]= useState();
+  const [previewSource, setPreviewSource] = useState('')
+  const [successMsg, setSuccessMsg] = useState(false)
+  const [videos, setVideos] = useState()
   const [loading, setLoading] = useState(false)
 
+  const handelVideoInputChange = (e) => {
+    const video = e.target.files[0]
+    previewVideo(video)
+  }
 
-  const handelVideoInputChange = (e) =>{
-      const video = e.target.files[0]
-      
-      previewVideo(video)
+  const previewVideo = (video) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(video)
+    reader.onloadend = () => {
+      setPreviewSource(reader.result)
     }
+  }
+  const uploadVideo = async (e) => {
+    e.preventDefault()
 
-     const previewVideo = (video)=>{
-     const reader = new FileReader();
-     reader.readAsDataURL(video);
-     reader.onloadend =()=>{
-         setPreviewSource(reader.result)
-     }
-     }
-     
-
-    const uploadVideo = async(e) => {
-    console.log("triggered")
-     e.preventDefault();
-     
     const data = new FormData()
-    data.append("file",previewSource)
-    data.append('upload_preset', "cofounderProfileVideo")
+    data.append('file', previewSource)
+    data.append('upload_preset', 'cofounderProfileVideo')
     setLoading(true)
     setPreviewSource(false)
-    const res = await fetch("https://api.cloudinary.com/v1_1/idealists/video/upload", {
-       method: "POST",
-       body: data
-    })
+    const res = await fetch(
+      'https://api.cloudinary.com/v1_1/idealists/video/upload',
+      {
+        method: 'POST',
+        body: data,
+      },
+    )
     const file = await res.json()
     setPreviewSource(!previewSource)
-    console.log(file)
-     setLoading(false)
-     setSuccessMsg(true)
+    setLoading(false)
+    setSuccessMsg(true)
     setVideos(file.secure_url)
-    console.log(file.secure_url)
-}
-    const cancelVideo = (e)=>{
+  }
+  const cancelVideo = (e) => {
     e.preventDefault()
     setPreviewSource(false)
-    document.getElementById("upload_file").value = "";
-    
-    console.log("value of prview source : " + previewSource)
-    console.log("what is Profile Video State" + ProfileVideoState)
-
+    document.getElementById('upload_file').value = ''
   }
-  
-  console.log("successMsg")
- 
-  const updateVideo = async (e) =>{
-  const response = await fetch(`${baseUrl}/users`, { 
-      method: 'PUT', 
-      headers: { 
-        'Content-type': 'application/json'
-      }, 
-      body: JSON.stringify(videos) 
-    }); 
-      
-    // Awaiting response.json() 
-    const resData = await response.json(); 
-    console.log(resData)
-  
-    // Return response data  
-    return resData; 
-  } 
-return (
+
+  const updateVideo = async (e) => {
+    const response = await fetch(`${baseUrl}/users`, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(videos),
+    })
+    // Awaiting response.json()
+    const resData = await response.json()
+    // Return response data
+    return resData
+  }
+  return (
     <div>
-        
-       <Container> 
-     
-           {successMsg ? (<div>
-               <LeftSide>
-            <h3>Thank you. Your Profile video submitted Succesfully.</h3>
-            </LeftSide>
-            </div> ):(
-                <div>
-        <LeftSide>
-            
+      <Container>
+        {successMsg ? (
           <div>
-            <h3>Upload Your Profile Video</h3>
+            <LeftSide>
+              <h3>Thank you. Your Profile video submitted Succesfully.</h3>
+            </LeftSide>
           </div>
-        </LeftSide>
-        
-        <RightSide>
-          <form onSubmit={uploadVideo}>
-            <label> <h3>Profile Video</h3></label>
-            <input
-              id="upload_file"
-              type="file"
-              name="video"
-              //value={ProfileVideoState}
-            accept="video/mp4,video/x-m4v,video/*"
-            
-              onChange={handelVideoInputChange}
-              
-            />
-            {loading && (<h3 style={{paddingLeft:'50px'}}>Loading...</h3>
-              )}
-               <br/>
-          
-          <button type="submit" >Upload</button>
-          <button  onClick={cancelVideo}>Cancel</button>
-           
-          <br />
-          {previewSource.length > 10 &&(
-              <div style={{height:'100px',width:'100px',paddingTop:'50px',paddingLeft:'50px'}}>
-            {previewSource && ( <video width="200px" height="100px" controls>
-                            <source src={previewSource} />
-                            Your browser does not support HTML5 video.
-                            </video>
-                             )}
-                             </div>
-          )
-
-          }
-          </form>
-        </RightSide>
-        </div>)}
-        <div css={css`position: absolute; right: 100px; bottom: 100px; width: 160px;`}>
-            {videos && 
+        ) : (
+          <div>
+            <LeftSide>
+              <div>
+                <h3>Upload Your Profile Video</h3>
+              </div>
+            </LeftSide>
+            <RightSide>
+              <form onSubmit={uploadVideo}>
+                <label>
+                  {' '}
+                  <h3>Profile Video</h3>
+                </label>
+                <input
+                  id="upload_file"
+                  type="file"
+                  name="video"
+                  accept="video/mp4,video/x-m4v,video/*"
+                  onChange={handelVideoInputChange}
+                />
+                {loading && <h3 style={{ paddingLeft: '50px' }}>Loading...</h3>}
+                <br />
+                <button type="submit">Upload</button>
+                <button onClick={cancelVideo}>Cancel</button>
+                <br />
+                {previewSource.length > 10 && (
+                  <div
+                    style={{
+                      height: '100px',
+                      width: '100px',
+                      paddingTop: '50px',
+                      paddingLeft: '50px',
+                    }}
+                  >
+                    {previewSource && (
+                      <video width="200px" height="100px" controls>
+                        <source src={previewSource} />
+                        Your browser does not support HTML5 video.
+                      </video>
+                    )}
+                  </div>
+                )}
+              </form>
+            </RightSide>
+          </div>
+        )}
+        <div
+          css={css`
+            position: absolute;
+            right: 100px;
+            bottom: 100px;
+            width: 160px;
+          `}
+        >
+          {videos && (
             <Link to="/cofounderPersonalityTest">
-          <Button  color="inherit" text='Next' disabled="" onClick={updateVideo} withIcon />
-          </Link>}
+              <Button
+                color="inherit"
+                text="Next"
+                disabled=""
+                onClick={updateVideo}
+                withIcon
+              />
+            </Link>
+          )}
         </div>
-        </Container> 
-        </div>
-    );
-
- }
+      </Container>
+    </div>
+  )
+}
 
 const LeftSide = styled.div`
   position: absolute;
@@ -188,7 +185,7 @@ const LeftSide = styled.div`
       color: #dfeff2;
     }
   }
-`;
+`
 
 const RightSide = styled.div`
   position: absolute;
@@ -282,7 +279,7 @@ const RightSide = styled.div`
       color: #1a3d7c;
     }
   }
-`;
+`
 
 const Container = styled.div`
   position: absolute;
@@ -299,4 +296,4 @@ const Container = styled.div`
     #31a2d7,
     #4cc5f1
   );
-`;
+`
