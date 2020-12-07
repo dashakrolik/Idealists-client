@@ -1,7 +1,14 @@
 .container {
-  margin-top: 100px;
-  color: rgb(34, 160, 209);
+  padding-top: 100px;
+  color: white;
+  background-color: rgb(34, 160, 209);
+
   align-content: center;
   text-align: center;
+  font-size: large;
+}
+
+.subHeading {
   text-decoration: underline;
+  border: 1px;
 }

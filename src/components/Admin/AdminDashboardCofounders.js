@@ -20,7 +20,9 @@ export default function AdminDashboardCofounders(props) {
   return (
     <div className="container">
       <h1>Admin DashBoard</h1>
-      <h3>These co-founders are still awaiting approval</h3>
+      <h3 className="subHeading">
+        These co-founders are still awaiting approval
+      </h3>
 
       <List
         data={coFounders}
