@@ -32,7 +32,7 @@ export default function InvestorLogin(props) {
       props.history.replace("/MyIdea/new");
       return <div></div>;
   }
-
+console.log('props',props)
   if (props.authState.loggedIn !== true)
     return (
       <Container>

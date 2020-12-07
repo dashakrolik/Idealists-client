@@ -3,45 +3,52 @@ import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { Link } from "react-router-dom";
+import LoginContext from "../reogranisation/Login/LoginContext"
 
-const LogInForm = (props) => {
- 
-  return (
-    <Container>
-      <LeftSide>
-        <div>
-          <h3>Login to my {props.name} page</h3>
-        </div>
-      </LeftSide>
-      <RightSide>
-        <form onSubmit={props.handleSubmit}>
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={props.loginState.email || ""}
-            onChange={props.handleChange}
-          />
-          <br />
+export default function CofounderLogin(props) {
+  const [loginState, setLoginState] = useState({});
 
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={props.loginState.password || ""}
-            onChange={props.handleChange}
-          />
-          <br />
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(loginState);
+    triggerUserData();
+  };
 
-          <button type="submit">Login</button>
-          <Link to="/reset-password">Forgot your password?</Link>
-        </form>
-      </RightSide>
-    </Container>
-  );
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setLoginState({
+      ...loginState,
+      [name]: value,
+    });
+  };
+
+  const onSubmit = (data) => {
+    const { email, password } = data;
+    props.login(email, password);
+  };
+
+  const triggerUserData = () => {
+    if (props.authState.loggedIn) {
+      props.user();
+    }
+  };
+
+  if (!localStorage.currentUserJwt) {
+    props.history.replace("/CofounderStart");
+    triggerUserData();
+    return <div></div>;
+  }
+
+  if (props.authState.loggedIn !== true)
+    return (
+      <div>
+        <LoginContext loginState={loginState}name="cofounder" email="email" password="password" handleSubmit={handleSubmit} handleChange={handleChange}
+        onSubmit={onSubmit}/>
+      </div>
+    )
+  else return <Redirect to="/Cofounder/dashboard" />;
 }
-
 const LeftSide = styled.div`
   position: absolute;
   color: #ffffff;
@@ -194,6 +201,3 @@ const Container = styled.div`
     #4cc5f1
   );
 `;
-
-
-export default LogInForm
