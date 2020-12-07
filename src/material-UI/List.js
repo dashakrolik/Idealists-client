@@ -36,7 +36,6 @@ export default function BasicTable({
             <TableCell>Co-Founders</TableCell>
             <TableCell align="right">E-mail</TableCell>
             <TableCell align="right">Role</TableCell>
-            <TableCell align="right">Country</TableCell>
             <TableCell align="right">Industry</TableCell>
             <TableCell align="right">Reject</TableCell>
             <TableCell align="right">Approve</TableCell>
@@ -50,10 +49,11 @@ export default function BasicTable({
               </TableCell>
               <TableCell align="right">{row.email}</TableCell>
               <TableCell align="right">{row.role}</TableCell>
-              <TableCell align="right">{row.country}</TableCell>
               <TableCell align="right">{row.industry}</TableCell>
               <TableCell align="right">
                 <ApproveRejectButton
+                  coFounders={coFounders}
+                  setCofounders={setCofounders}
                   id={row.id}
                   authState={authState}
                   approved={false}

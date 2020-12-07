@@ -23,17 +23,13 @@ export default function ContainedButtons(props) {
         })
         .set("Authorization", `Bearer ${props.authState.token}`)
         .then((res) => {
-          console.log(res);
+          const filteredCofounders = props.coFounders.filter((c) => {
+            return c.id !== res.body.id;
+          });
+          props.setCofounders(filteredCofounders);
         });
     else props.history.replace("/login");
   };
-
-  console.log(props);
-  console.log(props.coFounders);
-  console.log(props.coFounders);
-  console.log(props.coFounders);
-  console.log(props.coFounders);
-  console.log(props.coFounders);
 
   return (
     <div className={classes.root}>
