@@ -75,18 +75,35 @@ export default function IdeaDashboardDetail(props) {
       [e.target.name]: e.target.value,
     });
   };
-
+  // Validate if user provides responses to all (10) matching patents & (3) additional questions.
+  // Enable the submit button only when the user responds to all (13 at present) questions.
+  let countAnswers = 0;
   useEffect(() => {
-    const keys = Object.keys(patentDifference);
-    //const values = Object.values(patentDifference);
-    if (keys.length !== 0) {
-      for (let i = 0; i < keys.length; i++) {
-        if (patentDifference[keys[i]] !== "") {
-          setEnableSubmit(true);
-          break;
-        } else {
-          setEnableSubmit(false);
+    const allKeys = Object.keys(patentDifference);
+    const resultsKeys = Object.keys(automatchResults);
+    const addnlQuesKeys = allKeys.filter((key) => {
+      if (!resultsKeys.includes(key)) {
+        countAnswers++;
+        return key;
+      }
+    });
+
+    if (resultsKeys.length !== 0) {
+      for (let i = 0; i < resultsKeys.length; i++) {
+        if (patentDifference[resultsKeys[i]]) countAnswers += 1;
+      }
+
+      if (addnlQuesKeys.length !== 0) {
+        for (let i = 0; i < addnlQuesKeys.length; i++) {
+          if (patentDifference[addnlQuesKeys[i]] !== "") {
+          } else countAnswers -= 1;
         }
+      }
+      console.log("counta:", countAnswers);
+      if (countAnswers === resultsKeys.length + 3) {
+        setEnableSubmit(true);
+      } else {
+        setEnableSubmit(false);
       }
     }
   }, [patentDifference]);
