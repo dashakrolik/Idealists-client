@@ -1,45 +1,87 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
-import styled from "@emotion/styled";
-import { useState } from "react";
-import { Redirect } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { jsx } from '@emotion/core'
+import styled from '@emotion/styled'
+import { baseUrl } from '../../constants'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-const LogInForm = (props) => {
- 
+export default function CofounderPersonalityTest(props) {
+  const [testResult, setTestResult] = useState('')
+  const [errorCheck, seterrorCheck] = useState('false')
+  const [successMsg, setSuccessMsg] = useState(false)
+  const handelSubmit = async (e) => {
+    e.preventDefault()
+    setSuccessMsg(true)
+    const response = await fetch(`${baseUrl}/users`, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(testResult),
+    })
+
+    // Awaiting response.json()
+    const resData = await response.json()
+    console.log(resData)
+    // Return response data
+    return resData
+  }
+
+  const setValue = (e) => {
+    let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?0-9a-z]+/
+    setTestResult(e.target.value)
+
+    if (e.target.value.match(format)) {
+      seterrorCheck('only cpatial 4 letters allowed')
+    } else if (e.target.value.length > 4) {
+      seterrorCheck('only cpatial 4 letters allowed')
+    } else {
+      seterrorCheck('false')
+    }
+  }
+
   return (
-    <Container>
-      <LeftSide>
-        <div>
-          <h3>Login to my {props.name} page</h3>
-        </div>
-      </LeftSide>
-      <RightSide>
-        <form onSubmit={props.handleSubmit}>
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={props.loginState.email || ""}
-            onChange={props.handleChange}
-          />
-          <br />
-
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={props.loginState.password || ""}
-            onChange={props.handleChange}
-          />
-          <br />
-
-          <button type="submit">Login</button>
-          <Link to="/reset-password">Forgot your password?</Link>
-        </form>
-      </RightSide>
-    </Container>
-  );
+    <div>
+      <Container>
+        {successMsg ? (
+          <div>
+            <LeftSide>
+              <h3>
+                Thank you. Your Profile assesement test results submitted
+                successfully.
+              </h3>
+            </LeftSide>
+          </div>
+        ) : (
+          <div>
+            <LeftSide>
+              <div>
+                <h3>Take your Pesonality Test</h3>
+              </div>
+            </LeftSide>
+            <RightSide>
+              <form onSubmit={handelSubmit}>
+                <label>
+                  {' '}
+                  <h3>Click below</h3>
+                </label>
+                <br />
+                <a href="https://www.16personalities.com/nl">Start the test</a>
+                <br />
+                <br />
+                <label>Upload your result here</label>
+                <input type="text" value={testResult} onChange={setValue} />
+                {errorCheck !== 'false' && <label>{errorCheck}</label>}
+                <br />
+                <button type="submit">Submit</button>
+                <br />
+              </form>
+            </RightSide>
+          </div>
+        )}
+      </Container>
+    </div>
+  )
 }
 
 const LeftSide = styled.div`
@@ -78,12 +120,13 @@ const LeftSide = styled.div`
 
   a {
     font-weight: 800;
+
     &:hover {
       cursor: pointer;
       color: #dfeff2;
     }
   }
-`;
+`
 
 const RightSide = styled.div`
   position: absolute;
@@ -139,8 +182,8 @@ const RightSide = styled.div`
     position: relative;
     float: right;
     right: 10%;
-    width: 40%;
-    height: 60px;
+    width: 30%;
+    height: 30px;
     line-height: 30px;
     font-size: 12px;
     color: #233949;
@@ -166,7 +209,8 @@ const RightSide = styled.div`
     margin-right: 5px;
     height: 30px;
     line-height: 30px;
-    font-size: 10px;
+    font-size: 15px;
+
     color: #233949;
     outline: none;
     -webkit-appearance: none;
@@ -177,14 +221,15 @@ const RightSide = styled.div`
       color: #1a3d7c;
     }
   }
-`;
+`
 
 const Container = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+
   background-image: linear-gradient(
     to right top,
     #1a3d7c,
@@ -193,7 +238,4 @@ const Container = styled.div`
     #31a2d7,
     #4cc5f1
   );
-`;
-
-
-export default LogInForm
+`
