@@ -43,6 +43,7 @@ import CofounderDashboard from "./components/Cofounder/CofounderDashboard"
 import IdeasList from "./components/Cofounder/IdeaList";
 
 import Spinner from "./components/reogranisation/Spinner";
+import CofounderIdeaDetail from "./components/Cofounder/Cofounder-IdeaDetail";
 
 class App extends Component {
   state = {
@@ -701,6 +702,22 @@ class App extends Component {
                 render={(props) => {
                   return (
                     <IdeasList
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                    />
+                  );
+                }}
+              />
+                            <Route
+                exact
+                path="/Cofounder/dashboard/ideas/:id"
+                render={(props) => {
+                  return (
+                    <CofounderIdeaDetail
                       {...props}
                       authState={this.state.auth}
                       login={this.requestLoginUser}
