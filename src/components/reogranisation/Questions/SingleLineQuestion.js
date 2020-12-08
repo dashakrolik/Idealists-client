@@ -10,23 +10,40 @@ const SingleLineQuestion = (props) => {
   const [isStillInit, setIsStillInit] = useState(true);
   const [validated, setValidated] = useState(false);
   const [currentValue, setCurrentValue] = useState([]);
-  // console.log(props.value, "props in  single line question")
-  const [currentValue2, setCurrentValue2] = useState([]);
+  // console.log("answers in single line question", props)
+  const {
+    currentQuestionIndex,
+    answers
+  } = props
+  
+  console.log("currentQuestionIndex in single line question", currentQuestionIndex)
+console.log("answers in single line question", answers)
 
   useEffect(() => {
     props.onValidationChange && props.onValidationChange(props.id, validated);
   }, [validated]);
 
-  useEffect(()=> { 
-    if
-    (props.value) {
-      console.log("typo", props.value )
-      setCurrentValue(props.value)}
-  },[])
+    // useEffect(()=> { 
+    //   if
+    //   (props.value) {
+    //    setCurrentValue(props.value)}
+    // },[])
 
   useEffect(() => {
     if (currentValue.length > 1 && currentValue.length < props.maxChar) {
-      setValidated(true);
+      if (props.groupId === 5 && parseInt(props.id) === 0) {
+        const replaceComma = currentValue.trim().replace(/,/g, " ");
+        const removeSpaces = replaceComma.replace(/\s\s+/g, " ");
+        const splitBySpace = removeSpaces.trim().split(" ");
+        const numOfWords = splitBySpace.length;
+        if (numOfWords <= 3) {
+          setValidated(true);
+        } else {
+          setValidated(false);
+        }
+      } else {
+        setValidated(true);
+      }
     } else {
       setValidated(false);
     }
@@ -38,7 +55,9 @@ const SingleLineQuestion = (props) => {
   const handleChange = (e) => {
     setCurrentValue(e.target.value);
   };
-
+  // const handleChange = () => {
+  //   setCurrentValue(answers);
+  // };
   const handleFocus = () => {
     setIsFocused(true);
     props.onFocusChanged && props.onFocusChanged(true);
@@ -63,29 +82,33 @@ const SingleLineQuestion = (props) => {
                 ? "tfFocused"
                 : "tfDefault"
               : isFocused
-              ? "tfFocusedError"
-              : "tfError"
+                ? "tfFocusedError"
+                : "tfError"
           }
           onFocus={handleFocus}
           onBlur={handleLostFocus}
-          placeholder={props.placeholder.length > 0 ? props.placeholder : currentValue}
+          // placeholder={props.placeholder.length > 0 ? props.placeholder : ""}
+          placeholder={answers[currentValue]}
         />
       )}
-      {!!props.multiLine && (
+      {props.multiLine && (
         <TextArea
           onChange={handleChange}
-          value={currentValue}
+          value={answers[currentQuestionIndex]}
           pose={
             isStillInit || validated
               ? isFocused
                 ? "tfFocused"
                 : "tfDefault"
               : isFocused
-              ? "tfFocusedError"
-              : "tfError"
+                ? "tfFocusedError"
+                : "tfError"
           }
           onFocus={handleFocus}
           onBlur={handleLostFocus}
+          // placeholder={props.placeholder.length > 0 ? props.placeholder : ""}
+          // placeholder={currentValue}
+
         />
       )}
       <ErrorMessage

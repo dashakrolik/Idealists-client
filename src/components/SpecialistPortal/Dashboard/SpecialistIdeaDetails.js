@@ -17,6 +17,7 @@ import FullPDFCreator from "./Download/FullPDFCreator";
 import ProgressBar from "../../reogranisation/ProgressBar/ProgressBar";
 import IdeaDetails from "../../reogranisation/IdeaDetails/IdeaDetails";
 import { useHistory } from "react-router-dom";
+import Spinner from "../../reogranisation/Spinner";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
@@ -32,6 +33,7 @@ export default function IdeaDashboardDetail(props) {
   const [rejected, setRejected] = useState(false);
   const history = useHistory(); 
 
+  const [loading, setLoading] = useState(true);
 
   const docsUploaded = (
     <section>
@@ -140,8 +142,19 @@ export default function IdeaDashboardDetail(props) {
         setAssessments(res.body.assessments);
         setComments(res.body.comments);
         setIndustryIdea(res.body.industryIdea);
+        setLoading(false);
       });
   }, []);
+
+  if(loading){
+    return (
+      <SpinnerStyle>
+        <SpinnerPostion>
+          <Spinner />
+        </SpinnerPostion>
+      </SpinnerStyle>
+    )
+  }
 
   const renderAssessmentSection = !showAssessmentSection ? (
     <>
@@ -192,6 +205,7 @@ export default function IdeaDashboardDetail(props) {
     <CommentSection
       id={ideasId}
       authState={props.authState}
+      loading={props.location.state.loading}
       show={(e) => {
         setShowCommentSection(e);
       }}
@@ -443,6 +457,22 @@ const Left = styled.div`
   padding-top: 100px;
   padding-left: 30px;
 `;
+
+const SpinnerStyle = styled.div`
+  display: flex;
+  align-itmes: center;
+  justify-content: center;
+  background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+`;
+
+const SpinnerPostion = styled.div`
+  margin-top: 370px;
+`
 
 const FlexRow = styled.div`
   display: flex;

@@ -67,6 +67,12 @@ export default function AdminDashboard(props) {
             <h4>Rejected Ideas</h4>
           </div>
         </Link>
+        <Link className="links" to="/AdminDashboard/cofounders">
+          <div className="invest-tile">
+            <img className="icons" src={assess} alt="assessment icon"></img>
+            <h4>Add/Reject Co-founders</h4>
+          </div>
+        </Link>
       </div>
       <h2 style={styledH2}>Ideas:</h2>
 

@@ -24,6 +24,7 @@ const Submission = (props) => {
   const [valueDecideSdg, setValueDecideSdg] = useState(false);
   const [agreementSection, setAgreementSection] = useState(false);
   const questionGroups = [...jsonFormData];
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
 
   useEffect(() => {
     setProgress(activeGroup / questionGroups.length);
@@ -45,6 +46,7 @@ const Submission = (props) => {
   };
 
   const handleNextBttnClick = () => {
+    setCurrentQuestionIndex(currentQuestionIndex + 1)
     // console.log(activeGroup, questionGroups.length)
     if ((activeGroup) === questionGroups.length) {
       // console.log(activeGroup, questionGroups.length)
@@ -90,10 +92,18 @@ const Submission = (props) => {
   if (questionGroups.length === 0) return <div>Loading...</div>;
 
   const handleBackBttnClick = () => {
-
+    setCurrentQuestionIndex(currentQuestionIndex - 1)
       setActiveGroup(activeGroup - 1);
       setAgreementSection(false);
   }
+
+  // const questionIndexControl = (change) => {
+  //   if (change === -1 ) {
+  //     setCurrentQuestionIndex(currentQuestionIndex - 1)
+  //   } else {
+  //     setCurrentQuestionIndex(currentQuestionIndex + 1)
+  //   }
+  // }
 
   return (
     <div>
@@ -127,6 +137,7 @@ const Submission = (props) => {
                       handleValidationChanges={handleValidationChange}
                       key={questionGroups[activeGroup].id.toString()}
                       answers={answers}
+                      currentQuestionIndex={activeGroup}
                     />}
                   {(valueDecideProfit) ? <div style={{ color: "red" }}> <br />We are working very hard on building a non-profit version of The Idealists as well. Unfortunately, until that is ready, we cannot accept non-profit ideas yet.
                      </div> : null}
@@ -138,7 +149,7 @@ const Submission = (props) => {
           </Content>
         </Right>
         <div css={css`position: absolute; right: 20px; bottom: 20px; width: 160px;`}>
-          {activeGroup !== questionGroups.length && 
+          {!activeGroup !== questionGroups.length && 
             <Button text='Next' disabled={!activeGroupComplete} onClick={handleNextBttnClick} withIcon />}
             {activeGroup !== 0 &&  <Button text="Back" onClick={handleBackBttnClick}/>}
         </div>
