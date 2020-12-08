@@ -17,7 +17,6 @@ export default function CommentSection(props) {
     request
       .get(`${baseUrl}/ideas/${id}/comments`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      //   .then((res) => console.log("res.body", res.body));
       .then((res) => {
         setCommentsData(res.body);
       });
