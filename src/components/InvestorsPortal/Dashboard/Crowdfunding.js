@@ -28,7 +28,7 @@ export default function CrowdFunding(props) {
         eligible for crowdfunding. Only validated, unique ideas with a complete
         founder-team will be presented on our crowdfunding platform. All idea
         files will include all the results from all past 8 stages, so you can
-        easily assess whether this is a fitting investment for you [Open]
+        easily assess whether this is a fitting investment for you
       </StyledCard>
     </div>
   );
