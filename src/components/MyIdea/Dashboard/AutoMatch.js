@@ -99,8 +99,8 @@ export default function IdeaDashboardDetail(props) {
           } else countAnswers -= 1;
         }
       }
-      console.log("counta:", countAnswers);
-      if (countAnswers === resultsKeys.length + 3) {
+      //console.log("counta:", countAnswers);
+      if (countAnswers === resultsKeys.length + addnlQuesKeys.length) {
         setEnableSubmit(true);
       } else {
         setEnableSubmit(false);
