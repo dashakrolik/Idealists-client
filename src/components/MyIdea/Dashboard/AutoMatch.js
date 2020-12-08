@@ -94,7 +94,7 @@ export default function IdeaDashboardDetail(props) {
         }
       }
       //console.log("counta:", countAnswers);
-      if (countAnswers === resultsKeys.length + addnlQuesKeys.length) {
+      if (countAnswers === resultsKeys.length + 3) {
         setEnableSubmit(true);
       } else {
         setEnableSubmit(false);
@@ -109,7 +109,6 @@ export default function IdeaDashboardDetail(props) {
       .send({ autoMatchComments: patentDifference })
       .then((res) => {
         if (res.status === 200) {
-
           updateProgress(ideasId);
           setDisplaySuccess(true);
         }
@@ -120,7 +119,6 @@ export default function IdeaDashboardDetail(props) {
         } else {
           console.error(err);
         }
-
       });
   };
 
@@ -138,7 +136,6 @@ export default function IdeaDashboardDetail(props) {
         if (err) {
           console.log("error", err);
         }
-
       });
   };
 
@@ -404,7 +401,6 @@ export default function IdeaDashboardDetail(props) {
                     onClick={sendValues}
                     type="submit"
                   />
-
                 </AddlQuestions>
               </StartContent>
             </div>
