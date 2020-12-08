@@ -27,6 +27,7 @@ export default function IdeaDashboardDetail(props) {
   // const [identifyProblem, setIdentifyProblem] = useState("");
   // const [problemSolution, setProblemSolution] = useState("");
   // const [howProblemUnique, setHowProblemUnique] = useState("");
+
   const [enableSubmit, setEnableSubmit] = useState(false);
   const ideasId = props.match.params.id;
 
@@ -43,13 +44,6 @@ export default function IdeaDashboardDetail(props) {
       )
       .catch((err) => console.error(err));
   }, []);
-
-  // useEffect(() => {
-  //   request
-  //     .get(`${baseUrl}/ideas/${ideasId}/automatch`)
-  //     .set("Authorization", `Bearer ${props.authState.token}`)
-  //     .then(automatch => Do2(Object.values(automatch.body.autoMatch['ipscreener-results']['index-1'])))
-  // }, []);
 
   const updateShow = (e) => {
     setIsShown({
@@ -115,6 +109,8 @@ export default function IdeaDashboardDetail(props) {
       .send({ autoMatchComments: patentDifference })
       .then((res) => {
         if (res.status === 200) {
+
+          updateProgress(ideasId);
           setDisplaySuccess(true);
         }
       })
@@ -124,6 +120,25 @@ export default function IdeaDashboardDetail(props) {
         } else {
           console.error(err);
         }
+
+      });
+  };
+
+  const updateProgress = (id) => {
+    request
+      .put(`${baseUrl}/ideas/${ideasId}/progress`)
+      .set("Authorization", `Bearer ${props.authState.token}`)
+      .send({ step02: true })
+      .then((res) => {
+        if (res.status === 200) {
+          // console.log("success, idea progress moved forward");
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
       });
   };
 
@@ -382,12 +397,14 @@ export default function IdeaDashboardDetail(props) {
                     name="howProblemUnique"
                     type="text"
                   />
+
                   <Button
                     text={"Submit"}
                     disabled={!enableSubmit}
                     onClick={sendValues}
                     type="submit"
                   />
+
                 </AddlQuestions>
               </StartContent>
             </div>

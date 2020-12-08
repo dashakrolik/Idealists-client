@@ -47,6 +47,33 @@ export default function AdminDashboard(props) {
     props.user();
   }
 
+  const progressText = (idea) => {
+    const progress = [
+      "A New Idea!",
+      "First Patent Check",
+      "Expert Check",
+      "Second Patent Check",
+      "Validation Phase",
+      "Final Patent Check",
+      "Business Plan Phase",
+      "Co-Founder Phase",
+      "Funding Phase",
+      "Company is Born",
+      "Project Complete",
+    ];
+
+    for (let i = 1; i <= 10; i++) {
+      if (i === 10) return "Company is born!";
+      if (i === 1 && !idea.progress[`step0${i}`]) return progress[0];
+      if (
+        idea.progress[`step0${i}`] === true &&
+        idea.progress[`step0${i + 1}`] === false
+      ) {
+        return progress[i - 1];
+      }
+    }
+  };
+
   return (
     <div className="dashboard-container">
       <br />
@@ -62,6 +89,12 @@ export default function AdminDashboard(props) {
           <div className="invest-tile">
             <img className="icons" src={assess} alt="assessment icon"></img>
             <h4>Rejected Ideas</h4>
+          </div>
+        </Link>
+        <Link className="links" to="/AdminDashboard/cofounders">
+          <div className="invest-tile">
+            <img className="icons" src={assess} alt="assessment icon"></img>
+            <h4>Add/Reject Co-founders</h4>
           </div>
         </Link>
       </div>
@@ -87,19 +120,10 @@ export default function AdminDashboard(props) {
                     <strong>Description:</strong>
                   </p>
                   <p>{idea.idea[5].answers[1].qAnswer}</p>
-                  {idea.progress === null ||
-                    (idea.progress.step01 === true &&
-                      idea.progress.step02 === true &&
-                      idea.progress.step03 === false && (
-                        <p>Status: First patent check </p>
-                      ))}
-                  {idea.progress === null ||
-                    (idea.progress.step01 === true &&
-                      idea.progress.step02 === true &&
-                      idea.progress.step03 === true &&
-                      idea.progress.step04 === false && (
-                        <p>Status: Expert check </p>
-                      ))}
+
+                  <p>
+                    <strong>Completed status:</strong> {progressText(idea)}
+                  </p>
                 </div>
               </Link>
             )
