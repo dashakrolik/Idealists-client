@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     marginBottom: "15vh",
     position: "relative",
     top: "10vh",
-    left: "25%",
+    left: "35%",
   },
   media: {
     height: 140,

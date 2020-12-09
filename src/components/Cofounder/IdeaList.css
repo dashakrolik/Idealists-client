@@ -36,16 +36,17 @@
 #customers th {
   border: 1px solid #ddd;
   padding: 8px;
+  text-align: center;
 }
 
 #customers tr:hover {
-  background-color: #4caf50;
+  background-color: #62b0e4;
 }
 
 #customers th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #008528;
+  background-color: #155b94;
   color: white;
 }
