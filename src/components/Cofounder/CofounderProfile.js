@@ -77,11 +77,11 @@ export default function CofounderProfile(props) {
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button size="small" color="primary">
-                Button 1
+              <Button size="small" color="secondary">
+                STOP
               </Button>
               <Button size="small" color="primary">
-                Button 2
+                PLAY
               </Button>
             </CardActions>
           </Card>
