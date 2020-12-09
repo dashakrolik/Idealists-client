@@ -20,12 +20,18 @@ export default function ProgressBar(props) {
   const progressStep = [""];
 
   for (let i = 1; i < 10; i++) {
-    const step = progress[`step0${i}`]
-      ? "is-done"
-      : progress[`step0${i - 1}`]
-      ? "current"
-      : "";
-    progressStep.push(step);
+    if (progress[`step0${i}`]) {
+      progressStep.push(`is-done`);
+    } else {
+      const step =
+        i === 1 && !progress[`step01`]
+          ? "current"
+          : !progress[`step0${i}`] && progress[`step0${i - 1}`]
+          ? "current"
+          : null;
+
+      progressStep.push(step);
+    }
   }
 
   progressStep.push(

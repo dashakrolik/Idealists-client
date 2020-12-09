@@ -8,15 +8,37 @@ import "./CommentForm.css";
 import Spinner from "../../../reogranisation/Spinner";
 
 export default function CommentForm(props) {
-  const { token, id, loaded, reFetch } = props;
+  const { 
+    token, id, loaded, reFetch, 
+    commentId, pre_title, pre_message, edited } = props;
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [succes, setSucces] = useState(false);
-  const [sentComment, setSentComment] = useState(false)
+  const [sentComment, setSentComment] = useState(false);
 
   function AddComment() {
     if (title === "" || message === "") return null;
-    else
+    else if (edited){
+      setSentComment(true)
+      request
+        .put(`${baseUrl}/ideas/${id}/edit/comments/${commentId}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({ comment: { title, message } })
+        .then((res) => {
+          if (res.status === 201) {
+            setSucces(true);
+            setSentComment(false)
+            reFetch()
+          }
+        })
+        .catch((err) => {
+          if (err.status === 400) {
+          } else {
+            console.error(err);
+          }
+        });
+    }
+    else if(!edited && !sentComment){
       setSentComment(true)
       request
         .post(`${baseUrl}/ideas/${id}/comments`)
@@ -35,9 +57,27 @@ export default function CommentForm(props) {
             console.error(err);
           }
         });
+      }
   }
 
   const CancelAddComment = () => props.showForm(false);
+
+  const placeholderTitle = () => {
+    if(pre_title){
+      return pre_title
+    } else{
+      return "Add a title for your comment"
+    }
+  }
+
+  const placeholderMessage = () => {
+    if(pre_message){
+      return pre_message
+    } else{
+      return "Add a title for your comment"
+    }
+  }
+  
   const render = !succes ? (
     <form className="comment-form">
       Title:
@@ -49,8 +89,8 @@ export default function CommentForm(props) {
         }}
         cols="40"
         rows="1"
+        placeholder={placeholderTitle()}
       >
-        Add a title for your comment
       </textarea>
       Comment:
       <textarea
@@ -61,8 +101,8 @@ export default function CommentForm(props) {
         }}
         cols="40"
         rows="5"
+        placeholder={placeholderMessage()}
       >
-        Add your comment
       </textarea>
       <div className="comment-form-buttons">
         <Button

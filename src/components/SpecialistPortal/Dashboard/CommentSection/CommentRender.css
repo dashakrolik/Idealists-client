@@ -18,6 +18,11 @@
   text-align: left;
 }
 
+.comment-container .far-right {
+  text-align: right;
+  margin-top: 5px;
+}
+
 .comment-container .left p {
   font-size: small;
 }
