@@ -17,7 +17,10 @@ export default function CofounderIdeaDetail(props) {
 
   const ideaId = props.match.params.id;
   const [userIdeas, setUserIdeas] = useState([]);
-  const [show, setShow] = useState(false)
+  const [showSlider, setShowSlider] = useState(false)
+  const [showImage, setShowImage] = useState(true)
+  const [showButton, setButton] = useState(true)
+  const [showBidders, setShowBidders] = useState(false)
   const [ideaBids, setIdeaBids] = useState([])
   const [displaySuccess, setDisplaySuccess] = useState(false);
 
@@ -52,7 +55,7 @@ export default function CofounderIdeaDetail(props) {
 
 
   function showSlider() {
-    setShow(true)
+    setShowSlider(true)
   }
 
   return (
@@ -62,10 +65,10 @@ export default function CofounderIdeaDetail(props) {
           <FlexRow>
             <FlexColumn>
               <Left>
-                {!show ? (
+                {!showSlider ? (
                   <div className='bid-icon-wrap'>
                     <img className="icons" src={bid} alt="Bid on idea" onClick={() => {
-                      showSlider()
+                      setShowSlider(true)
                     }} />
                     <h3>Bid on this idea</h3>
                   </div>
@@ -74,7 +77,7 @@ export default function CofounderIdeaDetail(props) {
                 {displaySuccess ? (
                   <StyledDiv >Bid submission success!</StyledDiv>
                 ) : (
-                    <BidSlider authState={props.authState} ideaId={ideaId} show={!show} displaySuccess={displaySuccess} />
+                    <BidSlider authState={props.authState} ideaId={ideaId} showSlider={!showSlider} displaySuccess={displaySuccess} />
                   )}
               </Left>
             </FlexColumn>
@@ -87,8 +90,8 @@ export default function CofounderIdeaDetail(props) {
           </FlexRow>
         </Left>
         <Right>
-          {!show ? (
-            <Button text="See other bidders" onClick={(() => { setShow(true) })} />
+          {!showBidders ? (
+            <Button text="See other bidders" onClick={(() => { setShowBidders(true) })} />
           ) : (
               < StyledDiv> {ideaBids.map((bid) => {
                 return (
@@ -96,7 +99,7 @@ export default function CofounderIdeaDetail(props) {
                     <span key={bid.id}>{bid.firstname}{" "}{bid.lastname}</span>
                   </StyledLink>)
               })}
-                <Button text=" hide bidders" onClick={(() => { setShow(false) })} />
+                <Button text=" hide bidders" onClick={(() => { setShowBidders(false) })} />
               </StyledDiv>
             )}
           <Content>
