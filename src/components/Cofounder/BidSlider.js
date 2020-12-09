@@ -79,30 +79,6 @@ export default function BidSlider(props) {
             });
 
     }
-
-
-    // const EditBid = () => {
-
-    //     request
-    //         .put(`${baseUrl}/ideas/${props.ideaId}/bids`)
-    //         .set("Authorization", `Bearer ${props.authState.token}`)
-    //         .send({
-    //             equity: bidValue
-    //         })
-    //         .then(res => {
-    //             if (res.status === 204) {
-    //                 console.log('result', res)
-    //                 alert("You submitted your bid successfully")
-    //             }
-    //         })
-    //         .catch(err => {
-    //             if (err.status === 400) {
-    //             } else {
-    //                 console.error(err);
-    //             }
-    //         });
-
-    // }
     if (props.show) {
 
         return (
