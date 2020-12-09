@@ -11,7 +11,7 @@ import Button from '../../reogranisation/Questions/Button';
 import SubmissionSideScreen from './SubmissionSideScreen';
 import CompleteSubmission from './CompleteSubmission';
 import { useHistory } from "react-router-dom";
-
+export const  AnswersContext = React.createContext();
 
 
 const Submission = (props) => {
@@ -25,6 +25,7 @@ const Submission = (props) => {
   const [agreementSection, setAgreementSection] = useState(false);
   const questionGroups = [...jsonFormData];
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+
 
   useEffect(() => {
     setProgress(activeGroup / questionGroups.length);
@@ -55,7 +56,7 @@ const Submission = (props) => {
     else if ((activeGroup === 11) && (questionGroups.length === 12)) {
       setActiveGroup(12);
       setAgreementSection(true);
-    
+
     } else {
       setActiveGroup(activeGroup + 1);
       // console.log(activeGroup, questionGroups.length)
@@ -93,8 +94,8 @@ const Submission = (props) => {
 
   const handleBackBttnClick = () => {
     setCurrentQuestionIndex(currentQuestionIndex - 1)
-      setActiveGroup(activeGroup - 1);
-      setAgreementSection(false);
+    setActiveGroup(activeGroup - 1);
+    setAgreementSection(false);
   }
 
   // const questionIndexControl = (change) => {
@@ -130,16 +131,20 @@ const Submission = (props) => {
                   {activeGroup === questionGroups.length ?
                     <CompleteSubmission groups={questionGroups} answers={answers} authState={props.authState}
                       login={props.login} /> :
-                    <QuestionGroup group={questionGroups[activeGroup]}
-                      answersHandler={handleAnswers}
-                      handleDecidingQuestions={handleDecidingQuestions}
-                      handleInputFocus={handleInputFocus}
-                      handleValidationChanges={handleValidationChange}
-                      key={questionGroups[activeGroup].id.toString()}
-                      answers={answers}
-                      currentQuestionIndex={activeGroup}
-                      placeholder={answers}
-                    />}
+                      <AnswersContext.Provider answers={answers}>
+                      <QuestionGroup group={questionGroups[activeGroup]}
+                        answersHandler={handleAnswers}
+                        handleDecidingQuestions={handleDecidingQuestions}
+                        handleInputFocus={handleInputFocus}
+                        handleValidationChanges={handleValidationChange}
+                        key={questionGroups[activeGroup].id.toString()}
+                        answers={answers}
+                        currentQuestionIndex={activeGroup}
+                        placeholder={answers}
+                      />
+                      </AnswersContext.Provider>
+
+                    }
                   {(valueDecideProfit) ? <div style={{ color: "red" }}> <br />We are working very hard on building a non-profit version of The Idealists as well. Unfortunately, until that is ready, we cannot accept non-profit ideas yet.
                      </div> : null}
                   {(valueDecideSdg) ? <div style={{ color: "red" }}> <br />We are sorry, but you cannot continue if your idea does not fit within one of the SDGs.
@@ -150,9 +155,9 @@ const Submission = (props) => {
           </Content>
         </Right>
         <div css={css`position: absolute; right: 20px; bottom: 20px; width: 160px;`}>
-          {!activeGroup !== questionGroups.length && 
+          {!activeGroup !== questionGroups.length &&
             <Button text='Next' disabled={!activeGroupComplete} onClick={handleNextBttnClick} withIcon />}
-            {activeGroup !== 0 &&  <Button text="Back" onClick={handleBackBttnClick}/>}
+          {activeGroup !== 0 && <Button text="Back" onClick={handleBackBttnClick} />}
         </div>
       </Container>
     </div>
@@ -265,3 +270,22 @@ const Container = styled.div`
 `;
 
 export default Submission;
+
+const answers = () => {
+  const formValuesObject = {
+    "0": '',
+    "1": '',
+    "2": '',
+    "3": '',
+    "4": '',
+    "5": '',
+    "6": '',
+    "7": '',
+    "8": '',
+    "9": '',
+    "10": '',
+    "11": '',
+  }
+  const mapValuesToObject = (key, value) => formValuesObject.map(element => element[key] = value)
+  mapValuesToObject()
+}
