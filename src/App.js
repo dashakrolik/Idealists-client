@@ -38,7 +38,7 @@ import AddSpecialistStart from './components/SpecialistPortal/SpecialistCreation
 import UserAssessIdeas from './components/MyIdea/Dashboard/UserAssessIdeas';
 import CofounderStart from './components/Cofounder/CofounderStart';
 import CofounderLogin from './components/Cofounder/CofounderLogin';
-import CofounderDashboard from './components/Cofounder/CofounderDashboard';
+import CofounderProfileForm from './components/Cofounder/CofounderProfileForm';
 import IdeasList from './components/Cofounder/IdeaList';
 import CofounderPersonalityTest from './components/Cofounder/CofounderPersonalityTest';
 import CofounderProfileVideo from './components/Cofounder/CofounderProfileVideo';
@@ -675,10 +675,10 @@ class App extends Component {
 							/>
 							<Route
 								exact
-								path='/Cofounder/dashboard'
+								path='/CofounderProfileForm'
 								render={(props) => {
 									return (
-										<CofounderDashboard
+										<CofounderProfileForm
 											{...props}
 											user={this.getCurrentUser}
 											authState={this.state.auth}
