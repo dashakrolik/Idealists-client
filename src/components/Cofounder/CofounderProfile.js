@@ -8,10 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import "./IdeaList.css";
 
 const useStyles = makeStyles({
   root: {
@@ -42,7 +39,7 @@ export default function CofounderProfile(props) {
 
   const fakedata = {
     person: "I am Danny and Nikolas. We are One.",
-    reason: "Because i am very pationate to pay my rent.",
+    reason: "Because i am very pationate with my project.",
     whynow: "Because now i can",
     devgoal: "something for the enviroment",
     achievements: "profficiency in HTML 4",
@@ -69,7 +66,7 @@ export default function CofounderProfile(props) {
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
-                  <h1>My Video</h1>
+                  <h3>My Profile Video</h3>
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
                   <p>{fakedata.video}</p>
@@ -87,124 +84,50 @@ export default function CofounderProfile(props) {
           </Card>
         </div>
         <div className="data-div">
-          <div className={accordionClasses.root}>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography className={accordionClasses.heading}>
-                  Who am I
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  <p>{fakedata.person}</p>
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel2a-content"
-                id="panel2a-header"
-              >
-                <Typography className={accordionClasses.heading}>
-                  Why i want to be an impactfull Co-Founder ?
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>{fakedata.reason}</Typography>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel2a-content"
-                id="panel2a-header"
-              >
-                <Typography className={accordionClasses.heading}>
-                  Why now is the right timing for me to be an impactfull
-                  Co-Founder?
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>{fakedata.whynow}</Typography>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel2a-content"
-                id="panel2a-header"
-              >
-                <Typography className={accordionClasses.heading}>
-                  UN sustainable development goal that intrest me the most and
-                  why!
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>{fakedata.devgoal}</Typography>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel2a-content"
-                id="panel2a-header"
-              >
-                <Typography className={accordionClasses.heading}>
-                  Something exceptional i have done or created.
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>{fakedata.achievements}</Typography>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel2a-content"
-                id="panel2a-header"
-              >
-                <Typography className={accordionClasses.heading}>
-                  My work experience!
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>{fakedata.experience}</Typography>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel2a-content"
-                id="panel2a-header"
-              >
-                <Typography className={accordionClasses.heading}>
-                  My educational Background.
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>{fakedata.education}</Typography>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel2a-content"
-                id="panel2a-header"
-              >
-                <Typography className={accordionClasses.heading}>
-                  How many Languages i Speak.
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>{fakedata.languages}</Typography>
-              </AccordionDetails>
-            </Accordion>
-          </div>
+          <table id="customers">
+            <tr>
+              <th>Question</th>
+              <th>Answer</th>
+            </tr>
+            <tr>
+              <td>Who am I</td>
+              <td>{fakedata.person}</td>
+            </tr>
+            <tr>
+              <td>Why I want to be an impactful co-founder</td>
+              <td>{fakedata.reason}</td>
+            </tr>
+            <tr>
+              <td>
+                Why now is the right timing for me to become an impactful
+                co-founder
+              </td>
+              <td>{fakedata.whynow}</td>
+            </tr>
+            <tr>
+              <td>
+                The UN Sustainable Development Goal that interests me the most
+                and why
+              </td>
+              <td>{fakedata.devgoal}</td>
+            </tr>
+            <tr>
+              <td>Something exceptional I have done, built or created</td>
+              <td>{fakedata.achievements}</td>
+            </tr>
+            <tr>
+              <td>My work experience</td>
+              <td>{fakedata.experience}</td>
+            </tr>
+            <tr>
+              <td>My educational background</td>
+              <td>{fakedata.education}</td>
+            </tr>
+            <tr>
+              <td>The language(s) I speak</td>
+              <td>{fakedata.languages}</td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
