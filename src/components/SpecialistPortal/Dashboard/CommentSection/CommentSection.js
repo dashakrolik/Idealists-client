@@ -17,7 +17,6 @@ export default function CommentSection(props) {
     request
       .get(`${baseUrl}/ideas/${id}/comments`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      //   .then((res) => console.log("res.body", res.body));
       .then((res) => {
         setCommentsData(res.body);
       });
@@ -35,12 +34,19 @@ export default function CommentSection(props) {
       );
     else
       return commentsData.map((comment) => {
+        console.log("comment:", comment)
         return (
           <CommentRender
+            token={props.authState.token}
+            id={id}
+            loaded={loading}
+            reFetch={fetchComments}
             key={comment.id}
             date={comment.createdAt}
             comment={comment.comment}
             user={comment.user}
+            idComment={comment.id}
+            commentForm={CommentForm}
           />
         );
       });

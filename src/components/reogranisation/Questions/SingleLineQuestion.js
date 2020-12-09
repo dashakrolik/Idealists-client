@@ -9,25 +9,26 @@ const SingleLineQuestion = (props) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isStillInit, setIsStillInit] = useState(true);
   const [validated, setValidated] = useState(false);
-  const [currentValue, setCurrentValue] = useState([]);
-  // console.log("answers in single line question", props)
+  const [currentValue, setCurrentValue] = useState('');
+  // const [multiLineQuestion, setMultiLineQuestion] = useState({one });
+  // console.log("props in single line question", props)
   const {
     currentQuestionIndex,
-    answers
+    value,
+    placeholder
   } = props
-  
-  console.log("currentQuestionIndex in single line question", currentQuestionIndex)
-console.log("answers in single line question", answers)
 
+  console.log("currentQuestionIndex in single line question", currentQuestionIndex)
+  // console.log("answers in single line question", value)
+  // console.log("placeholder in single line question", placeholder)
   useEffect(() => {
     props.onValidationChange && props.onValidationChange(props.id, validated);
   }, [validated]);
 
-    // useEffect(()=> { 
-    //   if
-    //   (props.value) {
-    //    setCurrentValue(props.value)}
-    // },[])
+  useEffect(() => {
+    setCurrentValue(value)
+  }, [])
+  console.log("current value", currentValue)
 
   useEffect(() => {
     if (currentValue.length > 1 && currentValue.length < props.maxChar) {
@@ -53,11 +54,9 @@ console.log("answers in single line question", answers)
   }, [currentValue]);
 
   const handleChange = (e) => {
+    // setMultiLineQuestion(e.target.value);
     setCurrentValue(e.target.value);
   };
-  // const handleChange = () => {
-  //   setCurrentValue(answers);
-  // };
   const handleFocus = () => {
     setIsFocused(true);
     props.onFocusChanged && props.onFocusChanged(true);
@@ -87,14 +86,13 @@ console.log("answers in single line question", answers)
           }
           onFocus={handleFocus}
           onBlur={handleLostFocus}
-          // placeholder={props.placeholder.length > 0 ? props.placeholder : ""}
-          placeholder={answers[currentValue]}
+          placeholder={placeholder.length < 0 ? placeholder : ""}
         />
       )}
       {props.multiLine && (
         <TextArea
           onChange={handleChange}
-          value={answers[currentQuestionIndex]}
+          value={currentValue[currentQuestionIndex]}
           pose={
             isStillInit || validated
               ? isFocused
@@ -106,9 +104,7 @@ console.log("answers in single line question", answers)
           }
           onFocus={handleFocus}
           onBlur={handleLostFocus}
-          // placeholder={props.placeholder.length > 0 ? props.placeholder : ""}
-          // placeholder={currentValue}
-
+          placeholder={placeholder.length > 0 ? placeholder : ""}
         />
       )}
       <ErrorMessage

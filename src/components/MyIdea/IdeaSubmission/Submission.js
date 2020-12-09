@@ -138,6 +138,7 @@ const Submission = (props) => {
                       key={questionGroups[activeGroup].id.toString()}
                       answers={answers}
                       currentQuestionIndex={activeGroup}
+                      placeholder={answers}
                     />}
                   {(valueDecideProfit) ? <div style={{ color: "red" }}> <br />We are working very hard on building a non-profit version of The Idealists as well. Unfortunately, until that is ready, we cannot accept non-profit ideas yet.
                      </div> : null}

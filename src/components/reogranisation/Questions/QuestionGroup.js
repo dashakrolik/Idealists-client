@@ -10,13 +10,14 @@ import posed from "react-pose";
 const QuestionGroup = (props) => {
   const [validations, setValidations] = useState([]);
   // const [answers, setAnswers] = useState([]);
-  console.log(props, 'question group');
+  // console.log(props.answers, 'question group');
   const {
     currentQuestionIndex,
-    answers
+    answers,
+    placeholder
   } = props
-  console.log(currentQuestionIndex, 'question group question index')
-
+  // console.log(currentQuestionIndex, 'question group question index')
+  // console.log(placeholder, 'placeholder')
   useEffect(() => {
     if (validations.length === 0) return;
     if (
@@ -107,10 +108,12 @@ const QuestionGroup = (props) => {
                     groupId={props.group.id}
                     id={question.id.toString()}
                     onValidationChange={props.handleValidationChanges}
-                    placeholder={""}     
-                    answers={answers}
+                    // placeholder={""}     
+                    // answers={answers}
                     currentQuestionIndex={currentQuestionIndex}
                     value={answers}
+                    placeholder={placeholder.length > 0 ? placeholder.currentQuestionIndex : "nina"}
+
 
                   />
                 )}
@@ -125,10 +128,12 @@ const QuestionGroup = (props) => {
                     onValidationChange={props.handleValidationChanges}
                     multiLine
                     // value={answers}
-                    placeholder={""}
+                    // placeholder={""}
                     value={answers}
-                    answers={answers}
+                    // answers={answers}
                     currentQuestionIndex={currentQuestionIndex}
+                    placeholder={placeholder.length > 0 ? answers : placeholder}
+
                   />
                 )}
                 {question.type === "singleChoice" && (
@@ -142,7 +147,7 @@ const QuestionGroup = (props) => {
                     onValidationChange={props.handleValidationChanges}
                     id={question.id.toString()}
                     // value={props.answers}
-                    placeholder={""}     
+                    // placeholder={""}     
                   />
                 )}
                 {question.type === "multiChoice" && (
@@ -157,7 +162,7 @@ const QuestionGroup = (props) => {
                     id={question.id.toString()}
                     multiChoice
                     // value={props.answers}
-                    placeholder={""}     
+                    // placeholder={""}     
 
 
                   />
