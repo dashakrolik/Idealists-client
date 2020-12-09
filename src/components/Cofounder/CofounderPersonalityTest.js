@@ -13,7 +13,6 @@ export default function CofounderPersonalityTest(props) {
 	const handelSubmit = async (e) => {
 		e.preventDefault();
 		setSuccessMsg(true);
-		console.log('test Result ' + testResult);
 
 		const response = await fetch(`${baseUrl}/users`, {
 			method: 'PUT',
@@ -27,7 +26,7 @@ export default function CofounderPersonalityTest(props) {
 
 		// Awaiting response.json()
 		const resData = await response.json();
-		console.log(resData);
+
 		// Return response data
 		//return resData;
 	};
@@ -78,7 +77,7 @@ export default function CofounderPersonalityTest(props) {
 								<input type='text' value={testResult.personalityTest} required onChange={setValue} />
 								{errorCheck !== 'false' && <label>{errorCheck}</label>}
 								<br />
-								<Link to='/Cofounder/dashboard'>
+								<Link to='/CofounderProfileForm'>
 									<button type='submit'>Submit</button>
 								</Link>
 								<br />
