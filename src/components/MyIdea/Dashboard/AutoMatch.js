@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import { baseUrl } from "../../../constants";
 import "./IdeaDashboard.css";
 /** @jsx jsx */
-import { css, Global, jsx } from '@emotion/core';
-import styled from '@emotion/styled';
-import Button from '../../reogranisation/Questions/Button';
-import posed from 'react-pose';
-import TextField from '@material-ui/core/TextField';
-import Card from '@material-ui/core/Card'
-import Spinner from '../../reogranisation/Spinner';
+import { css, Global, jsx } from "@emotion/core";
+import styled from "@emotion/styled";
+import Button from "../../reogranisation/Questions/Button";
+import posed from "react-pose";
+import TextField from "@material-ui/core/TextField";
+import Card from "@material-ui/core/Card";
+import Spinner from "../../reogranisation/Spinner";
 
 export default function IdeaDashboardDetail(props) {
   // const [user, setUserData] = useState({});
@@ -153,8 +153,7 @@ export default function IdeaDashboardDetail(props) {
                     <FlexRow>
                       <FlexColumn>
                         <GroupTitle>
-                          Succesfully submit your comments to explain difference
-                          with patents.
+                          Your comments have been submitted successfully.
                         </GroupTitle>
                       </FlexColumn>
                     </FlexRow>
@@ -372,7 +371,7 @@ export default function IdeaDashboardDetail(props) {
       <Container>
         <Spinner />
       </Container>
-    )
+    );
   }
 }
 const PStartContent = posed.div({
