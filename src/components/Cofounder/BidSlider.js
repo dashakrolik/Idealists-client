@@ -14,11 +14,12 @@ import styled from "@emotion/styled";
 const useStyles = makeStyles((theme) => ({
     root: {
         width: 300,
-        color: '#ffffff'
+        color: '#fffffff',
     },
     margin: {
         height: theme.spacing(3),
     },
+
 }));
 
 export default function BidSlider(props) {
@@ -26,6 +27,7 @@ export default function BidSlider(props) {
     const [savedBid, setSavedbid] = useState("")
     const classes = useStyles();
 
+    console.log('props', props)
 
     const marks = [
         {
@@ -65,9 +67,8 @@ export default function BidSlider(props) {
                 equity: bidValue
             })
             .then(res => {
-                setSavedbid(res.body)
-                if (res.status === 204) {
-                    alert("You submitted your bid successfully")
+                if (res.status === 200) {
+                    props.displaySuccess(true)
                 }
             })
             .catch(err => {
@@ -80,30 +81,29 @@ export default function BidSlider(props) {
     }
 
 
-    const EditBid = () => {
+    // const EditBid = () => {
 
-        request
-            .put(`${baseUrl}/ideas/${props.ideaId}/bids`)
-            .set("Authorization", `Bearer ${props.authState.token}`)
-            .send({
-                equity: bidValue
-            })
-            .then(res => {
-                if (res.status === 204) {
-                    console.log('result', res)
-                    alert("You submitted your bid successfully")
-                }
-            })
-            .catch(err => {
-                if (err.status === 400) {
-                } else {
-                    console.error(err);
-                }
-            });
+    //     request
+    //         .put(`${baseUrl}/ideas/${props.ideaId}/bids`)
+    //         .set("Authorization", `Bearer ${props.authState.token}`)
+    //         .send({
+    //             equity: bidValue
+    //         })
+    //         .then(res => {
+    //             if (res.status === 204) {
+    //                 console.log('result', res)
+    //                 alert("You submitted your bid successfully")
+    //             }
+    //         })
+    //         .catch(err => {
+    //             if (err.status === 400) {
+    //             } else {
+    //                 console.error(err);
+    //             }
+    //         });
 
-    }
-    if (!props.show) {
-
+    // }
+    if (props.show) {
 
         return (
             <div className={classes.root}>
@@ -122,14 +122,33 @@ export default function BidSlider(props) {
                     max={25}
                     valueLabelDisplay="on"
                     onChange={handleChange}
+                    style={{ StyledSlider }}
 
                 />
                 <Button onClick={bid} text="Submit your bid" />
-
-                {/* <Button onClick={EditBid} text="Edit your bid" /> */}
 
             </div>
         );
     } else return null
 }
 
+const StyledDiv = styled.div`
+  margin: 0 auto;
+  width: 330px;
+  font-family: "Helvetica";
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+  margin-bottom: 20px;
+  margin-top: 45px;
+`;
+
+const StyledSlider = styled(Slider)`
+background-color: white;
+color: black;
+.MuiSlider-rail {
+    color: white
+}
+`

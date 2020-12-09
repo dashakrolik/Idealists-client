@@ -7,16 +7,20 @@ import IdeaDetails from "../reogranisation/IdeaDetails/IdeaDetails";
 import BidSlider from "./BidSlider";
 import { Redirect } from "react-router-dom";
 import bid from '../../res/bid.png'
-
+import ProgressBar from "../reogranisation/ProgressBar/ProgressBar"
+import Button from "../reogranisation/Questions/Button"
+import { Link } from 'react-router-dom'
 
 
 export default function CofounderIdeaDetail(props) {
 
-  console.log(props)
 
-  const [userIdeas, setUserIdeas] = useState([]);
   const ideaId = props.match.params.id;
+  const [userIdeas, setUserIdeas] = useState([]);
   const [show, setShow] = useState(false)
+  const [ideaBids, setIdeaBids] = useState([])
+  const [displaySuccess, setDisplaySuccess] = useState(false);
+
 
 
 
@@ -28,7 +32,16 @@ export default function CofounderIdeaDetail(props) {
         setUserIdeas(res.body.idea)
       );
   }, []);
-  console.log('userIdeas', userIdeas)
+
+  useEffect(() => {
+    request
+      .get(`${baseUrl}/ideas/${ideaId}/bids`)
+      .set("Authorization", `Bearer ${props.authState.token}`)
+      .then((res) => setIdeaBids(res.body)
+      );
+  }, [])
+  console.log('bids', ideaBids)
+
 
   if (props.authState.loggedIn === false) return <Redirect to="/CofounderStart" />;
 
@@ -37,7 +50,6 @@ export default function CofounderIdeaDetail(props) {
     props.user();
   }
 
-  // return <div className="dashboard-container">
 
   function showSlider() {
     setShow(true)
@@ -49,22 +61,44 @@ export default function CofounderIdeaDetail(props) {
         <Left>
           <FlexRow>
             <FlexColumn>
-              <StyledDiv>
-                <Left>
-                  {!show ? (
-                    <div>
-                      <img className="icons" src={bid} alt="Bid on idea" onClick={() => {
-                        showSlider()
-                      }} />
-                      <h3>Bid on this idea</h3>
-                    </div>
-                  ) : null}
-                  <BidSlider authState={props.authState} ideaId={ideaId} show={!show} /></Left>
-              </StyledDiv>
+              <Left>
+                {!show ? (
+                  <div className='bid-icon-wrap'>
+                    <img className="icons" src={bid} alt="Bid on idea" onClick={() => {
+                      showSlider()
+                    }} />
+                    <h3>Bid on this idea</h3>
+                  </div>
+                ) : null}
+
+                {displaySuccess ? (
+                  <StyledDiv >Bid submission success!</StyledDiv>
+                ) : (
+                    <BidSlider authState={props.authState} ideaId={ideaId} show={!show} displaySuccess={displaySuccess} />
+                  )}
+              </Left>
             </FlexColumn>
+          </FlexRow>
+          <FlexRow>
+            <ProgressBar
+              token={props.authState.token}
+              ideasId={props.match.params.id}
+            />
           </FlexRow>
         </Left>
         <Right>
+          {!show ? (
+            <Button text="See other bidders" onClick={(() => { setShow(true) })} />
+          ) : (
+              < StyledDiv> {ideaBids.map((bid) => {
+                return (
+                  <StyledLink to={`/Cofounder/profile/${bid.id}`}>
+                    <span key={bid.id}>{bid.firstname}{" "}{bid.lastname}</span>
+                  </StyledLink>)
+              })}
+                <Button text=" hide bidders" onClick={(() => { setShow(false) })} />
+              </StyledDiv>
+            )}
           <Content>
             <h1 className="header"> Questions and Answers about Idea:</h1>
             <IdeaDetails user={props.authState.user} ideas={userIdeas} />
@@ -82,6 +116,7 @@ const StyledDiv = styled.div`
   font-family: "Helvetica";
   font-size: 14px;
   border: 1px solid #ccc;
+  border-radius: 10px;
   padding: 20px;
   color: white;
   margin-bottom: 20px;
@@ -97,7 +132,7 @@ const Left = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: flex-start;
-  padding-top: 80px;
+  padding-top: 50px;
   padding-left: 30px;
 `;
 
@@ -111,7 +146,11 @@ const FlexRow = styled.div`
 const FlexColumn = styled.div`
   display: flex;
   flex: 1;
-`;
+.bid-icon-wrap {
+  border: 1px solid white;
+  border-radius: 10px;
+}
+  `;
 
 const Content = styled.div`
   align-self: center;
@@ -149,6 +188,15 @@ const Container = styled.div`
     #31a2d7,
     #4cc5f1
   );
+`;
+const StyledLink = styled(Link)`
+textDecoration: none;
+color: white;
+&:focus,  &:visited, &:link, &:active {
+  text-decoration: none;
+  &:hover {
+    transition: ease-in;
+  }
 `;
 
 
