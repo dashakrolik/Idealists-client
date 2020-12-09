@@ -38,13 +38,11 @@ import AddSpecialistStart from "./components/SpecialistPortal/SpecialistCreation
 import UserAssessIdeas from "./components/MyIdea/Dashboard/UserAssessIdeas";
 import CofounderStart from './components/Cofounder/CofounderStart'
 import CofounderLogin from "./components/Cofounder/CofounderLogin";
-import CofounderDashboard from "./components/Cofounder/CofounderDashboard"
 import IdeasList from "./components/Cofounder/IdeaList";
 import CofounderPersonalityTest from './components/Cofounder/CofounderPersonalityTest'
 import CofounderProfileVideo from './components/Cofounder/CofounderProfileVideo'
-
+import CofounderProfileForm from "./components/Cofounder/CofounderProfileForm";
 import Spinner from "./components/reogranisation/Spinner";
-
 
 class App extends Component {
   state = {
@@ -688,10 +686,10 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/Cofounder/dashboard"
+                path="/CofounderProfileForm"
                 render={(props) => {
                   return (
-                    <CofounderDashboard
+                    <CofounderProfileForm
                       {...props}
                       user={this.getCurrentUser}
                       authState={this.state.auth}

@@ -3,7 +3,6 @@ import { jsx } from '@emotion/core'
 import styled from '@emotion/styled'
 import { baseUrl } from '../../constants'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 
 export default function CofounderPersonalityTest(props) {
   const [testResult, setTestResult] = useState('')
@@ -22,13 +21,13 @@ export default function CofounderPersonalityTest(props) {
 
     // Awaiting response.json()
     const resData = await response.json()
-    console.log(resData)
+  
     // Return response data
     return resData
   }
 
   const setValue = (e) => {
-    let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?0-9a-z]+/
+    let format = /[!@#$%^&*()_+=[]{};':"\\|,.<>\/?0-9a-z]+/
     setTestResult(e.target.value)
 
     if (e.target.value.match(format)) {
