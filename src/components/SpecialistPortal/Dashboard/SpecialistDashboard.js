@@ -6,9 +6,6 @@ import "./SpecialistDashboard.css";
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import Spinner from "../../reogranisation/Spinner";
-// import assess from '../../../res/assess-white.png'
-// import invest from '../../../res/invest-white.png'
-// import crowdfunding from '../../../res/crowdfunding.png'
 
 export default function specialistDashboard(props) {
   const [userData, setUserData] = useState({});

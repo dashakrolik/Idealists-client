@@ -78,25 +78,33 @@ export default function IdeaDashboardDetail(props) {
     return <Redirect to="/MyIdea" />;
   }
 
-  // This loop results in an array that determines the current phase and completed phase(s).
-  // "is-done" and "current" refer to CSS class names used in the progress bar
-  // the switch statement below the loop depends on this progressStep array
-  const progressStep = [""];
-  for (let i = 1; i < 10; i++) {
-    const step = progress[`step0${i}`]
-      ? "is-done"
-      : progress[`step0${i - 1}`]
-      ? "current"
-      : "";
-    progressStep.push(step);
-  }
+  // Below code progressStep() determines the index of the current phase (currentStepIndex), as setup for the switch statement
+  const progressStep = (progress) => {
+    for (let i = 1; i < 10; i++) {
+      if (i === 1 && !progress[`step01`]) {
+        return 1;
+      } else if (!progress[`step0${i}`] && progress[`step0${i - 1}`]) return i;
+    }
+  };
 
-  // this determines the index of the current phase, as setup for the switch statement
-  let currentStepIndex = progressStep.indexOf("current");
+  /*
+STEPS IN IDEA SUBMISSION:
+1.	Submit your idea
+2.	First patent check
+3.	Expert check
+4.	Second patent check
+5.	Validation phase
+6.	Final patent check
+7.	Business plan phase
+8.	Build the team
+9.	Funding phase
+10.	Company is born
+ */
+
+  let currentStepIndex = progressStep(progress);
 
   let nextPhaseName;
   let stepNameInEntity;
-
   switch (currentStepIndex) {
     case 1:
       nextPhaseName = "First Patent Check"; // used in the button text
