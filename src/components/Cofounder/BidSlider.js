@@ -79,7 +79,7 @@ export default function BidSlider(props) {
             });
 
     }
-    if (props.show) {
+    if (!props.show) {
 
         return (
             <div className={classes.root}>

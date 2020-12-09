@@ -53,10 +53,11 @@ export default function CofounderIdeaDetail(props) {
     props.user();
   }
 
-
-  function showSlider() {
+  const handleSlider = () => {
     setShowSlider(true)
+    setShowImage(false)
   }
+
 
   return (
     <div className="dashboard-container">
@@ -68,17 +69,16 @@ export default function CofounderIdeaDetail(props) {
                 {!showSlider ? (
                   <div className='bid-icon-wrap'>
                     <img className="icons" src={bid} alt="Bid on idea" onClick={() => {
-                      setShowSlider(true)
-                    }} />
+                      handleSlider()
+                    }} showImage={showImage} />
                     <h3>Bid on this idea</h3>
                   </div>
-                ) : null}
-
-                {displaySuccess ? (
-                  <StyledDiv >Bid submission success!</StyledDiv>
                 ) : (
                     <BidSlider authState={props.authState} ideaId={ideaId} showSlider={!showSlider} displaySuccess={displaySuccess} />
                   )}
+                {displaySuccess ? (
+                  <StyledDiv >Bid submission success!</StyledDiv>
+                ) : null}
               </Left>
             </FlexColumn>
           </FlexRow>
