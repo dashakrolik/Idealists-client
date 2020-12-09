@@ -1,21 +1,27 @@
 .dashboard-container {
-    min-height: 100%;
-    background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
-    text-align: center;
-
+  min-height: 100%;
+  background-image: linear-gradient(
+    to right top,
+    #1a3d7c,
+    #195d9c,
+    #1f7fbb,
+    #31a2d7,
+    #4cc5f1
+  );
+  text-align: center;
 }
 .title {
- color: white
+  color: white;
 }
-.p{
-    color: white
+.p {
+  color: white;
 }
 .list-container {
-    width: 30%;
-    margin: 20px 50px 20px;
-    padding: 20px;
-    background-color:#1a3d7c;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 30%;
+  margin: 20px 50px 20px;
+  padding: 20px;
+  background-color: #1a3d7c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
