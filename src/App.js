@@ -719,7 +719,7 @@ class App extends Component {
                   );
                 }}
               />
-                            <Route
+              <Route
                 exact
                 path="/Cofounder/dashboard/ideas/:id"
                 render={(props) => {
