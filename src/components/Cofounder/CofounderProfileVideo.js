@@ -63,8 +63,6 @@ export default function CofounderProfileVideo(props) {
 		// Awaiting response.json()
 		const resData = await response.json();
 		console.log('response', resData);
-		// <Redirect to='/cofounderPersonalityTest' />;
-		//return resData;
 	};
 	return (
 		<div>
