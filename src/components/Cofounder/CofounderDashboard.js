@@ -6,6 +6,7 @@ import "../MyIdea/Dashboard/IdeaDashboard.css";
 import assesWhite from "../../res/assess-white.png";
 import mentor from "../../res/mentor.png";
 
+
 export default function CofounderDashboard(props) {
   const [user, setUserData] = useState({});
   const [userIdeas, setUserIdeas] = useState([]);
@@ -21,15 +22,9 @@ export default function CofounderDashboard(props) {
   }, []);
 
   if (props.authState.loggedIn === false) return <h1>Not logged in</h1>;
-  if (props.authState.isApproved === null)
-    return <h1>Your Application is being reviewed</h1>;
-  if (props.authState.isApproved === false)
-    return (
-      <h1>
-        Your Application has been rejected, you wont be able to view and bid on
-        ideas
-      </h1>
-    );
+  if (props.authState.isApproved === null) return <h1>Your Application is being reviewed</h1>;
+  if (props.authState.isApproved === false) return <h1>Your Application has been rejected, you wont be able to view and bid on ideas</h1>;
+
 
   return (
     <div className="dashboard-container">
@@ -38,7 +33,8 @@ export default function CofounderDashboard(props) {
       <div>
         <h1>{user.firstName}'s Dashboard</h1>
       </div>
-      <div className="items-wrapper">
+
+      <div className='items-wrapper'>
         <div className="flex-ideacontainer">
           <Link className="links" to="/Cofounder/dashboard/ideas">
             <div className="assess-tiles">
@@ -58,14 +54,6 @@ export default function CofounderDashboard(props) {
             </div>
           </Link>
         </div>
-        {/* <div className="flex-ideacontainer">
-            <Link className="links" to="/MyIdea/new">
-              <div className="assess-tiles">
-                <img alt="icon" className="icons" src={submitIdea}></img>
-                <h4>Submit your first idea</h4>
-              </div>
-            </Link>
-          </div> */}
       </div>
     </div>
   );
