@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 export default function BidSlider(props) {
     const [bidValue, setValue] = useState("")
     const [savedBid, setSavedbid] = useState("")
+    const [showEditBid, setShowEditBid] = useState(false)
     const classes = useStyles();
 
     console.log('props', props)
@@ -67,18 +68,29 @@ export default function BidSlider(props) {
                 equity: bidValue
             })
             .then(res => {
+                if (res.status === 500) {
+                    setShowEditBid(true)
+                } else (
+                    props.displaySuccess(true)
+                )
+            })
+
+    }
+    const EditBid = () => {
+        request
+            .pust(`${baseUrl}/ideas/${props.ideaId}/bids`)
+            .set("Authorization", `Bearer ${props.authState.token}`)
+            .send({
+                equity: bidValue
+            })
+            .then(res => {
                 if (res.status === 200) {
                     props.displaySuccess(true)
                 }
             })
-            .catch(err => {
-                if (err.status === 400) {
-                } else {
-                    console.error(err);
-                }
-            });
 
     }
+
     if (!props.show) {
 
         return (
@@ -101,7 +113,12 @@ export default function BidSlider(props) {
                     style={{ StyledSlider }}
 
                 />
-                <Button onClick={bid} text="Submit your bid" />
+                {!showEditBid ? (
+                    <Button onClick={bid} text="Submit your bid" />
+                ) : (
+                        <Button onClick={EditBid} text="Submit your bid" />
+                    )}
+
 
             </div>
         );
