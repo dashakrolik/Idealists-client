@@ -1,69 +1,71 @@
 /** @jsx jsx */
-import React from "react"
-import { css, jsx } from '@emotion/core';
-import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
-import jsonFormData from './idea-form-v1';
-import { PoseGroup } from 'react-pose';
-import posed from 'react-pose';
-import QuestionGroup from '../../reogranisation/Questions/QuestionGroup';
-import Button from '../../reogranisation/Questions/Button';
-import SubmissionSideScreen from './SubmissionSideScreen';
-import CompleteSubmission from './CompleteSubmission';
-import { useHistory } from "react-router-dom";
-export const  AnswersContext = React.createContext();
-
+import React from "react";
+import { css, jsx } from "@emotion/core";
+import styled from "@emotion/styled";
+import { useEffect, useState } from "react";
+import jsonFormData from "./idea-form-v1";
+import { PoseGroup } from "react-pose";
+import posed from "react-pose";
+import QuestionGroup from "../../reogranisation/Questions/QuestionGroup";
+import Button from "../../reogranisation/Questions/Button";
+import SubmissionSideScreen from "./SubmissionSideScreen";
+import CompleteSubmission from "./CompleteSubmission";
 
 const Submission = (props) => {
   const [activeGroup, setActiveGroup] = useState(0);
   const [activeGroupComplete, setActiveGroupComplete] = useState(false);
   const [progress, setProgress] = useState(0);
   const [inputFocused, setInputFocused] = useState(0);
-  const [answers, setAnswers] = useState({});
+  const [answers, setAnswers] = useState({
+    0: "",
+    1: "",
+    2: "",
+    3: "",
+    4: "",
+    5: "",
+    6: "",
+    7: "",
+    8: "",
+    9: "",
+    10: "",
+    11: "",
+  });
   const [valueDecideProfit, setValueDecideProfit] = useState(false);
   const [valueDecideSdg, setValueDecideSdg] = useState(false);
   const [agreementSection, setAgreementSection] = useState(false);
   const questionGroups = [...jsonFormData];
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   useEffect(() => {
     setProgress(activeGroup / questionGroups.length);
   }, [activeGroup]);
 
   if (!props.authState.user) {
-    props.user()
+    props.user();
   }
 
-
   const handleAnswers = (id, value) => {
-    setAnswers({
-      ...answers,
-      [activeGroup]: {
-        ...answers[activeGroup],
-        [id]: value,
-      },
-    });
+    const new_answers = answers;
+    new_answers[id] = value;
+    setAnswers(new_answers);
   };
 
+  // console.log("Answers in submissions", answers);
   const handleNextBttnClick = () => {
-    setCurrentQuestionIndex(currentQuestionIndex + 1)
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
     // console.log(activeGroup, questionGroups.length)
-    if ((activeGroup) === questionGroups.length) {
+    if (activeGroup === questionGroups.length) {
       // console.log(activeGroup, questionGroups.length)
       setAgreementSection(false);
-    }
-    else if ((activeGroup === 11) && (questionGroups.length === 12)) {
+    } else if (activeGroup === 11 && questionGroups.length === 12) {
       setActiveGroup(12);
       setAgreementSection(true);
-
     } else {
       setActiveGroup(activeGroup + 1);
       // console.log(activeGroup, questionGroups.length)
       setAgreementSection(false);
     }
   };
-
 
   const handleInputFocus = (isFocused) => {
     setInputFocused(isFocused);
@@ -80,23 +82,26 @@ const Submission = (props) => {
       setValueDecideProfit(false);
       setValueDecideSdg(false);
     } else if (from === 0) {
-      setValueDecideProfit(true)
+      setValueDecideProfit(true);
     } else if (from === 1) {
-      setValueDecideSdg(true)
+      setValueDecideSdg(true);
     }
   };
 
-  if (localStorage.currentUserJwt !== null && props.authState.loggedIn === false) {
-    props.setAuthLoggedInTrue()
+  if (
+    localStorage.currentUserJwt !== null &&
+    props.authState.loggedIn === false
+  ) {
+    props.setAuthLoggedInTrue();
     return <div></div>;
   }
   if (questionGroups.length === 0) return <div>Loading...</div>;
 
   const handleBackBttnClick = () => {
-    setCurrentQuestionIndex(currentQuestionIndex - 1)
+    setCurrentQuestionIndex(currentQuestionIndex - 1);
     setActiveGroup(activeGroup - 1);
     setAgreementSection(false);
-  }
+  };
 
   // const questionIndexControl = (change) => {
   //   if (change === -1 ) {
@@ -109,8 +114,8 @@ const Submission = (props) => {
   return (
     <div>
       <Container>
-        <Overlay pose={inputFocused ? 'isFocusing' : 'default'} />
-        <ProgressBar pose='visible' poseKey={progress} progress={progress} />
+        <Overlay pose={inputFocused ? "isFocusing" : "default"} />
+        <ProgressBar pose="visible" poseKey={progress} progress={progress} />
 
         {/* <SubmissionSideScreen
           agreementSection={agreementSection}
@@ -119,45 +124,93 @@ const Submission = (props) => {
         /> */}
         <SubmissionSideScreen
           agreementSection={agreementSection}
-          title={activeGroup === questionGroups.length ? '' : questionGroups[activeGroup].groupTitle}
-          description={activeGroup === questionGroups.length ? '' : questionGroups[activeGroup].groupDescription}
+          title={
+            activeGroup === questionGroups.length
+              ? ""
+              : questionGroups[activeGroup].groupTitle
+          }
+          description={
+            activeGroup === questionGroups.length
+              ? ""
+              : questionGroups[activeGroup].groupDescription
+          }
         />
         <Right>
           <Content>
-            <PoseGroup animateOnMount={false} withParent={true} preEnterPose='preEnter'>
+            <PoseGroup
+              animateOnMount={false}
+              withParent={true}
+              preEnterPose="preEnter"
+            >
               {
                 <PGroupContainer
-                  key={`container-${activeGroup === questionGroups.length ? 'complete-submission' : questionGroups[activeGroup].id.toString()}`}>
-                  {activeGroup === questionGroups.length ?
-                    <CompleteSubmission groups={questionGroups} answers={answers} authState={props.authState}
-                      login={props.login} /> :
-                      <AnswersContext.Provider answers={answers}>
-                      <QuestionGroup group={questionGroups[activeGroup]}
-                        answersHandler={handleAnswers}
-                        handleDecidingQuestions={handleDecidingQuestions}
-                        handleInputFocus={handleInputFocus}
-                        handleValidationChanges={handleValidationChange}
-                        key={questionGroups[activeGroup].id.toString()}
-                        answers={answers}
-                        currentQuestionIndex={activeGroup}
-                        placeholder={answers}
-                      />
-                      </AnswersContext.Provider>
-
-                    }
-                  {(valueDecideProfit) ? <div style={{ color: "red" }}> <br />We are working very hard on building a non-profit version of The Idealists as well. Unfortunately, until that is ready, we cannot accept non-profit ideas yet.
-                     </div> : null}
-                  {(valueDecideSdg) ? <div style={{ color: "red" }}> <br />We are sorry, but you cannot continue if your idea does not fit within one of the SDGs.
-                     </div> : null}
+                  key={`container-${
+                    activeGroup === questionGroups.length
+                      ? "complete-submission"
+                      : questionGroups[activeGroup].id.toString()
+                  }`}
+                >
+                  {activeGroup === questionGroups.length ? (
+                    <CompleteSubmission
+                      groups={questionGroups}
+                      answers={answers}
+                      authState={props.authState}
+                      login={props.login}
+                    />
+                  ) : (
+                    <QuestionGroup
+                      group={questionGroups[activeGroup]}
+                      answersHandler={handleAnswers}
+                      handleDecidingQuestions={handleDecidingQuestions}
+                      handleInputFocus={handleInputFocus}
+                      handleValidationChanges={handleValidationChange}
+                      key={questionGroups[activeGroup].id.toString()}
+                      answers={answers}
+                      currentQuestionIndex={activeGroup}
+                      placeholder={answers}
+                    />
+                  )}
+                  {valueDecideProfit ? (
+                    <div style={{ color: "red" }}>
+                      {" "}
+                      <br />
+                      We are working very hard on building a non-profit version
+                      of The Idealists as well. Unfortunately, until that is
+                      ready, we cannot accept non-profit ideas yet.
+                    </div>
+                  ) : null}
+                  {valueDecideSdg ? (
+                    <div style={{ color: "red" }}>
+                      {" "}
+                      <br />
+                      We are sorry, but you cannot continue if your idea does
+                      not fit within one of the SDGs.
+                    </div>
+                  ) : null}
                 </PGroupContainer>
               }
             </PoseGroup>
           </Content>
         </Right>
-        <div css={css`position: absolute; right: 20px; bottom: 20px; width: 160px;`}>
-          {!activeGroup !== questionGroups.length &&
-            <Button text='Next' disabled={!activeGroupComplete} onClick={handleNextBttnClick} withIcon />}
-          {activeGroup !== 0 && <Button text="Back" onClick={handleBackBttnClick} />}
+        <div
+          css={css`
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            width: 160px;
+          `}
+        >
+          {!activeGroup !== questionGroups.length && (
+            <Button
+              text="Next"
+              disabled={!activeGroupComplete}
+              onClick={handleNextBttnClick}
+              withIcon
+            />
+          )}
+          {activeGroup !== 0 && (
+            <Button text="Back" onClick={handleBackBttnClick} />
+          )}
         </div>
       </Container>
     </div>
@@ -167,10 +220,10 @@ const Submission = (props) => {
 const PProgressBar = posed.div({
   visible: {
     width: (props) => {
-      return (`${Math.floor(props.progress * 100)}vw`);
+      return `${Math.floor(props.progress * 100)}vw`;
     },
     transition: {
-      width: { type: 'spring', stiffness: 1000, damping: 30 },
+      width: { type: "spring", stiffness: 1000, damping: 30 },
     },
   },
 });
@@ -178,31 +231,31 @@ const PProgressBar = posed.div({
 const PGroupContainer = posed.div({
   preEnter: {
     x: 400,
-    originX: '50%',
-    originY: '50%',
+    originX: "50%",
+    originY: "50%",
     opacity: 0,
     scale: 0.69,
     transition: {
-      default: { ease: 'easeInOut', duration: 400 },
+      default: { ease: "easeInOut", duration: 400 },
     },
   },
   enter: {
     x: 0,
-    originX: '50%',
-    originY: '50%',
+    originX: "50%",
+    originY: "50%",
     opacity: 1.0,
     scale: 1.0,
     transition: {
-      default: { ease: 'easeInOut', duration: 400 },
+      default: { ease: "easeInOut", duration: 400 },
     },
   },
   exit: {
     x: -400,
-    originX: '50%',
-    originY: '50%',
+    originX: "50%",
+    originY: "50%",
     opacity: 0,
     scale: 0.69,
-    transition: { ease: 'easeInOut', duration: 400 },
+    transition: { ease: "easeInOut", duration: 400 },
   },
 });
 
@@ -218,21 +271,22 @@ const ProgressBar = styled(PProgressBar)`
 
 const POverlay = posed.div({
   default: {
-    backgroundImage: 'linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1)',
+    backgroundImage:
+      "linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1)",
     transition: {
-      ease: 'easeInOut',
+      ease: "easeInOut",
       duration: 120,
     },
   },
   isFocusing: {
-    backgroundImage: 'linear-gradient(to right top, #142f60, #043864, #004067, #004869, #084f69)',
+    backgroundImage:
+      "linear-gradient(to right top, #142f60, #043864, #004067, #004869, #084f69)",
     transition: {
-      ease: 'easeInOut',
+      ease: "easeInOut",
       duration: 120,
     },
   },
 });
-
 
 const Overlay = styled(POverlay)`
   width: 100vw;
@@ -252,7 +306,7 @@ const Content = styled.div`
 `;
 
 const Right = styled.div`
-grid-area: right;
+  grid-area: right;
   width: 100%;
   height: 100%;
   display: flex;
@@ -271,21 +325,22 @@ const Container = styled.div`
 
 export default Submission;
 
-const answers = () => {
-  const formValuesObject = {
-    "0": '',
-    "1": '',
-    "2": '',
-    "3": '',
-    "4": '',
-    "5": '',
-    "6": '',
-    "7": '',
-    "8": '',
-    "9": '',
-    "10": '',
-    "11": '',
-  }
-  const mapValuesToObject = (key, value) => formValuesObject.map(element => element[key] = value)
-  mapValuesToObject()
-}
+// const answers = () => {
+//   const formValuesObject = {
+//     0: "",
+//     1: "",
+//     2: "",
+//     3: "",
+//     4: "",
+//     5: "",
+//     6: "",
+//     7: "",
+//     8: "",
+//     9: "",
+//     10: "",
+//     11: "",
+//   };
+//   const mapValuesToObject = (key, value) =>
+//     formValuesObject.map((element) => (element[key] = value));
+//   mapValuesToObject();
+// };

@@ -4,33 +4,25 @@ import { useEffect, useState, useContext } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import posed from "react-pose";
-import { AnswersContext } from "../../MyIdea/IdeaSubmission/Submission"
 
 const SingleLineQuestion = (props) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isStillInit, setIsStillInit] = useState(true);
   const [validated, setValidated] = useState(false);
-  const [currentValue, setCurrentValue] = useState('');
-  const answers = useContext(AnswersContext)
-  // const [multiLineQuestion, setMultiLineQuestion] = useState({one });
-  // console.log("props in single line question", props)
-  const {
-    currentQuestionIndex,
-    value,
-    placeholder
-  } = props
+  const [currentValue, setCurrentValue] = useState("");
+  const { currentQuestionIndex, value, placeholder } = props;
 
-  console.log("currentQuestionIndex in single line question", currentQuestionIndex)
-  console.log("answers in single line question", answers)
-  // console.log("placeholder in single line question", placeholder)
   useEffect(() => {
     props.onValidationChange && props.onValidationChange(props.id, validated);
   }, [validated]);
 
   useEffect(() => {
-    setCurrentValue(value)
-  }, [])
-  console.log("current value", currentValue)
+    if (typeof value === "object") {
+      setCurrentValue(value[currentQuestionIndex]);
+    } else {
+      setCurrentValue(value);
+    }
+  }, []);
 
   useEffect(() => {
     if (currentValue.length > 1 && currentValue.length < props.maxChar) {
@@ -51,12 +43,11 @@ const SingleLineQuestion = (props) => {
       setValidated(false);
     }
     if (props.onChange) {
-      props.onChange(props.id, currentValue);
+      props.onChange(currentQuestionIndex, currentValue);
     }
   }, [currentValue]);
 
   const handleChange = (e) => {
-    // setMultiLineQuestion(e.target.value);
     setCurrentValue(e.target.value);
   };
   const handleFocus = () => {
@@ -73,51 +64,44 @@ const SingleLineQuestion = (props) => {
   return (
     <Container pose={isFocused ? "focused" : "default"}>
       <QuestionTitle>{props.questionTitle}</QuestionTitle>
-      {/* <AnswersContext.Consumer> */}
-         {!props.multiLine && (
-            <TextField
-              onChange={handleChange}
-              value={answers[currentQuestionIndex]}
-              defaultValue=""
-              pose={
-                isStillInit || validated
-                  ? isFocused
-                    ? "tfFocused"
-                    : "tfDefault"
-                  : isFocused
-                    ? "tfFocusedError"
-                    : "tfError"
-              }
+      {!props.multiLine && (
+        <TextField
+          onChange={handleChange}
+          value={currentValue}
+          pose={
+            isStillInit || validated
+              ? isFocused
+                ? "tfFocused"
+                : "tfDefault"
+              : isFocused
+              ? "tfFocusedError"
+              : "tfError"
+          }
+          onFocus={handleFocus}
+          onBlur={handleLostFocus}
+          placeholder={placeholder.length < 0 ? placeholder : ""}
+        />
+      )}
 
-              onFocus={handleFocus}
-              onBlur={handleLostFocus}
-              placeholder={placeholder.length < 0 ? placeholder : ""}
-            />
+      {props.multiLine && (
+        <TextArea
+          onChange={handleChange}
+          value={currentValue}
+          pose={
+            isStillInit || validated
+              ? isFocused
+                ? "tfFocused"
+                : "tfDefault"
+              : isFocused
+              ? "tfFocusedError"
+              : "tfError"
+          }
+          onFocus={handleFocus}
+          onBlur={handleLostFocus}
+          placeholder={placeholder.length > 0 ? placeholder : ""}
+        />
+      )}
 
-          )
-        }
-              {/* </AnswersContext.Consumer> */}
-
-        
-        {props.multiLine && (
-          <TextArea
-            onChange={handleChange}
-            value={currentValue[currentQuestionIndex]}
-            pose={
-              isStillInit || validated
-                ? isFocused
-                  ? "tfFocused"
-                  : "tfDefault"
-                : isFocused
-                  ? "tfFocusedError"
-                  : "tfError"
-            }
-            onFocus={handleFocus}
-            onBlur={handleLostFocus}
-            placeholder={placeholder.length > 0 ? placeholder : ""}
-          />
-        )}
-      {/* </AnswersContext.Consumer> */}
       <ErrorMessage
         pose={
           !isStillInit && !!props.validationRegex && !validated

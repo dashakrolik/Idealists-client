@@ -33,12 +33,15 @@ const customStyles = {
 
 const SingleChoiceQuestion = (props) => {
   const [isFocused, setIsFocused] = useState(false);
-  // const [isStillInit, setIsStillInit] = useState(true);
   const [validated, setValidated] = useState(false);
-  const [currentValue, setCurrentValue] = useState([]);
-  // const [currentValue2, setCurrentValue2] = useState([]);
-  useEffect(() => {
-    if (!!props.multiChoice) {
+  const [currentValue, setCurrentValue] = useState('');
+  const { currentQuestionIndex, value, placeholder, multiChoice } = props;
+// console.log(currentQuestionIndex, value, placeholder, multiChoice, "currentQuestionIndex, value, placeholder, multiChoice in single choise question")
+
+console.log(currentQuestionIndex, value, currentValue, "currentQuestionIndex, value, currentValue in single choise question")
+
+useEffect(() => {
+    if (props.multiChoice) {
       if (currentValue.length >= 1) {
         setValidated(true);
       } else {
@@ -52,13 +55,21 @@ const SingleChoiceQuestion = (props) => {
       }
     }
     if (props.onChange) {
-      props.onChange(props.id, currentValue);
+      props.onChange(currentQuestionIndex, currentValue);
     }
   }, [currentValue]);
 
   useEffect(() => {
     props.onValidationChange && props.onValidationChange(props.id, validated);
   }, [validated]);
+
+  useEffect(() => {
+    if (typeof value === "object") {
+      setCurrentValue(value[currentQuestionIndex]);
+    } else {
+      setCurrentValue(value);
+    }
+  }, []);
 
   const handleChange = (selectedOption) => {
     setCurrentValue(selectedOption);
@@ -80,14 +91,16 @@ const SingleChoiceQuestion = (props) => {
       <Select
         closeMenuOnSelect={!props.multiChoice}
         components={props.multiChoice ? makeAnimated() : undefined}
-        isMulti={!!props.multiChoice}
+        isMulti={props.multiChoice}
         styles={customStyles}
-        value={currentValue}
+        value={currentValue.value ? currentValue.value : currentValue}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleLostFocus}
         options={props.options}
         menuPortalTarget={document.body}
+        placeholder={placeholder.length > 0 ? placeholder : ""}
+
       />
     </Container>
   );
