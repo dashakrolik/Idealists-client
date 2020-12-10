@@ -3,7 +3,7 @@ import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
-import LoginContext from "../reogranisation/Login/LoginContext"
+import LoginContext from "../reogranisation/Login/LoginContext";
 
 export default function CofounderLogin(props) {
   const [loginState, setLoginState] = useState({});
@@ -27,18 +27,30 @@ export default function CofounderLogin(props) {
     props.login(email, password);
   };
 
+  if (!localStorage.currentUserJwt) {
+    props.history.replace("/CofounderStart");
+  }
   if (props.authState.loggedIn) {
     props.user()
     props.history.replace("/Cofounder/dashboard");    
-    return <div></div>;
+
+ return <div></div>;
   } else {
     return (
       <div>
-        <LoginContext loginState={loginState}name="cofounder" email="email" password="password" handleSubmit={handleSubmit} handleChange={handleChange}
-        onSubmit={onSubmit}/>
+        <LoginContext
+          loginState={loginState}
+          name="cofounder"
+          email="email"
+          password="password"
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          onSubmit={onSubmit}
+        />
       </div>
     )
   }
+
 }
 const LeftSide = styled.div`
   position: absolute;
