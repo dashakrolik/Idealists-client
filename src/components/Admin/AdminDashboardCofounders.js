@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import request from "superagent";
 import { baseUrl } from "../../constants";
 import List from "../../material-UI/List";
-import styles from "./styles.css";
 import "../MyIdea/Dashboard/IdeaDashboard.css";
 
 export default function AdminDashboardCofounders(props) {

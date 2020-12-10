@@ -31,7 +31,6 @@ export default function CofounderDashboard(props) {
       </h1>
     );
 
-  // if (props.authState.isApproved === true)
   return (
     <div className="dashboard-container">
       <br />
