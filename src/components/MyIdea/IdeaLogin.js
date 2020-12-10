@@ -36,7 +36,7 @@ export default function InvestorLogin(props) {
       return <div></div>;
     }, 3000)
   }
-console.log('props',loading)
+
   if (props.authState.loggedIn !== true)
     return (
       <Container>
@@ -72,7 +72,6 @@ console.log('props',loading)
       </Container>
     );
   else if(loading){
-  console.log("made it")
   return (
     <Container>
       <Middle>
