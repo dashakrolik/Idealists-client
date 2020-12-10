@@ -6,10 +6,12 @@ import { Link } from "react-router-dom";
 
 export default function InvestorLogin(props) {
   const [loginState, setLoginState] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);
+    setLoading(true);
   };
 
   const handleChange = (event) => {
@@ -27,12 +29,14 @@ export default function InvestorLogin(props) {
   };
 
   if (props.authState.loggedIn) {
+    setTimeout(function(){
       props.user();
 
       props.history.replace("/MyIdea/new");
       return <div></div>;
+    }, 3000)
   }
-console.log('props',props)
+console.log('props',loading)
   if (props.authState.loggedIn !== true)
     return (
       <Container>
@@ -67,7 +71,8 @@ console.log('props',props)
         </RightSide>
       </Container>
     );
-  else 
+  else if(loading){
+  console.log("made it")
   return (
     <Container>
       <Middle>
@@ -75,6 +80,7 @@ console.log('props',props)
       </Middle>
     </Container>
   );
+  }
 }
 
 const Middle = styled.div`
