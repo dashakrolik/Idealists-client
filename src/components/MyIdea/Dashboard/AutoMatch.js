@@ -345,7 +345,8 @@ export default function IdeaDashboardDetail(props) {
                           User feedback:
                           {patentDifference[key] === "false"
                             ? ` "this patent is the same like my idea".`
-                            : ` "My idea is different: ${patentDifference[key]}"`}
+                            : patentDifference[key] &&
+                              ` "My idea is different: ${patentDifference[key]}"`}
                         </p>
                       </UserFeedback>
                     )}
