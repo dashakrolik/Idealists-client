@@ -5,13 +5,13 @@ import { baseUrl } from '../../constants';
 import { useState } from 'react';
 import Button from '../reogranisation/Questions/Button';
 import { Redirect, Link } from 'react-router-dom';
+import request from 'superagent';
 
 export default function CofounderProfileVideo(props) {
 	const [ previewSource, setPreviewSource ] = useState('');
 	const [ successMsg, setSuccessMsg ] = useState(false);
 	const [ videos, setVideos ] = useState();
 	const [ loading, setLoading ] = useState(false);
-
 	const handelVideoInputChange = (e) => {
 		const video = e.target.files[0];
 		previewVideo(video);
@@ -26,22 +26,32 @@ export default function CofounderProfileVideo(props) {
 	};
 	const uploadVideo = async (e) => {
 		e.preventDefault();
-
 		const data = new FormData();
 		data.append('file', previewSource);
 		data.append('upload_preset', 'cofounderProfileVideo');
 		setLoading(true);
 		setPreviewSource(false);
-		const res = await fetch('https://api.cloudinary.com/v1_1/idealists/video/upload', {
-			method: 'POST',
-			body: data
-		});
-		const file = await res.json();
-		console.log(file);
-		setPreviewSource(!previewSource);
+		let file 
+		await request
+			.post('https://api.cloudinary.com/v1_1/idealists/video/upload')
+			.send(data)
+			.then((res)=> {
+				if (res.status === 200) {
+					file = JSON.parse(res.text)		
+				}
+			})
+			.catch((err) => {
+				if (err.status === 409) {
+					alert('User with this email already exists');
+				} else {
+					console.error(err);
+				}
+			});		    
+		setPreviewSource(!previewSource);		
 		setLoading(false);
-		setSuccessMsg(true);
 		setVideos({ video: file.secure_url });
+		updateVideoURL({ video: file.secure_url })	
+		setSuccessMsg(true);			 
 	};
 	const cancelVideo = (e) => {
 		e.preventDefault();
@@ -49,20 +59,26 @@ export default function CofounderProfileVideo(props) {
 		document.getElementById('upload_file').value = '';
 	};
 
-	const updateVideo = async (e) => {
-		e.preventDefault();
-		const response = await fetch(`${baseUrl}/users`, {
-			method: 'PUT',
-			headers: {
-				Authorization: 'Bearer ' + props.authState.token,
-				'Content-type': 'application/json'
-			},
-			body: JSON.stringify(videos)
-		});
-		console.log('The Video', videos);
-		// Awaiting response.json()
-		const resData = await response.json();
-		console.log('response', resData);
+	const updateVideoURL =  async(videoURL) => {			
+		await request
+			.put(`${baseUrl}/users`)
+			.set('Authorization', 'Bearer ' + props.authState.token)
+			.set('Content-Type', 'application/json')
+			.send(
+				JSON.stringify(videoURL)
+			)
+			.then((res) => {
+				if (res.status === 200) {
+					
+				}
+			})
+			.catch((err) => {
+				if (err.status === 409) {
+					alert('User with this email already exists');
+				} else {
+					console.error(err);
+				}
+			});		
 	};
 	return (
 		<div>
@@ -280,6 +296,5 @@ const Container = styled.div`
 	left: 0;
 	width: 100vw;
 	height: 100vh;
-
 	background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
 `;
