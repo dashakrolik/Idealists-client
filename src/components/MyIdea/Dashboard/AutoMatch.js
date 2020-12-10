@@ -112,7 +112,7 @@ export default function IdeaDashboardDetail(props) {
       .send({ step02: true })
       .then((res) => {
         if (res.status === 200) {
-          console.log("success, idea progress moved forward");
+          // console.log("success, idea progress moved forward");
         }
       })
       .catch((err) => {
