@@ -37,10 +37,6 @@ export default function CofounderLogin(props) {
     props.user();
   }
 
-  if (props.authState.loggedIn) {
-    props.user();
-  }
-
   if (!localStorage.currentUserJwt) {
     props.history.replace("/CofounderStart");
     triggerUserData();
