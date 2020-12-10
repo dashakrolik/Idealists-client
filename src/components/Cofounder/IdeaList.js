@@ -24,7 +24,6 @@ export default function IdeasList(props) {
             .get(`${baseUrl}/ideas`)
             .set("Authorization", `Bearer ${props.authState.token}`)
             .then((res) => {
-                console.log('res', res.body)
                 if (res.body.length === 0) {
                     alert("there are no ideas")
                 }
@@ -37,7 +36,6 @@ export default function IdeasList(props) {
     if (props.authState.loggedIn === false) return <h1>Not logged in</h1>;
 
     if (!props.authState.user) {
-        console.log(props.authState)
         props.user();
     }
 

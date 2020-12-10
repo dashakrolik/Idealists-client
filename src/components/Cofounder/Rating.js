@@ -39,7 +39,6 @@ export default function Ratings(props) {
         }
     })
   }
-console.log(props)
 
   return (
     <div>

@@ -43,13 +43,11 @@ export default function CofounderIdeaDetail(props) {
       .then((res) => setIdeaBids(res.body)
       );
   }, [])
-  console.log('bids', ideaBids)
 
 
   if (props.authState.loggedIn === false) return <Redirect to="/CofounderStart" />;
 
   if (!props.authState.user) {
-    console.log(props.authState)
     props.user();
   }
 

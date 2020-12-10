@@ -28,8 +28,6 @@ export default function BidSlider(props) {
     const [showEditBid, setShowEditBid] = useState(false)
     const classes = useStyles();
 
-    console.log('props', props)
-
     const marks = [
         {
             value: 5,
