@@ -22,7 +22,7 @@ export default function IdeaDashboardDetail(props) {
   const [displaySuccess, setDisplaySuccess] = useState(false);
   const [enableSubmit, setEnableSubmit] = useState(false);
   const [errorFound, setErrorFound] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  //const [errorMessage, setErrorMessage] = useState("");
   const [isShown, setIsShown] = useState({});
   const [patentDifference, setPatentDifference] = useState({
     // 0: "", 1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: "", howProblemUnique: ""
@@ -49,12 +49,12 @@ export default function IdeaDashboardDetail(props) {
         } else {
           // if there is any error
           setErrorFound(true);
-          setErrorMessage(automatch.body.message);
+          //setErrorMessage(automatch.body.message);
         }
       })
       .catch((err) => console.error(err));
   }, []);
-  console.log("Error:", errorMessage);
+
   const updateShow = (e) => {
     setIsShown({
       ...isShown,
