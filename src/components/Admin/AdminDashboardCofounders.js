@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import request from "superagent";
 import { baseUrl } from "../../constants";
 import List from "../../material-UI/List";
+import "../MyIdea/Dashboard/IdeaDashboard.css";
 
 export default function AdminDashboardCofounders(props) {
   const [coFounders, set_coFounder] = useState([]);
@@ -17,9 +18,12 @@ export default function AdminDashboardCofounders(props) {
   }, []);
 
   return (
-    <div style={styles.div}>
-      <h1 style={styles.h1}>Admin DashBoard</h1>
-      <h3 style={styles.h3}>These co-founders are still awaiting approval:</h3>
+    <div className="dashboard-container">
+      <h1>Admin DashBoard</h1>
+      <h3 className="subHeading">
+        These co-founders are still awaiting approval
+      </h3>
+
       <List
         data={coFounders}
         authState={props.authState}
@@ -29,20 +33,3 @@ export default function AdminDashboardCofounders(props) {
     </div>
   );
 }
-
-const styles = {
-  div: {
-    display: "flex",
-    flexDirection: "column",
-    alignContent: "center",
-  },
-  h1: {
-    // The reason of margin Top is because the initial
-    //  element is behind the NavBar! CSS needs to be changed
-    marginTop: "100px",
-    color: "#0f8ddb",
-  },
-  h3: {
-    color: "#0f8ddb",
-  },
-};

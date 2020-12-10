@@ -1,5 +1,4 @@
 /** @jsx jsx */
-
 import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { Component } from "react";
@@ -17,7 +16,7 @@ import request from "superagent";
 import IdeaDashboard from "./components/MyIdea/Dashboard/IdeaDashboard";
 import AdminDashboard from "./components/Admin/AdminDashboard";
 import AdminDashboardDetail from "./components/Admin/AdminDashboardDetail";
-import AdminDashboardCofounders from "./components/Admin/AdminDashboardCofounders"
+import AdminDashboardCofounders from "./components/Admin/AdminDashboardCofounders";
 import IdeaDashboardDetail from "./components/MyIdea/Dashboard/IdeaDashboardDetail";
 import IdeaLogin from "./components/MyIdea/IdeaLogin";
 import TopBar from "./components/NavBar/TopBar";
@@ -37,12 +36,16 @@ import AdminDashboardRejected from "./components/Admin/AdminDashboardRejected";
 import CompleteAssessment from "./components/InvestorsPortal/Dashboard/CompleteAssessment";
 import AddSpecialistStart from "./components/SpecialistPortal/SpecialistCreation/AddSpecialistStart";
 import UserAssessIdeas from "./components/MyIdea/Dashboard/UserAssessIdeas";
-import CofounderStart from './components/Cofounder/CofounderStart'
+import CofounderStart from "./components/Cofounder/CofounderStart";
 import CofounderLogin from "./components/Cofounder/CofounderLogin";
-import CofounderDashboard from "./components/Cofounder/CofounderDashboard"
+import CofounderDashboard from "./components/Cofounder/CofounderDashboard";
+import CofounderProfile from "./components/Cofounder/CofounderProfile";
 import IdeasList from "./components/Cofounder/IdeaList";
+import CofounderPersonalityTest from "./components/Cofounder/CofounderPersonalityTest";
+import CofounderProfileVideo from "./components/Cofounder/CofounderProfileVideo";
 
 import Spinner from "./components/reogranisation/Spinner";
+import CofounderIdeaDetail from "./components/Cofounder/Cofounder-IdeaDetail";
 
 class App extends Component {
   state = {
@@ -54,6 +57,7 @@ class App extends Component {
     navigation: {
       activePath: "",
     },
+
     loading: true,
   };
 
@@ -282,6 +286,7 @@ class App extends Component {
             loggedIn: true,
             user: res.body,
           },
+
           loading: true,
         });
         localStorage.setItem("currentUserJwt", this.state.auth.token);
@@ -712,6 +717,39 @@ class App extends Component {
                 }}
               />
               <Route
+                path="/Cofounder/dashboard/ideas/:id"
+                render={(props) => {
+                  return (
+                    <CofounderIdeaDetail
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                      setAuthLoggedInTrue={this.setAuthLoggedInTrue}
+                    />   
+                  );
+                }}
+              />
+           <Route
+                exact
+                path="/Cofounder/dashboard/:id/profile"
+                render={(props) => {
+                  return (
+                    <CofounderProfile
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                      setAuthLoggedInTrue={this.setAuthLoggedInTrue}
+                    />
+                  );
+                }}
+              />
+              <Route
                 exact
                 path="/InvestorStart"
                 render={(props) => {
@@ -824,6 +862,20 @@ class App extends Component {
                       logout={this.logout}
                     />
                   );
+                }}
+              />
+              <Route
+                exact
+                path="/cofounderProfileVideo"
+                render={(props) => {
+                  return <CofounderProfileVideo />;
+                }}
+              />
+              <Route
+                exact
+                path="/cofounderPersonalityTest"
+                render={(props) => {
+                  return <CofounderPersonalityTest />;
                 }}
               />
               <Route
@@ -970,17 +1022,21 @@ class App extends Component {
                   );
                 }}
               />
-              <Route exact path="/" render={(props) =>
-                <IdeaStart
-                  {...props}
-                  authState={this.state.auth}
-                  login={this.requestLoginUser}
-                  user={this.getCurrentUser}
-                  updateLocalStorage={this.updateLocalStorage}
-                  logout={this.logout}
-                  setAuthLoggedInTrue={this.setAuthLoggedInTrue}
-                />
-              } />
+              <Route
+                exact
+                path="/"
+                render={(props) => (
+                  <IdeaStart
+                    {...props}
+                    authState={this.state.auth}
+                    login={this.requestLoginUser}
+                    user={this.getCurrentUser}
+                    updateLocalStorage={this.updateLocalStorage}
+                    logout={this.logout}
+                    setAuthLoggedInTrue={this.setAuthLoggedInTrue}
+                  />
+                )}
+              />
             </Application>
           </ThemeProvider>
         </div>

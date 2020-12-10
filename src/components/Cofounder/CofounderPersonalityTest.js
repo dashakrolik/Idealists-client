@@ -1,64 +1,89 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
-import styled from "@emotion/styled";
-import { useState } from "react";
-import { Redirect } from "react-router-dom";
-import LoginContext from "../reogranisation/Login/LoginContext";
+import { jsx } from '@emotion/core'
+import styled from '@emotion/styled'
+import { baseUrl } from '../../constants'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-export default function CofounderLogin(props) {
-  const [loginState, setLoginState] = useState({});
+export default function CofounderPersonalityTest(props) {
+  const [testResult, setTestResult] = useState('')
+  const [errorCheck, seterrorCheck] = useState('false')
+  const [successMsg, setSuccessMsg] = useState(false)
+  const handelSubmit = async (e) => {
+    e.preventDefault()
+    setSuccessMsg(true)
+    const response = await fetch(`${baseUrl}/users`, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(testResult),
+    })
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(loginState);
-    triggerUserData();
-  };
+    // Awaiting response.json()
+    const resData = await response.json()
+    console.log(resData)
+    // Return response data
+    return resData
+  }
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setLoginState({
-      ...loginState,
-      [name]: value,
-    });
-  };
+  const setValue = (e) => {
+    let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?0-9a-z]+/
+    setTestResult(e.target.value)
 
-  const onSubmit = (data) => {
-    const { email, password } = data;
-    props.login(email, password);
-  };
-
-  const triggerUserData = () => {
-    if (props.authState.loggedIn) {
-      props.user();
+    if (e.target.value.match(format)) {
+      seterrorCheck('only cpatial 4 letters allowed')
+    } else if (e.target.value.length > 4) {
+      seterrorCheck('only cpatial 4 letters allowed')
+    } else {
+      seterrorCheck('false')
     }
-  };
-
-  if (props.authState.loggedIn) {
-    props.user();
   }
 
-  if (!localStorage.currentUserJwt) {
-    props.history.replace("/CofounderStart");
-    triggerUserData();
-    return <div></div>;
-  }
-
-  if (props.authState.loggedIn !== true)
-    return (
-      <div>
-        <LoginContext
-          loginState={loginState}
-          name="cofounder"
-          email="email"
-          password="password"
-          handleSubmit={handleSubmit}
-          handleChange={handleChange}
-          onSubmit={onSubmit}
-        />
-      </div>
-    );
-  else return <Redirect to="/Cofounder/dashboard" />;
+  return (
+    <div>
+      <Container>
+        {successMsg ? (
+          <div>
+            <LeftSide>
+              <h3>
+                Thank you. Your Profile assesement test results submitted
+                successfully.
+              </h3>
+            </LeftSide>
+          </div>
+        ) : (
+          <div>
+            <LeftSide>
+              <div>
+                <h3>Take your Pesonality Test</h3>
+              </div>
+            </LeftSide>
+            <RightSide>
+              <form onSubmit={handelSubmit}>
+                <label>
+                  {' '}
+                  <h3>Click below</h3>
+                </label>
+                <br />
+                <a href="https://www.16personalities.com/nl">Start the test</a>
+                <br />
+                <br />
+                <label>Upload your result here</label>
+                <input type="text" value={testResult} onChange={setValue} />
+                {errorCheck !== 'false' && <label>{errorCheck}</label>}
+                <br />
+                <button type="submit">Submit</button>
+                <br />
+              </form>
+            </RightSide>
+          </div>
+        )}
+      </Container>
+    </div>
+  )
 }
+
 const LeftSide = styled.div`
   position: absolute;
   color: #ffffff;
@@ -95,12 +120,13 @@ const LeftSide = styled.div`
 
   a {
     font-weight: 800;
+
     &:hover {
       cursor: pointer;
       color: #dfeff2;
     }
   }
-`;
+`
 
 const RightSide = styled.div`
   position: absolute;
@@ -156,8 +182,8 @@ const RightSide = styled.div`
     position: relative;
     float: right;
     right: 10%;
-    width: 40%;
-    height: 60px;
+    width: 30%;
+    height: 30px;
     line-height: 30px;
     font-size: 12px;
     color: #233949;
@@ -183,7 +209,8 @@ const RightSide = styled.div`
     margin-right: 5px;
     height: 30px;
     line-height: 30px;
-    font-size: 10px;
+    font-size: 15px;
+
     color: #233949;
     outline: none;
     -webkit-appearance: none;
@@ -194,14 +221,15 @@ const RightSide = styled.div`
       color: #1a3d7c;
     }
   }
-`;
+`
 
 const Container = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+
   background-image: linear-gradient(
     to right top,
     #1a3d7c,
@@ -210,4 +238,4 @@ const Container = styled.div`
     #31a2d7,
     #4cc5f1
   );
-`;
+`

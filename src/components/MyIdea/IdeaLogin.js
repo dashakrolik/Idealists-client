@@ -37,6 +37,7 @@ export default function InvestorLogin(props) {
     }, 3000)
   }
 console.log('props',loading)
+
   if (props.authState.loggedIn !== true)
     return (
       <Container>
@@ -55,7 +56,7 @@ console.log('props',loading)
               onChange={handleChange}
             />
             <br />
-  
+
             <label>Password</label>
             <input
               type="password"
@@ -64,7 +65,7 @@ console.log('props',loading)
               onChange={handleChange}
             />
             <br />
-  
+
             <Link to="/reset-password">Forgot your password?</Link>
             <button type="submit">Login</button>
           </form>
@@ -88,7 +89,7 @@ const Middle = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 370px;
-`
+`;
 
 const LeftSide = styled.div`
   position: absolute;

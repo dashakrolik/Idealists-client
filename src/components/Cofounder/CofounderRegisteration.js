@@ -184,7 +184,9 @@ const CofounderRegistration = (props) => {
         <Container pose={props.show ? 'show' : 'hide'} css={css`justify-self: flex-end; width: 100%;`}>
             <form>
                 <RegistrationForm>
-
+                    <br />
+                    <br />
+                    <br />
                     <FlexRow>
                         <FlexColumn>
                             <FormGroup css={css`font-size: 24px; padding: 5px 10px;`}>
@@ -294,22 +296,9 @@ const CofounderRegistration = (props) => {
                                         <span css={css`font-weight: 800; color: #ff4444;`}
                                         > / filed can not be left empty</span>}
                                     Co-founder's role</label>
-                                <RadioGroup row aria-label='roles' name="role" value={formData.role.value} onChange={handleChange} style={{
-                                    display: 'flex', flexWrap: 'nowrap',
-                                    flexDirection: 'row'
-                                }} onBlur={enableValidation} require>
-                                    <FormControlLabel value='creator' control={<Radio />} label="creator" labelPlacement="start" style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        height: '20px',
-                                        width: '40%',
-                                    }} />
-                                    <FormControlLabel value='catalyst' control={<Radio />} label="catalyst" labelPlacement="start" style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        height: '20px',
-                                        width: '40%',
-                                    }} />
+                                <RadioGroup row aria-label='roles' name="role" value={formData.role.value} onChange={handleChange} style={{ StyledRadioGroup }} onBlur={enableValidation} require>
+                                    <FormControlLabel value='creator' control={<Radio />} label="creator" labelPlacement="start" />
+                                    <FormControlLabel value='catalyst' control={<Radio />} label="catalyst" labelPlacement="start" />
                                 </RadioGroup>
                             </FormGroup>
                         </FlexColumn>
@@ -361,9 +350,12 @@ const Container = styled(PContainer)`
     height: auto;
     color: #233949;
   `;
-// const StyledFormControlLabel = styled(FormControlLabel)`
 
-// `;
+const StyledRadioGroup = styled(RadioGroup)`
+display: flex;
+flexWrap: nowrap;
+flexDirection: row;
+`;
 const RegistrationForm = styled.div`
     width: auto;
     height: auto;
@@ -395,6 +387,16 @@ const RegistrationForm = styled.div`
       outline: none;
       -webkit-appearance: none;
     }
+    .MuiFormGroup-root {
+        flex-wrap: noWrap;
+    }
+    .MuiTypography-body1{
+        font-size: 12px;
+        font-family: inherit;
+    }
+    .MuiFormControlLabel-labelPlacementStart {
+        margin-left: 20px
+    }
 
     input {
       display: block;
@@ -417,18 +419,12 @@ const RegistrationForm = styled.div`
       }
       
     }
-    input.MuiPrivateSwitchBase-input-183{
+    input.PrivateSwitchBase-input-4{
         border: none;
     }
-    input.MuiFormGroup-row-168 {
-        background-color: #ffffff;
-    }
+
   `;
-// const RadioGroupContainer = styled(RadioGroup)({
-//     display: 'flex',
-//     flexWrap: 'nowrap',
-//     flexDirection: 'row',
-// })
+
 
 
 export default withRouter(CofounderRegistration)
