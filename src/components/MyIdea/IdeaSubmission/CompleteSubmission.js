@@ -45,10 +45,7 @@ const CompleteSubmission = (props) => {
       .send({ idea: dataToSend, industryIdea: dataIndustryToSend })
       .then(res => {
         if (res.status === 201) {
-          setTimeout(function(){
-            setDisplaySuccess(true);
-            setLoading(false);
-          }, 3000);
+          setDisplaySuccess(true);
         };
       })
       .catch(err => {
@@ -57,7 +54,8 @@ const CompleteSubmission = (props) => {
         } else {
           console.error(err);
         }
-      });
+      })
+      .finally(() => setLoading(false))
   };
 
   if(loading){
