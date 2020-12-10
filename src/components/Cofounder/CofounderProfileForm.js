@@ -6,7 +6,8 @@ import { baseUrl } from '../../constants';
 import '../MyIdea/Dashboard/IdeaDashboard.css';
 
 export default function CofounderProfileForm(props) {
-	console.log(props);
+	
+	const [sucessMsg,setSucessMsg] = useState(false)
 	const [ formData, setFormData ] = useState({
 		workExperience: {
 			value: '',
@@ -121,10 +122,7 @@ export default function CofounderProfileForm(props) {
 
 	const submitForm = (e) => {
 		e.preventDefault();
-
-		console.log('submit form ');
-
-		request
+	    request
 			.post(`${baseUrl}/users/cofounders/profile`)
 			.set('Authorization', 'Bearer ' + props.authState.token)
 			.send({
@@ -139,7 +137,8 @@ export default function CofounderProfileForm(props) {
 			})
 			.then((res) => {
 				if (res.status === 200) {
-					props.history.replace(`Cofounder/login`);
+					setSucessMsg(true)
+					//props.history.replace(`Cofounder/login`);
 				}
 			})
 			.catch((err) => {
@@ -151,19 +150,33 @@ export default function CofounderProfileForm(props) {
 			});
 	};
 
-	return (
+	return (	
 		<Container>
-			<div>
-				<h3>Hello</h3>
-			</div>
+			{sucessMsg ?(<div css={css`
+						display: block;
+		                position: relative;
+		                 left: 47px;
+		                 top: 10px;
+		                width: 80%;
+		                font-size: 10px;
+		                font-weight: 300;
+		                 padding: 5px;
+		                 margin: 5px;
+					`}>
+						<LeftSide>
+							<h3>Thank you. Your profile video was submitted succesfully.</h3>
+						</LeftSide>
+					</div>)
+			:(
+				<div>
+					<div></div>
 			<LeftSide>
 				<div>
 					<h3>3.Profile form</h3>
 				</div>
 			</LeftSide>
 			<br />
-
-			<RightSide>
+           <RightSide>
 				<form onSubmit={submitForm}>
 					<label>
 						Who am I :
@@ -187,8 +200,7 @@ export default function CofounderProfileForm(props) {
 						required
 						onChange={handleChange}
 					/>
-
-					<label>
+                   <label>
 						My work experience:{formData.workExperience.shouldShowError &&
 						!formData.workExperience.validated && (
 							<span
@@ -209,7 +221,6 @@ export default function CofounderProfileForm(props) {
 						required
 						onChange={handleChange}
 					/>
-
 					<label>
 						My educational background:{' '}
 						{formData.myEducationBackground.shouldShowError &&
@@ -231,7 +242,6 @@ export default function CofounderProfileForm(props) {
 						onBlur={enableValidation}
 						onChange={handleChange}
 					/>
-
 					<label>
 						The language(s) I speak:{formData.languageSpeak.shouldShowError &&
 						!formData.languageSpeak.validated && (
@@ -252,7 +262,6 @@ export default function CofounderProfileForm(props) {
 						onBlur={enableValidation}
 						onChange={handleChange}
 					/>
-
 					<label>
 						Why I want to be an impactful co-founder:{formData.impactfulCoFounder.shouldShowError &&
 						!formData.impactfulCoFounder.validated && (
@@ -274,8 +283,7 @@ export default function CofounderProfileForm(props) {
 						required
 						onChange={handleChange}
 					/>
-
-					<label>
+                   <label>
 						Why now is the right timing for me to become an impactful co-founder:{formData
 							.rightTimecoFounder.shouldShowError &&
 						!formData.rightTimecoFounder.validated && (
@@ -297,7 +305,6 @@ export default function CofounderProfileForm(props) {
 						required
 						onChange={handleChange}
 					/>
-
 					<label>
 						The UN Sustainable Development Goal that interests me the most and why:{formData
 							.UNSustainableDev.shouldShowError &&
@@ -320,7 +327,6 @@ export default function CofounderProfileForm(props) {
 						required
 						onChange={handleChange}
 					/>
-
 					<label>
 						Something exceptional I have done, built or created:{formData.somethingExceptional
 							.shouldShowError &&
@@ -347,6 +353,7 @@ export default function CofounderProfileForm(props) {
 					<button type='submit'>Submit</button>
 				</form>
 			</RightSide>
+			</div>)}
 		</Container>
 	);
 }
@@ -354,12 +361,10 @@ export default function CofounderProfileForm(props) {
 const LeftSide = styled.div`
 	position: absolute;
 	color: #ffffff;
-
 	width: 360px;
 	height: 300px;
-
-	padding-left: 800px;
-	padding-bottom: 100px;
+    padding-left: 800px;
+	padding-top: 60px;
 
 	h3 {
 		display: block;
