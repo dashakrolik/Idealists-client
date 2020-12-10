@@ -3,7 +3,7 @@ import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
-import LoginContext from "../reogranisation/Login/LoginContext"
+import LoginContext from "../reogranisation/Login/LoginContext";
 
 export default function CofounderLogin(props) {
   const [loginState, setLoginState] = useState({});
@@ -13,7 +13,6 @@ export default function CofounderLogin(props) {
     onSubmit(loginState);
     triggerUserData();
   };
-
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -34,6 +33,15 @@ export default function CofounderLogin(props) {
     }
   };
 
+  if (props.authState.loggedIn) {
+    console.log("does this get called??");
+    props.user();
+  }
+
+  if (props.authState.loggedIn) {
+    props.user();
+  }
+
   if (!localStorage.currentUserJwt) {
     props.history.replace("/CofounderStart");
     triggerUserData();
@@ -43,10 +51,17 @@ export default function CofounderLogin(props) {
   if (props.authState.loggedIn !== true)
     return (
       <div>
-        <LoginContext loginState={loginState}name="cofounder" email="email" password="password" handleSubmit={handleSubmit} handleChange={handleChange}
-        onSubmit={onSubmit}/>
+        <LoginContext
+          loginState={loginState}
+          name="cofounder"
+          email="email"
+          password="password"
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          onSubmit={onSubmit}
+        />
       </div>
-    )
+    );
   else return <Redirect to="/Cofounder/dashboard" />;
 }
 const LeftSide = styled.div`

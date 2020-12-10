@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import request from "superagent";
+import { baseUrl } from "../../constants";
 import "../MyIdea/Dashboard/IdeaDashboard.css";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -23,36 +26,38 @@ const useStyles = makeStyles({
   },
 });
 
-const useNewStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
-}));
-
 export default function CofounderProfile(props) {
+  const routeParameters = useParams();
   const classes = useStyles();
-  const accordionClasses = useNewStyles();
-
-  const fakedata = {
-    person: "I am Danny and Nikolas. We are One.",
-    reason: "Because i am very pationate with my project.",
-    whynow: "Because now i can",
-    devgoal: "something for the enviroment",
-    achievements: "profficiency in HTML 4",
-    experience: "not much",
-    education: "i know maths",
-    languages: "Dutch",
-    video: "youtube.com",
-  };
+  const [profile, set_profile] = useState();
+  useEffect(() => {
+    if (
+      props.authState.loggedIn &&
+      props.authState.user.id === parseInt(routeParameters.id)
+    ) {
+      request
+        .get(`${baseUrl}/users/cofounders/profile`)
+        .set("Authorization", `Bearer ${props.authState.token}`)
+        .then((res) => {
+          set_profile(res.body);
+        });
+    } else if (
+      props.authState.loggedIn &&
+      props.authState.user.id !== parseInt(routeParameters.id)
+    ) {
+      request
+        .get(
+          `${baseUrl}/users/cofounders/${parseInt(routeParameters.id)}/profile`
+        )
+        .set("Authorization", `Bearer ${props.authState.token}`)
+        .then((res) => {
+          set_profile(res.body);
+        });
+    } else props.history.replace("/login");
+  }, []);
 
   //   Here an overview of what should be on each co-founders dashboard:
-  // •    My profile video:
-  console.log(fakedata.person);
-
+  //   My profile video:
   return (
     <div className="dashboard-container">
       <div className="flex-ideacontainer">
@@ -65,11 +70,11 @@ export default function CofounderProfile(props) {
                 title="Contemplative Reptile"
               />
               <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  <h3>My Profile Video</h3>
+                <Typography gutterBottom variant="h5" component="h3">
+                  My Profile Video
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  <p>{fakedata.video}</p>
+                  profile.video
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -83,52 +88,58 @@ export default function CofounderProfile(props) {
             </CardActions>
           </Card>
         </div>
-        <div className="data-div">
-          <table id="customers">
-            <tr>
-              <th>Question</th>
-              <th>Answer</th>
-            </tr>
-            <tr>
-              <td>Who am I</td>
-              <td>{fakedata.person}</td>
-            </tr>
-            <tr>
-              <td>Why I want to be an impactful co-founder</td>
-              <td>{fakedata.reason}</td>
-            </tr>
-            <tr>
-              <td>
-                Why now is the right timing for me to become an impactful
-                co-founder
-              </td>
-              <td>{fakedata.whynow}</td>
-            </tr>
-            <tr>
-              <td>
-                The UN Sustainable Development Goal that interests me the most
-                and why
-              </td>
-              <td>{fakedata.devgoal}</td>
-            </tr>
-            <tr>
-              <td>Something exceptional I have done, built or created</td>
-              <td>{fakedata.achievements}</td>
-            </tr>
-            <tr>
-              <td>My work experience</td>
-              <td>{fakedata.experience}</td>
-            </tr>
-            <tr>
-              <td>My educational background</td>
-              <td>{fakedata.education}</td>
-            </tr>
-            <tr>
-              <td>The language(s) I speak</td>
-              <td>{fakedata.languages}</td>
-            </tr>
-          </table>
-        </div>
+        {profile ? (
+          <div className="data-div">
+            <table id="customers">
+              <tbody>
+                <tr>
+                  <th>Question</th>
+                  <th>Answer</th>
+                </tr>
+                <tr>
+                  <td>Who am I</td>
+                  <td>{profile.who}</td>
+                </tr>
+                <tr>
+                  <td>Why I want to be an impactful co-founder</td>
+                  <td>{profile.why}</td>
+                </tr>
+                <tr>
+                  <td>
+                    Why now is the right timing for me to become an impactful
+                    co-founder
+                  </td>
+                  <td>{profile.whyNow}</td>
+                </tr>
+                <tr>
+                  <td>
+                    The UN Sustainable Development Goal that interests me the
+                    most and why
+                  </td>
+                  <td>{profile.UNgoals}</td>
+                </tr>
+                <tr>
+                  <td>Something exceptional I have done, built or created</td>
+                  <td>{profile.pride}</td>
+                </tr>
+                <tr>
+                  <td>My work experience</td>
+                  <td>{profile.workExperience}</td>
+                </tr>
+                <tr>
+                  <td>My educational background</td>
+                  <td>{profile.eduBackground}</td>
+                </tr>
+                <tr>
+                  <td>The language(s) I speak</td>
+                  <td>{profile.languages}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <p>loading...</p>
+        )}
       </div>
     </div>
   );

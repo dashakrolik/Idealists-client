@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -6,6 +7,8 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import Button from "@material-ui/core/Button";
+
 import Paper from "@material-ui/core/Paper";
 import ApproveRejectButton from "./ApproveRejectButton";
 
@@ -28,12 +31,17 @@ export default function BasicTable({
 }) {
   const classes = useStyles();
 
+  const handleClick = (id) => {
+    console.log(id);
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
+            <TableCell align="right">Profile</TableCell>
             <TableCell align="right">E-mail</TableCell>
             <TableCell align="right">Role</TableCell>
             <TableCell align="right">Industry</TableCell>
@@ -44,8 +52,13 @@ export default function BasicTable({
         <TableBody>
           {data.map((row) => (
             <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
-                {row.firstName} {row.lastName}
+              <TableCell gn="right">
+                {row.firstName + " " + row.lastName}
+              </TableCell>
+              <TableCell gn="right">
+                <Link to={`/Cofounder/dashboard/${row.id}/profile`}>
+                  Show profile
+                </Link>
               </TableCell>
               <TableCell align="right">{row.email}</TableCell>
               <TableCell align="right">{row.role}</TableCell>

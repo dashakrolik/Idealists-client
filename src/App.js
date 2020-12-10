@@ -717,7 +717,7 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/Cofounder/dashboard/profile"
+                path="/Cofounder/dashboard/:id/profile"
                 render={(props) => {
                   return (
                     <CofounderProfile

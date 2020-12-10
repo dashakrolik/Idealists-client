@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import request from "superagent";
 import { baseUrl } from "../../constants";
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../MyIdea/Dashboard/IdeaDashboard.css";
-import ideaImg from "../../res/idea.png";
 import assesWhite from "../../res/assess-white.png";
 import mentor from "../../res/mentor.png";
 
@@ -50,7 +49,10 @@ export default function CofounderDashboard(props) {
           </Link>
         </div>
         <div className="flex-ideacontainer">
-          <Link className="links" to="/Cofounder/dashboard/profile">
+          <Link
+            className="links"
+            to={`/Cofounder/dashboard/${props.authState.user.id}/profile`}
+          >
             <div className="assess-tiles">
               <img alt="icon" className="icons" src={mentor}></img>
               <h4>Your profile</h4>

@@ -1,69 +1,69 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
-import styled from '@emotion/styled'
-import { baseUrl } from '../../constants'
-import { useState } from 'react'
-import Button from '../reogranisation/Questions/Button'
-import { Link } from 'react-router-dom'
+import { css, jsx } from "@emotion/core";
+import styled from "@emotion/styled";
+import { baseUrl } from "../../constants";
+import { useState } from "react";
+import Button from "../reogranisation/Questions/Button";
+import { Link } from "react-router-dom";
 
 export default function CofounderProfileVideo(props) {
-  const [previewSource, setPreviewSource] = useState('')
-  const [successMsg, setSuccessMsg] = useState(false)
-  const [videos, setVideos] = useState()
-  const [loading, setLoading] = useState(false)
+  const [previewSource, setPreviewSource] = useState("");
+  const [successMsg, setSuccessMsg] = useState(false);
+  const [videos, setVideos] = useState();
+  const [loading, setLoading] = useState(false);
 
   const handelVideoInputChange = (e) => {
-    const video = e.target.files[0]
-    previewVideo(video)
-  }
+    const video = e.target.files[0];
+    previewVideo(video);
+  };
 
   const previewVideo = (video) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(video)
+    const reader = new FileReader();
+    reader.readAsDataURL(video);
     reader.onloadend = () => {
-      setPreviewSource(reader.result)
-    }
-  }
+      setPreviewSource(reader.result);
+    };
+  };
   const uploadVideo = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const data = new FormData()
-    data.append('file', previewSource)
-    data.append('upload_preset', 'cofounderProfileVideo')
-    setLoading(true)
-    setPreviewSource(false)
+    const data = new FormData();
+    data.append("file", previewSource);
+    data.append("upload_preset", "cofounderProfileVideo");
+    setLoading(true);
+    setPreviewSource(false);
     const res = await fetch(
-      'https://api.cloudinary.com/v1_1/idealists/video/upload',
+      "https://api.cloudinary.com/v1_1/idealists/video/upload",
       {
-        method: 'POST',
+        method: "POST",
         body: data,
-      },
-    )
-    const file = await res.json()
-    setPreviewSource(!previewSource)
-    setLoading(false)
-    setSuccessMsg(true)
-    setVideos(file.secure_url)
-  }
+      }
+    );
+    const file = await res.json();
+    setPreviewSource(!previewSource);
+    setLoading(false);
+    setSuccessMsg(true);
+    setVideos(file.secure_url);
+  };
   const cancelVideo = (e) => {
-    e.preventDefault()
-    setPreviewSource(false)
-    document.getElementById('upload_file').value = ''
-  }
+    e.preventDefault();
+    setPreviewSource(false);
+    document.getElementById("upload_file").value = "";
+  };
 
   const updateVideo = async (e) => {
     const response = await fetch(`${baseUrl}/users`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-type': 'application/json',
+        "Content-type": "application/json",
       },
       body: JSON.stringify(videos),
-    })
+    });
     // Awaiting response.json()
-    const resData = await response.json()
+    const resData = await response.json();
     // Return response data
-    return resData
-  }
+    return resData;
+  };
   return (
     <div>
       <Container>
@@ -83,7 +83,7 @@ export default function CofounderProfileVideo(props) {
             <RightSide>
               <form onSubmit={uploadVideo}>
                 <label>
-                  {' '}
+                  {" "}
                   <h3>Profile Video</h3>
                 </label>
                 <input
@@ -93,7 +93,7 @@ export default function CofounderProfileVideo(props) {
                   accept="video/mp4,video/x-m4v,video/*"
                   onChange={handelVideoInputChange}
                 />
-                {loading && <h3 style={{ paddingLeft: '50px' }}>Loading...</h3>}
+                {loading && <h3 style={{ paddingLeft: "50px" }}>Loading...</h3>}
                 <br />
                 <button type="submit">Upload</button>
                 <button onClick={cancelVideo}>Cancel</button>
@@ -101,10 +101,10 @@ export default function CofounderProfileVideo(props) {
                 {previewSource.length > 10 && (
                   <div
                     style={{
-                      height: '100px',
-                      width: '100px',
-                      paddingTop: '50px',
-                      paddingLeft: '50px',
+                      height: "100px",
+                      width: "100px",
+                      paddingTop: "50px",
+                      paddingLeft: "50px",
                     }}
                   >
                     {previewSource && (
@@ -141,7 +141,7 @@ export default function CofounderProfileVideo(props) {
         </div>
       </Container>
     </div>
-  )
+  );
 }
 
 const LeftSide = styled.div`
@@ -185,7 +185,7 @@ const LeftSide = styled.div`
       color: #dfeff2;
     }
   }
-`
+`;
 
 const RightSide = styled.div`
   position: absolute;
@@ -279,7 +279,7 @@ const RightSide = styled.div`
       color: #1a3d7c;
     }
   }
-`
+`;
 
 const Container = styled.div`
   position: absolute;
@@ -296,4 +296,4 @@ const Container = styled.div`
     #31a2d7,
     #4cc5f1
   );
-`
+`;
