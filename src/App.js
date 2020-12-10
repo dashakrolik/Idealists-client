@@ -39,6 +39,7 @@ import UserAssessIdeas from "./components/MyIdea/Dashboard/UserAssessIdeas";
 import CofounderStart from "./components/Cofounder/CofounderStart";
 import CofounderLogin from "./components/Cofounder/CofounderLogin";
 import CofounderDashboard from "./components/Cofounder/CofounderDashboard";
+import CofounderProfile from "./components/Cofounder/CofounderProfile";
 import IdeasList from "./components/Cofounder/IdeaList";
 import CofounderPersonalityTest from "./components/Cofounder/CofounderPersonalityTest";
 import CofounderProfileVideo from "./components/Cofounder/CofounderProfileVideo";
@@ -716,7 +717,6 @@ class App extends Component {
                 }}
               />
               <Route
-                exact
                 path="/Cofounder/dashboard/ideas/:id"
                 render={(props) => {
                   return (
@@ -727,6 +727,24 @@ class App extends Component {
                       user={this.getCurrentUser}
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
+                      setAuthLoggedInTrue={this.setAuthLoggedInTrue}
+                    />   
+                  );
+                }}
+              />
+           <Route
+                exact
+                path="/Cofounder/dashboard/:id/profile"
+                render={(props) => {
+                  return (
+                    <CofounderProfile
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                      setAuthLoggedInTrue={this.setAuthLoggedInTrue}
                     />
                   );
                 }}
