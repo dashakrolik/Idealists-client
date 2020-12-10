@@ -719,6 +719,22 @@ class App extends Component {
                 }}
               />
               <Route
+                exact
+                path="/Cofounder/dashboard"
+                render={(props) => {
+                  return (
+                    <CofounderDashboard
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                    />
+                  );
+                }}
+              />
+              <Route
                 path="/Cofounder/dashboard/ideas/:id"
                 render={(props) => {
                   return (
