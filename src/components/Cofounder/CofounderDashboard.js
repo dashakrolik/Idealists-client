@@ -4,13 +4,14 @@ import { baseUrl } from "../../constants";
 import { Redirect, Link } from "react-router-dom";
 import "../MyIdea/Dashboard/IdeaDashboard.css";
 import ideaImg from "../../res/assess-white.png"
+import styled from '@emotion/styled'
+
+import Rating from "./Rating"
 
 
 
 export default function CofounderDashboard(props) {
   const [user, setUserData] = useState({});
-  const [userIdeas, setUserIdeas] = useState([]);
-  const [ideasList, setIdeaList] = useState([])
 
   useEffect(() => {
     if (props.authState.loggedIn)
@@ -18,15 +19,30 @@ export default function CofounderDashboard(props) {
         .get(`${baseUrl}/current`)
         .set("Authorization", `Bearer ${props.authState.token}`)
         .then((res) => setUserData(res.body));
-    else props.history.replace("/MyIdea/login");
+    else props.history.replace("/Cofounder/login");
   }, []);
 
   if (props.authState.loggedIn === false) return <h1>Not logged in</h1>;
-  if (props.authState.isApproved === null) return <h1>Your Application is being reviewed</h1>;
-  if (props.authState.isApproved === false) return <h1>Your Application has been rejected, you wont be able to view and bid on ideas</h1>;
+  if (props.authState.user.isApproved === null) return (
 
+    <div className="dashboard-container">
+      <br />
+      <br />
+      <br />
+      <h3>Your Application is being reviewed, we'll get back to you shortly!</h3>
+    </div>
+  )
 
-  // if (props.authState.isApproved === true)
+  if (props.authState.user.isApproved === false) return (
+
+    <div className="dashboard-container">
+      <br />
+      <br />
+      <br />
+      <h3>Your Application has been rejected, you wont be able to view and bid on ideas</h3>;
+    </div>
+  )
+
   return (
     <div className="dashboard-container">
       <br />
@@ -47,5 +63,49 @@ export default function CofounderDashboard(props) {
     </div>
   );
 }
+
+const LeftSide = styled.div`
+  position: absolute;
+  color: #ffffff;
+  top: 50%;
+  left: 50%;
+  width: 360px;
+  height: 300px;
+  margin-left: -360px;
+  margin-top: -150px;
+  padding-top: 10px;
+
+  h3 {
+    display: block;
+    position: relative;
+    left: 47px;
+    width: 80%;
+    font-size: 24px;
+    font-weight: 500;
+    padding: 5px;
+    margin: 50px 5px 5px;
+  }
+
+  p {
+    display: block;
+    position: relative;
+    left: 47px;
+    top: 10px;
+    width: 80%;
+    font-size: 10px;
+    font-weight: 300;
+    padding: 5px;
+    margin: 5px;
+  }
+
+  a {
+    font-weight: 800;
+
+    &:hover {
+      cursor: pointer;
+      color: #dfeff2;
+    }
+  }
+`
 
 
