@@ -34,7 +34,6 @@ export default function CofounderLogin(props) {
   };
 
   if (props.authState.loggedIn) {
-    console.log("does this get called??");
     props.user();
   }
 
