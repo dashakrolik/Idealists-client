@@ -11,7 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import { jsx } from "@emotion/core";
 
 const TopBar = (props) => {
-
+console.log("props", props)
 
   return (
     <AppBar>
@@ -46,7 +46,9 @@ const TopBar = (props) => {
           {!localStorage.currentUserJwt || !props.authState.loggedIn ? (
             <Button
               color="inherit"
-              onClick={() => props.history.push("/MyIdea/login")}
+              onClick={() => {
+                props.history.push("/MyIdea/login")
+                console.log('nav bar props', props.history.push("/MyIdea/login"))}}
             >
               Login
             </Button>

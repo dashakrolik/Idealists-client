@@ -2,7 +2,8 @@
 import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { Component } from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom"
+import { Route } from "react-router-dom";
 import InvestorDashboard from "./components/InvestorsPortal/Dashboard/InvestorDashboard";
 import InvestorLogin from "./components/InvestorsPortal/InvestorLogin";
 import SpecialistDashboard from "./components/SpecialistPortal/Dashboard/SpecialistDashboard";
@@ -388,8 +389,9 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <TopBar
+          <ThemeProvider theme={theme}>
+            <Application>
+            <TopBar
             authState={this.state.auth}
             user={this.getCurrentUser}
             logout={this.logout}
@@ -397,8 +399,7 @@ class App extends Component {
             updatePassword={this.updatePassword}
             updateLocalStorage={this.updateLocalStorage}
           />
-          <ThemeProvider theme={theme}>
-            <Application>
+          <Switch>
               <Route
                 exact
                 path="/Specialist/dashboard"
@@ -1006,10 +1007,10 @@ class App extends Component {
                   />
                 )}
               />
+              </Switch>
             </Application>
           </ThemeProvider>
-        </div>
-      </Router>
+          </Router>
     )
   }
 }
