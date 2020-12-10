@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import request from "superagent";
 import { baseUrl } from "../../constants";
 import List from "../../material-UI/List";
-import styles from "./styles.css";
+import "../MyIdea/Dashboard/IdeaDashboard.css";
 
 export default function AdminDashboardCofounders(props) {
   const [coFounders, set_coFounder] = useState([]);
@@ -18,7 +18,7 @@ export default function AdminDashboardCofounders(props) {
   }, []);
 
   return (
-    <div className="container">
+    <div className="dashboard-container">
       <h1>Admin DashBoard</h1>
       <h3 className="subHeading">
         These co-founders are still awaiting approval
