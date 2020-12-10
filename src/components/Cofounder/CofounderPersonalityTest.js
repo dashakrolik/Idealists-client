@@ -1,50 +1,54 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
+import { css,jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { baseUrl } from '../../constants';
+import request from 'superagent';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Button from '../reogranisation/Questions/Button';
 
 export default function CofounderPersonalityTest(props) {
 	const [ testResult, setTestResult ] = useState({ personalityTest: '' });
 	const [ errorCheck, seterrorCheck ] = useState('false');
 	const [ successMsg, setSuccessMsg ] = useState(false);
-
 	const handelSubmit = async (e) => {
 		e.preventDefault();
 		setSuccessMsg(true);
-
-		const response = await fetch(`${baseUrl}/users`, {
-			method: 'PUT',
-			headers: {
-				Authorization: 'Bearer ' + props.authState.token,
-				'Content-type': 'application/json'
-			},
-			body: JSON.stringify(testResult)
-		});
-		console.log('I am here');
-
-		// Awaiting response.json()
-		const resData = await response.json();
-
-		// Return response data
-		//return resData;
+		await request
+		.put(`${baseUrl}/users`)
+		.set('Authorization', 'Bearer ' + props.authState.token)
+		.set('Content-Type', 'application/json')
+		.send(
+				JSON.stringify(testResult)
+			)
+			.then((res) => {
+				if (res.status === 200) {
+					setSuccessMsg(true)
+					// props.history.replace(`/CofounderProfileForm`);
+				}
+			})
+			.catch((err) => {
+				if (err.status === 409) {
+					alert('User with this email already exists');
+				} else {
+					console.error(err);
+				}
+			});
+			// console.log("Its working")
 	};
 
 	const setValue = (e) => {
 		let format = /[!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?0-9a-z]+/;
 		setTestResult({ personalityTest: e.target.value });
-		console.log('Value' + e.target.value);
-
+		// console.log('Value' + e.target.value);
 		if (e.target.value.match(format)) {
 			seterrorCheck('only capital letters with - is  allowed');
 		} else if (e.target.value.length > 6) {
-			seterrorCheck('only capital letters allowed');
+			seterrorCheck('only capital letters with - and it should be less than 6 character ');
 		} else {
 			seterrorCheck('false');
 		}
 	};
-
 	return (
 		<div>
 			<Container>
@@ -54,7 +58,7 @@ export default function CofounderPersonalityTest(props) {
 							<h3>Thank you. Your pesonality test result was submitted successfully.</h3>
 						</LeftSide>
 					</div>
-				) : (
+					) : (
 					<div>
 						<LeftSide>
 							<div>
@@ -73,18 +77,28 @@ export default function CofounderPersonalityTest(props) {
 								<br />
 								<label>Upload your result here</label>
 								<span>(ex:ISFP-T)</span>
-
 								<input type='text' value={testResult.personalityTest} required onChange={setValue} />
 								{errorCheck !== 'false' && <label>{errorCheck}</label>}
 								<br />
 								<Link to='/CofounderProfileForm'>
-									<button type='submit'>Submit</button>
+									<button type='submit' onClick ={handelSubmit}>Submit</button>
 								</Link>
 								<br />
 							</form>
 						</RightSide>
 					</div>
 				)}
+				<Link to='/CofounderProfileForm'>
+				{successMsg&&(
+				<div css={css`
+						position: absolute;
+						right: 100px;
+						bottom: 100px;
+						width: 160px;
+					`}>
+					<Button color='inherit' text='Next'></Button>
+				</div>)}
+				</Link>
 			</Container>
 		</div>
 	);
