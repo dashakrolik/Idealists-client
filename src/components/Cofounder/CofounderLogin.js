@@ -11,11 +11,11 @@ export default function CofounderLogin(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);
-    triggerUserData();
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+
     setLoginState({
       ...loginState,
       [name]: value,
@@ -27,19 +27,16 @@ export default function CofounderLogin(props) {
     props.login(email, password);
   };
 
-  const triggerUserData = () => {
-    if (props.authState.loggedIn) {
-      props.user();
-    }
-  };
-
   if (!localStorage.currentUserJwt) {
     props.history.replace("/CofounderStart");
-    triggerUserData();
-    return <div />;
-  }
 
-  if (props.authState.loggedIn !== true)
+  }
+  if (props.authState.loggedIn) {
+    props.user()
+    props.history.replace("/Cofounder/dashboard");    
+
+ return <div></div>;
+  } else {
     return (
       <div>
         <LoginContext
@@ -52,8 +49,10 @@ export default function CofounderLogin(props) {
           onSubmit={onSubmit}
         />
       </div>
-    );
-  else return <Redirect to="/cofounderWelcomePage" />;
+
+    )
+  }
+
 }
 const LeftSide = styled.div`
   position: absolute;

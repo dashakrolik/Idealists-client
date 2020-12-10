@@ -119,8 +119,7 @@ export default function CofounderProfileForm(props) {
 			}, {})
 		);
 	};
-
-	const submitForm = (e) => {
+    const submitForm = (e) => {
 		e.preventDefault();
 	    request
 			.post(`${baseUrl}/users/cofounders/profile`)

@@ -1,4 +1,5 @@
 /** @jsx jsx */
+
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { baseUrl } from '../../constants';
@@ -151,6 +152,8 @@ export default function CofounderProfileVideo(props) {
 			</Container>
 		</div>
 	);
+
+  
 }
 
 const LeftSide = styled.div`
