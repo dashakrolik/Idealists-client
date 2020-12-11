@@ -8,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import Box from "@material-ui/core/Box";
 import request from "superagent";
 import { baseUrl } from "../../constants";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 
 const StyledRating = withStyles({
   iconFilled: {

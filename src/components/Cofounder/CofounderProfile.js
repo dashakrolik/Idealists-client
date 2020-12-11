@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import request from "superagent";
 import { baseUrl } from "../../constants";
 import "../MyIdea/Dashboard/IdeaDashboard.css";
