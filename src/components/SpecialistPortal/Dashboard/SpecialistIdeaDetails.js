@@ -278,11 +278,11 @@ export default function IdeaDashboardDetail(props) {
 
   return (
     <div className="dashboard-container">
-      <div style={{ width: "12rem", margin: "auto" }}>
-      <Button text="Go back" onClick={() => history.goBack()}/>
-      </div>
       <Container>
         <Left>
+        <div style={{ width: "12rem"}}>
+      <Button text="Go back" onClick={() => history.goBack()}/>
+      </div>
           <ProgressBar
             token={props.authState.token}
             ideasId={props.match.params.id}
