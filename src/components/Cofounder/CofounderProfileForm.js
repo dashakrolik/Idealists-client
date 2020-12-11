@@ -108,7 +108,6 @@ export default function CofounderProfileForm(props) {
 		};
 		setFormData(
 			Object.keys(formData).reduce((acc, currVal) => {
-				// console.log('value of ACC ' + acc + '  currVal :' + currVal);
 				return {
 					...acc,
 					[currVal]: {
