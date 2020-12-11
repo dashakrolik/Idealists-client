@@ -1119,8 +1119,6 @@ class App extends Component {
           </ThemeProvider>
       </Router>
       </div>
-    // );
-          // </Router>
     )
   }
 }
