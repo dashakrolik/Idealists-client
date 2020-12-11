@@ -9,7 +9,6 @@ import { baseUrl } from '../../../constants';
 import { pdfjs } from "react-pdf";
 import { withRouter } from 'react-router-dom'
 import UserAgreement from './agreement.jsx'
-import SubmissionSideScreen from './SubmissionSideScreen';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
