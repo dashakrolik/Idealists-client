@@ -72,7 +72,7 @@ export default function CofounderIdeaDetail(props) {
                     <h3>Bid on this idea</h3>
                   </div>
                 ) : (
-                    <BidSlider authState={props.authState} ideaId={ideaId} showSlider={!showSlider} displaySuccess={displaySuccess} />
+                    <BidSlider authState={props.authState} ideaId={ideaId} showSlider={!showSlider} displaySuccess={setDisplaySuccess} />
                   )}
                 {displaySuccess ? (
                   <StyledDiv >Bid submission success!</StyledDiv>

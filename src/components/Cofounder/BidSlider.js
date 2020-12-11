@@ -76,7 +76,7 @@ export default function BidSlider(props) {
     }
     const EditBid = () => {
         request
-            .pust(`${baseUrl}/ideas/${props.ideaId}/bids`)
+            .put(`${baseUrl}/ideas/${props.ideaId}/bids`)
             .set("Authorization", `Bearer ${props.authState.token}`)
             .send({
                 equity: bidValue
