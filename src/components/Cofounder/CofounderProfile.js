@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import request from "superagent";
 import { baseUrl } from "../../constants";
 import "../MyIdea/Dashboard/IdeaDashboard.css";
@@ -54,7 +54,7 @@ export default function CofounderProfile(props) {
         .then((res) => {
           set_profile(res.body);
         });
-    } else history.push("/login");
+    } else props.history.replace("/login");
   }, []);
 
   //   Here an overview of what should be on each co-founders dashboard:
