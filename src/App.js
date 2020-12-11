@@ -59,9 +59,28 @@ class App extends Component {
     navigation: {
       activePath: "",
     },
-
+    cofounderProfile: '',
     loading: true,
   };
+
+  getCoFounderProfile = () => {
+    request
+      .get(`${baseUrl}/users/cofounders/profile`)
+      .set("Authorization", `Bearer ${this.state.auth.token}`)
+      .then(res => {
+        if (res.status === 200) {
+          this.setState({
+            ...this.state,
+            cofounderProfile: res.body
+          })
+        }
+      }).catch(e => {
+        this.setState({
+          ...this.state,
+          cofounderProfile: ''
+        })  
+      })
+  }
 
   rejectIdea = (rejected, ideasId) => {
     request
@@ -679,6 +698,7 @@ class App extends Component {
                       authState={this.state.auth}
                       login={this.requestLoginUser}
                       user={this.getCurrentUser}
+                      getProfile={this.getCoFounderProfile}              
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
                       setAuthLoggedInTrue={this.setAuthLoggedInTrue}
@@ -728,6 +748,7 @@ class App extends Component {
                       authState={this.state.auth}
                       login={this.requestLoginUser}
                       user={this.getCurrentUser}
+                      profile={this.state.cofounderProfile}
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
                     />

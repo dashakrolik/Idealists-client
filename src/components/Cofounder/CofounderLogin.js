@@ -1,13 +1,15 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
+import request from "superagent";
+import { baseUrl } from "../../constants";
 import LoginContext from "../reogranisation/Login/LoginContext";
 
 export default function CofounderLogin(props) {
   const [loginState, setLoginState] = useState({});
-
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);
@@ -31,11 +33,13 @@ export default function CofounderLogin(props) {
     props.history.replace("/CofounderStart");
 
   }
+
   if (props.authState.loggedIn) {
+    props.getProfile()
     props.user()
     props.history.replace("/Cofounder/dashboard");    
 
- return <div></div>;
+    return <div></div>;
   } else {
     return (
       <div>
