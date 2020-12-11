@@ -728,11 +728,11 @@ class App extends Component {
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
                       setAuthLoggedInTrue={this.setAuthLoggedInTrue}
-                    />   
+                    />
                   );
                 }}
               />
-           <Route
+              <Route
                 exact
                 path="/Cofounder/dashboard/:id/profile"
                 render={(props) => {
