@@ -17,7 +17,7 @@ import request from "superagent";
 import IdeaDashboard from "./components/MyIdea/Dashboard/IdeaDashboard";
 import AdminDashboard from "./components/Admin/AdminDashboard";
 import AdminDashboardDetail from "./components/Admin/AdminDashboardDetail";
-import AdminDashboardCofounders from "./components/Admin/AdminDashboardCofounders"
+import AdminDashboardCofounders from "./components/Admin/AdminDashboardCofounders";
 import IdeaDashboardDetail from "./components/MyIdea/Dashboard/IdeaDashboardDetail";
 import IdeaLogin from "./components/MyIdea/IdeaLogin";
 import TopBar from "./components/NavBar/TopBar";
@@ -37,47 +37,47 @@ import AdminDashboardRejected from "./components/Admin/AdminDashboardRejected";
 import CompleteAssessment from "./components/InvestorsPortal/Dashboard/CompleteAssessment";
 import AddSpecialistStart from "./components/SpecialistPortal/SpecialistCreation/AddSpecialistStart";
 import UserAssessIdeas from "./components/MyIdea/Dashboard/UserAssessIdeas";
-import CofounderStart from './components/Cofounder/CofounderStart'
+import CofounderStart from "./components/Cofounder/CofounderStart";
 import CofounderLogin from "./components/Cofounder/CofounderLogin";
-import CofounderDashboard from "./components/Cofounder/CofounderDashboard"
+import CofounderDashboard from "./components/Cofounder/CofounderDashboard";
+import CofounderProfile from "./components/Cofounder/CofounderProfile";
 import IdeasList from "./components/Cofounder/IdeaList";
-import CofounderPersonalityTest from './components/Cofounder/CofounderPersonalityTest'
-import CofounderProfileVideo from './components/Cofounder/CofounderProfileVideo'
+import CofounderPersonalityTest from "./components/Cofounder/CofounderPersonalityTest";
+import CofounderProfileVideo from "./components/Cofounder/CofounderProfileVideo";
 
 import Spinner from "./components/reogranisation/Spinner";
-
+import CofounderIdeaDetail from "./components/Cofounder/Cofounder-IdeaDetail";
 
 class App extends Component {
   state = {
     auth: {
       loggedIn: false,
-      token: '',
-      user: '',
+      token: "",
+      user: "",
     },
     navigation: {
-      activePath: '',
+      activePath: "",
     },
 
     loading: true,
   };
 
-
   rejectIdea = (rejected, ideasId) => {
     request
       .put(`${baseUrl}/ideas/${ideasId}/progress`)
-      .set('Authorization', `Bearer ${this.state.auth.token}`)
+      .set("Authorization", `Bearer ${this.state.auth.token}`)
       .send(rejected)
       .then((res) => {
         if (res.status === 200) {
-          console.log('idea rejection request successful')
+          console.log("idea rejection request successful");
         }
       })
       .catch((err) => {
         if (err) {
-          console.log('error', err)
+          console.log("error", err);
         }
-      })
-  }
+      });
+  };
 
   requestLoginUser = (email, password) => {
     request
@@ -92,7 +92,7 @@ class App extends Component {
               loggedIn: true,
               token: res.body.jwt,
             },
-          loading: false,
+            loading: false,
           });
           localStorage.setItem("currentUserJwt", res.body.jwt);
         }
@@ -107,12 +107,12 @@ class App extends Component {
               token: null,
               loading: false,
             },
-          })
+          });
 
           alert(
-            'You have entered an incorrect email. If you do not have an account, Please signup!',
-          )
-          localStorage.setItem('currentUserJwt', null)
+            "You have entered an incorrect email. If you do not have an account, Please signup!"
+          );
+          localStorage.setItem("currentUserJwt", null);
         } else if (err.status === 401) {
           this.setState({
             ...this.state,
@@ -122,10 +122,10 @@ class App extends Component {
               token: null,
               loading: false,
             },
-          })
+          });
 
-          alert('You have entered an incorrect password, Please try again!')
-          localStorage.setItem('currentUserJwt', null)
+          alert("You have entered an incorrect password, Please try again!");
+          localStorage.setItem("currentUserJwt", null);
         } else if (err.status === 403) {
           this.setState({
             ...this.state,
@@ -135,16 +135,16 @@ class App extends Component {
               token: null,
               loading: false,
             },
-          })
+          });
 
-          alert('As an Expert, Please use Expert Login!')
+          alert("As an Expert, Please use Expert Login!");
 
-          localStorage.setItem('currentUserJwt', null)
+          localStorage.setItem("currentUserJwt", null);
         } else {
-          console.error(err)
+          console.error(err);
         }
-      })
-  }
+      });
+  };
 
   requestLoginExpert = (email, password) => {
     request
@@ -159,8 +159,8 @@ class App extends Component {
               loggedIn: true,
               token: res.body.jwt,
             },
-          })
-          localStorage.setItem('currentUserJwt', res.body.jwt)
+          });
+          localStorage.setItem("currentUserJwt", res.body.jwt);
         }
       })
       .catch((err) => {
@@ -172,12 +172,12 @@ class App extends Component {
               loggedIn: false,
               token: null,
             },
-          })
+          });
 
           alert(
-            'You have entered an incorrect email. If you do not have an account, Please signup!',
-          )
-          localStorage.setItem('currentUserJwt', null)
+            "You have entered an incorrect email. If you do not have an account, Please signup!"
+          );
+          localStorage.setItem("currentUserJwt", null);
         } else if (err.status === 401) {
           this.setState({
             ...this.state,
@@ -186,10 +186,10 @@ class App extends Component {
               loggedIn: false,
               token: null,
             },
-          })
+          });
 
-          alert('You have entered an incorrect password, Please try again!')
-          localStorage.setItem('currentUserJwt', null)
+          alert("You have entered an incorrect password, Please try again!");
+          localStorage.setItem("currentUserJwt", null);
         } else if (err.status === 403) {
           this.setState({
             ...this.state,
@@ -198,17 +198,17 @@ class App extends Component {
               loggedIn: false,
               token: null,
             },
-          })
+          });
 
           alert(
-            'This login is for Experts only, Please use User Login as an Idea Owner or Specialist Login as a Specialist!',
-          )
-          localStorage.setItem('currentUserJwt', null)
+            "This login is for Experts only, Please use User Login as an Idea Owner or Specialist Login as a Specialist!"
+          );
+          localStorage.setItem("currentUserJwt", null);
         } else {
-          console.error(err)
+          console.error(err);
         }
-      })
-  }
+      });
+  };
 
   requestLoginSpecialist = (email, password) => {
     request
@@ -223,8 +223,8 @@ class App extends Component {
               loggedIn: true,
               token: res.body.jwt,
             },
-          })
-          localStorage.setItem('currentUserJwt', res.body.jwt)
+          });
+          localStorage.setItem("currentUserJwt", res.body.jwt);
         }
       })
       .catch((err) => {
@@ -236,12 +236,12 @@ class App extends Component {
               loggedIn: false,
               token: null,
             },
-          })
+          });
 
           alert(
-            'You have entered an incorrect email. If you do not have an account, Please contact the admin!',
-          )
-          localStorage.setItem('currentUserJwt', null)
+            "You have entered an incorrect email. If you do not have an account, Please contact the admin!"
+          );
+          localStorage.setItem("currentUserJwt", null);
         } else if (err.status === 401) {
           this.setState({
             ...this.state,
@@ -250,10 +250,10 @@ class App extends Component {
               loggedIn: false,
               token: null,
             },
-          })
+          });
 
-          alert('You have entered an incorrect password, Please try again!')
-          localStorage.setItem('currentUserJwt', null)
+          alert("You have entered an incorrect password, Please try again!");
+          localStorage.setItem("currentUserJwt", null);
         } else if (err.status === 403) {
           this.setState({
             ...this.state,
@@ -262,23 +262,23 @@ class App extends Component {
               loggedIn: false,
               token: null,
             },
-          })
+          });
 
           alert(
-            'This login is for Specialists only, Please use User Login as an Idea Owner or Expert Login as an Expert!',
-          )
+            "This login is for Specialists only, Please use User Login as an Idea Owner or Expert Login as an Expert!"
+          );
 
-          localStorage.setItem('currentUserJwt', null)
+          localStorage.setItem("currentUserJwt", null);
         } else {
-          console.error(err)
+          console.error(err);
         }
-      })
-  }
+      });
+  };
 
   getCurrentUser = () => {
     request
       .get(`${baseUrl}/current`)
-      .set('Authorization', `Bearer ${this.state.auth.token}`)
+      .set("Authorization", `Bearer ${this.state.auth.token}`)
       .then((res) => {
         this.setState({
           ...this.state,
@@ -295,29 +295,28 @@ class App extends Component {
       });
   };
 
-
   sendAssessment = (content) => {
     request
       .post(`${baseUrl}/assessments`)
-      .set('Authorization', `Bearer ${this.state.auth.token}`)
+      .set("Authorization", `Bearer ${this.state.auth.token}`)
       .send({ content })
       .then((res) => {
-        res.status === 200 && console.log('form sent')
-      })
-  }
+        res.status === 200 && console.log("form sent");
+      });
+  };
 
   sendInput = (content) => {
     request
       .post(`${baseUrl}/input`)
-      .set('Authorization', `Bearer ${this.state.auth.token}`)
+      .set("Authorization", `Bearer ${this.state.auth.token}`)
       .send({ content })
       .then((res) => {
-        res.status === 200 && console.log('form sent')
-      })
-  }
+        res.status === 200 && console.log("form sent");
+      });
+  };
 
   resetPassword = (email) => {
-    const clientUrl = window.location.origin
+    const clientUrl = window.location.origin;
     request
       .post(`${baseUrl}/reset-password`)
       .send({ email, clientUrl })
@@ -330,10 +329,10 @@ class App extends Component {
               loggedIn: false,
               token: null,
             },
-          })
+          });
         }
-      })
-  }
+      });
+  };
 
   updatePassword = (jwt, password) => {
     request
@@ -341,26 +340,26 @@ class App extends Component {
       .send({ jwt, password })
       .then((res) => res.status === 200)
       .catch((err) => {
-        alert('Something went wrong, please try again.')
-      })
-  }
+        alert("Something went wrong, please try again.");
+      });
+  };
 
   updateLocalStorage = (key, value) => {
-    localStorage.setItem('User first name', this.state.auth.user.firstName)
-    localStorage.setItem('User last name', this.state.auth.user.lastName)
-    localStorage.setItem('User email', this.state.auth.user.email)
-    localStorage.setItem('Current user', this.state.auth.user.email)
+    localStorage.setItem("User first name", this.state.auth.user.firstName);
+    localStorage.setItem("User last name", this.state.auth.user.lastName);
+    localStorage.setItem("User email", this.state.auth.user.email);
+    localStorage.setItem("Current user", this.state.auth.user.email);
 
-    let retrievedToken = localStorage.getItem('currentUserJwt')
+    let retrievedToken = localStorage.getItem("currentUserJwt");
 
-    return retrievedToken
-  }
+    return retrievedToken;
+  };
 
   logout = () => {
-    localStorage.clear()
-    localStorage.removeItem('currentUserJwt')
-    sessionStorage.clear()
-    localStorage.setItem('currentUserJwt', null)
+    localStorage.clear();
+    localStorage.removeItem("currentUserJwt");
+    sessionStorage.clear();
+    localStorage.setItem("currentUserJwt", null);
     this.setState({
       auth: {
         loggedIn: false,
@@ -371,20 +370,19 @@ class App extends Component {
     });
   };
 
-
   onDocumentLoadSuccess = ({ numPages }) => {
-    this.setState({ numPages })
-  }
+    this.setState({ numPages });
+  };
 
   setAuthLoggedInTrue = () => {
     this.setState({
       auth: {
         loggedIn: true,
         token: localStorage.currentUserJwt,
-        user: '',
+        user: "",
       },
-    })
-  }
+    });
+  };
 
   render() {
     return (
@@ -415,7 +413,7 @@ class App extends Component {
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -431,7 +429,7 @@ class App extends Component {
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -450,7 +448,7 @@ class App extends Component {
                       updateProgress={this.updateProgress}
                       updateLocalStorage={this.updateLocalStorage}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -467,7 +465,7 @@ class App extends Component {
                       logout={this.logout}
                       setAuthLoggedInTrue={this.setAuthLoggedInTrue}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -484,7 +482,7 @@ class App extends Component {
                       logout={this.logout}
                       setAuthLoggedInTrue={this.setAuthLoggedInTrue}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -500,7 +498,7 @@ class App extends Component {
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -517,7 +515,7 @@ class App extends Component {
                       logout={this.logout}
                       updateLocalStorage={this.updateLocalStorage}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -534,7 +532,7 @@ class App extends Component {
                       logout={this.logout}
                       updateLocalStorage={this.updateLocalStorage}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -551,7 +549,7 @@ class App extends Component {
                       logout={this.logout}
                       updateLocalStorage={this.updateLocalStorage}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -568,7 +566,7 @@ class App extends Component {
                       logout={this.logout}
                       updateLocalStorage={this.updateLocalStorage}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -584,7 +582,7 @@ class App extends Component {
                       logout={this.logout}
                       updateLocalStorage={this.updateLocalStorage}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -600,7 +598,7 @@ class App extends Component {
                       logout={this.logout}
                       updateLocalStorage={this.updateLocalStorage}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -616,7 +614,7 @@ class App extends Component {
                       logout={this.logout}
                       updateLocalStorage={this.updateLocalStorage}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -633,7 +631,7 @@ class App extends Component {
                       logout={this.logout}
                       setAuthLoggedInTrue={this.setAuthLoggedInTrue}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -650,7 +648,7 @@ class App extends Component {
                       logout={this.logout}
                       setAuthLoggedInTrue={this.setAuthLoggedInTrue}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -720,6 +718,39 @@ class App extends Component {
                 }}
               />
               <Route
+                path="/Cofounder/dashboard/ideas/:id"
+                render={(props) => {
+                  return (
+                    <CofounderIdeaDetail
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                      setAuthLoggedInTrue={this.setAuthLoggedInTrue}
+                    />   
+                  );
+                }}
+              />
+           <Route
+                exact
+                path="/Cofounder/dashboard/:id/profile"
+                render={(props) => {
+                  return (
+                    <CofounderProfile
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                      setAuthLoggedInTrue={this.setAuthLoggedInTrue}
+                    />
+                  );
+                }}
+              />
+              <Route
                 exact
                 path="/InvestorStart"
                 render={(props) => {
@@ -733,7 +764,7 @@ class App extends Component {
                       logout={this.logout}
                       setAuthLoggedInTrue={this.setAuthLoggedInTrue}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -749,7 +780,7 @@ class App extends Component {
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -765,7 +796,7 @@ class App extends Component {
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -783,7 +814,7 @@ class App extends Component {
                       rejectIdea={this.rejectIdea}
                       updateProgress={this.updateProgress}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -799,7 +830,7 @@ class App extends Component {
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -831,21 +862,21 @@ class App extends Component {
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
                     />
-                  )
+                  );
                 }}
               />
               <Route
                 exact
                 path="/cofounderProfileVideo"
                 render={(props) => {
-                  return <CofounderProfileVideo />
+                  return <CofounderProfileVideo />;
                 }}
               />
               <Route
                 exact
                 path="/cofounderPersonalityTest"
                 render={(props) => {
-                  return <CofounderPersonalityTest />
+                  return <CofounderPersonalityTest />;
                 }}
               />
               <Route
@@ -861,7 +892,7 @@ class App extends Component {
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -882,7 +913,7 @@ class App extends Component {
                       logout={this.logout}
                       setAuthLoggedInTrue={this.setAuthLoggedInTrue}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -899,7 +930,7 @@ class App extends Component {
                       logout={this.logout}
                       setAuthLoggedInTrue={this.setAuthLoggedInTrue}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -917,7 +948,7 @@ class App extends Component {
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -935,7 +966,7 @@ class App extends Component {
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -953,7 +984,7 @@ class App extends Component {
                       logout={this.logout}
                       updateLocalStorage={this.updateLocalStorage}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -972,7 +1003,7 @@ class App extends Component {
                       logout={this.logout}
                       updateLocalStorage={this.updateLocalStorage}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -989,7 +1020,7 @@ class App extends Component {
                       logout={this.logout}
                       updateLocalStorage={this.updateLocalStorage}
                     />
-                  )
+                  );
                 }}
               />
               <Route
@@ -1017,20 +1048,20 @@ class App extends Component {
 
 const theme = {
   colors: {
-    titleText: '#444444',
+    titleText: "#444444",
     accents: {
       primary: {
-        dark: '#1A3D7C',
-        light: '#4CC5F1',
+        dark: "#1A3D7C",
+        light: "#4CC5F1",
       },
       secondary: {
-        dark: '#233949',
-        light: '#DFEFF2',
+        dark: "#233949",
+        light: "#DFEFF2",
       },
     },
-    bodyText: '#636363',
+    bodyText: "#636363",
   },
-}
+};
 
 const Application = styled.div`
   width: 100%;
@@ -1039,6 +1070,6 @@ const Application = styled.div`
   top: 0;
   left: 0;
   color: ${(props) => props.theme.colors.bodyText};
-`
+`;
 
-export default App
+export default App;

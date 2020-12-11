@@ -23,16 +23,19 @@ export default function IdeasList(props) {
         request
             .get(`${baseUrl}/ideas`)
             .set("Authorization", `Bearer ${props.authState.token}`)
-            .then((res) =>
+            .then((res) => {
+                if (res.body.length === 0) {
+                    alert("there are no ideas")
+                }
                 setUserIdeas(res.body)
+            }
             );
     }, []);
-    console.log(userIdeas)
+
 
     if (props.authState.loggedIn === false) return <h1>Not logged in</h1>;
 
     if (!props.authState.user) {
-        console.log(props.authState)
         props.user();
     }
 
@@ -42,13 +45,16 @@ export default function IdeasList(props) {
             <br />
             <br />
             <br />
-            <h2 style={styledH2}> list</h2>
+            <h2 style={styledH2}> All Validated Ideas</h2>
             {userIdeas.map((idea) => {
-                return <Link to={`/Cofounder/Dashboard/ideas/${idea.id}`}>
-                    <div className='list-container'key={idea.id}>
-                        <p style={styledP}>
-                            {idea.idea[3].answers[0].qAnswer}
-                        </p>
+                return <Link to={{ pathname: `/cofounder/dashboard/ideas/${idea.id}`, query: { user: user } }} className='ideaDetail-link'>
+                    <div className='list-container' key={idea.id}>
+                        <div>
+
+                            <p style={styledP}>
+                                {idea ? idea.idea[5].answers[0].qAnswer : null}
+                            </p>
+                        </div>
                     </div>
                 </Link>
             })}
@@ -64,4 +70,11 @@ const styledH2 = {
 };
 const styledP = {
     color: 'white'
+}
+
+const styledSpan = {
+    color: "white",
+    marginTop: 5,
+    padding: 3,
+
 }

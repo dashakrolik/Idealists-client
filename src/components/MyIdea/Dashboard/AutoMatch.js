@@ -4,16 +4,15 @@ import { Link } from "react-router-dom";
 import { baseUrl } from "../../../constants";
 import "./IdeaDashboard.css";
 /** @jsx jsx */
-import { css, Global, jsx } from '@emotion/core';
-import styled from '@emotion/styled';
-import Button from '../../reogranisation/Questions/Button';
-import posed from 'react-pose';
-import TextField from '@material-ui/core/TextField';
-import Card from '@material-ui/core/Card'
-import Spinner from '../../reogranisation/Spinner';
+import { css, Global, jsx } from "@emotion/core";
+import styled from "@emotion/styled";
+import Button from "../../reogranisation/Questions/Button";
+import posed from "react-pose";
+import TextField from "@material-ui/core/TextField";
+import Card from "@material-ui/core/Card";
+import Spinner from "../../reogranisation/Spinner";
 
 export default function IdeaDashboardDetail(props) {
-  // const [user, setUserData] = useState({});
   // const [userLoggedIn, setUserLoggedIn] = useState(true);
   // const [userIdeas, setUserIdeas] = useState([]);
   const [automatchResults, DoAutomatch] = useState([]);
@@ -27,20 +26,41 @@ export default function IdeaDashboardDetail(props) {
   // const [identifyProblem, setIdentifyProblem] = useState("");
   // const [problemSolution, setProblemSolution] = useState("");
   // const [howProblemUnique, setHowProblemUnique] = useState("");
+
+  const [loading, setLoading] = useState(true);
+
+  const [enableSubmit, setEnableSubmit] = useState(false);
+
   const ideasId = props.match.params.id;
 
+  const isUser = props.authState.user.role === "user" ? true : false;
+
   useEffect(() => {
+    setLoading(true);
     request
       .get(`${baseUrl}/ideas/${ideasId}/automatch`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      .then((automatch) =>
+      .then((automatch) => {
         DoAutomatch(
           Object.values(
             automatch.body.autoMatch["ipscreener-results"]["index-1"]
           )
-        )
-      )
-      .catch((err) => console.error(err));
+        );
+      })
+      .catch((err) => console.error(err))
+      .finally(setLoading(false));
+
+    if (!isUser) {
+      setLoading(true);
+      request
+        .get(`${baseUrl}/ideas/${ideasId}`)
+        .set("Authorization", `Bearer ${props.authState.token}`)
+        .then((res) => {
+          setPatentDifference(JSON.parse(res.body.autoMatchComments));
+        })
+        .catch((err) => console.error(err))
+        .finally(setLoading(false));
+    }
   }, []);
 
   const updateShow = (e) => {
@@ -67,6 +87,39 @@ export default function IdeaDashboardDetail(props) {
       [e.target.name]: e.target.value,
     });
   };
+  // Validate if user provides responses to all (10) matching patents & (3) additional questions.
+  // Enable the submit button only when the user responds to all (13 at present) questions.
+  let countAnswers = 0;
+  useEffect(() => {
+    const allKeys = Object.keys(patentDifference);
+    const resultsKeys = Object.keys(automatchResults);
+    const addnlQuesKeys = allKeys.filter((key) => {
+      if (!resultsKeys.includes(key)) {
+        countAnswers++;
+        return key;
+      }
+    });
+
+    if (resultsKeys.length !== 0) {
+      for (let i = 0; i < resultsKeys.length; i++) {
+        if (patentDifference[resultsKeys[i]]) countAnswers += 1;
+      }
+
+      if (addnlQuesKeys.length !== 0) {
+        for (let i = 0; i < addnlQuesKeys.length; i++) {
+          if (patentDifference[addnlQuesKeys[i]] !== "") {
+          } else countAnswers -= 1;
+        }
+      }
+      //console.log("counta:", countAnswers);
+      if (countAnswers === resultsKeys.length + 3) {
+        setEnableSubmit(true);
+      } else {
+        setEnableSubmit(false);
+      }
+    }
+  }, [patentDifference]);
+
   const sendValues = () => {
     request
       .put(`${baseUrl}/ideas/${ideasId}`)
@@ -75,7 +128,6 @@ export default function IdeaDashboardDetail(props) {
       .then((res) => {
         if (res.status === 200) {
           updateProgress(ideasId);
-          setDisplaySuccess(true);
         }
       })
       .catch((err) => {
@@ -84,6 +136,9 @@ export default function IdeaDashboardDetail(props) {
         } else {
           console.error(err);
         }
+      })
+      .finally(() => {
+        setDisplaySuccess(true);
       });
   };
 
@@ -153,8 +208,7 @@ export default function IdeaDashboardDetail(props) {
                     <FlexRow>
                       <FlexColumn>
                         <GroupTitle>
-                          Succesfully submit your comments to explain difference
-                          with patents.
+                          Your comments have been submitted successfully.
                         </GroupTitle>
                       </FlexColumn>
                     </FlexRow>
@@ -183,6 +237,15 @@ export default function IdeaDashboardDetail(props) {
   // ONLY PROCEED if (arr.length === 10) !!!!!!!!!!!!!!!!! coz it takes time for the loop to complete
   // let obj = newImageArray.find(o => o.name === 'string 1');
 
+  if (loading) {
+    return (
+      <SpinnerStyle>
+        <SpinnerPostion>
+          <Spinner />
+        </SpinnerPostion>
+      </SpinnerStyle>
+    );
+  }
   if (automatchResults.length >= 1) {
     return (
       <Container>
@@ -247,71 +310,82 @@ export default function IdeaDashboardDetail(props) {
                       <br />
                       {automatchText[index]}
                     </Paragraph>
-                    {/* <Button name={key} onClick={updateDifference} text={`It's the same`} value={false} /> */}
-                    <div>
-                      <button
-                        onClick={updateDifference}
-                        text={`It's the same`}
-                        name={key}
-                        value={false}
-                        style={{
-                          width: "100%",
-                          height: "30px",
-                          backgroundColor: "inherit",
-                          color: "inherit",
-                          position: "relative",
-                          alignSelf: "flex-start",
-                          margin: "5px",
-                          borderRadius: "10px",
-                          padding: "2px",
-                          border: "1px solid",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        It's the same
-                      </button>
 
-                      <button
-                        onClick={updateShow}
-                        text={`It's different`}
-                        name={key}
-                        style={{
-                          width: "100%",
-                          height: "30px",
-                          backgroundColor: "inherit",
-                          color: "inherit",
-                          position: "relative",
-                          alignSelf: "flex-start",
-                          margin: "5px",
-                          borderRadius: "10px",
-                          padding: "2px",
-                          border: "1px solid",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        It's different
-                      </button>
-                      {isShown[key] && (
-                        <div>
-                          <StyledTextField
-                            id="filled-multiline-flexible"
-                            InputLabelProps={{ style: { color: "#fff" } }}
-                            label="Also then, please explain to us how your idea is different (especially better) or similar to this patent:"
-                            multiline
-                            rowsMax="4"
-                            fullWidth
-                            margin="normal"
-                            variant="filled"
-                            value={patentDifference.key}
-                            name={key}
-                            type="text"
-                            onChange={updateDifference}
-                          />
-                        </div>
-                      )}
-                    </div>
+                    {isUser ? (
+                      <div>
+                        <button
+                          onClick={updateDifference}
+                          text={`It's the same`}
+                          name={key}
+                          value={false}
+                          style={{
+                            width: "100%",
+                            height: "30px",
+                            backgroundColor: "inherit",
+                            color: "inherit",
+                            position: "relative",
+                            alignSelf: "flex-start",
+                            margin: "5px",
+                            borderRadius: "10px",
+                            padding: "2px",
+                            border: "1px solid",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          It's the same
+                        </button>
+                        <button
+                          onClick={updateShow}
+                          text={`It's different`}
+                          name={key}
+                          style={{
+                            width: "100%",
+                            height: "30px",
+                            backgroundColor: "inherit",
+                            color: "inherit",
+                            position: "relative",
+                            alignSelf: "flex-start",
+                            margin: "5px",
+                            borderRadius: "10px",
+                            padding: "2px",
+                            border: "1px solid",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          It's different
+                        </button>
+                        {isShown[key] && (
+                          <div>
+                            <StyledTextField
+                              id="filled-multiline-flexible"
+                              InputLabelProps={{ style: { color: "#fff" } }}
+                              label="Also then, please explain to us how your idea is different (especially better) or similar to this patent:"
+                              multiline
+                              rowsMax="4"
+                              fullWidth
+                              margin="normal"
+                              variant="filled"
+                              value={patentDifference.key}
+                              name={key}
+                              type="text"
+                              onChange={updateDifference}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <UserFeedback>
+                        <p>
+                          User feedback:
+                          {patentDifference[key] === "false"
+                            ? ` "this patent is the same like my idea".`
+                            : patentDifference[key] &&
+                              ` "My idea is different: ${patentDifference[key]}"`}
+                        </p>
+                      </UserFeedback>
+                    )}
                   </StyledCard>
                 ))}
                 <AddlQuestions>
@@ -330,6 +404,7 @@ export default function IdeaDashboardDetail(props) {
                     onChange={updateDifference}
                     name="identifyProblem"
                     type="text"
+                    disabled={!isUser ? true : false}
                   />
                   <StyledTextField
                     id="filled-multiline-flexible"
@@ -344,6 +419,7 @@ export default function IdeaDashboardDetail(props) {
                     onChange={updateDifference}
                     name="problemSolution"
                     type="text"
+                    disabled={!isUser ? true : false}
                   />
                   <StyledTextField
                     id="filled-multiline-flexible"
@@ -358,8 +434,16 @@ export default function IdeaDashboardDetail(props) {
                     onChange={updateDifference}
                     name="howProblemUnique"
                     type="text"
+                    disabled={!isUser ? true : false}
                   />
-                  <Button text={"Submit"} onClick={sendValues} type="submit" />
+                  <Button
+                    text={isUser ? "Submit" : "Back"}
+                    onClick={isUser ? sendValues : () => props.history.goBack()}
+                    type="submit"
+                    disabled={isUser ? !enableSubmit : false}
+
+                  />
+
                 </AddlQuestions>
               </StartContent>
             </div>
@@ -372,7 +456,7 @@ export default function IdeaDashboardDetail(props) {
       <Container>
         <Spinner />
       </Container>
-    )
+    );
   }
 }
 const PStartContent = posed.div({
@@ -528,4 +612,39 @@ const GroupContainer = styled(PGroupContainer)`
   align-content: center;
   justify-content: space-evenly;
   flex-grow: 1;
+`;
+
+const SpinnerStyle = styled.div`
+  display: flex;
+  align-itmes: center;
+  justify-content: center;
+  background-image: linear-gradient(
+    to right top,
+    #1a3d7c,
+    #195d9c,
+    #1f7fbb,
+    #31a2d7,
+    #4cc5f1
+  );
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+`;
+
+const SpinnerPostion = styled.div`
+  margin-top: 370px;
+`;
+
+const UserFeedback = styled.div`
+  height: auto;
+  padding: 0.5em;
+  background-color: rgba(256, 256, 256, 0.2);
+  /*
+  height: 2.8em;
+  border-radius: 10px;
+  */
+  font-size: 0.9em;
+  font-weight: 550;
 `;
