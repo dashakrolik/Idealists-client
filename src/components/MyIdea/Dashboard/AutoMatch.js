@@ -20,6 +20,7 @@ export default function IdeaDashboardDetail(props) {
   // const [currentValue, setCurrentValue] = useState([]);
   const [displaySuccess, setDisplaySuccess] = useState(false);
   // const [enableSubmit, setEnableSubmit] = useState(false);
+  const [enableSubmit, setEnableSubmit] = useState(false);
   const [errorFound, setErrorFound] = useState(false);
   //const [errorMessage, setErrorMessage] = useState("");
   const [isShown, setIsShown] = useState({});
@@ -30,7 +31,7 @@ export default function IdeaDashboardDetail(props) {
   // const [problemSolution, setProblemSolution] = useState("");
   // const [howProblemUnique, setHowProblemUnique] = useState("");
   const [loading, setLoading] = useState(true);
-  const [enableSubmit, setEnableSubmit] = useState(false);
+  // const [enableSubmit, setEnableSubmit] = useState(false);
   const ideasId = props.match.params.id;
 
   const isUser = props.authState.user.role === "user" ? true : false;
@@ -453,9 +454,7 @@ export default function IdeaDashboardDetail(props) {
                     onClick={isUser ? sendValues : () => props.history.goBack()}
                     type="submit"
                     disabled={isUser ? !enableSubmit : false}
-
                   />
-
                 </AddlQuestions>
               </StartContent>
             </div>
