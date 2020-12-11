@@ -30,7 +30,6 @@ export default function IdeaDashboardDetail(props) {
   // const [problemSolution, setProblemSolution] = useState("");
   // const [howProblemUnique, setHowProblemUnique] = useState("");
   const [loading, setLoading] = useState(true);
-  const [enableSubmit, setEnableSubmit] = useState(false);
   const ideasId = props.match.params.id;
 
   const isUser = props.authState.user.role === "user" ? true : false;
@@ -70,7 +69,6 @@ export default function IdeaDashboardDetail(props) {
         .catch((err) => console.error(err))
         .finally(setLoading(false));
     }
-
   }, []);
 
   const updateShow = (e) => {
@@ -247,7 +245,6 @@ export default function IdeaDashboardDetail(props) {
 
   // ONLY PROCEED if (arr.length === 10) !!!!!!!!!!!!!!!!! coz it takes time for the loop to complete
   // let obj = newImageArray.find(o => o.name === 'string 1');
-
 
   if (loading) {
     return (
@@ -453,9 +450,7 @@ export default function IdeaDashboardDetail(props) {
                     onClick={isUser ? sendValues : () => props.history.goBack()}
                     type="submit"
                     disabled={isUser ? !enableSubmit : false}
-
                   />
-
                 </AddlQuestions>
               </StartContent>
             </div>
