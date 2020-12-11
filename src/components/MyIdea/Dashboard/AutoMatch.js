@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import { baseUrl } from "../../../constants";
 import "./IdeaDashboard.css";
 /** @jsx jsx */
-import { css, Global, jsx } from '@emotion/core';
-import styled from '@emotion/styled';
-import Button from '../../reogranisation/Questions/Button';
-import posed from 'react-pose';
-import TextField from '@material-ui/core/TextField';
-import Card from '@material-ui/core/Card'
-import Spinner from '../../reogranisation/Spinner';
+import { css, Global, jsx } from "@emotion/core";
+import styled from "@emotion/styled";
+import Button from "../../reogranisation/Questions/Button";
+import posed from "react-pose";
+import TextField from "@material-ui/core/TextField";
+import Card from "@material-ui/core/Card";
+import Spinner from "../../reogranisation/Spinner";
 
 export default function IdeaDashboardDetail(props) {
   // const [user, setUserData] = useState({});
@@ -27,6 +27,8 @@ export default function IdeaDashboardDetail(props) {
   // const [identifyProblem, setIdentifyProblem] = useState("");
   // const [problemSolution, setProblemSolution] = useState("");
   // const [howProblemUnique, setHowProblemUnique] = useState("");
+
+  const [enableSubmit, setEnableSubmit] = useState(false);
   const ideasId = props.match.params.id;
 
   useEffect(() => {
@@ -67,6 +69,39 @@ export default function IdeaDashboardDetail(props) {
       [e.target.name]: e.target.value,
     });
   };
+  // Validate if user provides responses to all (10) matching patents & (3) additional questions.
+  // Enable the submit button only when the user responds to all (13 at present) questions.
+  let countAnswers = 0;
+  useEffect(() => {
+    const allKeys = Object.keys(patentDifference);
+    const resultsKeys = Object.keys(automatchResults);
+    const addnlQuesKeys = allKeys.filter((key) => {
+      if (!resultsKeys.includes(key)) {
+        countAnswers++;
+        return key;
+      }
+    });
+
+    if (resultsKeys.length !== 0) {
+      for (let i = 0; i < resultsKeys.length; i++) {
+        if (patentDifference[resultsKeys[i]]) countAnswers += 1;
+      }
+
+      if (addnlQuesKeys.length !== 0) {
+        for (let i = 0; i < addnlQuesKeys.length; i++) {
+          if (patentDifference[addnlQuesKeys[i]] !== "") {
+          } else countAnswers -= 1;
+        }
+      }
+      //console.log("counta:", countAnswers);
+      if (countAnswers === resultsKeys.length + 3) {
+        setEnableSubmit(true);
+      } else {
+        setEnableSubmit(false);
+      }
+    }
+  }, [patentDifference]);
+
   const sendValues = () => {
     request
       .put(`${baseUrl}/ideas/${ideasId}`)
@@ -153,8 +188,7 @@ export default function IdeaDashboardDetail(props) {
                     <FlexRow>
                       <FlexColumn>
                         <GroupTitle>
-                          Succesfully submit your comments to explain difference
-                          with patents.
+                          Your comments have been submitted successfully.
                         </GroupTitle>
                       </FlexColumn>
                     </FlexRow>
@@ -359,7 +393,13 @@ export default function IdeaDashboardDetail(props) {
                     name="howProblemUnique"
                     type="text"
                   />
-                  <Button text={"Submit"} onClick={sendValues} type="submit" />
+
+                  <Button
+                    text={"Submit"}
+                    disabled={!enableSubmit}
+                    onClick={sendValues}
+                    type="submit"
+                  />
                 </AddlQuestions>
               </StartContent>
             </div>
@@ -372,7 +412,7 @@ export default function IdeaDashboardDetail(props) {
       <Container>
         <Spinner />
       </Container>
-    )
+    );
   }
 }
 const PStartContent = posed.div({

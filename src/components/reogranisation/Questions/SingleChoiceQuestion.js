@@ -34,13 +34,38 @@ const customStyles = {
 const SingleChoiceQuestion = (props) => {
   const [isFocused, setIsFocused] = useState(false);
   const [validated, setValidated] = useState(false);
-  const [currentValue, setCurrentValue] = useState('');
-  const { currentQuestionIndex, value, placeholder, multiChoice } = props;
-// console.log(currentQuestionIndex, value, placeholder, multiChoice, "currentQuestionIndex, value, placeholder, multiChoice in single choise question")
 
-console.log(currentQuestionIndex, value, currentValue, "currentQuestionIndex, value, currentValue in single choise question")
+  // console.log("props.value",props.value[3])
+  const {
+    currentQuestionIndex,
+    value,
+    placeholder,
+    multiChoice,
+    questionTitle,
+    options
+  } = props;
+  const [currentValue, setCurrentValue] = useState(value[currentQuestionIndex]);
 
-useEffect(() => {
+  console.log("singleChoiseQuestion.js value.3", value[3])
+  console.log(
+    // currentQuestionIndex,
+    // value,
+    options,
+    currentValue,
+    "options in single choise questioN"
+  );
+
+  useEffect(() => {
+    // console.log("value in useEffect",value.currentQuestionIndex);  
+    // console.log(
+    //   value[currentQuestionIndex],
+    //   currentQuestionIndex,
+    //   "currentQuestionIndex in single choise question"
+    // );
+    // setCurrentValue(value.currentQuestionIndex);
+
+  }, []);
+  useEffect(() => {
     if (props.multiChoice) {
       if (currentValue.length >= 1) {
         setValidated(true);
@@ -55,24 +80,28 @@ useEffect(() => {
       }
     }
     if (props.onChange) {
+      
+      // console.log(currentQuestionIndex, currentValue,"currentQuestionIndex, currentValue")
       props.onChange(currentQuestionIndex, currentValue);
     }
-  }, [currentValue]);
+  }, []);
 
   useEffect(() => {
     props.onValidationChange && props.onValidationChange(props.id, validated);
   }, [validated]);
 
-  useEffect(() => {
-    if (typeof value === "object") {
-      setCurrentValue(value[currentQuestionIndex]);
-    } else {
-      setCurrentValue(value);
-    }
-  }, []);
 
-  const handleChange = (selectedOption) => {
+
+  // function handleClick(e) {
+  //   e.preventDefault();
+  //   console.log('The link was clicked.');
+  // }
+
+  const handleChange = (selectedOption, event) => {
+    // if(currentValue.length) 
     setCurrentValue(selectedOption);
+    // event.preventDefault(event);
+    console.log("selectedOption", selectedOption)
   };
 
   const handleFocus = () => {
@@ -93,14 +122,18 @@ useEffect(() => {
         components={props.multiChoice ? makeAnimated() : undefined}
         isMulti={props.multiChoice}
         styles={customStyles}
-        value={currentValue.value ? currentValue.value : currentValue}
         onChange={handleChange}
+        value={currentValue}
+        // value={currentValue.label ? currentValue.label : currentValue}
         onFocus={handleFocus}
         onBlur={handleLostFocus}
         options={props.options}
         menuPortalTarget={document.body}
-        placeholder={placeholder.length > 0 ? placeholder : ""}
-
+        backspaceRemovesValue={false}
+        defaultValue={[value.label]}
+        // controlShouldRenderValue={true}
+        // onKeyDown={()=> handleChange()}
+        // placeholder={placeholder.length > 0 ? placeholder : ""}
       />
     </Container>
   );

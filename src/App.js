@@ -44,6 +44,7 @@ import CofounderPersonalityTest from './components/Cofounder/CofounderPersonalit
 import CofounderProfileVideo from './components/Cofounder/CofounderProfileVideo'
 
 import Spinner from "./components/reogranisation/Spinner";
+import CofounderIdeaDetail from "./components/Cofounder/Cofounder-IdeaDetail";
 
 
 // const history = useHistory(); 
@@ -713,6 +714,22 @@ class App extends Component {
                 render={(props) => {
                   return (
                     <IdeasList
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/Cofounder/dashboard/ideas/:id"
+                render={(props) => {
+                  return (
+                    <CofounderIdeaDetail
                       {...props}
                       authState={this.state.auth}
                       login={this.requestLoginUser}

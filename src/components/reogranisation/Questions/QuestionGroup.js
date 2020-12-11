@@ -27,11 +27,7 @@ const QuestionGroup = (props) => {
     }
   }, [validations]);
 
-  // useEffect(()=> {
-
-  //   console.log("answers in questionGroup.js", props.answers)
-  // }, [])
-
+  console.log("questionGroup.js value.3", answers[3])
   const handleDecidingQuestions = (from, answer) => {
     props.handleDecidingQuestions(from, answer);
   };
@@ -41,8 +37,12 @@ const QuestionGroup = (props) => {
   };
 
   const handleValueChanges = (from, newValue) => {
-    console.log("QuestionGroup from newValue", from, newValue);
+    // console.log("QuestionGroup from newValue", from, newValue);
+    if (from != 3|| from != 4 ){
     props.answersHandler(from, newValue);
+    console.log("1")
+    }
+    console.log("2")
   };
 
   return (
@@ -105,8 +105,6 @@ const QuestionGroup = (props) => {
                     groupId={props.group.id}
                     id={question.id.toString()}
                     onValidationChange={props.handleValidationChanges}
-                    // placeholder={""}
-                    // answers={answers}
                     currentQuestionIndex={currentQuestionIndex}
                     value={answers}
                     placeholder={
@@ -126,10 +124,7 @@ const QuestionGroup = (props) => {
                     id={question.id.toString()}
                     onValidationChange={props.handleValidationChanges}
                     multiLine
-                    // value={answers}
-                    // placeholder={""}
                     value={answers}
-                    // answers={answers}
                     currentQuestionIndex={currentQuestionIndex}
                     placeholder={placeholder.length > 0 ? answers : placeholder}
                   />
@@ -144,13 +139,11 @@ const QuestionGroup = (props) => {
                     onFocusChanged={handleInputFocus}
                     onValidationChange={props.handleValidationChanges}
                     id={question.id.toString()}
-                    // value={props.answers}
-                    // placeholder={""}
                   />
                 )}
                 {question.type === "multiChoice" && (
                   <SingleChoiceQuestion
-                    // questionTitle={question.text}
+                    questionTitle={question.text}
                     options={question.options}
                     errorMessage={question.validationErrorMsg}
                     maxChar={question.maxChar}
@@ -162,8 +155,6 @@ const QuestionGroup = (props) => {
                     currentQuestionIndex={currentQuestionIndex}
                     placeholder={placeholder.length > 0 ? answers : placeholder}
                     multiChoice
-                    // value={props.answers}
-                    // placeholder={""}
                   />
                 )}
               </FormGroup>

@@ -20,8 +20,8 @@ const Submission = (props) => {
     0: "",
     1: "",
     2: "",
-    3: "",
-    4: "",
+    3: [],
+    4: [],
     5: "",
     6: "",
     7: "",
@@ -35,7 +35,7 @@ const Submission = (props) => {
   const [agreementSection, setAgreementSection] = useState(false);
   const questionGroups = [...jsonFormData];
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-
+console.log("submission.js value.3", answers[3])
   useEffect(() => {
     setProgress(activeGroup / questionGroups.length);
   }, [activeGroup]);
@@ -43,13 +43,27 @@ const Submission = (props) => {
   if (!props.authState.user) {
     props.user();
   }
-
-  const handleAnswers = (id, value) => {
-    const new_answers = answers;
-    new_answers[id] = value;
+const handleAnswers = (id, value) => {
+    const new_answers = {...answers, [id]: value};
+    // new_answers[id] = value;
     setAnswers(new_answers);
   };
 
+  // const handleAnswers = (id, value) => {
+  //   const new_answers = answers;
+  //   new_answers[id] = value;
+  //   setAnswers(new_answers);
+  // };
+
+  // const handleAnswers = (id, value) => {
+  //   setAnswers({
+  //     ...answers,
+  //     [activeGroup]: {
+  //       ...answers[activeGroup],
+  //       [id]: value,
+  //     },
+  //   });
+  // };
   // console.log("Answers in submissions", answers);
   const handleNextBttnClick = () => {
     setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -98,7 +112,7 @@ const Submission = (props) => {
   if (questionGroups.length === 0) return <div>Loading...</div>;
 
   const handleBackBttnClick = () => {
-    setCurrentQuestionIndex(currentQuestionIndex - 1);
+    // setCurrentQuestionIndex(currentQuestionIndex - 1);
     setActiveGroup(activeGroup - 1);
     setAgreementSection(false);
   };
