@@ -54,7 +54,7 @@ export default function CofounderProfile(props) {
         .then((res) => {
           set_profile(res.body);
         });
-    } else console.log(props.authState);
+    } else history.push("/login");
   }, []);
 
   //   Here an overview of what should be on each co-founders dashboard:

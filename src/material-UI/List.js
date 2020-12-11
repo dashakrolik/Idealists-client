@@ -30,10 +30,6 @@ export default function BasicTable({
 }) {
   const classes = useStyles();
 
-  const handleClick = (id) => {
-    console.log(id);
-  };
-
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
