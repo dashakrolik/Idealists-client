@@ -29,6 +29,7 @@ export default function CofounderLogin(props) {
 
   if (!localStorage.currentUserJwt) {
     props.history.replace("/CofounderStart");
+
   }
   if (props.authState.loggedIn) {
     props.user()
@@ -48,6 +49,7 @@ export default function CofounderLogin(props) {
           onSubmit={onSubmit}
         />
       </div>
+
     )
   }
 

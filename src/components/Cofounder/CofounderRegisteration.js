@@ -9,15 +9,14 @@ import Button from '../reogranisation/Questions/Button';
 import validator from 'validator';
 import { baseUrl } from '../../constants';
 import request from 'superagent';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CofounderStart from './CofounderStart';
 
-
-
 const CofounderRegistration = (props) => {
+
 
     const [formValidated, setFormValidated] = useState(false);
 
@@ -247,7 +246,7 @@ const CofounderRegistration = (props) => {
                             <FormGroup>
                                 <label>
                                     Needs to contain
-                  </label>
+                             </label>
                                 <div>
                                     - min 8 characters<br />
                     - min one capital letter<br />
@@ -315,34 +314,35 @@ const CofounderRegistration = (props) => {
             </form>
         </Container >
     );
+
 };
 
 const FlexRow = styled.div`
-    display: flex;
-    @media only screen and (orientation:portrait) { 
-      flex-direction: column;
-  }
-  `;
+	display: flex;
+	@media only screen and (orientation: portrait) {
+		flex-direction: column;
+	}
+`;
 
 const FlexColumn = styled.div`
-    display: flex;
-    flex: 1;
-  `;
+	display: flex;
+	flex: 1;
+`;
 
 const FormGroup = styled.div`
-    width: 100%;
-    padding: 5px 10px;
-  `;
+	width: 100%;
+	padding: 5px 10px;
+`;
 
 const PContainer = posed.div({
-    hide: {
-        y: 0,
-        opacity: 0,
-    },
-    show: {
-        y: -390,
-        opacity: 1.0,
-    },
+	hide: {
+		y: 0,
+		opacity: 0
+	},
+	show: {
+		y: -390,
+		opacity: 1.0
+	}
 });
 
 const Container = styled(PContainer)`
@@ -427,4 +427,4 @@ const RegistrationForm = styled.div`
 
 
 
-export default withRouter(CofounderRegistration)
+export default withRouter(CofounderRegistration);
