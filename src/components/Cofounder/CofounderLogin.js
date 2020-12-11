@@ -1,10 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
-import request from "superagent";
-import { baseUrl } from "../../constants";
+import { useState } from "react";
 import LoginContext from "../reogranisation/Login/LoginContext";
 
 export default function CofounderLogin(props) {
