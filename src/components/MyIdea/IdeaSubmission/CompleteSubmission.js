@@ -10,18 +10,20 @@ import { pdfjs } from "react-pdf";
 import { withRouter } from 'react-router-dom'
 import UserAgreement from './agreement.jsx'
 import SubmissionSideScreen from './SubmissionSideScreen';
+import Spinner from '../../reogranisation/Spinner';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const CompleteSubmission = (props) => {
 
   const [displaySuccess, setDisplaySuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
   // const [agreeBttn, setAgreeBttn] = useState(false);
   // const [isSubmitting, setIsSubmitting] = useState(false);
   // const [history, location] = useState({});
 
   const submitIdea = () => {
-    // setIsSubmitting(true);
+    setLoading(true);
     const dataToSend = props.groups.map((group, index) => {
       return {
         groupName: group.groupTitle,
@@ -44,7 +46,7 @@ const CompleteSubmission = (props) => {
       .then(res => {
         if (res.status === 201) {
           setDisplaySuccess(true);
-        }
+        };
       })
       .catch(err => {
         if (err.status === 400) {
@@ -52,8 +54,19 @@ const CompleteSubmission = (props) => {
         } else {
           console.error(err);
         }
-      });
+      })
+      .finally(() => setLoading(false))
   };
+
+  if(loading){
+    return(
+      <Container>
+        <SpinnerPostion>
+          <Spinner />
+        </SpinnerPostion>
+      </Container>
+    )
+  }
 
   if (displaySuccess) {
     return <GroupContainer>
@@ -126,6 +139,30 @@ const CompleteSubmission = (props) => {
       </Fragment>
   );
 };
+
+const Container = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-image: linear-gradient(
+    to right top,
+    #1a3d7c,
+    #195d9c,
+    #1f7fbb,
+    #31a2d7,
+    #4cc5f1
+  );
+`;
+
+const SpinnerPostion = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 370px;
+`;
 
 const FlexRow = styled.div`
   display: flex;
