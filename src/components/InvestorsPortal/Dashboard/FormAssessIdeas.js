@@ -9,6 +9,7 @@ import "react-inputs-validation/lib/react-inputs-validation.min.css";
 import "./styles.css";
 import "./InvestorDashboard.css";
 
+
 const SCALE_OPTIONS_LIST = [
   { id: "1", name: "1" },
   { id: "2", name: "2" },
@@ -83,6 +84,7 @@ export default class FormAssessIdeas extends Component {
       // hasWillPeopleWantThisError: true,
       validate: false,
     };
+
     this.validateForm = this.validateForm.bind(this);
   }
 
