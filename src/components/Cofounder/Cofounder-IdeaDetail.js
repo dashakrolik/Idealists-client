@@ -72,7 +72,7 @@ export default function CofounderIdeaDetail(props) {
                     <h3>Bid on this idea</h3>
                   </div>
                 ) : (
-                    <BidSlider authState={props.authState} ideaId={ideaId} showSlider={!showSlider} displaySuccess={displaySuccess} />
+                    <BidSlider authState={props.authState} ideaId={ideaId} showSlider={!showSlider} displaySuccess={setDisplaySuccess} />
                   )}
                 {displaySuccess ? (
                   <StyledDiv >Bid submission success!</StyledDiv>
@@ -93,7 +93,7 @@ export default function CofounderIdeaDetail(props) {
           ) : (
               < StyledDiv> {ideaBids.map((bid) => {
                 return (
-                  <StyledLink to={`/Cofounder/profile/${bid.id}`}>
+                  <StyledLink to={`/Cofounder/dashboard/${bid.userid}/profile`}>
                     <span key={bid.id}>{bid.firstname}{" "}{bid.lastname}</span>
                   </StyledLink>)
               })}

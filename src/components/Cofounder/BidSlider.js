@@ -18,93 +18,105 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function BidSlider(props) {
-  const [bidValue, setValue] = useState("");
-  const [savedBid, setSavedbid] = useState("");
-  const [showEditBid, setShowEditBid] = useState(false);
-  const classes = useStyles();
 
-  const marks = [
-    {
-      value: 5,
-      label: "5 %",
-    },
-    {
-      value: 10,
-      label: "10 %",
-    },
-    {
-      value: 15,
-      label: "15 %",
-    },
-    {
-      value: 20,
-      label: "20 %",
-    },
-    {
-      value: 25,
-      label: "25 %",
-    },
-  ];
+    const [bidValue, setValue] = useState("")
+    const [savedBid, setSavedbid] = useState("")
+    const [showEditBid, setShowEditBid] = useState(false)
+    const classes = useStyles();
 
-  function handleChange(event, newValue) {
-    setValue(parseInt(newValue));
-  }
+    const marks = [
+        {
+            value: 5,
+            label: '5 %',
+        },
+        {
+            value: 10,
+            label: '10 %',
+        },
+        {
+            value: 15,
+            label: '15 %',
+        },
+        {
+            value: 20,
+            label: '20 %',
+        },
+        {
+            value: 25,
+            label: '25 %',
+        },
+    ];
 
-  const bid = () => {
-    request
-      .post(`${baseUrl}/ideas/${props.ideaId}/bids`)
-      .set("Authorization", `Bearer ${props.authState.token}`)
-      .send({
-        equity: bidValue,
-      })
-      .then((res) => {
-        if (res.status === 500) {
-          setShowEditBid(true);
-        } else props.displaySuccess(true);
-      });
-  };
-  const EditBid = () => {
-    request
-      .pust(`${baseUrl}/ideas/${props.ideaId}/bids`)
-      .set("Authorization", `Bearer ${props.authState.token}`)
-      .send({
-        equity: bidValue,
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          props.displaySuccess(true);
-        }
-      });
-  };
 
-  if (!props.show) {
-    return (
-      <div className={classes.root}>
-        <Typography id="discrete-slider-custom" gutterBottom>
-          Equity in %
-        </Typography>
-        <br />
-        <br />
-        <Slider
-          defaultValue={0}
-          value={bidValue}
-          aria-labelledby="discrete-slider-custom"
-          step={1}
-          marks={marks}
-          min={0}
-          max={25}
-          valueLabelDisplay="on"
-          onChange={handleChange}
-          style={{ StyledSlider }}
-        />
-        {!showEditBid ? (
-          <Button onClick={bid} text="Submit your bid" />
-        ) : (
-          <Button onClick={EditBid} text="Submit your bid" />
-        )}
-      </div>
-    );
-  } else return null;
+    function handleChange(event, newValue) {
+        setValue(parseInt(newValue))
+    }
+
+
+    const bid = () => {
+
+        request
+            .post(`${baseUrl}/ideas/${props.ideaId}/bids`)
+            .set("Authorization", `Bearer ${props.authState.token}`)
+            .send({
+                equity: bidValue
+            })
+            .then(res => {
+                if (res.status === 500) {
+                    setShowEditBid(true)
+                } else (
+                    props.displaySuccess(true)
+                )
+            })
+
+    }
+    const EditBid = () => {
+        request
+            .put(`${baseUrl}/ideas/${props.ideaId}/bids`)
+            .set("Authorization", `Bearer ${props.authState.token}`)
+            .send({
+                equity: bidValue
+            })
+            .then(res => {
+                if (res.status === 200) {
+                    props.displaySuccess(true)
+                }
+            })
+
+    }
+
+    if (!props.show) {
+
+        return (
+            <div className={classes.root}>
+                <Typography id="discrete-slider-custom" gutterBottom>
+                    Equity in %
+      </Typography>
+                <br />
+                <br />
+                <Slider
+                    defaultValue={0}
+                    value={bidValue}
+                    aria-labelledby="discrete-slider-custom"
+                    step={1}
+                    marks={marks}
+                    min={0}
+                    max={25}
+                    valueLabelDisplay="on"
+                    onChange={handleChange}
+                    style={{ StyledSlider }}
+
+                />
+                {!showEditBid ? (
+                    <Button onClick={bid} text="Submit your bid" />
+                ) : (
+                        <Button onClick={EditBid} text="Submit your bid" />
+                    )}
+
+
+            </div>
+        );
+    } else return null
 }
 
 const StyledDiv = styled.div`
