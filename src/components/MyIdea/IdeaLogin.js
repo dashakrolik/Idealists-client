@@ -27,12 +27,11 @@ export default function InvestorLogin(props) {
   };
 
   if (props.authState.loggedIn) {
-      props.user();
+    props.user();
 
-      props.history.replace("/MyIdea/new");
-      return <div></div>;
+    props.history.replace("/MyIdea/new");
+    return <div></div>;
   }
-console.log('props',props)
   if (props.authState.loggedIn !== true)
     return (
       <Container>
@@ -51,7 +50,7 @@ console.log('props',props)
               onChange={handleChange}
             />
             <br />
-  
+
             <label>Password</label>
             <input
               type="password"
@@ -60,21 +59,21 @@ console.log('props',props)
               onChange={handleChange}
             />
             <br />
-  
+
             <Link to="/reset-password">Forgot your password?</Link>
             <button type="submit">Login</button>
           </form>
         </RightSide>
       </Container>
     );
-  else 
-  return (
-    <Container>
-      <Middle>
-        <props.spinner />
-      </Middle>
-    </Container>
-  );
+  else
+    return (
+      <Container>
+        <Middle>
+          <props.spinner />
+        </Middle>
+      </Container>
+    );
 }
 
 const Middle = styled.div`
@@ -82,7 +81,7 @@ const Middle = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 370px;
-`
+`;
 
 const LeftSide = styled.div`
   position: absolute;
