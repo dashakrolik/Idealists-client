@@ -1,9 +1,9 @@
 /** @jsx jsx */
-
 import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { Component } from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom"
+import { Route } from "react-router-dom";
 import InvestorDashboard from "./components/InvestorsPortal/Dashboard/InvestorDashboard";
 import InvestorLogin from "./components/InvestorsPortal/InvestorLogin";
 import SpecialistDashboard from "./components/SpecialistPortal/Dashboard/SpecialistDashboard";
@@ -17,6 +17,7 @@ import request from "superagent";
 import IdeaDashboard from "./components/MyIdea/Dashboard/IdeaDashboard";
 import AdminDashboard from "./components/Admin/AdminDashboard";
 import AdminDashboardDetail from "./components/Admin/AdminDashboardDetail";
+import AdminDashboardCofounders from "./components/Admin/AdminDashboardCofounders";
 import IdeaDashboardDetail from "./components/MyIdea/Dashboard/IdeaDashboardDetail";
 import IdeaLogin from "./components/MyIdea/IdeaLogin";
 import TopBar from "./components/NavBar/TopBar";
@@ -38,8 +39,17 @@ import AddSpecialistStart from "./components/SpecialistPortal/SpecialistCreation
 import UserAssessIdeas from "./components/MyIdea/Dashboard/UserAssessIdeas";
 import { useHistory } from "react-router-dom";
 import Button from './components/reogranisation/Questions/Button';
-
-// const history = useHistory(); 
+import CofounderStart from "./components/Cofounder/CofounderStart";
+import CofounderLogin from "./components/Cofounder/CofounderLogin";
+import CofounderDashboard from "./components/Cofounder/CofounderDashboard";
+import CofounderProfile from "./components/Cofounder/CofounderProfile";
+import IdeasList from "./components/Cofounder/IdeaList";
+import CofounderPersonalityTest from "./components/Cofounder/CofounderPersonalityTest";
+import CofounderProfileVideo from "./components/Cofounder/CofounderProfileVideo";
+import CofounderWelcomePage from "./components/Cofounder/CofounderWelcomePage";
+import CofounderProfileForm from "./components/Cofounder/CofounderProfileForm";
+import Spinner from "./components/reogranisation/Spinner";
+import CofounderIdeaDetail from "./components/Cofounder/Cofounder-IdeaDetail";
 
 
 class App extends Component {
@@ -52,8 +62,28 @@ class App extends Component {
     navigation: {
       activePath: "",
     },
+    cofounderProfile: '',
+    loading: true,
   };
 
+  getCoFounderProfile = () => {
+    request
+      .get(`${baseUrl}/users/cofounders/profile`)
+      .set("Authorization", `Bearer ${this.state.auth.token}`)
+      .then(res => {
+        if (res.status === 200) {
+          this.setState({
+            ...this.state,
+            cofounderProfile: res.body
+          })
+        }
+      }).catch(e => {
+        this.setState({
+          ...this.state,
+          cofounderProfile: ''
+        })  
+      })
+  }
 
   rejectIdea = (rejected, ideasId) => {
     request
@@ -85,6 +115,7 @@ class App extends Component {
               loggedIn: true,
               token: res.body.jwt,
             },
+            loading: false,
           });
           localStorage.setItem("currentUserJwt", res.body.jwt);
         }
@@ -97,6 +128,7 @@ class App extends Component {
               ...this.state.auth,
               loggedIn: false,
               token: null,
+              loading: false,
             },
           });
 
@@ -111,6 +143,7 @@ class App extends Component {
               ...this.state.auth,
               loggedIn: false,
               token: null,
+              loading: false,
             },
           });
 
@@ -123,6 +156,7 @@ class App extends Component {
               ...this.state.auth,
               loggedIn: false,
               token: null,
+              loading: false,
             },
           });
 
@@ -276,6 +310,8 @@ class App extends Component {
             loggedIn: true,
             user: res.body,
           },
+
+          loading: true,
         });
         localStorage.setItem("currentUserJwt", this.state.auth.token);
         localStorage.setItem("user", this.state.auth.user);
@@ -353,6 +389,7 @@ class App extends Component {
         token: null,
         user: null,
       },
+      loading: true,
     });
   };
 
@@ -375,8 +412,9 @@ class App extends Component {
       <div>
     
       <Router>
-        <div>
-          <TopBar
+          <ThemeProvider theme={theme}>
+            <Application>
+            <TopBar
             authState={this.state.auth}
             user={this.getCurrentUser}
             logout={this.logout}
@@ -384,8 +422,7 @@ class App extends Component {
             updatePassword={this.updatePassword}
             updateLocalStorage={this.updateLocalStorage}
           />
-          <ThemeProvider theme={theme}>
-            <Application>
+          <Switch>
               <Route
                 exact
                 path="/Specialist/dashboard"
@@ -395,6 +432,8 @@ class App extends Component {
                       {...props}
                       user={this.getCurrentUser}
                       authState={this.state.auth}
+                      spinner={Spinner}
+                      loaded={this.state.loading}
                       login={this.requestLoginSpecialist}
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
@@ -639,6 +678,123 @@ class App extends Component {
               />
               <Route
                 exact
+                path="/CofounderStart"
+                render={(props) => {
+                  return (
+                    <CofounderStart
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                      setAuthLoggedInTrue={this.setAuthLoggedInTrue}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/Cofounder/login"
+                render={(props) => {
+                  return (
+                    <CofounderLogin
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      getProfile={this.getCoFounderProfile}              
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                      setAuthLoggedInTrue={this.setAuthLoggedInTrue}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/CofounderProfileForm"
+                render={(props) => {
+                  return (
+                    <CofounderProfileForm
+                      {...props}
+                      user={this.getCurrentUser}
+                      authState={this.state.auth}
+                      login={this.requestLoginExpert}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/Cofounder/dashboard/ideas"
+                render={(props) => {
+                  return (
+                    <IdeasList
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/Cofounder/dashboard"
+                render={(props) => {
+                  return (
+                    <CofounderDashboard
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      profile={this.state.cofounderProfile}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                    />
+                  );
+                }}
+              />
+              <Route
+                path="/Cofounder/dashboard/ideas/:id"
+                render={(props) => {
+                  return (
+                    <CofounderIdeaDetail
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                      setAuthLoggedInTrue={this.setAuthLoggedInTrue}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/Cofounder/dashboard/:id/profile"
+                render={(props) => {
+                  return (
+                    <CofounderProfile
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                      setAuthLoggedInTrue={this.setAuthLoggedInTrue}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
                 path="/InvestorStart"
                 render={(props) => {
                   return (
@@ -722,6 +878,22 @@ class App extends Component {
               />
               <Route
                 exact
+                path="/AdminDashboard/cofounders"
+                render={(props) => {
+                  return (
+                    <AdminDashboardCofounders
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
                 path="/dashboard/ideas/:id"
                 render={(props) => {
                   return (
@@ -736,6 +908,56 @@ class App extends Component {
                   );
                 }}
               />
+              <Route
+                exact
+                path="/cofounderProfileVideo"
+                render={(props) => {
+                  return (
+                    <CofounderProfileVideo
+                      {...props}
+                      user={this.getCurrentUser}
+                      authState={this.state.auth}
+                      login={this.requestLoginExpert}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                    />
+                  );
+
+                }}
+              />
+              <Route
+                exact
+                path="/cofounderPersonalityTest"
+                render={(props) => {
+                  return (
+                    <CofounderPersonalityTest
+                      {...props}
+                      user={this.getCurrentUser}
+                      authState={this.state.auth}
+                      login={this.requestLoginExpert}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/cofounderWelcomePage"
+                render={(props) => {
+                  return (
+                    <CofounderWelcomePage
+                      {...props}
+                      user={this.getCurrentUser}
+                      authState={this.state.auth}
+                      login={this.requestLoginExpert}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                    />
+                  );
+                }}
+              />
+
               <Route
                 exact
                 path="/dashboard/assess"
@@ -760,6 +982,8 @@ class App extends Component {
                     <IdeaLogin
                       {...props}
                       authState={this.state.auth}
+                      loaded={this.state.loading}
+                      spinner={Spinner}
                       login={this.requestLoginUser}
                       user={this.getCurrentUser}
                       resetPassword={this.resetPassword}
@@ -878,17 +1102,22 @@ class App extends Component {
                   );
                 }}
               />
-              <Route exact path="/" render={(props) =>
-                <IdeaStart
-                  {...props}
-                  authState={this.state.auth}
-                  login={this.requestLoginUser}
-                  user={this.getCurrentUser}
-                  updateLocalStorage={this.updateLocalStorage}
-                  logout={this.logout}
-                  setAuthLoggedInTrue={this.setAuthLoggedInTrue}
-                />
-              } />
+              <Route
+                exact
+                path="/"
+                render={(props) => (
+                  <IdeaStart
+                    {...props}
+                    authState={this.state.auth}
+                    login={this.requestLoginUser}
+                    user={this.getCurrentUser}
+                    updateLocalStorage={this.updateLocalStorage}
+                    logout={this.logout}
+                    setAuthLoggedInTrue={this.setAuthLoggedInTrue}
+                  />
+                )}
+              />
+              </Switch>
             </Application>
           </ThemeProvider>
         </div>

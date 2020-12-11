@@ -1,45 +1,60 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import LoginContext from "../reogranisation/Login/LoginContext";
 
-const LogInForm = (props) => {
+export default function CofounderLogin(props) {
+  const [loginState, setLoginState] = useState({});
  
-  return (
-    <Container>
-      <LeftSide>
-        <div>
-          <h3>Login to my {props.name} page</h3>
-        </div>
-      </LeftSide>
-      <RightSide>
-        <form onSubmit={props.handleSubmit}>
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={props.loginState.email || ""}
-            onChange={props.handleChange}
-          />
-          <br />
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(loginState);
+  };
 
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={props.loginState.password || ""}
-            onChange={props.handleChange}
-          />
-          <br />
+  const handleChange = (event) => {
+    const { name, value } = event.target;
 
-          <button type="submit">Login</button>
-          <Link to="/reset-password">Forgot your password?</Link>
-        </form>
-      </RightSide>
-    </Container>
-  );
+    setLoginState({
+      ...loginState,
+      [name]: value,
+    });
+  };
+
+  const onSubmit = (data) => {
+    const { email, password } = data;
+    props.login(email, password);
+  };
+
+  if (!localStorage.currentUserJwt) {
+    props.history.replace("/CofounderStart");
+
+  }
+
+  if (props.authState.loggedIn) {
+    props.getProfile()
+    props.user()
+    props.history.replace("/Cofounder/dashboard");    
+
+    return <div></div>;
+  } else {
+    return (
+      <div>
+        <LoginContext
+          loginState={loginState}
+          name="cofounder"
+          email="email"
+          password="password"
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          onSubmit={onSubmit}
+        />
+      </div>
+
+    )
+  }
+
 }
-
 const LeftSide = styled.div`
   position: absolute;
   color: #ffffff;
@@ -192,6 +207,3 @@ const Container = styled.div`
     #4cc5f1
   );
 `;
-
-
-export default LogInForm

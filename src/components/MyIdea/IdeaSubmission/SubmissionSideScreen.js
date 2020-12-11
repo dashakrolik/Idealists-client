@@ -1,32 +1,28 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
-import styled from '@emotion/styled';
+import { jsx } from "@emotion/core";
+import styled from "@emotion/styled";
 
 const SubmissionSideScreen = (props) => {
   return (
-    <div style={{width: props.agreementSection ? '150xp' : 'auto'}}>
-    <Left>
-      <FlexRow>
-        <FlexColumn>
-          <GroupTitle>
-            {props.title}
-          </GroupTitle>
-        </FlexColumn>
-      </FlexRow>
-      <FlexRow>
-        <FlexColumn>
-          <GroupSubtitle>
-            {props.description}
-          </GroupSubtitle>
-        </FlexColumn>
-      </FlexRow>
-    </Left>
+    <div style={{ width: props.agreementSection ? "150xp" : "auto" }}>
+      <Left>
+        <FlexRow>
+          <FlexColumn>
+            <GroupTitle>{props.title}</GroupTitle>
+          </FlexColumn>
+        </FlexRow>
+        <FlexRow>
+          <FlexColumn>
+            <GroupSubtitle>{props.description}</GroupSubtitle>
+          </FlexColumn>
+        </FlexRow>
+      </Left>
     </div>
   );
 };
 
 const Left = styled.div`
-grid-area: left;
+  grid-area: left;
   width: 100%;
   height: 100%;
   display: flex;
@@ -42,7 +38,7 @@ const GroupTitle = styled.div`
   font-weight: 800;
   text-align: left;
   color: #ffffff;
-  position:relative;
+  position: relative;
   padding: 5px 15px;
   flex: 1;
   margin-bottom: 16px;
@@ -53,7 +49,7 @@ const GroupSubtitle = styled.div`
   font-weight: 400;
   text-align: left;
   color: #ffffff;
-  position:relative;
+  position: relative;
   padding: 5px 15px;
   flex: 1;
   margin-bottom: 32px;
@@ -61,9 +57,9 @@ const GroupSubtitle = styled.div`
 
 const FlexRow = styled.div`
   display: flex;
-  @media only screen and (orientation:portrait) { 
+  @media only screen and (orientation: portrait) {
     flex-direction: column;
-}
+  }
 `;
 
 const FlexColumn = styled.div`
@@ -76,7 +72,6 @@ const FlexColumn = styled.div`
 //   padding: 5px 10px;
 // `;
 
-
 // const Container = styled.div`
 //   width: 100vw;
 //   height: 100vh;
@@ -85,6 +80,5 @@ const FlexColumn = styled.div`
 //   grid-template-rows: 1fr;
 //   grid-template-areas: "left right";
 // `;
-
 
 export default SubmissionSideScreen;

@@ -9,22 +9,24 @@ import CommentForm from "./CommentForm";
 import "./CommentSection.css";
 
 export default function CommentSection(props) {
-  const { id, show } = props;
+  const { id, show, loading } = props;
   const [commentsData, setCommentsData] = useState([]);
   const [showAddComment, setShowAddComment] = useState(false);
-
-  useEffect(() => {
+  
+  const fetchComments = () => {
     request
       .get(`${baseUrl}/ideas/${id}/comments`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      //   .then((res) => console.log("res.body", res.body));
       .then((res) => {
         setCommentsData(res.body);
       });
-  }, [id]);
+  }
+  useEffect(() => {
+    fetchComments()
+  }, []);
 
   const renderComments = () => {
-    if (commentsData.length < 1)
+    if (commentsData.length === 0)
       return (
         <StyledCard>
           There are currently no specialist comments on this idea.
@@ -32,12 +34,19 @@ export default function CommentSection(props) {
       );
     else
       return commentsData.map((comment) => {
+        console.log("comment:", comment)
         return (
           <CommentRender
+            token={props.authState.token}
+            id={id}
+            loaded={loading}
+            reFetch={fetchComments}
             key={comment.id}
             date={comment.createdAt}
             comment={comment.comment}
             user={comment.user}
+            idComment={comment.id}
+            commentForm={CommentForm}
           />
         );
       });
@@ -58,6 +67,8 @@ export default function CommentSection(props) {
         <CommentForm
           token={props.authState.token}
           id={id}
+          loaded={loading}
+          reFetch={fetchComments}
           showForm={(e) => setShowAddComment(e)}
         />
       );
@@ -69,9 +80,6 @@ export default function CommentSection(props) {
         <Button text="Hide Comments" onClick={() => show(false)} />
       </StyledCard>
       <div className="commentsectioncontent">{renderComments()}</div>
-      <StyledCard>
-        <Button text="Hide Comments" onClick={() => show(false)} />
-      </StyledCard>
       {renderAddComment()}
     </>
   );

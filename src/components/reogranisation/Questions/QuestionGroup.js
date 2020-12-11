@@ -100,6 +100,7 @@ const QuestionGroup = (props) => {
                     maxChar={question.maxChar}
                     onChange={handleValueChanges}
                     onFocusChanged={handleInputFocus}
+                    groupId={props.group.id}
                     id={question.id.toString()}
                     onValidationChange={handleValidationChanges}
                     placeholder={
