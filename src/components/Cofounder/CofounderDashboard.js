@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import request from "superagent";
 import { baseUrl } from "../../constants";
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../MyIdea/Dashboard/IdeaDashboard.css";
 import ideaImg from "../../res/assess-white.png"
+import styled from '@emotion/styled'
+import Rating from "./Rating"
+import assesWhite from "../../res/assess-white.png";
+import mentor from "../../res/mentor.png";
 
 
 
 export default function CofounderDashboard(props) {
   const [user, setUserData] = useState({});
-  const [userIdeas, setUserIdeas] = useState([]);
-  const [ideasList, setIdeaList] = useState([])
+
 
   useEffect(() => {
     if (props.authState.loggedIn)
@@ -18,15 +21,30 @@ export default function CofounderDashboard(props) {
         .get(`${baseUrl}/current`)
         .set("Authorization", `Bearer ${props.authState.token}`)
         .then((res) => setUserData(res.body));
-    else props.history.replace("/MyIdea/login");
+    else props.history.replace("/Cofounder/login");
   }, []);
 
   if (props.authState.loggedIn === false) return <h1>Not logged in</h1>;
-  if (props.authState.isApproved === null) return <h1>Your Application is being reviewed</h1>;
-  if (props.authState.isApproved === false) return <h1>Your Application has been rejected, you wont be able to view and bid on ideas</h1>;
+  if (props.authState.user.isApproved === null) return (
 
+    <div className="dashboard-container">
+      <br />
+      <br />
+      <br />
+      <h3>Your Application is being reviewed, we'll get back to you shortly!</h3>
+    </div>
+  )
 
-  // if (props.authState.isApproved === true)
+  if (props.authState.user.isApproved === false) return (
+
+    <div className="dashboard-container">
+      <br />
+      <br />
+      <br />
+      <h3>Your Application has been rejected, you wont be able to view and bid on ideas</h3>;
+    </div>
+  )
+
   return (
     <div className="dashboard-container">
       <br />
@@ -34,12 +52,24 @@ export default function CofounderDashboard(props) {
       <div>
         <h1>{user.firstName}'s Dashboard</h1>
       </div>
+
       <div className='items-wrapper'>
         <div className="flex-ideacontainer">
           <Link className="links" to="/Cofounder/dashboard/ideas">
             <div className="assess-tiles">
-              <img alt="icon" className="icons" src={ideaImg}></img>
+              <img alt="icon" className="icons" src={assesWhite}></img>
               <h4>List of ideas</h4>
+            </div>
+          </Link>
+        </div>
+        <div className="flex-ideacontainer">
+          <Link
+            className="links"
+            to={`/Cofounder/dashboard/${props.authState.user.id}/profile`}
+          >
+            <div className="assess-tiles">
+              <img alt="icon" className="icons" src={mentor}></img>
+              <h4>Your profile</h4>
             </div>
           </Link>
         </div>
@@ -47,5 +77,7 @@ export default function CofounderDashboard(props) {
     </div>
   );
 }
+
+
 
 

@@ -1,8 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
-import { useState } from "react";
-import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const LogInForm = (props) => {
