@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import request from "superagent";
 import { baseUrl } from "../../constants";
 import "../MyIdea/Dashboard/IdeaDashboard.css";
@@ -12,6 +12,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import "./IdeaList.css";
+import Rating from "./Rating";
 
 const useStyles = makeStyles({
   root: {
@@ -28,6 +29,8 @@ const useStyles = makeStyles({
 
 export default function CofounderProfile(props) {
   const routeParameters = useParams();
+  const parsedParameters = parseInt(routeParameters.id);
+
   const classes = useStyles();
   const [profile, set_profile] = useState();
   useEffect(() => {
@@ -46,9 +49,7 @@ export default function CofounderProfile(props) {
       props.authState.user.id !== parseInt(routeParameters.id)
     ) {
       request
-        .get(
-          `${baseUrl}/users/cofounders/${parseInt(routeParameters.id)}/profile`
-        )
+        .get(`${baseUrl}/users/cofounders/${parsedParameters}/profile`)
         .set("Authorization", `Bearer ${props.authState.token}`)
         .then((res) => {
           set_profile(res.body);
@@ -140,6 +141,9 @@ export default function CofounderProfile(props) {
         ) : (
           <p>loading...</p>
         )}
+        {props.authState.user.id !== parseInt(routeParameters.id) ? (
+          <Rating authState={props.authState} />
+        ) : null}
       </div>
     </div>
   );

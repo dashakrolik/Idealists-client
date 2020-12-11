@@ -108,7 +108,6 @@ export default function CofounderProfileForm(props) {
 		};
 		setFormData(
 			Object.keys(formData).reduce((acc, currVal) => {
-				
 				return {
 					...acc,
 					[currVal]: {

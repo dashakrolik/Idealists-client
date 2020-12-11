@@ -19,6 +19,9 @@ export default function IdeaDashboardDetail(props) {
   // const [automatch2, Do2] = useState([])
   // const [currentValue, setCurrentValue] = useState([]);
   const [displaySuccess, setDisplaySuccess] = useState(false);
+  const [enableSubmit, setEnableSubmit] = useState(false);
+  const [errorFound, setErrorFound] = useState(false);
+  //const [errorMessage, setErrorMessage] = useState("");
   const [isShown, setIsShown] = useState({});
   const [patentDifference, setPatentDifference] = useState({
     // 0: "", 1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: "", howProblemUnique: ""
@@ -26,11 +29,7 @@ export default function IdeaDashboardDetail(props) {
   // const [identifyProblem, setIdentifyProblem] = useState("");
   // const [problemSolution, setProblemSolution] = useState("");
   // const [howProblemUnique, setHowProblemUnique] = useState("");
-
   const [loading, setLoading] = useState(true);
-
-  const [enableSubmit, setEnableSubmit] = useState(false);
-
   const ideasId = props.match.params.id;
 
   const isUser = props.authState.user.role === "user" ? true : false;
@@ -41,11 +40,20 @@ export default function IdeaDashboardDetail(props) {
       .get(`${baseUrl}/ideas/${ideasId}/automatch`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then((automatch) => {
-        DoAutomatch(
-          Object.values(
-            automatch.body.autoMatch["ipscreener-results"]["index-1"]
-          )
-        );
+        if (
+          automatch.body.status !== "error" &&
+          automatch.body.statusCode === 200
+        ) {
+          DoAutomatch(
+            Object.values(
+              automatch.body.autoMatch["ipscreener-results"]["index-1"]
+            )
+          );
+        } else {
+          // if there is any error
+          setErrorFound(true);
+          //setErrorMessage(automatch.body.message);
+        }
       })
       .catch((err) => console.error(err))
       .finally(setLoading(false));
@@ -87,6 +95,7 @@ export default function IdeaDashboardDetail(props) {
       [e.target.name]: e.target.value,
     });
   };
+
   // Validate if user provides responses to all (10) matching patents & (3) additional questions.
   // Enable the submit button only when the user responds to all (13 at present) questions.
   let countAnswers = 0;
@@ -246,7 +255,7 @@ export default function IdeaDashboardDetail(props) {
       </SpinnerStyle>
     );
   }
-  if (automatchResults.length >= 1) {
+  if (!errorFound && automatchResults.length >= 1) {
     return (
       <Container>
         <Global
@@ -441,9 +450,7 @@ export default function IdeaDashboardDetail(props) {
                     onClick={isUser ? sendValues : () => props.history.goBack()}
                     type="submit"
                     disabled={isUser ? !enableSubmit : false}
-
                   />
-
                 </AddlQuestions>
               </StartContent>
             </div>
@@ -454,7 +461,65 @@ export default function IdeaDashboardDetail(props) {
   } else {
     return (
       <Container>
-        <Spinner />
+        {errorFound ? (
+          <div>
+            <Global
+              styles={css`
+                body {
+                  background-image: linear-gradient(
+                    to right top,
+                    #1a3d7c,
+                    #195d9c,
+                    #1f7fbb,
+                    #31a2d7,
+                    #4cc5f1
+                  );
+                }
+              `}
+            />
+            <Content>
+              <div
+                css={css`
+                  grid-area: content-area;
+                `}
+              >
+                <div
+                  css={css`
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                  `}
+                >
+                  <StartContent
+                    css={css`
+                      display: flex;
+                      flex-direction: column;
+                      width: auto;
+                      margin-bottom: 60px;
+                    `}
+                  >
+                    <Heading
+                      css={css`
+                        @media only screen and (orientation: portrait) {
+                          margin-top: 60px;
+                        }
+                      `}
+                    >
+                      Automatch results
+                    </Heading>
+                    <Paragraph>
+                      <h2>
+                        {`Your idea did not match with any of the existing data, this is because the ipscreener couldn't make any sense of your idea.`}
+                      </h2>
+                    </Paragraph>
+                  </StartContent>
+                </div>
+              </div>
+            </Content>
+          </div>
+        ) : (
+          <Spinner />
+        )}
       </Container>
     );
   }

@@ -2,7 +2,8 @@
 import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { Component } from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom"
+import { Route } from "react-router-dom";
 import InvestorDashboard from "./components/InvestorsPortal/Dashboard/InvestorDashboard";
 import InvestorLogin from "./components/InvestorsPortal/InvestorLogin";
 import SpecialistDashboard from "./components/SpecialistPortal/Dashboard/SpecialistDashboard";
@@ -59,9 +60,28 @@ class App extends Component {
     navigation: {
       activePath: "",
     },
-
+    cofounderProfile: '',
     loading: true,
   };
+
+  getCoFounderProfile = () => {
+    request
+      .get(`${baseUrl}/users/cofounders/profile`)
+      .set("Authorization", `Bearer ${this.state.auth.token}`)
+      .then(res => {
+        if (res.status === 200) {
+          this.setState({
+            ...this.state,
+            cofounderProfile: res.body
+          })
+        }
+      }).catch(e => {
+        this.setState({
+          ...this.state,
+          cofounderProfile: ''
+        })  
+      })
+  }
 
   rejectIdea = (rejected, ideasId) => {
     request
@@ -388,8 +408,9 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <TopBar
+          <ThemeProvider theme={theme}>
+            <Application>
+            <TopBar
             authState={this.state.auth}
             user={this.getCurrentUser}
             logout={this.logout}
@@ -397,8 +418,7 @@ class App extends Component {
             updatePassword={this.updatePassword}
             updateLocalStorage={this.updateLocalStorage}
           />
-          <ThemeProvider theme={theme}>
-            <Application>
+          <Switch>
               <Route
                 exact
                 path="/Specialist/dashboard"
@@ -679,6 +699,7 @@ class App extends Component {
                       authState={this.state.auth}
                       login={this.requestLoginUser}
                       user={this.getCurrentUser}
+                      getProfile={this.getCoFounderProfile}              
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
                       setAuthLoggedInTrue={this.setAuthLoggedInTrue}
@@ -728,6 +749,7 @@ class App extends Component {
                       authState={this.state.auth}
                       login={this.requestLoginUser}
                       user={this.getCurrentUser}
+                      profile={this.state.cofounderProfile}
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
                     />
@@ -746,11 +768,11 @@ class App extends Component {
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
                       setAuthLoggedInTrue={this.setAuthLoggedInTrue}
-                    />   
+                    />
                   );
                 }}
               />
-           <Route
+              <Route
                 exact
                 path="/Cofounder/dashboard/:id/profile"
                 render={(props) => {
@@ -1091,11 +1113,11 @@ class App extends Component {
                   />
                 )}
               />
+              </Switch>
             </Application>
           </ThemeProvider>
-        </div>
-      </Router>
-    );
+          </Router>
+    )
   }
 }
 

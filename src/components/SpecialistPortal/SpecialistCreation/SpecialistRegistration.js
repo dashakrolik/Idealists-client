@@ -180,7 +180,7 @@ const SpecialistRegistration = (props) => {
       specialistType,
     } = formData;
     request
-      .post(`${baseUrl}/users/specialists`)
+      .post(`${baseUrl}/users`)
       .set("Authorization", `Bearer ${props.props.authState.token}`)
       .send({
         firstName: firstName.value,

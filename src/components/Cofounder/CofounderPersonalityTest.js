@@ -34,13 +34,12 @@ export default function CofounderPersonalityTest(props) {
 					console.error(err);
 				}
 			});
-			
 	};
 
 	const setValue = (e) => {
 		let format = /[!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?0-9a-z]+/;
 		setTestResult({ personalityTest: e.target.value });
-		
+
 		if (e.target.value.match(format)) {
 			seterrorCheck('only capital letters with - is  allowed');
 		} else if (e.target.value.length > 6) {
