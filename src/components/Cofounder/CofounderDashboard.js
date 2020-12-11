@@ -14,7 +14,7 @@ import mentor from "../../res/mentor.png";
 export default function CofounderDashboard(props) {
   const [user, setUserData] = useState({});
 
-
+  console.log('props', user)
   useEffect(() => {
     if (props.authState.loggedIn)
       request
@@ -25,23 +25,20 @@ export default function CofounderDashboard(props) {
   }, []);
 
   if (props.authState.loggedIn === false) return <h1>Not logged in</h1>;
-  if (props.authState.user.isApproved === null) return (
+  if (user.isApproved === null) return (
 
     <div className="dashboard-container">
       <br />
       <br />
       <br />
-      <h3>Your Application is being reviewed, we'll get back to you shortly!</h3>
+      <h3 style={styles.textStyle}>Your Application is being reviewed, we'll get back to you shortly!</h3>
     </div>
   )
 
-  if (props.authState.user.isApproved === false) return (
+  if (user.isApproved === false) return (
 
     <div className="dashboard-container">
-      <br />
-      <br />
-      <br />
-      <h3>Your Application has been rejected, you wont be able to view and bid on ideas</h3>;
+      <h3 style={styles.textStyle}>Your Application has been rejected, you wont be able to view and bid on ideas</h3>;
     </div>
   )
 
@@ -65,7 +62,7 @@ export default function CofounderDashboard(props) {
         <div className="flex-ideacontainer">
           <Link
             className="links"
-            to={`/Cofounder/dashboard/${props.authState.user.id}/profile`}
+            to={`/Cofounder/dashboard/${user.id}/profile`}
           >
             <div className="assess-tiles">
               <img alt="icon" className="icons" src={mentor}></img>
@@ -79,5 +76,10 @@ export default function CofounderDashboard(props) {
 }
 
 
+const styles = {
+  textStyle: {
+    padding: "100px",
+  }
+}
 
 
