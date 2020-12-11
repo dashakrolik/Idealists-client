@@ -14,7 +14,6 @@ import mentor from "../../res/mentor.png";
 export default function CofounderDashboard(props) {
   const [user, setUserData] = useState({});
 
-  console.log('props', user)
   useEffect(() => {
     if (props.authState.loggedIn)
       request
@@ -25,15 +24,18 @@ export default function CofounderDashboard(props) {
   }, []);
 
   if (props.authState.loggedIn === false) return <h1>Not logged in</h1>;
-  if (user.isApproved === null) return (
 
-    <div className="dashboard-container">
+  if (user.isApproved === null){ 
+    if(!props.profile) props.history.replace("/cofounderWelcomePage")
+    return (
+
+      <div className="dashboard-container">
       <br />
       <br />
       <br />
       <h3 style={styles.textStyle}>Your Application is being reviewed, we'll get back to you shortly!</h3>
     </div>
-  )
+  )}
 
   if (user.isApproved === false) return (
 

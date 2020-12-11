@@ -3,26 +3,12 @@ import { css, Global, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import Button from '../reogranisation/Questions/Button';
 import posed from 'react-pose';
-import { useState } from 'react';
-import CofounderRegisteration from './CofounderRegisteration';
 
-const CofounderStart = (props) => {
-	const [ uiState, setUiState ] = useState('notDisplayingLogin');
-
-	const existingUser = () => {
-		props.history.push('/Cofounder/login');
-		console.log('props', props);
-		console.log('I am here');
-	};
-	const newUser = () => {
+const CofounderWelcomePage = (props) => {
+	const startProfile = () => {
 		if (props.authState.loggedIn) {
-			props.history.push('/Cofounder');
-		} else {
-			setUiState('displayingLogin');
+			props.history.push('/CofounderProfileVideo');
 		}
-	};
-	const closeRegistration = () => {
-		setUiState('notDisplayingLogin');
 	};
 
 	return (
@@ -43,7 +29,7 @@ const CofounderStart = (props) => {
 							flex-direction: column;
 						`}>
 						<StartContent
-							pose={uiState}
+							// pose={uiState}
 							css={css`
 								display: flex;
 								flex-direction: column;
@@ -51,25 +37,34 @@ const CofounderStart = (props) => {
 								margin-bottom: 60px;
 							`}>
 							<Heading css={css`@media only screen and (orientation: portrait) {margin-top: 60px;}`}>
-								My co-founder page
+								Welcome to our co-founder platform!
 							</Heading>
-							<Paragraph>Welcome to your co-founder Page. Below you can login.</Paragraph>
-							<Paragraph>If you don’t have an account yet, create your account below.</Paragraph>
+							<Paragraph>To complete your profile, you’ll now go through 3 steps:</Paragraph>
+							<Paragraph>
+								1. Upload a short (max 3 minutes) video, explaining who you are and why you want to be
+								an impactful co-founder <br />
+								2. Take a personality test <br />
+								3. Fill out the blanks on your profile, by answering a few simple questions
+							</Paragraph>
+							<Paragraph>
+								As soon as your profile is complete, we’ll take a look at it.<br /> Once you get
+								approved,you’ll be able to see all the validated ideas and get to show your interest in
+								them.<br /> After this, with the help of our matchmaker, you’ll look for a co-founder
+								and try to find the perfect match. <br /> Next up, you’ll get to select up to 3 mentors
+								and off you go to the funding phase.<br /> When the funding has been closed
+								successfully, your journey as an impactful co-founder begins!
+							</Paragraph>
+							<Paragraph>Good luck!</Paragraph>
 							<Controls
 								css={css`
-									display: flex;
-									flex-wrap: wrap;
-									justify-content: flex-start;
+									position: absolute;
+									right: 140px;
+									bottom: 130px;
+									width: 180px;
 								`}>
-								<Button text={'Existing User'} onClick={existingUser} />
-								<Button text={'New User'} onClick={newUser} />
+								<Button text='Next' disabled='' onClick={startProfile} />
 							</Controls>
 						</StartContent>
-						<CofounderRegisteration
-							show={uiState === 'displayingLogin'}
-							handleCancel={closeRegistration}
-							props={props}
-						/>
 					</div>
 				</div>
 			</Content>
@@ -130,8 +125,9 @@ const Heading = styled.div`
 const Paragraph = styled.div`
 	display: block;
 	position: relative;
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 400;
+
 	margin: 0 10px 30px;
 `;
 
@@ -148,4 +144,4 @@ const Container = styled.div`
 	overflow-y: scroll;
 `;
 
-export default CofounderStart;
+export default CofounderWelcomePage;

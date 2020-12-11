@@ -1,28 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { baseUrl } from '../../constants';
-import request from 'superagent';
-import { makeStyles, withTheme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
+import React, { useEffect, useState } from "react";
+import { baseUrl } from "../../constants";
+import request from "superagent";
+import { makeStyles, withTheme } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Slider from "@material-ui/core/Slider";
 import Button from "../reogranisation/Questions/Button";
 import styled from "@emotion/styled";
 
-
-
-
-
 const useStyles = makeStyles((theme) => ({
-    root: {
-        width: 300,
-        color: '#fffffff',
-    },
-    margin: {
-        height: theme.spacing(3),
-    },
-
+  root: {
+    width: 300,
+    color: "#fffffff",
+  },
+  margin: {
+    height: theme.spacing(3),
+  },
 }));
 
 export default function BidSlider(props) {
+
     const [bidValue, setValue] = useState("")
     const [savedBid, setSavedbid] = useState("")
     const [showEditBid, setShowEditBid] = useState(false)
@@ -137,9 +133,9 @@ const StyledDiv = styled.div`
 `;
 
 const StyledSlider = styled(Slider)`
-background-color: white;
-color: black;
-.MuiSlider-rail {
-    color: white
-}
-`
+  background-color: white;
+  color: black;
+  .MuiSlider-rail {
+    color: white;
+  }
+`;
