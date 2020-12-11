@@ -1120,7 +1120,6 @@ class App extends Component {
               </Switch>
             </Application>
           </ThemeProvider>
-        </div>
       </Router>
       </div>
     );
