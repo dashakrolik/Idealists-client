@@ -8,7 +8,6 @@ import TextField from "@material-ui/core/TextField";
 import Box from "@material-ui/core/Box";
 import request from "superagent";
 import { baseUrl } from "../../constants";
-import { useParams } from "react-router";
 
 const StyledRating = withStyles({
   iconFilled: {
@@ -22,9 +21,7 @@ const StyledRating = withStyles({
 export default function Ratings(props) {
   const [rating, set_rating] = useState("");
   const [text, set_text] = useState("");
-  const routeParameters = useParams();
-  const parsedParameters = parseInt(routeParameters.id);
-
+  const parsedParameters = parseInt(props.match.params.id);
   function handleChange(event) {
     request
       .post(`${baseUrl}/cofounders/${parsedParameters}/assesments`)
