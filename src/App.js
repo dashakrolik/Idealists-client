@@ -2,7 +2,8 @@
 import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { Component } from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom"
+import { Route } from "react-router-dom";
 import InvestorDashboard from "./components/InvestorsPortal/Dashboard/InvestorDashboard";
 import InvestorLogin from "./components/InvestorsPortal/InvestorLogin";
 import SpecialistDashboard from "./components/SpecialistPortal/Dashboard/SpecialistDashboard";
@@ -43,9 +44,11 @@ import CofounderProfile from "./components/Cofounder/CofounderProfile";
 import IdeasList from "./components/Cofounder/IdeaList";
 import CofounderPersonalityTest from "./components/Cofounder/CofounderPersonalityTest";
 import CofounderProfileVideo from "./components/Cofounder/CofounderProfileVideo";
-
+import CofounderWelcomePage from "./components/Cofounder/CofounderWelcomePage";
+import CofounderProfileForm from "./components/Cofounder/CofounderProfileForm";
 import Spinner from "./components/reogranisation/Spinner";
 import CofounderIdeaDetail from "./components/Cofounder/Cofounder-IdeaDetail";
+
 
 class App extends Component {
   state = {
@@ -386,8 +389,9 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <TopBar
+          <ThemeProvider theme={theme}>
+            <Application>
+            <TopBar
             authState={this.state.auth}
             user={this.getCurrentUser}
             logout={this.logout}
@@ -395,8 +399,7 @@ class App extends Component {
             updatePassword={this.updatePassword}
             updateLocalStorage={this.updateLocalStorage}
           />
-          <ThemeProvider theme={theme}>
-            <Application>
+          <Switch>
               <Route
                 exact
                 path="/Specialist/dashboard"
@@ -686,10 +689,10 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/Cofounder/dashboard"
+                path="/CofounderProfileForm"
                 render={(props) => {
                   return (
-                    <CofounderDashboard
+                    <CofounderProfileForm
                       {...props}
                       user={this.getCurrentUser}
                       authState={this.state.auth}
@@ -706,6 +709,22 @@ class App extends Component {
                 render={(props) => {
                   return (
                     <IdeasList
+                      {...props}
+                      authState={this.state.auth}
+                      login={this.requestLoginUser}
+                      user={this.getCurrentUser}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/Cofounder/dashboard"
+                render={(props) => {
+                  return (
+                    <CofounderDashboard
                       {...props}
                       authState={this.state.auth}
                       login={this.requestLoginUser}
@@ -868,16 +887,52 @@ class App extends Component {
                 exact
                 path="/cofounderProfileVideo"
                 render={(props) => {
-                  return <CofounderProfileVideo />;
+                  return (
+                    <CofounderProfileVideo
+                      {...props}
+                      user={this.getCurrentUser}
+                      authState={this.state.auth}
+                      login={this.requestLoginExpert}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                    />
+                  );
+
                 }}
               />
               <Route
                 exact
                 path="/cofounderPersonalityTest"
                 render={(props) => {
-                  return <CofounderPersonalityTest />;
+                  return (
+                    <CofounderPersonalityTest
+                      {...props}
+                      user={this.getCurrentUser}
+                      authState={this.state.auth}
+                      login={this.requestLoginExpert}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                    />
+                  );
                 }}
               />
+              <Route
+                exact
+                path="/cofounderWelcomePage"
+                render={(props) => {
+                  return (
+                    <CofounderWelcomePage
+                      {...props}
+                      user={this.getCurrentUser}
+                      authState={this.state.auth}
+                      login={this.requestLoginExpert}
+                      updateLocalStorage={this.updateLocalStorage}
+                      logout={this.logout}
+                    />
+                  );
+                }}
+              />
+
               <Route
                 exact
                 path="/dashboard/assess"
@@ -1037,11 +1092,11 @@ class App extends Component {
                   />
                 )}
               />
+              </Switch>
             </Application>
           </ThemeProvider>
-        </div>
-      </Router>
-    );
+          </Router>
+    )
   }
 }
 
