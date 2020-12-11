@@ -10,6 +10,8 @@ export default function IdeasList(props) {
     const [user, setUserData] = useState({});
     const [userIdeas, setUserIdeas] = useState([]);
 
+    console.log('idea', userIdeas)
+
     useEffect(() => {
         if (props.authState.loggedIn)
             request

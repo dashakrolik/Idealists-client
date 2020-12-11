@@ -93,7 +93,7 @@ export default function CofounderIdeaDetail(props) {
           ) : (
               < StyledDiv> {ideaBids.map((bid) => {
                 return (
-                  <StyledLink to={`/Cofounder/profile/${bid.id}`}>
+                  <StyledLink to={`/Cofounder/dashboard/${bid.userid}/profile`}>
                     <span key={bid.id}>{bid.firstname}{" "}{bid.lastname}</span>
                   </StyledLink>)
               })}
