@@ -45,15 +45,9 @@ console.log("submission.js value.3", answers[3])
   }
 const handleAnswers = (id, value) => {
     const new_answers = {...answers, [id]: value};
-    // new_answers[id] = value;
+    new_answers[id] = value;
     setAnswers(new_answers);
   };
-
-  // const handleAnswers = (id, value) => {
-  //   const new_answers = answers;
-  //   new_answers[id] = value;
-  //   setAnswers(new_answers);
-  // };
 
   // const handleAnswers = (id, value) => {
   //   setAnswers({
@@ -64,19 +58,16 @@ const handleAnswers = (id, value) => {
   //     },
   //   });
   // };
-  // console.log("Answers in submissions", answers);
+
   const handleNextBttnClick = () => {
     setCurrentQuestionIndex(currentQuestionIndex + 1);
-    // console.log(activeGroup, questionGroups.length)
     if (activeGroup === questionGroups.length) {
-      // console.log(activeGroup, questionGroups.length)
       setAgreementSection(false);
     } else if (activeGroup === 11 && questionGroups.length === 12) {
       setActiveGroup(12);
       setAgreementSection(true);
     } else {
       setActiveGroup(activeGroup + 1);
-      // console.log(activeGroup, questionGroups.length)
       setAgreementSection(false);
     }
   };
@@ -112,18 +103,10 @@ const handleAnswers = (id, value) => {
   if (questionGroups.length === 0) return <div>Loading...</div>;
 
   const handleBackBttnClick = () => {
-    // setCurrentQuestionIndex(currentQuestionIndex - 1);
     setActiveGroup(activeGroup - 1);
     setAgreementSection(false);
   };
 
-  // const questionIndexControl = (change) => {
-  //   if (change === -1 ) {
-  //     setCurrentQuestionIndex(currentQuestionIndex - 1)
-  //   } else {
-  //     setCurrentQuestionIndex(currentQuestionIndex + 1)
-  //   }
-  // }
 
   return (
     <div>
@@ -339,22 +322,3 @@ const Container = styled.div`
 
 export default Submission;
 
-// const answers = () => {
-//   const formValuesObject = {
-//     0: "",
-//     1: "",
-//     2: "",
-//     3: "",
-//     4: "",
-//     5: "",
-//     6: "",
-//     7: "",
-//     8: "",
-//     9: "",
-//     10: "",
-//     11: "",
-//   };
-//   const mapValuesToObject = (key, value) =>
-//     formValuesObject.map((element) => (element[key] = value));
-//   mapValuesToObject();
-// };

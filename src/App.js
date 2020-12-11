@@ -49,9 +49,6 @@ import Spinner from "./components/reogranisation/Spinner";
 import CofounderIdeaDetail from "./components/Cofounder/Cofounder-IdeaDetail";
 
 
-// const history = useHistory(); 
-
-
 class App extends Component {
   state = {
     auth: {
@@ -1100,10 +1097,7 @@ class App extends Component {
           </ThemeProvider>
         </div>
       </Router>
-<<<<<<< HEAD
       </div>
-=======
->>>>>>> 6efadc8122bf7f5288dc3c322a47ada1cf50b858
     );
   }
 }

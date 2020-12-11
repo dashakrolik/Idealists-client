@@ -35,7 +35,6 @@ const SingleChoiceQuestion = (props) => {
   const [isFocused, setIsFocused] = useState(false);
   const [validated, setValidated] = useState(false);
 
-  // console.log("props.value",props.value[3])
   const {
     currentQuestionIndex,
     value,
@@ -45,25 +44,17 @@ const SingleChoiceQuestion = (props) => {
     options
   } = props;
   const [currentValue, setCurrentValue] = useState(value[currentQuestionIndex]);
-
-  console.log("singleChoiseQuestion.js value.3", value[3])
-  console.log(
-    // currentQuestionIndex,
-    // value,
-    options,
-    currentValue,
-    "options in single choise questioN"
-  );
+  
+  //   console.log(
+  //   currentQuestionIndex,
+  //   value,
+  //   options,
+  //   currentValue,
+  //   "currentQuestionIndex,value, options, currentValue in single choise questioN"
+  // );
 
   useEffect(() => {
-    // console.log("value in useEffect",value.currentQuestionIndex);  
-    // console.log(
-    //   value[currentQuestionIndex],
-    //   currentQuestionIndex,
-    //   "currentQuestionIndex in single choise question"
-    // );
-    // setCurrentValue(value.currentQuestionIndex);
-
+    setCurrentValue(value.currentQuestionIndex);
   }, []);
   useEffect(() => {
     if (props.multiChoice) {
@@ -80,9 +71,7 @@ const SingleChoiceQuestion = (props) => {
       }
     }
     if (props.onChange) {
-      
-      // console.log(currentQuestionIndex, currentValue,"currentQuestionIndex, currentValue")
-      props.onChange(currentQuestionIndex, currentValue);
+            props.onChange(currentQuestionIndex, currentValue);
     }
   }, []);
 
@@ -90,18 +79,8 @@ const SingleChoiceQuestion = (props) => {
     props.onValidationChange && props.onValidationChange(props.id, validated);
   }, [validated]);
 
-
-
-  // function handleClick(e) {
-  //   e.preventDefault();
-  //   console.log('The link was clicked.');
-  // }
-
-  const handleChange = (selectedOption, event) => {
-    // if(currentValue.length) 
+  const handleChange = (selectedOption) => {
     setCurrentValue(selectedOption);
-    // event.preventDefault(event);
-    console.log("selectedOption", selectedOption)
   };
 
   const handleFocus = () => {
@@ -131,9 +110,6 @@ const SingleChoiceQuestion = (props) => {
         menuPortalTarget={document.body}
         backspaceRemovesValue={false}
         defaultValue={[value.label]}
-        // controlShouldRenderValue={true}
-        // onKeyDown={()=> handleChange()}
-        // placeholder={placeholder.length > 0 ? placeholder : ""}
       />
     </Container>
   );

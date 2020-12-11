@@ -10,10 +10,7 @@ import posed from "react-pose";
 const QuestionGroup = (props) => {
   const [validations, setValidations] = useState([]);
   // const [answers, setAnswers] = useState([]);
-  // console.log(props.answers, 'question group');
   const { currentQuestionIndex, answers, placeholder } = props;
-  // console.log(currentQuestionIndex, 'question group question index')
-  // console.log(placeholder, 'placeholder')
   useEffect(() => {
     if (validations.length === 0) return;
     if (
@@ -37,12 +34,7 @@ const QuestionGroup = (props) => {
   };
 
   const handleValueChanges = (from, newValue) => {
-    // console.log("QuestionGroup from newValue", from, newValue);
-    if (from != 3|| from != 4 ){
     props.answersHandler(from, newValue);
-    console.log("1")
-    }
-    console.log("2")
   };
 
   return (
@@ -110,7 +102,7 @@ const QuestionGroup = (props) => {
                     placeholder={
                       placeholder.length > 0
                         ? placeholder.currentQuestionIndex
-                        : "nina"
+                        : ""
                     }
                   />
                 )}
@@ -140,7 +132,7 @@ const QuestionGroup = (props) => {
                     onValidationChange={props.handleValidationChanges}
                     id={question.id.toString()}
                   />
-                )}
+                )} 
                 {question.type === "multiChoice" && (
                   <SingleChoiceQuestion
                     questionTitle={question.text}
@@ -191,17 +183,8 @@ const FormGroup = styled.div`
 //   width: 90%;
 //   height: 50px;
 //   line-height: 50px;
-//   display: flex;
-//   flex-direction: row;
-// `;
+//   display: flex;    if (from != 3|| from != 4 ){
 
-// const GroupTitle = styled.div`
-//   font-size: 30px;
-//   font-weight: 800;
-//   text-align: left;
-//   color: #ffffff;
-//   position:relative;
-//   padding: 5px 15px;
 //   flex: 1;
 //   margin-bottom: 16px;
 // `;
