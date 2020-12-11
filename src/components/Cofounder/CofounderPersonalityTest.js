@@ -24,7 +24,7 @@ export default function CofounderPersonalityTest(props) {
 			.then((res) => {
 				if (res.status === 200) {
 					setSuccessMsg(true)
-					// props.history.replace(`/CofounderProfileForm`);
+					
 				}
 			})
 			.catch((err) => {
@@ -39,6 +39,7 @@ export default function CofounderPersonalityTest(props) {
 	const setValue = (e) => {
 		let format = /[!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?0-9a-z]+/;
 		setTestResult({ personalityTest: e.target.value });
+
 		if (e.target.value.match(format)) {
 			seterrorCheck('only capital letters with - is  allowed');
 		} else if (e.target.value.length > 6) {
@@ -118,7 +119,7 @@ const LeftSide = styled.div`
 		position: relative;
 		left: 47px;
 		width: 80%;
-		font-size: 24px;
+		font-size: 18px;
 		font-weight: 500;
 		padding: 5px;
 		margin: 50px 5px 5px;
@@ -216,8 +217,8 @@ const RightSide = styled.div`
 		display: inline-block;
 		position: relative;
 		float: right;
-		right: 10%;
-		width: 30%;
+		right: -330%;
+		width: 120%;
 		height: 30px;
 		line-height: 30px;
 		font-size: 12px;
@@ -235,6 +236,7 @@ const RightSide = styled.div`
 			cursor: pointer;
 		}
 	}
+	
 
 	a {
 		display: inline-block;
