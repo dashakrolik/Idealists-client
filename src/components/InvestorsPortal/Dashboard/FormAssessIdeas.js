@@ -25,7 +25,6 @@ const SCALE_OPTIONS_LIST = [
   { id: "10", name: "10" },
 ];
 
-
 export default class FormAssessIdeas extends Component {
   constructor(props) {
     super(props);
@@ -87,7 +86,6 @@ export default class FormAssessIdeas extends Component {
       // hasWillPeopleWantThisError: true,
       validate: false,
     };
-
     this.validateForm = this.validateForm.bind(this);
   }
 

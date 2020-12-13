@@ -8,7 +8,6 @@ import Button from "../../reogranisation/Questions/Button";
 import Card from "@material-ui/core/Card";
 import { useHistory } from "react-router-dom";
 
-
 export default function UserAssessIdeas(props) {
   // const [userData, setUserData] = useState({});
   // const [userLoggedIn, setUserLoggedIn] = useState(true);
@@ -17,7 +16,6 @@ export default function UserAssessIdeas(props) {
   // const [selection, setSelection] = useState("show all");
   const [sortedIdeas, setSortedIdeas] = useState([]);
   const history = useHistory(); 
-
 
   useEffect(() => {
     if (!props.authState.loggedIn) props.history.push("/MyIdea/login");
@@ -69,8 +67,8 @@ export default function UserAssessIdeas(props) {
 
   return (
     <div className="assessIdeas-container">
-       <div style={{ width: "12rem"}}>      
-      <Button text="Go back" onClick={() => history.goBack()}/>
+      <div style={{ width: "12rem"}}>      
+        <Button text="Go back" onClick={() => history.goBack()}/>
       </div>
       <br />
       <div className="title">

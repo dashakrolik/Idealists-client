@@ -10,9 +10,6 @@ import QuestionGroup from '../../reogranisation/Questions/QuestionGroup';
 import Button from '../../reogranisation/Questions/Button';
 import SubmissionSideScreen from './SubmissionSideScreen';
 import CompleteSubmission from './CompleteSubmission';
-import { useHistory } from "react-router-dom";
-
-
 
 const Submission = (props) => {
   const [activeGroup, setActiveGroup] = useState(0);
@@ -42,7 +39,6 @@ const Submission = (props) => {
         [id]: value,
       },
     });
-    console.log(answers, 'answers in Submission.js; handleAnswers function');
   };
 
   const handleNextBttnClick = () => {
@@ -91,7 +87,6 @@ const Submission = (props) => {
   if (questionGroups.length === 0) return <div>Loading...</div>;
 
   const handleBackBttnClick = () => {
-
       setActiveGroup(activeGroup - 1);
       setAgreementSection(false);
   }
@@ -128,8 +123,6 @@ const Submission = (props) => {
                       handleValidationChanges={handleValidationChange}
                       key={questionGroups[activeGroup].id.toString()}
                       answers={answers[activeGroup]}
-                      // onChange={}
-
                     />}
                   {(valueDecideProfit) ? <div style={{ color: "red" }}> <br />We are working very hard on building a non-profit version of The Idealists as well. Unfortunately, until that is ready, we cannot accept non-profit ideas yet.
                      </div> : null}

@@ -134,7 +134,7 @@ const QuestionGroup = (props) => {
                 )}
                 {question.type === "multiChoice" && (
                   <SingleChoiceQuestion
-                    // questionTitle={question.text}
+                    questionTitle={question.text}
                     options={question.options}
                     errorMessage={question.validationErrorMsg}
                     maxChar={question.maxChar}

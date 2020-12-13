@@ -15,8 +15,6 @@ export default function IdeaDashboardDetail(props) {
   const [rejected, setRejected] = useState(false);
   const ideasId = props.match.params.id;
   const history = useHistory(); 
-
-
   const rejectIdea = () => {
     const confirmRejected = window.confirm(
       "Are you sure you want to reject this idea? The user who submitted the idea will be immediately notified via email."
@@ -155,7 +153,6 @@ STEPS IN IDEA SUBMISSION:
 
   return (
     <div className="dashboard-container">
-     
       <Container>
         <Left>
         <div style={{ width: "12rem"}}>      

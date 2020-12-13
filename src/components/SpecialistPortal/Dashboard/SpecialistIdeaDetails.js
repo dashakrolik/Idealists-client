@@ -32,9 +32,7 @@ export default function IdeaDashboardDetail(props) {
   const ideasId = props.match.params.id;
   const [rejected, setRejected] = useState(false);
   const history = useHistory(); 
-
   const [loading, setLoading] = useState(true);
-
   const docsUploaded = (
     <section>
       {/* { === ideasId ?  */}
@@ -280,9 +278,9 @@ export default function IdeaDashboardDetail(props) {
     <div className="dashboard-container">
       <Container>
         <Left>
-        <div style={{ width: "12rem"}}>
-      <Button text="Go back" onClick={() => history.goBack()}/>
-      </div>
+          <div style={{ width: "12rem"}}>
+            <Button text="Go back" onClick={() => history.goBack()}/>
+          </div>
           <ProgressBar
             token={props.authState.token}
             ideasId={props.match.params.id}

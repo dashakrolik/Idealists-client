@@ -409,8 +409,6 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-    
       <Router>
           <ThemeProvider theme={theme}>
             <Application>
@@ -1121,7 +1119,6 @@ class App extends Component {
             </Application>
           </ThemeProvider>
       </Router>
-      </div>
     );
   }
 }

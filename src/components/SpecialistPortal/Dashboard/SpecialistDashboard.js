@@ -16,7 +16,6 @@ export default function specialistDashboard(props) {
   const [userData, setUserData] = useState({});
   const [ideaList, setIdeaList] = useState(false);
   const history = useHistory(); 
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -65,8 +64,8 @@ export default function specialistDashboard(props) {
       return (
         <>
          <div style={{ width: "12rem", margin: "auto" }}>
-      <Button text="Go back" onClick={() => history.goBack()}/>
-      </div>
+           <Button text="Go back" onClick={() => history.goBack()}/>
+        </div>
           {" "}
           {renderCard(props.authState.user.specialistType)}
           <h2 style={styledH2}>
@@ -110,8 +109,8 @@ export default function specialistDashboard(props) {
       return (
         <>
         <div style={{ width: "12rem", margin: "auto" }}>
-      <Button text="Go back" onClick={() => history.goBack()}/>
-      </div>
+          <Button text="Go back" onClick={() => history.goBack()}/>
+        </div>
           {renderCard(props.authState.user.specialistType)}
           <div className="flex-tilescontainer">{list}</div>
         </>

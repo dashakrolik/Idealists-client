@@ -15,7 +15,6 @@ export default function IdeaDashboardDetail(props) {
   const ideasId = props.match.params.id;
   const history = useHistory(); 
 
-
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
   }
@@ -57,9 +56,9 @@ export default function IdeaDashboardDetail(props) {
     <div className="dashboard-container">
       <Container>
         <Left>
-        <div style={{ width: "12rem"}}>
-      <Button text="Go back" onClick={() => history.goBack()}/>
-      </div>
+          <div style={{ width: "12rem"}}>
+            <Button text="Go back" onClick={() => history.goBack()}/>
+          </div>
           <FlexRow>
             <FlexColumn>
               <StyledDiv>

@@ -11,7 +11,6 @@ export default function CrowdFunding(props) {
   const [userData, setUserData] = useState({});
   const history = useHistory(); 
 
-
   useEffect(() => {
     if (props.authState.loggedIn)
       request
@@ -27,7 +26,7 @@ export default function CrowdFunding(props) {
       <br />
       <h2 className="title">This is {userData.firstName}'s dashboard</h2>
       <div style={{ width: "12rem", margin: "auto" }}>
-      <Button text="Go back" onClick={() => history.goBack()}/>
+        <Button text="Go back" onClick={() => history.goBack()}/>
       </div>
       <h2 className="title">Back ideas through crowdfunding</h2>
       <StyledCard>
