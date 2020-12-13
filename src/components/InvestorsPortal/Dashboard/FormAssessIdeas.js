@@ -8,7 +8,9 @@ import { baseUrl } from "../../../constants";
 import "react-inputs-validation/lib/react-inputs-validation.min.css";
 import "./styles.css";
 import "./InvestorDashboard.css";
-
+import Button from "../../reogranisation/Questions/Button";
+import { createBrowserHistory } from 'history';
+const history = createBrowserHistory();
 
 const SCALE_OPTIONS_LIST = [
   { id: "1", name: "1" },
@@ -22,6 +24,7 @@ const SCALE_OPTIONS_LIST = [
   { id: "9", name: "9" },
   { id: "10", name: "10" },
 ];
+
 
 export default class FormAssessIdeas extends Component {
   constructor(props) {
@@ -277,6 +280,9 @@ export default class FormAssessIdeas extends Component {
           <br></br>
           <br></br>
           <br></br>
+          <div style={{ width: "12rem"}}>      
+            <Button text="Go back" onClick={()=> history.back()}/>
+          </div>
           <h1
             style={{
               color: "white",
