@@ -6,6 +6,7 @@ import request from 'superagent';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../reogranisation/Questions/Button';
+import { trim } from 'validator';
 
 export default function CofounderPersonalityTest(props) {
 	const [ testResult, setTestResult ] = useState({ personalityTest: '' });
@@ -13,7 +14,15 @@ export default function CofounderPersonalityTest(props) {
 	const [ successMsg, setSuccessMsg ] = useState(false);
 	const handelSubmit = async (e) => {
 		e.preventDefault();
-		setSuccessMsg(true);
+
+		if((trim(testResult.personalityTest).length)<1 || errorCheck != 'false'){
+			setSuccessMsg(false);
+			if (errorCheck == 'false') {
+				seterrorCheck("** Test result cannot be to empty")
+			}
+
+		}else{
+			setSuccessMsg(true);
 		await request
 		.put(`${baseUrl}/users`)
 		.set('Authorization', 'Bearer ' + props.authState.token)
@@ -24,7 +33,7 @@ export default function CofounderPersonalityTest(props) {
 			.then((res) => {
 				if (res.status === 200) {
 					setSuccessMsg(true)
-					
+
 				}
 			})
 			.catch((err) => {
@@ -34,6 +43,9 @@ export default function CofounderPersonalityTest(props) {
 					console.error(err);
 				}
 			});
+
+		}
+
 	};
 
 	const setValue = (e) => {
@@ -41,9 +53,9 @@ export default function CofounderPersonalityTest(props) {
 		setTestResult({ personalityTest: e.target.value });
 
 		if (e.target.value.match(format)) {
-			seterrorCheck('only capital letters with - is  allowed');
+			seterrorCheck('** Only capital letters with - is  allowed');
 		} else if (e.target.value.length > 6) {
-			seterrorCheck('only capital letters with - and it should be less than 6 character ');
+			seterrorCheck('** Only capital letters with - and is allowed, it should be less than 6 character ');
 		} else {
 			seterrorCheck('false');
 		}
@@ -54,14 +66,14 @@ export default function CofounderPersonalityTest(props) {
 				{successMsg ? (
 					<div>
 						<LeftSide>
-							<h3>Thank you. Your pesonality test result was submitted successfully.</h3>
+							<h3>Thank you. Your personality test result was submitted successfully.</h3>
 						</LeftSide>
 					</div>
 					) : (
 					<div>
 						<LeftSide>
 							<div>
-								<h3>2.Take your Pesonality Test</h3>
+								<h3><b>2.</b>&nbsp;Take your Pesonality Test</h3>
 							</div>
 						</LeftSide>
 						<RightSide>
@@ -75,9 +87,9 @@ export default function CofounderPersonalityTest(props) {
 								<br />
 								<br />
 								<label>Upload your result here</label>
-								<span>(ex:ISFP-T)</span>
-								<input type='text' value={testResult.personalityTest} required onChange={setValue} />
-								{errorCheck !== 'false' && <label>{errorCheck}</label>}
+								<label>(For example:INTJ-A)</label>
+								<input type='text'   value={testResult.personalityTest} required onChange={setValue} />
+								{errorCheck !== 'false' && <span>{errorCheck}</span>}
 								<br />
 								<Link to='/CofounderProfileForm'>
 									<button type='submit' onClick ={handelSubmit}>Submit</button>
@@ -95,7 +107,7 @@ export default function CofounderPersonalityTest(props) {
 						bottom: 100px;
 						width: 160px;
 					`}>
-					<Button color='inherit' text='Next'></Button>
+					<Button color='inherit' text='Next' disabled={false} withIcon></Button>
 				</div>)}
 				</Link>
 			</Container>
@@ -204,7 +216,7 @@ const RightSide = styled.div`
 		height: 20px;
 		line-height: 20px;
 		font-size: 12px;
-		color: #233949;
+		color: #FF0000;
 		padding: 0;
 		margin: 0;
 		border-radius: 10px;
@@ -236,7 +248,7 @@ const RightSide = styled.div`
 			cursor: pointer;
 		}
 	}
-	
+
 
 	a {
 		display: inline-block;
