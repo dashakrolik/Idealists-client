@@ -32,13 +32,13 @@ export default function CofounderProfileVideo(props) {
 		data.append('upload_preset', 'cofounderProfileVideo');
 		setLoading(true);
 		setPreviewSource(false);
-		let file 
+		let file
 		await request
 			.post('https://api.cloudinary.com/v1_1/idealists/video/upload')
 			.send(data)
 			.then((res)=> {
 				if (res.status === 200) {
-					file = JSON.parse(res.text)		
+					file = JSON.parse(res.text)
 				}
 			})
 			.catch((err) => {
@@ -47,12 +47,12 @@ export default function CofounderProfileVideo(props) {
 				} else {
 					console.error(err);
 				}
-			});		    
-		setPreviewSource(!previewSource);		
+			});
+		setPreviewSource(!previewSource);
 		setLoading(false);
 		setVideos({ video: file.secure_url });
-		updateVideoURL({ video: file.secure_url })	
-		setSuccessMsg(true);			 
+		updateVideoURL({ video: file.secure_url })
+		setSuccessMsg(true);
 	};
 	const cancelVideo = (e) => {
 		e.preventDefault();
@@ -60,7 +60,7 @@ export default function CofounderProfileVideo(props) {
 		document.getElementById('upload_file').value = '';
 	};
 
-	const updateVideoURL =  async(videoURL) => {			
+	const updateVideoURL =  async(videoURL) => {
 		await request
 			.put(`${baseUrl}/users`)
 			.set('Authorization', 'Bearer ' + props.authState.token)
@@ -70,7 +70,7 @@ export default function CofounderProfileVideo(props) {
 			)
 			.then((res) => {
 				if (res.status === 200) {
-					
+
 				}
 			})
 			.catch((err) => {
@@ -79,7 +79,7 @@ export default function CofounderProfileVideo(props) {
 				} else {
 					console.error(err);
 				}
-			});		
+			});
 	};
 	return (
 		<div>
@@ -87,16 +87,17 @@ export default function CofounderProfileVideo(props) {
 				{successMsg ? (
 					<div>
 						<LeftSide>
-							<h3>Thank you. Your profile video was submitted succesfully.</h3>
+							<h3>Thank you. Your profile video was submitted successfully.</h3>
 						</LeftSide>
 					</div>
 				) : (
 					<div>
 						<LeftSide>
 							<div>
-								<h3>1.Upload a short (max 3 minutes) video,<br></br>
-									  explaining who you are and why you <br></br>
-									  want to be an impactful co-founder</h3>
+								<h3><b>1.</b>&nbsp;&nbsp;Upload a short (max 3 minutes) video,<br></br>
+									      &nbsp; &nbsp;&nbsp;explaining who you are and why you <br></br>
+									     &nbsp;&nbsp;&nbsp;&nbsp;want to be an impactful co-founder.
+		                                    &nbsp;&nbsp;&nbsp;&nbsp;(Upload only mp4 video.)</h3>
 							</div>
 						</LeftSide>
 						<RightSide>
@@ -115,7 +116,7 @@ export default function CofounderProfileVideo(props) {
 								/>
 								{loading && <h3 style={{ paddingLeft: '50px' }}>Loading...</h3>}
 								<br />
-								
+
 								<button type='submit'>Upload</button>
 								<div style={{
 											paddingRight:'90px',
@@ -152,7 +153,7 @@ export default function CofounderProfileVideo(props) {
 					`}>
 					{videos && (
 						<Link to='/cofounderPersonalityTest'>
-							<Button color='inherit' text='Next' disabled='' onClick='' />
+							<Button color='inherit' text='Next' disabled={false} withIcon onClick='' />
 						</Link>
 					)}
 				</div>
@@ -160,27 +161,27 @@ export default function CofounderProfileVideo(props) {
 		</div>
 	);
 
-  
+
 }
 
 const LeftSide = styled.div`
 	position: absolute;
 	color: #ffffff;
 	top: 47%;
-	left: 50%;
+	left: 47%;
 	width: 400px;
 	height: 300px;
 	margin-left: -360px;
 	margin-top: -150px;
 	padding-top: 10px;
-	
+
 
 	h3 {
 		display: block;
 		position: relative;
 		left: 47px;
-		width: 80%;
-		font-size: 16px;
+		width: 100%;
+		font-size: 17px;
 		font-weight: 500;
 		padding: 5px;
 		margin: 50px 5px 5px;
@@ -203,6 +204,13 @@ const LeftSide = styled.div`
 		&:hover {
 			cursor: pointer;
 			color: #dfeff2;
+		}
+
+		span{
+			padding:100px;
+			color:red
+
+
 		}
 	}
 `;
