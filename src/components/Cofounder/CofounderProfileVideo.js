@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { baseUrl } from '../../constants';
 import { useState } from 'react';
 import Button from '../reogranisation/Questions/Button';
-import { Redirect, Link } from 'react-router-dom';
+import {  Link } from 'react-router-dom';
 import request from 'superagent';
 
 export default function CofounderProfileVideo(props) {
@@ -94,7 +94,9 @@ export default function CofounderProfileVideo(props) {
 					<div>
 						<LeftSide>
 							<div>
-								<h3>1.Upload Your Profile Video</h3>
+								<h3>1.Upload a short (max 3 minutes) video,<br></br>
+									  explaining who you are and why you <br></br>
+									  want to be an impactful co-founder</h3>
 							</div>
 						</LeftSide>
 						<RightSide>
@@ -113,8 +115,13 @@ export default function CofounderProfileVideo(props) {
 								/>
 								{loading && <h3 style={{ paddingLeft: '50px' }}>Loading...</h3>}
 								<br />
+								
 								<button type='submit'>Upload</button>
-								<button onClick={cancelVideo}>Cancel</button>
+								<div style={{
+											paddingRight:'90px',
+											}}>
+								<button  onClick={cancelVideo}>Cancel</button>
+								</div>
 								<br />
 								{previewSource.length > 10 && (
 									<div
@@ -159,20 +166,21 @@ export default function CofounderProfileVideo(props) {
 const LeftSide = styled.div`
 	position: absolute;
 	color: #ffffff;
-	top: 50%;
+	top: 47%;
 	left: 50%;
-	width: 360px;
+	width: 400px;
 	height: 300px;
 	margin-left: -360px;
 	margin-top: -150px;
 	padding-top: 10px;
+	
 
 	h3 {
 		display: block;
 		position: relative;
 		left: 47px;
 		width: 80%;
-		font-size: 24px;
+		font-size: 16px;
 		font-weight: 500;
 		padding: 5px;
 		margin: 50px 5px 5px;
@@ -203,7 +211,7 @@ const RightSide = styled.div`
 	position: absolute;
 	//color: #ffffff;
 	top: 50%;
-	left: 50%;
+	left: 52%;
 	width: 300px;
 	height: auto;
 	padding-top: 10px;
@@ -253,7 +261,7 @@ const RightSide = styled.div`
 		position: relative;
 		float: right;
 		right: 10%;
-		width: 30%;
+		width: 25%;
 		height: 30px;
 		line-height: 30px;
 		font-size: 12px;

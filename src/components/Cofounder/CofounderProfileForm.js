@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import request from 'superagent';
@@ -108,7 +108,6 @@ export default function CofounderProfileForm(props) {
 		};
 		setFormData(
 			Object.keys(formData).reduce((acc, currVal) => {
-				// console.log('value of ACC ' + acc + '  currVal :' + currVal);
 				return {
 					...acc,
 					[currVal]: {
@@ -137,7 +136,7 @@ export default function CofounderProfileForm(props) {
 			.then((res) => {
 				if (res.status === 200) {
 					setSucessMsg(true)
-					//props.history.replace(`Cofounder/login`);
+					
 				}
 			})
 			.catch((err) => {
@@ -171,7 +170,7 @@ export default function CofounderProfileForm(props) {
 					<div></div>
 			<LeftSide>
 				<div>
-					<h3>3.Profile form</h3>
+					<h3>3.Fill out the blanks on your profile, by answering a few simple questions</h3>
 				</div>
 			</LeftSide>
 			<br />
@@ -360,17 +359,20 @@ export default function CofounderProfileForm(props) {
 const LeftSide = styled.div`
 	position: absolute;
 	color: #ffffff;
+	top: 50%;
+	left: 40%;
 	width: 360px;
 	height: 300px;
-    padding-left: 800px;
-	padding-top: 60px;
+	margin-left: -360px;
+	margin-top: -150px;
+	padding-top: 10px;
 
 	h3 {
 		display: block;
 		position: relative;
 		left: 47px;
 		width: 80%;
-		font-size: 24px;
+		font-size: 18px;
 		font-weight: 500;
 		padding: 5px;
 		margin: 50px 5px 5px;
@@ -400,8 +402,8 @@ const LeftSide = styled.div`
 const RightSide = styled.div`
 	position: absolute;
 	//color: #ffffff;
-	top: 35%;
-	left: 30%;
+	top: 30%;
+	left: 40%;
 	width: 800px;
 	height: auto;
 	padding-top: 10px;
@@ -435,8 +437,8 @@ const RightSide = styled.div`
 		position: relative;
 		left: 10%;
 		width: 80%;
-		height: 30px;
-		line-height: 30px;
+		height: 36px;
+		line-height: 36px;
 		font-size: 14px;
 		color: #233949;
 		border-radius: 6px;
@@ -452,7 +454,7 @@ const RightSide = styled.div`
 		float: right;
 		right: 10%;
 		width: 10%;
-		height: 40px;
+		height: 30px;
 		line-height: 30px;
 		font-size: 12px;
 		color: #233949;
@@ -495,7 +497,7 @@ const Container = styled.div`
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	height: 100vh;
 	background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
 `;
