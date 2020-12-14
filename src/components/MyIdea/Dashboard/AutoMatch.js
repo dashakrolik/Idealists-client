@@ -505,7 +505,7 @@ export default function IdeaDashboardDetail(props) {
                         }
                       `}
                     >
-                      Automatch results
+                      First patent check
                     </Heading>
                     <Paragraph>
                       <h2>
