@@ -88,22 +88,32 @@ export default function CofounderIdeaDetail(props) {
           </FlexRow>
         </Left>
         <Right>
-          {!showBidders ? (
-            <Button text="See other bidders" onClick={(() => { setShowBidders(true) })} />
-          ) : (
-              < StyledDiv> {ideaBids.map((bid) => {
-                return (
-                  <StyledLink to={`/Cofounder/dashboard/${bid.userid}/profile`}>
-                    <span key={bid.id}>{bid.firstname}{" "}{bid.lastname}</span>
-                  </StyledLink>)
-              })}
-                <Button text=" hide bidders" onClick={(() => { setShowBidders(false) })} />
-              </StyledDiv>
-            )}
-          <Content>
-            <h1 className="header"> Questions and Answers about Idea:</h1>
-            <IdeaDetails user={props.authState.user} ideas={userIdeas} />
-          </Content>
+          <FlexRow>
+
+            <FlexColumn>
+
+              {!showBidders ? (
+                <Button text="See other bidders" onClick={(() => { setShowBidders(true) })} style={{ alignSelf: 'baseline' }} />
+              ) : (
+                  < StyledDiv> {ideaBids.map((bid) => {
+                    return (
+                      <StyledLink to={`/Cofounder/dashboard/${bid.userid}/profile`}>
+                        <span key={bid.id}>{bid.firstname}{" "}{bid.lastname}</span>
+                      </StyledLink>)
+                  })}
+                    <Button text=" hide bidders" onClick={(() => { setShowBidders(false) })} />
+                  </StyledDiv>
+                )}
+            </FlexColumn>
+          </FlexRow>
+          <FlexRow>
+            <FlexColumn>
+              <Content>
+                <h1 className="header"> Questions and Answers about Idea:</h1>
+                <IdeaDetails user={props.authState.user} ideas={userIdeas} />
+              </Content>
+            </FlexColumn>
+          </FlexRow>
         </Right>
       </Container>
     </div>
@@ -160,7 +170,8 @@ const Content = styled.div`
   width: 90vw;
   max-width: 800px;
   height: auto;
-  padding: 20px;
+  padding: 20px 15px;
+  margin-top: 20px;
 `;
 
 const Right = styled.div`
@@ -170,8 +181,8 @@ const Right = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  justify-content: start;
-  align-items: flex-start;
+  justify-content: end;
+  align-items: center;
   padding-top: 100px;
 `;
 

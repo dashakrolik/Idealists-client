@@ -8,13 +8,13 @@ import Button from "../reogranisation/Questions/Button";
 import styled from "@emotion/styled";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: 300,
-    color: "#fffffff",
-  },
-  margin: {
-    height: theme.spacing(3),
-  },
+    root: {
+        width: 300,
+        color: "#fffffff",
+    },
+    margin: {
+        height: theme.spacing(3),
+    },
 }));
 
 export default function BidSlider(props) {
@@ -22,6 +22,7 @@ export default function BidSlider(props) {
     const [bidValue, setValue] = useState("")
     const [savedBid, setSavedbid] = useState("")
     const [showEditBid, setShowEditBid] = useState(false)
+    
     const classes = useStyles();
 
     const marks = [
@@ -89,6 +90,16 @@ export default function BidSlider(props) {
 
         return (
             <div className={classes.root}>
+                <StyledDiv>
+                    <h4>How it works</h4>
+                    <p>
+                        You, and all other interested co-founders, can now bid on the idea for 7 days.
+                        You do this, by stating how much equity (shares) you require to commit yourself to this new company. Next to this you will receive a set-wage, which you can find in the financial plan, further below on this page.
+                        You can now also, on this page, assess your potential co-founders (catalysts evaluate creators and vice versa).
+                        Our matchmaker builds the founding team, based on their equity bids (so don’t pick a share that is too high), the evaluations they received by the other co-founders and the quality of their profile and assessments.
+                        Good luck and if you have any questions, you can always contact us at support@the-idealists.com
+                        </p>
+                </StyledDiv>
                 <Typography id="discrete-slider-custom" gutterBottom>
                     Equity in %
       </Typography>
@@ -130,6 +141,9 @@ const StyledDiv = styled.div`
   color: white;
   margin-bottom: 20px;
   margin-top: 45px;
+  p {
+      text: justify
+  }
 `;
 
 const StyledSlider = styled(Slider)`
