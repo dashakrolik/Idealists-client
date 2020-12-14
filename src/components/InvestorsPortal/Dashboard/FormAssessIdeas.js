@@ -1721,65 +1721,39 @@ export default class FormAssessIdeas extends Component {
                                   // msgOnSuccess: "Your custom success message if you provide the validationOption['msgOnSuccess']. Otherwise, it will not show, not even green border." // Optional.[String].Default: "". Show your custom success message no matter what when it has error if it is provied.
                                 }}
                               />
-                              {
-                                isAgreementMentorChecked ? (
-                                  <Textarea
-                                    tabIndex="7"
-                                    id="mentorMotivationText"
-                                    name="mentorMotivationText"
-                                    value={mentorMotivationText}
-                                    disabled={false}
-                                    placeholder="Please explain why you would be the ideal mentor for this idea (the team will pick their mentors based on these texts)"
-                                    validate={validate}
-                                    validationCallback={(res) =>
-                                      this.setState({
-                                        hasProReason2Error: res,
-                                        validate: false,
-                                      })
-                                    }
-                                    classNameInput=""
-                                    classNameWrapper=""
-                                    classNameContainer=""
-                                    customStyleInput={{}}
-                                    customStyleWrapper={{}}
-                                    customStyleContainer={{}}
-                                    onChange={(mentorMotivationText, e) => {
-                                      this.setState({ mentorMotivationText });
-                                    }}
-                                    onBlur={(e) => {}}
-                                    validationOption={{
-                                      name: "mentorMotivationText",
-                                      check: true,
-                                      required: true,
-                                      type: "string",
-                                    }}
-                                  />
-                                ) : null
-                                /* 
-                              {assessment.isAgreementMentorChecked
-                      ? "TEST"
-                      : // (
-                        //   <div>
-                        //     <StyledTextField
-                        //       id="filled-multiline-flexible"
-                        //       InputLabelProps={{ style: { color: "#fff" } }}
-                        //       label="Please explain why you would be the ideal mentor for this idea (the team will pick their mentors based on these texts):"
-                        //       multiline
-                        //       rowsMax="4"
-                        //       fullWidth
-                        //       margin="normal"
-                        //       variant="filled"
-                        //       value={assessment.key}
-                        //       name={key}
-                        //       type="text"
-                        //       onChange={updateDifference}
-                        //     />
-                        //   </div>
-                        // )
-                        null}
-                    {/* Please explain why you would be the ideal mentor for this idea (the team will pick their mentors based on these texts)*/
-                              }
-                              */}
+                              {isAgreementMentorChecked ? (
+                                <Textarea
+                                  tabIndex="7"
+                                  id="mentorMotivationText"
+                                  name="mentorMotivationText"
+                                  value={mentorMotivationText}
+                                  disabled={false}
+                                  placeholder="Please explain why you would be the ideal mentor for this idea (the team will pick their mentors based on these texts)"
+                                  validate={validate}
+                                  validationCallback={(res) =>
+                                    this.setState({
+                                      hasProReason2Error: res,
+                                      validate: false,
+                                    })
+                                  }
+                                  classNameInput=""
+                                  classNameWrapper=""
+                                  classNameContainer=""
+                                  customStyleInput={{}}
+                                  customStyleWrapper={{}}
+                                  customStyleContainer={{}}
+                                  onChange={(mentorMotivationText, e) => {
+                                    this.setState({ mentorMotivationText });
+                                  }}
+                                  onBlur={(e) => {}}
+                                  validationOption={{
+                                    name: "mentorMotivationText",
+                                    check: true,
+                                    required: true,
+                                    type: "string",
+                                  }}
+                                />
+                              ) : null}
                             </div>
                           </div>
                         </div>
