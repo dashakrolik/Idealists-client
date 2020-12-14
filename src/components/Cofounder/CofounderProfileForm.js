@@ -6,7 +6,7 @@ import { baseUrl } from '../../constants';
 import '../MyIdea/Dashboard/IdeaDashboard.css';
 
 export default function CofounderProfileForm(props) {
-	
+
 	const [sucessMsg,setSucessMsg] = useState(false)
 	const [ formData, setFormData ] = useState({
 		workExperience: {
@@ -135,20 +135,18 @@ export default function CofounderProfileForm(props) {
 			})
 			.then((res) => {
 				if (res.status === 200) {
-					setSucessMsg(true)
-					
-				}
-			})
+					setSucessMsg(true)}
+					})
 			.catch((err) => {
 				if (err.status === 409) {
-					alert('User with this email already exists');
+					alert('Something went wrong');
 				} else {
 					console.error(err);
 				}
 			});
 	};
 
-	return (	
+	return (
 		<Container>
 			{sucessMsg ?(<div css={css`
 						display: block;
@@ -162,7 +160,7 @@ export default function CofounderProfileForm(props) {
 		                 margin: 5px;
 					`}>
 						<LeftSide>
-							<h3>Thank you. Your profile video was submitted succesfully.</h3>
+							<h3>Thank you.Your profile form was submitted successfully.We will get back to you shortly.</h3>
 						</LeftSide>
 					</div>)
 			:(
@@ -170,7 +168,7 @@ export default function CofounderProfileForm(props) {
 					<div></div>
 			<LeftSide>
 				<div>
-					<h3>3.Fill out the blanks on your profile, by answering a few simple questions</h3>
+					<h3><b>3.</b>&nbsp;Fill out the blanks on your  profile,by &nbsp;&nbsp;&nbsp;&nbsp;answering a few  simple questions</h3>
 				</div>
 			</LeftSide>
 			<br />
@@ -360,7 +358,7 @@ const LeftSide = styled.div`
 	position: absolute;
 	color: #ffffff;
 	top: 50%;
-	left: 40%;
+	left: 34%;
 	width: 360px;
 	height: 300px;
 	margin-left: -360px;
@@ -371,7 +369,7 @@ const LeftSide = styled.div`
 		display: block;
 		position: relative;
 		left: 47px;
-		width: 80%;
+		width: 100%;
 		font-size: 18px;
 		font-weight: 500;
 		padding: 5px;
