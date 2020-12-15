@@ -36,7 +36,7 @@ export default function CofounderProfile(props) {
       props.authState.user.id === parseInt(parsedParameters)
     ) {
       request
-        .get(`${baseUrl}/cofounders/profile`)
+        .get(`${baseUrl}/users/cofounders/profile`)
         .set("Authorization", `Bearer ${props.authState.token}`)
         .then((res) => {
           set_profile(res.body);
