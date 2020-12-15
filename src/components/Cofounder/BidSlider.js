@@ -19,7 +19,7 @@ export default function BidSlider(props) {
       .get(`${baseUrl}/ideas/${props.ideaId}/bid`)
       .set("Authorization", `Bearer ${props.authState.token}`)
       .then((res) => {
-        if (res.status !== 500) {
+        if (res.status === 200) {
           setValue(res.body.equity);
           setBidExists(true);
         }
@@ -114,6 +114,7 @@ export default function BidSlider(props) {
                 <Typography id="discrete-slider-custom" gutterBottom>
                   Equity in %
                 </Typography>
+                <br />
                 <br />
                 <Slider
                   defaultValue={0}
