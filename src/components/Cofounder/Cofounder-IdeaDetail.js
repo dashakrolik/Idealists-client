@@ -3,107 +3,82 @@ import request from "superagent";
 import { baseUrl } from "../../constants";
 import styled from "@emotion/styled";
 import IdeaDetails from "../reogranisation/IdeaDetails/IdeaDetails";
-// import IdeaDashboardDetail from "../SpecialistPortal/Dashboard/SpecialistIdeaDetails";
 import BidSlider from "./BidSlider";
 import { Redirect } from "react-router-dom";
-import bid from '../../res/bid.png'
-import ProgressBar from "../reogranisation/ProgressBar/ProgressBar"
-import Button from "../reogranisation/Questions/Button"
-import { Link } from 'react-router-dom'
-
+import ProgressBar from "../reogranisation/ProgressBar/ProgressBar";
+import Button from "../reogranisation/Questions/Button";
+import { Link } from "react-router-dom";
 
 export default function CofounderIdeaDetail(props) {
-
-
   const ideaId = props.match.params.id;
   const [userIdeas, setUserIdeas] = useState([]);
-  const [showSlider, setShowSlider] = useState(false)
-  const [showImage, setShowImage] = useState(true)
-  const [showButton, setButton] = useState(true)
-  const [showBidders, setShowBidders] = useState(false)
-  const [ideaBids, setIdeaBids] = useState([])
-  const [displaySuccess, setDisplaySuccess] = useState(false);
-
-
-
+  const [showBidders, setShowBidders] = useState(false);
+  const [ideaBids, setIdeaBids] = useState([]);
 
   useEffect(() => {
     request
       .get(`${baseUrl}/ideas/${ideaId}`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      .then((res) =>
-        setUserIdeas(res.body.idea)
-      );
+      .then((res) => setUserIdeas(res.body.idea));
   }, []);
 
   useEffect(() => {
     request
       .get(`${baseUrl}/ideas/${ideaId}/bids`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      .then((res) => setIdeaBids(res.body)
-      );
-  }, [])
+      .then((res) => setIdeaBids(res.body));
+  }, []);
 
-
-  if (props.authState.loggedIn === false) return <Redirect to="/CofounderStart" />;
+  if (props.authState.loggedIn === false)
+    return <Redirect to="/CofounderStart" />;
 
   if (!props.authState.user) {
     props.user();
   }
 
-  const handleSlider = () => {
-    setShowSlider(true)
-    setShowImage(false)
-  }
-
-
   return (
     <div className="dashboard-container">
       <Container>
         <Left>
-          <FlexRow>
-            <FlexColumn>
-              <Left>
-                {!showSlider ? (
-                  <div className='bid-icon-wrap'>
-                    <img className="icons" src={bid} alt="Bid on idea" onClick={() => {
-                      handleSlider()
-                    }} showImage={showImage} />
-                    <h3>Bid on this idea</h3>
-                  </div>
-                ) : (
-                    <BidSlider authState={props.authState} ideaId={ideaId} showSlider={!showSlider} displaySuccess={setDisplaySuccess} />
-                  )}
-                {displaySuccess ? (
-                  <StyledDiv >Bid submission success!</StyledDiv>
-                ) : null}
-              </Left>
-            </FlexColumn>
-          </FlexRow>
-          <FlexRow>
-            <ProgressBar
-              token={props.authState.token}
-              ideasId={props.match.params.id}
-            />
-          </FlexRow>
+          <BidSlider authState={props.authState} ideaId={ideaId} />
+          <ProgressBar
+            token={props.authState.token}
+            ideasId={props.match.params.id}
+          />
         </Left>
         <Right>
           <FlexRow>
-
             <FlexColumn>
-
               {!showBidders ? (
-                <Button text="See other bidders" onClick={(() => { setShowBidders(true) })} style={{ alignSelf: 'baseline' }} />
+                <Button
+                  text="See other bidders"
+                  onClick={() => {
+                    setShowBidders(true);
+                  }}
+                  style={{ alignSelf: "baseline" }}
+                />
               ) : (
-                  < StyledDiv> {ideaBids.map((bid) => {
+                <StyledDiv>
+                  {" "}
+                  {ideaBids.map((bid) => {
                     return (
-                      <StyledLink to={`/Cofounder/dashboard/${bid.userid}/profile`}>
-                        <span key={bid.id}>{bid.firstname}{" "}{bid.lastname}</span>
-                      </StyledLink>)
+                      <StyledLink
+                        to={`/Cofounder/dashboard/${bid.userid}/profile`}
+                      >
+                        <span key={bid.id}>
+                          {bid.firstname} {bid.lastname}
+                        </span>
+                      </StyledLink>
+                    );
                   })}
-                    <Button text=" hide bidders" onClick={(() => { setShowBidders(false) })} />
-                  </StyledDiv>
-                )}
+                  <Button
+                    text=" hide bidders"
+                    onClick={() => {
+                      setShowBidders(false);
+                    }}
+                  />
+                </StyledDiv>
+              )}
             </FlexColumn>
           </FlexRow>
           <FlexRow>
@@ -119,7 +94,6 @@ export default function CofounderIdeaDetail(props) {
     </div>
   );
 }
-
 
 const StyledDiv = styled.div`
   margin: 0 auto;
@@ -157,11 +131,11 @@ const FlexRow = styled.div`
 const FlexColumn = styled.div`
   display: flex;
   flex: 1;
-.bid-icon-wrap {
-  border: 1px solid white;
-  border-radius: 10px;
-}
-  `;
+  .bid-icon-wrap {
+    border: 1px solid white;
+    border-radius: 10px;
+  }
+`;
 
 const Content = styled.div`
   align-self: center;
@@ -210,14 +184,3 @@ color: white;
     transition: ease-in;
   }
 `;
-
-
-
-
-
-
-
-
-
-
-
