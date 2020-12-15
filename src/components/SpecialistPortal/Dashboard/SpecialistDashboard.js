@@ -5,13 +5,12 @@ import { Redirect, Link } from "react-router-dom";
 import "./SpecialistDashboard.css";
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
-// import assess from '../../../res/assess-white.png'
-// import invest from '../../../res/invest-white.png'
-// import crowdfunding from '../../../res/crowdfunding.png'
+import Spinner from "../../reogranisation/Spinner";
 
 export default function specialistDashboard(props) {
   const [userData, setUserData] = useState({});
   const [ideaList, setIdeaList] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (props.authState.loggedIn)
@@ -30,8 +29,15 @@ export default function specialistDashboard(props) {
     request
       .get(`${baseUrl}/ideas/specialist`)
       .set("Authorization", `Bearer ${props.authState.token}`)
-      .then((res) => setIdeaList(res.body));
+      .then((res) => {
+        setIdeaList(res.body)
+        setLoading(false)
+      });
   }, []);
+  
+  if(loading && !ideaList){
+    return <Container><Spinner /></Container>
+  }
 
   if (!props.authState.loggedIn) return <Redirect to="/Specialist/login" />;
 
@@ -66,7 +72,12 @@ export default function specialistDashboard(props) {
         <Link
           key={idea.id}
           className="tile-link"
-          to={`/Specialist/dashboard/ideas/${idea.id}`}
+          to={{
+            pathname: `/Specialist/dashboard/ideas/${idea.id}`,
+            state: {
+              loading: props.loaded,
+            },
+          }}
         >
           <div className="assess-tile" key={idea.id}>
             <p style={{ color: "black" }}>
@@ -223,3 +234,16 @@ const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
 `;
+
+const Container = styled.div`
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
+    display: flex;
+  `;

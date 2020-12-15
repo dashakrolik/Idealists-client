@@ -17,7 +17,19 @@ const SingleLineQuestion = (props) => {
 
   useEffect(() => {
     if (currentValue.length > 1 && currentValue.length < props.maxChar) {
-      setValidated(true);
+      if (props.groupId === 5 && parseInt(props.id) === 0) {
+        const replaceComma = currentValue.trim().replace(/,/g, " ");
+        const removeSpaces = replaceComma.replace(/\s\s+/g, " ");
+        const splitBySpace = removeSpaces.trim().split(" ");
+        const numOfWords = splitBySpace.length;
+        if (numOfWords <= 3) {
+          setValidated(true);
+        } else {
+          setValidated(false);
+        }
+      } else {
+        setValidated(true);
+      }
     } else {
       setValidated(false);
     }
