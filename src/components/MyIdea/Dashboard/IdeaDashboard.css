@@ -1,3 +1,8 @@
+p {
+  padding: 15px; 
+  white-space: nowrap; 
+  overflow: hidden;
+}
 .dashboard-container {
   min-height: 100%;
   background-image: linear-gradient(
@@ -144,3 +149,6 @@
 .flex-ideacontainer {
   margin: 40px;
 }
+  .overflow-visible {
+    text-overflow: ellipsis;
+  }
