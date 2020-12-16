@@ -29,7 +29,7 @@
   margin: 10px;
   border: 1px solid silver;
   border-radius: 10px;
-  background-color: white;
+  color: white;
 }
 
 .assess-tile:hover {
@@ -38,7 +38,8 @@
   margin: 10px;
   border: 1px solid silver;
   border-radius: 10px;
-  background-color: #dfeff2;
+  background-color: #1f7fbb;
+  color: white;
   transition: ease-in;
 }
 
