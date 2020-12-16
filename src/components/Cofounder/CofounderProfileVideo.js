@@ -84,7 +84,7 @@ export default function CofounderProfileVideo(props) {
         {successMsg ? (
           <div>
             <LeftSide>
-              <h3>Thank you. Your profile video was submitted succesfully.</h3>
+              <h3>Thank you. Your profile video was submitted successfully.</h3>
             </LeftSide>
           </div>
         ) : (
@@ -92,7 +92,7 @@ export default function CofounderProfileVideo(props) {
             <LeftSide>
               <div>
                 <h3>
-                  1.Upload a short (max 3 minutes) video,<br></br>
+                  1. Upload a short (max 3 minutes) video,<br></br>
                   explaining who you are and why you <br></br>
                   want to be an impactful co-founder
                 </h3>
