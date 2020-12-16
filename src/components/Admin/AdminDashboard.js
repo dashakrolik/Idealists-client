@@ -9,7 +9,6 @@ import assess from "../../res/assess-white.png";
 export default function AdminDashboard(props) {
   const [user, setUserData] = useState({});
   const [userIdeas, setUserIdeas] = useState([]);
-
   useEffect(() => {
     if (props.authState.loggedIn)
       request

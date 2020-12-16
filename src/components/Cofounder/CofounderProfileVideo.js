@@ -84,67 +84,66 @@ export default function CofounderProfileVideo(props) {
         {successMsg ? (
           <div>
             <LeftSide>
-              <h3>Thank you. Your profile video was submitted succesfully.</h3>
+              <h3>Thank you. Your profile video was submitted successfully.</h3>
             </LeftSide>
           </div>
         ) : (
-          <div>
-            <LeftSide>
-              <div>
-                <h3>
-                  1.Upload a short (max 3 minutes) video,<br></br>
-                  explaining who you are and why you <br></br>
-                  want to be an impactful co-founder
-                </h3>
-              </div>
-            </LeftSide>
-            <RightSide>
-              <form onSubmit={uploadVideo}>
-                <label>
-                  {" "}
-                  <h3>Profile Video</h3>
-                </label>
-                <input
-                  id="upload_file"
-                  type="file"
-                  required
-                  name="video"
-                  accept="video/mp4,video/x-m4v,video/*"
-                  onChange={handelVideoInputChange}
-                />
-                {loading && <h3 style={{ paddingLeft: "50px" }}>Loading...</h3>}
-                <br />
-
-                <button type="submit">Upload</button>
-                <div
-                  style={{
-                    paddingRight: "90px",
-                  }}
-                >
-                  <button onClick={cancelVideo}>Cancel</button>
+            <div>
+              <LeftSide>
+                <div>
+                  <h3><b>1.</b>&nbsp;&nbsp;Upload a short (max 3 minutes) video,<br></br>
+									      &nbsp; &nbsp;&nbsp;explaining who you are and why you <br></br>
+									     &nbsp;&nbsp;&nbsp;&nbsp;want to be an impactful co-founder.
+		                                    &nbsp;&nbsp;&nbsp;&nbsp;(Upload only mp4 video.)</h3>
                 </div>
-                <br />
-                {previewSource.length > 10 && (
+              </LeftSide>
+              <RightSide>
+                <form onSubmit={uploadVideo}>
+                  <label>
+                    {" "}
+                    <h3>Profile Video</h3>
+                  </label>
+                  <input
+                    id="upload_file"
+                    type="file"
+                    required
+                    name="video"
+                    accept="video/mp4,video/x-m4v,video/*"
+                    onChange={handelVideoInputChange}
+                  />
+                  {loading && <h3 style={{ paddingLeft: "50px" }}>Loading...</h3>}
+                  <br />
+
+                  <button type="submit">Upload</button>
                   <div
                     style={{
-                      height: "100px",
-                      width: "100px",
-                      paddingTop: "50px",
-                      paddingLeft: "50px",
+                      paddingRight: "90px",
                     }}
                   >
-                    {previewSource && (
-                      <video width="200px" height="100px" controls>
-                        <source src={previewSource} />
-                        Your browser does not support HTML5 video.
-                      </video>
-                    )}
+                    <button onClick={cancelVideo}>Cancel</button>
                   </div>
-                )}
-              </form>
-            </RightSide>
-          </div>
-        )}
+                  <br />
+                  {previewSource.length > 10 && (
+                    <div
+                      style={{
+                        height: "100px",
+                        width: "100px",
+                        paddingTop: "50px",
+                        paddingLeft: "50px",
+                      }}
+                    >
+                      {previewSource && (
+                        <video width="200px" height="100px" controls>
+                          <source src={previewSource} />
+                        Your browser does not support HTML5 video.
+                        </video>
+                      )}
+                    </div>
+                  )}
+                </form>
+              </RightSide>
+            </div>
+          )}
         <div
           css={css`
             position: absolute;
@@ -155,7 +154,7 @@ export default function CofounderProfileVideo(props) {
         >
           {videos && (
             <Link to="/cofounderPersonalityTest">
-              <Button color="inherit" text="Next" disabled="" onClick="" />
+							<Button color='inherit' text='Next' disabled={false} withIcon onClick='' />
             </Link>
           )}
         </div>
@@ -204,6 +203,10 @@ const LeftSide = styled.div`
       cursor: pointer;
       color: #dfeff2;
     }
+    span{
+			padding:100px;
+			color:red
+		} 
   }
 `;
 

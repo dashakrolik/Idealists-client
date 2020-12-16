@@ -6,7 +6,7 @@ import LoginContext from "../reogranisation/Login/LoginContext";
 
 export default function CofounderLogin(props) {
   const [loginState, setLoginState] = useState({});
- 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);
@@ -27,9 +27,9 @@ export default function CofounderLogin(props) {
   };
 
   if (props.authState.loggedIn) {
-    props.getProfile()
-    props.user()
-    props.history.replace("/Cofounder/dashboard");    
+    props.getProfile();
+    props.user();
+    props.history.replace("/Cofounder/dashboard");
 
     return <div></div>;
   } else {
@@ -45,10 +45,8 @@ export default function CofounderLogin(props) {
           onSubmit={onSubmit}
         />
       </div>
-
-    )
+    );
   }
-
 }
 const LeftSide = styled.div`
   position: absolute;

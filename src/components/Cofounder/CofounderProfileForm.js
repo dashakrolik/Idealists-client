@@ -137,11 +137,13 @@ export default function CofounderProfileForm(props) {
       .then((res) => {
         if (res.status === 200) {
           setSucessMsg(true);
+          props.getProfile()
+          props.history.push("/Cofounder/dashboard")
         }
       })
       .catch((err) => {
         if (err.status === 409) {
-          alert("User with this email already exists");
+					alert('Something went wrong');
         } else {
           console.error(err);
         }
@@ -165,7 +167,7 @@ export default function CofounderProfileForm(props) {
           `}
         >
           <LeftSide>
-            <h3>Thank you. Your profile was created succesfully.</h3>
+          <h3>Thank you.Your profile form was submitted successfully. We will get back to you shortly.</h3>
           </LeftSide>
         </div>
       ) : (
@@ -173,10 +175,8 @@ export default function CofounderProfileForm(props) {
           <div></div>
           <LeftSide>
             <div>
-              <h3>
-                3.Fill out the blanks on your profile, by answering a few simple
-                questions
-              </h3>
+            <h3><b>3.</b>&nbsp;Fill out the blanks on your  profile,by &nbsp;&nbsp;&nbsp;&nbsp;answering a few  simple questions</h3>
+
             </div>
           </LeftSide>
           <br />
@@ -379,7 +379,7 @@ const LeftSide = styled.div`
   position: absolute;
   color: #ffffff;
   top: 50%;
-  left: 40%;
+  left: 34%;
   width: 360px;
   height: 300px;
   margin-left: -360px;
@@ -390,7 +390,7 @@ const LeftSide = styled.div`
     display: block;
     position: relative;
     left: 47px;
-    width: 80%;
+    width: 100%;
     font-size: 18px;
     font-weight: 500;
     padding: 5px;
