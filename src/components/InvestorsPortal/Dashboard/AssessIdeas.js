@@ -6,6 +6,7 @@ import "./AssessIdeas.css";
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import Button from "../../reogranisation/Questions/Button";
+import { useHistory } from "react-router-dom";
 
 export default function AssessIdeas(props) {
   const [userData, setUserData] = useState({});
@@ -15,6 +16,7 @@ export default function AssessIdeas(props) {
   const [industries, setIndustries] = useState([]);
   // const [selection, setSelection] = useState("show all");
   const [sortedIdeas, setSortedIdeas] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     if (props.authState.loggedIn)
@@ -102,6 +104,9 @@ export default function AssessIdeas(props) {
       <br />
       <div className="title">
         <h2>This is {userData.firstName}'s Expert dashboard</h2>
+        <div style={{ width: "12rem", margin: "auto", paddingTop: "50px" }}>
+          <Button text="Go back" onClick={() => history.goBack()} />
+        </div>
       </div>
 
       {ideas.length < 1 ? (
@@ -160,19 +165,19 @@ export default function AssessIdeas(props) {
             to={`/investors/dashboard/idea/${idea.id}`}
           >
             <div className="assess-tile" key={idea.id}>
-              <p style={{ color: "black" }}>
+              <p>
                 <b>Title: </b>
                 <br />
                 {idea.idea[5].answers[0].qAnswer}
               </p>
               <br />
-              <p style={{ color: "black" }}>
+              <p>
                 <b>Description: </b>
                 <br />
                 {idea.idea[5].answers[1].qAnswer}
               </p>
               <br />
-              <p style={{ color: "black" }}>
+              <p>
                 <b>Industries: </b>
                 {idea.idea[4].answers[0].qAnswer.map((industries) => (
                   <li key={industries.value}>{industries.value}</li>
