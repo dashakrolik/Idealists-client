@@ -714,6 +714,7 @@ class App extends Component {
                   return (
                     <CofounderProfileForm
                       {...props}
+                      getProfile={this.getCoFounderProfile}
                       user={this.getCurrentUser}
                       authState={this.state.auth}
                       login={this.requestLoginExpert}

@@ -137,6 +137,8 @@ export default function CofounderProfileForm(props) {
       .then((res) => {
         if (res.status === 200) {
           setSucessMsg(true);
+          props.getProfile()
+          props.history.push("/Cofounder/dashboard")
         }
       })
       .catch((err) => {
