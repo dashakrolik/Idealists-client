@@ -1,5 +1,4 @@
 /** @jsx jsx */
-import React from "react"
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
@@ -20,11 +19,12 @@ const Submission = (props) => {
   const [valueDecideProfit, setValueDecideProfit] = useState(false);
   const [valueDecideSdg, setValueDecideSdg] = useState(false);
   const [agreementSection, setAgreementSection] = useState(false);
-  const questionGroups = [...jsonFormData];
+  const questionGroups = [...jsonFormData]
 
   useEffect(() => {
     setProgress(activeGroup / questionGroups.length);
   }, [activeGroup]);
+
 
   if (!props.authState.user) {
     props.user()
@@ -42,9 +42,9 @@ const Submission = (props) => {
   };
 
   const handleNextBttnClick = () => {
-    // console.log(activeGroup, questionGroups.length)
+    console.log(activeGroup, questionGroups.length)
     if ((activeGroup) === questionGroups.length) {
-      // console.log(activeGroup, questionGroups.length)
+      console.log(activeGroup, questionGroups.length)
       setAgreementSection(false);
     }
     else if ((activeGroup === 11) && (questionGroups.length === 12)) {
@@ -53,7 +53,7 @@ const Submission = (props) => {
     
     } else {
       setActiveGroup(activeGroup + 1);
-      // console.log(activeGroup, questionGroups.length)
+      console.log(activeGroup, questionGroups.length)
       setAgreementSection(false);
     }
   };
@@ -85,11 +85,6 @@ const Submission = (props) => {
     return <div></div>;
   }
   if (questionGroups.length === 0) return <div>Loading...</div>;
-
-  const handleBackBttnClick = () => {
-      setActiveGroup(activeGroup - 1);
-      setAgreementSection(false);
-  }
 
   return (
     <div>
@@ -123,6 +118,7 @@ const Submission = (props) => {
                       handleValidationChanges={handleValidationChange}
                       key={questionGroups[activeGroup].id.toString()}
                       answers={answers[activeGroup]}
+
                     />}
                   {(valueDecideProfit) ? <div style={{ color: "red" }}> <br />We are working very hard on building a non-profit version of The Idealists as well. Unfortunately, until that is ready, we cannot accept non-profit ideas yet.
                      </div> : null}
@@ -134,14 +130,15 @@ const Submission = (props) => {
           </Content>
         </Right>
         <div css={css`position: absolute; right: 20px; bottom: 20px; width: 160px;`}>
-          {activeGroup !== questionGroups.length && 
+          {activeGroup !== questionGroups.length &&
             <Button text='Next' disabled={!activeGroupComplete} onClick={handleNextBttnClick} withIcon />}
-            {activeGroup !== 0 &&  <Button text="Back" onClick={handleBackBttnClick}/>}
         </div>
+
       </Container>
     </div>
   );
 };
+
 
 const PProgressBar = posed.div({
   visible: {

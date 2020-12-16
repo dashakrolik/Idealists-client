@@ -7,13 +7,11 @@ import { Redirect } from "react-router-dom";
 import Button from "../../reogranisation/Questions/Button";
 import ProgressBar from "../../reogranisation/ProgressBar/ProgressBar";
 import IdeaDetails from "../../reogranisation/IdeaDetails/IdeaDetails";
-import { useHistory } from "react-router-dom";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [assessments, setAssessments] = useState([]);
   const ideasId = props.match.params.id;
-  const history = useHistory(); 
 
   if (props.authState.loggedIn === false) {
     return <Redirect to="/MyIdea" />;
@@ -56,9 +54,6 @@ export default function IdeaDashboardDetail(props) {
     <div className="dashboard-container">
       <Container>
         <Left>
-          <div style={{ width: "12rem"}}>
-            <Button text="Go back" onClick={() => history.goBack()}/>
-          </div>
           <FlexRow>
             <FlexColumn>
               <StyledDiv>

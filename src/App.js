@@ -37,8 +37,6 @@ import AdminDashboardRejected from "./components/Admin/AdminDashboardRejected";
 import CompleteAssessment from "./components/InvestorsPortal/Dashboard/CompleteAssessment";
 import AddSpecialistStart from "./components/SpecialistPortal/SpecialistCreation/AddSpecialistStart";
 import UserAssessIdeas from "./components/MyIdea/Dashboard/UserAssessIdeas";
-import { useHistory } from "react-router-dom";
-import Button from "./components/reogranisation/Questions/Button";
 import CofounderStart from "./components/Cofounder/CofounderStart";
 import CofounderLogin from "./components/Cofounder/CofounderLogin";
 import CofounderDashboard from "./components/Cofounder/CofounderDashboard";
