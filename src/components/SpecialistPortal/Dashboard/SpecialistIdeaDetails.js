@@ -143,14 +143,14 @@ export default function IdeaDashboardDetail(props) {
       });
   }, []);
 
-  if(loading){
+  if (loading) {
     return (
       <SpinnerStyle>
         <SpinnerPostion>
           <Spinner />
         </SpinnerPostion>
       </SpinnerStyle>
-    )
+    );
   }
 
   const renderAssessmentSection = !showAssessmentSection ? (
@@ -456,7 +456,14 @@ const SpinnerStyle = styled.div`
   display: flex;
   align-itmes: center;
   justify-content: center;
-  background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
+  background-image: linear-gradient(
+    to right top,
+    #1a3d7c,
+    #195d9c,
+    #1f7fbb,
+    #31a2d7,
+    #4cc5f1
+  );
   top: 0;
   left: 0;
   width: 100%;
@@ -466,7 +473,7 @@ const SpinnerStyle = styled.div`
 
 const SpinnerPostion = styled.div`
   margin-top: 370px;
-`
+`;
 
 const FlexRow = styled.div`
   display: flex;

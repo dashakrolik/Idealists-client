@@ -2,7 +2,7 @@
 import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { Component } from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom"
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
 import InvestorDashboard from "./components/InvestorsPortal/Dashboard/InvestorDashboard";
 import InvestorLogin from "./components/InvestorsPortal/InvestorLogin";
@@ -49,7 +49,6 @@ import CofounderProfileForm from "./components/Cofounder/CofounderProfileForm";
 import Spinner from "./components/reogranisation/Spinner";
 import CofounderIdeaDetail from "./components/Cofounder/Cofounder-IdeaDetail";
 
-
 class App extends Component {
   state = {
     auth: {
@@ -60,7 +59,7 @@ class App extends Component {
     navigation: {
       activePath: "",
     },
-    cofounderProfile: '',
+    cofounderProfile: "",
     loading: true,
   };
 
@@ -68,20 +67,21 @@ class App extends Component {
     request
       .get(`${baseUrl}/users/cofounders/profile`)
       .set("Authorization", `Bearer ${this.state.auth.token}`)
-      .then(res => {
+      .then((res) => {
         if (res.status === 200) {
           this.setState({
             ...this.state,
-            cofounderProfile: res.body
-          })
+            cofounderProfile: res.body,
+          });
         }
-      }).catch(e => {
+      })
+      .catch((e) => {
         this.setState({
           ...this.state,
-          cofounderProfile: ''
-        })  
-      })
-  }
+          cofounderProfile: "",
+        });
+      });
+  };
 
   rejectIdea = (rejected, ideasId) => {
     request
@@ -408,17 +408,17 @@ class App extends Component {
   render() {
     return (
       <Router>
-          <ThemeProvider theme={theme}>
-            <Application>
+        <ThemeProvider theme={theme}>
+          <Application>
             <TopBar
-            authState={this.state.auth}
-            user={this.getCurrentUser}
-            logout={this.logout}
-            resetPassword={this.resetPassword}
-            updatePassword={this.updatePassword}
-            updateLocalStorage={this.updateLocalStorage}
-          />
-          <Switch>
+              authState={this.state.auth}
+              user={this.getCurrentUser}
+              logout={this.logout}
+              resetPassword={this.resetPassword}
+              updatePassword={this.updatePassword}
+              updateLocalStorage={this.updateLocalStorage}
+            />
+            <Switch>
               <Route
                 exact
                 path="/Specialist/dashboard"
@@ -699,7 +699,7 @@ class App extends Component {
                       authState={this.state.auth}
                       login={this.requestLoginUser}
                       user={this.getCurrentUser}
-                      getProfile={this.getCoFounderProfile}              
+                      getProfile={this.getCoFounderProfile}
                       updateLocalStorage={this.updateLocalStorage}
                       logout={this.logout}
                       setAuthLoggedInTrue={this.setAuthLoggedInTrue}
@@ -918,7 +918,6 @@ class App extends Component {
                       logout={this.logout}
                     />
                   );
-
                 }}
               />
               <Route
@@ -1113,11 +1112,11 @@ class App extends Component {
                   />
                 )}
               />
-              </Switch>
-            </Application>
-          </ThemeProvider>
-          </Router>
-    )
+            </Switch>
+          </Application>
+        </ThemeProvider>
+      </Router>
+    );
   }
 }
 

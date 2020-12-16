@@ -65,14 +65,14 @@ export default function IdeaDashboard(props) {
               to={`/dashboard/ideas/${idea.id}`}
             >
               <div className="idea-tile" key={idea.id}>
-                <p
-                className="overflow-visible">
-                {idea ? idea.idea[5].answers[0].qAnswer : null}</p>
+                <p className="overflow-visible">
+                  {idea ? idea.idea[5].answers[0].qAnswer : null}
+                </p>
                 <br />
                 <div className="items-container">
-                <p 
-                className="overflow-visible">
-                  {idea ? idea.idea[5].answers[1].qAnswer : null}</p>
+                  <p className="overflow-visible">
+                    {idea ? idea.idea[5].answers[1].qAnswer : null}
+                  </p>
                 </div>
                 {/* {idea && idea.progress === null ||
                 (idea.progress.step01 === true &&
