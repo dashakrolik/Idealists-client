@@ -9,6 +9,7 @@ import bid from "../../res/bid.png";
 import ProgressBar from "../reogranisation/ProgressBar/ProgressBar";
 import Button from "../reogranisation/Questions/Button";
 import { Link } from "react-router-dom";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 export default function CofounderIdeaDetail(props) {
   const ideaId = props.match.params.id;
@@ -60,26 +61,29 @@ export default function CofounderIdeaDetail(props) {
                 />
               ) : (
                 <StyledDiv>
-                  {" "}
-                  {ideaBids.map((bid) => {
-                    return (
-                      <StyledLink
-                        to={`/Cofounder/dashboard/${bid.userid}/profile`}
-                      >
-                        <span key={bid.id}>
-                          {bid.firstname} {bid.lastname}
-                        </span>
-                      </StyledLink>
-                    );
-                  })}
-                  <Button
-                    text=" hide bidders"
-                    onClick={() => {
-                      setShowBidders(false);
-                    }}
-                  />
+                    <FlexColumn>
+                      {ideaBids.map((bid) => {
+                        return (
+                          <StyledLink key={bid.id}
+                          to={`/Cofounder/dashboard/${bid.userid}/profile`}
+                          >
+                              <AccountCircleIcon />
+                              <p >
+                                {bid.firstname} {bid.lastname}
+                              </p>
+                            
+                          </StyledLink>
+                        );
+                      })}
+                    </FlexColumn>
+                    <Button
+                      text=" hide bidders"
+                      onClick={() => {
+                        setShowBidders(false);
+                      }}
+                      />
                 </StyledDiv>
-              )}
+                )}
 
             </FlexColumn>
           </FlexRow>
@@ -108,6 +112,8 @@ const StyledDiv = styled.div`
   color: white;
   margin-bottom: 20px;
   margin-top: 45px;
+  display: flex;
+  flex-direction: column
 `;
 
 const Left = styled.div`
@@ -180,9 +186,14 @@ const Container = styled.div`
 const StyledLink = styled(Link)`
 textDecoration: none;
 color: white;
+border: 1px solid white;
+border-radius: 10px;
+margin: 10px;
+padding: 10px;
 &:focus,  &:visited, &:link, &:active {
   text-decoration: none;
   &:hover {
-    transition: ease-in;
+    transform: translateY(-0.25em);
+    background-color: #1a3d7c
   }
 `;
