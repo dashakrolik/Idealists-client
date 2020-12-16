@@ -6,7 +6,6 @@ import "./UserAssessIdeas.css";
 import styled from "@emotion/styled";
 import Button from "../../reogranisation/Questions/Button";
 import Card from "@material-ui/core/Card";
-import { useHistory } from "react-router-dom";
 
 export default function UserAssessIdeas(props) {
   // const [userData, setUserData] = useState({});
@@ -15,7 +14,6 @@ export default function UserAssessIdeas(props) {
   const [industries, setIndustries] = useState([]);
   // const [selection, setSelection] = useState("show all");
   const [sortedIdeas, setSortedIdeas] = useState([]);
-  const history = useHistory(); 
 
   useEffect(() => {
     if (!props.authState.loggedIn) props.history.push("/MyIdea/login");
@@ -67,9 +65,6 @@ export default function UserAssessIdeas(props) {
 
   return (
     <div className="assessIdeas-container">
-      <div style={{ width: "12rem"}}>      
-        <Button text="Go back" onClick={() => history.goBack()}/>
-      </div>
       <br />
       <div className="title">
         <h2>Assess ideas here</h2>
