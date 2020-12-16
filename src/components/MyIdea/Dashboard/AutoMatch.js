@@ -100,31 +100,32 @@ export default function IdeaDashboardDetail(props) {
   // Enable the submit button only when the user responds to all (13 at present) questions.
   let countAnswers = 0;
   useEffect(() => {
-    const allKeys = Object.keys(patentDifference);
-    const resultsKeys = Object.keys(automatchResults);
-    const addnlQuesKeys = allKeys.filter((key) => {
-      if (!resultsKeys.includes(key)) {
-        countAnswers++;
-        return key;
-      }
-    });
-
-    if (resultsKeys.length !== 0) {
-      for (let i = 0; i < resultsKeys.length; i++) {
-        if (patentDifference[resultsKeys[i]]) countAnswers += 1;
-      }
-
-      if (addnlQuesKeys.length !== 0) {
-        for (let i = 0; i < addnlQuesKeys.length; i++) {
-          if (patentDifference[addnlQuesKeys[i]] !== "") {
-          } else countAnswers -= 1;
+    if (isUser) {
+      const allKeys = Object.keys(patentDifference);
+      const resultsKeys = Object.keys(automatchResults);
+      const addnlQuesKeys = allKeys.filter((key) => {
+        if (!resultsKeys.includes(key)) {
+          countAnswers++;
+          return key;
         }
-      }
-      //console.log("counta:", countAnswers);
-      if (countAnswers === resultsKeys.length + 3) {
-        setEnableSubmit(true);
-      } else {
-        setEnableSubmit(false);
+      });
+
+      if (resultsKeys.length !== 0) {
+        for (let i = 0; i < resultsKeys.length; i++) {
+          if (patentDifference[resultsKeys[i]]) countAnswers += 1;
+        }
+
+        if (addnlQuesKeys.length !== 0) {
+          for (let i = 0; i < addnlQuesKeys.length; i++) {
+            if (patentDifference[addnlQuesKeys[i]] !== "") {
+            } else countAnswers -= 1;
+          }
+        }
+        if (countAnswers === resultsKeys.length + 3) {
+          setEnableSubmit(true);
+        } else {
+          setEnableSubmit(false);
+        }
       }
     }
   }, [patentDifference]);
@@ -242,7 +243,6 @@ export default function IdeaDashboardDetail(props) {
       </Container>
     );
   }
-
   // ONLY PROCEED if (arr.length === 10) !!!!!!!!!!!!!!!!! coz it takes time for the loop to complete
   // let obj = newImageArray.find(o => o.name === 'string 1');
 
@@ -505,11 +505,14 @@ export default function IdeaDashboardDetail(props) {
                         }
                       `}
                     >
-                      Automatch results
+                      First patent check
                     </Heading>
                     <Paragraph>
                       <h2>
-                        {`Your idea did not match with any of the existing data, this is because the ipscreener couldn't make any sense of your idea.`}
+                        {`Unfortunately, the information you supplied about your idea on the idea-form was too brief.
+Because of this, we are not able to look for matching patents and can’t continue your idea.
+Please re-submit your idea with a more extensive explanation on what your idea exactly is.
+If you have any questions, please contact us at any time at support@the-idealists.com`}
                       </h2>
                     </Paragraph>
                   </StartContent>
