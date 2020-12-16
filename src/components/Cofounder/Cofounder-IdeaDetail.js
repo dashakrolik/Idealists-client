@@ -3,7 +3,6 @@ import request from "superagent";
 import { baseUrl } from "../../constants";
 import styled from "@emotion/styled";
 import IdeaDetails from "../reogranisation/IdeaDetails/IdeaDetails";
-// import IdeaDashboardDetail from "../SpecialistPortal/Dashboard/SpecialistIdeaDetails";
 import BidSlider from "./BidSlider";
 import { Redirect } from "react-router-dom";
 import bid from "../../res/bid.png";
@@ -14,12 +13,8 @@ import { Link } from "react-router-dom";
 export default function CofounderIdeaDetail(props) {
   const ideaId = props.match.params.id;
   const [userIdeas, setUserIdeas] = useState([]);
-  const [showSlider, setShowSlider] = useState(false);
-  const [showImage, setShowImage] = useState(true);
-  const [showButton, setButton] = useState(true);
   const [showBidders, setShowBidders] = useState(false);
   const [ideaBids, setIdeaBids] = useState([]);
-  const [displaySuccess, setDisplaySuccess] = useState(false);
 
   useEffect(() => {
     request
@@ -42,84 +37,60 @@ export default function CofounderIdeaDetail(props) {
     props.user();
   }
 
-  const handleSlider = () => {
-    setShowSlider(true);
-    setShowImage(false);
-  };
-
   return (
     <div className="dashboard-container">
       <Container>
         <Left>
+          <BidSlider authState={props.authState} ideaId={ideaId} />
+          <ProgressBar
+            token={props.authState.token}
+            ideasId={props.match.params.id}
+          />
+        </Left>
+        <Right>
           <FlexRow>
             <FlexColumn>
-              <Left>
-                {!showSlider ? (
-                  <div className="bid-icon-wrap">
-                    <img
-                      className="icons"
-                      src={bid}
-                      alt="Bid on idea"
-                      onClick={() => {
-                        handleSlider();
-                      }}
-                      showImage={showImage}
-                    />
-                    <h3>Bid on this idea</h3>
-                  </div>
-                ) : (
-                  <BidSlider
-                    authState={props.authState}
-                    ideaId={ideaId}
-                    showSlider={!showSlider}
-                    displaySuccess={setDisplaySuccess}
+              {!showBidders ? (
+                <Button
+                  text="See other bidders"
+                  onClick={() => {
+                    setShowBidders(true);
+                  }}
+                  style={{ alignSelf: "baseline" }}
+                />
+              ) : (
+                <StyledDiv>
+                  {" "}
+                  {ideaBids.map((bid) => {
+                    return (
+                      <StyledLink
+                        to={`/Cofounder/dashboard/${bid.userid}/profile`}
+                      >
+                        <span key={bid.id}>
+                          {bid.firstname} {bid.lastname}
+                        </span>
+                      </StyledLink>
+                    );
+                  })}
+                  <Button
+                    text=" hide bidders"
+                    onClick={() => {
+                      setShowBidders(false);
+                    }}
                   />
-                )}
-                {displaySuccess ? (
-                  <StyledDiv>Bid submission success!</StyledDiv>
-                ) : null}
-              </Left>
+                </StyledDiv>
+              )}
+
             </FlexColumn>
           </FlexRow>
           <FlexRow>
-            <ProgressBar
-              token={props.authState.token}
-              ideasId={props.match.params.id}
-            />
+            <FlexColumn>
+              <Content>
+                <h1 className="header"> Questions and Answers about Idea:</h1>
+                <IdeaDetails user={props.authState.user} ideas={userIdeas} />
+              </Content>
+            </FlexColumn>
           </FlexRow>
-        </Left>
-        <Right>
-          {!showBidders ? (
-            <Button
-              text="See other bidders"
-              onClick={() => {
-                setShowBidders(true);
-              }}
-            />
-          ) : (
-            <StyledDiv>
-              {" "}
-              {ideaBids.map((bid) => {
-                return (
-                  <StyledLink to={`/Cofounder/dashboard/${bid.userid}/profile`}>
-                    <span key={bid.id}>
-                      {bid.firstname} {bid.lastname}
-                    </span>
-                  </StyledLink>
-                );
-              })}
-              <Button
-                text=" hide bidders"
-                onClick={() => {
-                  setShowBidders(false);
-                }}
-              />
-            </StyledDiv>
-          )}
-          <Content>
-            <h1 className="header"> Questions and Answers about Idea:</h1>
-            <IdeaDetails user={props.authState.user} ideas={userIdeas} />
-          </Content>
         </Right>
       </Container>
     </div>
@@ -175,7 +146,8 @@ const Content = styled.div`
   width: 90vw;
   max-width: 800px;
   height: auto;
-  padding: 20px;
+  padding: 20px 15px;
+  margin-top: 20px;
 `;
 
 const Right = styled.div`
@@ -185,8 +157,8 @@ const Right = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  justify-content: start;
-  align-items: flex-start;
+  justify-content: end;
+  align-items: center;
   padding-top: 100px;
 `;
 
