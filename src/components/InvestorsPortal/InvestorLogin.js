@@ -25,19 +25,8 @@ export default function InvestorLogin(props) {
   const onSubmit = (data) => {
     const { email, password } = data;
     props.login(email, password);
+    props.user();
   };
-
-  const triggerUserData = () => {
-    if (props.authState.loggedIn) {
-      props.user();
-    }
-  };
-
-  if (!localStorage.currentUserJwt) {
-    props.history.replace("/InvestorStart");
-    triggerUserData();
-    return <div></div>;
-  }
 
   if (props.authState.loggedIn !== true)
     return (
