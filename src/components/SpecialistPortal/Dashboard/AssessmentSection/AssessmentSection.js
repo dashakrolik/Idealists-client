@@ -143,17 +143,27 @@ export default function AssessmentSection(props) {
                     </h4>
                     <p>
                       {assessment.isAgreementStarChecked
-                        ? "Yes, I’d like to champion this idea because I believe it could be brilliant"
-                        : "My feedback is sufficient, I don’t want to champion this idea"}
+                        ? `
+                        ${assessment.mentorMotivationText}`
+                        : `My feedback is sufficient, I don’t want to champion this idea`}
                     </p>
                     <h4>
                       Would you like to apply to become a mentor for this idea?
                     </h4>
-                    <p>
-                      {assessment.isAgreementMentorChecked
-                        ? "Yes, I’d like to become a mentor for this idea"
-                        : "No, thank you"}
-                    </p>
+
+                    {assessment.isAgreementMentorChecked ? (
+                      <div>
+                        <p>Yes, I’d like to become a mentor for this idea.</p>
+                        <p>
+                          Please explain why you would be the ideal mentor for
+                          this idea (the team will pick their mentors based on
+                          these texts):
+                        </p>
+                        <p>{assessment.mentorMotivationText}</p>
+                      </div>
+                    ) : (
+                      <p>"No, thank you"</p>
+                    )}
                   </>
                 )}
               </div>

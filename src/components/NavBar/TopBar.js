@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import { jsx } from "@emotion/core";
 
 const TopBar = (props) => {
+ 
   return (
     <AppBar>
       <Toolbar className="topBar">
@@ -45,6 +46,7 @@ const TopBar = (props) => {
               color="inherit"
               onClick={() => {
                 props.history.push("/MyIdea/login");
+ 
               }}
             >
               Login
