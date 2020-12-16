@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 import IdeaDetails from "../reogranisation/IdeaDetails/IdeaDetails";
 import BidSlider from "./BidSlider";
 import { Redirect } from "react-router-dom";
+import bid from "../../res/bid.png";
 import ProgressBar from "../reogranisation/ProgressBar/ProgressBar";
 import Button from "../reogranisation/Questions/Button";
 import { Link } from "react-router-dom";
@@ -79,6 +80,7 @@ export default function CofounderIdeaDetail(props) {
                   />
                 </StyledDiv>
               )}
+
             </FlexColumn>
           </FlexRow>
           <FlexRow>
@@ -111,7 +113,7 @@ const StyledDiv = styled.div`
 const Left = styled.div`
   grid-area: left;
   width: 100%;
-  height: 100%;
+  // height: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -151,7 +153,7 @@ const Content = styled.div`
 const Right = styled.div`
   grid-area: right;
   width: 100%;
-  height: 100%;
+  // height: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;

@@ -10,8 +10,7 @@ const CofounderWelcomePage = (props) => {
 			props.history.push('/CofounderProfileVideo');
 		}
 	};
-
-	return (
+    return (
 		<Container>
 			<Global
 				styles={css`
@@ -29,8 +28,7 @@ const CofounderWelcomePage = (props) => {
 							flex-direction: column;
 						`}>
 						<StartContent
-							// pose={uiState}
-							css={css`
+                            css={css`
 								display: flex;
 								flex-direction: column;
 								width: auto;
@@ -62,7 +60,7 @@ const CofounderWelcomePage = (props) => {
 									bottom: 130px;
 									width: 180px;
 								`}>
-								<Button text='Next' disabled='' onClick={startProfile} />
+								<Button text='Next' disabled={false}  withIcon onClick={startProfile} />
 							</Controls>
 						</StartContent>
 					</div>

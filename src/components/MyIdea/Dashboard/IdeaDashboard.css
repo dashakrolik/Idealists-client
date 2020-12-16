@@ -1,63 +1,71 @@
 .dashboard-container {
-    min-height: 100%;
-    background-image: linear-gradient(to right top, #1a3d7c, #195d9c, #1f7fbb, #31a2d7, #4cc5f1);
-    text-align: center;
-    color: white
+  min-height: 100%;
+  background-image: linear-gradient(
+    to right top,
+    #1a3d7c,
+    #195d9c,
+    #1f7fbb,
+    #31a2d7,
+    #4cc5f1
+  );
+  text-align: center;
+  color: white;
 }
 
 .flex-tilescontainer {
-    margin: auto;   
-    max-width: 90%;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+  margin: auto;
+  max-width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .title {
-    color: white;
+  color: white;
 }
 
 .idea-tile {
-    width: 25vw;
-    height: 40vh;
-    margin: 10px;
-    border: 1px solid silver;
-    border-radius: 10px;
-    background-color: white;
+  width: 25vw;
+  height: 40vh;
+  margin: 10px;
+  border: 1px solid silver;
+  border-radius: 10px;
+  color: white;
 }
 
 .idea-tile:hover {
-    width: 25vw;
-    height: 40vh;
-    margin: 10px;
-    border: 1px solid silver;
-    border-radius: 10px;
-    background-color: #DFEFF2;
-    transition: ease-in;
+  width: 25vw;
+  height: 40vh;
+  margin: 10px;
+  border: 1px solid silver;
+  border-radius: 10px;
+  background-color: #1f7fbb;
+  color: white;
+  transition: ease-in;
 }
 
 .new-idea-button {
-    margin: 50px auto; 
+  margin: 50px auto;
 }
 
 .tile-link {
-    text-decoration: none;
-    text-decoration-color: black;
-    color: black;
+  text-decoration: none;
+  text-decoration-color: black;
+  color: black;
 }
 
 .questions-answers {
-    color: #DFEFF2;
+  color: #dfeff2;
 }
 
 .statusbar-container {
-    margin: 20px auto;   
-    width: 90%;
-    /* background: #4cc5f1;*/
-    /*border: 1px solid white;*/
-    border-radius: 10px; 
-    color: white;
-    height: 13%;
+  margin: 20px auto;
+  width: 90%;
+  /* background: #4cc5f1;*/
+  /*border: 1px solid white;*/
+  border-radius: 10px;
+  color: white;
+  height: 13%;
 }
 
 /* .progress-bar {
@@ -69,71 +77,70 @@
 } */
 
 .progressbar {
-	margin-bottom: 30px;
-	overflow: hidden;
-	/*CSS counters to number the steps*/
-	counter-reset: step;
+  margin-bottom: 30px;
+  overflow: hidden;
+  /*CSS counters to number the steps*/
+  counter-reset: step;
 }
 .progressbar li {
-	list-style-type: none;
-    color: white;
-    margin: 3px;
-	text-transform: uppercase;
-	font-size: 9px;
-	width: 13%;
-	float: left;
-	position: relative;
+  list-style-type: none;
+  color: white;
+  margin: 3px;
+  text-transform: uppercase;
+  font-size: 9px;
+  width: 13%;
+  float: left;
+  position: relative;
 }
 .progressbar li:before {
-	content: counter(step);
-	counter-increment: step;
-	width: 20px;
-	line-height: 20px;
-	display: block;
-	font-size: 10px;
-	color: #333;
-	background: white;
-	border-radius: 3px;
-    margin: 0 auto 5px auto;
-    
+  content: counter(step);
+  counter-increment: step;
+  width: 20px;
+  line-height: 20px;
+  display: block;
+  font-size: 10px;
+  color: #333;
+  background: white;
+  border-radius: 3px;
+  margin: 0 auto 5px auto;
 }
 /*progressbar connectors*/
 .progressbar li:after {
-	content: '';
-	width: 90%;
-	height: 2px;
-	background: white;
-	position: absolute;
-	left: -47%;
-	top: 9px;
-	/*z-index: -1; /*put it behind the numbers*/
+  content: "";
+  width: 90%;
+  height: 2px;
+  background: white;
+  position: absolute;
+  left: -47%;
+  top: 9px;
+  /*z-index: -1; /*put it behind the numbers*/
 }
 .progressbar li:first-child:after {
-	/*connector not needed before the first step*/
-	content: none; 
+  /*connector not needed before the first step*/
+  content: none;
 }
 /*marking active/completed steps blue*/
 /*The number of the step and the connector before it = blue*/
-.progressbar li.active:before,  #progressbar li.active:after{
-	background: #1f7fbb;
-    color: white;
-    z-index: auto;
+.progressbar li.active:before,
+#progressbar li.active:after {
+  background: #1f7fbb;
+  color: white;
+  z-index: auto;
 }
 
 .range {
-    background: #1f7fbb;
-    height: 100%;
-    border-radius: inherit;
-    transition: width .3s ease-in;
+  background: #1f7fbb;
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.3s ease-in;
 }
 
 .items-wrapper {
-    display: flex;
-    flex-direction: row;
-    margin: 20px;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+  justify-content: center;
 }
 .flex-ideacontainer {
-    margin: 40px;
-
+  margin: 40px;
 }

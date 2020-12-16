@@ -28,7 +28,25 @@ const SingleLineQuestion = (props) => {
           setValidated(false);
         }
       } else {
-        setValidated(true);
+        if (props.groupId === 5 && parseInt(props.id) === 1) {
+          const strWithNoSpaces = currentValue.replace(/ /g, "");
+          if (strWithNoSpaces.length >= 75) {
+            setValidated(true);
+          } else {
+            setValidated(false);
+          }
+        } else {
+          if (props.groupId === 6 && parseInt(props.id) === 0) {
+            const strWithNoSpaces = currentValue.replace(/ /g, "");
+            if (strWithNoSpaces.length >= 500) {
+              setValidated(true);
+            } else {
+              setValidated(false);
+            }
+          } else {
+            setValidated(true);
+          }
+        }
       }
     } else {
       setValidated(false);
