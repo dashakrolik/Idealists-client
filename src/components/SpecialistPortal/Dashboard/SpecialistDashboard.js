@@ -5,11 +5,17 @@ import { Redirect, Link } from "react-router-dom";
 import "./SpecialistDashboard.css";
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
+// import assess from '../../../res/assess-white.png'
+// import invest from '../../../res/invest-white.png'
+// import crowdfunding from '../../../res/crowdfunding.png'
+import { useHistory } from "react-router-dom";
+import Button from '../../reogranisation/Questions/Button';
 import Spinner from "../../reogranisation/Spinner";
 
 export default function specialistDashboard(props) {
   const [userData, setUserData] = useState({});
   const [ideaList, setIdeaList] = useState(false);
+  const history = useHistory(); 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -61,11 +67,15 @@ export default function specialistDashboard(props) {
     if (ideaList.length < 1) {
       return (
         <>
+         <div style={{ width: "12rem", margin: "auto" }}>
+           <Button text="Go back" onClick={() => history.goBack()}/>
+        </div>
           {" "}
           {renderCard(props.authState.user.specialistType)}
           <h2 style={styledH2}>
             There are no idea's available in your relevant phase(s)
           </h2>
+        
         </>
       );
     }
@@ -102,6 +112,9 @@ export default function specialistDashboard(props) {
 
       return (
         <>
+        <div style={{ width: "12rem", margin: "auto" }}>
+          <Button text="Go back" onClick={() => history.goBack()}/>
+        </div>
           {renderCard(props.authState.user.specialistType)}
           <div className="flex-tilescontainer">{list}</div>
         </>
