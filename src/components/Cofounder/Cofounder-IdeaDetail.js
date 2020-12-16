@@ -9,6 +9,7 @@ import bid from "../../res/bid.png";
 import ProgressBar from "../reogranisation/ProgressBar/ProgressBar";
 import Button from "../reogranisation/Questions/Button";
 import { Link } from "react-router-dom";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 export default function CofounderIdeaDetail(props) {
   const ideaId = props.match.params.id;
@@ -59,27 +60,32 @@ export default function CofounderIdeaDetail(props) {
                   style={{ alignSelf: "baseline" }}
                 />
               ) : (
-                <StyledDiv>
-                  {" "}
-                  {ideaBids.map((bid) => {
-                    return (
-                      <StyledLink
-                        to={`/Cofounder/dashboard/${bid.userid}/profile`}
-                      >
-                        <span key={bid.id}>
-                          {bid.firstname} {bid.lastname}
-                        </span>
-                      </StyledLink>
-                    );
-                  })}
-                  <Button
-                    text=" hide bidders"
-                    onClick={() => {
-                      setShowBidders(false);
-                    }}
-                  />
-                </StyledDiv>
-              )}
+                  <StyledDiv>
+                    {" "}
+                    {ideaBids.map((bid) => {
+                      return (
+                        <StyledLink
+                          to={`/Cofounder/dashboard/${bid.userid}/profile`}
+                        >
+                          <div>
+                            <AccountCircleIcon fontSize="small" />
+                            <div>
+                              <span key={bid.id}>
+                                {bid.firstname} {bid.lastname}
+                              </span>
+                            </div>
+                          </div>
+                        </StyledLink>
+                      );
+                    })}
+                    <Button
+                      text=" hide bidders"
+                      onClick={() => {
+                        setShowBidders(false);
+                      }}
+                    />
+                  </StyledDiv>
+                )}
 
             </FlexColumn>
           </FlexRow>
@@ -186,3 +192,4 @@ color: white;
     transition: ease-in;
   }
 `;
+
