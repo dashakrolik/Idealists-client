@@ -69,11 +69,16 @@ export default function IdeaDashboard(props) {
                   {idea ? idea.idea[5].answers[0].qAnswer : null}
                 </p>
                 <br />
-                <div className="items-container">
-                  <p className="overflow-visible">
-                    {idea ? idea.idea[5].answers[1].qAnswer : null}
-                  </p>
-                </div>
+                <p
+                  style={{
+                    padding: 15,
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                  }}
+                  className="overflow-visible"
+                >
+                  {idea ? idea.idea[5].answers[1].qAnswer : null}
+                </p>
                 {/* {idea && idea.progress === null ||
                 (idea.progress.step01 === true &&
                   idea.progress.step02 === true &&
