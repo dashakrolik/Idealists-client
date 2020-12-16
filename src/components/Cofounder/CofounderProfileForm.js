@@ -165,7 +165,7 @@ export default function CofounderProfileForm(props) {
           `}
         >
           <LeftSide>
-            <h3>Thank you. Your profile was created succesfully.</h3>
+            <h3>Thank you. Your profile was created successfully.</h3>
           </LeftSide>
         </div>
       ) : (
@@ -174,8 +174,8 @@ export default function CofounderProfileForm(props) {
           <LeftSide>
             <div>
               <h3>
-                3.Fill out the blanks on your profile, by answering a few simple
-                questions
+                3. Fill out the blanks on your profile, by answering a few
+                simple questions
               </h3>
             </div>
           </LeftSide>
