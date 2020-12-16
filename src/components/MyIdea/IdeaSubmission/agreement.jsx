@@ -12,7 +12,7 @@ const Useragreement = (props) => {
 
         <h1>THE UNDERSIGNED:</h1>
         <p>
-          1. The Idealists B.V., a private company with limited liability (besloten vennootschap met beperkte aansprakelijkheid) incorporated under the laws of the Netherlands, having its registered address at Lijsterbeslaan 3, Loon op Zand (5175 BR), hereinafter referred to as “The Idealists”; and
+          1. The Idealists B.V., a private company with limited liability (besloten vennootschap met beperkte aansprakelijkheid) incorporated under the laws of the Netherlands, having its registered address at Achtseweg Zuid 151, Eindhoven (5651 GW), hereinafter referred to as “The Idealists”; and
                 </p>
         2. <strong>{props.authState.user.firstName ? props.authState.user.firstName : 'Idea Owner'}</strong> <strong>{props.authState.user.lastName ? props.authState.user.lastName: ''}</strong>, hereinafter referred to as “Participant”;
             <br />
@@ -80,7 +80,7 @@ const Useragreement = (props) => {
 
     THE UNDERSIGNED: 
     
-        1. The Idealists B.V., a private company with limited liability (besloten vennootschap met beperkte aansprakelijkheid) incorporated under the laws of the Netherlands, having its registered address at Lijsterbeslaan 3, Loon op Zand (5175 BR), hereinafter referred to as “The Idealists”; and
+        1. The Idealists B.V., a private company with limited liability (besloten vennootschap met beperkte aansprakelijkheid) incorporated under the laws of the Netherlands, having its registered address at Achtseweg Zuid 151, Eindhoven (5651 GW), hereinafter referred to as “The Idealists”; and
         2. ${props.authState.user.firstName ? props.authState.user.firstName : 'Idea Owner'} ${props.authState.user.lastName ? props.authState.user.lastName: ''}, hereinafter referred to as “Participant”;
         also referred to below individually as a “Party” and collectively as the “Parties”.
     
