@@ -29,14 +29,13 @@ export default function InvestorLogin(props) {
   };
 
   if (props.authState.loggedIn) {
-    setTimeout(function(){
+    setTimeout(function () {
       props.user();
 
       props.history.replace("/MyIdea/new");
       return <div></div>;
-    }, 3000)
+    }, 3000);
   }
-console.log('props',loading)
 
   if (props.authState.loggedIn !== true)
     return (
@@ -72,15 +71,14 @@ console.log('props',loading)
         </RightSide>
       </Container>
     );
-  else if(loading){
-  console.log("made it")
-  return (
-    <Container>
-      <Middle>
-        <props.spinner />
-      </Middle>
-    </Container>
-  );
+  else if (loading) {
+    return (
+      <Container>
+        <Middle>
+          <props.spinner />
+        </Middle>
+      </Container>
+    );
   }
 }
 
