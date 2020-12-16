@@ -92,7 +92,7 @@ export default function BidSlider(props) {
         {showSlider ? (
           <StyledDiv>
             <h4>How it works</h4>
-            <span>
+            <p>
               You, and all other interested co-founders, can now bid on the idea
               for 7 days. You do this, by stating how much equity (shares) you
               require to commit yourself to this new company. Next to this you
@@ -104,7 +104,7 @@ export default function BidSlider(props) {
               evaluations they received by the other co-founders and the quality
               of their profile and assessments. Good luck and if you have any
               questions, you can always contact us at support@the-idealists.com
-            </span>
+            </p>
             {savedBid && bidExists ? (
               <Typography>{succesMessage}</Typography>
             ) : savedBid ? (
