@@ -1,6 +1,8 @@
 import React from 'react';
 import * as jsPDF from 'jspdf'
 import { withRouter } from 'react-router-dom'
+import Button from "../../reogranisation/Questions/Button";
+
 
 
 const Useragreement = (props) => {
@@ -152,9 +154,11 @@ const Useragreement = (props) => {
       {aggreementPage(props) }
       
       </div>
-      <br />
-      <button style={{ width:600, justifyContent:'center', backgroundColor: "inherit", margin:20, color: "white", borderRadius: "10px" }}
-        onClick={saveIt}> Download the Participants Agreement </button>
+      {/* <br /> */}
+      <div style={{justifyContent:'center', backgroundColor: "inherit", paddingTop:20, paddingBottom:20, color: "white", borderRadius: "10px" }}>
+      <Button
+        onClick={saveIt} text="Download the Participants Agreement" />
+        </div>
     </div>)
 }
 
