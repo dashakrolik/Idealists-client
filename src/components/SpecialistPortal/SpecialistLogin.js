@@ -11,7 +11,6 @@ export default function InvestorLogin(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);
-    triggerUserData();
   };
 
   const handleChange = (event) => {
