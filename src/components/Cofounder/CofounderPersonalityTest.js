@@ -63,7 +63,7 @@ export default function CofounderPersonalityTest(props) {
           <div>
             <LeftSide>
               <div>
-                <h3>2.Take your Pesonality Test</h3>
+                <h3>2. Take your Pesonality Test</h3>
               </div>
             </LeftSide>
             <RightSide>
