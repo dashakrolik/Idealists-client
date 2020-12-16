@@ -60,31 +60,29 @@ export default function CofounderIdeaDetail(props) {
                   style={{ alignSelf: "baseline" }}
                 />
               ) : (
-                  <StyledDiv>
-                    {" "}
-                    {ideaBids.map((bid) => {
-                      return (
-                        <StyledLink
+                <StyledDiv>
+                    <FlexColumn>
+                      {ideaBids.map((bid) => {
+                        return (
+                          <StyledLink key={bid.id}
                           to={`/Cofounder/dashboard/${bid.userid}/profile`}
-                        >
-                          <div>
-                            <AccountCircleIcon fontSize="small" />
-                            <div>
-                              <span key={bid.id}>
+                          >
+                              <AccountCircleIcon />
+                              <p >
                                 {bid.firstname} {bid.lastname}
-                              </span>
-                            </div>
-                          </div>
-                        </StyledLink>
-                      );
-                    })}
+                              </p>
+                            
+                          </StyledLink>
+                        );
+                      })}
+                    </FlexColumn>
                     <Button
                       text=" hide bidders"
                       onClick={() => {
                         setShowBidders(false);
                       }}
-                    />
-                  </StyledDiv>
+                      />
+                </StyledDiv>
                 )}
 
             </FlexColumn>
@@ -114,6 +112,8 @@ const StyledDiv = styled.div`
   color: white;
   margin-bottom: 20px;
   margin-top: 45px;
+  display: flex;
+  flex-direction: column
 `;
 
 const Left = styled.div`
@@ -186,10 +186,14 @@ const Container = styled.div`
 const StyledLink = styled(Link)`
 textDecoration: none;
 color: white;
+border: 1px solid white;
+border-radius: 10px;
+margin: 10px;
+padding: 10px;
 &:focus,  &:visited, &:link, &:active {
   text-decoration: none;
   &:hover {
-    transition: ease-in;
+    transform: translateY(-0.25em);
+    background-color: #1a3d7c
   }
 `;
-
