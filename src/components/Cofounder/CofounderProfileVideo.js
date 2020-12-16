@@ -95,7 +95,7 @@ export default function CofounderProfileVideo(props) {
                   1. Upload a short (max 3 minutes) video (in mp4 format),
                   <br></br>
                   explaining who you are and why you <br></br>
-                  want to be an impactful co-founder
+                  want to be an impactful co-founder.
                 </h3>
               </div>
             </LeftSide>

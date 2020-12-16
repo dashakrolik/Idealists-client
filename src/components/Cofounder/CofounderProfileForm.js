@@ -175,7 +175,7 @@ export default function CofounderProfileForm(props) {
             <div>
               <h3>
                 3. Fill out the blanks on your profile, by answering a few
-                simple questions
+                simple questions.
               </h3>
             </div>
           </LeftSide>

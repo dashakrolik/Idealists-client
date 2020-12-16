@@ -76,7 +76,7 @@ export default function CofounderPersonalityTest(props) {
                 <a href="https://www.16personalities.com/">Start the test</a>
                 <br />
                 <br />
-                <label>Upload your result here</label>
+                <label>Type your result here</label>
                 <span>(For example: ISFP-T)</span>
                 <input
                   type="text"
