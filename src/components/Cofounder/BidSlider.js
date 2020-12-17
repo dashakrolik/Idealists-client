@@ -63,6 +63,7 @@ export default function BidSlider(props) {
       .then((res) => {
         if (res.status === 200) {
           setSavedbid(true);
+          setBidExists(true);
           setSuccesMessage("Bid submitted successfully");
         }
       });
@@ -77,6 +78,7 @@ export default function BidSlider(props) {
       .then((res) => {
         if (res.status === 200) {
           setSavedbid(true);
+          setBidExists(true);
           setSuccesMessage("Bid updated successfully");
         } else {
           setSavedbid(true);
@@ -106,9 +108,13 @@ export default function BidSlider(props) {
               questions, you can always contact us at support@the-idealists.com
             </span>
             {savedBid && bidExists ? (
-              <Typography>{succesMessage}</Typography>
+              <div style={{ marginTop: "10px" }}>
+                <Typography>{succesMessage}</Typography>
+              </div>
             ) : savedBid ? (
-              <Typography>{succesMessage}</Typography>
+              <div style={{ marginTop: "10px" }}>
+                <Typography>{succesMessage}</Typography>
+              </div>
             ) : (
               <>
                 <Typography id="discrete-slider-custom" gutterBottom>
