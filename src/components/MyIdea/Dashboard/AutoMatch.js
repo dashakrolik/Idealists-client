@@ -389,10 +389,16 @@ export default function IdeaDashboardDetail(props) {
                       <UserFeedback>
                         <p>
                           User feedback:
-                          {patentDifference[key] === "false"
+                          {patentDifference ?  
+                        (  patentDifference[key] === "false"
                             ? ` "this patent is the same like my idea".`
                             : patentDifference[key] &&
-                              ` "My idea is different: ${patentDifference[key]}"`}
+                              ` "My idea is different: ${patentDifference[key]}"`)
+                              
+                              :
+                              ( <h3>The user has not yet provided the comments to the automatch results</h3>)
+                              }
+                        
                         </p>
                       </UserFeedback>
                     )}
@@ -410,7 +416,7 @@ export default function IdeaDashboardDetail(props) {
                     fullWidth
                     margin="normal"
                     variant="filled"
-                    value={patentDifference.identifyProblem}
+                    value={patentDifference ? patentDifference.identifyProblem : ''}
                     onChange={updateDifference}
                     name="identifyProblem"
                     type="text"
@@ -425,7 +431,7 @@ export default function IdeaDashboardDetail(props) {
                     fullWidth
                     margin="normal"
                     variant="filled"
-                    value={patentDifference.problemSolution}
+                    value={patentDifference ? patentDifference.problemSolution : ''}
                     onChange={updateDifference}
                     name="problemSolution"
                     type="text"
@@ -440,7 +446,7 @@ export default function IdeaDashboardDetail(props) {
                     fullWidth
                     margin="normal"
                     variant="filled"
-                    value={patentDifference.howProblemUnique}
+                    value={patentDifference ? patentDifference.howProblemUnique : ''}
                     onChange={updateDifference}
                     name="howProblemUnique"
                     type="text"
