@@ -7,13 +7,14 @@ import { Redirect } from "react-router-dom";
 import Button from "../reogranisation/Questions/Button";
 import ProgressBar from "../reogranisation/ProgressBar/ProgressBar";
 import IdeaDetails from "../reogranisation/IdeaDetails/IdeaDetails";
+import { useHistory } from "react-router-dom";
 
 export default function IdeaDashboardDetail(props) {
   const [userIdeas, setUserIdeas] = useState([]);
   const [progress, setProgress] = useState([]);
   const [rejected, setRejected] = useState(false);
   const ideasId = props.match.params.id;
-
+  const history = useHistory(); 
   const rejectIdea = () => {
     const confirmRejected = window.confirm(
       "Are you sure you want to reject this idea? The user who submitted the idea will be immediately notified via email."
@@ -154,6 +155,9 @@ STEPS IN IDEA SUBMISSION:
     <div className="dashboard-container">
       <Container>
         <Left>
+        <div style={{ width: "12rem"}}>      
+      <Button text="Go back" onClick={() => history.goBack()}/>
+      </div>
           <ProgressBar
             token={props.authState.token}
             ideasId={props.match.params.id}
@@ -230,7 +234,7 @@ const StyledDiv = styled.div`
 const Left = styled.div`
   grid-area: left;
   width: 100%;
-  height: 100%;
+  // height: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -265,7 +269,7 @@ const Content = styled.div`
 const Right = styled.div`
   grid-area: right;
   width: 100%;
-  height: 100%;
+  // height: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;

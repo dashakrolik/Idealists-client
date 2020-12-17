@@ -8,6 +8,9 @@ import { baseUrl } from "../../../constants";
 import "react-inputs-validation/lib/react-inputs-validation.min.css";
 import "./styles.css";
 import "./InvestorDashboard.css";
+import Button from "../../reogranisation/Questions/Button";
+import { createBrowserHistory } from 'history';
+const history = createBrowserHistory();
 
 const SCALE_OPTIONS_LIST = [
   { id: "1", name: "1" },
@@ -34,6 +37,7 @@ export default class FormAssessIdeas extends Component {
       isAgreementStarNoChecked: false,
       isAgreementMentorChecked: false,
       isAgreementMentorNoChecked: false,
+      mentorMotivationText: "",
       explanation: "",
       explanation2: "",
       explanation3: "",
@@ -201,6 +205,7 @@ export default class FormAssessIdeas extends Component {
         isAgreementStarNoChecked,
         isAgreementMentorChecked,
         isAgreementMentorNoChecked,
+        mentorMotivationText,
         explanation,
         explanation2,
         explanation3,
@@ -258,7 +263,10 @@ export default class FormAssessIdeas extends Component {
       const labelContentStyle = {
         verticalAlign: "middle",
       };
-
+      console.log(
+        "this.state.mentorMotivationText",
+        this.state.mentorMotivationText
+      );
       return (
         <div
           style={{
@@ -275,6 +283,9 @@ export default class FormAssessIdeas extends Component {
           <br></br>
           <br></br>
           <br></br>
+          <div style={{ width: "12rem"}}>      
+            <Button text="Go back" onClick={()=> history.back()}/>
+          </div>
           <h1
             style={{
               color: "white",
@@ -1716,6 +1727,39 @@ export default class FormAssessIdeas extends Component {
                                   // msgOnSuccess: "Your custom success message if you provide the validationOption['msgOnSuccess']. Otherwise, it will not show, not even green border." // Optional.[String].Default: "". Show your custom success message no matter what when it has error if it is provied.
                                 }}
                               />
+                              {isAgreementMentorChecked ? (
+                                <Textarea
+                                  tabIndex="7"
+                                  id="mentorMotivationText"
+                                  name="mentorMotivationText"
+                                  value={mentorMotivationText}
+                                  disabled={false}
+                                  placeholder="Please explain why you would be the ideal mentor for this idea (the team will pick their mentors based on these texts)"
+                                  validate={validate}
+                                  validationCallback={(res) =>
+                                    this.setState({
+                                      hasProReason2Error: res,
+                                      validate: false,
+                                    })
+                                  }
+                                  classNameInput=""
+                                  classNameWrapper=""
+                                  classNameContainer=""
+                                  customStyleInput={{}}
+                                  customStyleWrapper={{}}
+                                  customStyleContainer={{}}
+                                  onChange={(mentorMotivationText, e) => {
+                                    this.setState({ mentorMotivationText });
+                                  }}
+                                  onBlur={(e) => {}}
+                                  validationOption={{
+                                    name: "mentorMotivationText",
+                                    check: true,
+                                    required: true,
+                                    type: "string",
+                                  }}
+                                />
+                              ) : null}
                             </div>
                           </div>
                         </div>

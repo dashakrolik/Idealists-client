@@ -11,7 +11,6 @@ export default function InvestorLogin(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loginState);
-    triggerUserData();
   };
 
   const handleChange = (event) => {
@@ -25,19 +24,8 @@ export default function InvestorLogin(props) {
   const onSubmit = (data) => {
     const { email, password } = data;
     props.login(email, password);
+    props.user();
   };
-
-  const triggerUserData = () => {
-    if (props.authState.loggedIn) {
-      props.user();
-    }
-  };
-
-  if (!localStorage.currentUserJwt) {
-    props.history.replace("/SpecialistStart");
-    triggerUserData();
-    return <div></div>;
-  }
 
   if (props.authState.loggedIn !== true)
     return (

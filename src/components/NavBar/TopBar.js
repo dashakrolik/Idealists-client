@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
@@ -11,8 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import { jsx } from "@emotion/core";
 
 const TopBar = (props) => {
-console.log("props", props)
-
+ 
   return (
     <AppBar>
       <Toolbar className="topBar">
@@ -22,11 +21,11 @@ console.log("props", props)
           style={logoStyle}
           onClick={() =>
             props.authState.loggedIn &&
-              localStorage.currentUserJwt &&
-              (props.authState.user.role === "user" ||
-                props.authState.user.role === "expert" ||
-                props.authState.user.role === "specialist" ||
-                props.authState.user.role === "admin")
+            localStorage.currentUserJwt &&
+            (props.authState.user.role === "user" ||
+              props.authState.user.role === "expert" ||
+              props.authState.user.role === "specialist" ||
+              props.authState.user.role === "admin")
               ? props.history.push("/MyIdea/new")
               : null
           }
@@ -34,21 +33,21 @@ console.log("props", props)
         <Grid container direction="row" justify="flex-end" alignItems="center">
           {!props.authState.loggedIn ? (
             <div>
-
               <Button
                 color="inherit"
                 onClick={() => props.history.push("/CofounderStart")}
               >
                 Co-founder login
-            </Button >
+              </Button>
             </div>
           ) : null}
           {!localStorage.currentUserJwt || !props.authState.loggedIn ? (
             <Button
               color="inherit"
               onClick={() => {
-                props.history.push("/MyIdea/login")
-                console.log('nav bar props', props.history.push("/MyIdea/login"))}}
+                props.history.push("/MyIdea/login");
+ 
+              }}
             >
               Login
             </Button>
@@ -64,66 +63,66 @@ console.log("props", props)
           {!props.authState.user ? null : props.authState.loggedIn &&
             localStorage.currentUserJwt &&
             props.authState.user.role === "user" ? (
-              <Button
-                color="inherit"
-                onClick={() => props.history.push("/MyIdea/dashboard")}
-              >
-                Dashboard
-              </Button>
-            ) : null}
+            <Button
+              color="inherit"
+              onClick={() => props.history.push("/MyIdea/dashboard")}
+            >
+              Dashboard
+            </Button>
+          ) : null}
           {!props.authState.user ? null : props.authState.loggedIn &&
             localStorage.currentUserJwt &&
             props.authState.user.role === "admin" ? (
-              <Button
-                color="inherit"
-                onClick={() => props.history.push("/AdminDashboard")}
-              >
-                Admin Dashboard
-              </Button>
-            ) : null}
+            <Button
+              color="inherit"
+              onClick={() => props.history.push("/AdminDashboard")}
+            >
+              Admin Dashboard
+            </Button>
+          ) : null}
           {!props.authState.user ? null : props.authState.loggedIn &&
             localStorage.currentUserJwt &&
             (props.authState.user.role === "expert" ||
               props.authState.user.role === "admin") ? (
-              <Button
-                color="inherit"
-                onClick={() => props.history.push("/Investors/dashboard")}
-              >
-                Investor Dashboard
-              </Button>
-            ) : null}
+            <Button
+              color="inherit"
+              onClick={() => props.history.push("/Investors/dashboard")}
+            >
+              Investor Dashboard
+            </Button>
+          ) : null}
           {!props.authState.user ? null : props.authState.loggedIn &&
             localStorage.currentUserJwt &&
             (props.authState.user.role === "specialist" ||
               props.authState.user.role === "admin") ? (
-              <Button
-                color="inherit"
-                onClick={() => props.history.push("/Specialist/dashboard")}
-              >
-                Specialist Dashboard
-              </Button>
-            ) : null}
+            <Button
+              color="inherit"
+              onClick={() => props.history.push("/Specialist/dashboard")}
+            >
+              Specialist Dashboard
+            </Button>
+          ) : null}
           {!props.authState.user ? null : props.authState.loggedIn &&
             localStorage.currentUserJwt &&
             props.authState.user.role === "user" ? (
-              <Button
-                color="inherit"
-                onClick={() => props.history.push("/MyIdea/new")}
-              >
-                New Idea
-              </Button>
-            ) : null}
+            <Button
+              color="inherit"
+              onClick={() => props.history.push("/MyIdea/new")}
+            >
+              New Idea
+            </Button>
+          ) : null}
           {props.authState.loggedIn === true &&
-            localStorage.currentUserJwt !== null ? (
-              <Button
-                color="inherit"
-                onClick={() =>
-                  props.logout() || props.history.push("/MyIdea/login")
-                }
-              >
-                Logout
-              </Button>
-            ) : null}
+          localStorage.currentUserJwt !== null ? (
+            <Button
+              color="inherit"
+              onClick={() =>
+                props.logout() || props.history.push("/MyIdea/login")
+              }
+            >
+              Logout
+            </Button>
+          ) : null}
           {!localStorage.currentUserJwt || !props.authState.loggedIn ? (
             <Button
               color="inherit"

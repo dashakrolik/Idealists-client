@@ -121,7 +121,7 @@ export default function IdeaDashboardDetail(props) {
             } else countAnswers -= 1;
           }
         }
-        //console.log("counta:", countAnswers);
+
         if (countAnswers === resultsKeys.length + 3) {
           setEnableSubmit(true);
         } else {
@@ -244,7 +244,6 @@ export default function IdeaDashboardDetail(props) {
       </Container>
     );
   }
-
   // ONLY PROCEED if (arr.length === 10) !!!!!!!!!!!!!!!!! coz it takes time for the loop to complete
   // let obj = newImageArray.find(o => o.name === 'string 1');
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import * as jsPDF from 'jspdf'
 import { withRouter } from 'react-router-dom'
+import Button from "../../reogranisation/Questions/Button";
+
 
 
 const Useragreement = (props) => {
@@ -12,7 +14,7 @@ const Useragreement = (props) => {
 
         <h1>THE UNDERSIGNED:</h1>
         <p>
-          1. The Idealists B.V., a private company with limited liability (besloten vennootschap met beperkte aansprakelijkheid) incorporated under the laws of the Netherlands, having its registered address at Lijsterbeslaan 3, Loon op Zand (5175 BR), hereinafter referred to as “The Idealists”; and
+          1. The Idealists B.V., a private company with limited liability (besloten vennootschap met beperkte aansprakelijkheid) incorporated under the laws of the Netherlands, having its registered address at Achtseweg Zuid 151, Eindhoven (5651 GW), hereinafter referred to as “The Idealists”; and
                 </p>
         2. <strong>{props.authState.user.firstName ? props.authState.user.firstName : 'Idea Owner'}</strong> <strong>{props.authState.user.lastName ? props.authState.user.lastName: ''}</strong>, hereinafter referred to as “Participant”;
             <br />
@@ -80,7 +82,7 @@ const Useragreement = (props) => {
 
     THE UNDERSIGNED: 
     
-        1. The Idealists B.V., a private company with limited liability (besloten vennootschap met beperkte aansprakelijkheid) incorporated under the laws of the Netherlands, having its registered address at Lijsterbeslaan 3, Loon op Zand (5175 BR), hereinafter referred to as “The Idealists”; and
+        1. The Idealists B.V., a private company with limited liability (besloten vennootschap met beperkte aansprakelijkheid) incorporated under the laws of the Netherlands, having its registered address at Achtseweg Zuid 151, Eindhoven (5651 GW), hereinafter referred to as “The Idealists”; and
         2. ${props.authState.user.firstName ? props.authState.user.firstName : 'Idea Owner'} ${props.authState.user.lastName ? props.authState.user.lastName: ''}, hereinafter referred to as “Participant”;
         also referred to below individually as a “Party” and collectively as the “Parties”.
     
@@ -152,9 +154,11 @@ const Useragreement = (props) => {
       {aggreementPage(props) }
       
       </div>
-      <br />
-      <button style={{ width:600, justifyContent:'center', backgroundColor: "inherit", margin:20, color: "white", borderRadius: "10px" }}
-        onClick={saveIt}> Download the Participants Agreement </button>
+      {/* <br /> */}
+      <div style={{justifyContent:'center', backgroundColor: "inherit", paddingTop:20, paddingBottom:20, color: "white", borderRadius: "10px" }}>
+      <Button
+        onClick={saveIt} text="Download the Participants Agreement" />
+        </div>
     </div>)
 }
 
