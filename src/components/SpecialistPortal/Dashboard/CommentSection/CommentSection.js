@@ -29,7 +29,7 @@ export default function CommentSection(props) {
     if (commentsData.length === 0)
       return (
         <StyledCard>
-          There are currently no specialist comments on this idea.
+          <h4>There are currently no specialist comments on this idea.</h4>
         </StyledCard>
       );
     else
