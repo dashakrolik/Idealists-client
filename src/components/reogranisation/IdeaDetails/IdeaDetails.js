@@ -73,15 +73,15 @@ export default function IdeaDetails(props) {
           <ul>{industries}</ul>
         </StyledCard>
       </div>
-      <StyledCard>
-        <Button text="Show details" onClick={() => setShow(!show)} />
-      </StyledCard>
+      {/* <StyledCard> */}
+      <Button text="Show details" onClick={() => setShow(!show)} />
+      {/* </StyledCard> */}
     </>
   ) : (
     <>
-      <StyledCard>
-        <Button text="Hide details" onClick={() => setShow(!show)} />
-      </StyledCard>
+      {/* <StyledCard> */}
+      <Button text="Hide details" onClick={() => setShow(!show)} />
+      {/* </StyledCard> */}
       <div className="ideadetailscontent">
         {qTitles.map((title, index) => (
           <div key={index}>
@@ -92,9 +92,9 @@ export default function IdeaDetails(props) {
           </div>
         ))}
       </div>
-      <StyledCard>
-        <Button text="Hide details" onClick={() => setShow(!show)} />
-      </StyledCard>
+      {/* <StyledCard> */}
+      <Button text="Hide details" onClick={() => setShow(!show)} />
+      {/* </StyledCard> */}
     </>
   );
   return <>{renderIdeaDetails}</>;
