@@ -160,19 +160,19 @@ export default function AssessIdeas(props) {
             to={`/investors/dashboard/idea/${idea.id}`}
           >
             <div className="assess-tile" key={idea.id}>
-              <p style={{ color: "black" }}>
+              <p>
                 <b>Title: </b>
                 <br />
                 {idea.idea[5].answers[0].qAnswer}
               </p>
               <br />
-              <p style={{ color: "black" }}>
+              <p>
                 <b>Description: </b>
                 <br />
                 {idea.idea[5].answers[1].qAnswer}
               </p>
               <br />
-              <p style={{ color: "black" }}>
+              <p>
                 <b>Industries: </b>
                 {idea.idea[4].answers[0].qAnswer.map((industries) => (
                   <li key={industries.value}>{industries.value}</li>
