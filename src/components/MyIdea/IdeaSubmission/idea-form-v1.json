@@ -638,7 +638,7 @@
       {
         "id": 1,
         "type": "singleLine",
-        "text": "Describe your idea in up to 150 characters *",
+        "text": "Describe your idea in up to 150 characters * (minimum of 75 characters)",
         "validationRegex": "^(.){0,150}$",
         "maxChar": 150,
         "validationErrorMsg": "Invalid number of characters."
@@ -654,7 +654,7 @@
       {
         "id": 0,
         "type": "multiLine",
-        "text": "Describe your idea up to 1500 characters *",
+        "text": "Describe your idea up to 1500 characters * (minimum of 500 characters)",
         "validationRegex": "^(*.){1,1500}$",
         "maxChar": 1500,
         "validationErrorMsg": "Max 100 chars."

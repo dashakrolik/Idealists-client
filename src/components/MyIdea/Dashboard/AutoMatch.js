@@ -507,11 +507,14 @@ export default function IdeaDashboardDetail(props) {
                         }
                       `}
                     >
-                      Automatch results
+                      First patent check
                     </Heading>
                     <Paragraph>
                       <h2>
-                        {`Your idea did not match with any of the existing data, this is because the ipscreener couldn't make any sense of your idea.`}
+                        {`Unfortunately, the information you supplied about your idea on the idea-form was too brief.
+Because of this, we are not able to look for matching patents and can’t continue your idea.
+Please re-submit your idea with a more extensive explanation on what your idea exactly is.
+If you have any questions, please contact us at any time at support@the-idealists.com`}
                       </h2>
                     </Paragraph>
                   </StartContent>
