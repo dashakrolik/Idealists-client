@@ -55,10 +55,9 @@ export default function CofounderProfile(props) {
   }, []);
 
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container" style={{ paddingTop: "80px" }}>
       {
         <div className="flex-ideacontainer">
-
           {profile ? (
             <div className="data-div">
               <table id="customers">
@@ -109,9 +108,8 @@ export default function CofounderProfile(props) {
               </table>
             </div>
           ) : (
-            
-              <p style={{marginTop:"50px"}}>loading...</p>
-            )}
+            <p style={{ marginTop: "50px" }}>loading...</p>
+          )}
           {props.authState.user.id !== parseInt(parsedParameters) ? (
             <Rating authState={props.authState} match={props.match} />
           ) : null}

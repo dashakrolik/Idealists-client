@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
 import "./IdeaDetails.css";
-import { Button } from "@material-ui/core";
+import Button from '../Questions/Button'
 
 export default function IdeaDetails(props) {
   const { ideas } = props;
@@ -75,24 +75,18 @@ export default function IdeaDetails(props) {
       </div>
       <StyledCard>
         <Button
-          variant="outlined"
-          color="primary"
+          text="Show Details"
           onClick={() => setShow(!show)}
-        >
-          Show Details
-        </Button>
+        />
       </StyledCard>
     </>
   ) : (
     <>
       <StyledCard>
-        <Button
-          variant="outlined"
-          color="primary"
+      <Button
+          text="Show Details"
           onClick={() => setShow(!show)}
-        >
-          Show Details
-        </Button>
+        />
       </StyledCard>
       <div className="ideadetailscontent">
         {qTitles.map((title, index) => (
@@ -106,12 +100,9 @@ export default function IdeaDetails(props) {
       </div>
       <StyledCard>
       <Button
-          variant="outlined"
-          color="primary"
+          text="Hide Details"
           onClick={() => setShow(!show)}
-        >
-          Hide Details
-        </Button>
+        />
       </StyledCard>
     </>
   );
