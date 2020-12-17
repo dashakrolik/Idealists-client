@@ -12,7 +12,7 @@ export default function CommentSection(props) {
   const { id, show, loading } = props;
   const [commentsData, setCommentsData] = useState([]);
   const [showAddComment, setShowAddComment] = useState(false);
-  
+
   const fetchComments = () => {
     request
       .get(`${baseUrl}/ideas/${id}/comments`)
@@ -20,21 +20,21 @@ export default function CommentSection(props) {
       .then((res) => {
         setCommentsData(res.body);
       });
-  }
+  };
   useEffect(() => {
-    fetchComments()
+    fetchComments();
   }, []);
 
   const renderComments = () => {
     if (commentsData.length === 0)
       return (
         <StyledCard>
-          There are currently no specialist comments on this idea.
+          <h4>There are currently no specialist comments on this idea.</h4>
         </StyledCard>
       );
     else
       return commentsData.map((comment) => {
-        console.log("comment:", comment)
+        console.log("comment:", comment);
         return (
           <CommentRender
             token={props.authState.token}
@@ -86,7 +86,10 @@ export default function CommentSection(props) {
 }
 
 const StyledCard = styled(Card)`
-  background-color: rgb(255, 255, 255, 0.3);
   padding-left: 8px;
   padding-right: 8px;
+  &.MuiPaper-root {
+    background-color: rgb(255, 255, 255, 0.3);
+    color: white;
+  }
 `;

@@ -439,9 +439,12 @@ const StyledDiv = styled.div`
   margin-top: 45px;
 `;
 const StyledCard = styled(Card)`
-  background-color: rgb(255, 255, 255, 0.3);
   padding-left: 8px;
   padding-right: 8px;
+  &.MuiPaper-root {
+    background-color: rgb(255, 255, 255, 0.3);
+    color: white;
+  }
 `;
 const Left = styled.div`
   grid-area: left;

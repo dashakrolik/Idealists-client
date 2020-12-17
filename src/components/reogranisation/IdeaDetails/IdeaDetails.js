@@ -119,7 +119,10 @@ export default function IdeaDetails(props) {
 }
 
 const StyledCard = styled(Card)`
-  background-color: rgba(255, 255, 255, 0.3);
   padding-left: 8px;
   padding-right: 8px;
+  &.MuiPaper-root {
+    background-color: rgb(255, 255, 255, 0.3);
+    color: white;
+  }
 `;
