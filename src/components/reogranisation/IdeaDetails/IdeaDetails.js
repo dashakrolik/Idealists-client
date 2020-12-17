@@ -84,7 +84,7 @@ export default function IdeaDetails(props) {
     <>
       <StyledCard>
       <Button
-          text="Hide Details"
+          text="Show Details"
           onClick={() => setShow(!show)}
         />
       </StyledCard>
@@ -100,12 +100,9 @@ export default function IdeaDetails(props) {
       </div>
       <StyledCard>
       <Button
-          variant="outlined"
-          color="primary"
+          text="Hide Details"
           onClick={() => setShow(!show)}
-        >
-          Hide Details
-        </Button>
+        />
       </StyledCard>
     </>
   );
