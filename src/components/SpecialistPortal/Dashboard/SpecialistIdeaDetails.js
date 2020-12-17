@@ -16,6 +16,7 @@ import CommentsPDFCreator from "./Download/CommentsPDFCreator";
 import FullPDFCreator from "./Download/FullPDFCreator";
 import ProgressBar from "../../reogranisation/ProgressBar/ProgressBar";
 import IdeaDetails from "../../reogranisation/IdeaDetails/IdeaDetails";
+import { useHistory } from "react-router-dom";
 import Spinner from "../../reogranisation/Spinner";
 
 export default function IdeaDashboardDetail(props) {
@@ -30,8 +31,8 @@ export default function IdeaDashboardDetail(props) {
   const [industryIdea, setIndustryIdea] = useState({});
   const ideasId = props.match.params.id;
   const [rejected, setRejected] = useState(false);
+  const history = useHistory(); 
   const [loading, setLoading] = useState(true);
-
   const docsUploaded = (
     <section>
       {/* { === ideasId ?  */}
@@ -277,6 +278,9 @@ export default function IdeaDashboardDetail(props) {
     <div className="dashboard-container">
       <Container>
         <Left>
+          <div style={{ width: "12rem"}}>
+            <Button text="Go back" onClick={() => history.goBack()}/>
+          </div>
           <ProgressBar
             token={props.authState.token}
             ideasId={props.match.params.id}
@@ -435,9 +439,12 @@ const StyledDiv = styled.div`
   margin-top: 45px;
 `;
 const StyledCard = styled(Card)`
-  background-color: rgb(255, 255, 255, 0.3);
   padding-left: 8px;
   padding-right: 8px;
+  &.MuiPaper-root {
+    background-color: rgb(255, 255, 255, 0.3);
+    color: white;
+  }
 `;
 const Left = styled.div`
   grid-area: left;

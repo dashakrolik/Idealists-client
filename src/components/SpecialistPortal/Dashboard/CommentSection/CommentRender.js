@@ -5,13 +5,13 @@ import "./CommentRender.css";
 
 export default function CommentRender(props) {
   const { comment, user, date } = props;
-  const [editForm, setEditForm] = useState(false)
+  const [editForm, setEditForm] = useState(false);
   const showDate = new Date(date);
 
-  console.log("ID:", props.idComment)
+  console.log("ID:", props.idComment);
   const render = () => {
-    if(!editForm){
-      return(
+    if (!editForm) {
+      return (
         <StyledCard>
           <div className="comment-container">
             <div className="left">
@@ -42,7 +42,7 @@ export default function CommentRender(props) {
         </StyledCard>
       );
     } else {
-      return(
+      return (
         <props.commentForm
           token={props.token}
           id={props.id}
@@ -51,21 +51,21 @@ export default function CommentRender(props) {
           commentId={props.idComment}
           pre_message={comment.message}
           pre_title={comment.title}
-          edited={true} 
-          showForm={(e) => setEditForm(e)}/>
+          edited={true}
+          showForm={(e) => setEditForm(e)}
+        />
       );
     }
-  }
+  };
 
-  return(
-    <>
-      {render()}
-    </>
-  )
+  return <>{render()}</>;
 }
 
 const StyledCard = styled(Card)`
-  background-color: rgb(255, 255, 255, 0.3);
   padding-left: 8px;
   padding-right: 8px;
+  &.MuiPaper-root {
+    background-color: rgb(255, 255, 255, 0.3);
+    color: white;
+  }
 `;

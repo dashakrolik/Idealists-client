@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import Card from "@material-ui/core/Card";
-import Button from "../../reogranisation/Questions/Button";
 import "./IdeaDetails.css";
+import { Button } from "@material-ui/core";
 
 export default function IdeaDetails(props) {
   const { ideas } = props;
@@ -74,13 +74,25 @@ export default function IdeaDetails(props) {
         </StyledCard>
       </div>
       <StyledCard>
-        <Button text="Show details" onClick={() => setShow(!show)} />
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={() => setShow(!show)}
+        >
+          Show Details
+        </Button>
       </StyledCard>
     </>
   ) : (
     <>
       <StyledCard>
-        <Button text="Hide details" onClick={() => setShow(!show)} />
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={() => setShow(!show)}
+        >
+          Show Details
+        </Button>
       </StyledCard>
       <div className="ideadetailscontent">
         {qTitles.map((title, index) => (
@@ -93,7 +105,13 @@ export default function IdeaDetails(props) {
         ))}
       </div>
       <StyledCard>
-        <Button text="Hide details" onClick={() => setShow(!show)} />
+      <Button
+          variant="outlined"
+          color="primary"
+          onClick={() => setShow(!show)}
+        >
+          Hide Details
+        </Button>
       </StyledCard>
     </>
   );
@@ -101,7 +119,10 @@ export default function IdeaDetails(props) {
 }
 
 const StyledCard = styled(Card)`
-  background-color: rgb(255, 255, 255, 0.3);
   padding-left: 8px;
   padding-right: 8px;
+  &.MuiPaper-root {
+    background-color: rgb(255, 255, 255, 0.3);
+    color: white;
+  }
 `;

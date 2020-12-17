@@ -121,6 +121,7 @@ export default function IdeaDashboardDetail(props) {
             } else countAnswers -= 1;
           }
         }
+
         if (countAnswers === resultsKeys.length + 3) {
           setEnableSubmit(true);
         } else {
