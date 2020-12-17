@@ -15,15 +15,15 @@ export default function UserAssessIdeas(props) {
   const [industries, setIndustries] = useState([]);
   // const [selection, setSelection] = useState("show all");
   const [sortedIdeas, setSortedIdeas] = useState([]);
-  const history = useHistory(); 
+  const history = useHistory();
 
   useEffect(() => {
     if (!props.authState.loggedIn) props.history.push("/MyIdea/login");
-      // request
-      //   .get(`${baseUrl}/current`)
-      //   .set("Authorization", `Bearer ${props.authState.token}`)
-      //   .then((res) => setUserData(res.body));
-    // else 
+    // request
+    //   .get(`${baseUrl}/current`)
+    //   .set("Authorization", `Bearer ${props.authState.token}`)
+    //   .then((res) => setUserData(res.body));
+    // else
   }, []);
 
   useEffect(() => {
@@ -67,8 +67,8 @@ export default function UserAssessIdeas(props) {
 
   return (
     <div className="assessIdeas-container">
-      <div style={{ width: "12rem"}}>      
-        <Button text="Go back" onClick={() => history.goBack()}/>
+      <div style={{ width: "12rem" }}>
+        <Button text="Go back" onClick={() => history.goBack()} />
       </div>
       <br />
       <div className="title">
@@ -127,19 +127,19 @@ export default function UserAssessIdeas(props) {
             to={`/dashboard/ideas/${idea.id}`}
           >
             <div className="assess-tile" key={idea.id}>
-              <p style={{ color: "black" }}>
+              <p>
                 <b>Title: </b>
                 <br />
                 {idea.idea[5].answers[0].qAnswer}
               </p>
               <br />
-              <p style={{ color: "black" }}>
+              <p>
                 <b>Description: </b>
                 <br />
                 {idea.idea[5].answers[1].qAnswer}
               </p>
               <br />
-              <p style={{ color: "black" }}>
+              <p>
                 <b>Industries: </b>
                 {idea.idea[4].answers[0].qAnswer.map((industries) => (
                   <li key={industries.value}>{industries.value}</li>
