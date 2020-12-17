@@ -73,15 +73,15 @@ export default function IdeaDetails(props) {
           <ul>{industries}</ul>
         </StyledCard>
       </div>
-      {/* <StyledCard> */}
-      <Button text="Show details" onClick={() => setShow(!show)} />
-      {/* </StyledCard> */}
+      <StyledCard>
+        <Button text="Show details" onClick={() => setShow(!show)} />
+      </StyledCard>
     </>
   ) : (
     <>
-      {/* <StyledCard> */}
-      <Button text="Hide details" onClick={() => setShow(!show)} />
-      {/* </StyledCard> */}
+      <StyledCard>
+        <Button text="Hide details" onClick={() => setShow(!show)} />
+      </StyledCard>
       <div className="ideadetailscontent">
         {qTitles.map((title, index) => (
           <div key={index}>
@@ -92,16 +92,19 @@ export default function IdeaDetails(props) {
           </div>
         ))}
       </div>
-      {/* <StyledCard> */}
-      <Button text="Hide details" onClick={() => setShow(!show)} />
-      {/* </StyledCard> */}
+      <StyledCard>
+        <Button text="Hide details" onClick={() => setShow(!show)} />
+      </StyledCard>
     </>
   );
   return <>{renderIdeaDetails}</>;
 }
 
 const StyledCard = styled(Card)`
-  background-color: rgb(255, 255, 255, 0.3);
   padding-left: 8px;
   padding-right: 8px;
+  &.MuiPaper-root {
+    background-color: rgb(255, 255, 255, 0.3);
+    color: white;
+  }
 `;
