@@ -36,7 +36,7 @@
     "react-textfit": "^1.1.0",
     "simple-react-validator": "^1.5.0",
     "superagent": "^4.1.0",
-    "validator": "^10.11.0",
+    "validator": "^13.7.0",
     "winterfell": "^1.1.4"
   },
   "scripts": {
